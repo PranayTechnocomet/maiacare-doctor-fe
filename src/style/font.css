@@ -15,7 +15,7 @@
     color: var(--color-brand);
 }
 
-.maiacare-input-field::placeholder{
+.maiacare-input-field::placeholder {
     color: var(--color-radio);
 }
 
@@ -64,7 +64,7 @@
     color: var(--color-white);
 }
 
-.default-layout:focus-visible{
+.default-layout:focus-visible {
     background-color: var(--color-brand);
     color: var(--color-white);
 }
@@ -94,7 +94,7 @@
     border: 1px solid var(--color-brand);
 }
 
-.outline-layout:focus-visible{
+.outline-layout:focus-visible {
     background-color: transparent;
     color: var(--color-brand);
     border: 1px solid var(--color-brand);
@@ -119,6 +119,90 @@
     font-weight: 500;
 }
 
+.login-button {
+    width: 100%;
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.login-title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    font-style: SemiBold;
+    color: var(--login-font);
+}
+
+.login-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    font-style: Regular;
+    color: var(--font-subtitle);
+}
+
+.login-image-content {
+    font-weight: 600;
+    font-size: 44px;
+    color: var(--color-white);
+    line-height: 56px;
+}
+
+.select-profile {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--profile-text);
+}
+
+.select-profile-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--profile-subtitle);
+}
+
+.input-label-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--input-label-title);
+}
+
+.input-inner-text input {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--input-label-title);
+
+}
+
+.input-forrgot-password {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--input-forgot-password);
+    font-style: bold;
+}
+.login-google-button{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+.login-dont{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
 
 /* Media Query: Tablets (991px and below) */
 @media (max-width: 991px) {
@@ -138,7 +222,8 @@
     .maiacare-radio-label {
         font-size: 13px;
     }
-    .modal-custom-header{
+
+    .modal-custom-header {
         font-size: 20px;
     }
 }
@@ -161,7 +246,8 @@
     .maiacare-radio-label {
         font-size: 12px;
     }
-    .modal-custom-header{
+
+    .modal-custom-header {
         font-size: 18px;
     }
 }

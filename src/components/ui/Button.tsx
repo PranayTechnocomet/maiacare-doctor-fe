@@ -12,7 +12,7 @@ export default function Button({
     className?: string;
     variant?: string;
     disabled?: boolean;
-    onClick?: () => void;
+    onClick?: any;
 }) {
     return (
         <BootstrapButton
