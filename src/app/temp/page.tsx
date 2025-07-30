@@ -81,13 +81,12 @@ const columns: ColumnDef<Patient>[] = [
       const status = info.getValue() as string;
       return (
         <span
-          className={`badge ${
-            status === "Active"
-              ? "bg-primary"
-              : status === "Discontinued"
+          className={`badge ${status === "Active"
+            ? "bg-primary"
+            : status === "Discontinued"
               ? "bg-warning"
               : "bg-danger"
-          }`}
+            }`}
         >
           {status}
         </span>
@@ -99,8 +98,6 @@ const columns: ColumnDef<Patient>[] = [
 // Types for form data and form error
 type FormData = {
   name: string;
-  email: string;
-  password: string;
   doctor: string;
   date: string;
   gender: string;
@@ -112,8 +109,6 @@ type FormError = Partial<Record<keyof FormData, string>>;
 
 const initialFormData: FormData = {
   name: "",
-  email: "",
-  password: "",
   doctor: "",
   date: "",
   gender: "",
@@ -149,7 +144,7 @@ export default function Page() {
 
     if (!data.phone.trim()) {
       errors.phone = "Phone number is required";
-    } 
+    }
 
     if (!data.description.trim())
       errors.description = "Description is required";
@@ -174,7 +169,7 @@ export default function Page() {
     console.log("errors", errors);
     if (Object.keys(errors).length === 0) {
       setShowModal(true);
-      setFormData(initialFormData);
+      setFormError(initialFormError);
     }
   };
 
@@ -193,14 +188,14 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
           placeholder="Enter name"
           required={true}
           disabled={false}
           readOnly={false}
           error={formError.name}
           helperText="Enter name"
-          className="position-relative"
+          className="position-relative test"
         >
           <div
             className="position-absolute"
@@ -220,7 +215,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
           required={true}
           disabled={false}
           error={formError.doctor}
@@ -238,7 +233,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
           required={true}
           disabled={false}
           error={formError.date}
@@ -265,7 +260,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
           required={true}
           disabled={false}
           error={formError.description}
@@ -279,7 +274,7 @@ export default function Page() {
           onChange={(phone: any) => {
             // setFormData((prev) => ({ ...prev, phone }));
             // setFormError((prev) => ({ ...prev, phone: "" }));
-            handleChange({target: {name: "phone", value: phone}} as React.ChangeEvent<HTMLInputElement>);
+            handleChange({ target: { name: "phone", value: phone } } as React.ChangeEvent<HTMLInputElement>);
           }}
           required
           helperText="Enter a valid number including country code"

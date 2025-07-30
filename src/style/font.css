@@ -15,7 +15,7 @@
     color: var(--color-brand);
 }
 
-.maiacare-input-field::placeholder{
+.maiacare-input-field::placeholder {
     color: var(--color-radio);
 }
 
@@ -64,7 +64,7 @@
     color: var(--color-white);
 }
 
-.default-layout:focus-visible{
+.default-layout:focus-visible {
     background-color: var(--color-brand);
     color: var(--color-white);
 }
@@ -94,7 +94,7 @@
     border: 1px solid var(--color-brand);
 }
 
-.outline-layout:focus-visible{
+.outline-layout:focus-visible {
     background-color: transparent;
     color: var(--color-brand);
     border: 1px solid var(--color-brand);
@@ -119,6 +119,190 @@
     font-weight: 500;
 }
 
+/* pankaj solanki start*/
+
+/* .setting-password-left-side {
+    background-color: var(--color-white);
+    border-radius: 16px;
+    padding: 16px;
+
+} */
+
+.setting-password-item {
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.setting-password-item span {
+    color: var(--color-sidebar-icon);
+}
+
+.password-requirements{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: var(--color-radio-lable);
+}
+
+.custom-nav .nav-link {
+    background-color: transparent;
+    color: #8a8d93;
+}
+
+.custom-nav .nav-link .nav-icon {
+    color: #8a8d93;
+}
+
+/* Active styles */
+.custom-nav .nav-link.active {
+    background-color: #2b4360;
+    color: #ffffff;
+}
+
+.custom-nav .nav-link.active .nav-icon {
+    color: #ffffff;
+}
+
+.custom-nav .nav-link.active span {
+    color: #ffffff;
+}
+
+/* .setting-password-item:hover {
+    background-color: var(--color-brand) !important;
+    color: var(--color-white);
+
+}
+
+.setting-password-item:hover svg path,
+.setting-password-item:hover span {
+    fill: var(--color-white);
+    color: var(--color-white);
+
+} */
+
+.accordion-title {
+    color: var(--color-heading);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+
+}
+
+/* Remove background and shadow on accordion expansion */
+.accordion-button:not(.collapsed) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.accordion-button::after {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #F4F4F4;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: white;
+    /* optional */
+    padding: 0;
+
+    /* Center the arrow inside */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Optional: rotate the arrow when open */
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+.accordion-item {
+    border: none !important;
+}
+
+.accordion-button {
+    padding: 0 !important;
+}
+
+.settings-accordion-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-radio-lable);
+}
+
+.your-device-box-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #1E293B;
+}
+
+.your-device-box-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-heading);
+    width: 90%;
+
+}
+
+.support-faqs-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #1E293B;
+
+}
+
+.support-faqs-desc {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-heading);
+
+}
+
+.contact-detail {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #1E293B;
+}
+
+.support-accordion-header {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-radio-lable);
+
+}
+
+.support-accordion-content {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #858B95;
+
+}
+
+.forgate-password{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--color-brand);
+}
+
+/* pankaj solanki end*/
 
 /* Media Query: Tablets (991px and below) */
 @media (max-width: 991px) {
@@ -138,7 +322,8 @@
     .maiacare-radio-label {
         font-size: 13px;
     }
-    .modal-custom-header{
+
+    .modal-custom-header {
         font-size: 20px;
     }
 }
@@ -161,7 +346,8 @@
     .maiacare-radio-label {
         font-size: 12px;
     }
-    .modal-custom-header{
+
+    .modal-custom-header {
         font-size: 18px;
     }
 }

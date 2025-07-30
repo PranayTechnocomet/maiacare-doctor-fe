@@ -3,9 +3,9 @@ import React from 'react'
 import { Button as BootstrapButton } from 'react-bootstrap'
 export default function Button({
     children,
-    className="",
-    variant="default",
-    disabled=false,
+    className = "",
+    variant = "default",
+    disabled = false,
     onClick,
     type="button"
 }: {
