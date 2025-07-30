@@ -3,7 +3,7 @@
   --color-white: #fff;
   --color-black: #000;
   --color-border: #e2e8f0;
-  --color-brand: #2b4360;
+  --color-brand: #2B4360;
   --color-heading: #292929;
   --color-icon-border: #DDE1E8;
   --color-sidebar-icon: #8A8D93;
@@ -12,6 +12,10 @@
   --color-radio: #B0B4C1;
   --color-radio-lable: #3E4A57;
   --color-modal-heading: #E29578;
+  --login-font: #E29578;
+  --font-subtitle: #8A8D93;
+  --input-forgot-password: #2B4360;
+  --google-icon-border: #DDE1E8;
 }
 
 body {
@@ -29,4 +33,13 @@ input:focus {
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+.input-email-data{
+  position: absolute;
+  top: 55%;
+  left: 2%;
+}
+.maiacare-input-field-container .input-email-login-data::placeholder{
+  padding-left: 20px !important;
 }
