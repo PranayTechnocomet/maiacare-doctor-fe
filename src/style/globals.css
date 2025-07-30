@@ -25,15 +25,6 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-input:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-a {
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .input-email-data{
   position: absolute;
