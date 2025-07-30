@@ -3,6 +3,8 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { useDispatch } from "react-redux";
+import LoginScreenContainer from "@/components/LoginScreenContainer";
+import SiteLayout from "@/components/layout/SiteLayout";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -14,12 +16,15 @@ export default function Home() {
       <Row>
         <Col xs={6} className="bg-success">
           <h1>Maicare</h1>
-          {/* What is meaing of Maicare Bro !!!  It's Maiacare */}
+         
         </Col>
         <Col xs={6} className="bg-danger">
           <h1>Doctor</h1>
         </Col>
       </Row>
+      <LoginScreenContainer/>
+
+      {/* <SiteLayout collapsed={false} setCollapsed={() => {}} children={<div></div>}/> */}
     </Container>
   );
 }
