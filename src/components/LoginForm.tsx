@@ -10,6 +10,13 @@ import { useState } from 'react';
 
 export default function LoginForm() {
 
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setShowPassword(prev => !prev);
+    };
+    
+
     const defaultFormValue = {
         email: '',
         password: '',
@@ -85,23 +92,23 @@ export default function LoginForm() {
                         Sign In To Your Account.
                     </h2>
                     <p className="login-subtitle text-center">Please enter details to access your dashboard</p>
-                    
-                        <InputFieldGroup
-                            type="email"
-                            value={formData.email}
-                            name='email'
-                            onChange={handleChange}
-                            error={formError.email}
-                            label="Email Address"
-                            placeholder="doctor@maiacare.com"
-                            required={true}
-                            className={`position-relative  input-email-login-data`}
 
-                        >
-                            <MdMailOutline size={24} className='input-email-data' />
-                        </InputFieldGroup>
-                   
                     <InputFieldGroup
+                        type="email"
+                        value={formData.email}
+                        name='email'
+                        onChange={handleChange}
+                        error={formError.email}
+                        label="Email Address"
+                        placeholder="doctor@maiacare.com"
+                        required={true}
+                        className={`position-relative  input-email-login-data`}
+
+                    >
+                        <MdMailOutline size={24} className='input-email-data' />
+                    </InputFieldGroup>
+
+                    {/* <InputFieldGroup
                         type="password"
                         label="Password"
                         placeholder="*********"
@@ -114,7 +121,32 @@ export default function LoginForm() {
 
                     >
                         <BiLockAlt size={24} className='input-email-data' />
+                    </InputFieldGroup> */}
+
+                    <InputFieldGroup
+                        type={showPassword ? 'text' : 'password'}
+                        label="Password"
+                        placeholder="*********"
+                        required={true}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        error={formError.password}
+                        className="position-relative pt-3"
+                    >
+                        {/* Lock icon on left */}
+                        <BiLockAlt size={24} className="input-email-data" />
+
+                        {/* Eye icon on right */}
+                        <span
+                            onClick={togglePasswordVisibility}
+                            className="position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer"
+                            style={{ zIndex: 10 }}
+                        >
+                            {showPassword ? <BiHide size={20} /> : <BiShow size={20} />}
+                        </span>
                     </InputFieldGroup>
+
 
                     <div className="d-flex justify-content-end mb-3">
                         <a href="#" className="input-forrgot-password  mt-2" >
@@ -153,7 +185,7 @@ export default function LoginForm() {
                         alt="Login Image"
                         height={1000}
                         width={730}
-                       
+
                     />
                     <div className="position-absolute bottom-0 start-0 text-white text-center p-4" style={{ width: '100%' }}>
                         <p style={{ fontSize: '44px', alignItems: 'center' }}>Heal, Connect, & Lead
