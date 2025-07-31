@@ -18,6 +18,7 @@
   --google-icon-border: #DDE1E8;
   --color-radio-lable: #3E4A57;
   --color-placeholder-input: #475569;
+  --or-font-color :#B0B4C1;
 }
 
 body {
@@ -42,7 +43,11 @@ body {
   color: var(--color-placeholder-input) !important;
 }
 
-.passwored-btn-icon {
+.passwored-btn-icon 
+.input-email-login-data .maiacare-input-field-error{
+  width: 375px !important; 
+}
+.passwored-btn-icon{
   top: 72% !important;
 }
 
@@ -53,15 +58,14 @@ body {
 .abc {
   position: absolute;
 }
-
-.pregnecy-image {
-  height: 100vh !important;
+.pregnecy-image{
+  /* height:45.5em !important; */
   /* width: 105vh !important; */
   /* object-fit: contain !important; */
 
 }
-
-.main-pregnancy-img image {
-  height: 100vh !important;
+.main-pregnancy-img image{
+  height: 100% !important;
   /* width: 105vh !important; */
 }
+ 

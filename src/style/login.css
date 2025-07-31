@@ -3,11 +3,10 @@
     color: var(--color-radio-lable) !important;
     
 }
+
+
 .input-email-login-data .maiacare-input-field::placeholder{
     color: var(--color-radio-lable) !important;
-    font-weight: 500 !important;
-    font-size: 16px !important;
-    font-style: medium !important;
 }
 .login-title .main-login-title 
 {
@@ -15,4 +14,59 @@
 }
 .login-title1 .main-login-title {
     align-items: center !important;
+}
+.login-button{
+    padding: 12px 24px !important;
+}
+
+.forgot-password-screen{
+    padding-left: 9% !important;
+    padding-right: 9% !important;
+}
+.profile-card{
+    border: 1px solid var(--google-icon-border);
+    background-color: #FFFFFF !important;
+    padding: 16px;
+    border-radius: 16px;
+    width: 480px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1024px) {
+    .profile-card{
+        width: 380px !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile-card{
+        width: 280px !important;
+    }
+}
+@media screen and (max-width: 575px) {
+    .profile-card{
+        width: 480px !important;
+    }
+}
+@media screen and (max-width: 426px) {
+    .profile-card{
+        width: 380px !important;
+    }
+}
+@media screen and (max-width: 376px) {
+    .profile-card{
+        width: 300px !important;
+    }
 }
