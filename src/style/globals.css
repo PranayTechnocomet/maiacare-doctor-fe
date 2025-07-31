@@ -16,6 +16,7 @@
   --font-subtitle: #8A8D93;
   --input-forgot-password: #2B4360;
   --google-icon-border: #DDE1E8;
+  --or-font-color :#B0B4C1;
 }
 
 body {
@@ -37,6 +38,9 @@ input:focus {
 .maiacare-input-field-container .input-email-login-data::placeholder{
   padding-left: 20px !important;
 }
+.input-email-login-data .maiacare-input-field-error{
+  width: 375px !important; 
+}
 .passwored-btn-icon{
   top: 72% !important;
 }
@@ -49,12 +53,13 @@ input:focus {
   position: absolute;
 }
 .pregnecy-image{
-  height: 100vh !important;
+  /* height:45.5em !important; */
   /* width: 105vh !important; */
   /* object-fit: contain !important; */
  
 }
 .main-pregnancy-img image{
-  height: 100vh !important;
+  height: 100% !important;
   /* width: 105vh !important; */
 }
+ 

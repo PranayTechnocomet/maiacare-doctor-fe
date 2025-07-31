@@ -3,7 +3,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { useDispatch } from "react-redux";
-import LoginScreenContainer from "@/components/LoginScreenContainer";
 import SiteLayout from "@/components/layout/SiteLayout";
 
 export default function Home() {
@@ -22,7 +21,7 @@ export default function Home() {
           <h1>Doctor</h1>
         </Col>
       </Row>
-      <LoginScreenContainer/>
+      
 
       {/* <SiteLayout collapsed={false} setCollapsed={() => {}} children={<div></div>}/> */}
     </Container>

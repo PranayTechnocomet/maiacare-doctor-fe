@@ -3,29 +3,25 @@ import { FaEnvelope, FaLock, FaFacebookF, FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
 import { MdMailOutline } from "react-icons/md";
 import { BiHide, BiLockAlt, BiShow } from "react-icons/bi";
-
 import Logo from "../assets/images/Maia Logo.png";
 import FacebookIcon from "../assets/images/Facebook_Icon.png";
 import GoogleIcon from "../assets/images/Google_Icon.png";
 import PregnecyWomanLogin from "../assets/images/Pregnecy_Woman_Login.png";
 import "../style/login.css"
 import { Col, Container, Row } from 'react-bootstrap';
-import { LoginForms } from './form/LoginForms';
+import { ForgotPassword, ResetPasswordScreen } from './form/LoginForms';
 
 
-export default function LoginScreenContainer() {
-
-
-
+export default function ResetPassword() {
 
     return (
         <>
             <Container fluid>
-                <Row className='min-vh-100' >
+                <Row className='min-vh-100 ' >
 
                     <Col md={6} className="d-flex align-items-center justify-content-center">
                         <div className='' >
-                            <div className='d-flex justify-content-center align-item-center'>
+                            <div className='d-flex justify-content-start align-item-start'>
 
 
                                 <Image
@@ -36,34 +32,22 @@ export default function LoginScreenContainer() {
                                     className=" mb-2"
                                 />
                             </div>
-                            <h2 className="login-title text-center mt-3" >
-                                Sign In To Your Account.
+                            <h2 className="login-title text-start mt-3" >
+                            Reset Password
 
                             </h2>
-                            <p className="login-subtitle text-center">Please enter details to access your dashboard</p>
+                            <p className="login-subtitle text-start">Secure your account by setting a new password.</p>
                             {/* <LoginTitle className="login-title1" title="Sign In To Your Account." subtitle="Please enter details to access your dashboard" /> */}
-                            <LoginForms />
-
-                            <div className="text-center mt-3">
-                                <span className='login-dont'>Don't have an account? </span>
-                                <a href="#" className="input-forrgot-password">Sign Up</a>
-                            </div>
+                           
+                           
+                            <ResetPasswordScreen />
 
                            
-                                <div className="d-flex align-items-center justify-content-center mt-3">
-                                    <hr className="flex-grow-1" />
-                                    <p className='mx-3 mt-3 loginpage-or-btn'>OR</p>
-                                    <hr className="flex-grow-1" />
-                                </div>
+
+                           
+                                
                             
-                            <div className="d-grid gap-2">
-                                <button className="btn login-google-button d-flex align-items-center justify-content-center gap-3">
-                                    <Image src={FacebookIcon} alt="Facebook Icon" height={22} width={22} /> Sign In With Facebook
-                                </button>
-                                <button className="btn login-google-button d-flex align-items-center justify-content-center gap-3">
-                                    <Image src={GoogleIcon} alt='Google Icon' height={22} width={22} /> Sign In With Google
-                                </button>
-                            </div>
+                            
                         </div>
                     </Col>
 
