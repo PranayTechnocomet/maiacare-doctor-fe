@@ -136,10 +136,14 @@
 }
 
 .setting-password-item span {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
     color: var(--color-sidebar-icon);
+
 }
 
-.password-requirements{
+.password-requirements {
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
@@ -169,6 +173,10 @@
     color: #ffffff;
 }
 
+.maiacare-button .setting-button {
+    font-size: 10px !important;
+}
+
 /* .setting-password-item:hover {
     background-color: var(--color-brand) !important;
     color: var(--color-white);
@@ -187,10 +195,20 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
-
+   
 }
 
-/* Remove background and shadow on accordion expansion */
+/* setting accordion */
+
+.setting-accordion-item {
+    border: none !important;
+}
+
+.setting-accordion-item .accordion-button {
+    padding: 0 !important;
+}
+
+/* Remove background and shadow on accordion expansion  FOR ALL ACCORDION*/
 .accordion-button:not(.collapsed) {
     background-color: transparent !important;
     box-shadow: none !important;
@@ -201,7 +219,7 @@
     outline: none !important;
 }
 
-.accordion-button::after {
+.setting-accordion-item .accordion-button::after {
     width: 50px;
     height: 50px;
     border: 1px solid #F4F4F4;
@@ -211,7 +229,7 @@
     align-items: center;
     justify-content: center;
 
-    background-color: white;
+    background-color: var(--color-white);
     /* optional */
     padding: 0;
 
@@ -221,16 +239,17 @@
 }
 
 /* Optional: rotate the arrow when open */
-.accordion-button:not(.collapsed)::after {
+.setting-accordion-item .accordion-button:not(.collapsed)::after {
     transform: rotate(180deg);
 }
 
-.accordion-item {
-    border: none !important;
-}
+/* Style for open (expanded) Accordion Item */
+.support-accordion-item.open {
+    border-bottom: 1px solid var(--color-iconborder, #DDE1E8) !important;
+    /* padding: 20px; */
+    border-radius: 0 0 10px 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px;
 
-.accordion-button {
-    padding: 0 !important;
 }
 
 .settings-accordion-subtitle {
@@ -279,30 +298,70 @@
     color: #1E293B;
 }
 
-.support-accordion-header {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 20px;
-    color: var(--color-radio-lable);
 
-}
 
 .support-accordion-content {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
     color: #858B95;
-
+    padding: 20px !important;
 }
 
-.forgate-password{
+.forgate-password {
+    text-decoration: none;
     font-size: 16px;
     font-weight: 600;
     line-height: 22px;
     color: var(--color-brand);
 }
 
+/* support accordion */
+
+.support-accordion-item {
+    border: none !important;
+}
+
+.support-accordion-item .accordion-button {
+    padding: 0 !important;
+}
+.support-accordion-header {
+    font-size: 16px;
+    font-weight: 550;
+    line-height: 20px;
+    color: var(--color-radio-lable);
+    padding: 0 10px;
+}
+
+.support-accordion-item .accordion-button::after {
+    border: 1px solid var(--color-icon-border);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    /* Center the arrow inside */
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.support-accordion-item .accordion-button:not(.collapsed)::after {
+    transform: rotate(180deg);
+}
+
+
+
+@media screen and (max-width: 425px) {
+    .your-device-box-subtitle {
+        width: 100%;
+    }
+}
+
 /* pankaj solanki end*/
+
 .login-button {
     width: 100%;
     background-color: var(--color-brand);
@@ -373,14 +432,16 @@
     color: var(--input-forgot-password);
     font-style: bold;
 }
-.login-google-button{
+
+.login-google-button {
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
     font-style: Medium;
     color: var(--color-heading);
 }
-.login-dont{
+
+.login-dont {
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;

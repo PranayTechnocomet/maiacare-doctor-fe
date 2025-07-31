@@ -7,7 +7,7 @@ export default function Button({
     variant = "default",
     disabled = false,
     onClick,
-    type="button"
+    type = "button"
 }: {
     children: React.ReactNode;
     className?: string;

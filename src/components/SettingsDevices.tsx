@@ -1,32 +1,35 @@
 import React from 'react'
 import Button from './ui/Button'
 import Image from 'next/image'
+import { FiLogOut } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const SettingsDevices = () => {
     return (
         <>
             <p className="settings-accordion-subtitle">Where you're signed in</p>
             <div className="d-flex flex-column gap-4 ">
-                <div className="your-device-box d-flex justify-content-between">
+                <div className="your-device-box d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-start align-items-lg-center">
                     <div className="d-flex justify-content-center align-items-center gap-3 ">
                         <Image src="/images/device-windows.png" width={70} height={70} alt="device-window" />
                         <div>
                             <h6 className="your-device-box-title mb-1">Windows Computer</h6>
-                            <p className="your-device-box-subtitle mb-0">Google Chrome | Mumbai Logged In</p>
+                            <p className="your-device-box-subtitle mb-0 ">Google Chrome | Mumbai Logged In</p>
                         </div>
                     </div>
-                    <div className="d-flex flex-column gap-2">
+                    <div className="d-flex flex-row flex-lg-column gap-2">
                         <Button variant="default" >
-                            Log Out
+                            <FiLogOut /> Log Out
                         </Button>
-                        <Button variant="default"  >
-                            Delete Device
+                        <Button variant="outline" disabled={false} >
+                            <RiDeleteBin6Line /> Delete Devices
                         </Button>
+
                     </div>
 
                 </div>
 
-                <div className="your-device-box d-flex justify-content-between">
+                <div className="your-device-box d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-start align-items-lg-center">
                     <div className="d-flex justify-content-center align-items-center gap-3 ">
                         <Image src="/images/device-mobile.png" width={70} height={70} alt="device-window" />
                         <div>
@@ -34,13 +37,14 @@ const SettingsDevices = () => {
                             <p className="your-device-box-subtitle mb-0">Google Chrome | Mumbai Logged In</p>
                         </div>
                     </div>
-                    <div className="d-flex flex-column gap-2">
+                    <div className="d-flex flex-row flex-lg-column gap-2">
                         <Button variant="default" >
-                            Log Out
+                            <FiLogOut /> Log Out
                         </Button>
-                        <Button variant="default"  >
-                            Delete Device
+                        <Button variant="outline" disabled={false} >
+                            <RiDeleteBin6Line /> Delete Devices
                         </Button>
+
                     </div>
 
                 </div>

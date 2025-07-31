@@ -16,6 +16,8 @@
   --font-subtitle: #8A8D93;
   --input-forgot-password: #2B4360;
   --google-icon-border: #DDE1E8;
+  --color-radio-lable: #3E4A57;
+  --color-placeholder-input: #475569;
 }
 
 body {
@@ -26,11 +28,16 @@ body {
 }
 
 
-.input-email-data{
+.input-email-data {
   position: absolute;
   top: 55%;
   left: 2%;
 }
-.maiacare-input-field-container .input-email-login-data::placeholder{
+
+.maiacare-input-field-container .input-email-login-data::placeholder {
   padding-left: 20px !important;
+}
+
+.setting-password-input .maiacare-input-field::placeholder {
+  color: var(--color-placeholder-input) !important;
 }

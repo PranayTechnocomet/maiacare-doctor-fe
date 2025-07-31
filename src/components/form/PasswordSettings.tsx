@@ -13,7 +13,6 @@ type FormData = {
     confirmpassword: string;
 };
 
-
 function PasswordSettings() {
 
     const dispatch: AppDispatch = useDispatch();
@@ -99,34 +98,34 @@ function PasswordSettings() {
                     label="Current Password"
                     name="currentpassword"
                     type="password"
+                    className='setting-password-input'
                     value={formData.currentpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
                     }}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                    placeholder="Enter Current Password"
+                    placeholder="Enter Current password"
                     required={true}
                     disabled={false}
                     readOnly={false}
                     error={formError.currentpassword}
-                    helperText="Enter Current Password"
                 />
 
                 <InputFieldGroup
                     label="New Password"
                     name="newpassword"
                     type="password"
+                    className='setting-password-input mt-3'
                     value={formData.newpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
                     }}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                    placeholder="Enter new Password"
+                    placeholder="Enter new password"
                     required={true}
                     disabled={false}
                     readOnly={false}
                     error={formError.newpassword}
-                    helperText="Enter New Password"
                 />
 
                 <div className="my-3">
@@ -172,25 +171,25 @@ function PasswordSettings() {
                     label="Confirm Password"
                     name="confirmpassword"
                     type="password"
+                    className='setting-password-input'
                     value={formData.confirmpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
                     }}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                    placeholder="Enter Current Password"
+                    placeholder="Re-enter password"
                     required={true}
                     disabled={false}
                     readOnly={false}
                     error={formError.confirmpassword}
-                    helperText="Enter Password"
                 />
-                <div className="d-flex justify-content-end align-items-center gap-3">
+                <div className="d-flex justify-content-end align-items-center gap-3 mt-3">
 
                     <a className="forgate-password">Forgot Password?</a>
-                    <Button variant="default" disabled={false} type="submit">
+
+                    <Button variant="default" disabled={false} type="submit" className={`setting-button`}>
                         Save Password
                     </Button>
-
                 </div>
 
                 <Modal

@@ -7,14 +7,13 @@ import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { Accordion, Col, Nav, Row, Tab } from "react-bootstrap";
 import ContentContainer from "@/components/ui/ContentContainer";
 import Image from "next/image";
-import SettingsNotification from "@/components/ui/SettingsNotification";
-import SettingsSupport from "@/components/ui/SettingsSupport";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import Button from "@/components/ui/Button";
 import Modal from "@/components/ui/Modal";
 import PasswordSettings from "@/components/form/PasswordSettings";
 import SettingsDevices from "@/components/SettingsDevices";
-
+import SettingsNotification from "@/components/SettingsNotification";
+import SettingsSupport from "@/components/SettingsSupport";
 
 
 function Page() {
@@ -74,7 +73,7 @@ function Page() {
                 <Accordion defaultActiveKey="0">
                   <ContentContainer className="mb-3">
 
-                    <Accordion.Item eventKey="0" className="accordion-item" >
+                    <Accordion.Item eventKey="0" className="setting-accordion-item" >
                       <Accordion.Header>
                         <div className="d-flex justify-content-center align-items-center gap-3">
                           <Image src="/images/password-setting.png" width={48} height={48} alt="password-img" />
@@ -92,7 +91,7 @@ function Page() {
                     </Accordion.Item>
                   </ContentContainer>
                   <ContentContainer className="mb-3">
-                    <Accordion.Item eventKey="1">
+                    <Accordion.Item eventKey="1" className="setting-accordion-item">
                       <Accordion.Header>
 
                         <div className="d-flex justify-content-center align-items-center gap-3">
@@ -117,8 +116,11 @@ function Page() {
 
               </Tab.Pane>
               <Tab.Pane eventKey="second">
+
                 <SettingsNotification />
+
               </Tab.Pane>
+
               <Tab.Pane eventKey="third">
 
                 <SettingsSupport />
@@ -133,4 +135,6 @@ function Page() {
 }
 
 export default Page;
+
+// pankaj
 
