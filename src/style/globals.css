@@ -41,3 +41,27 @@ body {
 .setting-password-input .maiacare-input-field::placeholder {
   color: var(--color-placeholder-input) !important;
 }
+
+.passwored-btn-icon {
+  top: 72% !important;
+}
+
+.xyz .maiacare-input-field {
+  padding-left: 35px;
+}
+
+.abc {
+  position: absolute;
+}
+
+.pregnecy-image {
+  height: 100vh !important;
+  /* width: 105vh !important; */
+  /* object-fit: contain !important; */
+
+}
+
+.main-pregnancy-img image {
+  height: 100vh !important;
+  /* width: 105vh !important; */
+}

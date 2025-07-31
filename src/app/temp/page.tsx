@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AppDispatch } from "@/utils/redux/store";
-import { InputFieldGroup } from "@/components/ui/InputField";
+import { InputFieldGroup, InputFieldHelperText } from "@/components/ui/InputField";
 import InputSelect from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
@@ -16,16 +16,10 @@ import Modal from "@/components/ui/Modal";
 import BaseTable from "@/components/ui/BaseTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { IoIosEye } from "react-icons/io";
+import { Patient } from "@/utils/types/interfaces";
+import { tableResponse } from "@/utils/StaticData";
 
-type Patient = {
-  id: number;
-  name: string;
-  mobile: string;
-  email: string;
-  pincode: string;
-  treatment: string;
-  status: string;
-};
+
 
 const data: Patient[] = [
   {
@@ -120,13 +114,19 @@ const initialFormError: FormError = {};
 
 export default function Page() {
   const dispatch: AppDispatch = useDispatch();
+  const [tableData, setTableData] = useState<Patient[]>([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     dispatch(
       setHeaderData({
         title: "Sample Page",
         subtitle: "Sample Page for check common components",
       })
     );
+    setTableData(tableResponse);
+    setLoading(false);
+
   }, []);
 
   const [showModal, setShowModal] = useState(false);
@@ -190,20 +190,15 @@ export default function Page() {
           }}
           onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
           placeholder="Enter name"
-          required={true}
+          required={false}
           disabled={false}
-          readOnly={false}
+          readOnly={true}
           error={formError.name}
           helperText="Enter name"
-          className="position-relative test"
+          className="position-relative xyz"
         >
           <div
-            className="position-absolute"
-            style={{
-              top: "44%",
-              right: "0%",
-              transform: "translate(-50%, -50%)",
-            }}
+            className="position-absolute abc"
           >
             <IoIosEye size={25} />
           </div>
@@ -293,9 +288,10 @@ export default function Page() {
 
       <div className="my-4">
         <h4>Patient List</h4>
-        <BaseTable data={data} columns={columns} />
+        <BaseTable data={tableData} columns={columns} />
       </div>
 
+<InputFieldHelperText helperText="Helper Text" />
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}
