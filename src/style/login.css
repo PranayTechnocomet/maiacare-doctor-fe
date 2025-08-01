@@ -31,10 +31,29 @@
     width: 480px !important;
 }
 
+.select-clinic-image{
+    border-radius: 50%;
+}
 
+.select-profile-img-wrapeer {
+    border-radius: 8px !important;
+    padding: 8px;
 
+}
+.verificationcode-main{
+    padding: 48px;
+    background-color: #FFFFFF;
+    height: 420px ;
+    width: 652px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px !important;
 
-
+}
+.verfication-code-main{
+    height: 95vh !important;
+}
 
 
 
