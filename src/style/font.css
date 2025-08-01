@@ -1,4 +1,7 @@
 /* Base styles (default for desktops > 991px) */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tienne:wght@400;700;900&display=swap');
+
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -195,7 +198,7 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
-   
+
 }
 
 /* setting accordion */
@@ -325,6 +328,7 @@
 .support-accordion-item .accordion-button {
     padding: 0 !important;
 }
+
 .support-accordion-header {
     font-size: 16px;
     font-weight: 550;
@@ -438,8 +442,9 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    font-style: Medium;
+    font-style: medium;
     color: var(--color-heading);
+    
 }
 
 .login-dont {
@@ -449,33 +454,59 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.login-image-contetnt{
+
+.login-image-contetnt {
     font-weight: 600;
     font-size: 44px;
     color: var(--color-white);
     line-height: 56px;
     font-style: SemiBold;
 }
-.loginpage-or-btn{
+
+.loginpage-or-btn {
     font-size: 12px;
     font-weight: 600;
     font-style: SemiBold;
     color: var(--or-font-color);
 }
-.select-profile-title{
+
+.select-profile-title {
     font-weight: 600;
     font-size: 24px;
     line-height: 28px;
     font-style: SemiBold;
     color: var(--profile-text);
 }
-.select-profile-subtitle{
+
+.select-profile-subtitle {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
     font-style: Regular;
     color: var(--color-sidebar-icon);
 }
+@media screen and (max-width: 1400px) {
+    .login-image-contetnt {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .login-title {
+        font-size: 33px;
+        line-height: 40px;
+    }
+
+    .login-subtitle {
+        font-size: 17px;
+        line-height: 20px;
+    }
+    .login-image-contetnt {
+        font-size: 40px;
+        line-height: 51px;
+    }
+}
+
 /* Media Query: Tablets (991px and below) */
 @media (max-width: 991px) {
     .maiacare-input-field-label {
@@ -497,6 +528,31 @@
 
     .modal-custom-header {
         font-size: 20px;
+    }
+
+    .login-title {
+        font-size: 31px;
+        line-height: 35px;
+    }
+    .login-image-contetnt {
+        font-size: 38px;
+        line-height: 48px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-title {
+        font-size: 29px;
+        line-height: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 16px;
+        line-height: 20px;
+    }
+    .login-image-contetnt {
+        font-size: 30px;
+        line-height: 46px;
     }
 }
 
@@ -522,4 +578,32 @@
     .modal-custom-header {
         font-size: 18px;
     }
+
+    .login-title {
+        font-size: 27px;
+        line-height: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
 }
+
+@media screen and (max-width: 426px) {
+    .login-title {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .login-subtitle {
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+
+
+@media screen and (max-width: 376px) {}
+
+@media screen and (max-width: 320px) {}

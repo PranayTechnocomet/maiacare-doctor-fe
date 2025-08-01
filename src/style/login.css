@@ -43,8 +43,8 @@
 .verificationcode-main{
     padding: 48px;
     background-color: #FFFFFF;
-    height: 420px ;
-    width: 652px;
+    /* height: 420px ;
+    width: 652px; */
     display: flex;
     align-items: center;
     justify-content: center;
