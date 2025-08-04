@@ -152,7 +152,7 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
-   
+
 }
 
 .settings-accordion-subtitle {
@@ -213,6 +213,13 @@
     text-decoration: none;
     font-size: 16px;
     font-weight: 600;
+    line-height: 22px;
+    color: var(--color-brand);
+}
+
+.fertilitiy-assement-accodion-title {
+    font-size: 18px;
+    font-weight: 700;
     line-height: 22px;
     color: var(--color-brand);
 }
@@ -306,33 +313,38 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.login-image-contetnt{
+
+.login-image-contetnt {
     font-weight: 600;
     font-size: 44px;
     color: var(--color-white);
     line-height: 56px;
     font-style: SemiBold;
 }
-.loginpage-or-btn{
+
+.loginpage-or-btn {
     font-size: 12px;
     font-weight: 600;
     font-style: SemiBold;
     color: var(--or-font-color);
 }
-.select-profile-title{
+
+.select-profile-title {
     font-weight: 600;
     font-size: 24px;
     line-height: 28px;
     font-style: SemiBold;
     color: var(--profile-text);
 }
-.select-profile-subtitle{
+
+.select-profile-subtitle {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
     font-style: Regular;
     color: var(--color-sidebar-icon);
 }
+
 /* Media Query: Tablets (991px and below) */
 @media (max-width: 991px) {
     .maiacare-input-field-label {
@@ -359,11 +371,11 @@
     .maiacare-button-large {
         font-size: 16px;
     }
-    
+
     .maiacare-button-medium {
         font-size: 14px;
     }
-    
+
     .maiacare-button-small {
         font-size: 12px;
     }
@@ -391,14 +403,15 @@
     .modal-custom-header {
         font-size: 18px;
     }
+
     .maiacare-button-large {
         font-size: 14px;
     }
-    
+
     .maiacare-button-medium {
         font-size: 12px;
     }
-    
+
     .maiacare-button-small {
         font-size: 10px;
     }

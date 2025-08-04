@@ -1,0 +1,11 @@
+.fertilitiy-assement-accodion-item {
+    border: 1px solid var(--google-icon-border) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+
+}
+
+.custom-accordion-body {
+    padding: 0 16px 16px !important;
+}
+
