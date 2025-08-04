@@ -121,21 +121,7 @@
 
 /* pankaj solanki start*/
 
-/* .setting-password-left-side {
-    background-color: var(--color-white);
-    border-radius: 16px;
-    padding: 16px;
-
-} */
-
-.setting-password-item {
-    border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.setting-password-item span {
+.setting-password-item-name {
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
@@ -150,106 +136,13 @@
     color: var(--color-radio-lable);
 }
 
-.custom-nav .nav-link {
-    background-color: transparent;
-    color: #8a8d93;
-}
-
-.custom-nav .nav-link .nav-icon {
-    color: #8a8d93;
-}
-
-/* Active styles */
-.custom-nav .nav-link.active {
-    background-color: #2b4360;
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active .nav-icon {
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active span {
-    color: #ffffff;
-}
-
-.maiacare-button .setting-button {
-    font-size: 10px !important;
-}
-
-/* .setting-password-item:hover {
-    background-color: var(--color-brand) !important;
-    color: var(--color-white);
-
-}
-
-.setting-password-item:hover svg path,
-.setting-password-item:hover span {
-    fill: var(--color-white);
-    color: var(--color-white);
-
-} */
-
+/* setting accordion */
 .accordion-title {
     color: var(--color-heading);
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
    
-}
-
-/* setting accordion */
-
-.setting-accordion-item {
-    border: none !important;
-}
-
-.setting-accordion-item .accordion-button {
-    padding: 0 !important;
-}
-
-/* Remove background and shadow on accordion expansion  FOR ALL ACCORDION*/
-.accordion-button:not(.collapsed) {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-.accordion-button:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-.setting-accordion-item .accordion-button::after {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #F4F4F4;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--color-white);
-    /* optional */
-    padding: 0;
-
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Optional: rotate the arrow when open */
-.setting-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
-}
-
-/* Style for open (expanded) Accordion Item */
-.support-accordion-item.open {
-    border-bottom: 1px solid var(--color-iconborder, #DDE1E8) !important;
-    /* padding: 20px; */
-    border-radius: 0 0 10px 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px;
-
 }
 
 .settings-accordion-subtitle {
@@ -298,8 +191,6 @@
     color: #1E293B;
 }
 
-
-
 .support-accordion-content {
     font-size: 14px;
     font-weight: 400;
@@ -314,50 +205,6 @@
     font-weight: 600;
     line-height: 22px;
     color: var(--color-brand);
-}
-
-/* support accordion */
-
-.support-accordion-item {
-    border: none !important;
-}
-
-.support-accordion-item .accordion-button {
-    padding: 0 !important;
-}
-.support-accordion-header {
-    font-size: 16px;
-    font-weight: 550;
-    line-height: 20px;
-    color: var(--color-radio-lable);
-    padding: 0 10px;
-}
-
-.support-accordion-item .accordion-button::after {
-    border: 1px solid var(--color-icon-border);
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-white);
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.support-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
-}
-
-
-
-@media screen and (max-width: 425px) {
-    .your-device-box-subtitle {
-        width: 100%;
-    }
 }
 
 /* pankaj solanki end*/
