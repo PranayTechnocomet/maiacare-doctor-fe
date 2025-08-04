@@ -31,12 +31,44 @@ function PasswordSettings() {
 
     });
 
+    const [passwordValidation, setPasswordValidation] = useState({
+        minLength: false,
+        number: false,
+        lowercase: false,
+        uppercase: false,
+        specialChar: false,
+    });
+
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
+
+        if (name === "newpassword") {
+            setPasswordValidation({
+                minLength: value.length >= 8,
+                number: /[0-9]/.test(value),
+                lowercase: /[a-z]/.test(value),
+                uppercase: /[A-Z]/.test(value),
+                specialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value),
+            });
+        }
+    };
+
+    const renderIcon = (condition: boolean) => {
+        return condition ? (
+            // Tick icon svg
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+                <path d="M1.71875 6.64844L4.125 9.05469L9.625 3.55469" stroke="#AFDC81" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+        ) : (
+            // Dot icon svg
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
+                <circle cx="5.5" cy="5.96094" r="2" fill="#3E4A57" />
+            </svg>
+        );
     };
 
     const validateForm = (data: FormData): FormError => {
@@ -49,26 +81,22 @@ function PasswordSettings() {
         // Enhanced password validation for new password
         if (data.newpassword) {
             const password = data.newpassword;
-            const passwordErrors = [];
+            let passwordError = "";
 
             if (password.length < 8) {
-                passwordErrors.push("Minimum 8 characters");
-            }
-            if (!/(?=.*[a-z])/.test(password)) {
-                passwordErrors.push("At least one lowercase letter");
-            }
-            if (!/(?=.*[A-Z])/.test(password)) {
-                passwordErrors.push("At least one uppercase letter");
-            }
-            if (!/(?=.*\d)/.test(password)) {
-                passwordErrors.push("At least one number");
-            }
-            if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(password)) {
-                passwordErrors.push("At least one special character (e.g., !@#$%^&*)");
+                passwordError = "Minimum 8 characters";
+            } else if (!/(?=.*[a-z])/.test(password)) {
+                passwordError = "At least one lowercase letter";
+            } else if (!/(?=.*[A-Z])/.test(password)) {
+                passwordError = "At least one uppercase letter";
+            } else if (!/(?=.*\d)/.test(password)) {
+                passwordError = "At least one number";
+            } else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(password)) {
+                passwordError = "At least one special character (e.g., !@#$%^&*)";
             }
 
-            if (passwordErrors.length > 0) {
-                errors.newpassword = passwordErrors.join(", ");
+            if (passwordError) {
+                errors.newpassword = passwordError;
             }
         }
 
@@ -92,7 +120,7 @@ function PasswordSettings() {
 
     return (
         <>
-            <p className="settings-accordion-subtitle">For your security, please enter your current password followed by your new password.</p>
+            <p className="settings-accordion-subtitle my-4">For your security, please enter your current password followed by your new password.</p>
             <form onSubmit={handleSubmit}>
                 <InputFieldGroup
                     label="Current Password"
@@ -130,39 +158,29 @@ function PasswordSettings() {
 
                 <div className="my-3">
                     <p className="settings-accordion-subtitle mb-2">Your password must meet the following requirements:</p>
-                    <div className="d-flex align-items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
-                            <circle cx="5.5" cy="5.96094" r="2" fill="#3E4A57" />
-                        </svg>
 
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.number)}
                         <span className="password-requirements">At least one number</span>
                     </div>
-                    <div className="d-flex align-items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
-                            <path d="M1.71875 6.64844L4.125 9.05469L9.625 3.55469" stroke="#AFDC81" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
 
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.minLength)}
                         <span className="password-requirements">Minimum 8 characters</span>
                     </div>
-                    <div className="d-flex align-items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
-                            <circle cx="5.5" cy="5.96094" r="2" fill="#3E4A57" />
-                        </svg>
 
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.lowercase)}
                         <span className="password-requirements">At least one lowercase letter</span>
                     </div>
-                    <div className="d-flex align-items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
-                            <path d="M1.71875 6.64844L4.125 9.05469L9.625 3.55469" stroke="#AFDC81" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
 
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.uppercase)}
                         <span className="password-requirements">At least one uppercase letter</span>
                     </div>
-                    <div className="d-flex align-items-center  gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="12" viewBox="0 0 11 12" fill="none">
-                            <circle cx="5.5" cy="5.96094" r="2" fill="#3E4A57" />
-                        </svg>
 
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.specialChar)}
                         <span className="password-requirements">At least one special character (e.g., !@#$%^&*)</span>
                     </div>
                 </div>

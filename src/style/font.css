@@ -51,8 +51,18 @@
     color: var(--color-sidebar-icon);
 }
 
-.maiacare-button {
+.maiacare-button-large {
     font-size: 18px;
+    font-weight: 500;
+}
+
+.maiacare-button-medium {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.maiacare-button-small {
+    font-size: 14px;
     font-weight: 500;
 }
 
@@ -124,21 +134,7 @@
 
 /* pankaj solanki start*/
 
-/* .setting-password-left-side {
-    background-color: var(--color-white);
-    border-radius: 16px;
-    padding: 16px;
-
-} */
-
-.setting-password-item {
-    border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.setting-password-item span {
+.setting-password-item-name {
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
@@ -153,105 +149,12 @@
     color: var(--color-radio-lable);
 }
 
-.custom-nav .nav-link {
-    background-color: transparent;
-    color: #8a8d93;
-}
-
-.custom-nav .nav-link .nav-icon {
-    color: #8a8d93;
-}
-
-/* Active styles */
-.custom-nav .nav-link.active {
-    background-color: #2b4360;
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active .nav-icon {
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active span {
-    color: #ffffff;
-}
-
-.maiacare-button .setting-button {
-    font-size: 10px !important;
-}
-
-/* .setting-password-item:hover {
-    background-color: var(--color-brand) !important;
-    color: var(--color-white);
-
-}
-
-.setting-password-item:hover svg path,
-.setting-password-item:hover span {
-    fill: var(--color-white);
-    color: var(--color-white);
-
-} */
-
+/* setting accordion */
 .accordion-title {
     color: var(--color-heading);
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
-
-}
-
-/* setting accordion */
-
-.setting-accordion-item {
-    border: none !important;
-}
-
-.setting-accordion-item .accordion-button {
-    padding: 0 !important;
-}
-
-/* Remove background and shadow on accordion expansion  FOR ALL ACCORDION*/
-.accordion-button:not(.collapsed) {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-.accordion-button:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-.setting-accordion-item .accordion-button::after {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #F4F4F4;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--color-white);
-    /* optional */
-    padding: 0;
-
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Optional: rotate the arrow when open */
-.setting-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
-}
-
-/* Style for open (expanded) Accordion Item */
-.support-accordion-item.open {
-    border-bottom: 1px solid var(--color-iconborder, #DDE1E8) !important;
-    /* padding: 20px; */
-    border-radius: 0 0 10px 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px;
 
 }
 
@@ -300,8 +203,6 @@
     line-height: 22px;
     color: #1E293B;
 }
-
-
 
 .support-accordion-content {
     font-size: 14px;
@@ -444,7 +345,7 @@
     line-height: 22px;
     font-style: medium;
     color: var(--color-heading);
-    
+
 }
 
 .login-dont {
@@ -485,12 +386,14 @@
     font-style: Regular;
     color: var(--color-sidebar-icon);
 }
+
 @media screen and (max-width: 1400px) {
     .login-image-contetnt {
         font-size: 40px;
         line-height: 48px;
     }
 }
+
 @media screen and (max-width: 1024px) {
     .login-title {
         font-size: 33px;
@@ -501,6 +404,7 @@
         font-size: 17px;
         line-height: 20px;
     }
+
     .login-image-contetnt {
         font-size: 40px;
         line-height: 51px;
@@ -534,6 +438,7 @@
         font-size: 31px;
         line-height: 35px;
     }
+
     .login-image-contetnt {
         font-size: 38px;
         line-height: 48px;
@@ -550,60 +455,85 @@
         font-size: 16px;
         line-height: 20px;
     }
+
     .login-image-contetnt {
         font-size: 30px;
         line-height: 46px;
-    }
-}
 
-/* Optional: Smaller devices like phones (e.g., 575px and below) */
-@media (max-width: 575px) {
-    .maiacare-input-field-label {
-        font-size: 12px;
+        .maiacare-button-large {
+            font-size: 16px;
+        }
+
+        .maiacare-button-medium {
+            font-size: 14px;
+        }
+
+        .maiacare-button-small {
+            font-size: 12px;
+        }
     }
 
-    .maiacare-input-field {
+    /* Optional: Smaller devices like phones (e.g., 575px and below) */
+    @media (max-width: 575px) {
+        .maiacare-input-field-label {
+            font-size: 12px;
+        }
+
+        .maiacare-input-field {
+            font-size: 14px;
+        }
+
+        .maiacare-input-field-helper-text,
+        .maiacare-input-field-error {
+            font-size: 12px;
+        }
+
+        .maiacare-radio-label {
+            font-size: 12px;
+        }
+
+        .modal-custom-header {
+            font-size: 18px;
+        }
+
+        .login-title {
+            font-size: 27px;
+            line-height: 30px;
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+    }
+
+    @media screen and (max-width: 426px) {
+        .login-title {
+            font-size: 25px;
+            line-height: 25px;
+        }
+
+        .login-subtitle {
+            font-size: 13px;
+            line-height: 20px;
+        }
+    }
+
+
+    @media screen and (max-width: 376px) {}
+
+    @media screen and (max-width: 320px) {}
+
+    .maiacare-button-large {
         font-size: 14px;
     }
 
-    .maiacare-input-field-helper-text,
-    .maiacare-input-field-error {
+    .maiacare-button-medium {
         font-size: 12px;
     }
 
-    .maiacare-radio-label {
-        font-size: 12px;
-    }
-
-    .modal-custom-header {
-        font-size: 18px;
-    }
-
-    .login-title {
-        font-size: 27px;
-        line-height: 30px;
-    }
-
-    .login-subtitle {
-        font-size: 14px;
-        line-height: 20px;
-    }
-
-}
-
-@media screen and (max-width: 426px) {
-    .login-title {
-        font-size: 25px;
-        line-height: 25px;
-    }
-
-    .login-subtitle {
-        font-size: 13px;
-        line-height: 20px;
+    .maiacare-button-small {
+        font-size: 10px;
     }
 }
-
-
-@media screen and (max-width: 376px) {}
-
-@media screen and (max-width: 320px) {}

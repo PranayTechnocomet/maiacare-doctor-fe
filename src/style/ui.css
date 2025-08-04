@@ -117,16 +117,6 @@
     justify-content: center;
 }
 
-/* pankaj solanki start */
-.your-device-box{
-    border: 1px solid #CBD5E1;
-    padding: 16px;
-    border-radius: 12px;
-    
-}
-/* pankaj solanki end */
-
-
 
 @media (max-width: 991px) {
     .content-layout {

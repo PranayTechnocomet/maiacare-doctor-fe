@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { Accordion, Col, Row } from 'react-bootstrap'
 import ContentContainer from './ui/ContentContainer'
+import headphoneImg from "@/assets/images/headphone.png";
 
 const supportFaqs = [
     {
@@ -29,23 +30,22 @@ const SettingsSupport = () => {
     const handleSelect = (eventKey: string | null | undefined, _e?: React.SyntheticEvent) => {
         setActiveKey(eventKey ?? null);
     };
-    
 
 
     return (
         <>
             <ContentContainer>
                 <div className="d-flex justify-content-start align-items-center gap-3">
-                    <Image src="/images/headphone.png" width={48} height={48} alt="password-img" />
+                    <Image src={headphoneImg} width={48} height={48} alt="password-img" />
 
                     <span className="accordion-title">Support</span>
 
                 </div>
 
-                <p className="settings-accordion-subtitle mt-4">Everything you need to know about the software and get help</p>
+                <p className="settings-accordion-subtitle mt-lg-4 mt-3">Everything you need to know about the software and get help</p>
 
-                <Row className='mt-4 g-4'>
-                    <Col md="4">
+                <Row className='mt-lg-4 mt-0 g-lg-4 g-3'>
+                    <Col lg="4">
                         <div className='faqs-secation'>
                             <h6 className='support-faqs-title'>FAQs</h6>
                             <p className='support-faqs-desc'>Everything you need to know about the software and billing. Cant find answers you’re looking for? Please contact us on the phone number or on our email.</p>
@@ -70,8 +70,8 @@ const SettingsSupport = () => {
                         </div>
 
                     </Col>
-                    <Col md="8">
-                        <Accordion defaultActiveKey="0" activeKey={activeKey} onSelect={handleSelect}>
+                    <Col lg="8">
+                        <Accordion defaultActiveKey="0" activeKey={activeKey} onSelect={(e: any) => handleSelect(e)}>
                             {supportFaqs.map((item, index) => {
                                 const currentKey = index.toString();
                                 const isOpen = activeKey === currentKey;
@@ -94,23 +94,7 @@ const SettingsSupport = () => {
                                 );
                             })}
                         </Accordion>
-                        {/* <Accordion defaultActiveKey="0">
-                            {supportFaqs.map((item, index) => (
-                                
-                                <Accordion.Item eventKey={index.toString()} className='support-accordion-item mb-3'>
-                                    <Accordion.Header className='support-accordion-header '>
-                                        <div className='support-accordion-header '>
 
-                                            {item.title}
-                                        </div>
-                                    </Accordion.Header>
-                                    <Accordion.Body className='support-accordion-content p-0'>
-                                        {item.desc}
-                                    </Accordion.Body>
-                                </Accordion.Item>
-                            ))}
-                            
-                        </Accordion> */}
 
                     </Col>
                 </Row>
