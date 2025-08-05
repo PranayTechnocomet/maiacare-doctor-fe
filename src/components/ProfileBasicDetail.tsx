@@ -9,31 +9,10 @@ import Image from 'next/image';
 import ProfilePhone from '../assets/images/Phone.png'
 import ProfileEmail from '../assets/images/Email.png'
 import ProfileAddress from '../assets/images/Location.png'
+import Modal from './ui/Modal';
+import MedicalHistory from './form/MedicalHistory';
 
-// JSON data for accordion sections
-const accordionData = [
-    {
-        id: '0',
-        title: 'Physical Assessment',
-        content: <p>No data available yet.</p>,
-    },
-    {
-        id: '1',
-        title: 'Fertility Assessment',
-        content: <p>No data available yet.</p>,
-    },
-    {
-        id: '2',
-        title: 'Medical History',
-        content: (
-            <div className="text-center text-muted">
-                <BsFolder2Open size={40} className="mb-3" />
-                <p>No medical history</p>
-                <Button variant="outline-primary">+ Add Medical History</Button>
-            </div>
-        ),
-    },
-];
+
 const contactData = {
     phone: '+91 12345 67890',
     email: 'riyadharang@miacare.com',
@@ -116,54 +95,55 @@ const getStatusBadgeClass = (status: string) => {
             return 'badge bg-danger';
         default:
             return 'badge bg-secondary';
-    }
-};
+        }
+    };
 
-const getTimelineIconClass = (status: string) => {
-    switch (status) {
-        case 'Success':
-            return 'bg-success';
-        case 'Pending':
+    const getTimelineIconClass = (status: string) => {
+        switch (status) {
+            case 'Success':
+                return 'bg-success';
+                case 'Pending':
             return 'bg-warning';
         case 'Failed':
             return 'bg-danger';
-        default:
-            return 'bg-secondary';
-    }
+            default:
+                return 'bg-secondary';
+            }
 };
 
 
 const ProfileBasicDetail = () => {
-    const [activeAccordion, setActiveAccordion] = useState<string | null>('2');
-    // State for managing active accordion items (allows multiple open)
-    const [activeAccordions, setActiveAccordions] = useState<string[]>(['2']);
+    const [showModal, setShowModal] = useState(false);
+    const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
 
-    // Toggle accordion handler
-    const handleAccordionToggle = (eventKey: string) => {
-        setActiveAccordions(prev => {
-            if (prev.includes(eventKey)) {
-                // If already active, remove it (close)
-                return prev.filter(key => key !== eventKey);
-            } else {
-                // If not active, add it (open)
-                return [...prev, eventKey];
-            }
-        });
-    };
-
-    // Get badge variant based on status
-    const getBadgeVariant = (status: string) => {
-        switch (status) {
-            case 'success':
-                return 'success';
-            case 'pending':
-                return 'warning';
-            case 'cancelled':
-                return 'danger';
-            default:
-                return 'secondary';
-        }
-    };
+    // Accordion data with access to component state
+    const accordionData = [
+        {
+            id: '0',
+            title: 'Physical Assessment',
+            content: <p>No data available yet.</p>,
+        },
+        {
+            id: '1',
+            title: 'Fertility Assessment',
+            content: <div className="text-center text-muted">
+            <BsFolder2Open size={40} className="mb-3" />
+            <p>No medical history</p>
+            <Button variant="outline-primary" >+ Add Medical History</Button>
+        </div>,
+        },
+        {
+            id: '2',
+            title: 'Medical History',
+            content: (
+                <div className="text-center text-muted">
+                    <BsFolder2Open size={40} className="mb-3" />
+                    <p>No medical history</p>
+                    <Button variant="outline-primary" onClick={() => setShowModal(true)}>+ Add Medical History</Button>
+                </div>
+            ),
+        },
+    ];
 
 
     return (
@@ -174,46 +154,47 @@ const ProfileBasicDetail = () => {
                     {/* Contact Card */}
                     <Card className="mb-4 shadow-sm">
                         <Card.Body className="p-4">
-                            <h5 className="mb-4 contact-details-heading">Contact Details</h5>
+                            <h5 className="mb-3 contact-details-heading">Contact Details</h5>
 
                             <div className="d-flex justify-content-between">
                                 <div className="mb-3 d-flex align-items-center">
-                                    <Image src={ProfilePhone} className="me-2 contact-details-subheading" width={20} height={20} alt="Phone" />
-                                    <span>{contactData.phone}</span>
+                                    <Image src={ProfilePhone} className="me-2 " width={20} height={20} alt="Phone" />
+                                    <span className="contact-details-subheading">{contactData.phone}</span>
                                 </div>
 
-                                <div className="mb-3 d-flex align-items-center ">
-                                    <Image src={ProfileEmail} className="me-2 contact-details-subheading" width={20} height={20} alt="Email" />
-                                    <span className="text-primary">{contactData.email}</span>
+                                <div className="mb-3 d-flex align-items-center contac-email-card">
+                                    <Image src={ProfileEmail} className="me-2 " width={20} height={20} alt="Email" />
+                                    <span className="contact-details-subheading">{contactData.email}</span>
                                 </div>
                             </div>
                             <div className="mb-4 d-flex align-items-start">
-                                <Image src={ProfileAddress} className="me-2 contact-details-subheading" width={20} height={20} alt="Address" />
-                                <span className="text-muted w-75">{contactData.address}</span>
+                                <Image src={ProfileAddress} className="me-2 " width={20} height={20} alt="Address" />
+                                <span className="contact-details-subheading contact-propfile-address">{contactData.address}</span>
                             </div>
 
 
 
-                            <h6 className=" mb-3 contact-details-heading">Emergency Contact Details</h6>
+                            <h6 className=" mb-4 contact-details-heading">Emergency Contact Details</h6>
                             <Row className="g-3">
                                 <Col sm={4}>
                                     <div>
-                                        <small className="text-muted d-block">Name</small>
-                                        <strong>{contactData.emergencyContact.name}</strong>
+                                        <small className="contact-details-emergency d-block">Name</small>
+                                        <span className="contact-details-emergency-subdetail">{contactData.emergencyContact.name}</span >
                                     </div>
                                 </Col>
-                                <Col sm={4}>
-                                    <div>
-                                        <small className="text-muted d-block">Emergency Contact</small>
-                                        <strong>{contactData.emergencyContact.contact}</strong>
+                                <Col sm={8}>
+                                    <div className='d-flex gap-3'>
+                                        <div>
+                                            <small className="contact-details-emergency d-block">Emergency Contact</small>
+                                            <span className="contact-details-emergency-subdetail">{contactData.emergencyContact.contact}</span >
+                                        </div>
+                                        <div className='contact-details-relation'>
+                                            <small className="contact-details-emergency d-block">Relation</small>
+                                            <span className="contact-details-emergency-subdetail">{contactData.emergencyContact.relation}</span >
+                                        </div>
                                     </div>
                                 </Col>
-                                <Col sm={4}>
-                                    <div>
-                                        <small className="text-muted d-block">Relation</small>
-                                        <strong>{contactData.emergencyContact.relation}</strong>
-                                    </div>
-                                </Col>
+
                             </Row>
                         </Card.Body>
                     </Card>
@@ -222,13 +203,24 @@ const ProfileBasicDetail = () => {
                     <Accordion activeKey={activeAccordion} className="mb-3">
                         {accordionData.map((item) => (
                             <Accordion.Item eventKey={item.id} key={item.id}>
-                                <Accordion.Header  onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
-                                 <p className='contact-details-heading'>   {item.title }</p>
+                                <Accordion.Header onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
+                                    <p className='contact-details-heading'>   {item.title}</p>
                                 </Accordion.Header>
                                 <Accordion.Body>{item.content}</Accordion.Body>
                             </Accordion.Item>
                         ))}
                     </Accordion>
+
+                    <Modal
+                            show={showModal}
+                            onHide={() => setShowModal(false)}
+                            header="Add Medical History"
+                            closeButton={true}
+                            size = "lg"
+                          >
+                            <div className="mb-0 "><MedicalHistory /></div>
+                          </Modal>
+                          
                 </Col>
 
                 {/* Right Side - Patient Journey */}
@@ -262,6 +254,8 @@ const ProfileBasicDetail = () => {
                     ))}
 
                 </Col>
+
+                
             </Row>
         </Container>
     );
