@@ -20,8 +20,6 @@ import { Patient } from "@/utils/types/interfaces";
 import { tableResponse } from "@/utils/StaticData";
 import Textarea from "@/components/ui/Textarea";
 
-
-
 const data: Patient[] = [
   {
     id: 1,
@@ -292,7 +290,7 @@ export default function Page() {
         <BaseTable data={tableData} columns={columns} />
       </div>
 
-<InputFieldHelperText helperText="Helper Text" />
+      <InputFieldHelperText helperText="Helper Text" />
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}

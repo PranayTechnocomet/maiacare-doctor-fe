@@ -263,157 +263,167 @@
     .your-device-box-subtitle {
         width: 100%;
     }
-}
 
-/* pankaj solanki end*/
+    .fertilitiy-assement-accodion-title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 22px;
+        color: var(--color-brand);
+    }
 
-.login-button {
-    width: 100%;
-    background-color: var(--color-brand);
-    color: var(--color-white);
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 16px;
-}
+    /* pankaj solanki end*/
 
-.login-title {
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 44px;
-    font-style: SemiBold;
-    color: var(--login-font);
-}
+    .login-button {
+        width: 100%;
+        background-color: var(--color-brand);
+        color: var(--color-white);
+        font-weight: 600;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 16px;
+    }
 
-.login-subtitle {
-    font-weight: 400;
-    font-size: 18px;
-    font-style: Regular;
-    line-height: 160%;
-    color: var(--font-subtitle);
-}
+    .login-title {
+        font-weight: 600;
+        font-size: 36px;
+        line-height: 44px;
+        font-style: SemiBold;
+        color: var(--login-font);
+    }
 
-.login-image-content {
-    font-weight: 600;
-    font-size: 44px;
-    color: var(--color-white);
-    line-height: 56px;
-}
+    .login-subtitle {
+        font-weight: 400;
+        font-size: 18px;
+        font-style: Regular;
+        line-height: 160%;
+        color: var(--font-subtitle);
+    }
 
-.select-profile {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 28px;
-    color: var(--profile-text);
-}
+    .login-image-content {
+        font-weight: 600;
+        font-size: 44px;
+        color: var(--color-white);
+        line-height: 56px;
+    }
 
-.select-profile-subtitle {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--profile-subtitle);
-}
+    .select-profile {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        color: var(--profile-text);
+    }
 
-.input-label-title {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    font-style: SemiBold;
-    color: var(--input-label-title);
-}
+    .select-profile-subtitle {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: var(--profile-subtitle);
+    }
 
-.input-inner-text input {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 22px;
-    font-style: Medium;
-    color: var(--input-label-title);
+    .input-label-title {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 20px;
+        font-style: SemiBold;
+        color: var(--input-label-title);
+    }
 
-}
+    .input-inner-text input {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        font-style: Medium;
+        color: var(--input-label-title);
 
-.input-forrgot-password {
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 20px;
-    color: var(--input-forgot-password);
-    font-style: bold;
-}
+    }
 
-.login-google-button {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 22px;
-    font-style: medium;
-    color: var(--color-heading);
+    .input-forrgot-password {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--input-forgot-password);
+        font-style: bold;
+    }
 
-}
+    .login-google-button {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 22px;
+        font-style: medium;
+        color: var(--color-heading);
 
-.login-dont {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
-    font-style: Regular;
-    color: var(--color-radio-lable);
-}
+    }
 
-.login-image-contetnt {
-    font-weight: 600;
-    font-size: 44px;
-    color: var(--color-white);
-    line-height: 56px;
-    font-style: SemiBold;
-}
+    .login-dont {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        font-style: Regular;
+        color: var(--color-radio-lable);
+    }
 
-.loginpage-or-btn {
-    font-size: 12px;
-    font-weight: 600;
-    font-style: SemiBold;
-    color: var(--or-font-color);
-}
+    .login-image-contetnt {
+        font-weight: 600;
+        font-size: 44px;
+        color: var(--color-white);
+        line-height: 56px;
+        font-style: SemiBold;
+    }
 
-.select-profile-title {
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 28px;
-    font-style: SemiBold;
-    color: var(--profile-text);
-}
+    .loginpage-or-btn {
+        font-size: 12px;
+        font-weight: 600;
+        font-style: SemiBold;
+        color: var(--or-font-color);
+    }
 
-.select-profile-subtitle {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    font-style: Regular;
-    color: var(--color-sidebar-icon);
-}
+    .select-profile-title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        font-style: SemiBold;
+        color: var(--profile-text);
+    }
 
-.doctor-profile-heading{
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
-.doctor-profile-subheading{
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 20px;
-    font-style: Regular;
-    color: var(--font-subtitle);
-}
-.contact-details-heading{
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 26px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
-.contact-details-subheading{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: Regular;
-    color: var(--color-radio-lable);
+    .select-profile-subtitle {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        font-style: Regular;
+        color: var(--color-sidebar-icon);
+    }
+
+    .doctor-profile-heading {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        font-style: SemiBold;
+        color: var(--color-heading);
+    }
+
+    .doctor-profile-subheading {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        font-style: Regular;
+        color: var(--font-subtitle);
+    }
+
+    .contact-details-heading {
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 26px;
+        font-style: SemiBold;
+        color: var(--color-heading);
+    }
+
+    .contact-details-subheading {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        font-style: Regular;
+        color: var(--color-radio-lable);
+    }
 }
 
 @media screen and (max-width: 1400px) {
@@ -472,6 +482,14 @@
         font-size: 38px;
         line-height: 48px;
     }
+
+    .maiacare-button-medium {
+        font-size: 14px;
+    }
+
+    .maiacare-button-small {
+        font-size: 12px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -488,71 +506,66 @@
     .login-image-contetnt {
         font-size: 30px;
         line-height: 46px;
-
-        .maiacare-button-large {
-            font-size: 16px;
-        }
-
-        .maiacare-button-medium {
-            font-size: 14px;
-        }
-
-        .maiacare-button-small {
-            font-size: 12px;
-        }
     }
 
-    /* Optional: Smaller devices like phones (e.g., 575px and below) */
-    @media (max-width: 575px) {
-        .maiacare-input-field-label {
-            font-size: 12px;
-        }
-
-        .maiacare-input-field {
-            font-size: 14px;
-        }
-
-        .maiacare-input-field-helper-text,
-        .maiacare-input-field-error {
-            font-size: 12px;
-        }
-
-        .maiacare-radio-label {
-            font-size: 12px;
-        }
-
-        .modal-custom-header {
-            font-size: 18px;
-        }
-
-        .login-title {
-            font-size: 27px;
-            line-height: 30px;
-        }
-
-        .login-subtitle {
-            font-size: 14px;
-            line-height: 20px;
-        }
-
+    .maiacare-button-large {
+        font-size: 16px;
     }
 
-    @media screen and (max-width: 426px) {
-        .login-title {
-            font-size: 25px;
-            line-height: 25px;
-        }
-
-        .login-subtitle {
-            font-size: 13px;
-            line-height: 20px;
-        }
+    .maiacare-button-medium {
+        font-size: 14px;
     }
 
+    .maiacare-button-small {
+        font-size: 12px;
+    }
+}
 
-    @media screen and (max-width: 376px) {}
+/* Optional: Smaller devices like phones (e.g., 575px and below) */
+@media (max-width: 575px) {
+    .maiacare-input-field-label {
+        font-size: 12px;
+    }
 
-    @media screen and (max-width: 320px) {}
+    .maiacare-input-field {
+        font-size: 14px;
+    }
+
+    .maiacare-input-field-helper-text,
+    .maiacare-input-field-error {
+        font-size: 12px;
+    }
+
+    .maiacare-radio-label {
+        font-size: 12px;
+    }
+
+    .modal-custom-header {
+        font-size: 18px;
+    }
+
+    .login-title {
+        font-size: 27px;
+        line-height: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+}
+
+@media screen and (max-width: 426px) {
+    .login-title {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .login-subtitle {
+        font-size: 13px;
+        line-height: 20px;
+    }
 
     .maiacare-button-large {
         font-size: 14px;
@@ -566,3 +579,7 @@
         font-size: 10px;
     }
 }
+
+@media screen and (max-width: 376px) {}
+
+@media screen and (max-width: 320px) {}
