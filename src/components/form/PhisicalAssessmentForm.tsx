@@ -41,7 +41,6 @@ const PhisicalAssessmentForm = () => {
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
 
-
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
 
@@ -171,7 +170,7 @@ const PhisicalAssessmentForm = () => {
 
                     <Col md={5}>
                         <InputFieldGroup
-                            label="Blood Pressure*"
+                            label="Blood Pressure"
                             name="systolic"
                             type="text"
                             className="setting-password-input"
@@ -214,7 +213,7 @@ const PhisicalAssessmentForm = () => {
                     <Col md={12}>
 
                         <InputFieldGroup
-                            label="Heart Rate *"
+                            label="Heart Rate"
                             name="heartRate"
                             type="text"
                             className='setting-password-input'

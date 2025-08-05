@@ -13,7 +13,7 @@ import PhisicalAssessment from "@/components/PhisicalAssessment";
 import FertilityAssessment from "@/components/FertilityAssessment";
 import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
-
+import "@/style/patientProfile.css";
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();
@@ -21,12 +21,23 @@ function Page() {
     dispatch(setHeaderData({ title: "Patients", subtitle: "Patients List" }));
   }, []);
 
-  return <div>
-    {/* <h1>Patients</h1> */}
-    <PhisicalAssessment />
-    <FertilityAssessment />
+  return (
+    <>
+    
 
-  </div>;
+      <div>
+        <h6>PhisicalAssessment and FertilityAssessment modal </h6>
+        <div className="d-flex gap-5">
+
+          <PhisicalAssessment />
+          <FertilityAssessment />
+
+        </div>
+      </div>
+
+    </>
+
+  );
 }
 
 export default Page;
