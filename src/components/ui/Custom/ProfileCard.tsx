@@ -1,6 +1,4 @@
 
-
-
 import React, { useState } from 'react';
 
 import { Nav, Tab } from 'react-bootstrap';
@@ -22,6 +20,7 @@ import Cacke from '../../../assets/images/Cake.png'
 import '../../../style/profile.css';
 import ProfileBasicDetail from '@/components/ProfileBasicDetail';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import ContentContainer from '../ContentContainer';
 
 
 type ProfileProps = {
@@ -47,37 +46,40 @@ export const ProfileCard: React.FC<ProfileProps> = ({
 }) => {
   return (
     <Card className={`shadow-sm rounded-4 p-3`}>
-      <Row className="align-items-center">
+
+      <Row >
         <Col xs="auto">
           <Image
             src={PrfileImage}
             alt={name}
-            width={70}
-            height={70}
-            className="rounded-4"
+            width={90}
+            height={90}
+            className="rounded-3"
           />
         </Col>
         <Col>
           <div className="d-flex align-items-center mb-1">
             <h6 className="mb-0 doctor-profile-heading me-2">{name}</h6>
-            <Badge className="profile-active-btn"
-              style={{ backgroundColor: '#EBF5FF', color: '#3F83F8' }}>
-              {status}
-            </Badge>
-          </div>
-          <div className="text-muted small">
-            <div className=" gap-3 flex-wrap align-items-center">
-              <div className=''>
-                <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
-                <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
-              </div>
-              <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
-              <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
-            </div>
-            <div className="pt-1 doctor-profile-subheading">
-              <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
+
+            <div className="profile-card-btn-status">
+              <Badge className="profile-active-btn">
+                {status}
+              </Badge>
             </div>
           </div>
+
+
+          <div className=''>
+            <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
+            <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
+          </div>
+          <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
+          <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
+
+          <div className="pt-1 doctor-profile-subheading">
+            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
+          </div>
+
         </Col>
         <Col xs="auto">
           <Dropdown align="end" className="d-flex align-items-center">
@@ -86,7 +88,10 @@ export const ProfileCard: React.FC<ProfileProps> = ({
               id="dropdown-basic"
               className="bg-transparent border-0 p-1 no-caret"
             >
-              <HiOutlineDotsHorizontal  size={20} className="mb-1" />
+              <div className='patient-profile-dot'>
+
+                <HiOutlineDotsHorizontal />
+              </div>
             </Dropdown.Toggle>
             <Dropdown.Menu className="dropdown-menu-end">
               <Dropdown.Item>Edit</Dropdown.Item>
@@ -96,15 +101,10 @@ export const ProfileCard: React.FC<ProfileProps> = ({
           </Dropdown>
         </Col>
       </Row>
+
     </Card>
   );
 };
-
-
-
-
-
-
 
 export const TabsSection = () => {
   const [key, setKey] = useState<string>('basic');
@@ -155,7 +155,4 @@ export const TabsSection = () => {
     </Tab.Container>
   );
 };
-
-
-
 

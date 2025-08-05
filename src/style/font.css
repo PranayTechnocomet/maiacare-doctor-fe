@@ -132,6 +132,158 @@
     font-weight: 500;
 }
 
+.login-button {
+    width: 100%;
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.login-title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    font-style: SemiBold;
+    color: var(--login-font);
+}
+
+.login-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    font-style: Regular;
+    line-height: 160%;
+    color: var(--font-subtitle);
+}
+
+.login-image-content {
+    font-weight: 600;
+    font-size: 44px;
+    color: var(--color-white);
+    line-height: 56px;
+}
+
+.select-profile {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--profile-text);
+}
+
+.select-profile-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--profile-subtitle);
+}
+
+.input-label-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--input-label-title);
+}
+
+.input-inner-text input {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--input-label-title);
+
+}
+
+.input-forrgot-password {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--input-forgot-password);
+    font-style: bold;
+}
+
+.login-google-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: medium;
+    color: var(--color-heading);
+
+}
+
+.login-dont {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+
+.login-image-contetnt {
+    font-weight: 600;
+    font-size: 44px;
+    color: var(--color-white);
+    line-height: 56px;
+    font-style: SemiBold;
+}
+
+.loginpage-or-btn {
+    font-size: 12px;
+    font-weight: 600;
+    font-style: SemiBold;
+    color: var(--or-font-color);
+}
+
+.select-profile-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    font-style: SemiBold;
+    color: var(--profile-text);
+}
+
+.select-profile-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.doctor-profile-heading {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.doctor-profile-subheading {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--font-subtitle);
+}
+
+.contact-details-heading {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.contact-details-subheading {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+
 /* pankaj solanki start*/
 
 .setting-password-item-name {
@@ -258,7 +410,6 @@
 }
 
 
-
 @media screen and (max-width: 425px) {
     .your-device-box-subtitle {
         width: 100%;
@@ -273,157 +424,7 @@
 
     /* pankaj solanki end*/
 
-    .login-button {
-        width: 100%;
-        background-color: var(--color-brand);
-        color: var(--color-white);
-        font-weight: 600;
-        border-radius: 8px;
-        padding: 12px;
-        font-size: 16px;
-    }
 
-    .login-title {
-        font-weight: 600;
-        font-size: 36px;
-        line-height: 44px;
-        font-style: SemiBold;
-        color: var(--login-font);
-    }
-
-    .login-subtitle {
-        font-weight: 400;
-        font-size: 18px;
-        font-style: Regular;
-        line-height: 160%;
-        color: var(--font-subtitle);
-    }
-
-    .login-image-content {
-        font-weight: 600;
-        font-size: 44px;
-        color: var(--color-white);
-        line-height: 56px;
-    }
-
-    .select-profile {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 28px;
-        color: var(--profile-text);
-    }
-
-    .select-profile-subtitle {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        color: var(--profile-subtitle);
-    }
-
-    .input-label-title {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 20px;
-        font-style: SemiBold;
-        color: var(--input-label-title);
-    }
-
-    .input-inner-text input {
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 22px;
-        font-style: Medium;
-        color: var(--input-label-title);
-
-    }
-
-    .input-forrgot-password {
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 20px;
-        color: var(--input-forgot-password);
-        font-style: bold;
-    }
-
-    .login-google-button {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 22px;
-        font-style: medium;
-        color: var(--color-heading);
-
-    }
-
-    .login-dont {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 20px;
-        font-style: Regular;
-        color: var(--color-radio-lable);
-    }
-
-    .login-image-contetnt {
-        font-weight: 600;
-        font-size: 44px;
-        color: var(--color-white);
-        line-height: 56px;
-        font-style: SemiBold;
-    }
-
-    .loginpage-or-btn {
-        font-size: 12px;
-        font-weight: 600;
-        font-style: SemiBold;
-        color: var(--or-font-color);
-    }
-
-    .select-profile-title {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 28px;
-        font-style: SemiBold;
-        color: var(--profile-text);
-    }
-
-    .select-profile-subtitle {
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 18px;
-        font-style: Regular;
-        color: var(--color-sidebar-icon);
-    }
-
-    .doctor-profile-heading {
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        font-style: SemiBold;
-        color: var(--color-heading);
-    }
-
-    .doctor-profile-subheading {
-        font-weight: 400;
-        font-size: 15px;
-        line-height: 20px;
-        font-style: Regular;
-        color: var(--font-subtitle);
-    }
-
-    .contact-details-heading {
-        font-weight: 600;
-        font-size: 22px;
-        line-height: 26px;
-        font-style: SemiBold;
-        color: var(--color-heading);
-    }
-
-    .contact-details-subheading {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-        font-style: Regular;
-        color: var(--color-radio-lable);
-    }
 }
 
 @media screen and (max-width: 1400px) {
