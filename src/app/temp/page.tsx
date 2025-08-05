@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AppDispatch } from "@/utils/redux/store";
-import { InputFieldGroup, InputFieldHelperText } from "@/components/ui/InputField";
+import {
+  InputFieldGroup,
+  InputFieldHelperText,
+} from "@/components/ui/InputField";
 import InputSelect from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
@@ -19,8 +22,7 @@ import { IoIosEye } from "react-icons/io";
 import { Patient } from "@/utils/types/interfaces";
 import { tableResponse } from "@/utils/StaticData";
 import Textarea from "@/components/ui/Textarea";
-
-
+import CustomTabs from "@/components/ui/CustomTabs";
 
 const data: Patient[] = [
   {
@@ -76,12 +78,13 @@ const columns: ColumnDef<Patient>[] = [
       const status = info.getValue() as string;
       return (
         <span
-          className={`badge ${status === "Active"
-            ? "bg-primary"
-            : status === "Discontinued"
+          className={`badge ${
+            status === "Active"
+              ? "bg-primary"
+              : status === "Discontinued"
               ? "bg-warning"
               : "bg-danger"
-            }`}
+          }`}
         >
           {status}
         </span>
@@ -127,7 +130,6 @@ export default function Page() {
     );
     setTableData(tableResponse);
     setLoading(false);
-
   }, []);
 
   const [showModal, setShowModal] = useState(false);
@@ -178,6 +180,65 @@ export default function Page() {
     setShowModal(false);
   };
 
+  const [activeTab, setActiveTab] = useState<string>("basic");
+
+  const tabOptions = [
+    {
+      key: "basic",
+      label: "Basic Details",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Basic Details</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "leaves",
+      label: "Manage Leaves",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Leaves Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "reviews",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "xyz",
+      label: "Xyz",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>XYZ</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "abc",
+      label: "ABC",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>ABC</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "de",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+  ];
+
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
@@ -189,7 +250,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
           placeholder="Enter name"
           required={false}
           disabled={false}
@@ -198,9 +259,7 @@ export default function Page() {
           helperText="Enter name"
           className="position-relative xyz"
         >
-          <div
-            className="position-absolute abc"
-          >
+          <div className="position-absolute abc">
             <IoIosEye size={25} />
           </div>
         </InputFieldGroup>
@@ -211,7 +270,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => {}}
           required={true}
           disabled={false}
           error={formError.doctor}
@@ -229,7 +288,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
           required={true}
           disabled={false}
           error={formError.date}
@@ -256,7 +315,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {}}
           required={true}
           disabled={false}
           error={formError.description}
@@ -270,7 +329,9 @@ export default function Page() {
           onChange={(phone: any) => {
             // setFormData((prev) => ({ ...prev, phone }));
             // setFormError((prev) => ({ ...prev, phone: "" }));
-            handleChange({ target: { name: "phone", value: phone } } as React.ChangeEvent<HTMLInputElement>);
+            handleChange({
+              target: { name: "phone", value: phone },
+            } as React.ChangeEvent<HTMLInputElement>);
           }}
           required
           helperText="Enter a valid number including country code"
@@ -287,12 +348,18 @@ export default function Page() {
         </div>
       </ContentContainer>
 
+      <CustomTabs
+        activeKey={activeTab}
+        setActiveKey={setActiveTab}
+        tabOptions={tabOptions}
+      />
+
       <div className="my-4">
         <h4>Patient List</h4>
         <BaseTable data={tableData} columns={columns} />
       </div>
 
-<InputFieldHelperText helperText="Helper Text" />
+      <InputFieldHelperText helperText="Helper Text" />
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}
