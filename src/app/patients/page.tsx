@@ -25,10 +25,10 @@ function Page() {
 
   return (
     <>
-        {/* <h6>AddMedicalHistory modal </h6> */}
-        <AddMedicalHistory />
+      {/* <h6>AddMedicalHistory modal </h6> */}
+      <AddMedicalHistory />
 
-      <div>
+      {/* <div>
         <h6>PhisicalAssessment and FertilityAssessment modal </h6>
         <div className="d-flex gap-5">
 
@@ -36,7 +36,7 @@ function Page() {
           <FertilityAssessment />
 
         </div>
-      </div>
+      </div> */}
 
     </>
 

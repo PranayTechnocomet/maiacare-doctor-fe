@@ -7,7 +7,7 @@ import { ProfileCard, TabsSection } from './ui/Custom/ProfileCard';
 
 const AddMedicalHistory = () => {
   return (
-    <>
+    <>  
       {/* <Head>
         <title>Patient Profile</title>
         <link

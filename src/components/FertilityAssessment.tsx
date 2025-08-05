@@ -33,16 +33,17 @@ const FertilityAssessment = () => {
     return (
         <>
             {/* <h1>Fertility Assessment</h1> */}
-            <Button variant="outline" disabled={false} onClick={handleShow}>
+            {/* <Button variant="outline" disabled={false} onClick={handleShow}>
                 Fertility Assement
-            </Button>
+            </Button> */}
+{/* 
             <Modal
                 show={showModal}
                 onHide={() => setShowModal(false)}
                 header=" Fertility Assement"
                 closeButton={true}
                 size="md"
-            >
+            > */}
 
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3">
@@ -83,7 +84,7 @@ const FertilityAssessment = () => {
                     </Row>
                 </Accordion>
 
-            </Modal>
+            {/* </Modal> */}
         </>
     )
 }
