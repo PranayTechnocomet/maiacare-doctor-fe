@@ -387,6 +387,35 @@
     color: var(--color-sidebar-icon);
 }
 
+.doctor-profile-heading{
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+.doctor-profile-subheading{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--font-subtitle);
+}
+.contact-details-heading{
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+.contact-details-subheading{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+
 @media screen and (max-width: 1400px) {
     .login-image-contetnt {
         font-size: 40px;
