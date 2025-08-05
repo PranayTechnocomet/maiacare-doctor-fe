@@ -1,0 +1,24 @@
+.patient-profile-dot {
+    border: 1px solid var(--google-icon-border);
+    border-radius: 8px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.patient-accordion-item {
+    border: none !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+
+.patient-accordion-content-subtitle{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    font-style: italic;
+    color: #B0B4C1;
+    
+}

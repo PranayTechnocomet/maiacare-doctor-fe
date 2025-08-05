@@ -8,14 +8,16 @@ import { ProfileCard, TabsSection } from './ui/Custom/ProfileCard';
 const AddMedicalHistory = () => {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Patient Profile</title>
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
         />
-      </Head>
-      <div className=" py-2">
+      </Head> */}
+
+      {/* <div className=" py-2"> */}
+        
         <ProfileCard
           name="Rani Desai"
           image="../assets/images/Profile_Image.png"
@@ -26,7 +28,7 @@ const AddMedicalHistory = () => {
           joinDate="7 Jan 2025"
           status="Active"
         />
-      </div>
+      {/* </div> */}
 
 
       <main className="bg-light min-vh-100 py-2">
