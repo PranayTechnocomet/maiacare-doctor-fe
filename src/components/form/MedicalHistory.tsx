@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../ui/Button';
 import { MdMailOutline } from 'react-icons/md';
+import Textarea from '../ui/Textarea';
 
 
 type FormData = {
@@ -47,7 +48,11 @@ const initialFormData: FormData = {
 
 const initialFormError: FormError = {};
 
-export default function MedicalHistory() {
+interface MedicalHistoryProps {
+    onSave?: (data: FormData) => void;
+}
+
+export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
@@ -76,10 +81,16 @@ export default function MedicalHistory() {
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
-        console.log("errors", errors);
+        
         if (Object.keys(errors).length === 0) {
-            // setShowModal(true);
             setFormError(initialFormError);
+            if (onSave) {
+                // Pass the form data to the parent component
+                onSave({
+                    ...formData,
+                    lifestyle: selectedValues.join(', ')
+                });
+            }
         }
     };
 
@@ -94,8 +105,8 @@ export default function MedicalHistory() {
     ];
 
     const toggleOption = (value: string) => {
-        setSelectedValues(prev => 
-            prev.includes(value) 
+        setSelectedValues(prev =>
+            prev.includes(value)
                 ? prev.filter(v => v !== value)
                 : [...prev, value]
         );
@@ -122,7 +133,7 @@ export default function MedicalHistory() {
                             <RadioButtonGroup
                                 label="Are you currently taking any medications?"
                                 name="medication"
-                                value={formData.medication || ''}
+                                value={formData.medication || 'yes'}
                                 onChange={(e) => handleChange(e)}
                                 required={true}
                                 error={formError.medication}
@@ -154,7 +165,7 @@ export default function MedicalHistory() {
                                 <RadioButtonGroup
                                     label="Have you had any surgeries?"
                                     name="surgeries"
-                                    value={formData.surgeries || ''}
+                                    value={formData.surgeries || 'yes'}
                                     onChange={(e) => handleChange(e)}
                                     required={true}
                                     error={formError.surgeries}
@@ -166,8 +177,6 @@ export default function MedicalHistory() {
 
                             </div>
                         </Col>
-                    </Row>
-                    <Row>
                         <Col md={12} className='mt-2'>
                             <InputFieldGroup
                                 label="Do you have any medical condition? "
@@ -186,23 +195,20 @@ export default function MedicalHistory() {
                             ></InputFieldGroup>
                         </Col>
                         <Col md={12} className='mt-2'>
-                            <InputFieldGroup
+                            <Textarea
                                 label="Family Medical History "
                                 name="familyMedicalHistory"
-                                type="text"
                                 value={formData.familyMedicalHistory}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                                     handleChange(e);
                                 }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
                                 placeholder="Enter family medical history"
                                 required={false}
                                 error={formError.familyMedicalHistory}
                                 className="position-relative "
-                            ></InputFieldGroup>
+                            ></Textarea>
                         </Col>
-                    </Row>
-                    <Row>
                         <Col md={12} className='mt-2'>
                             <label className="form-label">Lifestyle</label>
 
@@ -264,38 +270,38 @@ export default function MedicalHistory() {
                                 </div>
                             )}
                         </Col>
-                        <>
-                            <Col md={6} className='mt-2'>
-                                <RadioButtonGroup
-                                    label="How often do you exercise?"
-                                    name="exercise"
-                                    value={formData.exercise || ''}
-                                    onChange={(e) => handleChange(e)}
-                                    required={true}
-                                    error={formError.exercise}
-                                    options={[
-                                        { label: "Never", value: "never" },
-                                        { label: "Rarely", value: "rarely" },
-                                        { label: "Regularly", value: "regularly" },
-                                    ]}
-                                />
-                            </Col>
-                            <Col md={6} className='mt-2'>
-                                <RadioButtonGroup
-                                    label="How would you rate your stress levels?"
-                                    name="stress"
-                                    value={formData.stress || ''}
-                                    onChange={(e) => handleChange(e)}
-                                    required={true}
-                                    error={formError.stress}
-                                    options={[
-                                        { label: "Low", value: "low" },
-                                        { label: "Moderate", value: "moderate" },
-                                        { label: "High", value: "high" },
-                                    ]}
-                                />
-                            </Col>
-                        </>
+
+                        <Col md={6} className='mt-2'>
+                            <RadioButtonGroup
+                                label="How often do you exercise?"
+                                name="exercise"
+                                value={formData.exercise || 'never'}
+                                onChange={(e) => handleChange(e)}
+                                required={true}
+                                error={formError.exercise}
+                                options={[
+                                    { label: "Never", value: "never" },
+                                    { label: "Rarely", value: "rarely" },
+                                    { label: "Regularly", value: "regularly" },
+                                ]}
+                            />
+                        </Col>
+                        <Col md={6} className='mt-2'>
+                            <RadioButtonGroup
+                                label="How would you rate your stress levels?"
+                                name="stress"
+                                value={formData.stress || 'low'}
+                                onChange={(e) => handleChange(e)}
+                                required={true}
+                                error={formError.stress}
+                                options={[
+                                    { label: "Low", value: "low" },
+                                    { label: "Moderate", value: "moderate" },
+                                    { label: "High", value: "high" },
+                                ]}
+                            />
+                        </Col>
+
 
                         <Col md={6} className='mt-2'>
                             <Button className="w-100" variant="outline" disabled={false}>
