@@ -283,6 +283,13 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
+.medical-emergency-fimily-history{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: medium;
+    color: var(--color-radio-lable);
+}
 
 /* pankaj solanki start*/
 
@@ -371,7 +378,34 @@
     line-height: 22px;
     color: var(--color-brand);
 }
-
+.accordion-title-detail{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+.border-box-orange-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box);
+}
+.border-box-blue-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box-blue);
+}
+.border-box-red-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box-red);
+}
 /* support accordion */
 
 .support-accordion-item {

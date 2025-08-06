@@ -19,6 +19,9 @@
   --color-radio-lable: #3E4A57;
   --color-placeholder-input: #475569;
   --or-font-color: #B0B4C1;
+  --border-box:#FF8A4C;
+  --border-box-blue:#3F83F8;
+  --border-box-red:#F05252;
 }
 
 body {
@@ -100,13 +103,13 @@ body {
 }
 
 .profile-card-btn-status {
-  color: #3F83F8 !important;
+  color: var(--border-box-blue) !important;
   border-radius: 8px !important;
 }
 
 .profile-active-btn {
   background-color: #EBF5FF !important;
-  color: #3F83F8 !important;
+  color: var(--border-box-blue) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   padding: 4px 8px !important;
@@ -119,4 +122,22 @@ body {
 .custom-small-modal .modal-dialog {
   max-width: 650px; /* adjust as needed */
   width: 81%;
+}
+.box-border-orange{
+  border: 1px solid var(--border-box);
+  padding: 4px 10px !important;
+  color: var(--border-box);
+  border-radius: 8px !important;
+}
+.box-border-blue{
+  border: 1px solid var(--border-box-blue);
+  padding: 4px 10px !important;
+  color: var(--border-box-blue);
+  border-radius: 8px !important;
+}
+.box-border-red{
+  border: 1px solid var(--border-box-red);
+  padding: 4px 10px !important;
+  color: var(--border-box-red);
+  border-radius: 8px !important;
 }

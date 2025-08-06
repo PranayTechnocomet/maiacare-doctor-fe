@@ -21,3 +21,16 @@ export const tableResponse: Patient[] = [
   },
   // ...add more rows
 ];
+
+
+export const MedicalHistoryData = {
+    id_medical_history:1,
+    medical_medications:"true",
+    medical_surgeries:"false",
+    medical_medical_condition:["PCOS", "Thyroid Disorder","Peanut Allergy","Lactose Intolerant"],
+    medical_family_medical_history:["Mother had endometriosis","Father had thyroid"],
+    medical_lifestyle:["Non-smoker","Occasional alcohol","Vegetarian diet"],
+    medical_exercise:"never",
+    medical_stress_level:"low",
+      
+}

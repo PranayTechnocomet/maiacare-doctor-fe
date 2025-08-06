@@ -21,6 +21,7 @@ import '../../../style/profile.css';
 import ProfileBasicDetail from '@/components/ProfileBasicDetail';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import ContentContainer from '../ContentContainer';
+import CustomTabs from '../CustomTabs';
 
 
 type ProfileProps = {
@@ -105,53 +106,5 @@ export const ProfileCard: React.FC<ProfileProps> = ({
   );
 };
 
-export const TabsSection = () => {
-  const [key, setKey] = useState<string>('basic');
 
-  return (
-    <Tab.Container activeKey={key} onSelect={(k) => k && setKey(k)}>
-      <Nav variant="tabs" className="customTabs">
-        <Nav.Item>
-          <Nav.Link eventKey="basic">Basic Details</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="partner">Partner Details</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="appointment">Appointment</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="reports">Reports</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="payment">Payment History</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="treatment">Treatment</Nav.Link>
-        </Nav.Item>
-      </Nav>
-
-      <Tab.Content className="pt-3">
-        <Tab.Pane eventKey="basic">
-          <ProfileBasicDetail />
-        </Tab.Pane>
-        <Tab.Pane eventKey="partner">
-          <p>Partner Details content here.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="appointment">
-          <p>Appointment info goes here.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="reports">
-          <p>Reports content.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="payment">
-          <p>Payment History section.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="treatment">
-          <p>Treatment information.</p>
-        </Tab.Pane>
-      </Tab.Content>
-    </Tab.Container>
-  );
-};
 
