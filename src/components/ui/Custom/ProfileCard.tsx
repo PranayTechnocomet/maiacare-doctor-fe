@@ -68,8 +68,7 @@ export const ProfileCard: React.FC<ProfileProps> = ({
             </div>
           </div>
 
-
-          <div className=''>
+          <div className='d-flex flex-column flex-sm-row gap-2'>
             <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
             <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
           </div>

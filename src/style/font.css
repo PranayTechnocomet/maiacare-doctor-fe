@@ -529,13 +529,6 @@
     color: var(--color-sidebar-icon);
 }
 
-.doctor-profile-heading {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
 
 .doctor-profile-subheading {
     font-weight: 400;
@@ -560,26 +553,45 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.contact-details-emergency{
+
+.contact-details-emergency {
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
     font-style: SemiBold;
     color: var(--font-subtitle);
 }
-.contact-details-emergency-subdetail{
+
+.contact-details-emergency-subdetail {
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.maiacare-modal .modal-custom-header{
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 24px;
-  line-height: 28px;
-  color: var(--color-modal-heading);
+
+.maiacare-modal .modal-custom-header {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-modal-heading);
+}
+
+@media screen and (max-width: 575px) {
+    .doctor-profile-heading {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .doctor-profile-subheading {
+        font-size: 14px;
+    }
+
+    .patient-profile-dot {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 @media screen and (max-width: 425px) {
