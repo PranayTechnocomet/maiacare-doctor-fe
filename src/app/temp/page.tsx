@@ -191,10 +191,10 @@ export default function Page() {
           placeholder="Enter name"
           required={false}
           disabled={false}
-          readOnly={true}
+          readOnly={false}
           error={formError.name}
           helperText="Enter name"
-          className="position-relative xyz"
+          className="position-relative "
         >
           <div
             className="position-absolute abc"

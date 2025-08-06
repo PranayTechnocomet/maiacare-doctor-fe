@@ -93,15 +93,15 @@ const getStatusBadgeClass = (status: string) => {
             return 'badge bg-danger';
         default:
             return 'badge bg-secondary';
-        }
-    };
+    }
+};
 
 
 
 
 const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
-    const [showModal, setShowModal] = useState(false); 
+    const [showModal, setShowModal] = useState(false);
 
     const accordionData = [
         {
@@ -262,15 +262,20 @@ const ProfileBasicDetail = () => {
                     </Accordion>
 
                     <Modal
-                            show={showModal}
-                            onHide={() => setShowModal(false)}
-                            header="Add Medical History"
-                            closeButton={true}
-                            size = "lg"
-                          >
-                            <div className="mb-0 "><MedicalHistory /></div>
-                          </Modal>
-                          
+                        className="medical-history-modal custom-small-modal"
+                        show={showModal}
+                        onHide={() => setShowModal(false)}
+                        header="Add Medical History"
+                        closeButton={true}
+                    >
+                        <div className="mb-0">
+                            <MedicalHistory />
+                        </div>
+                    </Modal>
+
+
+
+
                 </Col>
 
                 {/* Right Side - Patient Journey */}
@@ -305,7 +310,7 @@ const ProfileBasicDetail = () => {
 
                 </Col>
 
-                
+
             </Row>
 
         </Container>
