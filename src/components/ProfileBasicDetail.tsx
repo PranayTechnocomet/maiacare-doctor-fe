@@ -12,7 +12,7 @@ import ProfileAddress from '../assets/images/Location.png'
 import Modal from './ui/Modal';
 import MedicalHistory from './form/MedicalHistory';
 import { IoAdd } from "react-icons/io5";
-import { MenstrualCycle } from './form/FertilityAssessmentForm';
+import { FertilityAssessmentForm, MenstrualCycle } from './form/FertilityAssessmentForm';
 import PhisicalAssessmentForm from './form/PhisicalAssessmentForm';
 import FertilityAssessment from './FertilityAssessment';
 
@@ -291,7 +291,9 @@ const ProfileBasicDetail = () => {
                     >
                         <div className="mb-0 ">
                             {/* FertilityAssessment model */}
-                            <FertilityAssessment />
+                            {/* <FertilityAssessment /> */}
+                            <FertilityAssessmentForm />
+                            
                         </div>
                     </Modal>
 
