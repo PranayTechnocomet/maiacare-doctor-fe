@@ -9,20 +9,21 @@ import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
+import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
 
 // Types for form data and form error
-type FormData = {
-    height: string;
-    weight: string;
-    bmi: string;
-    bloodGroup: string
-    systolic: string;
-    diastolic: string;
-    heartRate: string;
-};
-type FormError = Partial<Record<keyof FormData, string>>;
+// type FormData = {
+//     height: string;
+//     weight: string;
+//     bmi: string;
+//     bloodGroup: string
+//     systolic: string;
+//     diastolic: string;
+//     heartRate: string;
+// };
+type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
 
-const initialFormData: FormData = {
+const initialFormData: PhysicalAssessmentDataModel = {
     height: "",
     weight: "",
     bmi: "",
@@ -37,11 +38,11 @@ const initialFormError: FormError = {};
 
 const PhisicalAssessmentForm = () => {
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: PhysicalAssessmentDataModel): FormError => {
         const errors: FormError = {};
 
         if (!data.height.trim()) errors.height = "Height is required";

@@ -11,8 +11,6 @@ import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
-import PhisicalAssessment from "@/components/PhisicalAssessment";
-import FertilityAssessment from "@/components/FertilityAssessment";
 import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
 import "@/style/patientProfile.css";

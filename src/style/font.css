@@ -588,10 +588,7 @@
         font-size: 14px;
     }
 
-    .patient-profile-dot {
-        width: 45px;
-        height: 45px;
-    }
+   
 }
 
 @media screen and (max-width: 425px) {

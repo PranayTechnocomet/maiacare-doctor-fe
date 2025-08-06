@@ -21,6 +21,7 @@ import '../../../style/profile.css';
 import ProfileBasicDetail from '@/components/ProfileBasicDetail';
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import ContentContainer from '../ContentContainer';
+import CustomTabs from '../CustomTabs';
 
 
 type ProfileProps = {
@@ -61,23 +62,21 @@ export const ProfileCard: React.FC<ProfileProps> = ({
           <div className="d-flex align-items-center mb-1">
             <h6 className="mb-0 doctor-profile-heading me-2">{name}</h6>
 
-            <div className="profile-card-btn-status">
-              <Badge className="profile-active-btn">
-                {status}
-              </Badge>
-            </div>
+            <span className='patient-journey-badge-InProgress'> {status}</span>
           </div>
 
-          <div className='d-flex flex-column flex-sm-row gap-2'>
+          <div className='pt-sm-1 p-0 d-flex flex-column flex-sm-row '>
             <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
             <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
           </div>
-          <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
-          <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
-
-          <div className="pt-1 doctor-profile-subheading">
-            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
+          <div className='pt-sm-1 p-0 d-flex flex-column flex-sm-row'>
+            <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
+            <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
           </div>
+          <div className="pt-sm-1 p-0 doctor-profile-subheading">
+            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: <br className='d-sm-none d-block' /> {joinDate}
+          </div>
+
 
         </Col>
         <Col xs="auto">
@@ -106,52 +105,117 @@ export const ProfileCard: React.FC<ProfileProps> = ({
 };
 
 export const TabsSection = () => {
-  const [key, setKey] = useState<string>('basic');
+  // const [key, setKey] = useState<string>('basic');
+  const [activeTab, setActiveTab] = useState<string>("basic");
+
+  const tabOptions = [
+    {
+      key: "basic",
+      label: "Basic Details",
+      content: (
+        <div className='mt-5'>
+          <ProfileBasicDetail />
+        </div>
+
+      ),
+    },
+    {
+      key: "leaves",
+      label: "Manage Leaves",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Leaves Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "reviews",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "xyz",
+      label: "Xyz",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>XYZ</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "abc",
+      label: "ABC",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>ABC</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "de",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+  ];
 
   return (
-    <Tab.Container activeKey={key} onSelect={(k) => k && setKey(k)}>
-      <Nav variant="tabs" className="customTabs">
-        <Nav.Item>
-          <Nav.Link eventKey="basic">Basic Details</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="partner">Partner Details</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="appointment">Appointment</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="reports">Reports</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="payment">Payment History</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="treatment">Treatment</Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <CustomTabs
+      activeKey={activeTab}
+      setActiveKey={setActiveTab}
+      tabOptions={tabOptions}
+    />
 
-      <Tab.Content className="pt-3">
-        <Tab.Pane eventKey="basic">
-          <ProfileBasicDetail />
-        </Tab.Pane>
-        <Tab.Pane eventKey="partner">
-          <p>Partner Details content here.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="appointment">
-          <p>Appointment info goes here.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="reports">
-          <p>Reports content.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="payment">
-          <p>Payment History section.</p>
-        </Tab.Pane>
-        <Tab.Pane eventKey="treatment">
-          <p>Treatment information.</p>
-        </Tab.Pane>
-      </Tab.Content>
-    </Tab.Container>
+    // <Tab.Container activeKey={key} onSelect={(k) => k && setKey(k)}>
+    //   <Nav variant="tabs" className="customTabs">
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="basic">Basic Details</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="partner">Partner Details</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="appointment">Appointment</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="reports">Reports</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="payment">Payment History</Nav.Link>
+    //     </Nav.Item>
+    //     <Nav.Item>
+    //       <Nav.Link eventKey="treatment">Treatment</Nav.Link>
+    //     </Nav.Item>
+    //   </Nav>
+
+    //   <Tab.Content className="pt-3">
+    //     <Tab.Pane eventKey="basic">
+    //       <ProfileBasicDetail />
+    //     </Tab.Pane>
+    //     <Tab.Pane eventKey="partner">
+    //       <p>Partner Details content here.</p>
+    //     </Tab.Pane>
+    //     <Tab.Pane eventKey="appointment">
+    //       <p>Appointment info goes here.</p>
+    //     </Tab.Pane>
+    //     <Tab.Pane eventKey="reports">
+    //       <p>Reports content.</p>
+    //     </Tab.Pane>
+    //     <Tab.Pane eventKey="payment">
+    //       <p>Payment History section.</p>
+    //     </Tab.Pane>
+    //     <Tab.Pane eventKey="treatment">
+    //       <p>Treatment information.</p>
+    //     </Tab.Pane>
+    //   </Tab.Content>
+    // </Tab.Container>
   );
 };
 
