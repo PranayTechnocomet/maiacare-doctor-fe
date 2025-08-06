@@ -106,6 +106,7 @@ const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
     const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const accordionData = [
         {
@@ -294,6 +295,20 @@ const ProfileBasicDetail = () => {
                             <FertilityAssessment />
                         </div>
                     </Modal>
+                    <Modal
+                        className="medical-history-modal custom-small-modal"
+                        show={showModal}
+                        onHide={() => setShowModal(false)}
+                        header="Add Medical History"
+                        closeButton={true}
+                    >
+                        <div className="mb-0">
+                            <MedicalHistory />
+                        </div>
+                    </Modal>
+
+
+
 
                 </Col>
 

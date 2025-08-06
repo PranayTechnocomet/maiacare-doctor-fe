@@ -47,9 +47,9 @@ body {
   top: 72% !important;
 }
 
-.xyz .maiacare-input-field {
+/* .xyz .maiacare-input-field {
   padding-left: 35px;
-}
+} */
 
 .abc {
   position: absolute;
@@ -114,4 +114,9 @@ body {
 
 .no-caret::after {
   display: none !important;
+}
+
+.custom-small-modal .modal-dialog {
+  max-width: 650px; /* adjust as needed */
+  width: 81%;
 }

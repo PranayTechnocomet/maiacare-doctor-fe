@@ -55,5 +55,7 @@ body {
   .contac-email-card{
     margin-right: 296px !important;
   }
-
-  
+  .maiacare-modal .medical-history-modal{
+    /* width: 60% !important;
+    height: 60% !important; */
+  }
