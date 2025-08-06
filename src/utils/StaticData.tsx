@@ -1,4 +1,4 @@
-import { Patient } from "./types/interfaces";
+import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 
 export const tableResponse: Patient[] = [
   {
@@ -34,3 +34,23 @@ export const MedicalHistoryData = {
     medical_stress_level:"low",
       
 }
+export const physicalAssessmentData: PhysicalAssessmentData[] = [
+  {
+    date: "Wed, 19 Feb 2024",
+    height: "5'4''(162cm)",
+    weight: "58 kg",
+    bmi: "22.1(Normal)",
+    bloodGroup: "O+",
+    bloodPressure: "120 mmHg",
+    heartRate: "72 bpm",
+  },
+  {
+    date: "mon, 22 Feb 2024",
+    height: "5'4''(162cm)",
+    weight: "58 kg",
+    bmi: "22.1(Normal)",
+    bloodGroup: "O+",
+    bloodPressure: "120 mmHg",
+    heartRate: "72 bpm",
+  },
+];

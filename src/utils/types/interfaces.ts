@@ -1,15 +1,36 @@
 export interface User {
-    id: string;
-    name: string;
-    email: string;
-  }
+  id: string;
+  name: string;
+  email: string;
+}
 
-  export interface Patient {
-    id: number;
-    name: string;
-    mobile: string;
-    email: string;
-    pincode: string;
-    treatment: string;
-    status: string;
-  };
+export interface Patient {
+  id: number;
+  name: string;
+  mobile: string;
+  email: string;
+  pincode: string;
+  treatment: string;
+  status: string;
+};
+
+export interface PhysicalAssessmentDataModel {
+  height: string;
+  weight: string;
+  bmi: string;
+  bloodGroup: string
+  systolic: string;
+  diastolic: string;
+  heartRate: string;
+};
+
+export interface PhysicalAssessmentData {
+  date: string;
+  height: string;
+  weight: string;
+  bmi: string;
+  bloodGroup: string;
+  bloodPressure : string;
+  heartRate: string;
+}
+
