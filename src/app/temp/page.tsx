@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { AppDispatch } from "@/utils/redux/store";
-import { InputFieldGroup, InputFieldHelperText } from "@/components/ui/InputField";
+import {
+  InputFieldGroup,
+  InputFieldHelperText,
+} from "@/components/ui/InputField";
 import InputSelect from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
@@ -19,6 +22,8 @@ import { IoIosEye } from "react-icons/io";
 import { Patient } from "@/utils/types/interfaces";
 import { tableResponse } from "@/utils/StaticData";
 import Textarea from "@/components/ui/Textarea";
+import CustomTabs from "@/components/ui/CustomTabs";
+import { TimePickerFieldGroup } from "@/components/ui/CustomTimePicker";
 
 const data: Patient[] = [
   {
@@ -74,12 +79,13 @@ const columns: ColumnDef<Patient>[] = [
       const status = info.getValue() as string;
       return (
         <span
-          className={`badge ${status === "Active"
-            ? "bg-primary"
-            : status === "Discontinued"
+          className={`badge ${
+            status === "Active"
+              ? "bg-primary"
+              : status === "Discontinued"
               ? "bg-warning"
               : "bg-danger"
-            }`}
+          }`}
         >
           {status}
         </span>
@@ -96,6 +102,8 @@ type FormData = {
   gender: string;
   description: string;
   phone: string;
+  startTime: string;
+  endTime: string;
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
@@ -107,6 +115,8 @@ const initialFormData: FormData = {
   gender: "",
   description: "",
   phone: "",
+  startTime: "",
+  endTime: "",
 };
 
 const initialFormError: FormError = {};
@@ -125,12 +135,14 @@ export default function Page() {
     );
     setTableData(tableResponse);
     setLoading(false);
-
   }, []);
 
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  
 
   // Validation Function
   const validateForm = (data: FormData): FormError => {
@@ -147,6 +159,9 @@ export default function Page() {
 
     if (!data.description.trim())
       errors.description = "Description is required";
+
+    if (!data.startTime.trim()) errors.startTime = "Start time is required";
+    if (!data.endTime.trim()) errors.endTime = "End time is required";
 
     return errors;
   };
@@ -176,6 +191,65 @@ export default function Page() {
     setShowModal(false);
   };
 
+  const [activeTab, setActiveTab] = useState<string>("basic");
+
+  const tabOptions = [
+    {
+      key: "basic",
+      label: "Basic Details",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Basic Details</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "leaves",
+      label: "Manage Leaves",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Leaves Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "reviews",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "xyz",
+      label: "Xyz",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>XYZ</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "abc",
+      label: "ABC",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>ABC</h1>
+        </ContentContainer>
+      ),
+    },
+    {
+      key: "de",
+      label: "Reviews",
+      content: (
+        <ContentContainer className="mt-5">
+          <h1>Reviews Content</h1>
+        </ContentContainer>
+      ),
+    },
+  ];
+
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
@@ -187,7 +261,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
           placeholder="Enter name"
           required={false}
           disabled={false}
@@ -196,9 +270,7 @@ export default function Page() {
           helperText="Enter name"
           className="position-relative "
         >
-          <div
-            className="position-absolute abc"
-          >
+          <div className="position-absolute abc">
             <IoIosEye size={25} />
           </div>
         </InputFieldGroup>
@@ -209,7 +281,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => {}}
           required={true}
           disabled={false}
           error={formError.doctor}
@@ -227,7 +299,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
           required={true}
           disabled={false}
           error={formError.date}
@@ -254,7 +326,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {}}
           required={true}
           disabled={false}
           error={formError.description}
@@ -268,11 +340,29 @@ export default function Page() {
           onChange={(phone: any) => {
             // setFormData((prev) => ({ ...prev, phone }));
             // setFormError((prev) => ({ ...prev, phone: "" }));
-            handleChange({ target: { name: "phone", value: phone } } as React.ChangeEvent<HTMLInputElement>);
+            handleChange({
+              target: { name: "phone", value: phone },
+            } as React.ChangeEvent<HTMLInputElement>);
           }}
           required
           helperText="Enter a valid number including country code"
           error={formError.phone}
+        />
+        <TimePickerFieldGroup
+          label="Start Time"
+          name="startTime"
+          value={startTime}
+          onChange={(e) => setStartTime(e.target.value)}
+          required
+          error={formError.startTime}
+        />
+
+        <TimePickerFieldGroup
+          label="End Time"
+          name="endTime"
+          value={endTime}
+          onChange={(e) => setEndTime(e.target.value)}
+          helperText="Enter operational end time"
         />
 
         <div className="d-flex gap-2">
@@ -284,6 +374,12 @@ export default function Page() {
           </Button>
         </div>
       </ContentContainer>
+
+      <CustomTabs
+        activeKey={activeTab}
+        setActiveKey={setActiveTab}
+        tabOptions={tabOptions}
+      />
 
       <div className="my-4">
         <h4>Patient List</h4>
