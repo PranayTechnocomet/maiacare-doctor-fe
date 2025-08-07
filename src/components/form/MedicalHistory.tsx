@@ -23,7 +23,7 @@ type FormData = {
 
 type FormError = Partial<Record<keyof FormData, string>>;
 const initialFormData: FormData = {
-   
+
     medication: "",
     surgeries: "",
     surgeriesContent: "",
@@ -63,8 +63,7 @@ export default function MedicalHistory({ setModalFormData, setShowModal }: any) 
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        console.log("hurrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-        
+
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
@@ -74,7 +73,7 @@ export default function MedicalHistory({ setModalFormData, setShowModal }: any) 
             setFormError(initialFormError);
             setModalFormData((prev: any) => [...prev, formData]);
             console.log("formData", formData);
-            
+
         }
     };
 
@@ -288,12 +287,12 @@ export default function MedicalHistory({ setModalFormData, setShowModal }: any) 
 
 
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="outline" disabled={false} onClick={()=>setShowModal(false)}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
                         </Col>
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="default" disabled={false}  type="submit">
+                            <Button className="w-100" variant="default" disabled={false} type="submit">
                                 Save
                             </Button>
                         </Col>

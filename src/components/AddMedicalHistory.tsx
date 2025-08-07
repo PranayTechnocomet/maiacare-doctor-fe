@@ -81,8 +81,7 @@ const AddMedicalHistory = () => {
   return (
 
     <>
-
-
+    
       <ProfileCard
         name={profileData.name}
         image={profileData.image}

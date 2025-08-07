@@ -47,7 +47,6 @@ export const ProfileCard: React.FC<ProfileProps> = ({
 }) => {
   return (
     <Card className={`shadow-sm rounded-4 p-3`}>
-
       <Row >
         <Col xs="auto">
           <Image
@@ -65,16 +64,16 @@ export const ProfileCard: React.FC<ProfileProps> = ({
             <span className='patient-journey-badge-InProgress'> {status}</span>
           </div>
 
-          <div className='pt-sm-1 p-0 d-flex flex-column flex-sm-row '>
+          <div className='pt-sm-1 p-0 d-flex  '>
             <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
             <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
           </div>
-          <div className='pt-sm-1 p-0 d-flex flex-column flex-sm-row'>
+          <div className='pt-sm-1 p-0 d-flex '>
             <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
             <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
           </div>
           <div className="pt-sm-1 p-0 doctor-profile-subheading">
-            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: <br className='d-sm-none d-block' /> {joinDate}
+            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
           </div>
 
 
@@ -99,6 +98,7 @@ export const ProfileCard: React.FC<ProfileProps> = ({
           </Dropdown>
         </Col>
       </Row>
+
 
     </Card>
   );

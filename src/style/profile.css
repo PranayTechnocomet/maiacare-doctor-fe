@@ -71,9 +71,4 @@ body {
   background-color: #fff;
   color: #3E4A57;
 }
-.accordion-body{
-  padding-top: 0px !important;
-}
-.accordion-button{
-  padding-bottom: 4px !important;
-}
+

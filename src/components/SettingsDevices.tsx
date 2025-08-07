@@ -20,10 +20,10 @@ const SettingsDevices = () => {
                         </div>
                     </div>
                     <div className="d-flex flex-row flex-lg-column gap-2">
-                        <Button variant="default" >
+                        <Button variant="default" contentSize="small">
                             <FiLogOut /> Log Out
                         </Button>
-                        <Button variant="outline" disabled={false} >
+                        <Button variant="outline" disabled={false} contentSize="small">
                             <RiDeleteBin6Line /> Delete Devices
                         </Button>
 
@@ -40,10 +40,10 @@ const SettingsDevices = () => {
                         </div>
                     </div>
                     <div className="d-flex flex-row flex-lg-column gap-2">
-                        <Button variant="default" >
+                        <Button variant="default" contentSize="small" >
                             <FiLogOut /> Log Out
                         </Button>
-                        <Button variant="outline" disabled={false} >
+                        <Button variant="outline" disabled={false} contentSize="small" >
                             <RiDeleteBin6Line /> Delete Devices
                         </Button>
 
