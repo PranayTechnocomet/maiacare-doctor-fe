@@ -17,6 +17,7 @@ export default function InputSelect({
     helperText,
     className,
     options = [],
+    placeholder = "Select",
     ...rest
 }: {
     label?: string;
@@ -32,6 +33,7 @@ export default function InputSelect({
     helperText?: string;
     className?: string;
     options?: { id: string, value: string, label: string }[];
+    placeholder?: string;
     [key: string]: any;
 }) {
   return (
@@ -48,7 +50,7 @@ export default function InputSelect({
         className={`maiacare-input-field`}
         {...rest}
       >
-        <option value={""}>Select</option>
+        <option value={""}>{placeholder}</option>
         {options.map(option => (
           <option key={option.id} value={option.value}>{option.label}</option>
         ))}

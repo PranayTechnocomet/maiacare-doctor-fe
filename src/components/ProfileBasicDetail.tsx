@@ -126,6 +126,7 @@ const ProfileBasicDetail = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalFormData, setModalFormData] = useState<any>([]);
 
+
     console.log("modalFormData", modalFormData);
 
     const accordionData = [
@@ -512,7 +513,7 @@ const ProfileBasicDetail = () => {
                         <div className="mb-0 ">
                             {/* FertilityAssessment model */}
                             {/* <FertilityAssessment /> */}
-                            <FertilityAssessmentForm />
+                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} />
 
                         </div>
                     </Modal>
