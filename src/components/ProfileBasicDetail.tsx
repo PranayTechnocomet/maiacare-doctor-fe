@@ -11,11 +11,11 @@ import ProfileEmail from '../assets/images/Email.png'
 import ProfileAddress from '../assets/images/Location.png'
 import Modal from './ui/Modal';
 
+
 import { IoAdd } from "react-icons/io5";
 import { FertilityAssessmentForm } from './form/FertilityAssessmentForm';
 import PhisicalAssessmentForm from './form/PhisicalAssessmentForm';
 import { MedicalHistoryData } from '@/utils/StaticData';
-import { MedicalHistory } from './form/MedicalHistory';
 import hiegthImg from '../assets/images/Physical-assement-hiegth-icons.png'
 import weightImg from '../assets/images/Physical-assement-weight-icons.png'
 import BMIIMG from '../assets/images/Physical-assement-bmi.png'
@@ -23,6 +23,11 @@ import BloodGroup from '../assets/images/Physical-assement-blod-group-icons.png'
 import BloodPressure from '../assets/images/Physical-assement-presure-icons.png'
 import HeartRate from '../assets/images/Physical-assement-heart-rate-icons.png'
 import { physicalAssessmentData } from '@/utils/StaticData';
+import EditIcon from "../assets/images/EditIcon.png";
+import MedicalHistory from './form/MedicalHistory';
+
+
+
 
 // JSON data for accordion sections
 
@@ -119,6 +124,9 @@ const ProfileBasicDetail = () => {
     const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [modalFormData, setModalFormData] = useState<any>([]);
+
+    console.log("modalFormData", modalFormData);
 
     const accordionData = [
         {
@@ -280,9 +288,11 @@ const ProfileBasicDetail = () => {
             id: '2',
             title: 'Medical History',
             content: (
-                
+
                 <>
-                    <div className="text-center ">
+                {Object.keys(modalFormData).length === 0 &&(
+                    <>
+                      <div className="text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
                             <path d="M60.6072 15.509V57.2116C60.6072 59.5787 58.6882 61.4977 56.3211 61.4977H22.0085C19.6414 61.4977 17.7224 59.5787 17.7224 57.2116V6.70801C17.7224 4.34086 19.6414 2.42188 22.0085 2.42188H47.5739C51.0628 5.92883 54.5519 9.43579 58.0453 12.9382C58.8964 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#F3F4F6" />
                             <path d="M60.6072 15.509H51.511C49.3365 15.509 47.5737 13.7463 47.5737 11.5718V2.42188C51.0626 5.92883 54.5517 9.43579 58.0451 12.9382C58.8963 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#DDE1E8" />
@@ -291,72 +301,123 @@ const ProfileBasicDetail = () => {
                             <path d="M60.3568 63.8798C60.3568 66.5187 58.2175 68.658 55.5786 68.658H48.1395C45.5006 68.658 43.3613 66.5187 43.3613 63.8798C43.3613 61.2409 45.5006 59.1016 48.1395 59.1016H55.5786C58.2175 59.1017 60.3568 61.2409 60.3568 63.8798Z" fill="#8D929C" />
                         </svg>
 
-                        <Button variant="outline-primary" onClick={() => setShowModal(true)} className="mt-2">
+                        <Button variant="outline-primary" onClick={() => setShowModal(true) } className="mt-2">
                             Edit Medical History
                         </Button>
                     </div>
+                    </>
+                )}
+                  
+
+                    {modalFormData.map((item: any, index: number) => {
+                        console.log("item", item);
 
 
-                    <div className="medical-history-details text-start">
-                        <Row>
-
-
-                            <Col lg={5} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Current Medications</h6>
-                                    <p className="mb-2 accordion-title-detail">{MedicalHistoryData.medical_medications || 'No medical conditions recorded'}</p>
+                        return (
+                            <div key={index} className="medical-history-details text-start">
+                                <div>
+                                    <Button onClick={() => setShowModal(true) } className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
+                                      <Image src={EditIcon} alt="Edit" /> Edit
+                                    </Button>
                                 </div>
-                            </Col>
-                            <Col lg={7} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency"> Surgeries</h6>
-                                    <p className="mb-2 accordion-title-detail">{MedicalHistoryData.medical_surgeries === 'true' ? 'Yes' : 'No'}</p>
-                                </div>
-                            </Col>
-                            <Col lg={12} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Medical condition / Allergies</h6>
-                                    {MedicalHistoryData.medical_medical_condition?.length > 0 ? MedicalHistoryData.medical_medical_condition?.map((item, index) => (
-                                        <p key={index} className="mb-2 d-inline-block border-box-orange-font box-border-orange me-2">{item.trim()}</p>
-                                    )) : <p className="mb-2 d-inline-block border-box-orange-font box-border-orange">No medical conditions recorded</p>}
-                                </div>
-                            </Col>
-                            <Col lg={5} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Family History</h6>
-                                    {MedicalHistoryData.medical_family_medical_history?.length > 0 ? (
-                                        <ul className="list-unstyled mb-2">
-                                            {MedicalHistoryData.medical_family_medical_history?.map((item, index) => (
-                                                <ul>
-                                                    <li className='medical-emergency-fimily-history' key={index}>{item.trim()}</li>
+                                <Row>
+                                    {/* Current Medications */}
+                                    <Col lg={5} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Current Medications</h6>
+                                            <p className="mb-2 accordion-title-detail">
+                                                {MedicalHistoryData.medical_medications || 'No medical conditions recorded'}
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    {/* Surgeries */}
+                                    <Col lg={7} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Surgeries</h6>
+                                            <p className="mb-2 accordion-title-detail">
+                                                {MedicalHistoryData.medical_surgeries === 'true' ? 'Yes' : 'No'}
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    {/* Medical Conditions */}
+                                    <Col lg={12} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Medical condition / Allergies</h6>
+                                            {MedicalHistoryData.medical_medical_condition?.length > 0 ? (
+                                                MedicalHistoryData.medical_medical_condition.map((cond: string, i: number) => (
+                                                    <p key={i} className="mb-2 d-inline-block border-box-orange-font box-border-orange me-2">
+                                                        {cond.trim()}
+                                                    </p>
+                                                ))
+                                            ) : (
+                                                <p className="mb-2 d-inline-block border-box-orange-font box-border-orange">
+                                                    No medical conditions recorded
+                                                </p>
+                                            )}
+                                        </div>
+                                    </Col>
+
+                                    {/* Family History */}
+                                    <Col lg={5} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Family History</h6>
+                                            {MedicalHistoryData.medical_family_medical_history?.length > 0 ? (
+                                                <ul className="mb-2">
+                                                    {MedicalHistoryData.medical_family_medical_history.map((fh: string, i: number) => (
+                                                        <li key={i} className="medical-emergency-fimily-history">{fh.trim()}</li>
+                                                    ))}
                                                 </ul>
-                                            ))}
-                                        </ul>
-                                    ) : <p className="mb-2 d-block ">No medical conditions recorded</p>}
-                                </div>
-                            </Col>
-                            <Col lg={7} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Lifestyle</h6>
-                                    {MedicalHistoryData.medical_lifestyle?.length > 0 ? MedicalHistoryData.medical_lifestyle?.map((item, index) => (
-                                        <p key={index} className="mb-2 d-inline-block border-box-blue-font box-border-blue me-2">{item.trim()}</p>
-                                    )) : <p className="mb-2 d-inline-block border-box-blue-font box-border-blue">No medical conditions recorded</p>}
-                                </div>
-                            </Col>
-                            <Col lg={5} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Physical Exercise</h6>
-                                    <p className="mb-2 border-box-orange-font box-border-orange  d-inline-block " >{MedicalHistoryData.medical_exercise || 'Not specified'}</p>
-                                </div>
-                            </Col>
-                            <Col lg={7} md={12}>
-                                <div className="mb-3">
-                                    <h6 className="mb-1 contact-details-emergency">Stress Level</h6>
-                                    <p className="mb-2  d-inline-block border-box-red-font box-border-red   ">{MedicalHistoryData.medical_stress_level || 'Not specified'}</p>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
+                                            ) : (
+                                                <p className="mb-2 d-block">No medical conditions recorded</p>
+                                            )}
+                                        </div>
+                                    </Col>
+
+                                    {/* Lifestyle */}
+                                    <Col lg={7} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Lifestyle</h6>
+                                            {MedicalHistoryData.medical_lifestyle?.length > 0 ? (
+                                                MedicalHistoryData.medical_lifestyle.map((lifestyle: string, i: number) => (
+                                                    <p key={i} className="mb-2 d-inline-block border-box-blue-font box-border-blue me-2">
+                                                        {lifestyle.trim()}
+                                                    </p>
+                                                ))
+                                            ) : (
+                                                <p className="mb-2 d-inline-block border-box-blue-font box-border-blue">
+                                                    No medical conditions recorded
+                                                </p>
+                                            )}
+                                        </div>
+                                    </Col>
+
+                                    {/* Physical Exercise */}
+                                    <Col lg={5} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Physical Exercise</h6>
+                                            <p className="mb-2 border-box-orange-font box-border-orange d-inline-block">
+                                                {MedicalHistoryData.medical_exercise || 'Not specified'}
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    {/* Stress Level */}
+                                    <Col lg={7} md={12}>
+                                        <div className="mb-3">
+                                            <h6 className="mb-1 contact-details-emergency">Stress Level</h6>
+                                            <p className="mb-2 d-inline-block border-box-red-font box-border-red">
+                                                {MedicalHistoryData.medical_stress_level || 'Not specified'}
+                                            </p>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </div>
+                        );
+                    })}
+
+
                 </>
             ),
         },
@@ -428,6 +489,7 @@ const ProfileBasicDetail = () => {
                     </Accordion>
 
                     <Modal
+                        className=""
                         show={showPhisicalAssessment}
                         onHide={() => setShowPhisicalAssessment(false)}
                         header="Physical Assessment"
@@ -463,7 +525,7 @@ const ProfileBasicDetail = () => {
                         closeButton={true}
                     >
                         <div className="mb-0">
-                            <MedicalHistory />
+                            <MedicalHistory setModalFormData={setModalFormData } setShowModal={setShowModal} />
                         </div>
                     </Modal>
 

@@ -59,3 +59,20 @@ body {
     /* width: 60% !important;
     height: 60% !important; */
   }
+.medical-history-edit-btn{
+  border-radius: 8px;
+  border: 1px solid #1e3a8a;
+  background-color: #fff;
+  color: #2B4360;
+  padding: 6px 12px !important;
+}
+.medical-history-edit-btn:hover{
+  background-color: #fff;
+  color: #3E4A57;
+}
+.accordion-body{
+  padding-top: 0px !important;
+}
+.accordion-button{
+  padding-bottom: 4px !important;
+}

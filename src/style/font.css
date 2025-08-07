@@ -290,7 +290,12 @@
     font-style: medium;
     color: var(--color-radio-lable);
 }
-
+.medical-history-edit-btn-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-brand);
+}
 /* pankaj solanki start*/
 
 .setting-password-item-name {

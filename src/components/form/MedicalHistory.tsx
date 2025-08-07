@@ -10,13 +10,7 @@ import Textarea from '../ui/Textarea';
 
 
 type FormData = {
-    name: string;
-    doctor: string;
-    date: string;
-    gender: string;
     medication: string;
-    description: string;
-    phone: string;
     surgeries: string;
     surgeriesContent: string;
     medicalCondition: string;
@@ -29,13 +23,8 @@ type FormData = {
 
 type FormError = Partial<Record<keyof FormData, string>>;
 const initialFormData: FormData = {
-    name: "",
-    doctor: "",
-    date: "",
-    gender: "",
+   
     medication: "",
-    description: "",
-    phone: "",
     surgeries: "",
     surgeriesContent: "",
     medicalCondition: "",
@@ -48,11 +37,7 @@ const initialFormData: FormData = {
 
 const initialFormError: FormError = {};
 
-interface MedicalHistoryProps {
-    onSave?: (data: FormData) => void;
-}
-
-export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
+export default function MedicalHistory({ setModalFormData, setShowModal }: any) {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
@@ -62,7 +47,7 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
         if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        // if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         if (!data.exercise.trim()) errors.exercise = "Exercise is required";
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
 
@@ -78,19 +63,18 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        console.log("hurrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+        
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
-        
+        console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
+            setShowModal(false);
             setFormError(initialFormError);
-            if (onSave) {
-                // Pass the form data to the parent component
-                onSave({
-                    ...formData,
-                    lifestyle: selectedValues.join(', ')
-                });
-            }
+            setModalFormData((prev: any) => [...prev, formData]);
+            console.log("formData", formData);
+            
         }
     };
 
@@ -304,12 +288,12 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
 
 
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="outline" disabled={false}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={()=>setShowModal(false)}>
                                 Cancel
                             </Button>
                         </Col>
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="default" disabled={false} type="submit">
+                            <Button className="w-100" variant="default" disabled={false}  type="submit">
                                 Save
                             </Button>
                         </Col>
