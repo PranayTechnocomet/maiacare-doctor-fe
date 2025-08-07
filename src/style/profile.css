@@ -71,9 +71,21 @@ body {
   background-color: #fff;
   color: #3E4A57;
 }
-.accordion-body{
+/* .accordion-body{
   padding-top: 0px !important;
 }
 .accordion-button{
   padding-bottom: 4px !important;
+} */
+
+@media (max-width: 992px) {
+  .contact-propfile-address{
+    width: 55% !important;
+  }
 }
+@media (max-width: 575px) {
+  .contact-propfile-address{
+    width: 100% !important;
+  }
+}
+

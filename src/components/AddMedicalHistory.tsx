@@ -7,6 +7,7 @@ import { ProfileCard } from './ui/Custom/ProfileCard';
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
 import ProfileBasicDetail from './ProfileBasicDetail';
+import PartnerDetail from './PartnerDetail';
 
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
@@ -36,9 +37,9 @@ const AddMedicalHistory = () => {
       key: "partner",
       label: "Partner Details",
       content: (
-        <ContentContainer className="mt-5">
-          <h1>Partner Details Content</h1>
-        </ContentContainer>
+        // <ContentContainer className="mt-5">
+          <PartnerDetail />
+        // </ContentContainer>
       ),
     },
     {
