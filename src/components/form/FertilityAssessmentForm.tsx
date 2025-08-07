@@ -26,18 +26,18 @@ const initialFormData: FormData = {
     cycleLength: "",
     periodLength: "",
     date: "",
-    isCycleRegular: "",
-    menstrualIssues: "",
-    pregnancy: "",
+    isCycleRegular: "Regular",
+    menstrualIssues: "yes",
+    pregnancy: "yes",
     timeduration: "",
-    ectopicpregnancy: ""
+    ectopicpregnancy: "yes"
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
 
 const initialFormError: FormError = {};
 
-export const FertilityAssessmentForm = ({ setShowFertilityAssessment }: { setShowFertilityAssessment: (show: boolean) => void }) => {
+export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFormFertilityData }: any) => {
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -75,6 +75,8 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment }: { setSho
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
             //   setShowModal(true);
+            setModalFormFertilityData((prev: any) => [...prev, formData]);
+            setShowFertilityAssessment(false);
             setFormError(initialFormError);
         }
     };
@@ -105,6 +107,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment }: { setSho
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Age"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>
@@ -121,6 +124,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment }: { setSho
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Cycle Length"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>
@@ -137,6 +141,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment }: { setSho
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Period Length"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>

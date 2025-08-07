@@ -14,11 +14,146 @@
     overflow: hidden !important;
 }
 
-.patient-accordion-content-subtitle{
-    font-size: 20px;
+
+.patient-journey-up-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-white);
+    border: 1px solid var(--google-icon-border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.patient-journey-box {
+    background-color: var(--color-white);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.patient-journey-box-title {
+    font-size: 14px;
     font-weight: 400;
-    line-height: 24px;
-    font-style: italic;
-    color: #B0B4C1;
+    line-height: 18px;
+    color: var(--color-brand);
+
+}
+
+.patient-journey-box-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: var(--color-sidebar-icon);
+}
+
+.patient-journey-dot {
+    top: 25%;
+}
+
+.patient-journey-box-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 33px;
+    left: 14px;
+    /* Align to dot center */
+    width: 1px;
+    height: 100%;
+    border-left: 2px dotted var(--color-icon-border);
+    z-index: 0;
+}
+
+.patient-journey-badge-success {
+    font-size: 12px;
+    background-color: #DEF7EC;
+    border-radius: 8px;
+    padding: 4px 8px;
+    color: #057A55;
+}
+
+.patient-journey-badge-pending {
+    font-size: 12px;
+    background-color: #FFF8F1;
+    border-radius: 8px;
+    padding: 4px 8px;
+    color: #FF8A4C;
+}
+
+.patient-journey-badge-InProgress {
+    font-size: 12px;
+    background-color: #F5F7FA;
+    border-radius: 8px;
+    padding: 4px 8px;
+    color: #3F83F8;
+}
+
+.phisical-assessment-accordion-item {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+.phisical-assessment-accordion-title-showData {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+
+    color: var(--color-radio-lable)
+}
+
+.phisical-assessment-accordion-showData-box {
+    border: 1px solid var(--google-icon-border);
+    padding: 14px;
+    border-radius: 8px;
+
+}
+
+.phisical-assessment-accordion-showData-box-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    font-style: Medium;
+    color: var(--color-sidebar-icon);
+}
+
+.phisical-assessment-accordion-showData-box-subtitle {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+
+.fertilityAssessment-subAccordion-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+
+    color: var(--color-radio-lable)
+}
+
+
+@media screen and (max-width: 575px) {
+    .patient-profile-dot {
+        width: 45px;
+        height: 45px;
+    }
+    .patient-journey-up-icon {
+        width: 45px;
+        height: 45px;
+       
+    }
     
+}
+
+@media screen and (max-width: 425px) {
+    .patient-profile-dot {
+        width: 40px;
+        height: 40px;
+    }
+    .patient-journey-up-icon {
+        width: 40px;
+        height: 40px;
+       
+    }
 }

@@ -9,20 +9,21 @@ import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
+import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
 
 // Types for form data and form error
-type FormData = {
-    height: string;
-    weight: string;
-    bmi: string;
-    bloodGroup: string
-    systolic: string;
-    diastolic: string;
-    heartRate: string;
-};
-type FormError = Partial<Record<keyof FormData, string>>;
+// type FormData = {
+//     height: string;
+//     weight: string;
+//     bmi: string;
+//     bloodGroup: string
+//     systolic: string;
+//     diastolic: string;
+//     heartRate: string;
+// };
+type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
 
-const initialFormData: FormData = {
+const initialFormData: PhysicalAssessmentDataModel = {
     height: "",
     weight: "",
     bmi: "",
@@ -34,14 +35,13 @@ const initialFormData: FormData = {
 
 const initialFormError: FormError = {};
 
+const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisicalData }: any) => {
 
-const PhisicalAssessmentForm = () => {
-
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: PhysicalAssessmentDataModel): FormError => {
         const errors: FormError = {};
 
         if (!data.height.trim()) errors.height = "Height is required";
@@ -70,8 +70,22 @@ const PhisicalAssessmentForm = () => {
         const errors = validateForm(formData);
         setFormError(errors);
         console.log("errors", errors);
+
         if (Object.keys(errors).length === 0) {
-            // setShowModal(true);
+            const formattedDate = new Date().toLocaleDateString('en-GB', {
+                weekday: 'short',
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }).replace(/^(\w+)/, '$1'); // Adds comma after weekday
+
+            const updatedFormData = {
+                ...formData,
+                date: formattedDate
+            };
+
+            setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+            setShowPhisicalAssessment(false);
             setFormError(initialFormError);
         }
     };
@@ -153,6 +167,7 @@ const PhisicalAssessmentForm = () => {
                             required={true}
                             disabled={false}
                             error={formError.bloodGroup}
+                            placeholder="Select Blood Group"
                             // helperText="Select doctor"
                             options={[
                                 { id: "1", value: "1", label: "A+" },
@@ -232,7 +247,7 @@ const PhisicalAssessmentForm = () => {
                     </Col>
                     <Col md={6}>
 
-                        <Button className="w-100" variant="outline" disabled={false}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
                             Cancel
                         </Button>
                     </Col>

@@ -1,4 +1,4 @@
-import { Patient } from "./types/interfaces";
+import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 
 export const tableResponse: Patient[] = [
   {

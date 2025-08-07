@@ -64,8 +64,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        console.log("hurrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-        
+
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
@@ -75,7 +74,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
             setFormError(initialFormError);
             setNedicalHistoryFormData((prev: any) => [...prev, formData]);
             console.log("formData", formData);
-            
+
         }
     };
 
@@ -289,12 +288,12 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
 
 
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="outline" disabled={false} onClick={()=>setShowModal(false)}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
                         </Col>
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="default" disabled={false}  type="submit">
+                            <Button className="w-100" variant="default" disabled={false} type="submit">
                                 Save
                             </Button>
                         </Col>

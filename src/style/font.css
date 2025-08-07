@@ -283,19 +283,22 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.medical-emergency-fimily-history{
+
+.medical-emergency-fimily-history {
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
     font-style: medium;
     color: var(--color-radio-lable);
 }
-.medical-history-edit-btn-font{
+
+.medical-history-edit-btn-font {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     color: var(--color-brand);
 }
+
 /* pankaj solanki start*/
 
 .setting-password-item-name {
@@ -383,43 +386,42 @@
     line-height: 22px;
     color: var(--color-brand);
 }
-.accordion-title-detail{
+
+.accordion-title-detail {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.border-box-orange-font{
+
+.border-box-orange-font {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     font-style: medium;
     color: var(--border-box);
 }
-.border-box-blue-font{
+
+.border-box-blue-font {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     font-style: medium;
     color: var(--border-box-blue);
 }
-.border-box-red-font{
+
+.border-box-red-font {
     font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     font-style: medium;
     color: var(--border-box-red);
 }
+
 /* support accordion */
 
-.support-accordion-item {
-    border: none !important;
-}
 
-.support-accordion-item .accordion-button {
-    padding: 0 !important;
-}
 
 .support-accordion-header {
     font-size: 16px;
@@ -427,25 +429,6 @@
     line-height: 20px;
     color: var(--color-radio-lable);
     padding: 0 10px;
-}
-
-.support-accordion-item .accordion-button::after {
-    border: 1px solid var(--color-icon-border);
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-white);
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.support-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
 }
 
 .login-button {
@@ -568,13 +551,6 @@
     color: var(--color-sidebar-icon);
 }
 
-.doctor-profile-heading {
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
 
 .doctor-profile-subheading {
     font-weight: 400;
@@ -599,26 +575,86 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.contact-details-emergency{
+
+.contact-details-emergency {
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
     font-style: SemiBold;
     color: var(--font-subtitle);
 }
-.contact-details-emergency-subdetail{
+
+.contact-details-emergency-subdetail {
     font-weight: 600;
     font-size: 14px;
     line-height: 18px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.maiacare-modal .modal-custom-header{
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 24px;
-  line-height: 28px;
-  color: var(--color-modal-heading);
+
+.maiacare-modal .modal-custom-header {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-modal-heading);
+}
+
+.patient-accordion-content-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    font-style: italic;
+    color: #B0B4C1;
+
+}
+
+.patient-journey-heading {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 26px;
+    font-style: bold;
+    color: var(--color-heading);
+}
+@media screen and (max-width: 768px) {
+
+    .contact-details-heading {
+        font-size: 20px;
+    }
+    .patient-accordion-content-subtitle {
+        font-size: 19px;
+    
+    }
+    .patient-journey-heading{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .doctor-profile-heading {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .doctor-profile-subheading {
+        font-size: 14px;
+    }
+
+    .contact-details-heading {
+        font-size: 18px;
+    }
+    .patient-journey-heading{
+        font-size: 18px;
+    }
+
+    .contact-details-subheading {
+        font-size: 15px;
+    }
+    .patient-accordion-content-subtitle {
+        font-size: 18px;
+    
+    }
+
 }
 
 @media screen and (max-width: 425px) {
@@ -633,10 +669,23 @@
         color: var(--color-brand);
     }
 
-    /* pankaj solanki end*/
+    .contact-details-heading {
+        font-size: 17px;
+    }
+    .patient-journey-heading{
+        font-size: 17px;
+    }
 
-
+    .contact-details-subheading {
+        font-size: 14px;
+    }
+    .patient-accordion-content-subtitle {
+        font-size: 16px;
+    
+    }
 }
+
+/* pankaj solanki end*/
 
 @media screen and (max-width: 1400px) {
     .login-image-contetnt {

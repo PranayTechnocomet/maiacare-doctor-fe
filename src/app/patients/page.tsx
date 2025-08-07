@@ -11,8 +11,6 @@ import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
-import PhisicalAssessment from "@/components/PhisicalAssessment";
-import FertilityAssessment from "@/components/FertilityAssessment";
 import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
 import "@/style/patientProfile.css";
@@ -25,18 +23,7 @@ function Page() {
 
   return (
     <>
-        {/* <h6>AddMedicalHistory modal </h6> */}
-        <AddMedicalHistory />
-
-      <div>
-        <h6>PhisicalAssessment and FertilityAssessment modal </h6>
-        <div className="d-flex gap-5">
-
-          <PhisicalAssessment />
-          <FertilityAssessment />
-
-        </div>
-      </div>
+      <AddMedicalHistory />
 
     </>
 
