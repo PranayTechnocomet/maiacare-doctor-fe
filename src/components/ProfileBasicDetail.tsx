@@ -125,7 +125,7 @@ const ProfileBasicDetail = () => {
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [nedicalHistoryFormData, setNedicalHistoryFormData] = useState<any>([]);
-    const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]); 
+    const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]);  
 
 
     console.log("nedicalHistoryFormData", nedicalHistoryFormData);
