@@ -343,6 +343,7 @@ export default function Page() {
               target: { name: "phone", value: phone },
             } as React.ChangeEvent<HTMLInputElement>);
           }}
+          placeholder="1212"
           required
           helperText="Enter a valid number including country code"
           error={formError.phone}

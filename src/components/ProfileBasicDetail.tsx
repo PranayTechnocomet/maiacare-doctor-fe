@@ -272,7 +272,7 @@ const ProfileBasicDetail = () => {
 
                         </Accordion>
                     </div>
-                    {modalFormPhisicalData.length === 0 ? (
+                    {/* {modalFormPhisicalData.length === 0 ? (
                         <div className="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81" fill="none">
                                 <g clipPath="url(#clip0_3886_2587)">
@@ -405,7 +405,7 @@ const ProfileBasicDetail = () => {
 
                             </Accordion>
                         </div>
-                    )}
+                    )} */}
                 </>
 
             ),

@@ -36,14 +36,16 @@ export default function PartnerDetail() {
                     </Button>
 
                     <Modal
-                            show={addPartner}
-                            onHide={() => setAddPartner(false)}
-                            header="Add Partner "
-                            closeButton={true}
-                            size = "lg"
-                          >
-                            <h2 className="mb-0"><AddPartnerDetailsForm /></h2>
-                          </Modal>
+                        show={addPartner}
+                        onHide={() => setAddPartner(false)}
+                        header="Add Partner "
+                        closeButton={true}
+                        size="lg"
+                    >
+                        <div className="mb-0">
+                            <AddPartnerDetailsForm />
+                        </div>
+                    </Modal>
                 </div>
             </div>
         </>

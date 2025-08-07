@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import ContentContainer from '../ui/ContentContainer';
 import CustomTabs from '../ui/CustomTabs';
 import Image from 'next/image';
 import Modal from '../ui/Modal';
 import { InputFieldGroup } from '../ui/InputField';
-import { Col, Row } from 'react-bootstrap';
+import { Accordion, Col, Row } from 'react-bootstrap';
 import { RadioButtonGroup } from '../ui/RadioField';
 import InputSelect from '../ui/InputSelect';
 import { PhoneNumberInput } from '../ui/PhoneNumberInput';
@@ -101,155 +101,644 @@ export function BasicDetailsForm() {
     };
     return (
         <>
-        <ContentContainer>
-            <form>
-                <Row>
-                    <Col xs={12}>
-                        <InputFieldGroup
-                            label="Name"
-                            name="basic_detail_name"
-                            type="text"
-                            value={formData.basic_detail_name}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Enter name"
-                            required={true}
-                            error={formError.basic_detail_name}
-                            className="position-relative "
-                        ></InputFieldGroup>
-                    </Col>
-                    <Col xs={6}>
-                        <RadioButtonGroup
-                            label="Gender"
-                            name="basic_detail_gender"
-                            value={formData.basic_detail_gender}
-                            defaultValue="male"
-                            onChange={(e) => handleChange(e)}
-                            required
-                            options={[
-                                { label: "Male", value: "male" },
-                                { label: "Female", value: "female" },
-                            ]}
-                        />
-                    </Col>
+            <ContentContainer>
+                <form>
+                    <Row>
+                        <Col xs={12}>
+                            <InputFieldGroup
+                                label="Name"
+                                name="basic_detail_name"
+                                type="text"
+                                value={formData.basic_detail_name}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                placeholder="Enter name"
+                                required={true}
+                                error={formError.basic_detail_name}
+                                className="position-relative "
+                            ></InputFieldGroup>
+                        </Col>
+                        <Col xs={6}>
+                            <RadioButtonGroup
+                                label="Gender"
+                                name="basic_detail_gender"
+                                value={formData.basic_detail_gender}
+                                defaultValue="male"
+                                onChange={(e) => handleChange(e)}
+                                required
+                                options={[
+                                    { label: "Male", value: "male" },
+                                    { label: "Female", value: "female" },
+                                ]}
+                            />
+                        </Col>
 
-                    <Col xs={6}>
-                        <InputSelect
-                            label="age"
-                            name="basic_detail_age"
-                            value={formData.basic_detail_age}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                            required={true}
-                            disabled={false}
-                            error={formError.basic_detail_age}
-                            options={[
-                                { id: "1", value: "1", label: "1" },
-                                { id: "2", value: "2", label: "2" },
-                                { id: "3", value: "3", label: "3" },
-                                { id: "4", value: "4", label: "4" },
-                                { id: "5", value: "5", label: "5" },
-                                { id: "6", value: "6", label: "6" },
-                                { id: "7", value: "7", label: "7" },
-                                { id: "8", value: "8", label: "8" },
-                                { id: "9", value: "9", label: "9" },
-                                { id: "10", value: "10", label: "10" },
-                                { id: "11", value: "11", label: "11" },
-                                { id: "12", value: "12", label: "12" },
-                                { id: "13", value: "13", label: "13" },
-                                { id: "14", value: "14", label: "14" },
-                                { id: "15", value: "15", label: "15" },
-                                { id: "16", value: "16", label: "16" },
-                                { id: "17", value: "17", label: "17" },
-                                { id: "18", value: "18", label: "18" },
-                                { id: "19", value: "19", label: "19" },
-                                { id: "20", value: "20", label: "20" },
-                                { id: "21", value: "21", label: "21" },
-                                { id: "22", value: "22", label: "22" },
-                                { id: "23", value: "23", label: "23" },
-                                { id: "24", value: "24", label: "24" },
-                                { id: "25", value: "25", label: "25" },
-                            ]}
-                        />
-                    </Col>
-
-
-                    <Col xs={6}>
-                        <PhoneNumberInput
-                            label="Contact Number"
-                            value={formData.basic_detail_phone}
-                            onChange={(phone: any) => {
-                                // setFormData((prev) => ({ ...prev, phone }));
-                                // setFormError((prev) => ({ ...prev, phone: "" }));
-                                handleChange({
-                                    target: { name: "basic_detail_phone", value: phone },
-                                } as React.ChangeEvent<HTMLInputElement>);
-                            }}
-                            required
-
-                            error={formError.basic_detail_phone}
-                        />
-                    </Col>
+                        <Col xs={6}>
+                            <InputSelect
+                                label="age"
+                                name="basic_detail_age"
+                                value={formData.basic_detail_age}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                                required={true}
+                                disabled={false}
+                                error={formError.basic_detail_age}
+                                options={[
+                                    { id: "1", value: "1", label: "1" },
+                                    { id: "2", value: "2", label: "2" },
+                                    { id: "3", value: "3", label: "3" },
+                                    { id: "4", value: "4", label: "4" },
+                                    { id: "5", value: "5", label: "5" },
+                                    { id: "6", value: "6", label: "6" },
+                                    { id: "7", value: "7", label: "7" },
+                                    { id: "8", value: "8", label: "8" },
+                                    { id: "9", value: "9", label: "9" },
+                                    { id: "10", value: "10", label: "10" },
+                                    { id: "11", value: "11", label: "11" },
+                                    { id: "12", value: "12", label: "12" },
+                                    { id: "13", value: "13", label: "13" },
+                                    { id: "14", value: "14", label: "14" },
+                                    { id: "15", value: "15", label: "15" },
+                                    { id: "16", value: "16", label: "16" },
+                                    { id: "17", value: "17", label: "17" },
+                                    { id: "18", value: "18", label: "18" },
+                                    { id: "19", value: "19", label: "19" },
+                                    { id: "20", value: "20", label: "20" },
+                                    { id: "21", value: "21", label: "21" },
+                                    { id: "22", value: "22", label: "22" },
+                                    { id: "23", value: "23", label: "23" },
+                                    { id: "24", value: "24", label: "24" },
+                                    { id: "25", value: "25", label: "25" },
+                                ]}
+                            />
+                        </Col>
 
 
-                    <Col xs={6}>
-                        <InputFieldGroup
-                            label="Email ID"
-                            name="basic_detail_email"
-                            type="email"
-                            value={formData.basic_detail_email}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Enter Email ID"
-                            required={true}
+                        <Col xs={6}>
+                            <PhoneNumberInput
+                                label="Contact Number"
+                                value={formData.basic_detail_phone}
+                                onChange={(phone: any) => {
+                                    // setFormData((prev) => ({ ...prev, phone }));
+                                    // setFormError((prev) => ({ ...prev, phone: "" }));
+                                    handleChange({
+                                        target: { name: "basic_detail_phone", value: phone },
+                                    } as React.ChangeEvent<HTMLInputElement>);
+                                }}
+                                placeholder='(000) 000-0000'
+                                required
 
-                            error={formError.basic_detail_email}
-                            className="position-relative "
-                        ></InputFieldGroup>
-                    </Col>
-                    <Col md={6} className='mt-2'>
-                        <Button className="w-100" variant="outline" disabled={false} >
-                            Cancel
-                        </Button>
-                    </Col>
-                    <Col md={6} className='mt-2'>
-                        <Button className="w-100" variant="default" disabled={false} type="submit">
-                            Save
-                        </Button>
-                    </Col>
-                </Row>
-            </form>
+                                error={formError.basic_detail_phone}
+                            />
+                        </Col>
+
+
+                        <Col xs={6}>
+                            <InputFieldGroup
+                                label="Email ID"
+                                name="basic_detail_email"
+                                type="email"
+                                value={formData.basic_detail_email}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                placeholder="Enter Email ID"
+                                required={true}
+
+                                error={formError.basic_detail_email}
+                                className="position-relative "
+                            ></InputFieldGroup>
+                        </Col>
+                        <Col md={6} className='mt-2'>
+                            <Button className="w-100" variant="outline" disabled={false} >
+                                Cancel
+                            </Button>
+                        </Col>
+                        <Col md={6} className='mt-2'>
+                            <Button className="w-100" variant="default" disabled={false} type="submit">
+                                Save
+                            </Button>
+                        </Col>
+                    </Row>
+                </form>
             </ContentContainer>
         </>
     )
 }
 
+type MedicalHistoryFormData = {
+    medication: string;
+    surgeries: string;
+    surgeriesContent: string;
+    medicalCondition: string;
+    familyMedicalHistory: string;
+    lifestyle: string;
+    stress: string;
+    exercise: string;
+    medicationcontent: string;
+};
 
+type MedicalHistoryFormError = Partial<Record<keyof MedicalHistoryFormData, string>>;
+
+const initialMedicalHistoryFormData: MedicalHistoryFormData = {
+    medication: "yes",
+    surgeries: "yes",
+    surgeriesContent: "",
+    medicalCondition: "",
+    familyMedicalHistory: "",
+    lifestyle: "",
+    stress: "low",
+    exercise: "never",
+    medicationcontent: "",
+};
+
+const MedicalHistoryFormError: MedicalHistoryFormError = {};
 
 export function MedicalHistoryForm() {
+    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryFormData>(initialMedicalHistoryFormData);
+    const [medicalHistoryFormError, setMedicalHistoryFormError] = useState<MedicalHistoryFormError>(MedicalHistoryFormError);
+
+    const validateForm = (data: MedicalHistoryFormData): MedicalHistoryFormError => {
+        const errors: MedicalHistoryFormError = {};
+
+        if (!data.medication.trim()) errors.medication = "Medication is required";
+        if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
+        if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
+        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        if (!data.exercise.trim()) errors.exercise = "Exercise is required";
+        if (!data.stress.trim()) errors.stress = "Stress Level is required";
+
+
+        return errors;
+    };
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setMedicalHistoryFormData((prev) => ({ ...prev, [name]: value }));
+        setMedicalHistoryFormError((prev) => ({ ...prev, [name]: "" }));
+
+    };
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+        e.preventDefault();
+        const errors = validateForm(medicalHistoryFormData);
+        setMedicalHistoryFormError(errors);
+
+        if (Object.keys(errors).length === 0) {
+            // setShowModal(false);
+            setMedicalHistoryFormError(medicalHistoryFormError);
+            // setNedicalHistoryFormData((prev: any) => [...prev, formData]);
+            console.log("formData", medicalHistoryFormData);
+
+        }
+    };
+
+
+    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const options = [
+        { value: "1", label: "Non-smoker" },
+        { value: "2", label: "Occasional alcohol" },
+        { value: "3", label: "Vegetarian diet" },
+    ];
+
+    const toggleOption = (value: string) => {
+        setSelectedValues(prev =>
+            prev.includes(value)
+                ? prev.filter(v => v !== value)
+                : [...prev, value]
+        );
+    };
+
+    const removeOption = (value: string) => {
+        setSelectedValues(prev => prev.filter(v => v !== value));
+    };
+
+    const getSelectedLabels = () => {
+        return selectedValues.map(value => {
+            const option = options.find(opt => opt.value === value);
+            return option ? option.label : value;
+        });
+    };
     return (
         <>
-            <div>
-                <h1>Medical History</h1>
+            <div className=''>
+                <form onSubmit={handleSubmit}>
+                    <Row>
+                        <Col md={12}>
+                            <RadioButtonGroup
+                                label="Are you currently taking any medications?"
+                                name="medication"
+                                value={medicalHistoryFormData.medication || 'yes'}
+                                onChange={(e) => handleChange(e)}
+                                required={true}
+                                error={medicalHistoryFormError.medication}
+                                options={[
+                                    { label: "Yes", value: "yes" },
+                                    { label: "No", value: "no" },
+                                ]}
+                            />
 
+                            {medicalHistoryFormData.medication === 'yes' && (
+                                <InputFieldGroup
+                                    type="text"
+                                    value={medicalHistoryFormData.medicationcontent}
+                                    name='medicationcontent'
+                                    onChange={handleChange}
+                                    error={medicalHistoryFormError.medicationcontent}
+
+                                    placeholder="Enter medication"
+
+                                    className={` `}
+                                >
+
+                                </InputFieldGroup>
+                            )}
+
+                        </Col>
+                        <Col md={12}>
+                            <div className='mt-2'>
+                                <RadioButtonGroup
+                                    label="Have you had any surgeries?"
+                                    name="surgeries"
+                                    value={medicalHistoryFormData.surgeries || 'yes'}
+                                    onChange={(e) => handleChange(e)}
+                                    required={true}
+                                    error={medicalHistoryFormError.surgeries}
+                                    options={[
+                                        { label: "Yes", value: "yes" },
+                                        { label: "No", value: "no" },
+                                    ]}
+                                />
+
+                            </div>
+                        </Col>
+                        <Col md={12} className='mt-2'>
+                            <InputFieldGroup
+                                label="Do you have any medical condition? "
+                                name="medicalCondition"
+                                type="text"
+                                value={medicalHistoryFormData.medicalCondition}
+
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                placeholder="Search Medical Condition or Allergies"
+                                required={true}
+                                error={medicalHistoryFormError.medicalCondition}
+                                className="position-relative "
+                            ></InputFieldGroup>
+                        </Col>
+                        <Col md={12} className='mt-2'>
+                            <InputFieldGroup
+                                label="Family Medical History "
+                                name="familyMedicalHistory"
+                                value={medicalHistoryFormData.familyMedicalHistory}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                placeholder="Enter family medical history"
+                                required={false}
+                                error={medicalHistoryFormError.familyMedicalHistory}
+                                className="position-relative "
+                            ></InputFieldGroup>
+                        </Col>
+                        <Col md={12} className='mt-2'>
+                            <InputSelect
+                                label="Lifestyle"
+                                name="lifestyle"
+                                value={medicalHistoryFormData.lifestyle}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                                required={true}
+                                disabled={false}
+                                error={medicalHistoryFormError.lifestyle}
+                                options={[
+                                    { id: "1", value: "1", label: "PCOS" },
+                                    { id: "2", value: "2", label: "Thyroid Disorder" },
+                                    { id: "3", value: "3", label: "Diabetes" },
+                                    { id: "4", value: "4", label: "Obstructive Sleep Apnea" },
+                                    { id: "5", value: "5", label: "Chronic Stress" },
+                                    { id: "6", value: "6", label: "Chronic Stress" },
+                                ]}
+                            />
+                            {/* <label className="form-label">Lifestyle</label>
+                           
+                            <div className="dropdown">
+                                <button
+                                    className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
+                                    type="button"
+                                    onClick={() => setIsOpen(!isOpen)}
+                                    aria-expanded={isOpen}
+                                >
+                                    {selectedValues.length === 0
+                                        ? "Select lifestyle options..."
+                                        : ` selected`
+                                    }
+                                </button>
+
+                                {isOpen && (
+                                    <ul className="dropdown-menu show w-100">
+                                        {options.map(option => (
+                                            <li key={option.value}>
+                                                <label className="dropdown-item d-flex align-items-center mb-0">
+                                                    <input
+                                                        type="checkbox"
+                                                        className="form-check-input me-2"
+                                                        checked={selectedValues.includes(option.value)}
+                                                        onChange={() => toggleOption(option.value)}
+                                                    />
+                                                    {option.label}
+                                                </label>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+
+                            
+                            {selectedValues.length > 0 && (
+                                <div className="mt-2">
+                                    <small className="text-muted mb-1 d-block">
+                                        Selected ({selectedValues.length}):
+                                    </small>
+                                    <div className="d-flex flex-wrap gap-1">
+                                        {getSelectedLabels().map((label, index) => (
+                                            <span
+                                                key={selectedValues[index]}
+                                                className="badge bg-success d-flex align-items-center"
+                                            >
+                                                {label}
+                                                <button
+                                                    type="button"
+                                                    className="btn-close btn-close-white ms-2"
+                                                    style={{ fontSize: '0.7rem' }}
+                                                    onClick={() => removeOption(selectedValues[index])}
+                                                />
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )} */}
+                        </Col>
+
+                        <Col md={6} className='mt-2'>
+                            <RadioButtonGroup
+                                label="How often do you exercise?"
+                                name="exercise"
+                                value={medicalHistoryFormData.exercise || 'never'}
+                                onChange={(e) => handleChange(e)}
+                                required={true}
+                                error={medicalHistoryFormError.exercise}
+                                options={[
+                                    { label: "Never", value: "never" },
+                                    { label: "Rarely", value: "rarely" },
+                                    { label: "Regularly", value: "regularly" },
+                                ]}
+                            />
+                        </Col>
+                        <Col md={6} className='mt-2'>
+                            <RadioButtonGroup
+                                label="How would you rate your stress levels?"
+                                name="stress"
+                                value={medicalHistoryFormData.stress || 'low'}
+                                onChange={(e) => handleChange(e)}
+                                required={true}
+                                error={medicalHistoryFormError.stress}
+                                options={[
+                                    { label: "Low", value: "low" },
+                                    { label: "Moderate", value: "moderate" },
+                                    { label: "High", value: "high" },
+                                ]}
+                            />
+                        </Col>
+
+
+                        <Col md={6} className='mt-2'>
+                            <Button className="w-100" variant="outline" disabled={false} >
+                                Cancel
+                            </Button>
+                        </Col>
+                        <Col md={6} className='mt-2'>
+                            <Button className="w-100" variant="default" disabled={false} type="submit">
+                                Save
+                            </Button>
+                        </Col>
+                    </Row>
+                </form>
             </div>
         </>
     )
 }
 
+
+type PhysicalFertilityAssessmentFormData = {
+    semenAnalysis: string;
+    semenAnalysisContent: string;
+    fertilityIssues: string;
+    fertilityIssuesContent: string;
+    fertilityTreatment: string;
+    fertilityTreatmentContent: string;
+    surgeries: string;
+    surgeriesContent: string;
+};
+
+type PhysicalFertilityAssessmentFormError = Partial<Record<keyof PhysicalFertilityAssessmentFormData, string>>;
+const initialPhysicalFertilityAssessmentFormData: PhysicalFertilityAssessmentFormData = {
+   
+    semenAnalysis: "yes",
+    semenAnalysisContent: "",
+    fertilityIssues: "no",
+    fertilityIssuesContent: "",
+    fertilityTreatment: "no",
+    fertilityTreatmentContent: "",
+    surgeries: "no",
+    surgeriesContent: "",
+};
+const initialPhysicalFertilityAssessmentFormError: PhysicalFertilityAssessmentFormError = {};
+
 export function PhysicalFertilityAssessmentForm() {
+
+    const [formData, setFormData] = useState<PhysicalFertilityAssessmentFormData>(initialPhysicalFertilityAssessmentFormData);
+    const [formError, setFormError] = useState<PhysicalFertilityAssessmentFormError>(initialPhysicalFertilityAssessmentFormError);
+    
+     const handleChange = (
+            e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+        ) => {
+            const { name, value } = e.target;
+            setFormData((prev) => ({ ...prev, [name]: value }));
+            setFormError((prev) => ({ ...prev, [name]: "" }));
+            
+        };
     return (
         <>
-            <div>
-                <h1>Physical & Fertility Assessment</h1>
+            <Accordion defaultActiveKey="0">
+                <Accordion.Item eventKey="0">
+                    <Accordion.Header>
+                        Physical Assessment
+                    </Accordion.Header>
+                    <Accordion.Body>
+                        <h1>Physical Assessment</h1>
+                    </Accordion.Body>
+                </Accordion.Item>
 
-            </div>
+
+
+
+
+
+                <Accordion.Item eventKey="1">
+                    <Accordion.Header>
+                        Fertility Assessment
+                    </Accordion.Header>
+                    <Accordion.Body>
+
+
+                        <>
+                            <form>
+                                <Row>
+                                <Col md={12} className='mt-1'>
+                                    <RadioButtonGroup
+                                        label="Have you ever had a semen analysis?"
+                                        name="semenAnalysis"
+                                        value={formData.semenAnalysis || 'yes'}
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={formError.semenAnalysis}
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" },
+                                        ]}
+                                    />
+
+                                    {formData.semenAnalysis === 'yes' && (
+                                        <InputFieldGroup
+                                            type="text"
+                                            value={formData.semenAnalysisContent}
+                                            name='semenAnalysisContent'
+                                            onChange={handleChange}
+                                            error={formError.semenAnalysisContent}
+
+                                            placeholder="If yes, provide details if available"
+
+                                            className={` `}
+                                        >
+
+                                        </InputFieldGroup>
+                                    )}
+
+                                </Col>
+                                <Col md={12} className='mt-2'>
+                                    <RadioButtonGroup
+                                        label="Have you experienced any fertility issues?"
+                                        name="fertilityIssues"
+                                        value={formData.fertilityIssues || 'yes'}
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={formError.fertilityIssues}
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" },
+                                        ]}
+                                    />
+
+                                    {formData.fertilityIssues === 'yes' && (
+                                        <InputFieldGroup
+                                            type="text"
+                                            value={formData.fertilityIssuesContent}
+                                            name='fertilityIssuesContent'
+                                            onChange={handleChange}
+                                            error={formError.semenAnalysisContent}
+
+                                            placeholder="If yes, provide details if available"
+
+                                            className={` `}
+                                        >
+
+                                        </InputFieldGroup>
+                                    )}
+
+                                </Col>
+                                <Col md={12} className='mt-2'>
+                                    <RadioButtonGroup
+                                        label="Have you previously undergone fertility treatments?"
+                                        name="fertilityTreatment"
+                                        value={formData.fertilityTreatment || 'yes'}
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={formError.fertilityTreatment}
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" },
+                                        ]}
+                                    />
+
+                                    {formData.fertilityTreatment === 'yes' && (
+                                        <InputFieldGroup
+                                            type="text"
+                                            value={formData.fertilityTreatmentContent}
+                                            name='fertilityTreatmentContent'
+                                            onChange={handleChange}
+                                            error={formError.fertilityTreatmentContent}
+
+                                            placeholder="If yes, provide details if available"
+
+                                            className={` `}
+                                        >
+
+                                        </InputFieldGroup>
+                                    )}
+
+                                </Col>
+                                <Col md={12} className='mt-2'>
+                                    <RadioButtonGroup
+                                        label="Any history of surgeries?"
+                                        name="surgeries"
+                                        value={formData.surgeries || 'yes'}
+                                        onChange={(e) => handleChange(e)}
+                                        required={true}
+                                        error={formError.surgeries}
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" },
+                                        ]}
+                                    />
+
+                                    {formData.surgeries === 'yes' && (
+                                        <InputFieldGroup
+                                            type="text"
+                                            value={formData.surgeriesContent}
+                                            name='surgeriesContent'
+                                            onChange={handleChange}
+                                            error={formError.surgeriesContent}
+
+                                            placeholder="If yes, provide details if available"
+
+                                            className={` `}
+                                        >
+
+                                        </InputFieldGroup>
+                                    )}
+
+                                </Col>
+                                </Row>
+                            </form>
+                        </>
+                    </Accordion.Body>
+                </Accordion.Item>
+            </Accordion>
         </>
     )
 }

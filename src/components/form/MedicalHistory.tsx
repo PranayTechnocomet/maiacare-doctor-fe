@@ -66,6 +66,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
+        // Validate the formData and return any errors found
         const errors = validateForm(formData);
         setFormError(errors);
         console.log("errors", errors);
