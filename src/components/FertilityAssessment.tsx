@@ -6,7 +6,7 @@ import InputSelect from "./ui/InputSelect";
 import { DatePickerFieldGroup } from "./ui/CustomDatePicker";
 import { RadioButtonGroup } from "./ui/RadioField";
 import { InputFieldGroup } from "./ui/InputField";
-import { MenstrualCycle, Pregnancy } from "./form/FertilityAssessmentForm";
+// import { MenstrualCycle, Pregnancy } from "./form/FertilityAssessmentForm";
 
 const FertilityAssessment = () => {
 
@@ -41,7 +41,7 @@ const FertilityAssessment = () => {
                 onHide={() => setShowModal(false)}
                 header=" Fertility Assement"
                 closeButton={true}
-                size="md"
+                size="lg"
             >
 
                 <Accordion defaultActiveKey="0">
@@ -53,7 +53,7 @@ const FertilityAssessment = () => {
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
 
-                            <MenstrualCycle />
+                            {/* <MenstrualCycle /> */}
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="1">
@@ -63,7 +63,7 @@ const FertilityAssessment = () => {
                             </div>
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
-                            <Pregnancy />
+                            {/* <Pregnancy /> */}
                         </Accordion.Body>
                     </Accordion.Item>
 

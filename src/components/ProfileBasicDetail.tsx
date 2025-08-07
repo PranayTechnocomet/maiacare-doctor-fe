@@ -11,18 +11,15 @@ import ProfileEmail from '../assets/images/Email.png'
 import ProfileAddress from '../assets/images/Location.png'
 import Modal from './ui/Modal';
 
-<<<<<<< Updated upstream
 import { MedicalHistoryData } from '../utils/StaticData';
-import { MedicalHistory } from './form/MedicalHistory';
-=======
+
 import { IoAdd } from "react-icons/io5";
-import { FertilityAssessmentForm, MenstrualCycle } from './form/FertilityAssessmentForm';
+
 import PhisicalAssessmentForm from './form/PhisicalAssessmentForm';
 import FertilityAssessment from './FertilityAssessment';
-import { MedicalHistoryData } from '@/utils/StaticData';
-import MedicalHistory from './form/MedicalHistory';
 import EditIcon from "../assets/images/EditIcon.png";
->>>>>>> Stashed changes
+import MedicalHistory from './form/MedicalHistory';
+import { FertilityAssessmentForm } from './form/FertilityAssessmentForm';
 
 
 // JSON data for accordion sections
@@ -115,6 +112,8 @@ const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
     const [showModal, setShowModal] = useState(false);
     const [modalFormData, setModalFormData] = useState<any>([]);
+    const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
+    const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
 
     console.log("modalFormData", modalFormData);
 
@@ -397,9 +396,6 @@ const ProfileBasicDetail = () => {
                     </Accordion>
 
                     <Modal
-<<<<<<< Updated upstream
-                        className=""
-=======
                         show={showPhisicalAssessment}
                         onHide={() => setShowPhisicalAssessment(false)}
                         header="Physical Assessment"
@@ -422,13 +418,12 @@ const ProfileBasicDetail = () => {
                         <div className="mb-0 ">
                             {/* FertilityAssessment model */}
                             {/* <FertilityAssessment /> */}
-                            <FertilityAssessmentForm />
+                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} />
 
                         </div>
                     </Modal>
                     <Modal
                         className="medical-history-modal custom-small-modal"
->>>>>>> Stashed changes
                         show={showModal}
                         onHide={() => setShowModal(false)}
                         header="Add Medical History"

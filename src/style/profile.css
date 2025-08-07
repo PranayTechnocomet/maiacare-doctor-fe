@@ -58,10 +58,8 @@ body {
   .maiacare-modal .medical-history-modal{
     /* width: 60% !important;
     height: 60% !important; */
-<<<<<<< Updated upstream
   }
-=======
-  }
+  
 .medical-history-edit-btn{
   border-radius: 8px;
   border: 1px solid #1e3a8a;
@@ -79,4 +77,3 @@ body {
 .accordion-button{
   padding-bottom: 4px !important;
 }
->>>>>>> Stashed changes
