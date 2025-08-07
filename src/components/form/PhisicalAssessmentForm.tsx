@@ -36,7 +36,7 @@ const initialFormData: PhysicalAssessmentDataModel = {
 const initialFormError: FormError = {};
 
 
-const PhisicalAssessmentForm = () => {
+const PhisicalAssessmentForm = ({ setShowPhisicalAssessment }: { setShowPhisicalAssessment: (show: boolean) => void }) => {
 
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -233,7 +233,7 @@ const PhisicalAssessmentForm = () => {
                     </Col>
                     <Col md={6}>
 
-                        <Button className="w-100" variant="outline" disabled={false}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
                             Cancel
                         </Button>
                     </Col>

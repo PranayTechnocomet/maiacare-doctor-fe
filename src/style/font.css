@@ -408,13 +408,7 @@
 }
 /* support accordion */
 
-.support-accordion-item {
-    border: none !important;
-}
 
-.support-accordion-item .accordion-button {
-    padding: 0 !important;
-}
 
 .support-accordion-header {
     font-size: 16px;
@@ -422,25 +416,6 @@
     line-height: 20px;
     color: var(--color-radio-lable);
     padding: 0 10px;
-}
-
-.support-accordion-item .accordion-button::after {
-    border: 1px solid var(--color-icon-border);
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--color-white);
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.support-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
 }
 
 .login-button {

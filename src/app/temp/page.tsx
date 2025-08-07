@@ -79,13 +79,12 @@ const columns: ColumnDef<Patient>[] = [
       const status = info.getValue() as string;
       return (
         <span
-          className={`badge ${
-            status === "Active"
+          className={`badge ${status === "Active"
               ? "bg-primary"
               : status === "Discontinued"
-              ? "bg-warning"
-              : "bg-danger"
-          }`}
+                ? "bg-warning"
+                : "bg-danger"
+            }`}
         >
           {status}
         </span>
@@ -142,7 +141,7 @@ export default function Page() {
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  
+
 
   // Validation Function
   const validateForm = (data: FormData): FormError => {
@@ -261,7 +260,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
           placeholder="Enter name"
           required={false}
           disabled={false}
@@ -281,7 +280,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
           required={true}
           disabled={false}
           error={formError.doctor}
@@ -299,7 +298,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
           required={true}
           disabled={false}
           error={formError.date}
@@ -326,7 +325,7 @@ export default function Page() {
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             handleChange(e);
           }}
-          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => {}}
+          onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
           required={true}
           disabled={false}
           error={formError.description}

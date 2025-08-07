@@ -280,7 +280,7 @@ const ProfileBasicDetail = () => {
             id: '2',
             title: 'Medical History',
             content: (
-                
+
                 <>
                     <div className="text-center ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
@@ -436,7 +436,7 @@ const ProfileBasicDetail = () => {
                     >
                         <div className="mb-0 ">
                             {/* <MedicalHistory /> */}
-                            <PhisicalAssessmentForm />
+                            <PhisicalAssessmentForm setShowPhisicalAssessment={setShowPhisicalAssessment} />
                         </div>
                     </Modal>
 
@@ -450,7 +450,7 @@ const ProfileBasicDetail = () => {
                         <div className="mb-0 ">
                             {/* FertilityAssessment model */}
                             {/* <FertilityAssessment /> */}
-                            <FertilityAssessmentForm />
+                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} />
 
                         </div>
                     </Modal>
