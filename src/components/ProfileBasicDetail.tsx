@@ -499,7 +499,7 @@ const ProfileBasicDetail = () => {
                     >
                         <div className="mb-0 ">
                             {/* <MedicalHistory /> */}
-                            <PhisicalAssessmentForm />
+                            <PhisicalAssessmentForm setShowPhisicalAssessment={setShowPhisicalAssessment} />
                         </div>
                     </Modal>
 
