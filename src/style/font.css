@@ -624,17 +624,18 @@
     color: var(--color-brand);
 }
 
-
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {
         font-size: 20px;
     }
+
     .patient-accordion-content-subtitle {
         font-size: 19px;
-    
+
     }
-    .patient-journey-heading{
+
+    .patient-journey-heading {
         font-size: 20px;
     }
 }
@@ -652,16 +653,18 @@
     .contact-details-heading {
         font-size: 18px;
     }
-    .patient-journey-heading{
+
+    .patient-journey-heading {
         font-size: 18px;
     }
 
     .contact-details-subheading {
         font-size: 15px;
     }
+
     .patient-accordion-content-subtitle {
         font-size: 18px;
-    
+
     }
 
 }
@@ -671,20 +674,23 @@
         width: 100%;
     }
 
-  
+
+
     .contact-details-heading {
         font-size: 17px;
     }
-    .patient-journey-heading{
+
+    .patient-journey-heading {
         font-size: 17px;
     }
 
     .contact-details-subheading {
         font-size: 14px;
     }
+
     .patient-accordion-content-subtitle {
         font-size: 16px;
-    
+
     }
 }
 
