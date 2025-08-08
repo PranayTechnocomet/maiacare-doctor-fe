@@ -35,8 +35,7 @@ const initialFormData: PhysicalAssessmentDataModel = {
 
 const initialFormError: FormError = {};
 
-
-const PhisicalAssessmentForm = () => {
+const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisicalData }: any) => {
 
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -71,8 +70,22 @@ const PhisicalAssessmentForm = () => {
         const errors = validateForm(formData);
         setFormError(errors);
         console.log("errors", errors);
+
         if (Object.keys(errors).length === 0) {
-            // setShowModal(true);
+            const formattedDate = new Date().toLocaleDateString('en-GB', {
+                weekday: 'short',
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }).replace(/^(\w+)/, '$1'); // Adds comma after weekday
+
+            const updatedFormData = {
+                ...formData,
+                date: formattedDate
+            };
+
+            setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+            setShowPhisicalAssessment(false);
             setFormError(initialFormError);
         }
     };
@@ -154,6 +167,7 @@ const PhisicalAssessmentForm = () => {
                             required={true}
                             disabled={false}
                             error={formError.bloodGroup}
+                            placeholder="Select Blood Group"
                             // helperText="Select doctor"
                             options={[
                                 { id: "1", value: "1", label: "A+" },
@@ -233,7 +247,7 @@ const PhisicalAssessmentForm = () => {
                     </Col>
                     <Col md={6}>
 
-                        <Button className="w-100" variant="outline" disabled={false}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
                             Cancel
                         </Button>
                     </Col>

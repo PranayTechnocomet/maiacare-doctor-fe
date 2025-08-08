@@ -23,18 +23,7 @@ function Page() {
 
   return (
     <>
-      {/* <h6>AddMedicalHistory modal </h6> */}
       <AddMedicalHistory />
-
-      {/* <div>
-        <h6>PhisicalAssessment and FertilityAssessment modal </h6>
-        <div className="d-flex gap-5">
-
-          <PhisicalAssessment />
-          <FertilityAssessment />
-
-        </div>
-      </div> */}
 
     </>
 

@@ -7,6 +7,9 @@ import { ProfileCard } from './ui/Custom/ProfileCard';
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
 import ProfileBasicDetail from './ProfileBasicDetail';
+import PartnerDetail from './PartnerDetail';
+import PatientReport from './PatientReport';
+import PatientTreatment from './PatientTreatment';
 
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
@@ -36,9 +39,10 @@ const AddMedicalHistory = () => {
       key: "partner",
       label: "Partner Details",
       content: (
-        <ContentContainer className="mt-5">
-          <h1>Partner Details Content</h1>
-        </ContentContainer>
+        <div>
+          <PartnerDetail />
+        </div>
+
       ),
     },
     {
@@ -54,9 +58,9 @@ const AddMedicalHistory = () => {
       key: "reports",
       label: "Reports",
       content: (
-        <ContentContainer className="mt-5">
-          <h1>Reports Content</h1>
-        </ContentContainer>
+        <div className='mt-4'>
+          <PatientReport />
+        </div>
       ),
     },
     {
@@ -72,16 +76,15 @@ const AddMedicalHistory = () => {
       key: "treatment",
       label: "Treatment",
       content: (
-        <ContentContainer className="mt-5">
-          <h1>Treatment Content</h1>
-        </ContentContainer>
+        <div >
+          <PatientTreatment />
+        </div>
       ),
     },
   ];
   return (
 
     <>
-
 
       <ProfileCard
         name={profileData.name}
@@ -93,8 +96,6 @@ const AddMedicalHistory = () => {
         joinDate={profileData.joinDate}
         status={profileData.status}
       />
-      {/* </div> */}
-
 
       <main className="bg-light min-vh-100 py-2">
         <div className="">

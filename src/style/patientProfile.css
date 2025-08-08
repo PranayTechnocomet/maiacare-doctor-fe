@@ -14,23 +14,6 @@
     overflow: hidden !important;
 }
 
-.patient-accordion-content-subtitle {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 24px;
-    font-style: italic;
-    color: #B0B4C1;
-
-}
-
-.patient-journey-heading {
-    font-size: 22px;
-    font-weight: 700;
-    line-height: 26px;
-    font-style: bold;
-    color: var(--color-heading);
-}
-
 .patient-journey-up-icon {
     width: 48px;
     height: 48px;
@@ -49,21 +32,6 @@
     padding: 16px;
 }
 
-.patient-journey-box-title {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 18px;
-    color: var(--color-brand);
-
-}
-
-.patient-journey-box-subtitle {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    color: var(--color-sidebar-icon);
-}
-
 .patient-journey-dot {
     top: 25%;
 }
@@ -80,42 +48,11 @@
     z-index: 0;
 }
 
-.patient-journey-badge-success {
-    font-size: 12px;
-    background-color: #DEF7EC;
-    border-radius: 8px;
-    padding: 4px 8px;
-    color: #057A55;
-}
-
-.patient-journey-badge-pending {
-    font-size: 12px;
-    background-color: #FFF8F1;
-    border-radius: 8px;
-    padding: 4px 8px;
-    color: #FF8A4C;
-}
-
-.patient-journey-badge-InProgress {
-    font-size: 12px;
-    background-color: #F5F7FA;
-    border-radius: 8px;
-    padding: 4px 8px;
-    color: #3F83F8;
-}
-
 .phisical-assessment-accordion-item {
     border-radius: 12px !important;
     overflow: hidden !important;
 }
 
-.phisical-assessment-accordion-title-showData {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 20px;
-
-    color: var(--color-radio-lable)
-}
 
 .phisical-assessment-accordion-showData-box {
     border: 1px solid var(--google-icon-border);
@@ -124,20 +61,53 @@
 
 }
 
-.phisical-assessment-accordion-showData-box-title {
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 18px;
-    font-style: Medium;
-    color: var(--color-sidebar-icon);
+
+.accordion-item:not(:first-of-type) {
+    border: 1px solid var(--color-border);
 }
 
-.phisical-assessment-accordion-showData-box-subtitle {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: Medium;
-    color: var(--color-radio-lable);
+.patient-list-count-box {
+    height: fit-content;
+    border: 1px solid var(--google-icon-border);
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--color-white);
+}
+
+
+.patient-report-box {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-icon-border);
+    border-radius: 12px;
+    padding: 16px;
+
+}
+
+.patient-treatment-box {
+    background-color: var(--color-white);
+    border: 1px solid #E29578;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.patient-treatment-status-completed-box {
+    background-color: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+
+.patient-treatment-box-dot-btn {
+    border: 1px solid var(--color-icon-border);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 
@@ -146,6 +116,13 @@
         width: 45px;
         height: 45px;
     }
+
+    .patient-journey-up-icon {
+        width: 45px;
+        height: 45px;
+
+    }
+
 }
 
 @media screen and (max-width: 425px) {
@@ -153,4 +130,11 @@
         width: 40px;
         height: 40px;
     }
+
+    .patient-journey-up-icon {
+        width: 40px;
+        height: 40px;
+
+    }
+
 }

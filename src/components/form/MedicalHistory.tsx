@@ -10,13 +10,7 @@ import Textarea from '../ui/Textarea';
 
 
 type FormData = {
-    name: string;
-    doctor: string;
-    date: string;
-    gender: string;
     medication: string;
-    description: string;
-    phone: string;
     surgeries: string;
     surgeriesContent: string;
     medicalCondition: string;
@@ -29,30 +23,21 @@ type FormData = {
 
 type FormError = Partial<Record<keyof FormData, string>>;
 const initialFormData: FormData = {
-    name: "",
-    doctor: "",
-    date: "",
-    gender: "",
-    medication: "",
-    description: "",
-    phone: "",
-    surgeries: "",
+   
+    medication: "yes",
+    surgeries: "yes",
     surgeriesContent: "",
     medicalCondition: "",
     familyMedicalHistory: "",
     lifestyle: "",
-    stress: "",
-    exercise: "",
+    stress: "low",
+    exercise: "never",
     medicationcontent: "",
 };
 
 const initialFormError: FormError = {};
 
-interface MedicalHistoryProps {
-    onSave?: (data: FormData) => void;
-}
-
-export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
+export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal }: any) {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
@@ -62,8 +47,8 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
         if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
-        if (!data.exercise.trim()) errors.exercise = "Exercise is required";
+        // if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        // if (!data.exercise.trim()) errors.exercise = "Exercise is required";
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
 
 
@@ -75,22 +60,22 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
+        
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
+        // Validate the formData and return any errors found
         const errors = validateForm(formData);
         setFormError(errors);
-        
+        console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
+            setShowModal(false);
             setFormError(initialFormError);
-            if (onSave) {
-                // Pass the form data to the parent component
-                onSave({
-                    ...formData,
-                    lifestyle: selectedValues.join(', ')
-                });
-            }
+            setNedicalHistoryFormData((prev: any) => [...prev, formData]);
+            console.log("formData", formData);
+
         }
     };
 
@@ -195,19 +180,19 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
                             ></InputFieldGroup>
                         </Col>
                         <Col md={12} className='mt-2'>
-                            <Textarea
+                            <InputFieldGroup
                                 label="Family Medical History "
                                 name="familyMedicalHistory"
                                 value={formData.familyMedicalHistory}
-                                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);
                                 }}
-                                onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                                 placeholder="Enter family medical history"
                                 required={false}
                                 error={formError.familyMedicalHistory}
                                 className="position-relative "
-                            ></Textarea>
+                            ></InputFieldGroup>
                         </Col>
                         <Col md={12} className='mt-2'>
                             <label className="form-label">Lifestyle</label>
@@ -304,7 +289,7 @@ export const MedicalHistory = ({ onSave }: MedicalHistoryProps) => {
 
 
                         <Col md={6} className='mt-2'>
-                            <Button className="w-100" variant="outline" disabled={false}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
                         </Col>

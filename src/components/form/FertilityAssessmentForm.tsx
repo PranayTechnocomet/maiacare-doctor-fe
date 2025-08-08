@@ -26,18 +26,18 @@ const initialFormData: FormData = {
     cycleLength: "",
     periodLength: "",
     date: "",
-    isCycleRegular: "",
-    menstrualIssues: "",
-    pregnancy: "",
+    isCycleRegular: "Regular",
+    menstrualIssues: "yes",
+    pregnancy: "yes",
     timeduration: "",
-    ectopicpregnancy: ""
+    ectopicpregnancy: "yes"
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
 
 const initialFormError: FormError = {};
 
-export const FertilityAssessmentForm = () => {
+export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFormFertilityData }: any) => {
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -75,6 +75,8 @@ export const FertilityAssessmentForm = () => {
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
             //   setShowModal(true);
+            setModalFormFertilityData((prev: any) => [...prev, formData]);
+            setShowFertilityAssessment(false);
             setFormError(initialFormError);
         }
     };
@@ -105,6 +107,7 @@ export const FertilityAssessmentForm = () => {
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Age"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>
@@ -121,6 +124,7 @@ export const FertilityAssessmentForm = () => {
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Cycle Length"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>
@@ -137,6 +141,7 @@ export const FertilityAssessmentForm = () => {
                                         onBlur={() => { }}
                                         required
                                         disabled={false}
+                                        placeholder="Select Period Length"
                                         options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
                                     />
                                 </Col>
@@ -162,8 +167,7 @@ export const FertilityAssessmentForm = () => {
                                     <RadioButtonGroup
                                         label="Is your cycle regular?"
                                         name="isCycleRegular"
-                                        value={formData.isCycleRegular}
-                                        defaultValue="Regular"
+                                        value={formData.isCycleRegular || 'Regular'}
                                         onChange={handleChange}
                                         required
                                         options={[
@@ -177,8 +181,7 @@ export const FertilityAssessmentForm = () => {
                                         label="Do you experience menstrual issues?"
                                         name="menstrualIssues"
                                         className="mt-2"
-                                        value={formData.menstrualIssues}
-                                        defaultValue="yes"
+                                        value={formData.menstrualIssues || 'yes'}
                                         onChange={handleChange}
                                         required
                                         options={[
@@ -202,8 +205,7 @@ export const FertilityAssessmentForm = () => {
                                 label="Have you been pregnant before?"
                                 name="pregnancy"
                                 className="mt-2"
-                                value={formData.pregnancy}
-                                defaultValue="yes"
+                                value={formData.pregnancy || 'yes'}
                                 onChange={handleChange}
                                 required
                                 options={[
@@ -233,8 +235,7 @@ export const FertilityAssessmentForm = () => {
                                 label="Any history of miscarriage or ectopic pregnancy?"
                                 name="ectopicpregnancy"
                                 className="mt-2"
-                                value={formData.ectopicpregnancy}
-                                defaultValue="yes"
+                                value={formData.ectopicpregnancy || 'yes'}
                                 onChange={handleChange}
                                 required
                                 options={[
@@ -249,7 +250,7 @@ export const FertilityAssessmentForm = () => {
                 {/* Submit buttons */}
                 <Row className="mt-4">
                     <Col md={6}>
-                        <Button className="w-100" variant="outline" type="button">
+                        <Button className="w-100" variant="outline" type="button" onClick={() => setShowFertilityAssessment(false)}>
                             Cancel
                         </Button>
                     </Col>

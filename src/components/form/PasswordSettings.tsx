@@ -205,7 +205,7 @@ function PasswordSettings() {
 
                     <a className="forgate-password">Forgot Password?</a>
 
-                    <Button variant="default" disabled={false} type="submit" className={`setting-button`}>
+                    <Button variant="default" disabled={false} type="submit" contentSize="medium">
                         Save Password
                     </Button>
                 </div>
