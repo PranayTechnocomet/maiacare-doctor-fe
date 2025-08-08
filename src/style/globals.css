@@ -107,13 +107,13 @@ body {
   border-radius: 8px !important;
 }
 
-.profile-active-btn {
+/* .profile-active-btn {
   background-color: #EBF5FF !important;
   color: var(--border-box-blue) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   padding: 4px 8px !important;
-}
+} */
 
 .no-caret::after {
   display: none !important;

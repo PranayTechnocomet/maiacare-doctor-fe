@@ -616,6 +616,15 @@
     font-style: bold;
     color: var(--color-heading);
 }
+
+.fertilitiy-assement-accodion-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    color: var(--color-brand);
+}
+
+
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {
@@ -662,13 +671,7 @@
         width: 100%;
     }
 
-    .fertilitiy-assement-accodion-title {
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 22px;
-        color: var(--color-brand);
-    }
-
+  
     .contact-details-heading {
         font-size: 17px;
     }

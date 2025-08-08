@@ -85,7 +85,7 @@
     background-color: #F5F7FA;
     border-radius: 8px;
     padding: 4px 8px;
-    color: #3F83F8;
+    color: var(--border-box-blue) !important;
 }
 
 .phisical-assessment-accordion-item {
@@ -132,18 +132,196 @@
     color: var(--color-radio-lable)
 }
 
+.accordion-item:not(:first-of-type) {
+    border: 1px solid var(--color-border);
+}
+
+.patient-list-count-box {
+    height: fit-content;
+    border: 1px solid var(--google-icon-border);
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--color-white);
+}
+
+.patient-list-count-box-countShow {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--color-heading);
+}
+
+/* .profile-active-btn {
+    background-color: #EBF5FF !important;
+    color: var(--border-box-blue) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 8px !important;
+  } */
+
+.patient-status-active {
+    background-color: #EBF5FF !important;
+    color: var(--border-box-blue) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 8px !important;
+}
+
+.patient-status-Deactivated {
+    background-color: #FDF2F2 !important;
+    color: #F05252 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 8px !important;
+}
+
+.patient-status-Discontinued {
+    background-color: #FDF2F8 !important;
+    color: #D61F69 !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    padding: 4px 8px !important;
+}
+
+.patient-report-box {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-icon-border);
+    border-radius: 12px;
+    padding: 16px;
+
+}
+
+.patient-report-box-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: var(--color-radio-lable);
+}
+
+.patient-report-box-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--color-sidebar-icon);
+}
+
+.patient-report-box-fileInfo {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--color-sidebar-icon);
+}
+
+.patient-treatment-box {
+    background-color: var(--color-white);
+    border: 1px solid #E29578;
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.patient-treatment-status-completed-box {
+    background-color: transparent;
+    border: none;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.patient-treatment-box-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--color-radio-lable);
+}
+
+.patient-treatment-box-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: var(--color-sidebar-icon);
+}
+
+.patient-treatment-status-Ongoing {
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #EBF5FF;
+    color: var(--border-box-blue);
+    height: fit-content;
+}
+
+.patient-treatment-status-Completed {
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #DEF7EC;
+    color: #057A55;
+    height: fit-content;
+}
+
+.patient-treatment-box-dot-btn {
+    border: 1px solid var(--color-icon-border);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.patient-treatment-box-subtitle-desc {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-radio-lable);
+    font-style: Medium;
+}
+
+.patient-treatment-box-subtitle-desc-fees {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    color: var(--login-font);
+
+}
+
+.patient-treatment-box-subtitle-desc-half-paid {
+    border: 1px solid #F4C47E;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #F4C47E;
+
+}
+
+.patient-treatment-box-subtitle-desc-paid {
+    border: 1px solid #057A55;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #057A55;
+
+}
 
 @media screen and (max-width: 575px) {
     .patient-profile-dot {
         width: 45px;
         height: 45px;
     }
+
     .patient-journey-up-icon {
         width: 45px;
         height: 45px;
-       
+
     }
-    
+
 }
 
 @media screen and (max-width: 425px) {
@@ -151,9 +329,10 @@
         width: 40px;
         height: 40px;
     }
+
     .patient-journey-up-icon {
         width: 40px;
         height: 40px;
-       
+
     }
 }
