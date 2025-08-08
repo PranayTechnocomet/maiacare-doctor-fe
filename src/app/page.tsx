@@ -1,9 +1,9 @@
 "use client";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { useDispatch } from "react-redux";
-import SiteLayout from "@/components/layout/SiteLayout";
+import Logo from "@/assets/images/maia.png";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -12,18 +12,16 @@ export default function Home() {
 
   return (
     <Container>
-      <Row>
-        <Col xs={6} className="bg-success">
-          <h1>Maicare</h1>
-         
-        </Col>
-        <Col xs={6} className="bg-danger">
-          <h1>Doctor</h1>
-        </Col>
-      </Row>
-      
-
-      {/* <SiteLayout collapsed={false} setCollapsed={() => {}} children={<div></div>}/> */}
+          <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <img src={Logo.src} alt="logo" />
+      </div>
     </Container>
   );
 }
