@@ -18,7 +18,10 @@
   --google-icon-border: #DDE1E8;
   --color-radio-lable: #3E4A57;
   --color-placeholder-input: #475569;
-  --or-font-color :#B0B4C1;
+  --or-font-color: #B0B4C1;
+  --border-box:#FF8A4C;
+  --border-box-blue:#3F83F8;
+  --border-box-red:#F05252;
 }
 
 body {
@@ -39,33 +42,102 @@ body {
   padding-left: 20px !important;
 }
 
-.setting-password-input .maiacare-input-field::placeholder {
-  color: var(--color-placeholder-input) !important;
+.passwored-btn-icon .input-email-login-data .maiacare-input-field-error {
+  width: 375px !important;
 }
 
-.passwored-btn-icon 
-.input-email-login-data .maiacare-input-field-error{
-  width: 375px !important; 
-}
-.passwored-btn-icon{
+.passwored-btn-icon {
   top: 72% !important;
 }
 
-.xyz .maiacare-input-field {
+/* .xyz .maiacare-input-field {
   padding-left: 35px;
-}
+} */
 
 .abc {
   position: absolute;
 }
-.pregnecy-image{
+
+.pregnecy-image {
   /* height:45.5em !important; */
   /* width: 105vh !important; */
   /* object-fit: contain !important; */
 
 }
-.main-pregnancy-img image{
+
+.main-pregnancy-img image {
   height: 100% !important;
   /* width: 105vh !important; */
 }
- 
+
+/* pankaj solanki start */
+
+.setting-password-input .maiacare-input-field::placeholder {
+  color: var(--color-placeholder-input) !important;
+}
+
+/* pankaj solanki end */
+
+
+
+.timeline-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.timeline-line {
+  width: 2px;
+  height: 40px;
+  left: 5px;
+  top: 12px;
+  background-color: #dee2e6;
+}
+
+.custom-shadow {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.profile-card-btn-status {
+  color: var(--border-box-blue) !important;
+  border-radius: 8px !important;
+}
+
+.profile-active-btn {
+  background-color: #EBF5FF !important;
+  color: var(--border-box-blue) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  padding: 4px 8px !important;
+}
+
+.no-caret::after {
+  display: none !important;
+}
+
+.custom-small-modal .modal-dialog {
+  max-width: 650px; /* adjust as needed */
+  width: 81%;
+}
+.box-border-orange{
+  border: 1px solid var(--border-box);
+  padding: 4px 10px !important;
+  color: var(--border-box);
+  border-radius: 8px !important;
+}
+.box-border-blue{
+  border: 1px solid var(--border-box-blue);
+  padding: 4px 10px !important;
+  color: var(--border-box-blue);
+  border-radius: 8px !important;
+}
+.box-border-red{
+  border: 1px solid var(--border-box-red);
+  padding: 4px 10px !important;
+  color: var(--border-box-red);
+  border-radius: 8px !important;
+}

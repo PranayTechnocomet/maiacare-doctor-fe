@@ -57,7 +57,7 @@ export function LoginForms() {
         } else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.password)) {
             errors.password = "At least one special character (e.g., !@#$%^&*)";
             isValid = false;
-        } 
+        }
 
         setFormError(errors);
         return isValid;
@@ -68,7 +68,7 @@ export function LoginForms() {
 
         if (validateForm()) {
             alert("Form Submitted");
-            router.push("/");
+            router.push("/selectprofile");
             setFormError(defaultFormError);
         }
     };
@@ -130,17 +130,17 @@ export function LoginForms() {
 
 
 export function ForgotPassword() {
-    
+
 
 
     const defaultFormValue = {
         email: '',
-        
+
     };
 
     const defaultFormError = {
         email: '',
-        
+
     };
 
     const [formData, setFormData] = useState(defaultFormValue);
@@ -165,12 +165,12 @@ export function ForgotPassword() {
             errors.email = "Invalid email format";
             isValid = false;
         }
-        else if(formData.email !== "admin@gmail.com"){
+        else if (formData.email !== "admin@gmail.com") {
             errors.email = "Invalid email";
             isValid = false;
         }
 
-        
+
 
         setFormError(errors);
         return isValid;
@@ -205,7 +205,7 @@ export function ForgotPassword() {
                 </InputFieldGroup>
 
 
-                
+
 
                 <Button className='login-button p-2 mt-4' type='submit'> Submit</Button>
             </form>
@@ -255,25 +255,25 @@ export function ResetPasswordScreen() {
             errors.newpassword = "New Password is required";
             isValid = false;
         } else if (formData.newpassword.length < 8) {
-                errors.newpassword = "Minimum 8 characters";
-                isValid = false;
-            }
-            else if (!/(?=.*[a-z])/.test(formData.newpassword)) {
-                errors.newpassword = "At least one lowercase letter";
-                isValid = false;
-            }
-            else if (!/(?=.*[A-Z])/.test(formData.newpassword)) {
-                errors.newpassword = "At least one uppercase letter";
-                isValid = false;
-            }
-            else if (!/(?=.*\d)/.test(formData.newpassword)) {
-                errors.newpassword = "At least one number";
-                isValid = false;
-            }
-            else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.newpassword)) {
-                errors.newpassword = "At least one special character (e.g., !@#$%^&*)";
-                isValid = false;
-            } else if(formData.newpassword !== formData.confirmpassword){
+            errors.newpassword = "Minimum 8 characters";
+            isValid = false;
+        }
+        else if (!/(?=.*[a-z])/.test(formData.newpassword)) {
+            errors.newpassword = "At least one lowercase letter";
+            isValid = false;
+        }
+        else if (!/(?=.*[A-Z])/.test(formData.newpassword)) {
+            errors.newpassword = "At least one uppercase letter";
+            isValid = false;
+        }
+        else if (!/(?=.*\d)/.test(formData.newpassword)) {
+            errors.newpassword = "At least one number";
+            isValid = false;
+        }
+        else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.newpassword)) {
+            errors.newpassword = "At least one special character (e.g., !@#$%^&*)";
+            isValid = false;
+        } else if (formData.newpassword !== formData.confirmpassword) {
             errors.confirmpassword = "New Password and Confirm Password do not match";
             isValid = false;
         }
@@ -294,7 +294,7 @@ export function ResetPasswordScreen() {
 
         <div>
             <form onSubmit={handleFormSubmit}>
-               
+
                 <div className='pt-3'>
                     <InputFieldGroup
                         type={newshowPassword ? 'text' : 'password'}
@@ -396,24 +396,37 @@ export function VerifyOtp() {
             setFormError(defaultFormError);
         }
     };
+ 
     return (
 
         <div>
             <form onSubmit={handleFormSubmit}>
                 <InputFieldGroup
-                    type="number"
+                    type="text"
                     value={formData.number}
                     name='number'
-                    onChange={handleChange}
+                    onChange={(e) => {
+                        const onlyDigits = e.target.value.replace(/\D/g, ''); // Remove non-digits
+                        setFormData({ ...formData, number: onlyDigits });
+                        setFormError({ ...formError, number: '' });
+                    }}
                     error={formError.number}
-                    label="Verification Code "
-                    placeholder="doctor@maiacare.com"
+                    label="Verification Code"
+                    placeholder="Enter 6-digit code"
                     required={true}
-                    className={`position-relative  input-email-login-data mt-4`}
+                    maxLength={6}
+                    className={`position-relative mt-4`}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                        const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+                        if (
+                            !/[0-9]/.test(e.key) &&
+                            !allowedKeys.includes(e.key)
+                        ) {
+                            e.preventDefault();
+                        }
+                    }}
+                />
 
-                >
-                    
-                </InputFieldGroup>
 
 
                 <Button className='login-button p-2 mt-4' type='submit'> Verify</Button>

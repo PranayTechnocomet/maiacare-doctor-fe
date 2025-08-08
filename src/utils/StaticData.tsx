@@ -1,4 +1,4 @@
-import { Patient } from "./types/interfaces";
+import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 
 export const tableResponse: Patient[] = [
   {
@@ -20,4 +20,37 @@ export const tableResponse: Patient[] = [
     status: "Deactivated",
   },
   // ...add more rows
+];
+
+
+export const MedicalHistoryData = {
+    id_medical_history:1,
+    medical_medications:"true",
+    medical_surgeries:"false",
+    medical_medical_condition:["PCOS", "Thyroid Disorder","Peanut Allergy","Lactose Intolerant"],
+    medical_family_medical_history:["Mother had endometriosis","Father had thyroid"],
+    medical_lifestyle:["Non-smoker","Occasional alcohol","Vegetarian diet"],
+    medical_exercise:"never",
+    medical_stress_level:"low",
+      
+}
+export const physicalAssessmentData: PhysicalAssessmentData[] = [
+  {
+    date: "Wed, 19 Feb 2024",
+    height: "5'4''(162cm)",
+    weight: "58 kg",
+    bmi: "22.1(Normal)",
+    bloodGroup: "O+",
+    bloodPressure: "120 mmHg",
+    heartRate: "72 bpm",
+  },
+  {
+    date: "mon, 22 Feb 2024",
+    height: "5'4''(162cm)",
+    weight: "58 kg",
+    bmi: "22.1(Normal)",
+    bloodGroup: "O+",
+    bloodPressure: "120 mmHg",
+    heartRate: "72 bpm",
+  },
 ];

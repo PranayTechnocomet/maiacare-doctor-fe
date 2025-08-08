@@ -1,4 +1,7 @@
 /* Base styles (default for desktops > 991px) */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tienne:wght@400;700;900&display=swap');
+
 * {
     font-family: 'Poppins', sans-serif;
 }
@@ -129,23 +132,168 @@
     font-weight: 500;
 }
 
-/* pankaj solanki start*/
-
-/* .setting-password-left-side {
-    background-color: var(--color-white);
-    border-radius: 16px;
-    padding: 16px;
-
-} */
-
-.setting-password-item {
+.login-button {
+    width: 100%;
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    font-weight: 600;
     border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    padding: 12px;
+    font-size: 16px;
 }
 
-.setting-password-item span {
+.login-title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    font-style: SemiBold;
+    color: var(--login-font);
+}
+
+.login-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    font-style: Regular;
+    line-height: 160%;
+    color: var(--font-subtitle);
+}
+
+.login-image-content {
+    font-weight: 600;
+    font-size: 44px;
+    color: var(--color-white);
+    line-height: 56px;
+}
+
+.select-profile {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--profile-text);
+}
+
+.select-profile-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--profile-subtitle);
+}
+
+.input-label-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--input-label-title);
+}
+
+.input-inner-text input {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--input-label-title);
+
+}
+
+.input-forrgot-password {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--input-forgot-password);
+    font-style: bold;
+}
+
+.login-google-button {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: medium;
+    color: var(--color-heading);
+
+}
+
+.login-dont {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+
+.login-image-contetnt {
+    font-weight: 600;
+    font-size: 44px;
+    color: var(--color-white);
+    line-height: 56px;
+    font-style: SemiBold;
+}
+
+.loginpage-or-btn {
+    font-size: 12px;
+    font-weight: 600;
+    font-style: SemiBold;
+    color: var(--or-font-color);
+}
+
+.select-profile-title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+    font-style: SemiBold;
+    color: var(--profile-text);
+}
+
+.select-profile-subtitle {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.doctor-profile-heading {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.doctor-profile-subheading {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--font-subtitle);
+}
+
+.contact-details-heading {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.contact-details-subheading {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+.medical-emergency-fimily-history{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-style: medium;
+    color: var(--color-radio-lable);
+}
+
+/* pankaj solanki start*/
+
+.setting-password-item-name {
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
@@ -160,105 +308,12 @@
     color: var(--color-radio-lable);
 }
 
-.custom-nav .nav-link {
-    background-color: transparent;
-    color: #8a8d93;
-}
-
-.custom-nav .nav-link .nav-icon {
-    color: #8a8d93;
-}
-
-/* Active styles */
-.custom-nav .nav-link.active {
-    background-color: #2b4360;
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active .nav-icon {
-    color: #ffffff;
-}
-
-.custom-nav .nav-link.active span {
-    color: #ffffff;
-}
-
-.maiacare-button .setting-button {
-    font-size: 10px !important;
-}
-
-/* .setting-password-item:hover {
-    background-color: var(--color-brand) !important;
-    color: var(--color-white);
-
-}
-
-.setting-password-item:hover svg path,
-.setting-password-item:hover span {
-    fill: var(--color-white);
-    color: var(--color-white);
-
-} */
-
+/* setting accordion */
 .accordion-title {
     color: var(--color-heading);
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
-   
-}
-
-/* setting accordion */
-
-.setting-accordion-item {
-    border: none !important;
-}
-
-.setting-accordion-item .accordion-button {
-    padding: 0 !important;
-}
-
-/* Remove background and shadow on accordion expansion  FOR ALL ACCORDION*/
-.accordion-button:not(.collapsed) {
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-
-.accordion-button:focus {
-    box-shadow: none !important;
-    outline: none !important;
-}
-
-.setting-accordion-item .accordion-button::after {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #F4F4F4;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--color-white);
-    /* optional */
-    padding: 0;
-
-    /* Center the arrow inside */
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Optional: rotate the arrow when open */
-.setting-accordion-item .accordion-button:not(.collapsed)::after {
-    transform: rotate(180deg);
-}
-
-/* Style for open (expanded) Accordion Item */
-.support-accordion-item.open {
-    border-bottom: 1px solid var(--color-iconborder, #DDE1E8) !important;
-    /* padding: 20px; */
-    border-radius: 0 0 10px 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px;
 
 }
 
@@ -308,8 +363,6 @@
     color: #1E293B;
 }
 
-
-
 .support-accordion-content {
     font-size: 14px;
     font-weight: 400;
@@ -325,7 +378,34 @@
     line-height: 22px;
     color: var(--color-brand);
 }
-
+.accordion-title-detail{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+.border-box-orange-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box);
+}
+.border-box-blue-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box-blue);
+}
+.border-box-red-font{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--border-box-red);
+}
 /* support accordion */
 
 .support-accordion-item {
@@ -335,6 +415,7 @@
 .support-accordion-item .accordion-button {
     padding: 0 !important;
 }
+
 .support-accordion-header {
     font-size: 16px;
     font-weight: 550;
@@ -361,16 +442,6 @@
 .support-accordion-item .accordion-button:not(.collapsed)::after {
     transform: rotate(180deg);
 }
-
-
-
-@media screen and (max-width: 425px) {
-    .your-device-box-subtitle {
-        width: 100%;
-    }
-}
-
-/* pankaj solanki end*/
 
 .login-button {
     width: 100%;
@@ -448,8 +519,9 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
-    font-style: Medium;
+    font-style: medium;
     color: var(--color-heading);
+
 }
 
 .login-dont {
@@ -459,33 +531,141 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
-.login-image-contetnt{
+
+.login-image-contetnt {
     font-weight: 600;
     font-size: 44px;
     color: var(--color-white);
     line-height: 56px;
     font-style: SemiBold;
 }
-.loginpage-or-btn{
+
+.loginpage-or-btn {
     font-size: 12px;
     font-weight: 600;
     font-style: SemiBold;
     color: var(--or-font-color);
 }
-.select-profile-title{
+
+.select-profile-title {
     font-weight: 600;
     font-size: 24px;
     line-height: 28px;
     font-style: SemiBold;
     color: var(--profile-text);
 }
-.select-profile-subtitle{
+
+.select-profile-subtitle {
     font-weight: 400;
     font-size: 14px;
     line-height: 18px;
     font-style: Regular;
     color: var(--color-sidebar-icon);
 }
+
+
+.doctor-profile-subheading {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--font-subtitle);
+}
+
+.contact-details-heading {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.contact-details-subheading {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-radio-lable);
+}
+
+.contact-details-emergency {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    font-style: SemiBold;
+    color: var(--font-subtitle);
+}
+
+.contact-details-emergency-subdetail {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
+.maiacare-modal .modal-custom-header {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-modal-heading);
+}
+
+@media screen and (max-width: 575px) {
+    .doctor-profile-heading {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .doctor-profile-subheading {
+        font-size: 14px;
+    }
+
+   
+}
+
+@media screen and (max-width: 425px) {
+    .your-device-box-subtitle {
+        width: 100%;
+    }
+
+    .fertilitiy-assement-accodion-title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 22px;
+        color: var(--color-brand);
+    }
+
+    /* pankaj solanki end*/
+
+
+}
+
+@media screen and (max-width: 1400px) {
+    .login-image-contetnt {
+        font-size: 40px;
+        line-height: 48px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .login-title {
+        font-size: 33px;
+        line-height: 40px;
+    }
+
+    .login-subtitle {
+        font-size: 17px;
+        line-height: 20px;
+    }
+
+    .login-image-contetnt {
+        font-size: 40px;
+        line-height: 51px;
+    }
+}
+
 /* Media Query: Tablets (991px and below) */
 @media (max-width: 991px) {
     .maiacare-input-field-label {
@@ -509,14 +689,49 @@
         font-size: 20px;
     }
 
-    .maiacare-button-large {
-        font-size: 16px;
+    .login-title {
+        font-size: 31px;
+        line-height: 35px;
     }
-    
+
+    .login-image-contetnt {
+        font-size: 38px;
+        line-height: 48px;
+    }
+
     .maiacare-button-medium {
         font-size: 14px;
     }
-    
+
+    .maiacare-button-small {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .login-title {
+        font-size: 29px;
+        line-height: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .login-image-contetnt {
+        font-size: 30px;
+        line-height: 46px;
+    }
+
+    .maiacare-button-large {
+        font-size: 16px;
+    }
+
+    .maiacare-button-medium {
+        font-size: 14px;
+    }
+
     .maiacare-button-small {
         font-size: 12px;
     }
@@ -544,15 +759,43 @@
     .modal-custom-header {
         font-size: 18px;
     }
+
+    .login-title {
+        font-size: 27px;
+        line-height: 30px;
+    }
+
+    .login-subtitle {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+}
+
+@media screen and (max-width: 426px) {
+    .login-title {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .login-subtitle {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
     .maiacare-button-large {
         font-size: 14px;
     }
-    
+
     .maiacare-button-medium {
         font-size: 12px;
     }
-    
+
     .maiacare-button-small {
         font-size: 10px;
     }
 }
+
+@media screen and (max-width: 376px) {}
+
+@media screen and (max-width: 320px) {}
