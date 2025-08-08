@@ -843,7 +843,7 @@ const ProfileBasicDetail = () => {
 
                 {/* Right Side - Patient Journey */}
                 <Col lg={4} md={12}>
-                    <div className='d-flex justify-content-between align-items-center mb-md-5 mb-sm-4 mb-3 px-1'>
+                    <div className='d-flex justify-content-between align-items-center mb-sm-4 mb-3 px-1'>
 
                         <h6 className='patient-journey-heading'>Patient Journey</h6>
                         <div className='patient-journey-up-icon'>
