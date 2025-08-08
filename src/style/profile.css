@@ -71,6 +71,14 @@ body {
   background-color: #fff;
   color: #3E4A57;
 }
+.camera-icon{
+  cursor: pointer;
+  top: 64%;
+  left: 60% !important;
+}
+.image-formate{
+  display: none;
+}
 /* .accordion-body{
   padding-top: 0px !important;
 }
