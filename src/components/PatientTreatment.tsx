@@ -10,7 +10,7 @@ const PatientTreatment = () => {
             <div className="mt-4">
                 <Row className="g-3">
                     {patientTreatmentData.map((item, index) => (
-                        <Col md={4} key={index}>
+                        <Col lg={4} md={6} key={index}>
                             <div className={item.status === "Ongoing" ? "patient-treatment-box" : "patient-treatment-status-completed-box"}>
                                 <div className="d-flex align-items-center justify-content-between">
                                     <div className="d-flex gap-3">
@@ -24,7 +24,8 @@ const PatientTreatment = () => {
 
                                 </div>
                                 <Row className="mt-1 g-3 ">
-                                    <Col md={6}>
+                                  
+                                    <Col sm={6} className="col-6 col-sm-6">
                                         <div>
                                             <p className="patient-treatment-box-subtitle m-0 mb-1">Start Date</p>
                                             <p className="patient-treatment-box-subtitle-desc m-0">{item.startDate}</p>
@@ -34,7 +35,7 @@ const PatientTreatment = () => {
                                             <p className="patient-treatment-box-subtitle-desc-fees m-0">{item.fees}</p>
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col sm={6} className="col-6 col-sm-6">
                                         <div>
                                             <p className="patient-treatment-box-subtitle m-0 mb-1">Expected End Date</p>
                                             <p className="patient-treatment-box-subtitle-desc m-0">{item.endDate}</p>
@@ -44,6 +45,7 @@ const PatientTreatment = () => {
                                             <span className={item.amountStatus === "Half Paid" ? "patient-treatment-box-subtitle-desc-half-paid m-0" : "patient-treatment-box-subtitle-desc-paid m-0"}>{item.amountStatus}</span>
                                         </div>
                                     </Col>
+                                    
                                 </Row>
                             </div>
                         </Col>

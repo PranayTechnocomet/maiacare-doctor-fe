@@ -63,7 +63,6 @@ export const ProfileCard: React.FC<ProfileProps> = ({
 
       <div >
         <Row>
-
           <Col xs="auto">
             <Image
               src={PrfileImage}
