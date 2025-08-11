@@ -571,6 +571,27 @@
     height: fit-content;
 }
 
+.add-patient-form-title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 100%;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.modal-custom-content {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--color-radio-lable);
+}
+
+@media screen and (max-width: 767px){
+    .add-patient-form-title {
+        font-size: 22px;
+    }
+}
+
 @media screen and (max-width: 575px) {
     .patient-report-box-title {
         font-size: 17px;
@@ -595,6 +616,10 @@
 
     .patient-treatment-box-subtitle-desc-fees {
         font-size: 18px;
+    }
+
+    .add-patient-form-title {
+        font-size: 20px;
     }
 }
 
@@ -623,6 +648,10 @@
     .patient-treatment-box-subtitle-desc-fees {
         font-size: 16px;
     }
+    .add-patient-form-title {
+        font-size: 18px;
+    }
+
 }
 
 /* pankaj solanki end */

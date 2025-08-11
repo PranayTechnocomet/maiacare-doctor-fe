@@ -7,14 +7,21 @@ import Image from "next/image";
 import dummyPatientImg from "../../assets/images/dummpy-patient-list-img.png"
 import InputSelect from "@/components/ui/InputSelect";
 import Button from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
 
+    const router = useRouter();
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
 
+    };
+    const handleAddPatient = () => {
+
+        // console.log("handleAddPatient");
+        router.push("/addpatient");
     };
 
     return (
@@ -66,7 +73,7 @@ export default function Page() {
                             />
                         </form>
                     </div>
-                    <Button variant="default" disabled={false} contentSize="large">
+                    <Button variant="default" disabled={false} contentSize="large" onClick={handleAddPatient} >
                         Add Patient
                     </Button>
                 </div>
