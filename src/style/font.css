@@ -421,8 +421,6 @@
 
 /* support accordion */
 
-
-
 .support-accordion-header {
     font-size: 16px;
     font-weight: 550;
@@ -430,6 +428,204 @@
     color: var(--color-radio-lable);
     padding: 0 10px;
 }
+
+.patient-report-box-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
+.patient-treatment-status-Ongoing {
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #EBF5FF;
+    color: #3F83F8;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    height: fit-content;
+}
+
+.patient-treatment-status-Completed {
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #DEF7EC;
+    color: #057A55;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    height: fit-content;
+}
+
+.patient-report-box-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+
+.patient-report-box-fileInfo {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.patient-treatment-box-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
+.patient-treatment-box-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    font-style: SemiBold;
+    color: var(--color-sidebar-icon);
+
+}
+
+.patient-treatment-box-subtitle-desc {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+
+.patient-treatment-box-subtitle-desc-fees {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-modal-heading);
+}
+
+.patient-treatment-box-subtitle-desc-half-paid {
+    border: 1px solid #F4C47E;
+    color: var(--border-box);
+    border-radius: 8px;
+    padding: 4px 8px;
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+}
+
+.patient-treatment-box-subtitle-desc-paid {
+    border: 1px solid #057A55;
+    color: #057A55;
+    border-radius: 8px;
+    padding: 4px 8px;
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+}
+
+.patient-journey-badge-success {
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #DEF7EC;
+    color: #057A55;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    height: fit-content;
+}
+
+.patient-journey-badge-pending {
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #FFF8F1;
+    color: var(--border-box);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    height: fit-content;
+}
+
+.patient-journey-badge-InProgress {
+    border-radius: 8px;
+    padding: 4px 8px;
+    background-color: var(--color-bg);
+    color: var(--border-box-blue);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    height: fit-content;
+}
+
+@media screen and (max-width: 575px) {
+    .patient-report-box-title {
+        font-size: 17px;
+    }
+
+    .patient-report-box-subtitle {
+        font-size: 15px;
+
+    }
+
+    .patient-report-box-fileInfo {
+        font-size: 13px;
+    }
+
+    .patient-treatment-box-title {
+        font-size: 17px;
+    }
+
+    .patient-treatment-box-subtitle-desc {
+        font-size: 15px;
+    }
+
+    .patient-treatment-box-subtitle-desc-fees {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .patient-report-box-title {
+        font-size: 16px;
+    }
+
+    .patient-report-box-subtitle {
+        font-size: 14px;
+
+    }
+
+    .patient-report-box-fileInfo {
+        font-size: 12px;
+    }
+
+    .patient-treatment-box-title {
+        font-size: 16px;
+    }
+
+    .patient-treatment-box-subtitle-desc {
+        font-size: 14px;
+    }
+
+    .patient-treatment-box-subtitle-desc-fees {
+        font-size: 16px;
+    }
+}
+
+/* pankaj solanki end */
 
 .login-button {
     width: 100%;
