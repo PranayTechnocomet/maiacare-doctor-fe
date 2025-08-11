@@ -34,3 +34,23 @@ export interface PhysicalAssessmentData {
   heartRate: string;
 }
 
+export interface AddPatientFormData {
+   // Personal details
+   name: string;
+   patientId: string;
+   gender: string;
+   date: string;
+   age: string;
+   phone: string;
+   email: string;
+   address: string;
+   pincode: string;
+   city: string;
+   state: string;
+
+   // Emergency contact
+   emergencyContactName: string;
+   emergencyContactPhone: string;
+   emergencyContactRelation: string;
+}
+

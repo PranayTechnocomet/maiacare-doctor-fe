@@ -574,9 +574,6 @@ const ProfileBasicDetail = () => {
                                     )
                                 })}
 
-
-
-
                             </Accordion>
                         </div>
                     )}
