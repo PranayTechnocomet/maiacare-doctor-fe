@@ -118,6 +118,19 @@
     border-radius: 8px;
 }
 
+.service-details-box{
+    border: 1px solid var(--color-icon-border);
+    border-radius: 16px 16px 0 0 ;
+    overflow: hidden;
+    
+    /* padding: 18px 23px; */
+}
+
+.service-details-box-header{
+    background-color: #F5F7FA;
+    padding: 10px 24px;
+}
+
 @media screen and (max-width: 575px) {
     .patient-profile-dot {
         width: 45px;

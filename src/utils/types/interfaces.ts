@@ -36,6 +36,8 @@ export interface PhysicalAssessmentData {
 
 export interface AddPatientFormData {
    // Personal details
+   
+   
    name: string;
    patientId: string;
    gender: string;

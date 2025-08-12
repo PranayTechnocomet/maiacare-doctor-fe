@@ -585,29 +585,135 @@
     line-height: 20px;
     color: var(--color-radio-lable);
 }
-.phisical-assessment-accordion-showData-box-title{
+
+.phisical-assessment-accordion-showData-box-title {
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
     font-style: Medium;
     color: var(--color-sidebar-icon);
 }
-.phisical-assessment-accordion-showData-box-subtitle{
+
+.phisical-assessment-accordion-showData-box-subtitle {
     font-size: 16px;
     font-weight: 500;
     line-height: 20px;
     font-style: Medium;
     color: var(--color-radio-lable);
 }
-.phisical-assessment-accordion-title-showData{
+
+.phisical-assessment-accordion-title-showData {
     font-size: 20px;
     font-weight: 500;
     line-height: 20px;
     font-style: Medium;
     color: var(--color-radio-lable);
 }
-@media screen and (max-width: 767px){
+
+@media screen and (max-width: 767px) {
+
+    .invoice-main-header {
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 40px;
+        font-style: Medium;
+        color: var(--color-modal-heading);
+
+    }
+
+    .invoice-no-title {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        font-style: Medium;
+        color: var(--color-invoice-no-title);
+    }
+
+    .invoice-no-title-subtitle {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        font-style: Medium;
+        color: var(--color-radio-lable);
+    }
+
+    .appointment-details-invoice-header {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 22px;
+        font-style: SemiBold;
+        color: var(--color-heading);
+
+    }
+
+    .appointment-details-invoice-title {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 18px;
+        font-style: SemiBold;
+        color: var(--color-sidebar-icon);
+    }
+
+    .appointment-details-invoice-subtitle {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+        font-style: Medium;
+        color: var(--color-radio-lable);
+
+    }
+
+    .invoice-doctor-name {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 28px;
+        font-style: SemiBold;
+        color: var(--color-radio-lable);
+    }
+
+    .invoice-doctor-contact-detail {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 22px;
+        font-style: Regular;
+        color: var(--color-sidebar-icon);
+    }
+
+    .service-details-box-header-content {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 22px;
+        font-style: SemiBold;
+        color: var(--color-radio-lable);
+    }
+
+    .service-details-box-content {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 24px;
+        font-style: SemiBold;
+        color: var(--color-radio-lable);
+    }
+}
+
+@media screen and (max-width: 1111px) {
+    .appointment-details-invoice-subtitle {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .appointment-details-invoice-subtitle {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
     .add-patient-form-title {
+        font-size: 22px;
+    }
+
+    .invoice-doctor-name {
         font-size: 22px;
     }
 }
@@ -641,6 +747,28 @@
     .add-patient-form-title {
         font-size: 20px;
     }
+
+    .invoice-no-title {
+        font-size: 17px;
+
+    }
+
+    .invoice-no-title-subtitle {
+        font-size: 17px;
+
+    }
+
+    .appointment-details-invoice-header {
+        font-size: 17px;
+    }
+
+    .invoice-doctor-name {
+        font-size: 19px;
+    }
+
+    .invoice-doctor-contact-detail {
+        font-size: 15px;
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -668,10 +796,32 @@
     .patient-treatment-box-subtitle-desc-fees {
         font-size: 16px;
     }
+
     .add-patient-form-title {
         font-size: 18px;
     }
 
+    .invoice-no-title {
+        font-size: 16px;
+
+    }
+
+    .invoice-no-title-subtitle {
+        font-size: 16px;
+
+    }
+
+    .appointment-details-invoice-header {
+        font-size: 16px;
+    }
+
+    .invoice-doctor-name {
+        font-size: 18px;
+    }
+
+    .invoice-doctor-contact-detail {
+        font-size: 14px;
+    }
 }
 
 /* pankaj solanki end */

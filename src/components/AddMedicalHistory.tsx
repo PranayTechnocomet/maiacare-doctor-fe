@@ -11,6 +11,7 @@ import ProfileBasicDetail from './ProfileBasicDetail';
 import PartnerDetail from './PartnerDetail';
 import PatientReport from './PatientReport';
 import PatientTreatment from './PatientTreatment';
+import PatientPaymentHistory from './PatientPaymentHistory';
 
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
@@ -68,9 +69,10 @@ const AddMedicalHistory = () => {
       key: "payment history",
       label: "Payment History",
       content: (
-        <ContentContainer className="mt-5">
-          <h1>Payment History Content</h1>
-        </ContentContainer>
+        <div>
+          <PatientPaymentHistory />
+        </div>
+
       ),
     },
     {
