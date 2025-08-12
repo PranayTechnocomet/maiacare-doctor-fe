@@ -24,6 +24,8 @@ import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'
 type FormError = Partial<Record<keyof AddPatientFormData, string>>;
 
 const initialFormData: AddPatientFormData = {
+
+
     name: "",
     patientId: "",
     gender: "male", // default to male if you want
@@ -96,6 +98,10 @@ function AddPatientForm() {
 
     const validateForm = (data: AddPatientFormData): FormError => {
         const errors: FormError = {};
+
+        // if(!previewImage){
+        //     errors.previewImage = "Profile image is required";
+        // }
 
         if (!data.name.trim()) errors.name = "Name is required";
         if (!data.patientId.trim()) errors.patientId = "Patient ID is required";
@@ -249,6 +255,9 @@ function AddPatientForm() {
                                         Allowed Jpg, png of max size 5MB
                                     </div>
                                 </div>
+
+
+
                             </div>
 
                         </Col>
