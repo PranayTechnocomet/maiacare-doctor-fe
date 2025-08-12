@@ -54,6 +54,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
         if (!data.pregnancy) errors.pregnancy = "Pregnancy is required";
         if (!data.timeduration) errors.timeduration = "Duration is required";
         if (!data.ectopicpregnancy) errors.ectopicpregnancy = "Ectopic pregnancy is required";
+        
 
         return errors;
     };

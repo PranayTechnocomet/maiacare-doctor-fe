@@ -585,7 +585,27 @@
     line-height: 20px;
     color: var(--color-radio-lable);
 }
-
+.phisical-assessment-accordion-showData-box-title{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    font-style: Medium;
+    color: var(--color-sidebar-icon);
+}
+.phisical-assessment-accordion-showData-box-subtitle{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+.phisical-assessment-accordion-title-showData{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
 @media screen and (max-width: 767px){
     .add-patient-form-title {
         font-size: 22px;

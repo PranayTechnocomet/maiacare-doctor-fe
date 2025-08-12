@@ -3,12 +3,32 @@ import Button from './ui/Button'
 import { IoAdd } from 'react-icons/io5'
 import Modal from './ui/Modal';
 import { AddPartnerDetailsForm } from './form/AddPartnerDetailsForm';
+import { Accordion, Col, Dropdown, Row } from 'react-bootstrap';
+import Image from 'next/image';
+import PartnerImage from "../assets/images/Profile_Images.png";
+import ContentContainer from './ui/ContentContainer';
+import ProfileGender from '../assets/images/Profile_Gender.png'
+import ProfileId from '../assets/images/Profile_Id.png'
+import ProfileAge from '../assets/images/Profile_Age.png'
+import ProfileDob from '../assets/images/Profile_Calendar.png'
+import Phone from '../assets/images/Phone.png'
+import Email from '../assets/images/Email.png'
+import EditIcon from '../assets/images/EditIcon.png'
+import { physicalAssessmentData } from '@/utils/StaticData';
+import hiegthImg from '../assets/images/Physical-assement-hiegth-icons.png'
+import weightImg from '../assets/images/Physical-assement-weight-icons.png'
+import BMIIMG from '../assets/images/Physical-assement-bmi.png'
+import BloodGroup from '../assets/images/Physical-assement-blod-group-icons.png'
+import BloodPressure from '../assets/images/Physical-assement-presure-icons.png'
+import HeartRate from '../assets/images/Physical-assement-heart-rate-icons.png'
+import MedicalHistory from './form/MedicalHistory';
+
 
 export default function PartnerDetail() {
     const [addPartner, setAddPartner] = useState(false);
     return (
         <>
-            <div className='d-flex align-items-center justify-content-center vh-100'>
+            {/* <div className='d-flex align-items-center justify-content-center vh-100'>
                 <div className="text-center">
                     <svg width="86" height="79" viewBox="0 0 86 79" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M34.387 52.6988L31.187 56.6988C29.587 58.5988 26.687 58.5988 25.087 56.6988L21.887 52.6988L23.4869 44.8984H32.7869L34.387 52.6988Z" fill="#F3F4F6" />
@@ -43,11 +63,281 @@ export default function PartnerDetail() {
                         size="lg"
                     >
                         <div className="mb-0">
-                            <AddPartnerDetailsForm />
+                            <AddPartnerDetailsForm   setAddPartner={setAddPartner} />
                         </div>
                     </Modal>
                 </div>
-            </div>
+            </div> */}
+
+
+
+
+            {/* After Contetn After Display Content  */}
+
+            <Row className="mt-4">
+                <Col md={7}>
+                    <ContentContainer>
+                        {/* <div className='d-flex align-items-center'>
+                            <div>
+                                <Image src={PartnerImage} alt="PartnerImage" height={90} width={90} />
+                            </div>
+                            <div>
+                                <p className='p-3'>Raj Desai</p>
+                            </div>
+                        </div> */}
+
+                        <div className='d-flex justify-content-between align-items-start '>
+                            <div className='d-flex align-items-start align-items-sm-center gap-3 flex-column flex-sm-row'>
+                                <div>
+                                    <Image
+                                        src={PartnerImage}
+                                        alt="PartnerImage"
+                                        width={90}
+                                        height={90}
+                                        className="rounded-3"
+                                    />
+                                </div>
+                                <div>
+                                    <div className="d-flex align-items-center mb-1">
+                                        <h6 className="mb-0 doctor-profile-heading me-2">Raj Desai</h6>
+                                    </div>
+
+                                    <div className='pt-sm-1 p-0 d-flex gap-2 '>
+                                        <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={16} height={16} className="me-1" /> Male</span>
+                                        <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={16} height={16} className="me-1" /> 31 Years</span>
+                                    </div>
+                                    <div className='pt-sm-1 p-0 d-flex gap-2 '>
+                                        <span className='doctor-profile-subheading'><Image src={Phone} alt="contact number" width={16} height={16} className="me-1" /> +91 12345 67890</span>
+                                        <span className='doctor-profile-subheading'><Image src={Email} alt="email" width={18} height={16} className="me-1" /> riyadharang@miacare.com</span>
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </ContentContainer>
+                    <ContentContainer className="mt-4">
+                        {[
+                            {
+                                familyMedicalHistory: "Diabetes",
+                                medical_surgeries: "true",
+                                medical_medical_condition: ["Diabetes", "Hypertension"],
+                                lifestyle: ["Vegetarian", "Non-smoker"],
+                                exercise: "Never",
+                                stress: "High",
+                            },
+                        ].map((item: any, index: number) => {
+                            return (
+                                <div key={index} className="medical-history-details text-start">
+                                    <div>
+                                        {/* <Button onClick={() => setShowModal(true)} className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
+                                            <Image src={EditIcon} alt="Edit" /> Edit
+                                        </Button> */}
+                                        {/* <p>{item.familyMedicalHistory}</p> */}
+                                    </div>
+                                    <div className='d-flex justify-content-between align-items-center'>
+                                        <p className="contact-details-heading mb-3">Medical History</p>
+                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
+                                            <Image src={EditIcon} alt="Edit" /> Edit
+                                        </Button>
+                                    </div>
+
+                                    <Row>
+                                        {/* Current Medications */}
+                                        <Col lg={5} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Current Medications</h6>
+                                                <p className="mb-2 accordion-title-detail">
+                                                    {item.medicationcontent || 'No medical conditions recorded'}
+                                                </p>
+                                            </div>
+                                        </Col>
+                                        {/* Surgeries */}
+                                        <Col lg={7} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Surgeries</h6>
+                                                <p className="mb-2 accordion-title-detail">
+                                                    {item.medical_surgeries === 'true' ? 'Yes' : 'No'}
+                                                </p>
+                                            </div>
+                                        </Col>
+                                        {/* Medical Conditions */}
+                                        <Col lg={12} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Medical condition / Allergies</h6>
+                                                {item.medical_medical_condition?.length > 0 ? (
+                                                    item.medical_medical_condition.map((cond: string, i: number) => (
+                                                        <p key={i} className="mb-2 d-inline-block border-box-orange-font box-border-orange me-2">
+                                                            {cond.trim()}
+                                                        </p>
+                                                    ))
+                                                ) : (
+                                                    <p className="mb-2 d-inline-block border-box-orange-font box-border-orange">
+                                                        No medical conditions recorded
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </Col>
+                                        {/* Family History */}
+                                        <Col lg={12} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Family History</h6>
+                                                {item.familyMedicalHistory?.length > 0 ? (
+                                                    <ul className="mb-2">
+                                                        {typeof item.familyMedicalHistory === 'string' ? (
+                                                            <li className="medical-emergency-fimily-history">
+                                                                {item.familyMedicalHistory.trim()}
+                                                            </li>
+                                                        ) : (
+                                                            item.familyMedicalHistory.map((fh: string, i: number) => (
+                                                                <li key={i} className="medical-emergency-fimily-history">
+                                                                    {fh.trim()}
+                                                                </li>
+                                                            ))
+                                                        )}
+                                                    </ul>
+                                                ) : (
+                                                    <p className="mb-2 d-block">
+                                                        No medical conditions recorded
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </Col>
+                                        {/* Lifestyle */}
+                                        <Col lg={12} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Lifestyle</h6>
+                                                {item.lifestyle?.length > 0 ? (
+                                                    item.lifestyle.map((lifestyle: string, i: number) => (
+                                                        <p key={i} className="mb-2 d-inline-block border-box-blue-font box-border-blue me-2">
+                                                            {lifestyle.trim()}
+                                                        </p>
+                                                    ))
+                                                ) : (
+                                                    <p className="mb-2 d-inline-block border-box-blue-font box-border-blue">
+                                                        No medical conditions recorded
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </Col>
+                                        {/* Physical Exercise */}
+                                        <Col lg={5} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Physical Exercise</h6>
+                                                <p className="mb-2 border-box-orange-font box-border-orange d-inline-block">
+                                                    {item.exercise || 'Not specified'}
+                                                </p>
+                                            </div>
+                                        </Col>
+                                        {/* Stress Level */}
+                                        <Col lg={7} md={12}>
+                                            <div className="mb-3">
+                                                <h6 className="mb-1 contact-details-emergency">Stress Level</h6>
+                                                <p className="mb-2 d-inline-block border-box-red-font box-border-red">
+                                                    {item.stress || 'Not specified'}
+                                                </p>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </div>
+                            );
+                        })}
+                    </ContentContainer>
+                </Col>
+                <Col md={5}>
+                    <ContentContainer>
+                        <p className="contact-details-heading">Physical Assessment </p>
+                        <Accordion defaultActiveKey="0">
+                                {/* <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small" >
+                                    <IoAdd /> Add new
+                                </Button> */}
+                                {physicalAssessmentData?.map((item: any, index: any): any => {
+                                    return (
+                                        <Accordion.Item eventKey={index.toString()} className='phisical-assessment-accordion-item mb-3' key={index}>
+                                            <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                                <div className='phisical-assessment-accordion-title-showData'>
+                                                    {item.date}
+                                                </div>
+                                            </Accordion.Header>
+                                            <Accordion.Body>
+                                                <Row className='g-3'>
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={hiegthImg} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>Height</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={weightImg} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>Weight</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={BMIIMG} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>BMI</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={BloodGroup} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>Blood Group</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bloodGroup}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={BloodPressure} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>Blood Pressure</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                    <Col sm={6}>
+                                                        <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
+                                                            <Image src={HeartRate} alt="Age" width={42} height={42} />
+                                                            <div className='d-flex flex-column gap-1'>
+                                                                <span className='phisical-assessment-accordion-showData-box-title'>Hearth Rate</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate}</span>
+                                                            </div>
+                                                        </div>
+                                                    </Col>
+                                                </Row>
+                                            </Accordion.Body>
+                                        </Accordion.Item>
+                                    )
+
+                                })}
+
+                            </Accordion>
+                    </ContentContainer>
+                    <ContentContainer className='mt-3'>
+                        <p className="contact-details-heading">Fertility Assessment</p>
+
+                        
+                    </ContentContainer>
+                </Col>
+
+
+            </Row>
         </>
     )
 }

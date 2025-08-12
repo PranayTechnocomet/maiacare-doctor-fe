@@ -43,8 +43,9 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
 
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
-
-        if (!data.medication.trim()) errors.medication = "Medication is required";
+        if(data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
+        // if(data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
+        // if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
         // if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
