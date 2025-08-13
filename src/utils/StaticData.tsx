@@ -146,3 +146,58 @@ export const patientTreatmentData = [
   }
 
 ]
+
+
+export const partnerDetailData = {
+  profile: {
+    basic_detail_name: "Raj Desai",
+    basic_detail_gender: "Male",
+    basic_detail_age: "31",
+    basic_detail_phone: "12345 67890",
+    basic_detail_email: "riyadharang@miacare.com",
+
+  },
+  medicalHistory: {
+    medication:"yes",
+
+    medicationContent:"This is Medical Condition",
+    surgeriesContent:"This is Medical Condition",
+    currentMedication: "CureAll 5000, HealMax Plus",
+    surgeries: "No",
+    MedicalconditionAllergies: ["PCOS", "Thyroid Disorder", "Peanut Allergy", "Lactose Intolerant"],
+    familyMedicalHistory: ["Mother had endometriosis", "Father had thyroid"],
+    lifestyle: ["Non-smoker", "Occasional alcohol", "Vegetarian diet"],
+    exercise: "never",
+    stress: "low",
+  },
+  PhysicalAssessmentData: [
+    {
+      date: "Wed, 19 Feb 2024",
+      height: "5'4''(162cm)",
+      weight: "58 kg",
+      bmi: "22.1(Normal)",
+      bloodGroup: "O+",
+      bloodPressure: "120/80 mmHg",
+      heartRate: "72 bpm",
+    },
+    {
+      date: "Mon, 22 Feb 2024",
+      height: "5'4''(162cm)",
+      weight: "58 kg",
+      bmi: "22.1(Normal)",
+      bloodGroup: "O+",
+      bloodPressure: "120/80 mmHg",
+      heartRate: "72 bpm",
+    },
+  ],
+  fertilityAssessment:  {
+    semenAnalysis: "Yes | Healthy Semen",
+    semenAnalysisContent:"This Is Seema Analys Content",  
+    fertilityIssues: "No",
+    fertilityIssuesContent:"This is Fertility Issue Content",
+    fertilityTreatment: "No",
+    fertilityTreatmentContent:"This Is fertilityTreatmentContent Contet",
+    surgeries: "No",
+    surgeriesContent:"This Is surgeriesContent Content"
+    }
+}

@@ -137,6 +137,18 @@ export default function Page() {
   }, []);
 
   const [showModal, setShowModal] = useState(false);
+  const [tempShowData, setTempShowData] = useState(
+    {
+      name: "test name",
+      doctor: "test doc",
+      date: "",
+      gender: "male",
+      description: "test desc",
+      phone: "9898989898",
+      startTime: "",
+      endTime: "",
+    }
+  )
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
@@ -184,6 +196,8 @@ export default function Page() {
       setShowModal(true);
       setFormError(initialFormError);
     }
+    setTempShowData(formData);
+    setFormData(initialFormData);
   };
 
   const handleClose = () => {
@@ -374,6 +388,17 @@ export default function Page() {
           </Button>
         </div>
       </ContentContainer>
+
+<ContentContainer>
+     
+              <div className="my-4 bg-warning">
+                <div>{tempShowData.name}</div>
+                <div>{tempShowData.description}</div>
+                <div>{tempShowData.phone}</div>
+                <div>{tempShowData.startTime}</div>
+                <div>{tempShowData.endTime}</div>
+              </div>
+</ContentContainer>
 
       <CustomTabs
         activeKey={activeTab}
