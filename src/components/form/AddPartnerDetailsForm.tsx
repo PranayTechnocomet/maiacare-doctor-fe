@@ -11,12 +11,10 @@ import { PhoneNumberInput } from '../ui/PhoneNumberInput';
 import Button from '../ui/Button';
 import Simpleeditpro from '../../assets/images/Simpleeditpro.png';
 import cameraicon from '../../assets/images/cameraicon.png';
-import { log } from 'console';
+import { log, profile } from 'console';
 // import '../../style/PartnerDetails.css'
 
-export function AddPartnerDetailsForm( {setAddPartner}: {setAddPartner: (value: boolean) => void}) {
-    const [key, setKey] = useState<string>('basic');
-
+export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void }) {
     const [activeTab, setActiveTab] = useState<string>("basic");
 
 
@@ -27,7 +25,7 @@ export function AddPartnerDetailsForm( {setAddPartner}: {setAddPartner: (value: 
             label: "Basic Details",
             content: (
                 <div>
-                    <BasicDetailsForm setAddPartner={setAddPartner} setActiveTab={setActiveTab}/>
+                    <BasicDetailsForm setAddPartner={setAddPartner} setActiveTab={setActiveTab} setShowData={setShowData} />
                 </div>
             ),
         },
@@ -35,14 +33,14 @@ export function AddPartnerDetailsForm( {setAddPartner}: {setAddPartner: (value: 
             key: "medical history",
             label: "Medical History",
             content: (
-                <MedicalHistoryForm  setAddPartner={setAddPartner} setActiveTab={setActiveTab}/>
+                <MedicalHistoryForm setAddPartner={setAddPartner} setActiveTab={setActiveTab} setShowData={setShowData} />
             ),
         },
         {
             key: "physical & fertility assessment",
             label: "Physical & Fertility Assessment",
             content: (
-                <PhysicalFertilityAssessmentForm setAddPartner={setAddPartner} />
+                <PhysicalFertilityAssessmentForm setShowContent={setShowContent} setAddPartner={setAddPartner} setShowPartnerDetail={setShowPartnerDetail} setShowData={setShowData} />
             ),
         },
 
@@ -53,10 +51,10 @@ export function AddPartnerDetailsForm( {setAddPartner}: {setAddPartner: (value: 
             <div className="">
 
                 <CustomTabs
+                    tabOptions={tabOptions}
+                    className="mb-3"
                     activeKey={activeTab}
                     setActiveKey={setActiveTab}
-                    tabOptions={tabOptions}
-
                 />
             </div>
             {/* </main> */}
@@ -65,27 +63,30 @@ export function AddPartnerDetailsForm( {setAddPartner}: {setAddPartner: (value: 
 }
 
 
-type FormData = {
-    basic_detail_name: string;
-    basic_detail_gender: string;
-    basic_detail_age: string;
-    basic_detail_phone: string;
-    basic_detail_email: string;
-};
 
-type FormError = Partial<Record<keyof FormData, string>>;
 
-const initialFormData: FormData = {
-    basic_detail_name: "",
-    basic_detail_gender: "male",
-    basic_detail_age: "",
-    basic_detail_phone: "",
-    basic_detail_email: ""
+export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void }) {
 
-};
-const initialFormError: FormError = {};
+    const initialFormError: FormError = {};
+    type FormData = {
+        basic_detail_name: string;
+        basic_detail_gender: string;
+        basic_detail_age: string;
+        basic_detail_phone: string;
+        basic_detail_email: string;
+    };
 
-export function BasicDetailsForm({setAddPartner, setActiveTab}: {setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void}) {
+    type FormError = Partial<Record<keyof FormData, string>>;
+
+    const initialFormData: FormData = {
+        basic_detail_name: "",
+        basic_detail_gender: "male",
+        basic_detail_age: "",
+        basic_detail_phone: "",
+        basic_detail_email: ""
+
+    };
+
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
     // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +96,9 @@ export function BasicDetailsForm({setAddPartner, setActiveTab}: {setAddPartner: 
     //         [name]: value,
     //     }));
     // };
+
+    console.log("formData", formData);
+
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -150,220 +154,229 @@ export function BasicDetailsForm({setAddPartner, setActiveTab}: {setAddPartner: 
             setFormError(initialFormError);
             setActiveTab("medical history");
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
         }
+        setShowData((prev: any) => ({ ...prev, profile: { ...prev.profile, ...formData } }));
     };
     return (
         <>
-            
-                <form onSubmit={handleSubmit}>
-                    <Row className="g-3">
-                        <Col md={12}>
-                            <div className="d-flex align-items-center gap-4  mt-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
-                                <div className="profile-wrapper position-relative" >
-                                    <Image
-                                        src={profileImage || Simpleeditpro}
-                                        alt="Profile"
-                                        className="object-fit-cover rounded-2"
-                                        width={100}
-                                        height={100}
 
-                                    />
-                                    <div
-                                        className="camera-icon position-absolute bottom-0 end-0 cursor-pointer"
-                                        onClick={handleImageClick}
-                                    >
-                                        <Image src={cameraicon} alt="Upload" width={48} height={48} />
-                                    </div>
-                                    <input
-                                        type="file"
-                                        accept="image/png, image/jpeg"
-                                        ref={fileInputRef}
-                                        className="image-formate"
-                                        onChange={handleFileChange}
-                                    />
-                                </div>
+            <form onSubmit={handleSubmit}>
+                <Row className="g-3">
+                    <Col md={12}>
+                        <div className="d-flex align-items-center gap-4  mt-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
+                            <div className="profile-wrapper position-relative" >
+                                <Image
+                                    src={profileImage || Simpleeditpro}
+                                    alt="Profile"
+                                    className="object-fit-cover rounded-2"
+                                    width={100}
+                                    height={100}
 
-                                <div>
-                                    <div className="accordion-title-detail">Add Profile Picture</div>
-                                    <div className="select-profile-subtitle">
-                                        Allowed Jpg, png of max size 5MB
-                                    </div>
+                                />
+                                <div
+                                    className="camera-icon position-absolute bottom-0 end-0 cursor-pointer"
+                                    onClick={handleImageClick}
+                                >
+                                    <Image src={cameraicon} alt="Upload" width={48} height={48} />
                                 </div>
+                                <input
+                                    type="file"
+                                    accept="image/png, image/jpeg"
+                                    ref={fileInputRef}
+                                    className="image-formate"
+                                    onChange={handleFileChange}
+                                />
                             </div>
 
-                        </Col>
-                        <Col md={12}>
+                            <div>
+                                <div className="accordion-title-detail">Add Profile Picture</div>
+                                <div className="select-profile-subtitle">
+                                    Allowed Jpg, png of max size 5MB
+                                </div>
+                            </div>
+                        </div>
 
-                            <InputFieldGroup
-                                label="Name"
-                                name="basic_detail_name"
-                                type="text"
-                                value={formData.basic_detail_name}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                placeholder="Enter name"
-                                required={true}
-                                error={formError.basic_detail_name}
-                                className="position-relative "
-                            ></InputFieldGroup>
-                        </Col>
-                        <Col md={6}>
-                            <RadioButtonGroup
-                                label="Gender"
-                                name="basic_detail_gender"
-                                value={formData.basic_detail_gender || ''}
-                                // defaultValue="male"
-                                onChange={(e) => handleChange(e)}
-                                required
-                                options={[
-                                    { label: "Male", value: "male" },
-                                    { label: "Female", value: "female" },
-                                ]}
-                            />
-                        </Col>
+                    </Col>
+                    <Col md={12}>
 
-                        <Col md={6}>
-                            <InputSelect
-                                label="age"
-                                name="basic_detail_age"
-                                value={formData.basic_detail_age}
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                                required={true}
-                                disabled={false}
-                                error={formError.basic_detail_age}
-                                options={[
-                                    { id: "1", value: "1", label: "1" },
-                                    { id: "2", value: "2", label: "2" },
-                                    { id: "3", value: "3", label: "3" },
-                                    { id: "4", value: "4", label: "4" },
-                                    { id: "5", value: "5", label: "5" },
-                                    { id: "6", value: "6", label: "6" },
-                                    { id: "7", value: "7", label: "7" },
-                                    { id: "8", value: "8", label: "8" },
-                                    { id: "9", value: "9", label: "9" },
-                                    { id: "10", value: "10", label: "10" },
-                                    { id: "11", value: "11", label: "11" },
-                                    { id: "12", value: "12", label: "12" },
-                                    { id: "13", value: "13", label: "13" },
-                                    { id: "14", value: "14", label: "14" },
-                                    { id: "15", value: "15", label: "15" },
-                                    { id: "16", value: "16", label: "16" },
-                                    { id: "17", value: "17", label: "17" },
-                                    { id: "18", value: "18", label: "18" },
-                                    { id: "19", value: "19", label: "19" },
-                                    { id: "20", value: "20", label: "20" },
-                                    { id: "21", value: "21", label: "21" },
-                                    { id: "22", value: "22", label: "22" },
-                                    { id: "23", value: "23", label: "23" },
-                                    { id: "24", value: "24", label: "24" },
-                                    { id: "25", value: "25", label: "25" },
-                                ]}
-                            />
-                        </Col>
+                        <InputFieldGroup
+                            label="Name"
+                            name="basic_detail_name"
+                            type="text"
+                            value={formData.basic_detail_name}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter name"
+                            required={true}
+                            error={formError.basic_detail_name}
+                            className="position-relative "
+                        ></InputFieldGroup>
+                    </Col>
+                    <Col md={6}>
+                        <RadioButtonGroup
+                            label="Gender"
+                            name="basic_detail_gender"
+                            value={formData.basic_detail_gender || ''}
+                            // defaultValue="male"
+                            onChange={(e) => handleChange(e)}
+                            required
+                            options={[
+                                { label: "Male", value: "male" },
+                                { label: "Female", value: "female" },
+                            ]}
+                        />
+                    </Col>
 
-
-                        <Col md={6}>
-                            <PhoneNumberInput
-                                label="Contact Number"
-                                value={formData.basic_detail_phone}
-                                onChange={(phone: any) => {
-                                    // setFormData((prev) => ({ ...prev, phone }));
-                                    // setFormError((prev) => ({ ...prev, phone: "" }));
-                                    handleChange({
-                                        target: { name: "basic_detail_phone", value: phone },
-                                    } as React.ChangeEvent<HTMLInputElement>);
-                                }}
-                                placeholder='(000) 000-0000'
-                                required
-
-                                error={formError.basic_detail_phone}
-                            />
-                        </Col>
+                    <Col md={6}>
+                        <InputSelect
+                            label="age"
+                            name="basic_detail_age"
+                            value={formData.basic_detail_age}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={formError.basic_detail_age}
+                            options={[
+                                { id: "1", value: "1", label: "1" },
+                                { id: "2", value: "2", label: "2" },
+                                { id: "3", value: "3", label: "3" },
+                                { id: "4", value: "4", label: "4" },
+                                { id: "5", value: "5", label: "5" },
+                                { id: "6", value: "6", label: "6" },
+                                { id: "7", value: "7", label: "7" },
+                                { id: "8", value: "8", label: "8" },
+                                { id: "9", value: "9", label: "9" },
+                                { id: "10", value: "10", label: "10" },
+                                { id: "11", value: "11", label: "11" },
+                                { id: "12", value: "12", label: "12" },
+                                { id: "13", value: "13", label: "13" },
+                                { id: "14", value: "14", label: "14" },
+                                { id: "15", value: "15", label: "15" },
+                                { id: "16", value: "16", label: "16" },
+                                { id: "17", value: "17", label: "17" },
+                                { id: "18", value: "18", label: "18" },
+                                { id: "19", value: "19", label: "19" },
+                                { id: "20", value: "20", label: "20" },
+                                { id: "21", value: "21", label: "21" },
+                                { id: "22", value: "22", label: "22" },
+                                { id: "23", value: "23", label: "23" },
+                                { id: "24", value: "24", label: "24" },
+                                { id: "25", value: "25", label: "25" },
+                            ]}
+                        />
+                    </Col>
 
 
-                        <Col md={6}>
-                            <InputFieldGroup
-                                label="Email ID"
-                                name="basic_detail_email"
-                                type="email"
-                                value={formData.basic_detail_email}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                placeholder="Enter Email ID"
-                                required={true}
+                    <Col md={6}>
+                        <PhoneNumberInput
+                            label="Contact Number"
+                            value={formData.basic_detail_phone}
+                            onChange={(phone: any) => {
+                                // setFormData((prev) => ({ ...prev, phone }));
+                                // setFormError((prev) => ({ ...prev, phone: "" }));
+                                handleChange({
+                                    target: { name: "basic_detail_phone", value: phone },
+                                } as React.ChangeEvent<HTMLInputElement>);
+                            }}
+                            placeholder='(000) 000-0000'
+                            required
 
-                                error={formError.basic_detail_email}
-                                className="position-relative "
-                            ></InputFieldGroup>
-                        </Col>
-                        <Col md={6} >
-                            <Button className="w-100" variant="outline" disabled={false}  onClick={()=>setAddPartner(false)}>
-                                Cancel
-                            </Button>
-                        </Col>
-                        <Col md={6} >
-                            <Button className="w-100" variant="default" disabled={false} type="submit">
-                                Save
-                            </Button>
-                        </Col>
-                    </Row>
-                </form>
-            
+                            error={formError.basic_detail_phone}
+                        />
+                    </Col>
+
+
+                    <Col md={6}>
+                        <InputFieldGroup
+                            label="Email ID"
+                            name="basic_detail_email"
+                            type="email"
+                            value={formData.basic_detail_email}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter Email ID"
+                            required={true}
+
+                            error={formError.basic_detail_email}
+                            className="position-relative "
+                        ></InputFieldGroup>
+                    </Col>
+                    <Col md={6} >
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                            Cancel
+                        </Button>
+                    </Col>
+                    <Col md={6} >
+                        <Button className="w-100" variant="default" disabled={false} type="submit">
+                            Save
+                        </Button>
+                    </Col>
+                </Row>
+            </form>
+
         </>
     )
 }
 
-type MedicalHistoryFormData = {
-    medication: string;
-    surgeries: string;
-    surgeriesContent: string;
-    medicalCondition: string;
-    familyMedicalHistory: string;
-    lifestyle: string;
-    stress: string;
-    exercise: string;
-    medicationcontent: string;
-    surgeriescontent: string;
-};
 
-type MedicalHistoryFormError = Partial<Record<keyof MedicalHistoryFormData, string>>;
+export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void }) {
 
-const initialMedicalHistoryFormData: MedicalHistoryFormData = {
-    medication: "yes",
-    surgeries: "yes",
-    surgeriesContent: "",
-    medicalCondition: "",
-    familyMedicalHistory: "",
-    lifestyle: "",
-    stress: "low",
-    exercise: "never",
-    medicationcontent: "",
-    surgeriescontent: "",
-};
+    type FormData = {
+        medication: string;
+        surgeries: string;
+        surgeriesContent: string;
+        medicalCondition: string;
+        familyMedicalHistory: string;
+        lifestyle: string;
+        stress: string;
+        exercise: string;
+        medicationcontent: string;
+        surgeriescontent: string;
+    };
 
-const MedicalHistoryFormError: MedicalHistoryFormError = {};
+    type FormError = Partial<Record<keyof FormData, string>>;
 
-export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void}) {
-    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryFormData>(initialMedicalHistoryFormData);
-    const [medicalHistoryFormError, setMedicalHistoryFormError] = useState<MedicalHistoryFormError>(MedicalHistoryFormError);
+    const initialFormData: FormData = {
+        medication: "yes",
+        surgeries: "yes",
+        surgeriesContent: "",
+        medicalCondition: "",
+        familyMedicalHistory: "",
+        lifestyle: "",
+        stress: "low",
+        exercise: "never",
+        medicationcontent: "",
+        surgeriescontent: "",
+    };
 
-    const validateForm = (data: MedicalHistoryFormData): MedicalHistoryFormError => {
-        const errors: MedicalHistoryFormError = {};
 
-        if(data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
-        if(data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
+
+    const MedicalHistoryFormError: FormError = {};
+
+
+
+    const [FormData, setFormData] = useState<FormData>(initialFormData);
+    const [medicalHistoryFormError, setMedicalHistoryFormError] = useState<FormError>(MedicalHistoryFormError);
+    console.log("FormData1111111111111111112", FormData);
+
+
+
+    const validateForm = (data: FormData): FormError => {
+        const errors: FormError = {};
+
+        if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
+        if (data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
         if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         // if (!data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
-        
+
 
 
         return errors;
@@ -372,7 +385,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setMedicalHistoryFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
         setMedicalHistoryFormError((prev) => ({ ...prev, [name]: "" }));
 
     };
@@ -380,17 +393,22 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
-        const errors = validateForm(medicalHistoryFormData);
+        const errors = validateForm(FormData);
         setMedicalHistoryFormError(errors);
 
         if (Object.keys(errors).length === 0) {
             // setShowModal(false);
             setMedicalHistoryFormError(medicalHistoryFormError);
             // setNedicalHistoryFormData((prev: any) => [...prev, formData]);
-            console.log("formData", medicalHistoryFormData);
+            console.log("medicalHistoryFormData", FormData);
+
+            console.log("formData", FormData);
             setActiveTab("physical & fertility assessment");
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // window.scrollTo({ top: 0, behavior: 'smooth' });
+
         }
+        setShowData((prev: any) => ({ ...prev, medicalHistory: { ...prev.medicalHistory, ...FormData } }));
+
     };
 
 
@@ -430,7 +448,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                             <RadioButtonGroup
                                 label="Are you currently taking any medications?"
                                 name="medication"
-                                value={medicalHistoryFormData.medication || 'yes'}
+                                value={FormData.medication || 'yes'}
                                 onChange={(e) => handleChange(e)}
                                 required={true}
                                 error={medicalHistoryFormError.medication}
@@ -440,10 +458,10 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                                 ]}
                             />
 
-                            {medicalHistoryFormData.medication === 'yes' && (
+                            {FormData.medication === 'yes' && (
                                 <InputFieldGroup
                                     type="text"
-                                    value={medicalHistoryFormData.medicationcontent}
+                                    value={FormData.medicationcontent}
                                     name='medicationcontent'
                                     onChange={handleChange}
                                     error={medicalHistoryFormError.medicationcontent}
@@ -474,7 +492,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                                 <RadioButtonGroup
                                     label="Have you had any surgeries?"
                                     name="surgeries"
-                                    value={medicalHistoryFormData.surgeries || 'yes'}
+                                    value={FormData.surgeries || 'yes'}
                                     onChange={(e) => handleChange(e)}
                                     required={true}
                                     error={medicalHistoryFormError.surgeries}
@@ -484,10 +502,10 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                                     ]}
                                 />
 
-                                {medicalHistoryFormData.surgeries === 'yes' && (
+                                {FormData.surgeries === 'yes' && (
                                     <InputFieldGroup
                                         type="text"
-                                        value={medicalHistoryFormData.surgeriescontent}
+                                        value={FormData.surgeriescontent}
                                         name='surgeriescontent'
                                         onChange={handleChange}
                                         error={medicalHistoryFormError.surgeriescontent}
@@ -506,7 +524,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                                 label="Do you have any medical condition? "
                                 name="medicalCondition"
                                 type="text"
-                                value={medicalHistoryFormData.medicalCondition}
+                                value={FormData.medicalCondition}
 
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);
@@ -522,7 +540,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                             <InputFieldGroup
                                 label="Family Medical History "
                                 name="familyMedicalHistory"
-                                value={medicalHistoryFormData.familyMedicalHistory}
+                                value={FormData.familyMedicalHistory}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);
                                 }}
@@ -537,7 +555,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                             <InputSelect
                                 label="Lifestyle"
                                 name="lifestyle"
-                                value={medicalHistoryFormData.lifestyle}
+                                value={FormData.lifestyle}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     handleChange(e);
                                 }}
@@ -546,12 +564,12 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                                 disabled={false}
                                 error={medicalHistoryFormError.lifestyle}
                                 options={[
-                                    { id: "1", value: "1", label: "PCOS" },
-                                    { id: "2", value: "2", label: "Thyroid Disorder" },
-                                    { id: "3", value: "3", label: "Diabetes" },
-                                    { id: "4", value: "4", label: "Obstructive Sleep Apnea" },
-                                    { id: "5", value: "5", label: "Chronic Stress" },
-                                    { id: "6", value: "6", label: "Chronic Stress" },
+                                    { id: "1", value: "PCOS", label: "PCOS" },
+                                    { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
+                                    { id: "3", value: "Diabetes", label: "Diabetes" },
+                                    { id: "4", value: "Obstructive Sleep Apnea", label: "Obstructive Sleep Apnea" },
+                                    { id: "5", value: "Chronic Stress", label: "Chronic Stress" },
+                                    { id: "6", value: "Chronic Stress", label: "Chronic Stress" },
                                 ]}
                             />
                             {/* <label className="form-label">Lifestyle</label>
@@ -618,7 +636,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                             <RadioButtonGroup
                                 label="How often do you exercise?"
                                 name="exercise"
-                                value={medicalHistoryFormData.exercise || 'never'}
+                                value={FormData.exercise || 'never'}
                                 onChange={(e) => handleChange(e)}
                                 required={true}
                                 error={medicalHistoryFormError.exercise}
@@ -633,7 +651,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
                             <RadioButtonGroup
                                 label="How would you rate your stress levels?"
                                 name="stress"
-                                value={medicalHistoryFormData.stress || 'low'}
+                                value={FormData.stress || 'low'}
                                 onChange={(e) => handleChange(e)}
                                 required={true}
                                 error={medicalHistoryFormError.stress}
@@ -647,7 +665,7 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
 
 
                         <Col md={6} >
-                            <Button className="w-100" variant="outline" disabled={false} onClick={()=>setAddPartner(false)}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
                                 Cancel
                             </Button>
                         </Col>
@@ -664,61 +682,66 @@ export function MedicalHistoryForm({setAddPartner, setActiveTab}: {setAddPartner
 }
 
 
-type PhysicalFertilityAssessmentFormData = {
-    semenAnalysis: string;
-    semenAnalysisContent: string;
-    fertilityIssues: string;
-    fertilityIssuesContent: string;
-    fertilityTreatment: string;
-    fertilityTreatmentContent: string;
-    surgeries: string;
-    surgeriesContent: string;
-    height: string;
-    weight: string;
-    bmi: string;
-    bloodGroup: string;
-    systolic: string;
-    diastolic: string;
-    heartRate: string;
-};
 
-type PhysicalFertilityAssessmentFormError = Partial<Record<keyof PhysicalFertilityAssessmentFormData, string>>;
-const initialPhysicalFertilityAssessmentFormData: PhysicalFertilityAssessmentFormData = {
 
-    semenAnalysis: "yes",
-    semenAnalysisContent: "",
-    fertilityIssues: "no",
-    fertilityIssuesContent: "",
-    fertilityTreatment: "no",
-    fertilityTreatmentContent: "",
-    surgeries: "no",
-    surgeriesContent: "",
-    height: "",
-    weight: "",
-    bmi: "",
-    bloodGroup: "",
-    systolic: "",
-    diastolic: "",
-    heartRate: "",
-};
-const initialPhysicalFertilityAssessmentFormError: PhysicalFertilityAssessmentFormError = {};
+export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerDetail, setShowContent, setShowData }: { setAddPartner: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowData: (value: any) => void }) {
 
-export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner: (value: boolean) => void}) {
+    type FormData = {
+        semenAnalysis: string;
+        semenAnalysisContent: string;
+        fertilityIssues: string;
+        fertilityIssuesContent: string;
+        fertilityTreatment: string;
+        fertilityTreatmentContent: string;
+        surgeries: string;
+        surgeriesContent: string;
+        height: string;
+        weight: string;
+        bmi: string;
+        bloodGroup: string;
+        systolic: string;
+        diastolic: string;
+        heartRate: string;
+    };
 
-    const [formData, setFormData] = useState<PhysicalFertilityAssessmentFormData>(initialPhysicalFertilityAssessmentFormData);
-    const [formError, setFormError] = useState<PhysicalFertilityAssessmentFormError>(initialPhysicalFertilityAssessmentFormError);
+    type FormError = Partial<Record<keyof FormData, string>>;
+    const initialFormData: FormData = {
+        semenAnalysis: "yes",
+        semenAnalysisContent: "",
+        fertilityIssues: "no",
+        fertilityIssuesContent: "",
+        fertilityTreatment: "no",
+        fertilityTreatmentContent: "",
+        surgeries: "no",
+        surgeriesContent: "",
+        height: "",
+        weight: "",
+        bmi: "",
+        bloodGroup: "",
+        systolic: "",
+        diastolic: "",
+        heartRate: "",
+    };
+    const initialFormError: FormError = {};
 
-    const validateForm = (data: PhysicalFertilityAssessmentFormData): PhysicalFertilityAssessmentFormError => {
-        const errors: PhysicalFertilityAssessmentFormError = {};
+    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    console.log("formData1111111111", formData);
+    console.log("formError", formError);
+
+
+
+    const validateForm = (data: FormData): FormError => {
+        const errors: FormError = {};
 
         if (!data.semenAnalysis.trim()) errors.semenAnalysis = "Seminal Analysis is required";
-        if(data.semenAnalysis === 'yes' && !data.semenAnalysisContent.trim()) errors.semenAnalysisContent = "Seminal Analysis Content is required";
+        if (data.semenAnalysis === 'yes' && !data.semenAnalysisContent.trim()) errors.semenAnalysisContent = "Seminal Analysis Content is required";
         if (!data.fertilityIssues.trim()) errors.fertilityIssues = "Fertility Issues is required";
-        if(data.fertilityIssues === 'yes' && !data.fertilityIssuesContent.trim()) errors.fertilityIssuesContent = "Fertility Issues Content is required";
+        if (data.fertilityIssues === 'yes' && !data.fertilityIssuesContent.trim()) errors.fertilityIssuesContent = "Fertility Issues Content is required";
         if (!data.fertilityTreatment.trim()) errors.fertilityTreatment = "Fertility Treatment is required";
-        if(data.fertilityTreatment === 'yes' && !data.fertilityTreatmentContent.trim()) errors.fertilityTreatmentContent = "Fertility Treatment Content is required";
+        if (data.fertilityTreatment === 'yes' && !data.fertilityTreatmentContent.trim()) errors.fertilityTreatmentContent = "Fertility Treatment Content is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
-        if(data.surgeries === 'yes' && !data.surgeriesContent.trim()) errors.surgeriesContent = "Surgeries Content is required";
+        if (data.surgeries === 'yes' && !data.surgeriesContent.trim()) errors.surgeriesContent = "Surgeries Content is required";
 
         if (!data.height.trim()) errors.height = "Height is required";
         if (!data.weight.trim()) errors.weight = "Weight is required";
@@ -729,16 +752,28 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
         if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
         return errors;
     };
+    
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        console.log("testsstttttttttttttttttt");
+        
         e.preventDefault();
         const errors = validateForm(formData);
+        console.log("Form submitted", formData);
         setFormError(errors);
 
         if (Object.keys(errors).length === 0) {
-            console.log("Form submitted successfully", formData);
             // Handle form submission
+            setFormError(initialFormError);
             setAddPartner(false);
+            setShowPartnerDetail(false);
+            setShowContent(true);
+
         }
+        setShowData((prev: any) => ({...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData]}));
+        // setShowData((prev: any) => ({...prev, fertilityAssessment: {...prev.fertilityAssessment, ...formData}}));
+        setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
+
+        
     };
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -750,7 +785,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
     };
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form >
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3 mt-3">
                         <Accordion.Header>
@@ -767,7 +802,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         name="height"
                                         type="text"
                                         className='setting-password-input'
-                                           value={formData.height}
+                                        value={formData.height}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                             handleChange(e);
 
@@ -777,7 +812,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         required={true}
                                         disabled={false}
                                         readOnly={false}
-                                       error={formError.height}
+                                        error={formError.height}
                                     />
                                 </Col>
                                 <Col md={6}>
@@ -787,7 +822,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         name="weight"
                                         type="text"
                                         className='setting-password-input'
-                                           value={formData.weight}
+                                        value={formData.weight}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                             handleChange(e);
 
@@ -797,7 +832,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         required={true}
                                         disabled={false}
                                         readOnly={false}
-                                       error={formError.weight}
+                                        error={formError.weight}
                                     />
                                 </Col>
 
@@ -808,7 +843,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         name="bmi"
                                         type="text"
                                         className='setting-password-input'
-                                           value={formData.bmi}
+                                        value={formData.bmi}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                             handleChange(e);
 
@@ -818,21 +853,21 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         required={true}
                                         disabled={false}
                                         readOnly={false}
-                                       error={formError.bmi}
+                                        error={formError.bmi}
                                     />
                                 </Col>
                                 <Col md={6}>
                                     <InputSelect
                                         label="Blood Group"
                                         name="bloodGroup"
-                                           value={formData.bloodGroup}
+                                        value={formData.bloodGroup}
                                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                             handleChange(e);
                                         }}
                                         onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
                                         required={true}
                                         disabled={false}
-                                           error={formError.bloodGroup}
+                                        error={formError.bloodGroup}
                                         placeholder="Select Blood Group"
                                         // helperText="Select doctor"
                                         options={[
@@ -859,12 +894,12 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         required={true}
                                         disabled={false}
                                         readOnly={false}
-                                           value={formData.systolic}
+                                        value={formData.systolic}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                             handleChange(e);
 
                                         }}
-                                       error={formError.systolic}
+                                        error={formError.systolic}
                                     />
                                 </Col>
 
@@ -908,7 +943,7 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                                         required={true}
                                         disabled={false}
                                         readOnly={false}
-                                       error={formError.heartRate}
+                                        error={formError.heartRate}
                                     />
                                 </Col>
                                 {/* <Col md={6}>
@@ -1072,12 +1107,13 @@ export function PhysicalFertilityAssessmentForm({setAddPartner}: {setAddPartner:
                 </Accordion>
                 <Row className='g-2'>
                     <Col md={6}  >
-                        <Button className="w-100" variant="outline" disabled={false} onClick={()=>setAddPartner(false)}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
                             Cancel
                         </Button>
                     </Col>
                     <Col md={6} >
-                        <Button className="w-100" variant="default" disabled={false} type="submit">
+                        <Button className="w-100" variant="default"  disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
+                         >
                             Save
                         </Button>
                     </Col>

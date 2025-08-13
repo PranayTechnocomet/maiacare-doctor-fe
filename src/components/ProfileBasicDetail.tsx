@@ -823,7 +823,7 @@ const ProfileBasicDetail = () => {
                         </div>
                     </Modal>
                     <Modal
-                        className="medical-history-modal custom-small-modal"
+                        className=""
                         show={showModal}
                         onHide={() => setShowModal(false)}
                         header="Add Medical History"

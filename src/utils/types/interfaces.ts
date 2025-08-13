@@ -30,8 +30,31 @@ export interface PhysicalAssessmentData {
   weight: string;
   bmi: string;
   bloodGroup: string;
-  bloodPressure : string;
+  bloodPressure: string;
   heartRate: string;
+}
+
+export interface FertilityAssessmentData {
+  date: string;
+  semenAnalysis: string;
+  semenAnalysisContent?: string;
+  fertilityIssues: string;
+  fertilityIssuesContent?: string;
+  fertilityTreatment: string;
+  fertilityTreatmentContent?: string;
+  surgeries: string;
+  surgeriesContent?: string;
+}
+
+export interface FertilityAssessmentHistory {
+  semenAnalysis: string;
+  semenAnalysisContent?: string;
+  fertilityIssues: string;
+  fertilityIssuesContent?: string;
+  fertilityTreatment: string;
+  fertilityTreatmentContent?: string;
+  surgeries: string;
+  surgeriesContent?: string;
 }
 
 export interface AddPatientFormData {
