@@ -702,6 +702,26 @@
     color: var(--color-radio-lable);
 }
 
+.patient-journey-box-title {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-heading);
+}
+
+.patient-journey-box-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.or-custom-slash{
+    font-size: 40px;
+    color: var(--color-radio-lable);
+}
 
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
@@ -723,17 +743,21 @@
     .invoice-doctor-name {
         font-size: 22px;
     }
+
     .service-details-box-header-content {
         font-size: 17px;
 
     }
+
     .service-details-box-content-data {
         font-size: 18px;
     }
+
     .service-details-box-content-data-total {
         font-size: 22px;
-        
+
     }
+
 }
 
 @media screen and (max-width: 575px) {
@@ -805,9 +829,14 @@
     .service-details-box-content-data-total {
         font-size: 22px;
     }
+
     .invoice-main-header {
         font-size: 34px;
-    
+
+    }
+
+    .forgate-password {
+        font-size: 15px;
     }
 }
 
@@ -876,14 +905,30 @@
         font-size: 14px;
 
     }
+
     .service-details-box-content-data-total {
         font-size: 20px;
     }
+
     .invoice-main-header {
         font-size: 30px;
-    
+
     }
-  
+
+    .forgate-password {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .patient-journey-box-title {
+        text-align: center;
+    }
+
+    .patient-journey-box-subtitle {
+        text-align: center;
+    }
+
 }
 
 /* pankaj solanki end */
