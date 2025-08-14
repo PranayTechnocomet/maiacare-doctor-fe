@@ -18,11 +18,11 @@ const PatientPaymentInvoice = () => {
 
             <ContentContainer className="mt-3">
                 <div className="d-flex ">
-                    <div className="d-flex flex-column me-3">
+                    <div className="d-flex flex-column gap-2 me-3">
                         <p className="invoice-no-title m-0">Invoice No:</p>
                         <p className="invoice-no-title m-0">Date:</p>
                     </div>
-                    <div className="d-flex flex-column">
+                    <div className="d-flex flex-column gap-2">
                         <p className="invoice-no-title-subtitle m-0">INV-12345</p>
                         <p className="invoice-no-title-subtitle m-0">8 Jul, 2024</p>
                     </div>
@@ -87,24 +87,41 @@ const PatientPaymentInvoice = () => {
 
             </Row>
 
-            <ContentContainer>
+            <ContentContainer className="mt-3">
                 <p className="appointment-details-invoice-header">Service Details</p>
 
                 <div className="service-details-box">
-                    <div className="service-details-box-header d-flex justify-content-between">
+                    <div className="service-details-box-header px-3 py-2 d-flex justify-content-between">
                         <p className="service-details-box-header-content m-0">Description</p>
                         <p className="service-details-box-header-content m-0">Total Price</p>
                     </div>
-                    <div className="d-flex justify-content-between p-4">
-                        <div>
-                            <p className="service-details-box-content">IVF Treatment</p>
-                            <p className="service-details-box-content">₹ 500</p>
+                    <div className="px-3">
+
+                        <div className="service-details-box-content d-flex flex-column gap-3">
+                            <div className="d-flex justify-content-between">
+                                <p className="service-details-box-content-data m-0">IVF Treatment</p>
+                                <p className="service-details-box-content-data m-0">₹ 500</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p className="service-details-box-content-data m-0">Fertility Tests</p>
+                                <p className="service-details-box-content-data m-0">₹ 1500</p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="service-details-box-content">Fertility Testst</p>
-                            <p className="service-details-box-content">₹ 1500</p>
+
+                        <div className="service-details-box-content-hr"></div>
+
+                        <div className="service-details-box-content d-flex flex-column gap-3">
+                            <div className="d-flex justify-content-between">
+                                <p className="service-details-box-content-data m-0">Commission(5%)</p>
+                                <p className="service-details-box-content-data m-0">₹ 320</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <p className="modal-custom-header m-0">Grand Total</p>
+                                <p className="service-details-box-content-data-total m-0">₹ 320</p>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </ContentContainer>
         </>
