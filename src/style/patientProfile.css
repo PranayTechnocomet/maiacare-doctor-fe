@@ -32,6 +32,12 @@
     padding: 16px;
 }
 
+.patient-journey-box-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .patient-journey-dot {
     top: 25%;
 }
@@ -166,4 +172,14 @@
 
     }
 
+}
+
+
+@media screen and (max-width: 375px) {
+    .patient-journey-box-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
 }

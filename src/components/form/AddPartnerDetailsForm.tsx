@@ -974,7 +974,6 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                         </Accordion.Body>
                     </Accordion.Item>
 
-
                     <Accordion.Item eventKey="1" className="fertilitiy-assement-accodion-item mb-3">
                         <Accordion.Header>
                             <div className="fertilitiy-assement-accodion-title">

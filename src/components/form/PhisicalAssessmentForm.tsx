@@ -205,8 +205,8 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center " : "or-custom-width d-flex justify-content-center align-items-end "}>
-                        <span className="fs-1">/</span>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-end mt-4"}>
+                        <span className="or-custom-slash">/</span>
                     </Col>
 
                     <Col md={5} className="input-custom-width">

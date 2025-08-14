@@ -11,7 +11,7 @@ const SettingsDevices = () => {
         <>
             <p className="settings-accordion-subtitle my-4">Where you're signed in</p>
             <div className="d-flex flex-column gap-4 ">
-                <div className="your-device-box d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-start align-items-lg-center">
+                <div className="your-device-box d-flex flex-column flex-sm-row justify-content-between gap-3 align-items-start align-items-sm-center">
                     <div className="d-flex justify-content-center align-items-center gap-3 ">
                         <Image src={deviceWindowsImg} width={70} height={70} alt="device-window" />
                         <div>
@@ -19,7 +19,7 @@ const SettingsDevices = () => {
                             <p className="your-device-box-subtitle mb-0 ">Google Chrome | Mumbai Logged In</p>
                         </div>
                     </div>
-                    <div className="d-flex flex-row flex-lg-column gap-2">
+                    <div className="d-flex flex-row flex-sm-column gap-2">
                         <Button variant="default" contentSize="small">
                             <FiLogOut /> Log Out
                         </Button>
@@ -31,7 +31,7 @@ const SettingsDevices = () => {
 
                 </div>
 
-                <div className="your-device-box d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-start align-items-lg-center">
+                <div className="your-device-box d-flex flex-column flex-sm-row justify-content-between gap-3 align-items-start align-items-sm-center">
                     <div className="d-flex justify-content-center align-items-center gap-3 ">
                         <Image src={deviceMobileImg} width={70} height={70} alt="device-window" />
                         <div>
@@ -39,7 +39,7 @@ const SettingsDevices = () => {
                             <p className="your-device-box-subtitle mb-0">Google Chrome | Mumbai Logged In</p>
                         </div>
                     </div>
-                    <div className="d-flex flex-row flex-lg-column gap-2">
+                    <div className="d-flex flex-row flex-sm-column gap-2">
                         <Button variant="default" contentSize="small" >
                             <FiLogOut /> Log Out
                         </Button>

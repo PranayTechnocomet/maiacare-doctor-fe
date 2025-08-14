@@ -127,7 +127,7 @@ const ProfileBasicDetail = () => {
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [nedicalHistoryFormData, setNedicalHistoryFormData] = useState<any>([]);
-    const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]);  
+    const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]);
 
 
     console.log("nedicalHistoryFormData", nedicalHistoryFormData);
@@ -272,7 +272,7 @@ const ProfileBasicDetail = () => {
 
                         </Accordion>
                     </div> */}
-                    
+
                     {modalFormPhisicalData.length === 0 ? (
                         <div className="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81" fill="none">
@@ -433,8 +433,8 @@ const ProfileBasicDetail = () => {
                     ) : (
                         <div>
                             <Accordion defaultActiveKey="0">
-                                <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small"> 
-                                <Image src={PencilEditIcons} width={16} height={16} alt="PencilEditIcons" /> Edit
+                                <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small">
+                                    <Image src={PencilEditIcons} width={16} height={16} alt="PencilEditIcons" /> Edit
                                 </Button>
                                 {modalFormFertilityData.map((item: any, index: any) => {
                                     return (
@@ -588,26 +588,26 @@ const ProfileBasicDetail = () => {
             content: (
 
                 <>
-                {Object.keys(nedicalHistoryFormData).length === 0 &&(
-                    <>
-                      <div className="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
-                            <path d="M60.6072 15.509V57.2116C60.6072 59.5787 58.6882 61.4977 56.3211 61.4977H22.0085C19.6414 61.4977 17.7224 59.5787 17.7224 57.2116V6.70801C17.7224 4.34086 19.6414 2.42188 22.0085 2.42188H47.5739C51.0628 5.92883 54.5519 9.43579 58.0453 12.9382C58.8964 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#F3F4F6" />
-                            <path d="M60.6072 15.509H51.511C49.3365 15.509 47.5737 13.7463 47.5737 11.5718V2.42188C51.0626 5.92883 54.5517 9.43579 58.0451 12.9382C58.8963 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#DDE1E8" />
-                            <path d="M47.6833 28.1613V31.1021C47.6833 31.9213 47.0192 32.5854 46.2 32.5854H42.1186V36.6668C42.1186 37.486 41.4545 38.1501 40.6353 38.1501H37.6903C36.8712 38.1501 36.207 37.486 36.207 36.6668V32.5854H32.1298C31.3106 32.5854 30.6465 31.9213 30.6465 31.1021V28.1613C30.6465 27.3422 31.3106 26.678 32.1298 26.678H36.207V22.5966C36.207 21.7774 36.8712 21.1133 37.6903 21.1133H40.6353C41.4545 21.1133 42.1186 21.7774 42.1186 22.5966V26.678H46.2C47.0192 26.678 47.6833 27.3422 47.6833 28.1613Z" fill="#D2D6DE" />
-                            <path d="M70.7355 44.5053L65.9498 70.7936C65.4789 73.3803 63.2258 75.2604 60.5965 75.2604H19.5071C16.8778 75.2604 14.6247 73.3803 14.1538 70.7936L7.59299 34.7558C6.98481 31.4153 9.55093 28.3398 12.9463 28.3398H26.3864C27.5838 28.3398 28.7477 28.7348 29.6979 29.4636L39.4797 36.9658C40.4299 37.6944 41.5938 38.0895 42.7912 38.0895H65.3821C68.7776 38.0894 71.3437 41.1649 70.7355 44.5053Z" fill="#9CA3AF" />
-                            <path d="M60.3568 63.8798C60.3568 66.5187 58.2175 68.658 55.5786 68.658H48.1395C45.5006 68.658 43.3613 66.5187 43.3613 63.8798C43.3613 61.2409 45.5006 59.1016 48.1395 59.1016H55.5786C58.2175 59.1017 60.3568 61.2409 60.3568 63.8798Z" fill="#8D929C" />
-                        </svg>
+                    {Object.keys(nedicalHistoryFormData).length === 0 && (
+                        <>
+                            <div className="text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
+                                    <path d="M60.6072 15.509V57.2116C60.6072 59.5787 58.6882 61.4977 56.3211 61.4977H22.0085C19.6414 61.4977 17.7224 59.5787 17.7224 57.2116V6.70801C17.7224 4.34086 19.6414 2.42188 22.0085 2.42188H47.5739C51.0628 5.92883 54.5519 9.43579 58.0453 12.9382C58.8964 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#F3F4F6" />
+                                    <path d="M60.6072 15.509H51.511C49.3365 15.509 47.5737 13.7463 47.5737 11.5718V2.42188C51.0626 5.92883 54.5517 9.43579 58.0451 12.9382C58.8963 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#DDE1E8" />
+                                    <path d="M47.6833 28.1613V31.1021C47.6833 31.9213 47.0192 32.5854 46.2 32.5854H42.1186V36.6668C42.1186 37.486 41.4545 38.1501 40.6353 38.1501H37.6903C36.8712 38.1501 36.207 37.486 36.207 36.6668V32.5854H32.1298C31.3106 32.5854 30.6465 31.9213 30.6465 31.1021V28.1613C30.6465 27.3422 31.3106 26.678 32.1298 26.678H36.207V22.5966C36.207 21.7774 36.8712 21.1133 37.6903 21.1133H40.6353C41.4545 21.1133 42.1186 21.7774 42.1186 22.5966V26.678H46.2C47.0192 26.678 47.6833 27.3422 47.6833 28.1613Z" fill="#D2D6DE" />
+                                    <path d="M70.7355 44.5053L65.9498 70.7936C65.4789 73.3803 63.2258 75.2604 60.5965 75.2604H19.5071C16.8778 75.2604 14.6247 73.3803 14.1538 70.7936L7.59299 34.7558C6.98481 31.4153 9.55093 28.3398 12.9463 28.3398H26.3864C27.5838 28.3398 28.7477 28.7348 29.6979 29.4636L39.4797 36.9658C40.4299 37.6944 41.5938 38.0895 42.7912 38.0895H65.3821C68.7776 38.0894 71.3437 41.1649 70.7355 44.5053Z" fill="#9CA3AF" />
+                                    <path d="M60.3568 63.8798C60.3568 66.5187 58.2175 68.658 55.5786 68.658H48.1395C45.5006 68.658 43.3613 66.5187 43.3613 63.8798C43.3613 61.2409 45.5006 59.1016 48.1395 59.1016H55.5786C58.2175 59.1017 60.3568 61.2409 60.3568 63.8798Z" fill="#8D929C" />
+                                </svg>
 
-                       
-                        <p className='patient-accordion-content-subtitle my-3' >No Medical History details</p>
-                        <Button onClick={() => setShowModal(true)} variant="outline" disabled={false} contentSize="medium">
-                            <IoAdd /> Add Medical History
-                        </Button>
-                    </div>
-                    </>
-                )}
-                  
+
+                                <p className='patient-accordion-content-subtitle my-3' >No Medical History details</p>
+                                <Button onClick={() => setShowModal(true)} variant="outline" disabled={false} contentSize="medium">
+                                    <IoAdd /> Add Medical History
+                                </Button>
+                            </div>
+                        </>
+                    )}
+
 
                     {nedicalHistoryFormData.map((item: any, index: number) => {
                         console.log("item", item);
@@ -736,28 +736,28 @@ const ProfileBasicDetail = () => {
                     <Card className="mb-4 shadow-sm">
                         <Card.Body className="p-4">
                             <Row>
-                            <h6 className="mb-3 contact-details-heading">Contact Details</h6>
+                                <h6 className="mb-3 contact-details-heading">Contact Details</h6>
 
-                            
+
                                 <Col lg={4} md={12}>
-                                <div className="mb-3 d-flex align-items-center">
-                                    <Image src={ProfilePhone} className="me-2 " width={20} height={20} alt="Phone" />
-                                    <span className="contact-details-subheading">{contactData.phone}</span>
-                                </div>
+                                    <div className="mb-3 d-flex align-items-center">
+                                        <Image src={ProfilePhone} className="me-2 " width={20} height={20} alt="Phone" />
+                                        <span className="contact-details-subheading">{contactData.phone}</span>
+                                    </div>
                                 </Col>
                                 <Col lg={8} md={12}>
-                                <div className="mb-4 d-flex align-items-center contac-email-card">
-                                    <Image src={ProfileEmail} className="me-2 " width={20} height={20} alt="Email" />
-                                    <span className="contact-details-subheading">{contactData.email}</span>
-                                </div>
+                                    <div className="mb-4 d-flex align-items-center contac-email-card">
+                                        <Image src={ProfileEmail} className="me-2 " width={20} height={20} alt="Email" />
+                                        <span className="contact-details-subheading">{contactData.email}</span>
+                                    </div>
                                 </Col>
-                            
-                            <Col lg={12} md={12}>
-                            <div className="mb-4 d-flex align-items-start">
-                                <Image src={ProfileAddress} className="me-2 " width={20} height={20} alt="Address" />
-                                <span className="contact-details-subheading contact-propfile-address">{contactData.address}</span>
-                            </div>
-                            </Col>
+
+                                <Col lg={12} md={12}>
+                                    <div className="mb-4 d-flex align-items-start">
+                                        <Image src={ProfileAddress} className="me-2 " width={20} height={20} alt="Address" />
+                                        <span className="contact-details-subheading contact-propfile-address">{contactData.address}</span>
+                                    </div>
+                                </Col>
                             </Row>
 
                             <h6 className=" mb-3 contact-details-heading">Emergency Contact Details</h6>
@@ -831,7 +831,7 @@ const ProfileBasicDetail = () => {
                         closeButton={true}
                     >
                         <div className="mb-0">
-                            <MedicalHistory setNedicalHistoryFormData={setNedicalHistoryFormData } setShowModal={setShowModal} />
+                            <MedicalHistory setNedicalHistoryFormData={setNedicalHistoryFormData} setShowModal={setShowModal} />
                         </div>
                     </Modal>
 
@@ -857,7 +857,7 @@ const ProfileBasicDetail = () => {
                                 className={`position-relative ${!isLastItem ? 'patient-journey-box-wrapper' : ''}`}
                                 key={item.id}>
                                 <div className='patient-journey-box ms-5 mb-3 ' key={item.id}>
-                                    <div className="d-flex justify-content-between align-items-center">
+                                    <div className="patient-journey-box-item">
                                         <div>
                                             <h6 className="patient-journey-box-title mb-1">{item.title}</h6>
                                             <p className="patient-journey-box-subtitle mb-0">{item.date} , {item.time}</p>

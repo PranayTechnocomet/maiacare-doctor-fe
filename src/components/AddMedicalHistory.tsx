@@ -8,10 +8,11 @@ import { ProfileCard } from './ui/Custom/ProfileCard';
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
 import ProfileBasicDetail from './ProfileBasicDetail';
-import PartnerDetail from './PartnerDetail';
+
 import PatientReport from './PatientReport';
 import PatientTreatment from './PatientTreatment';
 import PatientPaymentHistory from './PatientPaymentHistory';
+import PartnerDetail from './PartnerDetail';
 
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
@@ -42,7 +43,7 @@ const AddMedicalHistory = () => {
       label: "Partner Details",
       content: (
         <div>
-          <PartnerDetail />
+          <PartnerDetail setActiveTab={setActiveTab} />
         </div>
 
       ),
