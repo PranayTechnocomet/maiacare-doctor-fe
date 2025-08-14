@@ -114,7 +114,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
         <>
             <div className=''>
                 <form onSubmit={handleSubmit}>
-                    <Row>
+                    <Row className='g-2'>
                         <Col md={12}>
                             <RadioButtonGroup
                                 label="Are you currently taking any medications?"
@@ -147,7 +147,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
 
                         </Col>
                         <Col md={12}>
-                            <div className='mt-2'>
+                            <div className=''>
                                 <RadioButtonGroup
                                     label="Have you had any surgeries?"
                                     name="surgeries"
@@ -163,7 +163,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
 
                             </div>
                         </Col>
-                        <Col md={12} className='mt-2'>
+                        <Col md={12} className=''>
                             <InputFieldGroup
                                 label="Do you have any medical condition? "
                                 name="medicalCondition"
@@ -180,7 +180,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                                 className="position-relative "
                             ></InputFieldGroup>
                         </Col>
-                        <Col md={12} className='mt-2'>
+                        <Col md={12} className=''>
                             <InputFieldGroup
                                 label="Family Medical History "
                                 name="familyMedicalHistory"
@@ -195,7 +195,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                                 className="position-relative "
                             ></InputFieldGroup>
                         </Col>
-                        <Col md={12} className='mt-2'>
+                        <Col md={12} className=''>
                             <label className="form-label">Lifestyle</label>
 
                             {/* Custom dropdown */}
@@ -233,7 +233,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
 
                             {/* Display badges */}
                             {selectedValues.length > 0 && (
-                                <div className="mt-2">
+                                <div className="">
                                     <small className="text-muted mb-1 d-block">
                                         Selected ({selectedValues.length}):
                                     </small>
@@ -257,7 +257,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                             )}
                         </Col>
 
-                        <Col md={6} className='mt-2'>
+                        <Col md={6} className=''>
                             <RadioButtonGroup
                                 label="How often do you exercise?"
                                 name="exercise"
@@ -272,7 +272,7 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                                 ]}
                             />
                         </Col>
-                        <Col md={6} className='mt-2'>
+                        <Col md={6} className=''>
                             <RadioButtonGroup
                                 label="How would you rate your stress levels?"
                                 name="stress"
@@ -289,12 +289,12 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                         </Col>
 
 
-                        <Col md={6} className='mt-2'>
+                        <Col md={6} className='mt-3'>
                             <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
                         </Col>
-                        <Col md={6} className='mt-2'>
+                        <Col md={6} className='mt-3'>
                             <Button className="w-100" variant="default" disabled={false} type="submit">
                                 Save
                             </Button>
