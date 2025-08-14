@@ -48,8 +48,11 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
         if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
-        if (!data.systolic.trim()) errors.systolic = "Systolic is required";
-        if (!data.diastolic.trim()) errors.diastolic = "Diastolic is required";
+        if (!data.systolic.trim() && !data.diastolic.trim()) {
+            errors.systolic = "At least one of systolic or diastolic is required";
+
+            // errors.diastolic = "At least one of systolic or diastolic is required";
+        }
         if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
 
         return errors;
@@ -93,13 +96,13 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <Row className="g-4">
+                <Row className="g-md-4 g-2 accordion-form-physical-assessment" >
                     <Col md={6}>
 
                         <InputFieldGroup
                             label="Height"
                             name="height"
-                            type="text"
+                            type="number"
                             className='setting-password-input'
                             value={formData.height}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +122,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         <InputFieldGroup
                             label="Weight"
                             name="weight"
-                            type="text"
+                            type="number"
                             className='setting-password-input'
                             value={formData.weight}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +143,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         <InputFieldGroup
                             label="BMI"
                             name="bmi"
-                            type="text"
+                            type="number"
                             className='setting-password-input'
                             value={formData.bmi}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,24 +173,24 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             placeholder="Select Blood Group"
                             // helperText="Select doctor"
                             options={[
-                                { id: "1", value: "1", label: "A+" },
-                                { id: "2", value: "2", label: "A-" },
-                                { id: "3", value: "3", label: "B+" },
-                                { id: "4", value: "4", label: "B-" },
-                                { id: "5", value: "5", label: "AB+" },
-                                { id: "6", value: "6", label: "AB-" },
-                                { id: "7", value: "7", label: "O+" },
-                                { id: "8", value: "8", label: "O-" },
+                                { id: "1", value: "A+", label: "A+" },
+                                { id: "2", value: "A-", label: "A-" },
+                                { id: "3", value: "B+", label: "B+" },
+                                { id: "4", value: "B-", label: "B-" },
+                                { id: "5", value: "AB+", label: "AB+" },
+                                { id: "6", value: "AB-", label: "AB-" },
+                                { id: "7", value: "O+", label: "O+" },
+                                { id: "8", value: "O-", label: "O-" },
                             ]}
                         />
 
                     </Col>
 
-                    <Col md={5}>
+                    <Col md={5} className="input-custom-width">
                         <InputFieldGroup
                             label="Blood Pressure"
                             name="systolic"
-                            type="text"
+                            type="number"
                             className="setting-password-input"
                             placeholder="Systolic(mmHg)"
                             required={true}
@@ -202,18 +205,18 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         />
                     </Col>
 
-                    <Col md={1} className="d-flex justify-content-center align-items-end ">
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center " : "or-custom-width d-flex justify-content-center align-items-end "}>
                         <span className="fs-1">/</span>
                     </Col>
 
-                    <Col md={5}>
+                    <Col md={5} className="input-custom-width">
                         <InputFieldGroup
                             label="" // No label here to match the design
                             name="diastolic"
-                            type="text"
+                            type="number"
                             className="setting-password-input"
                             placeholder="Diastolic(mmHg)"
-                            required={true}
+                            required={false}
                             disabled={false}
                             readOnly={false}
                             value={formData.diastolic}
@@ -221,7 +224,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                                 handleChange(e);
 
                             }}
-                            error={formError.diastolic}
+                        // error={formError.diastolic}
                         />
                     </Col>
 
@@ -230,7 +233,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         <InputFieldGroup
                             label="Heart Rate"
                             name="heartRate"
-                            type="text"
+                            type="number"
                             className='setting-password-input'
                             value={formData.heartRate}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -245,7 +248,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             error={formError.heartRate}
                         />
                     </Col>
-                    <Col md={6}>
+                    <Col md={6} className="mt-md-auto mt-4">
 
                         <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
                             Cancel

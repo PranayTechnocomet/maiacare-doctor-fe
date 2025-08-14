@@ -54,7 +54,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
         if (!data.pregnancy) errors.pregnancy = "Pregnancy is required";
         if (!data.timeduration) errors.timeduration = "Duration is required";
         if (!data.ectopicpregnancy) errors.ectopicpregnancy = "Ectopic pregnancy is required";
-        
+
 
         return errors;
     };
@@ -95,7 +95,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
                             </div>
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
-                            <Row className="g-3">
+                            <Row className="g-md-3 g-1">
                                 <Col md={6}>
                                     <InputSelect
                                         label="Age at first menstruation"
@@ -202,54 +202,60 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
                             </div>
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
-                            <RadioButtonGroup
-                                label="Have you been pregnant before?"
-                                name="pregnancy"
-                                className="mt-2"
-                                value={formData.pregnancy || 'yes'}
-                                onChange={handleChange}
-                                required
-                                options={[
-                                    { label: "Yes", value: "yes" },
-                                    { label: "No", value: "no" }
-                                ]}
-                            />
-
-                            <InputFieldGroup
-                                label="How long have you been trying to conceive?"
-                                name="timeduration"
-                                type="text"
-                                className="setting-password-input"
-                                placeholder="Enter Duration"
-                                required
-                                disabled={false}
-                                readOnly={false}
-                                value={formData.timeduration}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                error={formError.timeduration}
-                            />
-
-                            <RadioButtonGroup
-                                label="Any history of miscarriage or ectopic pregnancy?"
-                                name="ectopicpregnancy"
-                                className="mt-2"
-                                value={formData.ectopicpregnancy || 'yes'}
-                                onChange={handleChange}
-                                required
-                                options={[
-                                    { label: "Yes", value: "yes" },
-                                    { label: "No", value: "no" }
-                                ]}
-                            />
+                            <Row className="g-md-3 g-1">
+                                <Col md={12}>
+                                    <RadioButtonGroup
+                                        label="Have you been pregnant before?"
+                                        name="pregnancy"
+                                        className="mt-2"
+                                        value={formData.pregnancy || 'yes'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" }
+                                        ]}
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <InputFieldGroup
+                                        label="How long have you been trying to conceive?"
+                                        name="timeduration"
+                                        type="text"
+                                        className="setting-password-input"
+                                        placeholder="Enter Duration"
+                                        required
+                                        disabled={false}
+                                        readOnly={false}
+                                        value={formData.timeduration}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                        error={formError.timeduration}
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <RadioButtonGroup
+                                        label="Any history of miscarriage or ectopic pregnancy?"
+                                        name="ectopicpregnancy"
+                                        className="mt-2"
+                                        value={formData.ectopicpregnancy || 'yes'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" }
+                                        ]}
+                                    />
+                                </Col>
+                            </Row>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
 
                 {/* Submit buttons */}
-                <Row className="mt-4">
+                <Row className="mt-4 g-2">
                     <Col md={6}>
                         <Button className="w-100" variant="outline" type="button" onClick={() => setShowFertilityAssessment(false)}>
                             Cancel

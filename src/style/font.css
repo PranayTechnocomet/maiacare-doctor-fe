@@ -469,7 +469,6 @@
     color: var(--color-sidebar-icon);
 }
 
-
 .patient-report-box-fileInfo {
     font-size: 14px;
     font-weight: 400;
@@ -610,91 +609,99 @@
     color: var(--color-radio-lable);
 }
 
-@media screen and (max-width: 767px) {
-
-    .invoice-main-header {
-        font-size: 36px;
-        font-weight: 500;
-        line-height: 40px;
-        font-style: Medium;
-        color: var(--color-modal-heading);
-
-    }
-
-    .invoice-no-title {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 22px;
-        font-style: Medium;
-        color: var(--color-invoice-no-title);
-    }
-
-    .invoice-no-title-subtitle {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 22px;
-        font-style: Medium;
-        color: var(--color-radio-lable);
-    }
-
-    .appointment-details-invoice-header {
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 22px;
-        font-style: SemiBold;
-        color: var(--color-heading);
-
-    }
-
-    .appointment-details-invoice-title {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 18px;
-        font-style: SemiBold;
-        color: var(--color-sidebar-icon);
-    }
-
-    .appointment-details-invoice-subtitle {
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 22px;
-        font-style: Medium;
-        color: var(--color-radio-lable);
-
-    }
-
-    .invoice-doctor-name {
-        font-size: 24px;
-        font-weight: 600;
-        line-height: 28px;
-        font-style: SemiBold;
-        color: var(--color-radio-lable);
-    }
-
-    .invoice-doctor-contact-detail {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 22px;
-        font-style: Regular;
-        color: var(--color-sidebar-icon);
-    }
-
-    .service-details-box-header-content {
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 22px;
-        font-style: SemiBold;
-        color: var(--color-radio-lable);
-    }
-
-    .service-details-box-content {
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 24px;
-        font-style: SemiBold;
-        color: var(--color-radio-lable);
-    }
+.service-details-box-content-data-total {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    font-style: Bold;
+    color: var(--color-brand);
 }
+
+.invoice-main-header {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 40px;
+    font-style: Medium;
+    color: var(--color-modal-heading);
+
+}
+
+.invoice-no-title {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-invoice-no-title);
+
+
+}
+
+.invoice-no-title-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+
+.appointment-details-invoice-header {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+
+}
+
+.appointment-details-invoice-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    font-style: SemiBold;
+    color: var(--color-sidebar-icon);
+}
+
+.appointment-details-invoice-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+
+}
+
+.invoice-doctor-name {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
+.invoice-doctor-contact-detail {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.service-details-box-header-content {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
+.service-details-box-content-data {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
 
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
@@ -715,6 +722,17 @@
 
     .invoice-doctor-name {
         font-size: 22px;
+    }
+    .service-details-box-header-content {
+        font-size: 17px;
+
+    }
+    .service-details-box-content-data {
+        font-size: 18px;
+    }
+    .service-details-box-content-data-total {
+        font-size: 22px;
+        
     }
 }
 
@@ -769,6 +787,28 @@
     .invoice-doctor-contact-detail {
         font-size: 15px;
     }
+
+    .patient-accordion-content-subtitle {
+        font-size: 18px;
+
+    }
+
+    .service-details-box-content-data {
+        font-size: 17px;
+    }
+
+    .service-details-box-header-content {
+        font-size: 16px;
+
+    }
+
+    .service-details-box-content-data-total {
+        font-size: 22px;
+    }
+    .invoice-main-header {
+        font-size: 34px;
+    
+    }
 }
 
 @media screen and (max-width: 425px) {
@@ -822,6 +862,28 @@
     .invoice-doctor-contact-detail {
         font-size: 14px;
     }
+
+    .patient-accordion-content-subtitle {
+        font-size: 16px;
+
+    }
+
+    .service-details-box-content-data {
+        font-size: 16px;
+    }
+
+    .service-details-box-header-content {
+        font-size: 14px;
+
+    }
+    .service-details-box-content-data-total {
+        font-size: 20px;
+    }
+    .invoice-main-header {
+        font-size: 30px;
+    
+    }
+  
 }
 
 /* pankaj solanki end */
@@ -995,6 +1057,14 @@
     color: var(--color-modal-heading);
 }
 
+.modal-custom-header {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-modal-heading);
+}
+
 .patient-accordion-content-subtitle {
     font-size: 20px;
     font-weight: 400;
@@ -1057,10 +1127,6 @@
         font-size: 15px;
     }
 
-    .patient-accordion-content-subtitle {
-        font-size: 18px;
-
-    }
 
 }
 
@@ -1082,10 +1148,7 @@
         font-size: 14px;
     }
 
-    .patient-accordion-content-subtitle {
-        font-size: 16px;
 
-    }
 }
 
 

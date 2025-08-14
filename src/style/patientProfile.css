@@ -118,17 +118,26 @@
     border-radius: 8px;
 }
 
-.service-details-box{
+.service-details-box {
     border: 1px solid var(--color-icon-border);
-    border-radius: 16px 16px 0 0 ;
+    border-radius: 16px;
     overflow: hidden;
-    
-    /* padding: 18px 23px; */
+    /* padding: 10px 14px; */
+
 }
 
-.service-details-box-header{
+.service-details-box-header {
     background-color: #F5F7FA;
-    padding: 10px 24px;
+    /* padding: 10px 12px; */
+}
+
+.service-details-box-content {
+    padding: 18px;
+}
+
+.service-details-box-content-hr {
+    /* margin: 0 -23px;  */
+    border-top: 2px solid var(--color-icon-border);
 }
 
 @media screen and (max-width: 575px) {
