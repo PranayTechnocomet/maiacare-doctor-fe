@@ -798,7 +798,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
     };
     return (
         <>
-            <form >
+            <form className="accordion-form-physical-assessment">
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3 mt-3">
                         <Accordion.Header>
@@ -897,7 +897,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
 
                                 </Col>
 
-                                <Col md={5}>
+                                <Col md={5} className='input-custom-width'>
                                     <InputFieldGroup
                                         label="Blood Pressure"
                                         name="systolic"
@@ -916,11 +916,11 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     />
                                 </Col>
 
-                                <Col md={1} className="d-flex justify-content-center align-items-end ">
+                                <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
                                     <span className="fs-1">/</span>
                                 </Col>
 
-                                <Col md={5}>
+                                <Col md={5} className='input-custom-width'>
                                     <InputFieldGroup
                                         label="" // No label here to match the design
                                         name="diastolic"
