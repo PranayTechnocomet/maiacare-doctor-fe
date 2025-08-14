@@ -27,31 +27,40 @@ import { partnerDetailData } from '@/utils/StaticData';
 
 
 
-export default function PartnerDetail() {
+export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: string) => void}) {
     const [addPartner, setAddPartner] = useState(false);
     const [showContent, setShowContent] = useState(false);
     const [showPartnerDetail, setShowPartnerDetail] = useState(true);
     const [loading, setLoading] = useState({});
-
+    const [modalEditTab, setModalEditTab] = useState<string | null>("basic");
+    console.log("modalEditTab11111", modalEditTab);
+    console.log("addPartner", addPartner);
+    
+   
     const [showData, setShowData] = useState<any>(partnerDetailData);
-
+   
     useEffect(() => {
         setLoading(true)
         setShowData(partnerDetailData);
-        setLoading(false)
+        
     }, [])
 
     console.log("showData", showData);
     const formatDate = (dateString?: string) => {
-        const date = dateString ? new Date(dateString) : new Date(); // Use today if no date
+        const date = dateString ? new Date(dateString) : new Date(); 
         return date.toLocaleDateString("en-GB", {
-          weekday: "short", // Wed
-          day: "2-digit",   // 19
-          month: "short",   // Feb
-          year: "numeric"   // 2025
+          weekday: "short", 
+          day: "2-digit",   
+          month: "short",   
+          year: "numeric"   
         });
       }
 
+      const handelEdit = () => {
+        
+        setAddPartner(true); 
+        setModalEditTab("medical history");  
+      }
     return (
         <>
             {showPartnerDetail && (
@@ -82,6 +91,10 @@ export default function PartnerDetail() {
                             <IoAdd /> Add Partner Details
                         </Button>
 
+                    </div>
+                </div>
+            )}
+
                         <Modal
                             show={addPartner}
                             onHide={() => setAddPartner(false)}
@@ -90,13 +103,9 @@ export default function PartnerDetail() {
                             size="lg"
                         >
                             <div className="mb-0">
-                                <AddPartnerDetailsForm setShowContent={setShowContent} setShowPartnerDetail={setShowPartnerDetail} setAddPartner={setAddPartner} setShowData={setShowData} />
+                                <AddPartnerDetailsForm setShowContent={setShowContent} setShowPartnerDetail={setShowPartnerDetail} setAddPartner={setAddPartner} setShowData={setShowData} modalEditTab={modalEditTab} setModalEditTab={setModalEditTab} />
                             </div>
                         </Modal>
-                    </div>
-                </div>
-            )}
-
 
 
             {showContent && (
@@ -161,8 +170,8 @@ export default function PartnerDetail() {
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <p className="contact-details-heading mb-3">Medical History</p>
-                                            <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
-                                                <Image src={EditIcon} alt="Edit" /> Edit
+                                            <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => handelEdit()}>
+                                                <Image src={EditIcon} alt="Edit"  /> Edit
                                             </Button>
                                         </div>
 
@@ -283,7 +292,7 @@ export default function PartnerDetail() {
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className="contact-details-heading">Physical Assessment </p>
                                 <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
-                                    <Image src={PhysicalAssessment} alt="Edit" />
+                                    <Image src={PhysicalAssessment} alt="Edit" onClick={() => {setAddPartner(true); setModalEditTab("physical & fertility assessment")}}/>
                                 </Button>
                             </div>
                             <Accordion defaultActiveKey="0">
@@ -311,7 +320,7 @@ export default function PartnerDetail() {
                                                         <Image src={weightImg} alt="Age" width={42} height={42} />
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='phisical-assessment-accordion-showData-box-title'>Weight</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight}</span>
+                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight} kg</span>
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -320,7 +329,7 @@ export default function PartnerDetail() {
                                                         <Image src={BMIIMG} alt="Age" width={42} height={42} />
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='phisical-assessment-accordion-showData-box-title'>BMI</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi}</span>
+                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi} (Normal)</span>
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -340,7 +349,7 @@ export default function PartnerDetail() {
                                                         <Image src={BloodPressure} alt="Age" width={42} height={42} />
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='phisical-assessment-accordion-showData-box-title'>Blood Pressure</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bloodPressure}</span>
+                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic}</span>
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -349,7 +358,7 @@ export default function PartnerDetail() {
                                                         <Image src={HeartRate} alt="Age" width={42} height={42} />
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='phisical-assessment-accordion-showData-box-title'>Hearth Rate</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate}</span>
+                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate} bpm</span>
                                                         </div>
                                                     </div>
                                                 </Col>
@@ -377,7 +386,7 @@ export default function PartnerDetail() {
                                 <div key={index} className="medical-history-details text-start">
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <p className="contact-details-heading mb-3">Fertility Assessment</p>
-                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
+                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => {setAddPartner(true); setModalEditTab("physical & fertility assessment")}}>
                                             <Image src={EditIcon} alt="Edit" /> Edit
                                         </Button>
                                     </div>

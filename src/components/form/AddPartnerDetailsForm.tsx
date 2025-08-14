@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import ContentContainer from '../ui/ContentContainer';
 import CustomTabs from '../ui/CustomTabs';
 import Image from 'next/image';
@@ -14,10 +14,23 @@ import cameraicon from '../../assets/images/cameraicon.png';
 import { log, profile } from 'console';
 // import '../../style/PartnerDetails.css'
 
-export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void }) {
+export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData, modalEditTab, setModalEditTab }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void, modalEditTab: string | null, setModalEditTab: (value: string | null) => void }) {
+
     const [activeTab, setActiveTab] = useState<string>("basic");
+    // console.log("tetetetetet");
+    // Sync local state with prop
+    const handleTabChange = (tab: string) => {
+        setActiveTab(tab);
+    };
 
-
+    // In AddPartnerDetailsForm.tsx
+    useEffect(() => {
+        console.log("modalEditTab changed:", modalEditTab);
+        if (modalEditTab) {
+            setActiveTab(modalEditTab);
+        }
+    }, [modalEditTab]);
+    // console.log("modalEditTab", modalEditTab);
 
     const tabOptions = [
         {
@@ -54,7 +67,7 @@ export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPa
                     tabOptions={tabOptions}
                     className="mb-3"
                     activeKey={activeTab}
-                    setActiveKey={setActiveTab}
+                    setActiveKey={handleTabChange}
                 />
             </div>
             {/* </main> */}
@@ -747,15 +760,15 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
         if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
-        if (!data.systolic.trim()) errors.systolic = "Systolic is required";
+        if (!data.systolic.trim()) errors.systolic = "Blood pressure is required";
         // if (!data.diastolic.trim()) errors.diastolic = "Diastolic is required";
         if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
         return errors;
     };
-    
+
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         console.log("testsstttttttttttttttttt");
-        
+
         e.preventDefault();
         const errors = validateForm(formData);
         console.log("Form submitted", formData);
@@ -769,11 +782,11 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
             setShowContent(true);
 
         }
-        setShowData((prev: any) => ({...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData]}));
+        setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
         // setShowData((prev: any) => ({...prev, fertilityAssessment: {...prev.fertilityAssessment, ...formData}}));
         setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
 
-        
+
     };
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -800,7 +813,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="Height"
                                         name="height"
-                                        type="text"
+                                        type="number"
                                         className='setting-password-input'
                                         value={formData.height}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -820,7 +833,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="Weight"
                                         name="weight"
-                                        type="text"
+                                        type="number"
                                         className='setting-password-input'
                                         value={formData.weight}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -841,7 +854,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="BMI"
                                         name="bmi"
-                                        type="text"
+                                        type="number"
                                         className='setting-password-input'
                                         value={formData.bmi}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -871,14 +884,14 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                         placeholder="Select Blood Group"
                                         // helperText="Select doctor"
                                         options={[
-                                            { id: "1", value: "1", label: "A+" },
-                                            { id: "2", value: "2", label: "A-" },
-                                            { id: "3", value: "3", label: "B+" },
-                                            { id: "4", value: "4", label: "B-" },
-                                            { id: "5", value: "5", label: "AB+" },
-                                            { id: "6", value: "6", label: "AB-" },
-                                            { id: "7", value: "7", label: "O+" },
-                                            { id: "8", value: "8", label: "O-" },
+                                            { id: "1", value: "A+", label: "A+" },
+                                            { id: "2", value: "A-", label: "A-" },
+                                            { id: "3", value: "B+", label: "B+" },
+                                            { id: "4", value: "B-", label: "B-" },
+                                            { id: "5", value: "AB+", label: "AB+" },
+                                            { id: "6", value: "AB-", label: "AB-" },
+                                            { id: "7", value: "O+", label: "O+" },
+                                            { id: "8", value: "O-", label: "O-" },
                                         ]}
                                     />
 
@@ -888,7 +901,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="Blood Pressure"
                                         name="systolic"
-                                        type="text"
+                                        type="number"
                                         className="setting-password-input"
                                         placeholder="Systolic(mmHg)"
                                         required={true}
@@ -911,7 +924,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="" // No label here to match the design
                                         name="diastolic"
-                                        type="text"
+                                        type="number"
                                         className="setting-password-input"
                                         placeholder="Diastolic(mmHg)"
                                         required={false}
@@ -931,7 +944,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                     <InputFieldGroup
                                         label="Heart Rate"
                                         name="heartRate"
-                                        type="text"
+                                        type="number"
                                         className='setting-password-input'
                                         value={formData.heartRate}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -1107,13 +1120,13 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                 </Accordion>
                 <Row className='g-2'>
                     <Col md={6}  >
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                        <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
                             Cancel
                         </Button>
                     </Col>
                     <Col md={6} >
-                        <Button className="w-100" variant="default"  disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
-                         >
+                        <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
+                        >
                             Save
                         </Button>
                     </Col>
