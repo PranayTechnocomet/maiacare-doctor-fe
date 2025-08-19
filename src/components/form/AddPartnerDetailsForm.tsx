@@ -14,7 +14,7 @@ import cameraicon from '../../assets/images/cameraicon.png';
 import { log, profile } from 'console';
 // import '../../style/PartnerDetails.css'
 
-export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData, modalEditTab, setModalEditTab }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void, modalEditTab: string | null, setModalEditTab: (value: string | null) => void }) {
+export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData, modalEditTab, setModalEditTab, showData, eventKey }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void, modalEditTab: string | null, setModalEditTab: (value: string | null) => void, showData: any, eventKey: boolean }) {
 
     const [activeTab, setActiveTab] = useState<string>("basic");
     // console.log("tetetetetet");
@@ -46,14 +46,27 @@ export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPa
             key: "medical history",
             label: "Medical History",
             content: (
-                <MedicalHistoryForm setAddPartner={setAddPartner} setActiveTab={setActiveTab} setShowData={setShowData} />
+                <MedicalHistoryForm 
+              setAddPartner={setAddPartner} 
+              setActiveTab={setActiveTab} 
+              setShowData={setShowData} 
+              initialData={modalEditTab === "medical history" ? showData.medicalHistory : undefined} 
+            />
             ),
         },
         {
             key: "physical & fertility assessment",
             label: "Physical & Fertility Assessment",
             content: (
-                <PhysicalFertilityAssessmentForm setShowContent={setShowContent} setAddPartner={setAddPartner} setShowPartnerDetail={setShowPartnerDetail} setShowData={setShowData} />
+                <PhysicalFertilityAssessmentForm 
+                setShowContent={setShowContent} 
+                setAddPartner={setAddPartner} 
+                setShowPartnerDetail={setShowPartnerDetail} 
+                setShowData={setShowData} 
+                showData={showData} 
+                initialData={modalEditTab === "physical & fertility assessment" ? showData.fertilityAssessment : undefined}
+                eventKey={eventKey}
+                />
             ),
         },
 
@@ -339,7 +352,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
 }
 
 
-export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void }) {
+export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, initialData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void, initialData?: any }) {
 
     type FormData = {
         medication: string;
@@ -357,16 +370,16 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData }:
     type FormError = Partial<Record<keyof FormData, string>>;
 
     const initialFormData: FormData = {
-        medication: "yes",
-        surgeries: "yes",
-        surgeriesContent: "",
-        medicalCondition: "",
-        familyMedicalHistory: "",
-        lifestyle: "",
-        stress: "low",
-        exercise: "never",
-        medicationcontent: "",
-        surgeriescontent: "",
+        medication: initialData?.medication || "yes",
+        surgeries: initialData?.surgeries || "yes",
+        surgeriesContent: initialData?.surgeriescontent || "",
+        medicalCondition: initialData?.medicalCondition || "",
+        familyMedicalHistory: initialData?.familyMedicalHistory || "",
+        lifestyle: initialData?.lifestyle || "",
+        stress: initialData?.stress || "low",
+        exercise: initialData?.exercise || "never",
+        medicationcontent: initialData?.medicationcontent || "",
+        surgeriescontent: initialData?.surgeriescontent || "",
     };
 
 
@@ -697,7 +710,7 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData }:
 
 
 
-export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerDetail, setShowContent, setShowData }: { setAddPartner: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowData: (value: any) => void }) {
+export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerDetail, setShowContent, setShowData, showData, initialData, eventKey }: { setAddPartner: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowData: (value: any) => void, showData?: any, initialData?: any, eventKey?: boolean }) {
 
     type FormData = {
         semenAnalysis: string;
@@ -719,17 +732,17 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
 
     type FormError = Partial<Record<keyof FormData, string>>;
     const initialFormData: FormData = {
-        semenAnalysis: "yes",
-        semenAnalysisContent: "",
-        fertilityIssues: "no",
-        fertilityIssuesContent: "",
-        fertilityTreatment: "no",
-        fertilityTreatmentContent: "",
-        surgeries: "no",
-        surgeriesContent: "",
+        semenAnalysis: initialData?.semenAnalysis || "yes",
+        semenAnalysisContent: initialData?.semenAnalysisContent || "",
+        fertilityIssues: initialData?.fertilityIssues || "no",
+        fertilityIssuesContent: initialData?.fertilityIssuesContent || "",
+        fertilityTreatment: initialData?.fertilityTreatment || "no",
+        fertilityTreatmentContent: initialData?.fertilityTreatmentContent || "",
+        surgeries: initialData?.surgeries || "no",
+        surgeriesContent: initialData?.surgeriesContent || "",
         height: "",
-        weight: "",
-        bmi: "",
+        weight:  "",
+        bmi:"",
         bloodGroup: "",
         systolic: "",
         diastolic: "",
@@ -783,7 +796,6 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
 
         }
         setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
-        // setShowData((prev: any) => ({...prev, fertilityAssessment: {...prev.fertilityAssessment, ...formData}}));
         setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
 
 
@@ -792,7 +804,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));    
         setFormError((prev) => ({ ...prev, [name]: "" }));
 
     };
@@ -800,7 +812,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
         <>
             <form className="accordion-form-physical-assessment">
                 <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3 mt-3">
+                    <Accordion.Item eventKey={eventKey ? "1" : "0"} className="fertilitiy-assement-accodion-item mb-3 mt-3">
                         <Accordion.Header>
                             <div className="fertilitiy-assement-accodion-title">
                                 Physical Assessment
@@ -974,148 +986,148 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                         </Accordion.Body>
                     </Accordion.Item>
 
-                    <Accordion.Item eventKey="1" className="fertilitiy-assement-accodion-item mb-3">
-                        <Accordion.Header>
-                            <div className="fertilitiy-assement-accodion-title">
-                                Fertility Assessment
-                            </div>
-                        </Accordion.Header>
-                        <Accordion.Body>
+                        <Accordion.Item eventKey={eventKey ? "0" : "1"} className="fertilitiy-assement-accodion-item mb-3">
+                            <Accordion.Header>
+                                <div className="fertilitiy-assement-accodion-title">
+                                    Fertility Assessment
+                                </div>
+                            </Accordion.Header>
+                            <Accordion.Body>
 
 
-                            <>
+                                <>
 
-                                <Row className='g-2'>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you ever had a semen analysis?"
-                                            name="semenAnalysis"
-                                            value={formData.semenAnalysis || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.semenAnalysis}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
+                                    <Row className='g-2'>
+                                        <Col md={12} >
+                                            <RadioButtonGroup
+                                                label="Have you ever had a semen analysis?"
+                                                name="semenAnalysis"
+                                                value={formData.semenAnalysis || 'yes'}
+                                                onChange={(e) => handleChange(e)}
+                                                required={true}
+                                                error={formError.semenAnalysis}
+                                                options={[
+                                                    { label: "Yes", value: "yes" },
+                                                    { label: "No", value: "no" },
+                                                ]}
+                                            />
 
-                                        {formData.semenAnalysis === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.semenAnalysisContent}
-                                                name='semenAnalysisContent'
-                                                onChange={handleChange}
-                                                error={formError.semenAnalysisContent}
+                                            {formData.semenAnalysis === 'yes' && (
+                                                <InputFieldGroup
+                                                    type="text"
+                                                    value={formData.semenAnalysisContent}
+                                                    name='semenAnalysisContent'
+                                                    onChange={handleChange}
+                                                    error={formError.semenAnalysisContent}
 
-                                                placeholder="If yes, provide details if available"
+                                                    placeholder="If yes, provide details if available"
 
-                                                className={` `}
-                                            >
+                                                    className={` `}
+                                                >
 
-                                            </InputFieldGroup>
-                                        )}
+                                                </InputFieldGroup>
+                                            )}
 
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you experienced any fertility issues?"
-                                            name="fertilityIssues"
-                                            value={formData.fertilityIssues || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.fertilityIssues}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
+                                        </Col>
+                                        <Col md={12} >
+                                            <RadioButtonGroup
+                                                label="Have you experienced any fertility issues?"
+                                                name="fertilityIssues"
+                                                value={formData.fertilityIssues || 'yes'}
+                                                onChange={(e) => handleChange(e)}
+                                                required={true}
+                                                error={formError.fertilityIssues}
+                                                options={[
+                                                    { label: "Yes", value: "yes" },
+                                                    { label: "No", value: "no" },
+                                                ]}
+                                            />
 
-                                        {formData.fertilityIssues === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.fertilityIssuesContent}
-                                                name='fertilityIssuesContent'
-                                                onChange={handleChange}
-                                                error={formError.semenAnalysisContent}
+                                            {formData.fertilityIssues === 'yes' && (
+                                                <InputFieldGroup
+                                                    type="text"
+                                                    value={formData.fertilityIssuesContent}
+                                                    name='fertilityIssuesContent'
+                                                    onChange={handleChange}
+                                                    error={formError.semenAnalysisContent}
 
-                                                placeholder="If yes, provide details if available"
+                                                    placeholder="If yes, provide details if available"
 
-                                                className={` `}
-                                            >
+                                                    className={` `}
+                                                >
 
-                                            </InputFieldGroup>
-                                        )}
+                                                </InputFieldGroup>
+                                            )}
 
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you previously undergone fertility treatments?"
-                                            name="fertilityTreatment"
-                                            value={formData.fertilityTreatment || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.fertilityTreatment}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
+                                        </Col>
+                                        <Col md={12} >
+                                            <RadioButtonGroup
+                                                label="Have you previously undergone fertility treatments?"
+                                                name="fertilityTreatment"
+                                                value={formData.fertilityTreatment || 'yes'}
+                                                onChange={(e) => handleChange(e)}
+                                                required={true}
+                                                error={formError.fertilityTreatment}
+                                                options={[
+                                                    { label: "Yes", value: "yes" },
+                                                    { label: "No", value: "no" },
+                                                ]}
+                                            />
 
-                                        {formData.fertilityTreatment === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.fertilityTreatmentContent}
-                                                name='fertilityTreatmentContent'
-                                                onChange={handleChange}
-                                                error={formError.fertilityTreatmentContent}
+                                            {formData.fertilityTreatment === 'yes' && (
+                                                <InputFieldGroup
+                                                    type="text"
+                                                    value={formData.fertilityTreatmentContent}
+                                                    name='fertilityTreatmentContent'
+                                                    onChange={handleChange}
+                                                    error={formError.fertilityTreatmentContent}
 
-                                                placeholder="If yes, provide details if available"
+                                                    placeholder="If yes, provide details if available"
 
-                                                className={` `}
-                                            >
+                                                    className={` `}
+                                                >
 
-                                            </InputFieldGroup>
-                                        )}
+                                                </InputFieldGroup>
+                                            )}
 
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Any history of surgeries?"
-                                            name="surgeries"
-                                            value={formData.surgeries || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.surgeries}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
+                                        </Col>
+                                        <Col md={12} >
+                                            <RadioButtonGroup
+                                                label="Any history of surgeries?"
+                                                name="surgeries"
+                                                value={formData.surgeries || 'yes'}
+                                                onChange={(e) => handleChange(e)}
+                                                required={true}
+                                                error={formError.surgeries}
+                                                options={[
+                                                    { label: "Yes", value: "yes" },
+                                                    { label: "No", value: "no" },
+                                                ]}
+                                            />
 
-                                        {formData.surgeries === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.surgeriesContent}
-                                                name='surgeriesContent'
-                                                onChange={handleChange}
-                                                error={formError.surgeriesContent}
+                                            {formData.surgeries === 'yes' && (
+                                                <InputFieldGroup
+                                                    type="text"
+                                                    value={formData.surgeriesContent}
+                                                    name='surgeriesContent'
+                                                    onChange={handleChange}
+                                                    error={formError.surgeriesContent}
 
-                                                placeholder="If yes, provide details if available"
+                                                    placeholder="If yes, provide details if available"
 
-                                                className={` `}
-                                            >
+                                                    className={` `}
+                                                >
 
-                                            </InputFieldGroup>
-                                        )}
+                                                </InputFieldGroup>
+                                            )}
 
-                                    </Col>
+                                        </Col>
 
 
-                                </Row>
-                            </>
-                        </Accordion.Body>
-                    </Accordion.Item>
+                                    </Row>
+                                </>
+                            </Accordion.Body>
+                        </Accordion.Item>
                 </Accordion>
                 <Row className='g-2'>
                     <Col md={6}  >
