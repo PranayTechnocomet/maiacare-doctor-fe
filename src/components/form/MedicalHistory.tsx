@@ -8,42 +8,52 @@ import Button from '../ui/Button';
 import { MdMailOutline } from 'react-icons/md';
 import Textarea from '../ui/Textarea';
 
+interface MedicalHistoryProps {
+    setMedicalHistoryFormData: any;
+    setShowModal: any;
+    initialData?: any;
+    onClose?: () => void;
+}
 
-type FormData = {
-    medication: string;
-    surgeries: string;
-    surgeriesContent: string;
-    medicalCondition: string;
-    familyMedicalHistory: string;
-    lifestyle: string;
-    stress: string;
-    exercise: string;
-    medicationcontent: string;
-};
+export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal, initialData, onClose }: MedicalHistoryProps) {
 
-type FormError = Partial<Record<keyof FormData, string>>;
-const initialFormData: FormData = {
-   
-    medication: "yes",
-    surgeries: "yes",
-    surgeriesContent: "",
-    medicalCondition: "",
-    familyMedicalHistory: "",
-    lifestyle: "",
-    stress: "low",
-    exercise: "never",
-    medicationcontent: "",
-};
+    type FormData = {
+        medication: string;
+        surgeries: string;
+        surgeriesContent: string;
+        medicalCondition: string;
+        familyMedicalHistory: string;
+        lifestyle: string;
+        stress: string;
+        exercise: string;
+        medicationcontent: string;
+        surgeriescontent: string;
+    };
 
-const initialFormError: FormError = {};
+    type FormError = Partial<Record<keyof FormData, string>>;
+    const initialFormData: FormData = {
+        medication: initialData?.medication || "yes",
+        surgeries: initialData?.surgeries || "yes",
+        surgeriesContent: initialData?.surgeriescontent || "",
+        medicalCondition: initialData?.medicalCondition || "",
+        familyMedicalHistory: initialData?.familyMedicalHistory || "",
+        lifestyle: initialData?.lifestyle || "",
+        stress: initialData?.stress || "low",
+        exercise: initialData?.exercise || "never",
+        medicationcontent: initialData?.medicationcontent || "",
+        surgeriescontent: initialData?.surgeriescontent || "",
+    };
 
-export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal }: any) {
+    const initialFormError: FormError = {};
+
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
-        if(data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
+        if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
+        if (data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
+
         // if(data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
         // if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
@@ -53,15 +63,18 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
 
 
+
         return errors;
     };
+    
+    
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
-        
+
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -74,9 +87,18 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
         if (Object.keys(errors).length === 0) {
             setShowModal(false);
             setFormError(initialFormError);
-            setNedicalHistoryFormData((prev: any) => [...prev, formData]);
-            console.log("formData", formData);
-
+            if (initialData) {
+                // If editing, update the existing entry
+                setMedicalHistoryFormData((prev: any) => 
+                    prev.map((item: any) => 
+                        item === initialData ? formData : item
+                    )
+                );
+            } else {
+                // If creating new, add to the array
+                setMedicalHistoryFormData((prev: any) => [...prev, formData]);
+            }
+            if (onClose) onClose();
         }
     };
 
@@ -159,8 +181,23 @@ export default function MedicalHistory({ setNedicalHistoryFormData, setShowModal
                                         { label: "Yes", value: "yes" },
                                         { label: "No", value: "no" },
                                     ]}
-                                />
 
+                                />
+                                {formData.surgeries === 'yes' && (
+                                    <InputFieldGroup
+                                        type="text"
+                                        value={formData.surgeriescontent}
+                                        name='surgeriescontent'
+                                        onChange={handleChange}
+                                        error={formError.surgeriescontent}
+
+                                        placeholder="Enter surgeries"
+
+                                        className={` `}
+                                    >
+
+                                    </InputFieldGroup>
+                                )}
                             </div>
                         </Col>
                         <Col md={12} className=''>

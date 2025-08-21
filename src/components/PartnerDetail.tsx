@@ -27,43 +27,43 @@ import { partnerDetailData } from '@/utils/StaticData';
 
 
 
-export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: string) => void}) {
+export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
     const [addPartner, setAddPartner] = useState(false);
     const [showContent, setShowContent] = useState(false);
     const [showPartnerDetail, setShowPartnerDetail] = useState(true);
     const [loading, setLoading] = useState({});
     const [eventKey, setEventKey] = useState(0);
     console.log("eventKey", eventKey);
-    
+
     const [modalEditTab, setModalEditTab] = useState<string | null>("basic");
     console.log("modalEditTab11111", modalEditTab);
     console.log("addPartner", addPartner);
-    
-   
+
+
     const [showData, setShowData] = useState<any>(partnerDetailData);
-   
+
     useEffect(() => {
         setLoading(true)
         setShowData(partnerDetailData);
-        
+
     }, [])
 
     console.log("showData", showData);
     const formatDate = (dateString?: string) => {
-        const date = dateString ? new Date(dateString) : new Date(); 
+        const date = dateString ? new Date(dateString) : new Date();
         return date.toLocaleDateString("en-GB", {
-          weekday: "short", 
-          day: "2-digit",   
-          month: "short",   
-          year: "numeric"   
+            weekday: "short",
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
         });
-      }
+    }
 
-      const handelEdit = () => {
-        
-        setAddPartner(true); 
-        setModalEditTab("medical history");  
-      }
+    const handelEdit = () => {
+
+        setAddPartner(true);
+        setModalEditTab("medical history");
+    }
     return (
         <>
             {showPartnerDetail && (
@@ -98,26 +98,26 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                 </div>
             )}
 
-                        <Modal
-                            show={addPartner}
-                            onHide={() => setAddPartner(false)}
-                            header="Add Partner "
-                            closeButton={true}
-                            size="lg"
-                        >
-                            <div className="mb-0">
-                                <AddPartnerDetailsForm 
-                                setShowContent={setShowContent} 
-                                setShowPartnerDetail={setShowPartnerDetail} 
-                                setAddPartner={setAddPartner} 
-                                setShowData={setShowData} 
-                                modalEditTab={modalEditTab} 
-                                setModalEditTab={setModalEditTab}
-                                showData={showData}
-                                eventKey={eventKey === 1}
-                                />
-                            </div>
-                        </Modal>
+            <Modal
+                show={addPartner}
+                onHide={() => setAddPartner(false)}
+                header="Add Partner "
+                closeButton={true}
+                size="lg"
+            >
+                <div className="mb-0">
+                    <AddPartnerDetailsForm
+                        setShowContent={setShowContent}
+                        setShowPartnerDetail={setShowPartnerDetail}
+                        setAddPartner={setAddPartner}
+                        setShowData={setShowData}
+                        modalEditTab={modalEditTab}
+                        setModalEditTab={setModalEditTab}
+                        showData={showData}
+                        eventKey={eventKey === 1}
+                    />
+                </div>
+            </Modal>
 
 
             {showContent && (
@@ -183,7 +183,7 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <p className="contact-details-heading mb-3">Medical History</p>
                                             <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => handelEdit()}>
-                                                <Image src={EditIcon} alt="Edit"  /> Edit
+                                                <Image src={EditIcon} alt="Edit" /> Edit
                                             </Button>
                                         </div>
 
@@ -275,24 +275,26 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                                                     )}
                                                 </div>
                                             </Col>
+                                            <div className='d-flex justify-content-between align-items-center'>
+                                                <Col lg={5} md={12} sm={4}>
+                                                    <div className="mb-3">
+                                                        <h6 className="mb-1 contact-details-emergency">Physical Exercise</h6>
+                                                        <p className="mb-2 border-box-orange-font box-border-orange d-inline-block">
+                                                            {item.exercise || 'Not specified'}
+                                                        </p>
+                                                    </div>
+                                                </Col>
 
-                                            <Col lg={5} md={12}>
-                                                <div className="mb-3">
-                                                    <h6 className="mb-1 contact-details-emergency">Physical Exercise</h6>
-                                                    <p className="mb-2 border-box-orange-font box-border-orange d-inline-block">
-                                                        {item.exercise || 'Not specified'}
-                                                    </p>
-                                                </div>
-                                            </Col>
+                                                <Col lg={7} md={12} sm={8}>
+                                                    <div className="mb-3 pe-md-3">
+                                                        <h6 className="mb-1 contact-details-emergency">Stress Level</h6>
+                                                        <p className="mb-2 d-inline-block border-box-red-font box-border-red">
+                                                            {item.stress || 'Not specified'}
+                                                        </p>
+                                                    </div>
 
-                                            <Col lg={7} md={12}>
-                                                <div className="mb-3">
-                                                    <h6 className="mb-1 contact-details-emergency">Stress Level</h6>
-                                                    <p className="mb-2 d-inline-block border-box-red-font box-border-red">
-                                                        {item.stress || 'Not specified'}
-                                                    </p>
-                                                </div>
-                                            </Col>
+                                                </Col>
+                                            </div>
                                         </Row>
                                     </div>
                                 );
@@ -304,7 +306,7 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className="contact-details-heading">Physical Assessment </p>
                                 <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3">
-                                    <Image src={PhysicalAssessment} alt="Edit" onClick={() => {setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(0);}}/>
+                                    <Image src={PhysicalAssessment} alt="Edit" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(0); }} />
                                 </Button>
                             </div>
                             <Accordion defaultActiveKey="0">
@@ -313,7 +315,7 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                                     <Accordion.Item eventKey={index.toString()} className='phisical-assessment-accordion-item mb-3' key={index}>
                                         <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                             <div className='phisical-assessment-accordion-title-showData'>
-                                            {formatDate(item.date)}
+                                                {formatDate(item.date)}
                                             </div>
                                         </Accordion.Header>
                                         <Accordion.Body>
@@ -398,7 +400,7 @@ export default function PartnerDetail({setActiveTab}: {setActiveTab: (tab: strin
                                 <div key={index} className="medical-history-details text-start">
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <p className="contact-details-heading mb-3">Fertility Assessment</p>
-                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => {setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(1);  }}>
+                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(1); }}>
                                             <Image src={EditIcon} alt="Edit" /> Edit
                                         </Button>
                                     </div>
