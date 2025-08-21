@@ -433,7 +433,7 @@ const ProfileBasicDetail = () => {
                     ) : (
                         <div>
                             <Accordion defaultActiveKey="0">
-                                <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small">
+                                <Button className='mb-3' onClick={() => setShowFertilityAssessment(true)} variant="outline" disabled={false} contentSize="small">
                                     <Image src={PencilEditIcons} width={16} height={16} alt="PencilEditIcons" /> Edit
                                 </Button>
                                 {modalFormFertilityData.map((item: any, index: any) => {
