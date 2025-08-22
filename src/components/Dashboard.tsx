@@ -25,6 +25,12 @@ import {
 import Image from "next/image";
 import InputSelect from "./ui/InputSelect";
 
+import dynamic from "next/dynamic";
+
+const LineChart = dynamic(() => import("react-chartjs-2").then(mod => mod.Line), { ssr: false });
+const BarChart = dynamic(() => import("react-chartjs-2").then(mod => mod.Bar), { ssr: false });
+const DoughnutChart = dynamic(() => import("react-chartjs-2").then(mod => mod.Doughnut), { ssr: false });
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -239,8 +245,7 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
 // ---------- Dashboard Component ----------
 const Dashboard: React.FC = () => {
   const [formData, setFormData] = useState<FormData>();
-
-  const [data, setData] = useState<DashboardData>({
+  const initialData = {
     appointments: 18,
     appointmentsChange: 40,
     activePatients: 131,
@@ -271,11 +276,46 @@ const Dashboard: React.FC = () => {
       ],
       values: [20, 35, 25, 45, 40, 35, 30, 25],
     },
-  });
+  };
+
+  const [data, setData] = useState<DashboardData | any>(initialData);
+
+  // const [data, setData] = useState<DashboardData | any>({
+  //   appointments: 18,
+  //   appointmentsChange: 40,
+  //   activePatients: 131,
+  //   activePatientsChange: 25,
+  //   newPatients: 32,
+  //   newPatientsChange: 55,
+  //   noShowRate: 24,
+  //   noShowRateChange: -10,
+  //   patientOverview: { male: 45, female: 55 },
+  //   appointmentData: {
+  //     months: ["Jan", "Feb", "Mar", "Apr"],
+  //     ivfTreatment: [3800, 2600, 3300, 3500],
+  //     kitTreatment: [1900, 3200, 2200, 1600],
+  //     icsiTreatment: [3200, 2400, 1400, 2400],
+  //     gametefreezing: [800, 1200, 800, 1000],
+  //     pgtTesting: [600, 800, 400, 800],
+  //   },
+  //   dropoutData: {
+  //     labels: [
+  //       "Fertility Assessment ",
+  //       "Stimulation",
+  //       "Egg Retrieval",
+  //       "Fertilisation",
+  //       "IVF",
+  //       "Embryo Culture",
+  //       "Embryo Transfer",
+  //       "Pregnancy Test",
+  //     ],
+  //     values: [20, 35, 25, 45, 40, 35, 30, 25],
+  //   },
+  // });
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setData((prev) => ({
+      setData((prev: DashboardData | any) => ({
         ...prev,
         appointments: Math.floor(Math.random() * 50) + 10,
         activePatients: Math.floor(Math.random() * 200) + 100,
@@ -395,6 +435,10 @@ const Dashboard: React.FC = () => {
 
   const progressSegments = generateProgressSegments();
 
+  const [mounted, setMounted] = useState(false);
+useEffect(() => setMounted(true), []);
+if (!mounted) return null;
+
 
   return (
     <>
@@ -456,7 +500,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
                 <div >
-                  <Doughnut data={patientChartData} options={{ responsive: true }} />
+                  <DoughnutChart data={patientChartData} options={{ responsive: true }} />
                 </div>
               </Card.Body>
             </Card>
