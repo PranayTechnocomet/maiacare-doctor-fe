@@ -153,7 +153,6 @@ const ProfileBasicDetail = () => {
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
     const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]);
 
-
     console.log("medicalHistoryFormData", medicalHistoryFormData);
     const [modalFormData, setModalFormData] = useState<any>([]);
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<any>([]);
