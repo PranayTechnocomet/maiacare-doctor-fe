@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
 import Appointments from "../assets/images/Appointments.png";
 import ActivePatients from "../assets/images/Active Patients.png";
 import NewPatients from "../assets/images/New Patients.png";
 import NoShowRate from "../assets/images/No Show Rate.png";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,6 +23,7 @@ import {
   ChartData,
 } from "chart.js";
 import Image from "next/image";
+import InputSelect from "./ui/InputSelect";
 
 ChartJS.register(
   CategoryScale,
@@ -72,6 +74,11 @@ interface WaveChartProps {
   width?: number;
   height?: number;
 }
+const handleChange = (
+  e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+
+};
 
 // ---------- WaveChart Component ----------
 const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
@@ -184,7 +191,25 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
   return (
     <div className="card shadow-sm">
       <div className="card-header bg-light text-center">
-        <h6 className="mb-0 d-flex align-items-start justify-content-start">IVF Process Journey</h6>
+        <div className="d-flex align-items-center justify-content-between">
+          <h6 className="mb-0 d-flex align-items-start justify-content-start dashboard-chart-heading">Patient Dropout Rate</h6>
+
+          <InputSelect
+           className="dashboard-chart-dropdown1 p-0"
+            name="ivf"
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+              handleChange(e);
+            }}
+            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+            required={false}
+            disabled={false}
+            options={[
+              { id: "1", value: "1", label: "IVF 1" },
+              { id: "2", value: "2", label: "IVF 2" },
+              { id: "3", value: "3", label: "IVF 3" },
+            ]}
+          />
+        </div>
 
       </div>
 
@@ -213,6 +238,8 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
 
 // ---------- Dashboard Component ----------
 const Dashboard: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>();
+
   const [data, setData] = useState<DashboardData>({
     appointments: 18,
     appointmentsChange: 40,
@@ -265,7 +292,7 @@ const Dashboard: React.FC = () => {
 
   const formatChange = (change: number) => {
     const isPositive = change >= 0;
-    const color = isPositive ? "text-success" : "text-danger";
+    const color = isPositive ? "dashboard-card-green" : "dashboard-card-orange";
     const icon = isPositive ? "↗" : "↘";
     return (
       <span className={color}>
@@ -284,22 +311,23 @@ const Dashboard: React.FC = () => {
       { label: "PGT Testing", data: data.appointmentData.pgtTesting, backgroundColor: "#F1CABB" },
     ],
   };
-  
+
   const options: ChartOptions<"bar"> = {
     responsive: true,
     plugins: {
       legend: {
         position: "bottom", // ✅ this is allowed
         labels: {
-          padding: 20,
-          boxWidth: 20,
+          padding: 30,
+          boxHeight: 10,
+          boxWidth: 10,
           usePointStyle: true,
-          pointStyle: 'rectRounded',
+          pointStyle: 'circle',
         },
       },
       title: {
         display: true,
-        text: "Appointment Overview",
+        // text: "Appointment Overview",
         align: "start", // ✅ "start" | "center" | "end"
       },
     },
@@ -377,8 +405,8 @@ const Dashboard: React.FC = () => {
             <Card className="">
               <Card.Body >
                 <Card.Title className="phisical-assessment-accordion-title-showData"><Image src={Appointments} alt="Appointments" width={38} height={38} className="me-3"></Image>Appointments</Card.Title>
-                <h2 className="dashboard-subheader">{data.appointments}</h2>
-                {formatChange(data.appointmentsChange)}
+                <h2 className="dashboard-subheader mt-3 mb-0">{data.appointments}</h2>
+                <h1 className="dashboard-card-subtitle mt-0">{formatChange(data.appointmentsChange)}</h1>
               </Card.Body>
             </Card>
           </Col>
@@ -386,7 +414,7 @@ const Dashboard: React.FC = () => {
             <Card className="">
               <Card.Body>
                 <Card.Title className="phisical-assessment-accordion-title-showData"><Image src={ActivePatients} alt="Active Patients" width={38} height={38} className="me-3"></Image>Active Patients</Card.Title>
-                <h2 className="dashboard-subheader">{data.activePatients}</h2>
+                <h2 className="dashboard-subheader mt-3 mb-0">{data.activePatients}</h2>
                 {formatChange(data.activePatientsChange)}
               </Card.Body>
             </Card>
@@ -395,7 +423,7 @@ const Dashboard: React.FC = () => {
             <Card className="">
               <Card.Body>
                 <Card.Title className="phisical-assessment-accordion-title-showData"><Image src={NewPatients} alt="New Patients" width={38} height={38} className="me-3"></Image> New Patients</Card.Title>
-                <h2 className="dashboard-subheader">{data.newPatients}</h2>
+                <h2 className="dashboard-subheader mt-3 mb-0">{data.newPatients}</h2>
                 {formatChange(data.newPatientsChange)}
               </Card.Body>
             </Card>
@@ -404,7 +432,7 @@ const Dashboard: React.FC = () => {
             <Card className="">
               <Card.Body>
                 <Card.Title className="phisical-assessment-accordion-title-showData"><Image src={NoShowRate} alt="No Show Rate" width={38} height={38} className="me-3"></Image>No Show Rate</Card.Title>
-                <h2 className="dashboard-subheader">{data.noShowRate}%</h2>
+                <h2 className="dashboard-subheader mt-3 mb-0">{data.noShowRate}%</h2>
                 {formatChange(data.noShowRateChange)}
               </Card.Body>
             </Card>
@@ -417,10 +445,17 @@ const Dashboard: React.FC = () => {
             <WaveChart height={400} />
           </Col>
           <Col lg={4}>
-            <Card>
+            <Card className="h-100">
               <Card.Body>
-                <Card.Title>Patient Overview</Card.Title>
-                <div style={{ height: 440 }}>
+                <div className="d-flex justify-content-between align-items-center">
+                  <Card.Title className="dashboard-chart-heading">Patient Overview</Card.Title>
+                  <div className="patient-journey-up-icon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                      <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
+                    </svg>
+                  </div>
+                </div>
+                <div >
                   <Doughnut data={patientChartData} options={{ responsive: true }} />
                 </div>
               </Card.Body>
@@ -432,8 +467,16 @@ const Dashboard: React.FC = () => {
           <Col lg={8}>
             <Card>
               <Card.Body>
-                <Card.Title>Appointment Overview</Card.Title>
-                <div style={{ height: 400 }}>
+
+                <div className="d-flex justify-content-between align-items-center">
+                  <Card.Title className="dashboard-chart-heading">Appointment Overview</Card.Title>
+                  <div className="patient-journey-up-icon1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                      <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
+                    </svg>
+                  </div>
+                </div>
+                <div style={{ height: '100%' }}>
                   <Bar data={appointmentChartData} options={options} />
                 </div>
               </Card.Body>
@@ -455,28 +498,17 @@ const Dashboard: React.FC = () => {
                 <div className="card-body" style={{ padding: '24px' }}>
                   {/* Header */}
                   <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h4 className="mb-0" style={{
-                      fontWeight: '600',
-                      fontSize: '18px',
-                      color: '#333333',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                    }}>
+
+                    <p className="mb-0 dashboard-chart-heading">
                       Treatment Success Rate
-                    </h4>
-                    <div
-                      style={{
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '50%',
-                        backgroundColor: '#f0f0f0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <span style={{ fontSize: '12px', color: '#666', fontWeight: 'bold' }}>i</span>
+                    </p>
+                    <div className="patient-journey-up-icon1">
+                      <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 0.75C8.07164 0.75 6.18657 1.32183 4.58319 2.39317C2.97982 3.46451 1.73013 4.98726 0.992179 6.76884C0.254225 8.55042 0.061142 10.5108 0.437348 12.4021C0.813554 14.2934 1.74215 16.0307 3.10571 17.3943C4.46928 18.7579 6.20656 19.6865 8.09787 20.0627C9.98919 20.4389 11.9496 20.2458 13.7312 19.5078C15.5127 18.7699 17.0355 17.5202 18.1068 15.9168C19.1782 14.3134 19.75 12.4284 19.75 10.5C19.7473 7.91498 18.7192 5.43661 16.8913 3.60872C15.0634 1.78084 12.585 0.75273 10 0.75ZM10 18.75C8.36831 18.75 6.77326 18.2661 5.41655 17.3596C4.05984 16.4531 3.00242 15.1646 2.378 13.6571C1.75358 12.1496 1.5902 10.4908 1.90853 8.8905C2.22685 7.29016 3.01259 5.82015 4.16637 4.66637C5.32016 3.51259 6.79017 2.72685 8.39051 2.40852C9.99085 2.09019 11.6497 2.25357 13.1571 2.87799C14.6646 3.50242 15.9531 4.55984 16.8596 5.91655C17.7661 7.27325 18.25 8.8683 18.25 10.5C18.2475 12.6873 17.3775 14.7843 15.8309 16.3309C14.2843 17.8775 12.1873 18.7475 10 18.75ZM11.5 15C11.5 15.1989 11.421 15.3897 11.2803 15.5303C11.1397 15.671 10.9489 15.75 10.75 15.75C10.3522 15.75 9.97065 15.592 9.68934 15.3107C9.40804 15.0294 9.25 14.6478 9.25 14.25V10.5C9.05109 10.5 8.86033 10.421 8.71967 10.2803C8.57902 10.1397 8.5 9.94891 8.5 9.75C8.5 9.55109 8.57902 9.36032 8.71967 9.21967C8.86033 9.07902 9.05109 9 9.25 9C9.64783 9 10.0294 9.15804 10.3107 9.43934C10.592 9.72064 10.75 10.1022 10.75 10.5V14.25C10.9489 14.25 11.1397 14.329 11.2803 14.4697C11.421 14.6103 11.5 14.8011 11.5 15ZM8.5 6.375C8.5 6.1525 8.56598 5.93499 8.6896 5.74998C8.81322 5.56498 8.98892 5.42078 9.19449 5.33564C9.40005 5.25049 9.62625 5.22821 9.84448 5.27162C10.0627 5.31502 10.2632 5.42217 10.4205 5.5795C10.5778 5.73684 10.685 5.93729 10.7284 6.15552C10.7718 6.37375 10.7495 6.59995 10.6644 6.80552C10.5792 7.01109 10.435 7.18679 10.25 7.3104C10.065 7.43402 9.84751 7.5 9.625 7.5C9.32664 7.5 9.04049 7.38147 8.82951 7.1705C8.61853 6.95952 8.5 6.67337 8.5 6.375Z" fill="#2B4360" />
+                      </svg>
+
                     </div>
+
                   </div>
 
                   {/* Total Count */}
