@@ -80,10 +80,10 @@ const columns: ColumnDef<Patient>[] = [
       return (
         <span
           className={`badge ${status === "Active"
-              ? "bg-primary"
-              : status === "Discontinued"
-                ? "bg-warning"
-                : "bg-danger"
+            ? "bg-primary"
+            : status === "Discontinued"
+              ? "bg-warning"
+              : "bg-danger"
             }`}
         >
           {status}
@@ -389,16 +389,16 @@ export default function Page() {
         </div>
       </ContentContainer>
 
-<ContentContainer>
-     
-              <div className="my-4 bg-warning">
-                <div>{tempShowData.name}</div>
-                <div>{tempShowData.description}</div>
-                <div>{tempShowData.phone}</div>
-                <div>{tempShowData.startTime}</div>
-                <div>{tempShowData.endTime}</div>
-              </div>
-</ContentContainer>
+      <ContentContainer>
+
+        <div className="my-4 bg-warning">
+          <div>{tempShowData.name}</div>
+          <div>{tempShowData.description}</div>
+          <div>{tempShowData.phone}</div>
+          <div>{tempShowData.startTime}</div>
+          <div>{tempShowData.endTime}</div>
+        </div>
+      </ContentContainer>
 
       <CustomTabs
         activeKey={activeTab}

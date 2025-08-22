@@ -299,6 +299,7 @@
     color: var(--color-brand);
 }
 
+
 /* pankaj solanki start*/
 
 .setting-password-item-name {
@@ -722,7 +723,55 @@
     font-size: 40px;
     color: var(--color-radio-lable);
 }
-
+.dashboard-subheader{
+    font-size: 31px;
+    font-weight: 600;
+    line-height: 33px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+.dashboard-card-subtitle{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+.dashboard-chart-heading{
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+.dashboard-card-green{
+    font-size: 14px !important;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--dashboard-card-green);
+}
+.dashboard-card-orange{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--login-font);
+}
+.dashboard-card-red{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--dashboard-card-red);
+}
+.dashboard-chart-dropdown{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--input-forgot-password);
+}
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
