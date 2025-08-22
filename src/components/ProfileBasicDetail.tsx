@@ -24,9 +24,6 @@ import EditIcon from "../assets/images/EditIcon.png";
 import MedicalHistory from './form/MedicalHistory';
 import Button from './ui/Button';
 
-
-
-
 // JSON data for accordion sections
 import { physicalAssessmentData } from '@/utils/StaticData';
 import MenstrualCycleIcon from '../assets/images/MenstrualCycle-icons.png'
@@ -43,6 +40,31 @@ const contactData = {
         relation: 'Husband'
     }
 };
+
+type FormData = {
+    ageAtFirstMenstruation: string;
+    cycleLength: string;
+    periodLength: string;
+    date: string;
+    isCycleRegular: string;
+    menstrualIssues: string;
+    pregnancy: string;
+    timeduration: string;
+    ectopicpregnancy: string;
+};
+
+const initialFormData: FormData = {
+    ageAtFirstMenstruation: "",
+    cycleLength: "",
+    periodLength: "",
+    date: "",
+    isCycleRegular: "Regular",
+    menstrualIssues: "yes",
+    pregnancy: "yes",
+    timeduration: "",
+    ectopicpregnancy: "yes"
+};
+
 
 const patientJourneyData = [
     {
@@ -125,6 +147,7 @@ const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
     const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
+    const [formData, setFormData] = useState<FormData>(initialFormData);
     const [showModal, setShowModal] = useState(false);
     const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<any>([]);
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
@@ -139,6 +162,21 @@ const ProfileBasicDetail = () => {
     console.log("modalFormData", modalFormData);
     console.log("modalFormPhisicalData", modalFormPhisicalData);
     console.log("modalFormFertilityData", modalFormFertilityData);
+
+    const handleEdit = (item: any) => {
+        setFormData({
+            ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
+            cycleLength: item.cycleLength || "",
+            periodLength: item.periodLength || "",
+            date: item.date || "",
+            isCycleRegular: item.isCycleRegular || "",
+            menstrualIssues: item.menstrualIssues || "",
+            pregnancy: item.pregnancy || "",
+            timeduration: item.timeduration || "",
+            ectopicpregnancy: item.ectopicpregnancy || ""
+        });
+        setShowFertilityAssessment(true); // open the form modal
+    }
 
     const accordionData = [
         {
@@ -340,7 +378,7 @@ const ProfileBasicDetail = () => {
                                                     {item.date}
                                                 </div>
                                             </Accordion.Header>
-                                            <Accordion.Body>
+                                            <Accordion.Body >
                                                 <Row className='g-3'>
                                                     <Col md={4} sm={6}>
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
@@ -417,7 +455,8 @@ const ProfileBasicDetail = () => {
             title: 'Fertility Assessment',
             content: (
                 <>
-                    {modalFormFertilityData.length == 0 ? (
+                    {/* Object.keys(modalFormFertilityData).length === 0 && */}
+                    {Object.keys(modalFormFertilityData).length === 0 ? (
                         <div className="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81" fill="none">
                                 <path d="M16.8308 29.5077C16.5023 29.5092 16.1768 29.4452 15.8734 29.3192C15.5701 29.1933 15.2949 29.008 15.0641 28.7743L11.7308 25.441C9.06581 22.7926 7.55607 19.198 7.53076 15.441C7.53502 14.4301 7.74005 13.4301 8.13394 12.499C8.52784 11.568 9.10275 10.7244 9.8253 10.0174C10.5479 9.31032 11.4037 8.75384 12.343 8.38024C13.2824 8.00663 14.2866 7.82334 15.2974 7.84101C16.7924 7.83521 18.255 8.2763 19.4974 9.10768L28.2308 14.941C28.7395 15.3281 29.0806 15.8953 29.184 16.5262C29.2875 17.157 29.1453 17.8035 28.7868 18.3327C28.4282 18.862 27.8806 19.2338 27.2564 19.3717C26.6322 19.5096 25.9789 19.4032 25.4308 19.0743L16.8308 13.2743C16.4019 13.0009 15.906 12.851 15.3974 12.841C14.699 12.841 14.0292 13.1184 13.5354 13.6123C13.0415 14.1061 12.7641 14.7759 12.7641 15.4743C12.7496 16.712 12.9841 17.94 13.4536 19.0853C13.9232 20.2306 14.6182 21.2697 15.4974 22.141L18.8308 25.4743C19.2989 25.9431 19.5619 26.5785 19.5619 27.241C19.5619 27.9035 19.2989 28.5389 18.8308 29.0077C18.5532 29.2304 18.2307 29.3903 17.8855 29.4766C17.5403 29.5629 17.1805 29.5735 16.8308 29.5077Z" fill="#9CA3AF" />
@@ -428,152 +467,150 @@ const ProfileBasicDetail = () => {
                             </svg>
                             <p className='patient-accordion-content-subtitle my-3'>No fertility assessment</p>
                             <Button onClick={() => setShowFertilityAssessment(true)} variant="outline" disabled={false} contentSize="medium" >
-                                <IoAdd /> Add Physical Assessment
+                                <IoAdd /> Add Fertility Assessment
                             </Button>
                         </div>
                     ) : (
                         <div>
+                            <Button className='mb-3' onClick={() => {
+                                handleEdit(modalFormFertilityData)
+                            }} variant="outline" disabled={false} contentSize="small">
+                                <Image src={PencilEditIcons} width={16} height={16} alt="PencilEditIcons" /> Edit
+                            </Button>
+
                             <Accordion defaultActiveKey="0">
-                                <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small">
-                                    <Image src={PencilEditIcons} width={16} height={16} alt="PencilEditIcons" /> Edit
-                                </Button>
-                                {modalFormFertilityData.map((item: any, index: any) => {
-                                    return (
-                                        <>
-                                            <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' key={index.toString()}>
-                                                <Accordion.Header className='phisical-assessment-accordion-title-showData'>
-                                                    <div className='d-flex justify-content-center align-items-center gap-2'>
+                                <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
+                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                        <div className='d-flex justify-content-center align-items-center gap-2'>
 
-                                                        <Image src={PregnancyIcon} width={34} height={34} alt="" />
-                                                        <span className='fertilityAssessment-subAccordion-title'>
-                                                            Menstrual Cycle
-                                                        </span>
+                                            <Image src={PregnancyIcon} width={34} height={34} alt="" />
+                                            <span className='fertilityAssessment-subAccordion-title'>
+                                                Menstrual Cycle
+                                            </span>
 
-                                                    </div>
-                                                </Accordion.Header>
-                                                <Accordion.Body>
+                                        </div>
+                                    </Accordion.Header>
+                                    <Accordion.Body>
 
-                                                    <Row className='g-3'>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Age at first menstruation
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.ageAtFirstMenstruation}
-                                                                </span>
-                                                            </div>
+                                        <Row className='g-3'>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Age at first menstruation
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.ageAtFirstMenstruation}
+                                                    </span>
+                                                </div>
 
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Cycle Length
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.cycleLength}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Cycle Length
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.cycleLength}
+                                                    </span>
+                                                </div>
+                                            </Col>
 
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Period Length
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.periodLength}
-                                                                </span>
-                                                            </div>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Period Length
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.periodLength}
+                                                    </span>
+                                                </div>
 
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Last Period Date
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.date}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Is your cycle regular?
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.isCycleRegular}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Do you experience menstrual issues?  *
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.menstrualIssues}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Last Period Date
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.date}
+                                                    </span>
+                                                </div>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Is your cycle regular?
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.isCycleRegular}
+                                                    </span>
+                                                </div>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Do you experience menstrual issues?  *
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.menstrualIssues}
+                                                    </span>
+                                                </div>
+                                            </Col>
 
-                                                    </Row>
+                                        </Row>
 
-                                                </Accordion.Body>
-                                            </Accordion.Item>
+                                    </Accordion.Body>
+                                </Accordion.Item>
 
-                                            <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
-                                                <Accordion.Header className='phisical-assessment-accordion-title-showData'>
-                                                    <div className='d-flex justify-content-center align-items-center gap-2'>
+                                <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
+                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                        <div className='d-flex justify-content-center align-items-center gap-2'>
 
-                                                        <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
-                                                        <span className='fertilityAssessment-subAccordion-title'>
-                                                            Pregnancy
-                                                        </span>
+                                            <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
+                                            <span className='fertilityAssessment-subAccordion-title'>
+                                                Pregnancy
+                                            </span>
 
 
-                                                    </div>
-                                                </Accordion.Header>
-                                                <Accordion.Body>
-                                                    <Row className='g-3'>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Have you been pregnant before?
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.pregnancy}
-                                                                </span>
-                                                            </div>
+                                        </div>
+                                    </Accordion.Header>
+                                    <Accordion.Body>
+                                        <Row className='g-3'>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Have you been pregnant before?
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.pregnancy}
+                                                    </span>
+                                                </div>
 
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    How long have you been trying to conceive?
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.timeduration}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
-                                                        <Col md={6}>
-                                                            <div className="d-flex flex-column gap-1">
-                                                                <span className="contact-details-emergency">
-                                                                    Any history of miscarriage or ectopic pregnancy?
-                                                                </span>
-                                                                <span className="accordion-title-detail">
-                                                                    {item.ectopicpregnancy}
-                                                                </span>
-                                                            </div>
-                                                        </Col>
-                                                    </Row>
-                                                </Accordion.Body>
-                                            </Accordion.Item>
-                                        </>
-                                    )
-                                })}
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        How long have you been trying to conceive?
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.timeduration}
+                                                    </span>
+                                                </div>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className="d-flex flex-column gap-1">
+                                                    <span className="contact-details-emergency">
+                                                        Any history of miscarriage or ectopic pregnancy?
+                                                    </span>
+                                                    <span className="accordion-title-detail">
+                                                        {modalFormFertilityData.ectopicpregnancy}
+                                                    </span>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </Accordion.Body>
+                                </Accordion.Item>
+
 
                             </Accordion>
                         </div>
@@ -766,7 +803,7 @@ const ProfileBasicDetail = () => {
                         {accordionData.map((item) => (
                             <Accordion.Item eventKey={item.id} key={item.id} className='patient-accordion-item mb-3'>
                                 <Accordion.Header onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
-                                    <p className='contact-details-heading'>{item.title}</p>
+                                    <p className='contact-details-heading m-0'>{item.title}</p>
                                 </Accordion.Header>
                                 <Accordion.Body>{item.content}</Accordion.Body>
                             </Accordion.Item>
@@ -794,7 +831,7 @@ const ProfileBasicDetail = () => {
                         size="lg"
                     >
                         <div className="mb-0 ">
-                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} setModalFormFertilityData={setModalFormFertilityData} />
+                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} setModalFormFertilityData={setModalFormFertilityData} setFormData={setFormData} formData={formData} />
 
                         </div>
                     </Modal>
@@ -821,9 +858,9 @@ const ProfileBasicDetail = () => {
 
                 {/* Right Side - Patient Journey */}
                 <Col lg={4} md={12}>
-                    <div className='d-flex justify-content-between align-items-center mb-sm-4 mb-3 px-1'>
+                    <div className='d-flex justify-content-between align-items-center mb-lg-4 mb-3 px-1'>
 
-                        <h6 className='patient-journey-heading'>Patient Journey</h6>
+                        <h6 className='patient-journey-heading m-0'>Patient Journey</h6>
                         <div className='patient-journey-up-icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                 <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />

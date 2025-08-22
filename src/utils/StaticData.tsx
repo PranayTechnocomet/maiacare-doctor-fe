@@ -24,6 +24,54 @@ export const tableResponse: Patient[] = [
   // ...add more rows
 ];
 
+export const appointmentData = [
+  {
+    id: 1,
+    reason: "Ultrasound scan",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    payment: "Pending",
+    status: "Upcoming",
+    prescription: "N / A",
+    invoice: "N / A",
+    actions: "View"
+  },
+  {
+    id: 2,
+    reason: "Blood Test Review",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    payment: "Done",
+    status: "Completed",
+    prescription: "N / A",
+    invoice: "N / A",
+    actions: "View"
+  },
+  {
+    id: 3,
+    reason: "Physical Check-up",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    payment: "Done",
+    status: "Completed",
+    prescription: "N / A",
+    invoice: "N / A",
+    actions: "View"
+  },
+  {
+    id: 4,
+    reason: "Initial Consultation",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    payment: "Done",
+    status: "Completed",
+    prescription: "N / A",
+    invoice: "N / A",
+    actions: "View"
+  },
+
+];
+
 export const MedicalHistoryData = {
   id_medical_history: 1,
   medical_medications: "true",
@@ -158,10 +206,10 @@ export const partnerDetailData = {
 
   },
   medicalHistory: {
-    medication:"yes",
+    medication: "yes",
 
-    medicationContent:"This is Medical Condition",
-    surgeriesContent:"This is Medical Condition",
+    medicationContent: "This is Medical Condition",
+    surgeriesContent: "This is Medical Condition",
     currentMedication: "CureAll 5000, HealMax Plus",
     surgeries: "No",
     MedicalconditionAllergies: ["PCOS", "Thyroid Disorder", "Peanut Allergy", "Lactose Intolerant"],
@@ -179,7 +227,7 @@ export const partnerDetailData = {
       bloodGroup: "O+",
       systolic: "120",
       diastolic: "80",
-      
+
       heartRate: "72",
     },
     {
@@ -193,14 +241,14 @@ export const partnerDetailData = {
       heartRate: "72",
     },
   ],
-  fertilityAssessment:  {
+  fertilityAssessment: {
     semenAnalysis: "Yes | Healthy Semen",
-    semenAnalysisContent:"This Is Seema Analys Content",  
+    semenAnalysisContent: "This Is Seema Analys Content",
     fertilityIssues: "No",
-    fertilityIssuesContent:"This is Fertility Issue Content",
+    fertilityIssuesContent: "This is Fertility Issue Content",
     fertilityTreatment: "No",
-    fertilityTreatmentContent:"This Is fertilityTreatmentContent Contet",
+    fertilityTreatmentContent: "This Is fertilityTreatmentContent Contet",
     surgeries: "No",
-    surgeriesContent:"This Is surgeriesContent Content"
-    }
+    surgeriesContent: "This Is surgeriesContent Content"
+  }
 }

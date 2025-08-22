@@ -21,25 +21,25 @@ type FormData = {
     ectopicpregnancy: string;
 };
 
-const initialFormData: FormData = {
-    ageAtFirstMenstruation: "",
-    cycleLength: "",
-    periodLength: "",
-    date: "",
-    isCycleRegular: "Regular",
-    menstrualIssues: "yes",
-    pregnancy: "yes",
-    timeduration: "",
-    ectopicpregnancy: "yes"
-};
+// const initialFormData: FormData = {
+//     ageAtFirstMenstruation: "" ,
+//     cycleLength: "",
+//     periodLength: "",
+//     date: "",
+//     isCycleRegular: "Regular",
+//     menstrualIssues: "yes",
+//     pregnancy: "yes",
+//     timeduration: "",
+//     ectopicpregnancy: "yes"
+// };
 
 type FormError = Partial<Record<keyof FormData, string>>;
 
 const initialFormError: FormError = {};
 
-export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFormFertilityData }: any) => {
+export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFormFertilityData , setFormData , formData }: any) => {
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    // const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
     const validateForm = (data: FormData): FormError => {
@@ -55,7 +55,6 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
         if (!data.timeduration) errors.timeduration = "Duration is required";
         if (!data.ectopicpregnancy) errors.ectopicpregnancy = "Ectopic pregnancy is required";
 
-
         return errors;
     };
 
@@ -63,20 +62,19 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-        setFormError((prev) => ({ ...prev, [name]: "" }));
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
+        setFormError((prev: any) => ({ ...prev, [name]: "" }));
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("clicked");
 
         const errors = validateForm(formData);
         setFormError(errors);
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
             //   setShowModal(true);
-            setModalFormFertilityData((prev: any) => [...prev, formData]);
+            setModalFormFertilityData(formData);
             setShowFertilityAssessment(false);
             setFormError(initialFormError);
         }
