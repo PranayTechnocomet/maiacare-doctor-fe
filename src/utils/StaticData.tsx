@@ -24,7 +24,7 @@ export const tableResponse: Patient[] = [
   // ...add more rows
 ];
 
-export const appointmentData = [
+export const AppointmentData = [
   {
     id: 1,
     reason: "Ultrasound scan",
@@ -32,8 +32,8 @@ export const appointmentData = [
     time: "3 PM",
     payment: "Pending",
     status: "Upcoming",
-    prescription: "N / A",
-    invoice: "N / A",
+    prescription: "N/A",
+    invoice: "N/A",
     actions: "View"
   },
   {
@@ -43,8 +43,8 @@ export const appointmentData = [
     time: "3 PM",
     payment: "Done",
     status: "Completed",
-    prescription: "N / A",
-    invoice: "N / A",
+    prescription: "file",
+    invoice: "file",
     actions: "View"
   },
   {
@@ -54,8 +54,8 @@ export const appointmentData = [
     time: "3 PM",
     payment: "Done",
     status: "Completed",
-    prescription: "N / A",
-    invoice: "N / A",
+    prescription: "viewfile",
+    invoice: "viewfile",
     actions: "View"
   },
   {
@@ -65,12 +65,55 @@ export const appointmentData = [
     time: "3 PM",
     payment: "Done",
     status: "Completed",
-    prescription: "N / A",
-    invoice: "N / A",
+    prescription: "viewfile",
+    invoice: "viewfile",
     actions: "View"
   },
 
 ];
+
+export const PaymentHistoryData = [
+  {
+    transactionId: "TXN1234567890",
+    serviceType: "Treatment",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    paymentMode: "UPI",
+    amount: "₹1,200",
+    status: "Pending",
+    actions: "View"
+  },
+  {
+    transactionId: "TXN1234567890",
+    serviceType: "Treatment",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    paymentMode: "UPI",
+    amount: "₹1,200",
+    status: "Paid",
+    actions: "View"
+  },
+  {
+    transactionId: "TXN1234567890",
+    serviceType: "Lab Test",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    paymentMode: "UPI",
+    amount: "₹1,200",
+    status: "Paid",
+    actions: "View"
+  },
+  {
+    transactionId: "TXN1234567890",
+    serviceType: "Consultation",
+    date: "11 Feb 2025",
+    time: "3 PM",
+    paymentMode: "UPI",
+    amount: "₹1,200",
+    status: "Refunded",
+    actions: "View"
+  },
+]
 
 export const MedicalHistoryData = {
   id_medical_history: 1,

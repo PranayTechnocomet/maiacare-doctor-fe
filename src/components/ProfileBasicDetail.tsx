@@ -174,7 +174,7 @@ const ProfileBasicDetail = () => {
             timeduration: item.timeduration || "",
             ectopicpregnancy: item.ectopicpregnancy || ""
         });
-        setShowFertilityAssessment(true); // open the form modal
+        setShowFertilityAssessment(true);
     }
 
     const accordionData = [
@@ -627,18 +627,18 @@ const ProfileBasicDetail = () => {
                 <div>
                     {medicalHistoryFormData && medicalHistoryFormData.length > 0 ? (
                         <div className="mb-3">
-                            <Button 
+                            <Button
                                 onClick={() => {
                                     setEditingMedicalHistory(medicalHistoryFormData[0]);
                                     setShowModal(true);
-                                }} 
-                                className="mb-3" 
-                                variant="outline" 
+                                }}
+                                className="mb-3"
+                                variant="outline"
                                 contentSize="small"
                             >
                                 <Image src={PencilEditIcons} width={16} height={16} alt="Edit" /> Edit
                             </Button>
-                            
+
                             <Row className="">
                                 <Col lg={5} md={12}>
                                     <div className="">
@@ -653,8 +653,8 @@ const ProfileBasicDetail = () => {
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Surgeries</h6>
                                         <p className=" accordion-title-detail">
-                                            {medicalHistoryFormData[0]?.surgeries === 'yes' 
-                                                ? medicalHistoryFormData[0]?.surgeriescontent || 'Yes' 
+                                            {medicalHistoryFormData[0]?.surgeries === 'yes'
+                                                ? medicalHistoryFormData[0]?.surgeriescontent || 'Yes'
                                                 : 'No'}
                                         </p>
                                     </div>
@@ -693,8 +693,8 @@ const ProfileBasicDetail = () => {
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Physical Exercise</h6>
                                         <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
-                                            {medicalHistoryFormData[0]?.exercise ? 
-                                                medicalHistoryFormData[0].exercise.charAt(0).toUpperCase() + medicalHistoryFormData[0].exercise.slice(1) 
+                                            {medicalHistoryFormData[0]?.exercise ?
+                                                medicalHistoryFormData[0].exercise.charAt(0).toUpperCase() + medicalHistoryFormData[0].exercise.slice(1)
                                                 : 'Not specified'}
                                         </p>
                                     </div>
@@ -704,8 +704,8 @@ const ProfileBasicDetail = () => {
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Stress Level</h6>
                                         <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
-                                            {medicalHistoryFormData[0]?.stress ? 
-                                                medicalHistoryFormData[0].stress.charAt(0).toUpperCase() + medicalHistoryFormData[0].stress.slice(1) 
+                                            {medicalHistoryFormData[0]?.stress ?
+                                                medicalHistoryFormData[0].stress.charAt(0).toUpperCase() + medicalHistoryFormData[0].stress.slice(1)
                                                 : 'Not specified'}
                                         </p>
                                     </div>
@@ -722,12 +722,12 @@ const ProfileBasicDetail = () => {
                                 <path d="M60.3568 63.8798C60.3568 66.5187 58.2175 68.658 55.5786 68.658H48.1395C45.5006 68.658 43.3613 66.5187 43.3613 63.8798C43.3613 61.2409 45.5006 59.1016 48.1395 59.1016H55.5786C58.2175 59.1017 60.3568 61.2409 60.3568 63.8798Z" fill="#8D929C" />
                             </svg>
                             <p className='patient-accordion-content-subtitle my-3'>No Medical History details</p>
-                            <Button 
+                            <Button
                                 onClick={() => {
                                     setEditingMedicalHistory(null);
                                     setShowModal(true);
-                                }} 
-                                variant="outline" 
+                                }}
+                                variant="outline"
                                 contentSize="medium"
                             >
                                 <IoAdd /> Add Medical History
@@ -843,9 +843,9 @@ const ProfileBasicDetail = () => {
                         closeButton={true}
                     >
                         <div className="mb-0">
-                            <MedicalHistory 
-                                setMedicalHistoryFormData={setMedicalHistoryFormData} 
-                                setShowModal={setShowModal} 
+                            <MedicalHistory
+                                setMedicalHistoryFormData={setMedicalHistoryFormData}
+                                setShowModal={setShowModal}
                                 initialData={editingMedicalHistory}
                                 onClose={() => setEditingMedicalHistory(null)}
                             />
