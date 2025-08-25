@@ -492,7 +492,7 @@ const ProfileBasicDetail = () => {
                                     <Accordion.Body>
 
                                         <Row className='g-3'>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Age at first menstruation
@@ -503,7 +503,7 @@ const ProfileBasicDetail = () => {
                                                 </div>
 
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Cycle Length
@@ -514,7 +514,7 @@ const ProfileBasicDetail = () => {
                                                 </div>
                                             </Col>
 
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Period Length
@@ -525,7 +525,7 @@ const ProfileBasicDetail = () => {
                                                 </div>
 
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Last Period Date
@@ -535,7 +535,7 @@ const ProfileBasicDetail = () => {
                                                     </span>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Is your cycle regular?
@@ -545,7 +545,7 @@ const ProfileBasicDetail = () => {
                                                     </span>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Do you experience menstrual issues?  *
@@ -575,7 +575,7 @@ const ProfileBasicDetail = () => {
                                     </Accordion.Header>
                                     <Accordion.Body>
                                         <Row className='g-3'>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Have you been pregnant before?
@@ -586,7 +586,7 @@ const ProfileBasicDetail = () => {
                                                 </div>
 
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         How long have you been trying to conceive?
@@ -596,7 +596,7 @@ const ProfileBasicDetail = () => {
                                                     </span>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
                                                         Any history of miscarriage or ectopic pregnancy?
@@ -609,14 +609,10 @@ const ProfileBasicDetail = () => {
                                         </Row>
                                     </Accordion.Body>
                                 </Accordion.Item>
-
-
                             </Accordion>
                         </div>
                     )}
-
                 </>
-
             ),
         },
         {
@@ -804,7 +800,7 @@ const ProfileBasicDetail = () => {
                                 <Accordion.Header onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
                                     <p className='contact-details-heading m-0'>{item.title}</p>
                                 </Accordion.Header>
-                                <Accordion.Body>{item.content}</Accordion.Body>
+                                <Accordion.Body className='pt-0'>{item.content}</Accordion.Body>
                             </Accordion.Item>
                         ))}
                     </Accordion>

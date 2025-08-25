@@ -268,21 +268,6 @@
     color: var(--font-subtitle);
 }
 
-.contact-details-heading {
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 26px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
-
-.contact-details-subheading {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: Regular;
-    color: var(--color-radio-lable);
-}
 
 .medical-emergency-fimily-history {
     font-weight: 500;
@@ -1078,7 +1063,7 @@
 
 .contact-details-heading {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 26px;
     font-style: SemiBold;
     color: var(--color-heading);
@@ -1086,7 +1071,7 @@
 
 .contact-details-subheading {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
     font-style: Regular;
     color: var(--color-radio-lable);
@@ -1134,7 +1119,7 @@
 }
 
 .patient-journey-heading {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 26px;
     font-style: bold;
@@ -1151,7 +1136,7 @@
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     .patient-accordion-content-subtitle {
@@ -1160,7 +1145,7 @@
     }
 
     .patient-journey-heading {
-        font-size: 20px;
+        font-size: 19px;
     }
 }
 
@@ -1175,11 +1160,11 @@
     }
 
     .contact-details-heading {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .patient-journey-heading {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .contact-details-subheading {
@@ -1196,17 +1181,16 @@
 
 
     .contact-details-heading {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .patient-journey-heading {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .contact-details-subheading {
         font-size: 14px;
     }
-
 
 }
 

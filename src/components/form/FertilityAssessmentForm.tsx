@@ -193,7 +193,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
                         </Accordion.Body>
                     </Accordion.Item>
 
-                    <Accordion.Item eventKey="1">
+                    <Accordion.Item eventKey="1" className="fertilitiy-assement-accodion-item" >
                         <Accordion.Header>
                             <div className="fertilitiy-assement-accodion-title">
                                 Pregnancy
