@@ -268,21 +268,6 @@
     color: var(--font-subtitle);
 }
 
-.contact-details-heading {
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 26px;
-    font-style: SemiBold;
-    color: var(--color-heading);
-}
-
-.contact-details-subheading {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    font-style: Regular;
-    color: var(--color-radio-lable);
-}
 
 .medical-emergency-fimily-history {
     font-weight: 500;
@@ -719,59 +704,67 @@
     color: var(--color-sidebar-icon);
 }
 
-.or-custom-slash{
+.or-custom-slash {
     font-size: 40px;
     color: var(--color-radio-lable);
 }
-.dashboard-subheader{
+
+.dashboard-subheader {
     font-size: 31px;
     font-weight: 600;
     line-height: 33px;
     font-style: SemiBold;
     color: var(--color-heading);
 }
-.dashboard-card-subtitle{
+
+.dashboard-card-subtitle {
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.dashboard-chart-heading{
+
+.dashboard-chart-heading {
     font-size: 22px;
     font-weight: 500;
     line-height: 26px;
     font-style: Medium;
     color: var(--color-heading);
 }
-.dashboard-card-green{
+
+.dashboard-card-green {
     font-size: 14px !important;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--dashboard-card-green);
 }
-.dashboard-card-orange{
+
+.dashboard-card-orange {
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--login-font);
 }
-.dashboard-card-red{
+
+.dashboard-card-red {
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--dashboard-card-red);
 }
-.dashboard-chart-dropdown{
+
+.dashboard-chart-dropdown {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--input-forgot-password);
 }
+
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
@@ -1113,7 +1106,7 @@
 
 .contact-details-heading {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 26px;
     font-style: SemiBold;
     color: var(--color-heading);
@@ -1121,7 +1114,7 @@
 
 .contact-details-subheading {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 20px;
     font-style: Regular;
     color: var(--color-radio-lable);
@@ -1169,7 +1162,7 @@
 }
 
 .patient-journey-heading {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 26px;
     font-style: bold;
@@ -1183,10 +1176,60 @@
     color: var(--color-brand);
 }
 
+.patient-journey-chart-details {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+.treatment-success-rate-charts-patients{
+     font-size: 12px;
+     font-weight: 500;
+     line-height: 16px;
+     font-style: Medium;
+     color: var(--dashboard-chart-patients);
+}
+.treatment-success-rate-datas{
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 26px;
+    font-style: bold;
+    color: var(--color-heading);
+}
+.dashboard-treatment-success-title{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+.dashboard-treatment-success-patients{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-sidebar-icon);
+}
+.dashboard-treatment-success-rate{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--dashboard-card-green);
+}
+.dashboard-treatment-success{
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-radio-lable);
+}
+
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     .patient-accordion-content-subtitle {
@@ -1195,7 +1238,7 @@
     }
 
     .patient-journey-heading {
-        font-size: 20px;
+        font-size: 19px;
     }
 }
 
@@ -1210,11 +1253,11 @@
     }
 
     .contact-details-heading {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .patient-journey-heading {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .contact-details-subheading {
@@ -1231,17 +1274,16 @@
 
 
     .contact-details-heading {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .patient-journey-heading {
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .contact-details-subheading {
         font-size: 14px;
     }
-
 
 }
 

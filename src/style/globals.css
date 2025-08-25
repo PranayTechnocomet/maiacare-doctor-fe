@@ -25,6 +25,7 @@
   --color-invoice-no-title: #6B7280;
   --dashboard-card-green: #2ECF98;
   --dashboard-card-red: #E85966;
+  --dashboard-chart-patients: #057A55;
 
 }
 
@@ -162,11 +163,7 @@ body {
   cursor: pointer;
 }
 
-.maiacare-input-field-container .maiacare-input-field .dashboard-chart-dropdown1  {
-  padding: 5px;
-  width: 81px;
 
-}
 
 @media screen and (max-width: 575px) {
   .patient-journey-up-icon1 {
