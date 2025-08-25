@@ -6,6 +6,7 @@ import Appointments from "../assets/images/Appointments.png";
 import ActivePatients from "../assets/images/Active Patients.png";
 import NewPatients from "../assets/images/New Patients.png";
 import NoShowRate from "../assets/images/No Show Rate.png";
+import '../style/dashboard.css'
 
 import {
   Chart as ChartJS,
@@ -195,7 +196,7 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
           <h6 className="mb-0 d-flex align-items-start justify-content-start dashboard-chart-heading">Patient Dropout Rate</h6>
 
           <InputSelect
-           className="dashboard-chart-dropdown1 p-0"
+            className="dashboard-chart-dropdown1 p-0 "
             name="ivf"
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
               handleChange(e);
@@ -203,10 +204,12 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
             onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
             required={false}
             disabled={false}
+            placeholder="IVF"
             options={[
-              { id: "1", value: "1", label: "IVF 1" },
-              { id: "2", value: "2", label: "IVF 2" },
-              { id: "3", value: "3", label: "IVF 3" },
+
+              { id: "1", value: "1", label: "IVF1" },
+              { id: "2", value: "2", label: "IVF2" },
+              { id: "3", value: "3", label: "IVF3" },
             ]}
           />
         </div>
@@ -215,16 +218,16 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
 
       <div className="card-body p-3">
         <div style={{ height: `${height}px`, width: "100%" }}>
-          <canvas ref={chartRef} style={{ width: "100%", height: "100%" }} />
+          <canvas ref={chartRef} className="dashboard-chart-canvas" />
         </div>
 
         {/* IVF Stages below chart */}
         <div
-          className="d-flex justify-content-between flex-wrap mt-3 "
-          style={{ fontSize: "12px", color: "#495057", fontWeight: 500 }}
+          className="d-flex justify-content-between flex-wrap mt-3 patient-journey-chart-details"
+
         >
           {ivfStages.map((stage, idx) => (
-            <span key={idx} className="text-center flex-fill" style={{ width: "5px" }}>
+            <span key={idx} className="text-center flex-fill patient-journey-charts" >
               {stage}
             </span>
           ))}
@@ -476,26 +479,22 @@ const Dashboard: React.FC = () => {
                     </svg>
                   </div>
                 </div>
-                <div style={{ height: '100%' }}>
+                <div className="appointment-overview-charts">
                   <Bar data={appointmentChartData} options={options} />
                 </div>
               </Card.Body>
             </Card>
           </Col>
           <Col lg={4}>
-            <div style={{ backgroundColor: '#f5f5f5', }}>
+            <div >
 
 
 
               <div
                 className="card border-0"
-                style={{
-                  borderRadius: '16px',
-                  boxShadow: '0 2px 20px rgba(0,0,0,0.08)',
-                  backgroundColor: 'white'
-                }}
+
               >
-                <div className="card-body" style={{ padding: '24px' }}>
+                <div className="card-body treatment-success-rate-charts" >
                   {/* Header */}
                   <div className="d-flex justify-content-between align-items-center mb-3">
 
@@ -514,27 +513,18 @@ const Dashboard: React.FC = () => {
                   {/* Total Count */}
                   <div className="mb-3">
                     <div className="d-flex align-items-center">
-                      <div className="me-2">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#666" strokeWidth="2">
-                          <path d="M7 17l9.2-9.2M17 17H7V7"></path>
+                      <div className="me-2 patient-journey-up-icon1">
+                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M22.5 5.75V11.75C22.5 11.9489 22.421 12.1397 22.2803 12.2803C22.1397 12.421 21.9489 12.5 21.75 12.5C21.5511 12.5 21.3603 12.421 21.2197 12.2803C21.079 12.1397 21 11.9489 21 11.75V7.56031L13.2806 15.2806C13.211 15.3504 13.1282 15.4057 13.0372 15.4434C12.9461 15.4812 12.8486 15.5006 12.75 15.5006C12.6514 15.5006 12.5538 15.4812 12.4628 15.4434C12.3717 15.4057 12.289 15.3504 12.2194 15.2806L8.99999 12.0603L2.78061 18.2806C2.63988 18.4214 2.44901 18.5004 2.24999 18.5004C2.05097 18.5004 1.8601 18.4214 1.71936 18.2806C1.57863 18.1399 1.49957 17.949 1.49957 17.75C1.49957 17.551 1.57863 17.3601 1.71936 17.2194L8.46936 10.4694C8.53902 10.3996 8.62174 10.3443 8.71278 10.3066C8.80383 10.2688 8.90143 10.2494 8.99999 10.2494C9.09855 10.2494 9.19615 10.2688 9.2872 10.3066C9.37824 10.3443 9.46096 10.3996 9.53061 10.4694L12.75 13.6897L19.9397 6.5H15.75C15.5511 6.5 15.3603 6.42098 15.2197 6.28033C15.079 6.13968 15 5.94891 15 5.75C15 5.55109 15.079 5.36032 15.2197 5.21967C15.3603 5.07902 15.5511 5 15.75 5H21.75C21.9489 5 22.1397 5.07902 22.2803 5.21967C22.421 5.36032 22.5 5.55109 22.5 5.75Z" fill="#6FA8DC" />
                         </svg>
+
                       </div>
                       <div>
-                        <span style={{
-                          fontSize: '32px',
-                          fontWeight: '700',
-                          color: '#333',
-                          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                        }}>
+                        <span className="treatment-success-rate-datas">
                           {totalSuccessRate}%
                         </span>
-                        <span style={{
-                          fontSize: '14px',
-                          color: '#4caf50',
-                          fontWeight: '500',
-                          marginLeft: '12px'
-                        }}>
-                          Total Success Contribution
+                        <span className="treatment-success-rate-charts-patients">
+                          + 215 Patients
                         </span>
                       </div>
                     </div>
@@ -542,13 +532,7 @@ const Dashboard: React.FC = () => {
 
                   {/* Progress Bar */}
                   <div className="mb-4">
-                    <div style={{
-                      height: '36px',
-                      display: 'flex',
-                      gap: '1px',
-                      borderRadius: '4px',
-                      overflow: 'hidden'
-                    }}>
+                    <div className="dashboard-progress-bar">
                       {progressSegments.map((segment) => {
                         const numBars = Math.max(1, Math.round(segment.percentage / 2));
                         const bars = [];
@@ -570,11 +554,7 @@ const Dashboard: React.FC = () => {
                         return (
                           <div
                             key={segment.id}
-                            style={{
-                              display: 'flex',
-                              gap: '1px',
-                              marginRight: '2px'
-                            }}
+                            className="dashboard-progress-bars"
                           >
                             {bars}
                           </div>
@@ -599,20 +579,10 @@ const Dashboard: React.FC = () => {
                             />
                           </div>
                           <div className="flex-grow-1">
-                            <div style={{
-                              fontSize: '16px',
-                              fontWeight: '600',
-                              color: '#333',
-                              marginBottom: '2px',
-                              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                            }}>
+                            <div className="dashboard-treatment-success-title">
                               {treatment.name}
                             </div>
-                            <div style={{
-                              fontSize: '14px',
-                              color: '#999',
-                              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                            }}>
+                            <div className="dashboard-treatment-success-patients mt-2">
                               {treatment.patients} Patients
                             </div>
                           </div>
@@ -625,24 +595,15 @@ const Dashboard: React.FC = () => {
                                 fill="none"
                                 stroke="#4caf50"
                                 strokeWidth="2"
-                                style={{ marginRight: '4px' }}
+
+                                className="dashboard-treatment-success-icon"
                               >
                                 <path d="M7 17l9.2-9.2M17 17H7V7"></path>
                               </svg>
-                              <span style={{
-                                fontSize: '16px',
-                                fontWeight: '600',
-                                color: '#4caf50',
-                                marginRight: '4px',
-                                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                              }}>
+                              <span className="dashboard-treatment-success-rate">
                                 {treatment.successRate}%
                               </span>
-                              <span style={{
-                                fontSize: '14px',
-                                color: '#666',
-                                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                              }}>
+                              <span className="dashboard-treatment-success ps-1">
                                 Success
                               </span>
                             </div>
