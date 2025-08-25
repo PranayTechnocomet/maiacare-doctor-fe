@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import Dashboard from "@/components/Dashboard";
+import DoctorListing from "@/components/DoctorListing";
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();
@@ -12,10 +13,10 @@ function Page() {
     dispatch(setHeaderData({ title: "Appointments", subtitle: "Appointments List" }));
   }, []);
   return (
-    // <div>Appointments</div>
-    <>
-    <Dashboard />
-    </>
+    <div>
+      {/* <h1>Appointments</h1></div> */}
+    <DoctorListing /> 
+    </div>
   )
 }
 

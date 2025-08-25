@@ -19,10 +19,14 @@
   --color-radio-lable: #3E4A57;
   --color-placeholder-input: #475569;
   --or-font-color: #B0B4C1;
-  --border-box:#FF8A4C;
-  --border-box-blue:#3F83F8;
-  --border-box-red:#F05252;
-  --color-invoice-no-title:#6B7280;
+  --border-box: #FF8A4C;
+  --border-box-blue: #3F83F8;
+  --border-box-red: #F05252;
+  --color-invoice-no-title: #6B7280;
+  --dashboard-card-green: #2ECF98;
+  --dashboard-card-red: #E85966;
+  --dashboard-chart-patients: #057A55;
+
 }
 
 body {
@@ -121,24 +125,60 @@ body {
 }
 
 .custom-small-modal .modal-dialog {
-  max-width: 650px; /* adjust as needed */
+  max-width: 650px;
+  /* adjust as needed */
   width: 81%;
 }
-.box-border-orange{
+
+.box-border-orange {
   border: 1px solid var(--border-box);
   padding: 4px 10px !important;
   color: var(--border-box);
   border-radius: 8px !important;
 }
-.box-border-blue{
+
+.box-border-blue {
   border: 1px solid var(--border-box-blue);
   padding: 4px 10px !important;
   color: var(--border-box-blue);
   border-radius: 8px !important;
 }
-.box-border-red{
+
+.box-border-red {
   border: 1px solid var(--border-box-red);
   padding: 4px 10px !important;
   color: var(--border-box-red);
   border-radius: 8px !important;
+}
+
+.patient-journey-up-icon1 {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-white);
+  border: 1px solid var(--google-icon-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 575px) {
+  .patient-journey-up-icon1 {
+    width: 45px;
+    height: 45px;
+
+  }
+
+}
+
+@media screen and (max-width: 425px) {
+  .patient-journey-up-icon1 {
+    width: 40px;
+    height: 40px;
+
+  }
+
 }

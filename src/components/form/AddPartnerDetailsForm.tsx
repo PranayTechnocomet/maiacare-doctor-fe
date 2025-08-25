@@ -767,6 +767,9 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (data.surgeries === 'yes' && !data.surgeriesContent.trim()) errors.surgeriesContent = "Surgeries Content is required";
 
+
+
+        
         if (!data.height.trim()) errors.height = "Height is required";
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
