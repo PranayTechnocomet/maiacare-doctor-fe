@@ -765,6 +765,39 @@
     color: var(--input-forgot-password);
 }
 
+.appointment-reschedule-profile-name {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-profile-name);
+}
+
+.appointment-reschedule-profile-detail {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-sidebar-icon);
+}
+
+.appointment-reschedule-profile-schedule-detail {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+
+.progressBar-step {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-profile-name);
+}
+
+
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
@@ -1183,42 +1216,48 @@
     font-style: Regular;
     color: var(--color-sidebar-icon);
 }
-.treatment-success-rate-charts-patients{
-     font-size: 12px;
-     font-weight: 500;
-     line-height: 16px;
-     font-style: Medium;
-     color: var(--dashboard-chart-patients);
+
+.treatment-success-rate-charts-patients {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--dashboard-chart-patients);
 }
-.treatment-success-rate-datas{
+
+.treatment-success-rate-datas {
     font-size: 36px;
     font-weight: 500;
     line-height: 26px;
     font-style: bold;
     color: var(--color-heading);
 }
-.dashboard-treatment-success-title{
+
+.dashboard-treatment-success-title {
     font-size: 20px;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.dashboard-treatment-success-patients{
+
+.dashboard-treatment-success-patients {
     font-size: 16px;
     font-weight: 500;
     line-height: 16px;
     font-style: Medium;
     color: var(--color-sidebar-icon);
 }
-.dashboard-treatment-success-rate{
+
+.dashboard-treatment-success-rate {
     font-size: 18px;
     font-weight: 600;
     line-height: 20px;
     font-style: SemiBold;
     color: var(--dashboard-card-green);
 }
-.dashboard-treatment-success{
+
+.dashboard-treatment-success {
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
