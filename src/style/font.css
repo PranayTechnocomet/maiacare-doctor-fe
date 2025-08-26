@@ -798,6 +798,20 @@
 }
 
 
+.doctor-listing-today-schedule-boxs{
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: medium;
+    color: var(--color-radio-lable);
+}
+.doctor-listing-all-box{
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24px;
+    font-style: SemiBold;
+    color: #FFFFFF;
+}
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
@@ -1263,6 +1277,31 @@
     line-height: 20px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
+}
+.doctor-listing-calender-heading{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: medium;
+    color: var(--color-heading);
+}
+.doctor-listing-calender-filter{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: medium;
+    color: var(--color-sidebar-icon);
+    cursor: pointer;
+}
+.doctor-listing-filter{
+    
+}
+.doctor-listing-heading{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    font-style: medium;
+    color: var(--color-heading);
 }
 
 @media screen and (max-width: 768px) {
