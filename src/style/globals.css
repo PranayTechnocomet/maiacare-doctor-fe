@@ -26,6 +26,9 @@
   --dashboard-card-green: #2ECF98;
   --dashboard-card-red: #E85966;
   --dashboard-chart-patients: #057A55;
+  --waiting-box:#E78422;
+  --engaged-box:#5A94D9;
+  --done-box:#1CB384;
 
 }
 
@@ -182,3 +185,5 @@ body {
   }
 
 }
+
+

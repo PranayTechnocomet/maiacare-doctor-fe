@@ -1,0 +1,80 @@
+.doctor-listing-filter label {
+    cursor: pointer !important;
+
+}
+
+.doctor-listing-filter input[type="checkbox"] {
+    cursor: pointer !important;
+    box-shadow: none !important;
+}
+.calendar-selcted-date{
+    color: white;
+    background-color: #E29578;
+    font-weight: 500;
+}
+.doctor-listing-today-schedule-box{
+    width: 67px;
+    height: 63px;
+    /* background-color: #DDE1E8; */
+    border-radius: 8px;
+    border: 2px solid #DDE1E8;
+    padding: 8px 4px;
+}
+.upcoming-box{
+    background-color: var(--color-radio);
+    width: 37px;
+    height: 27px;
+    border-radius: 4px;
+    margin-top: -12px !important;
+    padding: 6px 11px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.waiting-box{
+    background-color: var(--waiting-box);
+    width: 37px;
+    height: 27px;
+    border-radius: 4px;
+    margin-top: -12px !important;
+    padding: 6px 11px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.engaged-box{
+    background-color: var(--engaged-box);
+    width: 37px;
+    height: 27px;
+    border-radius: 4px;
+    margin-top: -12px !important;
+    padding: 6px 11px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.done-box{
+    background-color: var(--done-box  );
+    width: 37px;
+    height: 27px;
+    border-radius: 4px;
+    margin-top: -12px !important;
+    padding: 6px 11px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.today-schedule{
+    border-radius: 0px 8px 0px 0px;
+    border: 1px solid #DDE1E8;
+    padding: 14px;
+}
+.today-schedule-box-section{
+   padding: 16px 8px;
+   border: 1px solid #DDE1E8;
+   background-color: #FFFFFF;
+}
