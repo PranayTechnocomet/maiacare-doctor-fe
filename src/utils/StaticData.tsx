@@ -1,6 +1,7 @@
 import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 import dummyPdfImg from "../assets/images/dummy-pdf-img.png"
 import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
+import appointmentProfile from "../assets/images/appoiment-img-1.png"
 
 export const tableResponse: Patient[] = [
   {
@@ -294,4 +295,15 @@ export const partnerDetailData = {
     surgeries: "No",
     surgeriesContent: "This Is surgeriesContent Content"
   }
+}
+
+export const tempAppointmentProfileData = {
+    profilePhoto: appointmentProfile,
+    name: "Radhika More",
+    id: "PTS-874562",
+    gender: "Female",
+    year: "31 Years",
+    date: "15 Jun 2025",
+    time: "3:15 PM",
+    FertilityAssessment: "Fertility assessment"
 }

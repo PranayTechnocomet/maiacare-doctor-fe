@@ -1,0 +1,17 @@
+.appointment-reschedule-profile-box {
+    background-color: var(--color-bg);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+
+.appointment-reschedule-profile-icon-box {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #DDE1E8;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

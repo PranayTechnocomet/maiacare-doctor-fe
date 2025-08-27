@@ -1,0 +1,290 @@
+"use client"
+
+import { ChangeEvent, FormEvent, useState } from "react";
+import InputSelect from "../ui/InputSelect";
+import Button from "../ui/Button";
+import { Col, ProgressBar, Row } from "react-bootstrap";
+import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
+import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
+import Textarea from "../ui/Textarea";
+import AppointmentProfile from "../ui/Custom/AppointmentProfile";
+import { tempAppointmentProfileData } from "@/utils/StaticData";
+
+type FormError = Partial<Record<keyof FormData, string>>;
+// Define type for your form
+type FormData = {
+    reason: string;
+    type: string;
+    reasonForVisit: string;
+    appointmentDate: string;   // or Date if your picker returns Date
+    appointmentTime: string;
+    forTime: string;
+    additionalNote: string;
+};
+
+// Initial state
+const initialFormData: FormData = {
+    reason: "",
+    type: "",
+    reasonForVisit: "",
+    appointmentDate: "",
+    appointmentTime: "",
+    forTime: "",
+    additionalNote: "",
+};
+
+const initialFormError: FormError = {};
+
+export function RescheduleAppointment() {
+    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [step, setStep] = useState<number>(1); // 👈 step tracker
+    const [stepper, setStepper] = useState(1);
+    const totalSteps = 2;
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    const validateForm = (data: FormData): FormError => {
+        const errors: FormError = {};
+        if (!data.reason.trim()) errors.reason = "Reason is required";
+
+        return errors;
+    };
+
+    const validateForm2 = (data: FormData): FormError => {
+        const errors: FormError = {};
+
+        if (!data.type.trim()) errors.type = "Type is required";
+        if (!data.reasonForVisit.trim()) errors.reasonForVisit = "Reason for visit is required";
+        if (!data.appointmentDate.trim()) errors.appointmentDate = "Appointment date is required";
+        if (!data.appointmentTime.trim()) errors.appointmentTime = "Appointment time is required";
+        if (!data.forTime.trim()) errors.forTime = "For time is required";
+        if (!data.additionalNote.trim()) errors.additionalNote = "Additional note is required";
+        return errors;
+    };
+
+    const handelNext = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const errors = validateForm(formData);
+        setFormError(errors);
+        if (Object.keys(errors).length === 0) {
+            console.log("Go to next step");
+            setStep(2);
+        }
+    };
+
+    const handelSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const errors = validateForm2(formData);
+        setFormError(errors);
+        if (Object.keys(errors).length === 0) {
+            console.log("form submit sucess");
+            setStepper((prev) => Math.max(1, prev + 1))
+            // setStep(2);
+        }
+    };
+
+    const handelPrevious = () => {
+        setStep(1);
+        setStepper((prev) => Math.max(1, prev - 1))
+    };
+
+    return (
+        <>
+
+            <div className="d-flex align-items-center mb-4">
+                <div className="flex-grow-1 d-flex">
+                    {[...Array(totalSteps)].map((_, index) => (
+                        <div key={index} className="flex-fill mx-1">
+                            <ProgressBar
+                                now={100}
+                                variant={index < stepper ? "success" : "secondary"}
+                                style={{
+                                    height: "8px",
+                                    borderRadius: "5px",
+                                    opacity: index < stepper ? 1 : 0.2,
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <span className="ms-2 progressBar-step">
+                    {step} of {totalSteps}
+                </span>
+            </div>
+
+            <AppointmentProfile tempProfileData={tempAppointmentProfileData} />
+
+            {step === 1 && (
+                <form className="mt-4" onSubmit={handelNext}>
+                    <InputSelect
+                        label="Reason of Rescheduling Appointment "
+                        name="reason"
+                        value={formData.reason}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                            handleChange(e);
+                        }}
+                        onBlur={() => { }}
+                        required={true}
+                        disabled={false}
+                        error={formError.reason}
+                        placeholder="Select reason"
+                        options={[
+                            { id: "1", value: "Doctor Unavailability", label: "Doctor Unavailability" },
+                            { id: "2", value: "Patient Request", label: "Patient Request" },
+                            { id: "3", value: "Clinic Emergency", label: "Clinic Emergency" },
+                            { id: "4", value: "Scheduling Conflicts", label: "Scheduling Conflicts" },
+                            { id: "5", value: "Cycle changes", label: "Cycle changes" },
+                            { id: "6", value: "Other", label: "Other" },
+                        ]}
+                    />
+
+                    <div className="d-flex gap-3 mt-3">
+                        <Button variant="outline" disabled={false} className="w-100" type="button">
+                            Previous
+                        </Button>
+                        <Button variant="default" disabled={false} type="submit" className="w-100">
+                            Next
+                        </Button>
+                    </div>
+                </form>
+            )}
+
+            {step === 2 && (
+                <>
+
+                    <form onSubmit={handelSubmit}>
+                        <Row className="g-2">
+                            <Col md={12}>
+                                <InputSelect
+                                    label="Type"
+                                    name="type"
+                                    value={formData.type}
+                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={() => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.type}
+                                    placeholder="Select type"
+                                    options={[
+                                        { id: "1", value: "Follow - Up", label: "Follow - Up" },
+                                        { id: "2", value: "other", label: "other" },
+
+                                    ]}
+                                />
+                            </Col>
+                            <Col md={12}>
+                                <InputSelect
+                                    label="Reason for visit "
+                                    name="reasonForVisit"
+                                    value={formData.reasonForVisit}
+                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={() => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.reasonForVisit}
+                                    placeholder="Select Services"
+                                    options={[
+                                        { id: "1", value: "Fertility Support", label: "Fertility Support" },
+                                        { id: "2", value: "IUI", label: "IUI" },
+                                        { id: "3", value: "IVF", label: "IVF" },
+                                        { id: "4", value: "Egg Freezing", label: "Egg Freezing" },
+                                        { id: "5", value: "other", label: "other" },
+
+                                    ]}
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <DatePickerFieldGroup
+                                    label="Appointment Date"
+                                    name="appointmentDate"
+                                    value={formData.appointmentDate}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.appointmentDate}
+
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <TimePickerFieldGroup
+                                    label="Appointment Time"
+                                    name="appointmentTime"
+                                    value={formData.appointmentTime}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.appointmentTime}
+                                />
+
+                            </Col>
+                            <Col md={4}>
+                                <InputSelect
+                                    label="For"
+                                    name="forTime"
+                                    value={formData.forTime}
+                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={() => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.forTime}
+                                    placeholder="Select Services"
+                                    options={[
+                                        { id: "1", value: "30minutes", label: "30minutes" },
+                                        { id: "2", value: "1hour", label: "1hour" },
+                                        { id: "3", value: "2hours", label: "2hours" },
+
+                                    ]}
+                                />
+                            </Col>
+                            <Col md={12}>
+                                <Textarea
+                                    label="Additional Note"
+                                    name="additionalNote"
+                                    value={formData.additionalNote}
+                                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+                                    required={true}
+                                    disabled={false}
+                                    error={formError.additionalNote}
+                                    maxLength={100}
+                                />
+                            </Col>
+                        </Row>
+                        <div className="d-flex gap-3 mt-3">
+                            <Button variant="outline" disabled={false} className="w-100" type="button" onClick={handelPrevious}>
+                                Previous
+                            </Button>
+                            <Button variant="default" disabled={false} type="submit" className="w-100">
+                                Next
+                            </Button>
+                        </div>
+                    </form>
+
+                </>
+            )}
+        </>
+    );
+}
+
+

@@ -18,6 +18,7 @@
   --google-icon-border: #DDE1E8;
   --color-radio-lable: #3E4A57;
   --color-placeholder-input: #475569;
+  --color-profile-name: #131D2A;
   --or-font-color: #B0B4C1;
   --border-box: #FF8A4C;
   --border-box-blue: #3F83F8;
@@ -26,6 +27,9 @@
   --dashboard-card-green: #2ECF98;
   --dashboard-card-red: #E85966;
   --dashboard-chart-patients: #057A55;
+  --waiting-box:#E78422;
+  --engaged-box:#5A94D9;
+  --done-box:#1CB384;
 
 }
 
@@ -182,3 +186,5 @@ body {
   }
 
 }
+
+
