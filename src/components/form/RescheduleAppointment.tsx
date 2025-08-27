@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
 import InputSelect from "../ui/InputSelect";
@@ -6,24 +6,24 @@ import Button from "../ui/Button";
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
-import Textarea from "../ui/Textarea";
+import { RescheduleAppointmentForm } from "@/utils/types/interfaces";
 import AppointmentProfile from "../ui/Custom/AppointmentProfile";
 import { tempAppointmentProfileData } from "@/utils/StaticData";
+import Modal from "../ui/Modal";
+import Image from "next/image";
+import SuccessImage from "@/assets/images/rescheduleAppointment.png";
+import Textarea from "../ui/Textarea";
 
-type FormError = Partial<Record<keyof FormData, string>>;
-// Define type for your form
-type FormData = {
-    reason: string;
-    type: string;
-    reasonForVisit: string;
-    appointmentDate: string;   // or Date if your picker returns Date
-    appointmentTime: string;
-    forTime: string;
-    additionalNote: string;
-};
+interface RescheduleAppointmentProps {
+    setRescheduleModal?: (show: boolean) => void;
+    onSuccess?: () => void;
+    showSuccessModal?: boolean;
+    setShowSuccessModal?: (show: boolean) => void;
+}
 
-// Initial state
-const initialFormData: FormData = {
+type FormError = Partial<Record<keyof RescheduleAppointmentForm, string>>;
+
+const initialFormData: RescheduleAppointmentForm = {
     reason: "",
     type: "",
     reasonForVisit: "",
@@ -35,37 +35,43 @@ const initialFormData: FormData = {
 
 const initialFormError: FormError = {};
 
-export function RescheduleAppointment() {
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+export function RescheduleAppointment({
+    setRescheduleModal,
+    setShowSuccessModal,
+
+}: RescheduleAppointmentProps) {
+    const [formData, setFormData] = useState<RescheduleAppointmentForm>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    const [step, setStep] = useState<number>(1); // 👈 step tracker
+    const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
     const totalSteps = 2;
 
     const handleChange = (
-        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+        e:
+            | ChangeEvent<HTMLInputElement>
+            | ChangeEvent<HTMLTextAreaElement>
+            | ChangeEvent<HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: RescheduleAppointmentForm): FormError => {
         const errors: FormError = {};
         if (!data.reason.trim()) errors.reason = "Reason is required";
-
         return errors;
     };
 
-    const validateForm2 = (data: FormData): FormError => {
+    const validateForm2 = (data: RescheduleAppointmentForm): FormError => {
         const errors: FormError = {};
-
         if (!data.type.trim()) errors.type = "Type is required";
-        if (!data.reasonForVisit.trim()) errors.reasonForVisit = "Reason for visit is required";
-        if (!data.appointmentDate.trim()) errors.appointmentDate = "Appointment date is required";
-        if (!data.appointmentTime.trim()) errors.appointmentTime = "Appointment time is required";
-        if (!data.forTime.trim()) errors.forTime = "For time is required";
-        if (!data.additionalNote.trim()) errors.additionalNote = "Additional note is required";
+        if (!data.reasonForVisit.trim())
+            errors.reasonForVisit = "Reason for visit is required";
+        if (!data.appointmentDate.trim())
+            errors.appointmentDate = "Appointment date is required";
+        if (!data.appointmentTime.trim())
+            errors.appointmentTime = "Appointment time is required";
         return errors;
     };
 
@@ -74,7 +80,6 @@ export function RescheduleAppointment() {
         const errors = validateForm(formData);
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
-            console.log("Go to next step");
             setStep(2);
         }
     };
@@ -84,43 +89,53 @@ export function RescheduleAppointment() {
         const errors = validateForm2(formData);
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
-            console.log("form submit sucess");
-            setStepper((prev) => Math.max(1, prev + 1))
-            // setStep(2);
+            console.log("form submit success");
+
+            // stepper
+            setStepper((prev) => Math.max(1, prev + 1));
+
+            // close main modal
+            setRescheduleModal?.(false);
+
+            // show success modal
+            setShowSuccessModal?.(true);
+
+
         }
     };
 
     const handelPrevious = () => {
         setStep(1);
-        setStepper((prev) => Math.max(1, prev - 1))
+        setStepper((prev) => Math.max(1, prev - 1));
     };
 
     return (
         <>
-
+            {/* Progress */}
             <div className="d-flex align-items-center mb-4">
                 <div className="flex-grow-1 d-flex">
                     {[...Array(totalSteps)].map((_, index) => (
                         <div key={index} className="flex-fill mx-1">
                             <ProgressBar
                                 now={100}
-                                variant={index < stepper ? "success" : "secondary"}
-                                style={{
-                                    height: "8px",
-                                    borderRadius: "5px",
-                                    opacity: index < stepper ? 1 : 0.2,
-                                }}
+                                className={
+                                    index < stepper
+                                        ? "progress-bar progressbar-step-success"
+                                        : "progress-bar progressbar-step-secondary"
+                                }
                             />
                         </div>
                     ))}
                 </div>
-                <span className="ms-2 progressBar-step">
+                <span className="ms-2 progressbar-step">
                     {step} of {totalSteps}
                 </span>
             </div>
 
+            {/* Appointment Info */}
             <AppointmentProfile tempProfileData={tempAppointmentProfileData} />
 
+            {/* Step 1 */}
             {step === 1 && (
                 <form className="mt-4" onSubmit={handelNext}>
                     <InputSelect
@@ -130,9 +145,7 @@ export function RescheduleAppointment() {
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                             handleChange(e);
                         }}
-                        onBlur={() => { }}
                         required={true}
-                        disabled={false}
                         error={formError.reason}
                         placeholder="Select reason"
                         options={[
@@ -146,19 +159,19 @@ export function RescheduleAppointment() {
                     />
 
                     <div className="d-flex gap-3 mt-3">
-                        <Button variant="outline" disabled={false} className="w-100" type="button">
+                        <Button variant="outline" className="w-100" type="button">
                             Previous
                         </Button>
-                        <Button variant="default" disabled={false} type="submit" className="w-100">
+                        <Button variant="default" type="submit" className="w-100">
                             Next
                         </Button>
                     </div>
                 </form>
             )}
 
+            {/* Step 2 */}
             {step === 2 && (
                 <>
-
                     <form onSubmit={handelSubmit}>
                         <Row className="g-2">
                             <Col md={12}>
@@ -169,15 +182,12 @@ export function RescheduleAppointment() {
                                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                         handleChange(e);
                                     }}
-                                    onBlur={() => { }}
                                     required={true}
-                                    disabled={false}
                                     error={formError.type}
                                     placeholder="Select type"
                                     options={[
                                         { id: "1", value: "Follow - Up", label: "Follow - Up" },
                                         { id: "2", value: "other", label: "other" },
-
                                     ]}
                                 />
                             </Col>
@@ -189,9 +199,7 @@ export function RescheduleAppointment() {
                                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                         handleChange(e);
                                     }}
-                                    onBlur={() => { }}
                                     required={true}
-                                    disabled={false}
                                     error={formError.reasonForVisit}
                                     placeholder="Select Services"
                                     options={[
@@ -200,7 +208,6 @@ export function RescheduleAppointment() {
                                         { id: "3", value: "IVF", label: "IVF" },
                                         { id: "4", value: "Egg Freezing", label: "Egg Freezing" },
                                         { id: "5", value: "other", label: "other" },
-
                                     ]}
                                 />
                             </Col>
@@ -212,11 +219,8 @@ export function RescheduleAppointment() {
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         handleChange(e);
                                     }}
-                                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                                     required={true}
-                                    disabled={false}
                                     error={formError.appointmentDate}
-
                                 />
                             </Col>
                             <Col md={4}>
@@ -227,12 +231,9 @@ export function RescheduleAppointment() {
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         handleChange(e);
                                     }}
-                                    onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                                     required={true}
-                                    disabled={false}
                                     error={formError.appointmentTime}
                                 />
-
                             </Col>
                             <Col md={4}>
                                 <InputSelect
@@ -242,16 +243,13 @@ export function RescheduleAppointment() {
                                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                         handleChange(e);
                                     }}
-                                    onBlur={() => { }}
-                                    required={true}
-                                    disabled={false}
+                                    required={false}
                                     error={formError.forTime}
-                                    placeholder="Select Services"
+                                    placeholder="Select duration"
                                     options={[
                                         { id: "1", value: "30minutes", label: "30minutes" },
                                         { id: "2", value: "1hour", label: "1hour" },
                                         { id: "3", value: "2hours", label: "2hours" },
-
                                     ]}
                                 />
                             </Col>
@@ -264,27 +262,64 @@ export function RescheduleAppointment() {
                                         handleChange(e);
                                     }}
                                     onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
-                                    required={true}
-                                    disabled={false}
+                                    required={false}
                                     error={formError.additionalNote}
                                     maxLength={100}
                                 />
                             </Col>
                         </Row>
                         <div className="d-flex gap-3 mt-3">
-                            <Button variant="outline" disabled={false} className="w-100" type="button" onClick={handelPrevious}>
+                            <Button
+                                variant="outline"
+                                className="w-100"
+                                type="button"
+                                onClick={handelPrevious}
+                            >
                                 Previous
                             </Button>
-                            <Button variant="default" disabled={false} type="submit" className="w-100">
-                                Next
+                            <Button variant="default" type="submit" className="w-100">
+                                Submit
                             </Button>
                         </div>
                     </form>
-
                 </>
             )}
         </>
     );
 }
 
+export function SuccessModalReschedule({
+    showSuccessModal,
+    setShowSuccessModal,
+}: {
+    showSuccessModal: boolean;
+    setShowSuccessModal: (show: boolean) => void;
+}) {
+    return (
+        <Modal
+            show={showSuccessModal}
+            onHide={() => setShowSuccessModal(false)}
+            closeButton={true}
+        >
+            <div className="text-center">
+                <Image src={SuccessImage} alt="successImg" width={200} height={200} />
+                <h3 className="modal-custom-header mt-2">
+                    Reschedule Request Submitted!
+                </h3>
+                <p className="modal-custom-content">
+                    Maicare will contact you shortly to confirm your request
+                </p>
+            </div>
 
+            <div className="d-flex justify-content-center gap-3">
+                <Button
+                    variant="outline"
+                    className="w-100"
+                    onClick={() => setShowSuccessModal(false)}
+                >
+                    Okay
+                </Button>
+            </div>
+        </Modal>
+    );
+}
