@@ -58,24 +58,37 @@ export interface FertilityAssessmentHistory {
 }
 
 export interface AddPatientFormData {
-   // Personal details
-   
-   
-   name: string;
-   patientId: string;
-   gender: string;
-   date: string;
-   age: string;
-   phone: string;
-   email: string;
-   address: string;
-   pincode: string;
-   city: string;
-   state: string;
+  // Personal details
 
-   // Emergency contact
-   emergencyContactName: string;
-   emergencyContactPhone: string;
-   emergencyContactRelation: string;
+  name: string;
+  patientId: string;
+  gender: string;
+  date: string;
+  age: string;
+  phone: string;
+  email: string;
+  address: string;
+  pincode: string;
+  city: string;
+  state: string;
+
+  // Emergency contact
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  emergencyContactRelation: string;
 }
 
+export interface RescheduleAppointmentForm {
+  reason: string;
+  type: string;
+  reasonForVisit: string;
+  appointmentDate: string;   // or Date if your picker returns Date
+  appointmentTime: string;
+  forTime: string;
+  additionalNote: string;
+}
+
+export interface CancelAppointmentForm {
+  reasonForCancel: string;
+  additionalNote: string;
+}

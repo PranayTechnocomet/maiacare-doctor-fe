@@ -1,52 +1,63 @@
-"use client"
+
+
+
+"use client";
 
 import { useState } from "react";
-import Button from "./ui/Button"
+import Button from "./ui/Button";
 import Modal from "./ui/Modal";
-import { RescheduleAppointment } from "./form/RescheduleAppointment";
-import CancelAppointment from "./form/CancelAppointment";
-import AppointmentProfile from "./ui/Custom/AppointmentProfile";
-import { tempAppointmentProfileData } from "@/utils/StaticData";
+import { RescheduleAppointment, SuccessModalReschedule } from "./form/RescheduleAppointment";
+import { CancelAppointment } from "./form/CancelAppointment";
+
 
 function TempAppoRequstCancelModel() {
+  const [RescheduleModal, setRescheduleModal] = useState(false);
+  const [CancelModal, setCancelModal] = useState(false);
 
-    const [RescheduleModal, setRescheduleModal] = useState(false);
-    const [CancelModal, setCancelModal] = useState(false);
+  // independent success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    return (
-        <>
+  return (
+    <>
+      <div className="d-flex gap-5">
+        <Button onClick={() => setRescheduleModal(true)}>
+          Reschedule Appointment
+        </Button>
+        <Button onClick={() => setCancelModal(true)}>
+          Cancel Appointment
+        </Button>
+      </div>
 
-            {/* <h1>TempAppoRequstCancelModel</h1> */}
-            <div className="d-flex gap-5">
+      {/* Reschedule Modal */}
+      <Modal
+        show={RescheduleModal}
+        onHide={() => setRescheduleModal(false)}
+        header="Request to Reschedule Appointment"
+        closeButton={true}
+      >
+        <RescheduleAppointment
+          setRescheduleModal={setRescheduleModal}
+          setShowSuccessModal={setShowSuccessModal}
+        />
+      </Modal>
 
-                <Button onClick={() => setRescheduleModal(true)}>Reschedule Appointment</Button>
-                <Button onClick={() => setCancelModal(true)}>Cancel Appointment</Button>
-            </div>
+      {/* Cancel Modal */}
+      <Modal
+        show={CancelModal}
+        onHide={() => setCancelModal(false)}
+        header="Request to Cancel Appointment"
+        closeButton={true}
+      >
+        <CancelAppointment setCancelModal={setCancelModal} />
+      </Modal>
 
-            <div>
-                <Modal
-                    show={RescheduleModal}
-                    onHide={() => setRescheduleModal(false)}
-                    header="Request to Reschedule Appointment"
-                    closeButton={true}
-                >
-                    <RescheduleAppointment />
-                </Modal>
-            </div>
-
-            <div>
-                <Modal
-                    show={CancelModal}
-                    onHide={() => setCancelModal(false)}
-                    header="Request to Cancel Appointment"
-                    closeButton={true}
-                >
-                    <CancelAppointment />
-                </Modal>
-            </div>
-        </>
-    )
+      {/* Independent Success Modal */}
+      <SuccessModalReschedule
+        showSuccessModal={showSuccessModal}
+        setShowSuccessModal={setShowSuccessModal}
+      />
+    </>
+  );
 }
 
-export default TempAppoRequstCancelModel
-
+export default TempAppoRequstCancelModel;

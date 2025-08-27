@@ -25,7 +25,6 @@ type FormError = Partial<Record<keyof AddPatientFormData, string>>;
 
 const initialFormData: AddPatientFormData = {
 
-
     name: "",
     patientId: "",
     gender: "male", // default to male if you want
