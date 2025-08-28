@@ -894,6 +894,13 @@
     font-style: Medium;
     color: var(--color-radio-lable);
 }
+.doctor-listing-modal-main-title{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-brand);
+}
 
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
@@ -1361,6 +1368,13 @@
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
+.doctor-listing-modal-id{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: medium;
+    color: var( --color-radio-lable);
+}
 
 .doctor-listing-calender-heading {
     font-size: 18px;
@@ -1402,7 +1416,20 @@
     font-style: medium;
     color: var(--color-heading);
 }
-
+.doctor-listing-modal-patient-name{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-heading);
+}
+.doctor-listing-modal-button{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    font-style: Bold;
+    color: var(--color-white);
+}
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {
