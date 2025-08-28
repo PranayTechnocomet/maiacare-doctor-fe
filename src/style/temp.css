@@ -138,3 +138,17 @@
     scrollbar-width: none;
     /* Firefox */
 }
+
+.doctor-listing-modal-profile{
+    border: 1px solid var(--google-icon-border);
+    border-radius: 8px;
+    padding: 10px;
+    background-color: var(--modal-profile-color);
+}
+.doctor-listing-modal-profile-img{
+    border-radius: 4px;
+}
+.doctor-listing-modal-buttons{
+    background-color: #FFFFFF;
+    padding: 8px 0px 12px 0px;
+}
