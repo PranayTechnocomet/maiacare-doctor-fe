@@ -7,12 +7,14 @@
     cursor: pointer !important;
     box-shadow: none !important;
 }
-.calendar-selcted-date{
+
+.calendar-selcted-date {
     color: white;
     background-color: #E29578;
     font-weight: 500;
 }
-.doctor-listing-today-schedule-box{
+
+.doctor-listing-today-schedule-box {
     width: 67px;
     height: 63px;
     /* background-color: #DDE1E8; */
@@ -20,7 +22,8 @@
     border: 2px solid #DDE1E8;
     padding: 8px 4px;
 }
-.upcoming-box{
+
+.upcoming-box {
     background-color: var(--color-radio);
     width: 37px;
     height: 27px;
@@ -32,7 +35,8 @@
     justify-content: center;
     color: white;
 }
-.waiting-box{
+
+.waiting-box {
     background-color: var(--waiting-box);
     width: 37px;
     height: 27px;
@@ -44,7 +48,8 @@
     justify-content: center;
     color: white;
 }
-.engaged-box{
+
+.engaged-box {
     background-color: var(--engaged-box);
     width: 37px;
     height: 27px;
@@ -56,8 +61,9 @@
     justify-content: center;
     color: white;
 }
-.done-box{
-    background-color: var(--done-box  );
+
+.done-box {
+    background-color: var(--done-box);
     width: 37px;
     height: 27px;
     border-radius: 4px;
@@ -68,13 +74,67 @@
     justify-content: center;
     color: white;
 }
-.today-schedule{
+
+.today-schedule {
     border-radius: 0px 8px 0px 0px;
     border: 1px solid #DDE1E8;
     padding: 14px;
 }
-.today-schedule-box-section{
-   padding: 16px 8px;
-   border: 1px solid #DDE1E8;
-   background-color: #FFFFFF;
+
+.today-schedule-box-section {
+    padding: 16px 8px;
+    border: 1px solid #DDE1E8;
+    background-color: #FFFFFF;
+}
+
+.doctor-listing-day-week-month {
+
+    background-color: #2B4360 !important;
+    color: white !important;
+    padding: 8px 29px;
+    border-radius: 94px;
+    border-radius: 94px !important;
+
+}
+
+.doctor-listing-day-custom-active111 {
+
+
+    width: 102px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.doctor-listing-day-week-month-main {
+    background-color: #FFFFFF !important;
+    padding: 4px !important;
+    border-radius: 45px !important;
+    height: 47px !important;
+}
+
+
+
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+
+
+/* Hide scrollbar for the time column for a cleaner look */
+.time-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.time-scroll {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }

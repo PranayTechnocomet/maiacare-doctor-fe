@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { MouseEvent, useEffect, useRef, useState } from 'react'
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
-import { Badge, Card, Col, Form, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Form, Nav, Row, Tab } from 'react-bootstrap';
 import Button from './ui/Button';
 import '../style/temp.css'
 
@@ -14,38 +14,9 @@ const MultiSelectDatePicker: React.FC = () => {
   const [lastSelectedDate, setLastSelectedDate] = useState<Date | null>(null);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
-  const months: string[] = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
 
-  // Utility functions
-  const getDaysInMonth = (date: Date): number => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
 
-  const getFirstDayOfMonth = (date: Date): number => {
-    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    return firstDay === 0 ? 6 : firstDay - 1;
-  };
 
-  const getDateString = (year: number, month: number, day: number): string => {
-    return new Date(year, month, day).toDateString();
-  };
-
-  const getDateRange = (startDate: Date, endDate: Date): Date[] => {
-    const dates: Date[] = [];
-    const start = new Date(Math.min(startDate.getTime(), endDate.getTime()));
-    const end = new Date(Math.max(startDate.getTime(), endDate.getTime()));
-
-    const current = new Date(start);
-    while (current <= end) {
-      dates.push(new Date(current));
-      current.setDate(current.getDate() + 1);
-    }
-
-    return dates;
-  };
 
   // Navigation functions
   const navigateMonth = (direction: number): void => {
@@ -56,119 +27,7 @@ const MultiSelectDatePicker: React.FC = () => {
     });
   };
 
-  const toggleCollapse = (): void => {
-    setIsCollapsed(!isCollapsed);
-  };
 
-  // Date selection functions
-  const toggleDateSelection = (day: number): void => {
-    const clickedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-    const clickedDateString = clickedDate.toDateString();
-
-    setSelectedDates(prev => {
-      const newSelected = new Set(prev);
-
-      // If we have a last selected date and this is a different date, select range
-      if (lastSelectedDate && lastSelectedDate.toDateString() !== clickedDateString) {
-        const rangeDates = getDateRange(lastSelectedDate, clickedDate);
-
-        // Check if all dates in range are already selected
-        const allInRangeSelected = rangeDates.every(date => prev.has(date.toDateString()));
-
-        if (allInRangeSelected) {
-          // If all dates in range are selected, deselect them
-          rangeDates.forEach(date => newSelected.delete(date.toDateString()));
-        } else {
-          // Otherwise, select all dates in range
-          rangeDates.forEach(date => newSelected.add(date.toDateString()));
-        }
-
-        setLastSelectedDate(null); // Reset after range selection
-      } else {
-        // Single date toggle
-        if (newSelected.has(clickedDateString)) {
-          newSelected.delete(clickedDateString);
-          setLastSelectedDate(null);
-        } else {
-          newSelected.add(clickedDateString);
-          setLastSelectedDate(clickedDate);
-        }
-      }
-
-      return newSelected;
-    });
-  };
-
-  const clearAllSelections = (): void => {
-    setSelectedDates(new Set());
-    setLastSelectedDate(null);
-  };
-
-  // Get sorted selected dates
-  const getSelectedDatesList = (): Date[] => {
-    return Array.from(selectedDates)
-      .map(dateString => new Date(dateString))
-      .sort((a, b) => a.getTime() - b.getTime());
-  };
-
-  // Render calendar days
-  const renderCalendarDays = (): JSX.Element[] => {
-    const daysInMonth = getDaysInMonth(currentDate);
-    const firstDay = getFirstDayOfMonth(currentDate);
-    const days: JSX.Element[] = [];
-
-    // Add empty cells for days before the first day of the month
-    for (let i = 0; i < firstDay; i++) {
-      days.push(
-        <div key={`empty-${i}`} className="col p-0">
-          <div style={{ height: '35px' }}></div>
-        </div>
-      );
-    }
-
-    // Add days of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dateString = getDateString(currentDate.getFullYear(), currentDate.getMonth(), day);
-      const isSelected = selectedDates.has(dateString);
-
-      days.push(
-        <div key={day} className="col p-0">
-          <button
-            type="button"
-            onClick={() => toggleDateSelection(day)}
-            className={`btn d-flex align-items-center justify-content-center border-0`}
-            style={{
-              height: '35px',
-              width: '35px',
-              borderRadius: '50%',
-              transition: 'all 0.2s ease',
-              margin: '1px',
-              backgroundColor: isSelected ? '#ffc107' : '#f8f9fa',
-              color: isSelected ? '#000' : '#495057',
-              fontWeight: isSelected ? 'bold' : 'normal',
-              fontSize: '14px'
-            }}
-            onMouseEnter={(e) => {
-              if (!isSelected) {
-                (e.target as HTMLElement).style.transform = 'scale(1.1)';
-                (e.target as HTMLElement).style.backgroundColor = '#e9ecef';
-              }
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.transform = 'scale(1)';
-              if (!isSelected) {
-                (e.target as HTMLElement).style.backgroundColor = '#f8f9fa';
-              }
-            }}
-          >
-            {day}
-          </button>
-        </div>
-      );
-    }
-
-    return days;
-  };
 
 
   return (
@@ -184,10 +43,6 @@ const MultiSelectDatePicker: React.FC = () => {
             ◀
           </button>
 
-          <h6 className="mb-0 fw-semibold text-muted">
-            {months[currentDate.getMonth()]} {currentDate.getFullYear()}
-          </h6>
-
           <button
             type="button"
             className="btn btn-outline-secondary btn-sm"
@@ -198,74 +53,7 @@ const MultiSelectDatePicker: React.FC = () => {
         </div>
       </div>
 
-      <div className="card-body p-0">
-        {/* Days of Week Header */}
-        <div className="row g-1 mb-2">
-          {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index) => (
-            <div key={index} className="col p-0">
-              <div
-                className="d-flex align-items-center justify-content-center text-muted"
-                style={{
-                  height: '25px',
-                  fontWeight: 600,
-                  fontSize: '12px'
-                }}
-              >
-                {day}
-              </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Calendar Grid */}
-        <div className="row g-1 mb-3">
-          {renderCalendarDays()}
-        </div>
-
-        {/* Instructions */}
-        {/* <div className="alert alert-info py-2 px-3 mb-2" style={{ fontSize: '12px' }}>
-          <strong>Range Selection:</strong> એક તારીખ પસંદ કરો, પછી બીજી તારીખ પસંદ કરો - વચ્ચેની બધી તારીખો પસંદ થશે
-        </div> */}
-
-        {/* Selected Dates Display */}
-        {/* {selectedDates.size > 0 && (
-          <div className="bg-light p-2 rounded">
-            <div className="d-flex justify-content-between align-items-center mb-1">
-              <small className="text-success fw-bold">
-                પસંદ કરેલી તારીખો ({selectedDates.size}):
-              </small>
-              <button 
-                type="button" 
-                className="btn btn-outline-danger btn-sm py-0 px-2" 
-                style={{ fontSize: '10px' }}
-                onClick={clearAllSelections}
-              >
-                Clear
-              </button>
-            </div>
-            <div className="d-flex flex-wrap gap-1">
-              {getSelectedDatesList().slice(0, 6).map((date, index) => (
-                <span
-                  key={index}
-                  className="badge"
-                  style={{
-                    backgroundColor: '#ffc107',
-                    color: '#000',
-                    fontSize: '10px'
-                  }}
-                >
-                  {date.getDate()} {months[date.getMonth()].slice(0, 3)}
-                </span>
-              ))}
-              {selectedDates.size > 6 && (
-                <span className="badge bg-secondary" style={{ fontSize: '10px' }}>
-                  +{selectedDates.size - 6} more
-                </span>
-              )}
-            </div>
-          </div>
-        )} */}
-      </div>
     </div>
   );
 };
@@ -275,22 +63,7 @@ export default function DoctorListing() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  function handleDateChange(date: Date) {
-    // initial change: start by setting the startDate
-    if (!startDate && !endDate) {
-      setStartDate(date);
-      // startDate has been set, set the end date
-    } else if (startDate && !endDate) {
-      setEndDate(date);
-    }
 
-    // user is choosing another range => set the start date
-    // and set the endDate back to null
-    if (startDate && endDate) {
-      setStartDate(date);
-      setEndDate(null);
-    }
-  }
 
   const tabOptions = [
     {
@@ -342,6 +115,13 @@ export default function DoctorListing() {
 
 export function CalendarView() {
   const [filters, setFilters] = useState<string[]>([]);
+  interface Appointment {
+    id: string;
+    time: string;
+    title: string;
+    startTime: number; // in minutes from midnight
+    duration: number; // in minutes
+  }
 
   const options = [
     "Upcoming",
@@ -360,20 +140,131 @@ export function CalendarView() {
   const clearAll = () => {
     setFilters([]);
   };
-  interface StatusItem {
-    label: string;
-    value: number;
-    color: string;
-  }
-  const statuses: StatusItem[] = [
-    { label: "Upcoming", value: 0, color: "secondary" },
-    { label: "Waiting", value: 0, color: "warning" },
-    { label: "Engaged", value: 0, color: "primary" },
-    { label: "Done", value: 0, color: "success" },
-  ];
+
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const [selectedView, setSelectedView] = useState<string>("day");
+
+
+
+  const [events, setEvents] = useState<Event[]>([]);
+  const [showTooltip, setShowTooltip] = useState(true);
+
+  // Refs for the scrollable areas
+  const scheduleRef = useRef<HTMLDivElement>(null);
+  const timeColumnRef = useRef<HTMLDivElement>(null);
+
+  // Helper function to generate time slots
+  const generateTimeSlots = () => {
+    const slots = [];
+    // Extended hours to better fill the view
+    for (let i = 9; i < 19; i++) {
+      slots.push(`${i}:00`);
+      slots.push(`${i}:30`);
+    }
+    return slots;
+  };
+
+  const timeSlots = generateTimeSlots();
+
+  const formatTime = (hour: number, minutes: number) => {
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    return `${formattedHour}:${formattedMinutes} ${ampm}`;
+  };
+
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (showTooltip) {
+      setShowTooltip(false);
+    }
+
+    if (scheduleRef.current) {
+      const rect = scheduleRef.current.getBoundingClientRect();
+      const scrollTop = scheduleRef.current.scrollTop;
+      const clickY = e.clientY - rect.top + scrollTop;
+
+      const totalHours = (18 - 9);
+      const totalMinutes = (clickY / scheduleRef.current.scrollHeight) * totalHours * 60;
+      const hour = Math.floor(totalMinutes / 60) + 9;
+      const minutes = Math.floor(totalMinutes % 60);
+      const roundedMinutes = Math.round(minutes / 15) * 15;
+
+      const date = new Date();
+      date.setHours(hour, roundedMinutes, 0, 0);
+
+      const newEvent: Event = {
+        id: Date.now(),
+        top: clickY,
+        time: formatTime(date.getHours(), date.getMinutes()),
+      };
+      setEvents([...events, newEvent]);
+    }
+  };
+
+  // Effect to synchronize scrolling between the two columns
+  useEffect(() => {
+    const timeEl = timeColumnRef.current;
+    const scheduleEl = scheduleRef.current;
+    if (!timeEl || !scheduleEl) return;
+
+    let activeScroller: 'time' | 'schedule' | null = null;
+    let timer: number;
+
+    const clearActiveScroller = () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        activeScroller = null;
+      }, 100); // Reset after 100ms of inactivity
+    };
+
+    const handleTimeScroll = () => {
+      if (activeScroller === 'schedule') return;
+      activeScroller = 'time';
+      scheduleEl.scrollTop = timeEl.scrollTop;
+      clearActiveScroller();
+    };
+
+    const handleScheduleScroll = () => {
+      if (activeScroller === 'time') return;
+      activeScroller = 'schedule';
+      timeEl.scrollTop = scheduleEl.scrollTop;
+      clearActiveScroller();
+    };
+
+    timeEl.addEventListener('scroll', handleTimeScroll);
+    scheduleEl.addEventListener('scroll', handleScheduleScroll);
+
+    // Cleanup function to remove event listeners
+    return () => {
+      timeEl.removeEventListener('scroll', handleTimeScroll);
+      scheduleEl.removeEventListener('scroll', handleScheduleScroll);
+    };
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+
+  // CSS styles that will be applied inline
+  const styles = {
+    timeColumn: { width: '120px', backgroundColor: '#fafafa', flexShrink: 0 },
+    dateCircle: { width: '40px', height: '40px', backgroundColor: '#fce5d8', color: '#f57c00' },
+    eventLine: { left: '5px', right: '0', height: '1px' }, // Adjusted left position
+    eventDot: { width: '10px', height: '10px', left: '-5px', top: '-4.5px', zIndex: 1 },
+    tooltipCustom: { top: '25%', left: '30%' },
+    tooltipDot: { width: '12px', height: '12px', top: '-4px', left: '-4px' },
+    pingAnimation: { animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' }
+  };
+
+  // Calculate the position for the static 12:30 PM line
+  // 12:30 PM is 3.5 hours after 9:00 AM. Each hour is 2 * 48px.
+  // Add 24px (half the slot height) to center it.
+  const staticLineTop = ((12.5 - 9) * 2 * 48) + 24;
+
+
+
   return (
     <>
-      <Row>
+      <Row className='mt-3'>
         <Col md={3}>
           <ContentContainer>
             <>
@@ -421,124 +312,185 @@ export function CalendarView() {
             </>
           </ContentContainer>
         </Col>
-        <Col md={6}>
-          <ContentContainer>
-            <div
-              style={{
-                background: "#fff",
-                borderRadius: "10px",
-                padding: "20px",
-                boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
-              }}
-            >
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 className="fw-bold">November 2024</h5>
-                  <p className="text-danger mb-0">0 Appointments</p>
-                </div>
-
-                {/* Tabs for Day/Week/Month */}
-                <div className="btn-group">
-                  <Button variant="light" size="sm" className="fw-bold active">
-                    Day
-                  </Button>
-                  <Button variant="light" size="sm" className="fw-bold">
-                    Week
-                  </Button>
-                  <Button variant="light" size="sm" className="fw-bold">
-                    Month
-                  </Button>
-                </div>
+        <Col md={9}>
+          <Row>
+            <div className="d-flex justify-content-between ">
+              <div>
+                <p className='doctor-listing-date-heading  m-0 '>November 2024</p>
+                <p className='doctor-listing-date-subtitle '>0 Appointments</p>
               </div>
+              <div className='doctor-listing-day-week-month-main'>
 
-              {/* Calendar Grid */}
-              <div
-                style={{
-                  marginTop: "20px",
-                  borderTop: "1px solid #eee",
-                  paddingTop: "20px",
-                  minHeight: "500px",
-                  position: "relative",
-                }}
-              >
-                {/* Example time slots */}
-                {[
-                  "10 AM",
-                  "10:30 AM",
-                  "11 AM",
-                  "11:30 AM",
-                  "12 PM",
-                  "12:30 PM",
-                  "1 PM",
-                ].map((time, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      borderBottom: "1px solid #f1f1f1",
-                      padding: "10px 0",
-                      fontSize: "14px",
-                      color: "#555",
-                    }}
-                  >
-                    {time}
-                  </div>
-                ))}
-
-                {/* Floating Info Box */}
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "150px",
-                    left: "50px",
-                    background: "#fff",
-                    border: "1px solid #eee",
-                    borderRadius: "8px",
-                    padding: "12px 16px",
-                    boxShadow: "0px 2px 6px rgba(0,0,0,0.1)",
+                <Nav
+                  variant="pills"
+                  activeKey={selectedView}
+                  onSelect={(selectedKey) => {
+                    if (selectedKey) setSelectedView(selectedKey);
                   }}
                 >
-                  <p className="mb-1">
-                    Get started by clicking anywhere on the calendar to add your
-                    first appointment
-                  </p>
-                  <a href="#" className="text-danger fw-bold">
-                    OK. GOT IT!
-                  </a>
-                </div>
+                  <Nav.Item>
+                    <Nav.Link eventKey="day" className={(selectedView === 'day' ? 'doctor-listing-day-week-month' : '') || 'doctor-listing-day-custom-active111 '}>Day</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="week" className={(selectedView === 'week' ? 'doctor-listing-day-week-month' : '') || 'doctor-listing-day-custom-active111'}>Week</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link eventKey="month" className={(selectedView === 'month' ? 'doctor-listing-day-week-month' : '') || 'doctor-listing-day-custom-active111'}>Month</Nav.Link>
+                  </Nav.Item>
+                </Nav>
+
               </div>
             </div>
+            <Col md={8}>
+              {selectedView === 'day'
+                &&
+                <>
 
-          </ContentContainer>
-        </Col>
-        <Col md={3}>
 
-          <div className='todays-schedule-main'>
-            <div className='today-schedule'>
-              <p className='doctor-listing-heading mb-0'>Today’s Schedule</p>
-            </div>
-            <div className='today-schedule-box-section h-100'>
-              <div className='d-flex justify-content-between align-items-center gap-1 p-0'>
-                <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
-                  <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
-                  <div className='upcoming-box doctor-listing-all-box'>0</div>
+                  <div className=" min-vh-100 d-flex align-items-center justify-content-center">
+                    <div className="w-100 bg-white rounded shadow-lg d-flex" style={{ maxWidth: '64rem', height: '90vh' }}>
+                      {/* Time Column with Icon and Times */}
+                      <div className="border-end d-flex flex-column" style={styles.timeColumn}>
+                        {/* Header with Icon */}
+                        <div className="d-flex align-items-center justify-content-center border-bottom" style={{ height: '96px', flexShrink: 0 }}>
+                          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg" style={{ color: 'rgb(156 163 175)' }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+
+                        {/* Scrollable Time Slots */}
+                        <div
+                          className="text-center flex-grow-1 overflow-auto time-scroll"
+                          ref={timeColumnRef}
+                        >
+                          {timeSlots.map((time, index) => {
+                            const [hour, minute] = time.split(':');
+                            const displayTime = parseInt(hour, 10);
+                            const ampm = displayTime < 12 ? 'AM' : 'PM';
+                            const formattedHour = displayTime > 12 ? displayTime - 12 : (displayTime === 0 ? 12 : displayTime);
+                            return (
+                              <div key={index} className="d-flex align-items-center justify-content-center border-top" style={{ height: '48px' }}>
+                                <span className="small text-secondary">
+                                  {`${formattedHour}:${minute} ${ampm}`}
+                                </span>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Main Content Area */}
+                      <div className="flex-grow-1 d-flex flex-column">
+                        {/* Header with Day and Date */}
+                        <div className="d-flex align-items-center border-bottom p-3" style={{ height: '96px', flexShrink: 0 }}>
+                          <div className="d-flex align-items-center">
+                            <p className="small fw-semibold mb-0 me-2" style={{ color: '#f57c00' }}>Monday</p>
+                            <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold" style={styles.dateCircle}>
+                              01
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Schedule Clickable Area */}
+                        <div
+                          className="flex-grow-1 position-relative overflow-auto"
+                          ref={scheduleRef}
+                          onClick={handleClick}
+                        >
+                          {/* Grid Lines Container */}
+                          <div className="position-relative" style={{ height: `${timeSlots.length * 48}px` }}>
+                            {timeSlots.map((_, index) => (
+                              <div key={index} className="border-top" style={{ height: '48px' }}></div>
+                            ))}
+
+                            {/* Static 12:30 PM Line */}
+                            <div
+                              className="position-absolute bg-warning"
+                              style={{ ...styles.eventLine, top: `${staticLineTop}px` }}
+                            >
+                              <div className="bg-warning rounded-circle position-absolute" style={styles.eventDot}></div>
+                            </div>
+
+                            {/* Dynamic Event Lines */}
+                            {events.map(event => (
+                              <div
+                                key={event.id}
+                                className="position-absolute bg-warning"
+                                style={{ ...styles.eventLine, top: `${event.top}px` }}
+                              >
+                                <div className="bg-warning rounded-circle position-absolute" style={styles.eventDot}></div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Initial Tooltip */}
+                          {showTooltip && (
+                            <div className="position-absolute bg-white p-4 rounded shadow-lg" style={styles.tooltipCustom}>
+                              <div className="position-absolute bg-warning rounded-circle" style={{ ...styles.tooltipDot, ...styles.pingAnimation }}></div>
+                              <div className="position-absolute bg-warning rounded-circle" style={styles.tooltipDot}></div>
+                              <p className="small text-secondary">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
+                              <button onClick={() => setShowTooltip(false)} className="btn btn-link p-0 mt-3 small fw-bold text-warning text-decoration-none">OK, GOT IT!</button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+               
+
+              }
+
+              {selectedView === 'week'
+                &&
+                <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} Week View</h1>
+               
+
+              }
+
+              {selectedView === 'month'
+                &&
+                <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} Month View</h1>
+                
+
+              }
+
+              {/* <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} View</h1> */}
+
+
+
+            </Col>
+            <Col md={4}>
+
+              <div className='todays-schedule-main mt-3'>
+                <div className='today-schedule'>
+                  <p className='doctor-listing-heading mb-0 '>Today’s Schedule</p>
                 </div>
-                <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
-                  <p className='doctor-listing-today-schedule-boxs text-center'>Waiting</p>
-                  <div className='waiting-box doctor-listing-all-box'>0</div>
-                </div>
-                <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
-                  <p className='doctor-listing-today-schedule-boxs text-center'>Engaged</p>
-                  <div className='engaged-box doctor-listing-all-box'>0</div>
-                </div>
-                <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
-                  <p className='doctor-listing-today-schedule-boxs text-center'>Done</p>
-                  <div className='done-box doctor-listing-all-box'>0</div>
+                <div className='today-schedule-box-section h-100'>
+                  <div className='d-flex justify-content-between align-items-center gap-1 p-0'>
+                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+                      <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
+                      <div className='upcoming-box doctor-listing-all-box'>0</div>
+                    </div>
+                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+                      <p className='doctor-listing-today-schedule-boxs text-center'>Waiting</p>
+                      <div className='waiting-box doctor-listing-all-box'>0</div>
+                    </div>
+                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+                      <p className='doctor-listing-today-schedule-boxs text-center'>Engaged</p>
+                      <div className='engaged-box doctor-listing-all-box'>0</div>
+                    </div>
+                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+                      <p className='doctor-listing-today-schedule-boxs text-center'>Done</p>
+                      <div className='done-box doctor-listing-all-box'>0</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
 
+            </Col>
+          </Row>
         </Col>
+
+
       </Row >
     </>
   )

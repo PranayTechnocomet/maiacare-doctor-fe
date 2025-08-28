@@ -811,6 +811,34 @@
     font-style: SemiBold;
     color: #FFFFFF;
 }
+.doctor-listing-date-heading{
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+.doctor-listing-date-subtitle{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--color-modal-heading);
+}
+.doctor-listing-day-week-month{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: Bold;
+    color: var(--color-white);
+}
+.doctor-listing-day-custom-active111{
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-sidebar-icon);
+}
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
