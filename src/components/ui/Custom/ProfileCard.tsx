@@ -114,41 +114,41 @@ export const ProfileCard: React.FC<ProfileProps> = ({
         </Col>
       </Row> */}
 
-    <div className='d-flex justify-content-between align-items-start  '>
-      <div className='d-flex align-items-start align-items-sm-center gap-3 flex-column flex-sm-row'>
-        <div>
-        <Image
-            src={PrfileImage}
-            alt={name}
-            width={90}
-            height={90}
-            className="rounded-3"
-          />
+      <div className='d-flex justify-content-between align-items-start  '>
+        <div className='d-flex align-items-start align-items-sm-center gap-3 flex-column flex-sm-row'>
+          <div>
+            <Image
+              src={PrfileImage}
+              alt={name}
+              width={90}
+              height={90}
+              className="rounded-3"
+            />
+          </div>
+          <div>
+            <div className="d-flex align-items-center mb-1">
+              <h6 className="mb-0 doctor-profile-heading me-2">{name}</h6>
+
+              <span className='patient-journey-badge-InProgress'> {status}</span>
+            </div>
+
+            <div className='pt-sm-1 p-0 d-flex  '>
+              <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
+              <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
+            </div>
+            <div className='pt-sm-1 p-0 d-flex '>
+              <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
+              <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
+            </div>
+            <div className="pt-sm-1 p-0 doctor-profile-subheading">
+              <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
+            </div>
+
+
+          </div>
         </div>
         <div>
-        <div className="d-flex align-items-center mb-1">
-            <h6 className="mb-0 doctor-profile-heading me-2">{name}</h6>
-
-            <span className='patient-journey-badge-InProgress'> {status}</span>
-          </div>
-
-          <div className='pt-sm-1 p-0 d-flex  '>
-            <span className='me-2 doctor-profile-subheading'><Image src={ProfileId} alt="Age" width={14} height={16} className="me-1" /> {id}</span>
-            <span className='doctor-profile-subheading'><Image src={ProfileGender} alt="Age" width={14} height={16} className="me-1" /> {gender}</span>
-          </div>
-          <div className='pt-sm-1 p-0 d-flex '>
-            <span className='me-2 doctor-profile-subheading'><Image src={Cacke} alt="Age" width={15} height={15} className="me-1" /> {dob}</span>
-            <span className='doctor-profile-subheading'><Image src={ProfileAge} alt="Age" width={15} height={15} className="me-1" /> {age} Years</span>
-          </div>
-          <div className="pt-sm-1 p-0 doctor-profile-subheading">
-            <Image src={ProfileDob} alt="Age" width={15} height={15} className="me-1" /> Joined Date: {joinDate}
-          </div>
-
-
-        </div>
-      </div>
-      <div>
-      <Dropdown align="end" className="d-flex align-items-center">
+          <Dropdown align="end" className="d-flex align-items-center">
             <Dropdown.Toggle
               as="button"
               id="dropdown-basic"
@@ -165,8 +165,8 @@ export const ProfileCard: React.FC<ProfileProps> = ({
               <Dropdown.Item className="text-danger">Delete</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+        </div>
       </div>
-    </div>
 
     </Card>
   );
