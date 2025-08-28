@@ -318,6 +318,13 @@
     color: var(--color-radio-lable);
 }
 
+.appoiment-dots-open-danger{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-dander);
+}
+
 .your-device-box-title {
     font-size: 18px;
     font-weight: 500;
