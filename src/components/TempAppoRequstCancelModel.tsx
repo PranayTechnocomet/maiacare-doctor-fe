@@ -1,14 +1,10 @@
-
-
-
 "use client";
 
 import { useState } from "react";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { RescheduleAppointment, SuccessModalReschedule } from "./form/RescheduleAppointment";
-import { CancelAppointment } from "./form/CancelAppointment";
-
+import { CancelAppointment, SuccessModalCancel } from "./form/CancelAppointment";
 
 function TempAppoRequstCancelModel() {
   const [RescheduleModal, setRescheduleModal] = useState(false);
@@ -16,6 +12,7 @@ function TempAppoRequstCancelModel() {
 
   // independent success modal
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showSuccessModalCancel, setShowSuccessModalCancel] = useState(false);
 
   return (
     <>
@@ -48,13 +45,17 @@ function TempAppoRequstCancelModel() {
         header="Request to Cancel Appointment"
         closeButton={true}
       >
-        <CancelAppointment setCancelModal={setCancelModal} />
+        <CancelAppointment setCancelModal={setCancelModal} setShowSuccessModalCancel={setShowSuccessModalCancel} />
       </Modal>
 
       {/* Independent Success Modal */}
       <SuccessModalReschedule
         showSuccessModal={showSuccessModal}
         setShowSuccessModal={setShowSuccessModal}
+      />
+      <SuccessModalCancel
+        showSuccessModalCancel={showSuccessModalCancel}
+        setShowSuccessModalCancel={setShowSuccessModalCancel}
       />
     </>
   );

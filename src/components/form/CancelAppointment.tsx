@@ -21,11 +21,10 @@ const initialFormData: CancelAppointmentForm = {
 
 const initialFormError: FormError = {};
 
-export function CancelAppointment({ setCancelModal }: any) {
+export function CancelAppointment({ setCancelModal, setShowSuccessModalCancel }: any) {
 
     const [formData, setFormData] = useState<CancelAppointmentForm>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -51,7 +50,7 @@ export function CancelAppointment({ setCancelModal }: any) {
             console.log("form submit sucess", formData);
 
             setCancelModal(false)
-            setShowSuccessModal(true)
+            setShowSuccessModalCancel(true)
         }
     };
 
@@ -102,7 +101,7 @@ export function CancelAppointment({ setCancelModal }: any) {
                 </div>
             </form>
 
-            <Modal
+            {/* <Modal
                 show={showSuccessModal}
                 onHide={() => setShowSuccessModal(false)}
                 closeButton={true}
@@ -123,8 +122,41 @@ export function CancelAppointment({ setCancelModal }: any) {
                     </Button>
 
                 </div>
-            </Modal>
+            </Modal> */}
         </>
+    )
+}
+
+export function SuccessModalCancel({
+    showSuccessModalCancel,
+    setShowSuccessModalCancel,
+}: {
+    showSuccessModalCancel: boolean;
+    setShowSuccessModalCancel: (show: boolean) => void;
+}) {
+    return (
+        <Modal
+            show={showSuccessModalCancel}
+            onHide={() => setShowSuccessModalCancel(false)}
+            closeButton={true}
+        >
+            <div className="text-center">
+                <Image src={SuccessImageCancel} alt="dummyPatientImg" width={200} height={200} />
+
+                <h3 className="modal-custom-header mt-2">Cancellation Request Sent!</h3>
+                <p className="modal-custom-content">Maiacare will contact you shortly to confirm your request</p>
+            </div>
+
+            <div className="d-flex justify-content-center gap-3">
+                <Button variant="outline" disabled={false} className="w-100" >
+                    Okay
+                </Button>
+                <Button variant="default" disabled={false} className="w-100" >
+                    Book New Appointment
+                </Button>
+
+            </div>
+        </Modal>
     )
 }
 
