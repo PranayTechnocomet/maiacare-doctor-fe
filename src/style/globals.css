@@ -21,7 +21,8 @@
   --color-profile-name: #131D2A;
   --color-progressbar-success: #2B4360;
   --color-progressbar-secondary: #E6F3F2;
-
+  --color-dander:#E85966;
+  
   --or-font-color: #B0B4C1;
   --border-box: #FF8A4C;
   --border-box-blue: #3F83F8;
@@ -33,6 +34,8 @@
   --waiting-box:#E78422;
   --engaged-box:#5A94D9;
   --done-box:#1CB384;
+  --modal-profile-color:#F5F7FA;
+  --modal-follw-btn-color:#7E3AF2;
 
 }
 
@@ -169,8 +172,20 @@ body {
   justify-content: center;
   cursor: pointer;
 }
+.patient-profile-card{
+  padding: 24px !important;
+}
 
-
+.doctor-listing-modal-profile-subtitle{
+  background-color: #EDEBFE;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+.doctor-listing-payment-unpaid{
+  background-color: #FDF2F2;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
 
 @media screen and (max-width: 575px) {
   .patient-journey-up-icon1 {

@@ -308,7 +308,7 @@
     font-weight: 600;
     line-height: 26px;
     color: var(--color-heading);
-    
+
 }
 
 .settings-accordion-subtitle {
@@ -316,6 +316,13 @@
     font-weight: 500;
     line-height: 20px;
     color: var(--color-radio-lable);
+}
+
+.appoiment-dots-open-danger{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-dander);
 }
 
 .your-device-box-title {
@@ -507,6 +514,7 @@
     line-height: 16px;
     font-style: Medium;
 }
+
 
 .patient-treatment-box-subtitle-desc-paid {
     border: 1px solid #057A55;
@@ -797,20 +805,103 @@
     color: var(--color-profile-name);
 }
 
-.doctor-listing-today-schedule-boxs{
+.doctor-listing-today-schedule-boxs {
     font-size: 11px;
     font-weight: 500;
     line-height: 16px;
     font-style: medium;
     color: var(--color-radio-lable);
 }
-.doctor-listing-all-box{
+
+.doctor-listing-modal-orange-box {
+    border: 1.5px solid #F4C47E;
+    color: var(--border-box);
+    border-radius: 8px;
+    padding: 4px 6px;
+
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+}
+
+.doctor-listing-all-box {
     font-size: 20px;
     font-weight: 600;
     line-height: 24px;
     font-style: SemiBold;
     color: #FFFFFF;
 }
+
+.doctor-listing-date-heading {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    font-style: SemiBold;
+    color: var(--color-heading);
+}
+
+.doctor-listing-date-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--color-modal-heading);
+}
+
+.doctor-listing-day-week-month {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    font-style: Bold;
+    color: var(--color-white);
+}
+
+.doctor-listing-day-custom-active111 {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    font-style: SemiBold;
+    color: var(--color-sidebar-icon);
+}
+
+.doctor-listing-modal-profile-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+
+.doctor-listing-modal-profile-subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    font-style: Medium;
+    color: var(--modal-follw-btn-color);
+}
+.doctor-listing-payment-unpaid{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--border-box-red);
+}
+.doctor-listing-aditional-commit{
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+.doctor-listing-modal-main-title{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-brand);
+}
+
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
@@ -1176,7 +1267,7 @@
 
 .contact-details-emergency-subdetail {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 18px;
     font-style: SemiBold;
     color: var(--color-radio-lable);
@@ -1277,14 +1368,23 @@
     font-style: SemiBold;
     color: var(--color-radio-lable);
 }
-.doctor-listing-calender-heading{
+.doctor-listing-modal-id{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: medium;
+    color: var( --color-radio-lable);
+}
+
+.doctor-listing-calender-heading {
     font-size: 18px;
     font-weight: 600;
     line-height: 22px;
     font-style: medium;
     color: var(--color-heading);
 }
-.doctor-listing-calender-filter{
+
+.doctor-listing-calender-filter {
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
@@ -1292,17 +1392,44 @@
     color: var(--color-sidebar-icon);
     cursor: pointer;
 }
-.doctor-listing-filter{
-    
+
+.doctor-listing-modal-label {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: medium;
+    color: var(--color-sidebar-icon);
 }
-.doctor-listing-heading{
+
+.doctor-listing-modal-subtext {
+    font-size: 14px;
+    font-weight: 600 !important;
+    line-height: 18px;
+    font-style: medium;
+    color: #3E4A57;
+}
+
+.doctor-listing-heading {
     font-size: 20px;
     font-weight: 500;
     line-height: 24px;
     font-style: medium;
     color: var(--color-heading);
 }
-
+.doctor-listing-modal-patient-name{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-heading);
+}
+.doctor-listing-modal-button{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    font-style: Bold;
+    color: var(--color-white);
+}
 @media screen and (max-width: 768px) {
 
     .contact-details-heading {

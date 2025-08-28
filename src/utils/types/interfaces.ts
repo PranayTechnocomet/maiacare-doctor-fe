@@ -82,7 +82,7 @@ export interface RescheduleAppointmentForm {
   reason: string;
   type: string;
   reasonForVisit: string;
-  appointmentDate: string;   // or Date if your picker returns Date
+  appointmentDate: string;
   appointmentTime: string;
   forTime: string;
   additionalNote: string;
@@ -91,4 +91,23 @@ export interface RescheduleAppointmentForm {
 export interface CancelAppointmentForm {
   reasonForCancel: string;
   additionalNote: string;
+}
+
+export interface BookAppointmentForm {
+  //Appointment Details
+
+  appointmentId: string;
+  type: string;
+  concernsTreatment: string;
+  appointmentDate: string;
+  appointmentTime: string;
+  forTime: string;
+  additionalNote: string;
+
+  //Patient Details
+  patientName: string;
+  phone: string;
+  email: string;
+  patientAge: string;
+  gender: string;
 }
