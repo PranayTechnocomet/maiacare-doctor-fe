@@ -2,6 +2,10 @@ import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 import dummyPdfImg from "../assets/images/dummy-pdf-img.png"
 import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
 import appointmentProfile from "../assets/images/appoiment-img-1.png"
+import PriyaGupta from "../assets/images/Priya Gupta.png"
+import AarushiPatel from "../assets/images/Aarushi Patel.png"
+import NishaRao from "../assets/images/Nisha Rao.png"
+import RiyaSharma from "../assets/images/Riya Sharma.png"
 
 export const tableResponse: Patient[] = [
   {
@@ -298,14 +302,101 @@ export const partnerDetailData = {
 }
 
 export const tempAppointmentProfileData = {
-    profilePhoto: appointmentProfile,
-    name: "Radhika More",
-    id: "PTS-874562",
-    gender: "Female",
-    year: "31 Years",
-    date: "15 Jun 2025",
-    time: "3:15 PM",
-    FertilityAssessment: "Fertility assessment"
+  profilePhoto: appointmentProfile,
+  name: "Radhika More",
+  id: "PTS-874562",
+  gender: "Female",
+  year: "31 Years",
+  date: "15 Jun 2025",
+  time: "3:15 PM",
+  FertilityAssessment: "Fertility assessment"
 }
 
+export interface tempAppointmentProfileData {
+  appointment_id: string;
+  patient_profile: string | any;
+  patient_name: string;
+  patient_status: string;
+  patient_contactnumber: string;
+  patient_email: string;
+  patient_appointment_date: string;
+  patient_appointment_time: string;
+  patient_treatment: string[];
+  patient_payment: string;
+  patient_additional_commet: string;
+  patient_time: string;
+}
 
+export const doctorlistingModalData: tempAppointmentProfileData[] = [
+  {
+
+    appointment_id:"1",
+    patient_profile: PriyaGupta,
+    patient_name: "Priya Gupta",
+    patient_status: "Follow Up",
+    patient_contactnumber: "12345 67890",
+    patient_email: "riya@gmail.com",
+    patient_appointment_date: "12 May 2024",
+    patient_appointment_time: "10:00 AM - 10:30 AM",
+    patient_treatment: ["Fertility Support", "IVF", "IUI"],
+    patient_payment: "Unpaid",
+    patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    patient_time:"11:00 AM"
+
+  },
+  {
+
+    appointment_id: "2",
+    patient_profile: AarushiPatel,
+    patient_name: "Aarushi Patel",
+    patient_status: "Follow Up",
+    patient_contactnumber: "09876 54321",
+    patient_email: "aarushi@gmail.com",
+    patient_appointment_date: "15 April 2024",
+    patient_appointment_time: "12:00 AM - 12:30 AM",
+    patient_treatment: ["Fertility Support", "IVF", "IUI"],
+    patient_payment: "Unpaid",
+    patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    patient_time:"12:00 AM"
+
+  },
+  {
+
+    appointment_id: "3",
+    patient_profile: NishaRao,
+    patient_name: "Nisha Rao",
+    patient_status: "Follow Up",
+    patient_contactnumber: "98562 98758",
+    patient_email: "nisha@gmail.com",
+    patient_appointment_date: "20 January 2024",
+    patient_appointment_time: "01:00 AM - 01:30 AM",
+    patient_treatment: ["Fertility Support", "IVF", "IUI"],
+    patient_payment: "Unpaid",
+    patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    patient_time:"1:00 PM"
+
+  },
+  {
+
+    appointment_id: "4",
+    patient_profile: RiyaSharma,
+    patient_name: "Riya Sharma",
+    patient_status: "Follow Up",
+    patient_contactnumber: "78545 69855",
+    patient_email: "priya@gmail.com",
+    patient_appointment_date: "28 February 2024",
+    patient_appointment_time: "02:00 AM - 02:30 AM",
+    patient_treatment: ["Fertility Support", "IVF", "IUI"],
+    patient_payment: "Unpaid",
+    patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    patient_time:"2:00 PM"
+
+  },
+
+  
+]
+export const umeshData =[
+{
+  appointment_id: "1234",
+},
+]
