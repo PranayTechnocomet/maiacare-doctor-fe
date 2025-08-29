@@ -334,7 +334,7 @@ export interface tempAppointmentProfileData {
 export const doctorlistingModalData: tempAppointmentProfileData[] = [
   {
 
-    appointment_id:"1",
+    appointment_id: "1",
     patient_profile: PriyaGupta,
     patient_name: "Priya Gupta",
     patient_status: "Follow Up",
@@ -345,7 +345,7 @@ export const doctorlistingModalData: tempAppointmentProfileData[] = [
     patient_treatment: ["Fertility Support", "IVF", "IUI"],
     patient_payment: "Unpaid",
     patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    patient_time:"11:00 AM"
+    patient_time: "11:00 AM"
 
   },
   {
@@ -361,7 +361,7 @@ export const doctorlistingModalData: tempAppointmentProfileData[] = [
     patient_treatment: ["Fertility Support", "IVF", "IUI"],
     patient_payment: "Unpaid",
     patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    patient_time:"12:00 AM"
+    patient_time: "12:00 AM"
 
   },
   {
@@ -377,7 +377,7 @@ export const doctorlistingModalData: tempAppointmentProfileData[] = [
     patient_treatment: ["Fertility Support", "IVF", "IUI"],
     patient_payment: "Unpaid",
     patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    patient_time:"1:00 PM"
+    patient_time: "1:00 PM"
 
   },
   {
@@ -393,20 +393,19 @@ export const doctorlistingModalData: tempAppointmentProfileData[] = [
     patient_treatment: ["Fertility Support", "IVF", "IUI"],
     patient_payment: "Unpaid",
     patient_additional_commet: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    patient_time:"2:00 PM"
+    patient_time: "2:00 PM"
 
   },
 
-  
 ]
-export const umeshData =[
-{
-  appointment_id: "1234",
-},
+export const umeshData = [
+  {
+    appointment_id: "1234",
+  },
 ]
 export const PatientsDetails = [
-    { id: 1, ProfilePhoto: patientImg1, name: "Nisha S" },
-    { id: 2, ProfilePhoto: patientImg2, name: "Kavita Sharma" },
-    { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
-    { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
+  { id: 1, ProfilePhoto: patientImg1, name: "Nisha S" },
+  { id: 2, ProfilePhoto: patientImg2, name: "Kavita Sharma" },
+  { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
+  { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
 ];

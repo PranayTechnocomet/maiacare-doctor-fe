@@ -44,6 +44,7 @@ export function PatientAutocomplete({
 
     return (
         <div className="position-relative" >
+            <Form.Label className="maiacare-input-field-label  form-label">Name</Form.Label>
             <Form.Control
                 type="text"
                 className="maiacare-input-field w-100"
@@ -113,6 +114,8 @@ export function SelecteAgeBox() {
 
     const handleChange = (val: string) => {
         setAge(val);
+
+       console.log(val);
     };
 
     return (
