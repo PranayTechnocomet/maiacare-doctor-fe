@@ -10,20 +10,16 @@ import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
 import '../style/Appointment.css';
 import { BsClock } from 'react-icons/bs';
-
 import { doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
-
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
+
 
   const [currentDate, setCurrentDate] = useState<Date>(new Date(2024, 10)); // November 2024
   const [selectedDates, setSelectedDates] = useState<Set<string>>(new Set());
   const [lastSelectedDate, setLastSelectedDate] = useState<Date | null>(null);
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
-
-
-
 
 
   // Navigation functions
@@ -158,11 +154,11 @@ export function CalendarView() {
   const [selectedView, setSelectedView] = useState<string>("day");
   const [doctorListingModal, setDoctorListingModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState<tempAppointmentProfileData | any>();
+  const [RescheduleModal, setRescheduleModal] = useState(false);
+  const [CancelModal, setCancelModal] = useState(false);
+
+
   console.log("AppointmentID", selectedPatient?.appointment_id);
-
-
-
-
 
   const [events, setEvents] = useState<Event[] | any>([]);
   const [showTooltip, setShowTooltip] = useState(true);
@@ -585,6 +581,7 @@ export function CalendarView() {
                     </div>
                   </div>
 
+                  <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
 
                   <Modal
                     show={doctorListingModal}
@@ -637,15 +634,12 @@ export function CalendarView() {
                               </div>
                             </div>
                             <div>
-                              <AppointmentRequestCancelModel />
+                              <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
                             </div>
 
                           </div>
 
                         </div>
-
-
-
 
                         <div className='mt-3'>
                           <p className='mb-2 doctor-listing-modal-label '><svg width="14" className='me-1' height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">

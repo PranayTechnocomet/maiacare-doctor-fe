@@ -6,7 +6,7 @@ import '@/style/Appointment.css'
 function page() {
     return (
         <>
-            <AppointmentRequestCancelModel />
+            {/* <AppointmentRequestCancelModel /> */}
             <div className="mt-3">
 
                 <BookAppointmentModal />
