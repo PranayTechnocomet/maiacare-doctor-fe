@@ -4,7 +4,7 @@ import '../../style/customtabs.css';
 
 interface TabOption {
   key: string;
-  label: string;
+  label: string | React.ReactNode;
   content: React.ReactNode;
   disabled?: boolean;
 }
