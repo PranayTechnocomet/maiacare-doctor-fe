@@ -2,6 +2,10 @@ import { Patient, PhysicalAssessmentData } from "./types/interfaces";
 import dummyPdfImg from "../assets/images/dummy-pdf-img.png"
 import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
 import appointmentProfile from "../assets/images/appoiment-img-1.png"
+import patientImg1 from "../assets/images/patient-img-1.png"
+import patientImg2 from "../assets/images/patient-img-2.png"
+import patientImg3 from "../assets/images/patient-img-3.png"
+import patientImg4 from "../assets/images/patient-img-4.png"
 
 export const tableResponse: Patient[] = [
   {
@@ -307,3 +311,10 @@ export const tempAppointmentProfileData = {
     time: "3:15 PM",
     FertilityAssessment: "Fertility assessment"
 }
+
+export const PatientsDetails = [
+    { id: 1, ProfilePhoto: patientImg1, name: "Nisha S" },
+    { id: 2, ProfilePhoto: patientImg2, name: "Kavita Sharma" },
+    { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
+    { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
+];
