@@ -14,6 +14,8 @@ import { RadioButtonGroup } from "../ui/RadioField";
 import Image from "next/image";
 import Modal from "../ui/Modal";
 import SuccessImageBookAppointment from "@/assets/images/Appointment-book.png";
+import { PatientAutocomplete, PatientShow, SelecteAgeBox } from "../TempPatientAutocomplete";
+import { PatientsDetails } from "@/utils/StaticData";
 
 interface BookAppointmentProps {
     setBookAppointmentModal: (show: boolean) => void;
@@ -52,6 +54,7 @@ export function BookAppointment({
     const [formError, setFormError] = useState<FormError>(initialFormError);
     const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
+
     const totalSteps = 2;
 
     const handleChange = (
@@ -100,7 +103,7 @@ export function BookAppointment({
         const errors = validateForm2(formData);
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
-            console.log("form submit success");
+            console.log("form submit success", formData);
 
             // close main modal
             setBookAppointmentModal?.(false);
@@ -263,7 +266,18 @@ export function BookAppointment({
                     <Row className="g-3">
                         <h6 className="doctor-profile-heading m-0">Patient’s Details</h6>
                         <Col md={12}>
-                            <InputFieldGroup
+
+                            <PatientAutocomplete
+                                data={PatientsDetails}
+                                placeholder="Type patient name..."
+                                onChange={(selected) => {
+                                    console.log("Selected:", selected);
+                                }}
+                            />
+
+                            <PatientShow />
+
+                            {/* <InputFieldGroup
                                 label="Name"
                                 name="patientName"
                                 type="text"
@@ -278,7 +292,16 @@ export function BookAppointment({
                                 readOnly={false}
                                 error={formError.patientName}
 
-                            ></InputFieldGroup>
+                            ></InputFieldGroup> */}
+
+                            {/* <PatientAutocomplete data={patients} onSelect={(patient) => {
+                                setFormData((prev) => ({ ...prev, patientName: patient.name }));
+                                setFormError((prev) => ({ ...prev, patientName: "" }));
+                                handleChange({
+                                    target: { name: "patientName", value: patient.name },
+                                } as React.ChangeEvent<HTMLInputElement>);
+                            }} /> */}
+
                         </Col>
                         <Col md={6}>
                             <PhoneNumberInput
@@ -316,7 +339,10 @@ export function BookAppointment({
                             ></InputFieldGroup>
                         </Col>
                         <Col md={12}>
-                            <InputSelect
+
+                            <SelecteAgeBox />
+
+                            {/* <InputSelect
                                 label="Age"
                                 name="patientAge"
                                 value={formData.patientAge}
@@ -337,7 +363,7 @@ export function BookAppointment({
                                     { id: "5", value: "3", label: "41 - 50" },
                                     { id: "6", value: "3", label: "50+" },
                                 ]}
-                            />
+                            /> */}
                         </Col>
                         <Col md={12}>
                             <RadioButtonGroup

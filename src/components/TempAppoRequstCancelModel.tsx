@@ -122,6 +122,7 @@ export function BookAppointmentModal() {
           setShowSuccessModalBook={setShowSuccessModalBook}
         />
       </Modal>
+      
       <SuccessModalBookAppointment
         showSuccessModalBook={showSuccessModalBook}
         setShowSuccessModalBook={setShowSuccessModalBook}

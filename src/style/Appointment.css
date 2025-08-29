@@ -49,3 +49,34 @@
     background: transparent !important;
     color: inherit !important;
 }
+
+.show-patient-box {
+    border: 1px solid var(--color-icon-border);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.show-patient-img {
+    border-radius: 4px;
+}
+
+.age-select-field .age-select-item {
+    border: 1px solid var(--color-age-select-item) !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    color: var(--color-sidebar-icon) !important;
+
+}
+
+.age-select-field .btn-link {
+    text-decoration: none;
+}
+
+.age-select-field .btn-check:checked+.age-select-item {
+    border-color: var(--border-box) !important;
+    color: var(--border-box) !important;
+}
+
+.age-select-field .btn-group-vertical > .btn, .btn-group > .btn {
+   flex: none !important;
+}

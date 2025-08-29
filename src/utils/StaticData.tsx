@@ -6,6 +6,10 @@ import PriyaGupta from "../assets/images/Priya Gupta.png"
 import AarushiPatel from "../assets/images/Aarushi Patel.png"
 import NishaRao from "../assets/images/Nisha Rao.png"
 import RiyaSharma from "../assets/images/Riya Sharma.png"
+import patientImg1 from "../assets/images/patient-img-1.png"
+import patientImg2 from "../assets/images/patient-img-2.png"
+import patientImg3 from "../assets/images/patient-img-3.png"
+import patientImg4 from "../assets/images/patient-img-4.png"
 
 export const tableResponse: Patient[] = [
   {
@@ -400,3 +404,9 @@ export const umeshData =[
   appointment_id: "1234",
 },
 ]
+export const PatientsDetails = [
+    { id: 1, ProfilePhoto: patientImg1, name: "Nisha S" },
+    { id: 2, ProfilePhoto: patientImg2, name: "Kavita Sharma" },
+    { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
+    { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
+];
