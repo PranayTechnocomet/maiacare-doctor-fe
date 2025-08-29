@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect, useRef, useState } from 'react';
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
-import { Badge, Card, Col, Form, Nav, Row, Tab } from 'react-bootstrap';
+import { Badge, Card, Col, Form, Nav, Row, Stack, Tab } from 'react-bootstrap';
 import Button from './ui/Button';
 import '../style/temp.css';
 import Modal from './ui/Modal';
@@ -278,6 +278,107 @@ export function CalendarView() {
 
 
 
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [weekRange, setWeekRange] = useState<{ start: Date; end: Date } | null>(null);
+
+  // --- Date Calculation Helpers ---
+  const getDaysInMonth = (year: number, month: number) => {
+    return new Date(year, month + 1, 0).getDate();
+  };
+
+  const getFirstDayOfMonth = (year: number, month: number) => {
+    // Adjust to make Monday the first day of the week (0 = Monday)
+    return (new Date(year, month, 1).getDay() + 6) % 7;
+  };
+
+  const getWeekRange = (date: Date) => {
+    const dt = new Date(date);
+    const dayOfWeek = (dt.getDay() + 6) % 7; // Monday = 0, Sunday = 6
+
+    const weekStart = new Date(dt);
+    weekStart.setDate(dt.getDate() - dayOfWeek);
+    weekStart.setHours(0, 0, 0, 0);
+
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    weekEnd.setHours(23, 59, 59, 999);
+
+    return { start: weekStart, end: weekEnd };
+  };
+
+  // --- Handlers ---
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  };
+
+  const handleDateClick = (day: number) => {
+    const newSelectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    setSelectedDate(newSelectedDate);
+    setWeekRange(getWeekRange(newSelectedDate));
+  };
+
+  // --- Effects ---
+  useEffect(() => {
+    // Initialize the week range when the component mounts
+    setWeekRange(getWeekRange(selectedDate));
+  }, []);
+
+
+  // --- Render Logic ---
+  const renderCalendar = () => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const daysInMonth = getDaysInMonth(year, month);
+    const firstDay = getFirstDayOfMonth(year, month);
+
+    const calendarDays = [];
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < firstDay; i++) {
+      calendarDays.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+    }
+
+    // Add the days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDate = new Date(year, month, day);
+      const isSelected = selectedDate.getDate() === day && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
+
+      const isInRange = weekRange && dayDate >= weekRange.start && dayDate <= weekRange.end;
+      const dayOfWeek = (dayDate.getDay() + 6) % 7;
+      const isWeekStart = dayOfWeek === 0;
+      const isWeekEnd = dayOfWeek === 6;
+      const isFirstDayOfMonth = day === 1;
+      const isLastDayOfMonth = day === daysInMonth;
+
+      const classNames = [
+        'calendar-day',
+        isSelected ? 'selected' : '',
+        isInRange && !isSelected ? 'in-range' : '',
+        isInRange && (isWeekStart || isFirstDayOfMonth) ? 'range-start' : '',
+        isInRange && (isWeekEnd || isLastDayOfMonth) ? 'range-end' : ''
+      ].join(' ');
+
+      calendarDays.push(
+        <div
+          key={day}
+          className={classNames}
+          onClick={() => handleDateClick(day)}
+        >
+          {day}
+        </div>
+      );
+    }
+
+    return calendarDays;
+  };
+
+  const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
   return (
     <>
       <Row className='mt-3'>
@@ -297,6 +398,39 @@ export function CalendarView() {
                 {/* Multi-Select DatePicker Component */}
                 <div className="mt-3">
                   {/* <MultiDateSelector /> */}
+
+
+                  <style>{`
+        
+      `}</style>
+                  <div className="bg-light  d-flex align-items-center justify-content-center ">
+                    <Card className="shadow-sm calendar-card ">
+                      <Card.Body>
+                        <Stack direction="horizontal" className="mb-3">
+                          <h2 className="calendar-header mb-0">Calendar</h2>
+                          <div className="ms-auto">^</div>
+                        </Stack>
+
+                        <Stack direction="horizontal" className="align-items-center mb-3">
+                          <div className="month-header">
+                            {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
+                          </div>
+                          <Stack direction="horizontal" className="ms-auto">
+                            <Button variant="link" className="nav-btn p-0" onClick={handlePrevMonth}>&lt;</Button>
+                            <Button variant="link" className="nav-btn p-0" onClick={handleNextMonth}>&gt;</Button>
+                          </Stack>
+                        </Stack>
+
+                        <div className="calendar-grid">
+                          {daysOfWeek.map((day, index) => (
+                            <div key={index} className="day-of-week">{day}</div>
+                          ))}
+                          {renderCalendar()}
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </div>
+
                 </div>
 
 
@@ -426,7 +560,7 @@ export function CalendarView() {
                             </div>
 
                             {/* Dynamic Event Lines */}
-                            {events.map((event:any) => (
+                            {events.map((event: any) => (
                               <div
                                 key={event.id}
                                 className="position-absolute bg-warning"

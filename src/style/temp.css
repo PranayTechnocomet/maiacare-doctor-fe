@@ -139,21 +139,96 @@
     /* Firefox */
 }
 
-.doctor-listing-modal-profile{
+.doctor-listing-modal-profile {
     border: 1px solid var(--google-icon-border);
     border-radius: 8px;
     padding: 10px;
     background-color: var(--modal-profile-color);
 }
-.doctor-listing-modal-profile-img{
+
+.doctor-listing-modal-profile-img {
     border-radius: 4px;
 }
-.doctor-listing-modal-buttons{
+
+.doctor-listing-modal-buttons {
     background-color: #FFFFFF;
     padding: 8px 0px 12px 0px;
 }
-.docotor-listing-today-schedule-datas{
+
+.docotor-listing-today-schedule-datas {
     background-color: #F5F7FA;
     /* padding: 12px; */
     border-radius: 8px;
+}
+
+.calendar-card {
+    width: 320px;
+    border: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.calendar-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.month-header {
+    font-size: 1rem;
+    color: #8e8e93;
+    font-weight: 400;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 8px;
+    column-gap: 0;
+    /* Ensures horizontal continuity */
+    text-align: center;
+}
+
+.day-of-week {
+    font-weight: 500;
+    color: #6c757d;
+    font-size: 12px;
+    padding-bottom: 0px;
+}
+
+.calendar-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    width: 22px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.calendar-day.range-start {
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+}
+
+.calendar-day.range-end {
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+}
+
+.calendar-day.selected {
+    background-color: #E29578;
+    color: white;
+    border-radius: 50%;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #8e8e93;
+    font-size: 1.25rem;
+    font-weight: 200;
+}
+
+.nav-btn:hover {
+    color: #000;
 }
