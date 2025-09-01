@@ -151,7 +151,7 @@
 }
 
 .doctor-listing-modal-buttons {
-    background-color: #FFFFFF;
+    background-color: var(--color-white);
     padding: 8px 0px 12px 0px;
 }
 
@@ -174,7 +174,7 @@
 
 .month-header {
     font-size: 1rem;
-    color: #8e8e93;
+    color: var(--calender-day);
     font-weight: 400;
 }
 
@@ -216,19 +216,19 @@
 }
 
 .calendar-day.selected {
-    background-color: #E29578;
-    color: white;
+    background-color: var(--login-font);
+    color: var(--color-white);
     border-radius: 50%;
 }
 
 .nav-btn {
     background: none;
     border: none;
-    color: #8e8e93;
+    color: var(--calender-day);
     font-size: 1.25rem;
     font-weight: 200;
 }
 
 .nav-btn:hover {
-    color: #000;
+    color: var(--color-black);
 }

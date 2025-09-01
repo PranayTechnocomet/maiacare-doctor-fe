@@ -396,9 +396,7 @@ export function CalendarView() {
                   {/* <MultiDateSelector /> */}
 
 
-                  <style>{`
-        
-      `}</style>
+                  
                   <div className="bg-light  d-flex align-items-center justify-content-center ">
                     <Card className="shadow-sm calendar-card ">
                       <Card.Body>

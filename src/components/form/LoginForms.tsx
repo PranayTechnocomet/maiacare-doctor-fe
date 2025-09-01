@@ -38,26 +38,40 @@ export function LoginForms() {
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
-
+        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+       
         if (formData.password.trim() === "") {
             errors.password = "Password is required";
             isValid = false;
-        } else if (formData.password.length < 8) {
-            errors.password = "Minimum 8 characters";
-            isValid = false;
-        } else if (!/(?=.*[a-z])/.test(formData.password)) {
-            errors.password = "At least one lowercase letter";
-            isValid = false;
-        } else if (!/(?=.*[A-Z])/.test(formData.password)) {
-            errors.password = "At least one uppercase letter";
-            isValid = false;
-        } else if (!/(?=.*\d)/.test(formData.password)) {
-            errors.password = "At least one number";
-            isValid = false;
-        } else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.password)) {
-            errors.password = "At least one special character (e.g., !@#$%^&*)";
+        }
+        if (formData.email.trim() === "") {
+            errors.email = "Email is required";
             isValid = false;
         }
+        else if (!emailRegex.test(formData.email)) {
+            errors.email = "Invalid email format";
+            isValid = false;
+        }
+
+
+
+        
+        // else if (formData.password.length < 8) {
+        //     errors.password = "Minimum 8 characters";
+        //     isValid = false;
+        // } else if (!/(?=.*[a-z])/.test(formData.password)) {
+        //     errors.password = "At least one lowercase letter";
+        //     isValid = false;
+        // } else if (!/(?=.*[A-Z])/.test(formData.password)) {
+        //     errors.password = "At least one uppercase letter";
+        //     isValid = false;
+        // } else if (!/(?=.*\d)/.test(formData.password)) {
+        //     errors.password = "At least one number";
+        //     isValid = false;
+        // } else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.password)) {
+        //     errors.password = "At least one special character (e.g., !@#$%^&*)";
+        //     isValid = false;
+        // }
 
         setFormError(errors);
         return isValid;
@@ -77,7 +91,7 @@ export function LoginForms() {
         <div>
             <form onSubmit={handleFormSubmit}>
                 <InputFieldGroup
-                    type="email"
+                    type="text"
                     value={formData.email}
                     name='email'
                     onChange={handleChange}
@@ -109,8 +123,9 @@ export function LoginForms() {
                             className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
                             style={{ zIndex: 8 }}
                         >
-                            {showPassword ? <BiShow size={20} /> : <BiHide size={20} />}
-
+                            {/* {showPassword ? <BiShow  size={20} className='passwored-eye-icon' /> : <BiHide size={20} className='passwored-eye-icon' />} */}
+                            {showPassword ? <BiShow  size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
+                           
                         </span>
                     </InputFieldGroup>
                 </div>
@@ -134,47 +149,41 @@ export function ForgotPassword() {
 
 
     const defaultFormValue = {
-        email: '',
+        email: ''
 
     };
 
     const defaultFormError = {
-        email: '',
+        email: ''
 
     };
 
-    const [formData, setFormData] = useState(defaultFormValue);
+    const [data, setData] = useState(defaultFormValue);
     const [formError, setFormError] = useState(defaultFormError);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setData({ ...data, [name]: value });
         setFormError({ ...formError, [name]: '' });
     };
 
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
+        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (formData.email.trim() === "") {
+        if (data.email.trim() === "") {
             errors.email = "Email is required";
             isValid = false;
-        } else if (!emailRegex.test(formData.email)) {
+        } else if (!emailRegex.test(data.email)) {
             errors.email = "Invalid email format";
             isValid = false;
         }
-        else if (formData.email !== "admin@gmail.com") {
-            errors.email = "Invalid email";
-            isValid = false;
-        }
-
-
-
+    
         setFormError(errors);
         return isValid;
     };
+    
     const router = useRouter();
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -190,8 +199,8 @@ export function ForgotPassword() {
         <div>
             <form onSubmit={handleFormSubmit}>
                 <InputFieldGroup
-                    type="email"
-                    value={formData.email}
+                    type="text"
+                    value={data.email}
                     name='email'
                     onChange={handleChange}
                     error={formError.email}
@@ -314,7 +323,7 @@ export function ResetPasswordScreen() {
                             className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
                             style={{ zIndex: 8 }}
                         >
-                            {newshowPassword ? <BiShow size={20} /> : <BiHide size={20} />}
+                            {newshowPassword ? <BiShow size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
 
                         </span>
                     </InputFieldGroup>
@@ -338,7 +347,7 @@ export function ResetPasswordScreen() {
                             className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
                             style={{ zIndex: 8 }}
                         >
-                            {confirmshowPassword ? <BiShow size={20} /> : <BiHide size={20} />}
+                            {confirmshowPassword ? <BiShow size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
 
                         </span>
                     </InputFieldGroup>
@@ -396,7 +405,7 @@ export function VerifyOtp() {
             setFormError(defaultFormError);
         }
     };
- 
+
     return (
 
         <div>

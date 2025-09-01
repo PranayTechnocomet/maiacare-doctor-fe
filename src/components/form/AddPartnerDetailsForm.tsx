@@ -25,7 +25,7 @@ export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPa
 
     // In AddPartnerDetailsForm.tsx
     useEffect(() => {
-        console.log("modalEditTab changed:", modalEditTab);
+        // console.log("modalEditTab changed:", modalEditTab);
         if (modalEditTab) {
             setActiveTab(modalEditTab);
         }
@@ -100,6 +100,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         basic_detail_age: string;
         basic_detail_phone: string;
         basic_detail_email: string;
+        profileImage: string | null;
     };
 
     type FormError = Partial<Record<keyof FormData, string>>;
@@ -109,11 +110,13 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         basic_detail_gender: "male",
         basic_detail_age: "",
         basic_detail_phone: "",
-        basic_detail_email: ""
+        basic_detail_email: "",
+        profileImage: ""
 
     };
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<FormData>(initialFormData);  
+    console.log("formData", formData);  
     const [formError, setFormError] = useState<FormError>(initialFormError);
     // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     const { name, value } = e.target;
@@ -123,7 +126,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     //     }));
     // };
 
-    console.log("formData", formData);
+    // console.log("formData", formData);
 
 
     const handleChange = (
@@ -141,21 +144,41 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         fileInputRef.current?.click();
     };
 
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     const file = event.target.files?.[0];
+    //     if (file) {
+    //         if (file.size > 5 * 1024 * 1024) {
+    //             alert("File size must be less than 5MB");
+    //             return;
+    //         }
+    //         const reader = new FileReader();
+    //         reader.onload = () => {
+    //             setProfileImage(reader.result as string);
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            if (file.size > 5 * 1024 * 1024) {
-                alert("File size must be less than 5MB");
-                return;
-            }
-            const reader = new FileReader();
-            reader.onload = () => {
-                setProfileImage(reader.result as string);
-            };
-            reader.readAsDataURL(file);
+          if (file.size > 5 * 1024 * 1024) {
+            alert("File size must be less than 5MB");
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = () => {
+            setProfileImage(reader.result as string);
+            setFormData((prev) => ({
+              ...prev,
+              profileImage: reader.result as string, // ✅ store base64 inside formData
+            }));
+          };
+          reader.readAsDataURL(file);
         }
-    };
-
+      };
+      
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
 
@@ -174,9 +197,9 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
 
         const errors = validateForm(formData);
         setFormError(errors);
-        console.log("errors", errors);
+        // console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
-            console.log("patient add successfully ... ", formData);
+            console.log("FormData111111 ", formData);
             setFormError(initialFormError);
             setActiveTab("medical history");
             window.scrollTo({ top: 0, behavior: 'smooth' });

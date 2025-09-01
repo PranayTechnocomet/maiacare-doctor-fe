@@ -6,7 +6,8 @@
 
 
 .input-email-login-data .maiacare-input-field::placeholder{
-    color: var(--color-radio-lable) !important;
+    color: var(--color-radio) !important;
+   
 }
 .login-title .main-login-title 
 {
@@ -17,6 +18,13 @@
 }
 .login-button{
     padding: 12px 24px !important;
+}
+.input-forrgot-password{
+    cursor: pointer !important;
+}
+.eye-color{
+   
+    color: #B0B4C1 !important;
 }
 
 .forgot-password-screen{
@@ -53,6 +61,9 @@
 }
 .verfication-code-main{
     height: 95vh !important;
+}
+.passwored-eye-icon{
+    cursor: pointer;
 }
 
 

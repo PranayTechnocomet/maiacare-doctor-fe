@@ -32,14 +32,14 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
     type FormError = Partial<Record<keyof FormData, string>>;
     const initialFormData: FormData = {
-        medication: initialData?.medication || "yes",
+        medication: initialData?.medication || "no",
         surgeries: initialData?.surgeries || "yes",
         surgeriesContent: initialData?.surgeriescontent || "",
         medicalCondition: initialData?.medicalCondition || "",
         familyMedicalHistory: initialData?.familyMedicalHistory || "",
         lifestyle: initialData?.lifestyle || "",
-        stress: initialData?.stress || "low",
-        exercise: initialData?.exercise || "never",
+        stress: initialData?.stress || "high",
+        exercise: initialData?.exercise || "rarely",
         medicationcontent: initialData?.medicationcontent || "",
         surgeriescontent: initialData?.surgeriescontent || "",
     };
@@ -66,8 +66,8 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
         return errors;
     };
-    
-    
+
+
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
@@ -89,8 +89,8 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
             setFormError(initialFormError);
             if (initialData) {
                 // If editing, update the existing entry
-                setMedicalHistoryFormData((prev: any) => 
-                    prev.map((item: any) => 
+                setMedicalHistoryFormData((prev: any) =>
+                    prev.map((item: any) =>
                         item === initialData ? formData : item
                     )
                 );
@@ -232,10 +232,10 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 className="position-relative "
                             ></InputFieldGroup>
                         </Col>
-                        <Col md={12} className=''>
+                        {/* <Col md={12} className=''>
                             <label className="form-label">Lifestyle</label>
 
-                            {/* Custom dropdown */}
+                            
                             <div className="dropdown">
                                 <button
                                     className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
@@ -268,7 +268,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 )}
                             </div>
 
-                            {/* Display badges */}
+                           
                             {selectedValues.length > 0 && (
                                 <div className="">
                                     <small className="text-muted mb-1 d-block">
@@ -292,6 +292,26 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                     </div>
                                 </div>
                             )}
+                        </Col> */}
+                        <Col md={12}>
+                            <InputSelect
+                                label="Lifestyle"
+                                name="lifestyle"
+                                placeholder='Select lifestyle'
+                                value={formData.lifestyle}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                    handleChange(e);
+                                }}
+                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                                required={true}
+                                disabled={false}
+                                error={formError.lifestyle}
+                                options={[
+                                    { id: "1", value: "lifestyle 1", label: "lifestyle 1" },
+                                    { id: "2", value: "lifestyle 2", label: "lifestyle 2" },
+                                    { id: "3", value: "lifestyle 3", label: "lifestyle 3" },
+                                ]}
+                            />
                         </Col>
 
                         <Col md={6} className=''>
