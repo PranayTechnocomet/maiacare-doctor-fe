@@ -260,7 +260,7 @@ const ProfileBasicDetail = () => {
                                                             <Image src={hiegthImg} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='phisical-assessment-accordion-showData-box-title'>Height</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height}</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span>
                                                             </div>
                                                         </div>
                                                     </Col>
@@ -269,7 +269,7 @@ const ProfileBasicDetail = () => {
                                                             <Image src={weightImg} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='phisical-assessment-accordion-showData-box-title'>Weight</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight}</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight} kg</span>
                                                             </div>
                                                         </div>
                                                     </Col>
@@ -278,7 +278,7 @@ const ProfileBasicDetail = () => {
                                                             <Image src={BMIIMG} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='phisical-assessment-accordion-showData-box-title'>BMI</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi}</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi} (Normal)</span>
                                                             </div>
                                                         </div>
                                                     </Col>
@@ -298,7 +298,7 @@ const ProfileBasicDetail = () => {
                                                             <Image src={BloodPressure} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='phisical-assessment-accordion-showData-box-title'>Blood Pressure</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic}</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic} mmHg </span>
                                                             </div>
                                                         </div>
                                                     </Col>
@@ -307,7 +307,7 @@ const ProfileBasicDetail = () => {
                                                             <Image src={HeartRate} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='phisical-assessment-accordion-showData-box-title'>Hearth Rate</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate}</span>
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate} bpm</span>
                                                             </div>
                                                         </div>
                                                     </Col>

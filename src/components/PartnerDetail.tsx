@@ -357,7 +357,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                         <Image src={hiegthImg} alt="Age" width={42} height={42} />
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='phisical-assessment-accordion-showData-box-title'>Height</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height}"</span>
+                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span>
                                                         </div>
                                                     </div>
                                                 </Col>
