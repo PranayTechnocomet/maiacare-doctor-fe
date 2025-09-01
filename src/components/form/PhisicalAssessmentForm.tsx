@@ -205,8 +205,13 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-end mt-4"}>
-                        <span className="or-custom-slash">/</span>
+                    
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5" }>   
+                        {/* <span className="or-custom-slash">/</span> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
+                            <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
+                        </svg>
+
                     </Col>
 
                     <Col md={5} className="input-custom-width">
@@ -214,7 +219,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="" // No label here to match the design
                             name="diastolic"
                             type="number"
-                            className="setting-password-input"
+                            className="setting-password-input "
                             placeholder="Diastolic(mmHg)"
                             required={false}
                             disabled={false}
