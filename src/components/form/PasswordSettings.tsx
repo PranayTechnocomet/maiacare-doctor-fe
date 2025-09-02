@@ -132,7 +132,7 @@ function PasswordSettings() {
                         handleChange(e);
                     }}
                     onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                    placeholder="Enter Current password"
+                    placeholder="Enter current password"
                     required={true}
                     disabled={false}
                     readOnly={false}
@@ -158,10 +158,59 @@ function PasswordSettings() {
 
                 <div className="my-3">
                     <p className="settings-accordion-subtitle mb-2">Your password must meet the following requirements:</p>
-
                     <div className="d-flex align-items-center gap-2">
                         {renderIcon(passwordValidation.number)}
-                        <span className="password-requirements">At least one number</span>
+                        <span
+                            className={`password-requirements ${passwordValidation.number ? "active" : ""
+                                }`}
+                        >
+                            At least one number
+                        </span>
+                    </div>
+
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.minLength)}
+                        <span
+                            className={`password-requirements ${passwordValidation.minLength ? "active" : ""
+                                }`}
+                        >
+                            Minimum 8 characters
+                        </span>
+                    </div>
+
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.lowercase)}
+                        <span
+                            className={`password-requirements ${passwordValidation.lowercase ? "active" : ""
+                                }`}
+                        >
+                            At least one lowercase letter
+                        </span>
+                    </div>
+
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.uppercase)}
+                        <span
+                            className={`password-requirements ${passwordValidation.uppercase ? "active" : ""
+                                }`}
+                        >
+                            At least one uppercase letter
+                        </span>
+                    </div>
+
+                    <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.specialChar)}
+                        <span
+                            className={`password-requirements ${passwordValidation.specialChar ? "active" : ""
+                                }`}
+                        >
+                            At least one special character (e.g., !@#$%^&*)
+                        </span>
+                    </div>
+
+                    {/* <div className="d-flex align-items-center gap-2">
+                        {renderIcon(passwordValidation.number)}
+                        <span className="password-requirements active">At least one number</span>
                     </div>
 
                     <div className="d-flex align-items-center gap-2">
@@ -182,7 +231,7 @@ function PasswordSettings() {
                     <div className="d-flex align-items-center gap-2">
                         {renderIcon(passwordValidation.specialChar)}
                         <span className="password-requirements">At least one special character (e.g., !@#$%^&*)</span>
-                    </div>
+                    </div> */}
                 </div>
 
                 <InputFieldGroup

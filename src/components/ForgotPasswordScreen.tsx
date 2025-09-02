@@ -62,7 +62,7 @@ export default function ForgotPasswordScreen() {
 
                             />
                             <div className="position-absolute bottom-0 start-0  text-center p-2 " >
-                                <p className='login-image-contetnt m-0 '>Heal, Connect, & Lead-<br className="d-block md-none"/>
+                                <p className='login-image-contetnt'>Heal, Connect, & Lead-<br className="d-block md-none"/>
                                     The Future of Fertility Support Starts Here.</p>
                             </div>
                         </div>

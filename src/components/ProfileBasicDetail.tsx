@@ -151,17 +151,12 @@ const ProfileBasicDetail = () => {
     const [showModal, setShowModal] = useState(false);
     const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<any>([]);
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
-    const [physicalAssessmentData, setPhysicalAssessmentData] = useState<any>([]);
 
     console.log("medicalHistoryFormData", medicalHistoryFormData);
-    const [modalFormData, setModalFormData] = useState<any>([]);
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<any>([]);
     const [modalFormFertilityData, setModalFormFertilityData] = useState<any>([]);
 
-    console.log("modalFormData", modalFormData);
-    console.log("modalFormPhisicalData", modalFormPhisicalData);
-    console.log("modalFormFertilityData", modalFormFertilityData);
-
+    
     const handleEdit = (item: any) => {
         setFormData({
             ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
@@ -183,7 +178,6 @@ const ProfileBasicDetail = () => {
             title: 'Physical Assessment',
             content: (
                 <>
-
                     {modalFormPhisicalData.length === 0 ? (
                         <div className="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 81 81" fill="none">
@@ -243,7 +237,12 @@ const ProfileBasicDetail = () => {
                         <div>
                             <Accordion defaultActiveKey="0">
                                 <Button className='mb-3' onClick={() => setShowPhisicalAssessment(true)} variant="outline" disabled={false} contentSize="small" >
-                                    <IoAdd /> Add new
+                                    <div className='d-flex align-items-center gap-1'>
+                                        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.1641 8C15.1641 8.16576 15.0982 8.32473 14.981 8.44194C14.8638 8.55915 14.7048 8.625 14.5391 8.625H8.28906V14.875C8.28906 15.0408 8.22322 15.1997 8.10601 15.3169C7.9888 15.4342 7.82982 15.5 7.66406 15.5C7.4983 15.5 7.33933 15.4342 7.22212 15.3169C7.10491 15.1997 7.03906 15.0408 7.03906 14.875V8.625H0.789063C0.623302 8.625 0.464331 8.55915 0.347121 8.44194C0.229911 8.32473 0.164062 8.16576 0.164062 8C0.164062 7.83424 0.229911 7.67527 0.347121 7.55806C0.464331 7.44085 0.623302 7.375 0.789063 7.375H7.03906V1.125C7.03906 0.95924 7.10491 0.800269 7.22212 0.683058C7.33933 0.565848 7.4983 0.5 7.66406 0.5C7.82982 0.5 7.9888 0.565848 8.10601 0.683058C8.22322 0.800269 8.28906 0.95924 8.28906 1.125V7.375H14.5391C14.7048 7.375 14.8638 7.44085 14.981 7.55806C15.0982 7.67527 15.1641 7.83424 15.1641 8Z" fill="#2B4360" />
+                                        </svg>
+                                        Add new
+                                    </div>
                                 </Button>
                                 {modalFormPhisicalData?.map((item: any, index: any): any => {
                                     return (
@@ -353,9 +352,10 @@ const ProfileBasicDetail = () => {
                             <Button className='mb-3' onClick={() => {
                                 handleEdit(modalFormFertilityData)
                             }} variant="outline" disabled={false} contentSize="small">
-                                <svg width="14" height="14" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
-                                </svg> Edit
+                                </svg> 
+                                Edit
                             </Button>
 
                             <Accordion defaultActiveKey="0">
@@ -363,7 +363,7 @@ const ProfileBasicDetail = () => {
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
 
-                                            <Image src={PregnancyIcon} width={34} height={34} alt="" />
+                                        <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
                                             <span className='fertilityAssessment-subAccordion-title'>
                                                 Menstrual Cycle
                                             </span>
@@ -445,13 +445,11 @@ const ProfileBasicDetail = () => {
                                 <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
-
-                                            <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
+                                        <Image src={PregnancyIcon} width={34} height={34} alt="" />
+                                           
                                             <span className='fertilityAssessment-subAccordion-title'>
                                                 Pregnancy
                                             </span>
-
-
                                         </div>
                                     </Accordion.Header>
                                     <Accordion.Body>
@@ -513,14 +511,14 @@ const ProfileBasicDetail = () => {
                                 variant="outline"
                                 contentSize="small"
                             >
-                                <svg width="14" height="14" viewBox="0 0 14 14" className='me-2' fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="16" height="16" viewBox="0 0 14 14" className='me-2' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                 </svg>
                                 Edit
                             </Button>
 
                             <Row className="">
-                                <Col lg={5} md={12}>
+                                <Col sm={5}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Current Medications</h6>
                                         <p className=" accordion-title-detail">
@@ -529,7 +527,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={7} md={12}>
+                                <Col sm={7}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Surgeries</h6>
                                         <p className=" accordion-title-detail">
@@ -540,7 +538,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={12} md={12}>
+                                <Col sm={12}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Medical condition / Allergies</h6>
                                         <p className=" accordion-title-detail d-inline-block border-box-orange-font box-border-orange ">
@@ -549,7 +547,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={5} md={12}>
+                                <Col sm={5}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Family History</h6>
                                         <p className=" accordion-title-detail">
@@ -560,7 +558,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={7} md={12}>
+                                <Col sm={7}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Lifestyle</h6>
                                         <p className=" accordion-title-detail d-inline-block border-box-blue-font box-border-blue me-2">
@@ -569,7 +567,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={5} md={12}>
+                                <Col sm={5}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Physical Exercise</h6>
                                         <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
@@ -580,7 +578,7 @@ const ProfileBasicDetail = () => {
                                     </div>
                                 </Col>
 
-                                <Col lg={7} md={12}>
+                                <Col sm={7}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Stress Level</h6>
                                         <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
@@ -705,13 +703,13 @@ const ProfileBasicDetail = () => {
 
                     <Modal
                         show={showFertilityAssessment}
-                        onHide={() => setShowFertilityAssessment(false)}
+                        onHide={() => {setShowFertilityAssessment(false); setFormData(initialFormData); }}
                         header="Fertility Assessment"
                         closeButton={true}
                         size="lg"
                     >
                         <div className="mb-0 ">
-                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} setModalFormFertilityData={setModalFormFertilityData} setFormData={setFormData} formData={formData} />
+                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} setModalFormFertilityData={setModalFormFertilityData} setFormData={setFormData} formData={formData} initialFormData={initialFormData} />
 
                         </div>
                     </Modal>
