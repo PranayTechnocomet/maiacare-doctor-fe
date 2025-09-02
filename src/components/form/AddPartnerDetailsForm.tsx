@@ -100,7 +100,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         basic_detail_age: string;
         basic_detail_phone: string;
         basic_detail_email: string;
-        profileImage: string | null;
+        profileImage: string;
     };
 
     type FormError = Partial<Record<keyof FormData, string>>;
@@ -115,8 +115,8 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
 
     };
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);  
-    console.log("formData", formData);  
+    const [formData, setFormData] = useState<FormData>(initialFormData);
+    console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
     // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     const { name, value } = e.target;
@@ -160,25 +160,63 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     // };
 
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, data: FormData, errors: FormError) => {
+    //     const file = event.target.files?.[0];
+    //     if (file) {
+    //         if (file.size > 5 * 1024 * 1024) {
+    //             // alert("File size must be less than 5MB");
+    //             //  (!data.profileImage.trim())
+    //             //     errors.profileImage = "File size must be less than 5MB";
+    //             return;
+    //         }
+    //         const reader = new FileReader();
+    //         reader.onload = () => {
+    //             setProfileImage(reader.result as string);
+    //             setFormData((prev) => ({
+    //                 ...prev,
+    //                 profileImage: reader.result as string, // ✅ store base64 inside formData
+    //             }));
+    //         };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
+
+    const handleFileChange = (
+        event: React.ChangeEvent<HTMLInputElement>,
+        data: FormData,
+        errors: FormError
+    ) => {
         const file = event.target.files?.[0];
         if (file) {
-          if (file.size > 5 * 1024 * 1024) {
-            alert("File size must be less than 5MB");
-            return;
-          }
-          const reader = new FileReader();
-          reader.onload = () => {
-            setProfileImage(reader.result as string);
-            setFormData((prev) => ({
-              ...prev,
-              profileImage: reader.result as string, // ✅ store base64 inside formData
-            }));
-          };
-          reader.readAsDataURL(file);
+            // Check size before converting
+            if (file.size > 5 * 1024 * 1024) {
+                setFormData((prev) => ({
+                    ...prev,
+                    profileImage: "", // clear invalid image
+                }));
+                setFormError((prev) => ({
+                    ...prev,
+                    profileImage: "File size must be less than 5MB",
+                }));
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                setProfileImage(reader.result as string);
+                setFormData((prev) => ({
+                    ...prev,
+                    profileImage: reader.result as string, // store base64
+                }));
+                setFormError((prev) => ({
+                    ...prev,
+                    profileImage: "", // clear error if valid
+                }));
+            };
+            reader.readAsDataURL(file);
         }
-      };
-      
+    };
+
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
 
@@ -186,11 +224,36 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         if (!data.basic_detail_age.trim()) errors.basic_detail_age = "Age is required";
         if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Phone number is required";
 
-        if (!data.basic_detail_email.trim())
-            errors.basic_detail_email = "Email is required";
+        // Only check required here
+        if (!data.profileImage.trim()) {
+            errors.profileImage = "Profile Image is required";
+        }
+
+        if (!data.basic_detail_email.trim()) errors.basic_detail_email = "Email is required";
 
         return errors;
     };
+
+
+    // const validateForm = (data: FormData): FormError => {
+    //     const errors: FormError = {};
+
+    //     if (!data.basic_detail_name.trim()) errors.basic_detail_name = "Name is required";
+    //     if (!data.basic_detail_age.trim()) errors.basic_detail_age = "Age is required";
+    //     if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Phone number is required";
+
+    //     if (data.profileImage && data.profileImage.length > 5 * 1024 * 1024) {
+    //         console.log("data.profileImage", data.profileImage);
+    //         errors.profileImage = "File size must be less than 5MB";
+    //     } else if (!data.profileImage.trim()) {
+    //         errors.profileImage = "Profile Image is required";
+    //     }
+
+    //     if (!data.basic_detail_email.trim())
+    //         errors.basic_detail_email = "Email is required";
+
+    //     return errors;
+    // };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -221,6 +284,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                     width={100}
                                     height={100}
 
+
                                 />
                                 <div
                                     className="camera-icon position-absolute bottom-0 end-0 cursor-pointer"
@@ -228,12 +292,15 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                 >
                                     <Image src={cameraicon} alt="Upload" width={48} height={48} />
                                 </div>
-                                <input
+                                <InputFieldGroup
                                     type="file"
                                     accept="image/png, image/jpeg"
                                     ref={fileInputRef}
                                     className="image-formate"
                                     onChange={handleFileChange}
+                                    name="profileImage"
+                                    error={formError.profileImage}
+
                                 />
                             </div>
 
@@ -710,17 +777,18 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, i
                             />
                         </Col>
 
-
-                        <Col md={6} >
-                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
-                                Cancel
-                            </Button>
-                        </Col>
-                        <Col md={6} >
-                            <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
-                                Save
-                            </Button>
-                        </Col>
+                        <Row className='g-2'>
+                            <Col md={6} >
+                                <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                                    Cancel
+                                </Button>
+                            </Col>
+                            <Col md={6} >
+                                <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
+                                    Save
+                                </Button>
+                            </Col>
+                        </Row>
                     </Row>
                 </form>
             </div>
@@ -792,7 +860,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
 
 
 
-        
+
         if (!data.height.trim()) errors.height = "Height is required";
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
