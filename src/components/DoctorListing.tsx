@@ -598,7 +598,7 @@ export function CalendarView() {
 
                     }
                     closeButton={true}
-                    size="md"
+                    size="lg"
                   >
 
 

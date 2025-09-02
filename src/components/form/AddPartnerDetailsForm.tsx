@@ -182,38 +182,38 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     // };
 
     const handleFileChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-        data: FormData,
-        errors: FormError
+        event: React.ChangeEvent<HTMLInputElement> | undefined
     ) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            // Check size before converting
-            if (file.size > 5 * 1024 * 1024) {
-                setFormData((prev) => ({
-                    ...prev,
-                    profileImage: "", // clear invalid image
-                }));
-                setFormError((prev) => ({
-                    ...prev,
-                    profileImage: "File size must be less than 5MB",
-                }));
-                return;
+        if (event) {
+            const file = event.target.files?.[0];
+            if (file) {
+                // Check size before converting
+                if (file.size > 5 * 1024 * 1024) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        profileImage: "", // clear invalid image
+                    }));
+                    setFormError((prev) => ({
+                        ...prev,
+                        profileImage: "File size must be less than 5MB",
+                    }));
+                    return;
+                }
+    
+                const reader = new FileReader();
+                reader.onload = () => {
+                    setProfileImage(reader.result as string);
+                    setFormData((prev) => ({
+                        ...prev,
+                        profileImage: reader.result as string, // store base64
+                    }));
+                    setFormError((prev) => ({
+                        ...prev,
+                        profileImage: "", // clear error if valid
+                    }));
+                };
+                reader.readAsDataURL(file);
             }
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                setProfileImage(reader.result as string);
-                setFormData((prev) => ({
-                    ...prev,
-                    profileImage: reader.result as string, // store base64
-                }));
-                setFormError((prev) => ({
-                    ...prev,
-                    profileImage: "", // clear error if valid
-                }));
-            };
-            reader.readAsDataURL(file);
         }
     };
 
@@ -297,7 +297,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                     accept="image/png, image/jpeg"
                                     ref={fileInputRef}
                                     className="image-formate"
-                                    onChange={handleFileChange}
+                                    onChange={(event) => handleFileChange(event)}
                                     name="profileImage"
                                     error={formError.profileImage}
 
