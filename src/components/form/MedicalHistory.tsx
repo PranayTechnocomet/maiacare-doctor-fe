@@ -136,7 +136,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
         <>
             <div className=''>
                 <form onSubmit={handleSubmit}>
-                    <Row className='g-2'>
+                    <Row className='g-3'>
                         <Col md={12}>
                             <RadioButtonGroup
                                 label="Are you currently taking any medications?"
@@ -314,7 +314,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                             />
                         </Col>
 
-                        <Col md={6} className=''>
+                        <Col lg={6}>
                             <RadioButtonGroup
                                 label="How often do you exercise?"
                                 name="exercise"
@@ -329,7 +329,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 ]}
                             />
                         </Col>
-                        <Col md={6} className=''>
+                        <Col lg={6} >
                             <RadioButtonGroup
                                 label="How would you rate your stress levels?"
                                 name="stress"
@@ -345,17 +345,14 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                             />
                         </Col>
 
-
-                        <Col md={6} className='mt-3'>
+                        <div className='d-flex gap-2'>
                             <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
-                        </Col>
-                        <Col md={6} className='mt-3'>
                             <Button className="w-100" variant="default" disabled={false} type="submit">
                                 Save
                             </Button>
-                        </Col>
+                        </div>
                     </Row>
                 </form>
             </div>

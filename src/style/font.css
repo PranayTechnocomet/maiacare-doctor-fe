@@ -300,8 +300,13 @@
 .password-requirements {
     font-size: 12px;
     font-weight: 500;
-    line-height: 16px;
+    line-height: 17px;
     color: var(--color-radio-lable);
+    /* default */
+}
+
+.password-requirements.active {
+    color: var(--color-profile-name);
 }
 
 /* setting accordion */
@@ -380,6 +385,7 @@
     font-weight: 600;
     line-height: 22px;
     color: var(--color-brand);
+    cursor: pointer;
 }
 
 .accordion-title-detail {
@@ -907,6 +913,18 @@
     color: var(--color-brand);
 }
 
+@media screen and (max-width: 1199px) {
+    .support-accordion-header {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1270px) {
+    .contact-detail {
+        font-size: 13px;
+    }
+}
+
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
         font-size: 16px;
@@ -917,15 +935,44 @@
     .appointment-details-invoice-subtitle {
         font-size: 15px;
     }
-}
 
-@media screen and (max-width: 767px) {
     .accordion-title {
         font-size: 20px;
     }
 
+    .settings-accordion-subtitle {
+        font-size: 13px;
+
+    }
+
     .support-faqs-title {
         font-size: 17px;
+    }
+
+    .support-faqs-desc {
+        font-size: 13px;
+    }
+
+    .support-accordion-header {
+        font-size: 14px;
+    }
+
+    .support-accordion-content {
+        font-size: 13px;
+    }
+
+    .forgate-password {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .accordion-title {
+        font-size: 18px;
+    }
+
+    .support-faqs-title {
+        font-size: 16px;
     }
 
     .add-patient-form-title {
@@ -947,14 +994,18 @@
 
     .service-details-box-content-data-total {
         font-size: 22px;
-
     }
 
 }
 
 @media screen and (max-width: 575px) {
     .accordion-title {
-        font-size: 19px;
+        font-size: 17px;
+    }
+
+    .settings-accordion-subtitle {
+        font-size: 12px;
+
     }
 
     .patient-report-box-title {
@@ -973,9 +1024,10 @@
     .patient-treatment-box-title {
         font-size: 17px;
     }
+
     .modal-custom-content {
         font-size: 15px;
-       
+
     }
 
     .patient-treatment-box-subtitle-desc {
@@ -1036,7 +1088,19 @@
     }
 
     .forgate-password {
+        font-size: 14px;
+    }
+
+    .support-faqs-title {
         font-size: 15px;
+    }
+
+    .support-accordion-header {
+        font-size: 13px;
+    }
+
+    .support-accordion-content {
+        font-size: 12px;
     }
 }
 
@@ -1045,12 +1109,13 @@
     .your-device-box-title {
         font-size: 16px;
     }
+
     .your-device-box-subtitle {
         font-size: 14px;
     }
 
     .accordion-title {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .patient-report-box-title {
@@ -1069,13 +1134,15 @@
     .patient-treatment-box-title {
         font-size: 16px;
     }
-   
+
     .patient-treatment-box-subtitle-desc {
         font-size: 14px;
     }
+
     .modal-custom-content {
         font-size: 14px;
     }
+
     .patient-treatment-box-subtitle-desc-fees {
         font-size: 16px;
     }
@@ -1130,13 +1197,17 @@
     }
 
     .forgate-password {
+        font-size: 13px;
+    }
+
+    .support-faqs-title {
         font-size: 14px;
     }
 }
 
 @media screen and (max-width: 375px) {
     .accordion-title {
-        font-size: 17px;
+        font-size: 15px;
     }
 
     .patient-journey-box-title {
@@ -1146,12 +1217,8 @@
     .patient-journey-box-subtitle {
         text-align: center;
     }
-    .support-accordion-header{
-        font-size: 14px;
-    }
-    .support-faqs-title {
-        font-size: 16px;
-    }
+
+
 
 }
 

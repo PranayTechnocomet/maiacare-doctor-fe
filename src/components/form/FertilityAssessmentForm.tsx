@@ -35,13 +35,26 @@ type FormData = {
 
 type FormError = Partial<Record<keyof FormData, string>>;
 
+interface FertilityAssessmentFormProps {
+    setShowFertilityAssessment: (show: boolean) => void;
+    setModalFormFertilityData: (data: any) => void;
+    setFormData: (data: any) => void;
+    formData: any;
+    initialFormData: any;
+}
 const initialFormError: FormError = {};
 
-export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFormFertilityData , setFormData , formData }: any) => {
+export const FertilityAssessmentForm = ({
+    setShowFertilityAssessment,
+    setModalFormFertilityData,
+    setFormData,
+    formData,
+    initialFormData
+}: FertilityAssessmentFormProps) => {
+
 
     // const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
 
@@ -147,7 +160,7 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
 
                                 <Col md={6}>
                                     <DatePickerFieldGroup
-                                        label="Select Date"
+                                        label="Last Period Date"
                                         name="date"
                                         value={formData.date}
                                         placeholder="Enter last period date"
@@ -253,18 +266,32 @@ export const FertilityAssessmentForm = ({ setShowFertilityAssessment, setModalFo
                 </Accordion>
 
                 {/* Submit buttons */}
-                <Row className="mt-4 g-2">
+                <div className='d-flex gap-2 mt-3'>
+                    <Button className="w-100" variant="outline" type="button" onClick={() => {
+                        setShowFertilityAssessment(false); setFormData(initialFormData);
+                    }}>
+                        Cancel
+                    </Button>
+                    <Button className="w-100" variant="default" type="submit">
+                        Save
+                    </Button>
+                </div>
+
+                {/* <Row className="mt-4 g-2">
                     <Col md={6}>
-                        <Button className="w-100" variant="outline" type="button" onClick={() => setShowFertilityAssessment(false)}>
+                        <Button className="w-100" variant="outline" type="button" onClick={() => {
+                            setShowFertilityAssessment(false); setFormData(initialFormData);
+                        }}>
                             Cancel
                         </Button>
+
                     </Col>
                     <Col md={6}>
                         <Button className="w-100" variant="default" type="submit">
                             Save
                         </Button>
                     </Col>
-                </Row>
+                </Row> */}
             </form>
 
         </>
