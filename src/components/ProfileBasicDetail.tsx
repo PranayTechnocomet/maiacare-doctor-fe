@@ -156,7 +156,7 @@ const ProfileBasicDetail = () => {
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<any>([]);
     const [modalFormFertilityData, setModalFormFertilityData] = useState<any>([]);
 
-    
+
     const handleEdit = (item: any) => {
         setFormData({
             ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
@@ -252,22 +252,25 @@ const ProfileBasicDetail = () => {
                                                     {item.date}
                                                 </div>
                                             </Accordion.Header>
-                                            <Accordion.Body >
+                                            <Accordion.Body className='pt-0'>
                                                 <Row className='g-3'>
                                                     <Col md={4} sm={6}>
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={hiegthImg} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>Height</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span>
+                                                                <span className='contact-details-emergency'>Height</span>
+                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span> */}
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>
+                                                                    {item.height} <span>({(item.height * 2.54).toFixed(0)} cm)</span>
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </Col>
-                                                    <Col md={4} sm={6}>
+                                                    <Col md={4} sm={6} >
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={weightImg} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>Weight</span>
+                                                                <span className='contact-details-emergency'>Weight</span>
                                                                 <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.weight} kg</span>
                                                             </div>
                                                         </div>
@@ -276,7 +279,7 @@ const ProfileBasicDetail = () => {
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={BMIIMG} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>BMI</span>
+                                                                <span className='contact-details-emergency'>BMI</span>
                                                                 <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bmi} (Normal)</span>
                                                             </div>
                                                         </div>
@@ -286,7 +289,7 @@ const ProfileBasicDetail = () => {
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={BloodGroup} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>Blood Group</span>
+                                                                <span className='contact-details-emergency'>Blood Group</span>
                                                                 <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.bloodGroup}</span>
                                                             </div>
                                                         </div>
@@ -296,8 +299,14 @@ const ProfileBasicDetail = () => {
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={BloodPressure} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>Blood Pressure</span>
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic} mmHg </span>
+                                                                <span className='contact-details-emergency'>Blood Pressure</span>
+                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.systolic}/{item.diastolic} mmHg </span> */}
+                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>
+                                                                    {item.systolic}
+                                                                    {item.systolic && item.diastolic && "/"}
+                                                                    {item.diastolic}
+                                                                    {(item.systolic || item.diastolic) && " mmHg"}
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </Col>
@@ -305,7 +314,7 @@ const ProfileBasicDetail = () => {
                                                         <div className='phisical-assessment-accordion-showData-box d-flex gap-3'>
                                                             <Image src={HeartRate} alt="Age" width={42} height={42} />
                                                             <div className='d-flex flex-column gap-1'>
-                                                                <span className='phisical-assessment-accordion-showData-box-title'>Hearth Rate</span>
+                                                                <span className='contact-details-emergency'>Hearth Rate</span>
                                                                 <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.heartRate} bpm</span>
                                                             </div>
                                                         </div>
@@ -354,7 +363,7 @@ const ProfileBasicDetail = () => {
                             }} variant="outline" disabled={false} contentSize="small">
                                 <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
-                                </svg> 
+                                </svg>
                                 Edit
                             </Button>
 
@@ -363,16 +372,16 @@ const ProfileBasicDetail = () => {
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
 
-                                        <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
+                                            <Image src={MenstrualCycleIcon} width={34} height={34} alt="" />
                                             <span className='fertilityAssessment-subAccordion-title'>
                                                 Menstrual Cycle
                                             </span>
 
                                         </div>
                                     </Accordion.Header>
-                                    <Accordion.Body>
+                                    <Accordion.Body className='pt-0'>
 
-                                        <Row className='g-3'>
+                                        <Row className='g-2'>
                                             <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
@@ -445,14 +454,14 @@ const ProfileBasicDetail = () => {
                                 <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
-                                        <Image src={PregnancyIcon} width={34} height={34} alt="" />
-                                           
+                                            <Image src={PregnancyIcon} width={34} height={34} alt="" />
+
                                             <span className='fertilityAssessment-subAccordion-title'>
                                                 Pregnancy
                                             </span>
                                         </div>
                                     </Accordion.Header>
-                                    <Accordion.Body>
+                                    <Accordion.Body className='pt-0'>
                                         <Row className='g-3'>
                                             <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
@@ -624,7 +633,7 @@ const ProfileBasicDetail = () => {
         <Container fluid >
             <Row >
                 {/* Left Side - Contact Details & Accordion */}
-                <Col lg={8} md={12} className='ps-0'>
+                <Col lg={8} md={12} className='ps-0 pe-0 pe-lg-2'>
                     {/* Contact Card */}
                     <Card className="mb-4 shadow-sm">
                         <Card.Body className="p-4">
@@ -632,20 +641,20 @@ const ProfileBasicDetail = () => {
                                 <h6 className="mb-3 contact-details-heading">Contact Details</h6>
                                 <Col lg={4} md={12}>
                                     <div className="mb-3 d-flex align-items-center">
-                                        <Image src={ProfilePhone} className="me-2 " width={20} height={20} alt="Phone" />
+                                        <Image src={ProfilePhone} className="me-1" width={20} height={20} alt="Phone" />
                                         <span className="contact-details-subheading">{contactData.phone}</span>
                                     </div>
                                 </Col>
                                 <Col lg={8} md={12}>
-                                    <div className="mb-4 d-flex align-items-center contac-email-card">
-                                        <Image src={ProfileEmail} className="me-2 " width={20} height={20} alt="Email" />
+                                    <div className="mb-3 d-flex align-items-center contac-email-card">
+                                        <Image src={ProfileEmail} className="me-1" width={20} height={20} alt="Email" />
                                         <span className="contact-details-subheading">{contactData.email}</span>
                                     </div>
                                 </Col>
 
                                 <Col lg={12} md={12}>
                                     <div className="mb-4 d-flex align-items-start">
-                                        <Image src={ProfileAddress} className="me-2 " width={20} height={20} alt="Address" />
+                                        <Image src={ProfileAddress} className="me-1" width={20} height={20} alt="Address" />
                                         <span className="contact-details-subheading contact-propfile-address">{contactData.address}</span>
                                     </div>
                                 </Col>
@@ -679,7 +688,7 @@ const ProfileBasicDetail = () => {
                     {/* Single Rendered Accordion using JSON */}
                     <Accordion activeKey={activeAccordion} className="mb-3">
                         {accordionData.map((item) => (
-                            <Accordion.Item eventKey={item.id} key={item.id} className='patient-accordion-item mb-3'>
+                            <Accordion.Item eventKey={item.id} key={item.id} className='patient-accordion-item shadow-sm mb-3'>
                                 <Accordion.Header onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
                                     <p className='contact-details-heading m-0'>{item.title}</p>
                                 </Accordion.Header>
@@ -703,7 +712,7 @@ const ProfileBasicDetail = () => {
 
                     <Modal
                         show={showFertilityAssessment}
-                        onHide={() => {setShowFertilityAssessment(false); setFormData(initialFormData); }}
+                        onHide={() => { setShowFertilityAssessment(false); setFormData(initialFormData); }}
                         header="Fertility Assessment"
                         closeButton={true}
                         size="lg"
@@ -734,25 +743,27 @@ const ProfileBasicDetail = () => {
 
                 </Col>
 
-                {/* Right Side - Patient Journey */}
-                <Col lg={4} md={12} className='pe-0'>
-                    <div className='d-flex justify-content-between align-items-center mb-lg-4 mb-3 px-1'>
+                {/* Right Side - Patient Journey pe-auto pe-lg-0 ps-lg-auto ps-1*/}
+                <Col lg={4} md={12} className='ps-0 pe-0 ps-lg-2'>
+                    <h6 className='patient-journey-heading mb-lg-4 mb-3 px-1'>Patient Journey</h6>
 
-                        <h6 className='patient-journey-heading m-0'>Patient Journey</h6>
+                    {/* <div className='d-flex justify-content-between align-items-center mb-lg-4 mb-3 px-1'>
+
                         <div className='patient-journey-up-icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
                                 <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
                             </svg>
 
                         </div>
-                    </div>
+                    </div> */}
+
                     {journeyData.map((item, index) => {
                         const isLastItem = index === journeyData.length - 1;
                         return (
                             <div
                                 className={`position-relative ${!isLastItem ? 'patient-journey-box-wrapper' : ''}`}
                                 key={item.id}>
-                                <div className='patient-journey-box ms-5 mb-3 ' key={item.id}>
+                                <div className='patient-journey-box shadow-sm ms-5 mb-3 ' key={item.id}>
                                     <div className="patient-journey-box-item">
                                         <div>
                                             <h6 className="patient-journey-box-title mb-1">{item.title}</h6>

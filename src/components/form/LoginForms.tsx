@@ -14,7 +14,6 @@ export function LoginForms() {
         setShowPassword(prev => !prev);
     };
 
-
     const defaultFormValue = {
         email: '',
         password: '',
@@ -39,7 +38,7 @@ export function LoginForms() {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
         const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-       
+
         if (formData.password.trim() === "") {
             errors.password = "Password is required";
             isValid = false;
@@ -55,7 +54,7 @@ export function LoginForms() {
 
 
 
-        
+
         // else if (formData.password.length < 8) {
         //     errors.password = "Minimum 8 characters";
         //     isValid = false;
@@ -102,7 +101,12 @@ export function LoginForms() {
                     className={`position-relative  input-email-login-data mt-4`}
 
                 >
-                    <MdMailOutline size={24} className='input-email-data' />
+                    {/* <MdMailOutline size={24} className='input-email-data' /> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                        <path d="M3.39966 5.57422H21.3997V18.3242C21.3997 18.5231 21.3206 18.7139 21.18 18.8545C21.0393 18.9952 20.8486 19.0742 20.6497 19.0742H4.14966C3.95075 19.0742 3.75998 18.9952 3.61933 18.8545C3.47868 18.7139 3.39966 18.5231 3.39966 18.3242V5.57422Z" stroke="#343330" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M21.3997 5.57422L12.3997 13.8242L3.39966 5.57422" stroke="#2B4360" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+
                 </InputFieldGroup>
                 <div className='pt-3'>
                     <InputFieldGroup
@@ -113,10 +117,14 @@ export function LoginForms() {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+
                         error={formError.password}
                         className="position-relative  input-email-login-data"
                     >
-                        <BiLockAlt size={24} className="input-email-data" />
+                        {/* <BiLockAlt size={24} className="input-email-data" /> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                            <path d="M16.8503 6.39844H14.6628V4.83594C14.6628 3.7585 14.2348 2.72518 13.473 1.96332C12.7111 1.20145 11.6778 0.773438 10.6003 0.773438C9.5229 0.773438 8.48959 1.20145 7.72772 1.96332C6.96585 2.72518 6.53784 3.7585 6.53784 4.83594V6.39844H4.35034C3.93594 6.39844 3.53851 6.56306 3.24549 6.85608C2.95246 7.14911 2.78784 7.54654 2.78784 7.96094V16.7109C2.78784 17.1253 2.95246 17.5228 3.24549 17.8158C3.53851 18.1088 3.93594 18.2734 4.35034 18.2734H16.8503C17.2647 18.2734 17.6622 18.1088 17.9552 17.8158C18.2482 17.5228 18.4128 17.1253 18.4128 16.7109V7.96094C18.4128 7.54654 18.2482 7.14911 17.9552 6.85608C17.6622 6.56306 17.2647 6.39844 16.8503 6.39844ZM8.41284 4.83594C8.41284 4.25578 8.64331 3.69938 9.05355 3.28914C9.46378 2.87891 10.0202 2.64844 10.6003 2.64844C11.1805 2.64844 11.7369 2.87891 12.1471 3.28914C12.5574 3.69938 12.7878 4.25578 12.7878 4.83594V6.39844H8.41284V4.83594ZM16.5378 16.3984H4.66284V8.27344H16.5378V16.3984Z" fill="#2B4360" />
+                        </svg>
 
                         <span
                             onClick={togglePasswordVisibility}
@@ -124,8 +132,8 @@ export function LoginForms() {
                             style={{ zIndex: 8 }}
                         >
                             {/* {showPassword ? <BiShow  size={20} className='passwored-eye-icon' /> : <BiHide size={20} className='passwored-eye-icon' />} */}
-                            {showPassword ? <BiShow  size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
-                           
+                            {showPassword ? <BiShow size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
+
                         </span>
                     </InputFieldGroup>
                 </div>
@@ -179,11 +187,11 @@ export function ForgotPassword() {
             errors.email = "Invalid email format";
             isValid = false;
         }
-    
+
         setFormError(errors);
         return isValid;
     };
-    
+
     const router = useRouter();
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -210,7 +218,12 @@ export function ForgotPassword() {
                     className={`position-relative  input-email-login-data mt-4`}
 
                 >
-                    <MdMailOutline size={24} className='input-email-data' />
+                    {/* <MdMailOutline size={24} className='input-email-data' /> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                        <path d="M3.39966 5.57422H21.3997V18.3242C21.3997 18.5231 21.3206 18.7139 21.18 18.8545C21.0393 18.9952 20.8486 19.0742 20.6497 19.0742H4.14966C3.95075 19.0742 3.75998 18.9952 3.61933 18.8545C3.47868 18.7139 3.39966 18.5231 3.39966 18.3242V5.57422Z" stroke="#343330" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M21.3997 5.57422L12.3997 13.8242L3.39966 5.57422" stroke="#2B4360" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+
                 </InputFieldGroup>
 
 
@@ -316,7 +329,10 @@ export function ResetPasswordScreen() {
                         error={formError.newpassword}
                         className="position-relative  input-email-login-data"
                     >
-                        <BiLockAlt size={24} className="input-email-data" />
+                        {/* <BiLockAlt size={24} className="input-email-data" /> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                            <path d="M16.8503 6.39844H14.6628V4.83594C14.6628 3.7585 14.2348 2.72518 13.473 1.96332C12.7111 1.20145 11.6778 0.773438 10.6003 0.773438C9.5229 0.773438 8.48959 1.20145 7.72772 1.96332C6.96585 2.72518 6.53784 3.7585 6.53784 4.83594V6.39844H4.35034C3.93594 6.39844 3.53851 6.56306 3.24549 6.85608C2.95246 7.14911 2.78784 7.54654 2.78784 7.96094V16.7109C2.78784 17.1253 2.95246 17.5228 3.24549 17.8158C3.53851 18.1088 3.93594 18.2734 4.35034 18.2734H16.8503C17.2647 18.2734 17.6622 18.1088 17.9552 17.8158C18.2482 17.5228 18.4128 17.1253 18.4128 16.7109V7.96094C18.4128 7.54654 18.2482 7.14911 17.9552 6.85608C17.6622 6.56306 17.2647 6.39844 16.8503 6.39844ZM8.41284 4.83594C8.41284 4.25578 8.64331 3.69938 9.05355 3.28914C9.46378 2.87891 10.0202 2.64844 10.6003 2.64844C11.1805 2.64844 11.7369 2.87891 12.1471 3.28914C12.5574 3.69938 12.7878 4.25578 12.7878 4.83594V6.39844H8.41284V4.83594ZM16.5378 16.3984H4.66284V8.27344H16.5378V16.3984Z" fill="#2B4360" />
+                        </svg>
 
                         <span
                             onClick={() => setNewShowPassword(!newshowPassword)}
@@ -340,7 +356,10 @@ export function ResetPasswordScreen() {
                         error={formError.confirmpassword}
                         className="position-relative  input-email-login-data "
                     >
-                        <BiLockAlt size={24} className="input-email-data" />
+                        {/* <BiLockAlt size={24} className="input-email-data" /> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                            <path d="M16.8503 6.39844H14.6628V4.83594C14.6628 3.7585 14.2348 2.72518 13.473 1.96332C12.7111 1.20145 11.6778 0.773438 10.6003 0.773438C9.5229 0.773438 8.48959 1.20145 7.72772 1.96332C6.96585 2.72518 6.53784 3.7585 6.53784 4.83594V6.39844H4.35034C3.93594 6.39844 3.53851 6.56306 3.24549 6.85608C2.95246 7.14911 2.78784 7.54654 2.78784 7.96094V16.7109C2.78784 17.1253 2.95246 17.5228 3.24549 17.8158C3.53851 18.1088 3.93594 18.2734 4.35034 18.2734H16.8503C17.2647 18.2734 17.6622 18.1088 17.9552 17.8158C18.2482 17.5228 18.4128 17.1253 18.4128 16.7109V7.96094C18.4128 7.54654 18.2482 7.14911 17.9552 6.85608C17.6622 6.56306 17.2647 6.39844 16.8503 6.39844ZM8.41284 4.83594C8.41284 4.25578 8.64331 3.69938 9.05355 3.28914C9.46378 2.87891 10.0202 2.64844 10.6003 2.64844C11.1805 2.64844 11.7369 2.87891 12.1471 3.28914C12.5574 3.69938 12.7878 4.25578 12.7878 4.83594V6.39844H8.41284V4.83594ZM16.5378 16.3984H4.66284V8.27344H16.5378V16.3984Z" fill="#2B4360" />
+                        </svg>
 
                         <span
                             onClick={() => setConfirmShowPassword(!confirmshowPassword)}
