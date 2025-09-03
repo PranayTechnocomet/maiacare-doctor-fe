@@ -39,21 +39,10 @@ export default function ResetPassword() {
                             <p className="login-subtitle text-start">Secure your account by setting a new password.</p>
                             {/* <LoginTitle className="login-title1" title="Sign In To Your Account." subtitle="Please enter details to access your dashboard" /> */}
                            
-                           
                             <ResetPasswordScreen />
 
-                           
-
-                           
-                                
-                            
-                            
                         </div>
                     </Col>
-
-
-
-
                     <Col md={6} className=' p-0 d-none d-md-block '>
                         <div className="h-100 w-100 position-relative main-pregnancy-img">
                             <Image
@@ -61,8 +50,6 @@ export default function ResetPassword() {
                                 alt="Login Image"
                                 fill
                                 className=" pregnecy-image w-100 h-100"
-
-
                             />
                             <div className="position-absolute bottom-0 start-0  text-center p-2 " >
                                 <p className='login-image-contetnt m-0 '>Heal, Connect, & Lead-<br className="d-block md-none"/>

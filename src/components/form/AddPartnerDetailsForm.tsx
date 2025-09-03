@@ -199,7 +199,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                     }));
                     return;
                 }
-    
+
                 const reader = new FileReader();
                 reader.onload = () => {
                     setProfileImage(reader.result as string);
@@ -299,7 +299,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                     className="image-formate"
                                     onChange={(event) => handleFileChange(event)}
                                     name="profileImage"
-                                    error={formError.profileImage}
+                                    
 
                                 />
                             </div>
@@ -311,7 +311,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                 </div>
                             </div>
                         </div>
-
+                        <small className="text-danger maiacare-input-field-error form-text ">{formError.profileImage}</small>
                     </Col>
                     <Col md={12}>
 
@@ -424,16 +424,15 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                             className="position-relative "
                         ></InputFieldGroup>
                     </Col>
-                    <Col md={6} >
+                    <div className='d-flex gap-3'>
                         <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
                             Cancel
                         </Button>
-                    </Col>
-                    <Col md={6} >
                         <Button className="w-100" variant="default" disabled={false} type="submit">
                             Save
                         </Button>
-                    </Col>
+                    </div>
+                   
                 </Row>
             </form>
 
@@ -776,19 +775,18 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, i
                                 ]}
                             />
                         </Col>
+                        <div className='d-flex gap-3'>
 
-                        <Row className='g-2'>
-                            <Col md={6} >
-                                <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
-                                    Cancel
-                                </Button>
-                            </Col>
-                            <Col md={6} >
-                                <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
-                                    Save
-                                </Button>
-                            </Col>
-                        </Row>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                                Cancel
+                            </Button>
+
+                            <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
+                                Save
+                            </Button>
+
+                        </div>
+
                     </Row>
                 </form>
             </div>
@@ -1221,19 +1219,16 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
-                <Row className='g-2'>
-                    <Col md={6}  >
-                        <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
-                            Cancel
-                        </Button>
-                    </Col>
-                    <Col md={6} >
-                        <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
-                        >
-                            Save
-                        </Button>
-                    </Col>
-                </Row>
+                <div className='d-flex gap-2'>
+                    <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                        Cancel
+                    </Button>
+                    <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
+                    >
+                        Save
+                    </Button>
+                </div>
+
             </form>
         </>
     )
