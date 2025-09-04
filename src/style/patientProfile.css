@@ -148,6 +148,16 @@
     border-top: 2px solid var(--color-icon-border);
 }
 
+.disabled-accordion-header {
+    cursor: not-allowed !important;
+  }
+  
+  .disabled-accordion-header .accordion-button {
+    cursor: not-allowed !important;
+    background-color: #f8f9fa !important;
+    color: #6c757d !important;
+  }
+
 @media screen and (max-width: 575px) {
     .patient-profile-dot {
         width: 45px;
