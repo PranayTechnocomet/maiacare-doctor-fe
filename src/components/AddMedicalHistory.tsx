@@ -15,6 +15,7 @@ import PatientPaymentHistory from './PatientPaymentHistory';
 import PartnerDetail from './PartnerDetail';
 import PatientAppointment from './PatientAppointment';
 
+
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
 

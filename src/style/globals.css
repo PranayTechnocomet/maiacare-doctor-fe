@@ -189,6 +189,7 @@ body {
   border-radius: 10px;
 }
 
+
 @media screen and (max-width: 575px) {
   .patient-journey-up-icon1 {
     width: 45px;

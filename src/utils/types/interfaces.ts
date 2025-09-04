@@ -111,3 +111,22 @@ export interface BookAppointmentForm {
   patientAge: string;
   gender: string;
 }
+
+export interface FertilityAssessmentType {
+    height: string;
+    weight: string;
+    bmi: string;
+    bloodGroup: string;
+    systolic: string;
+    diastolic: string;
+    heartRate: string;
+    semenAnalysis: string;
+    semenAnalysisContent: string;
+    fertilityIssues: string;
+    fertilityIssuesContent: string;
+    fertilityTreatment: string;
+    fertilityTreatmentContent: string;
+    surgeries: string;
+    surgeriesContent: string;
+}
+

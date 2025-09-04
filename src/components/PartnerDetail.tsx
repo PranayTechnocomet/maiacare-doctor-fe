@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 
 import { IoAdd } from 'react-icons/io5'
 import Modal from './ui/Modal';
-import { AddPartnerDetailsForm } from './form/AddPartnerDetailsForm';
+import { AddPartnerDetailsForm, PhysicalAssessment } from './form/AddPartnerDetailsForm';
 import { Accordion, Col, Dropdown, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import PartnerImage from "../assets/images/Profile_Images.png";
@@ -22,11 +22,12 @@ import BloodGroup from '../assets/images/Physical-assement-blod-group-icons.png'
 import BloodPressure from '../assets/images/Physical-assement-presure-icons.png'
 import HeartRate from '../assets/images/Physical-assement-heart-rate-icons.png'
 import MedicalHistory from './form/MedicalHistory';
-import PhysicalAssessment from '../assets/images/Pluse Sine.png';
+// import PhysicalAssessment from '../assets/images/Pluse Sine.png';
+import Simpleeditpro from '@/assets/images/Simpleeditpro.png';
 import { partnerDetailData } from '@/utils/StaticData';
 import Button from './ui/Button';
-
-
+import { AddPartnerDetails } from './AddPartnerDetails';
+import { FertilityAssessmentType } from '@/utils/types/interfaces';
 
 export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
     const [addPartner, setAddPartner] = useState(false);
@@ -37,8 +38,31 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
     console.log("eventKey", eventKey);
 
     const [modalEditTab, setModalEditTab] = useState<string | null>("basic");
-    console.log("modalEditTab11111", modalEditTab);
-    console.log("addPartner", addPartner);
+    const [AddPhysicalAssessment, setAddPhysicalAssessment] = useState(false);
+
+    const initialFormData: FertilityAssessmentType = {
+        height: "",
+        weight: "",
+        bmi: "",
+        bloodGroup: "",
+        systolic: "",
+        diastolic: "",
+        heartRate: "",
+        semenAnalysis: "",
+        semenAnalysisContent: "",
+        fertilityIssues: "",
+        fertilityIssuesContent: "",
+        fertilityTreatment: "",
+        fertilityTreatmentContent: "",
+        surgeries: "",
+        surgeriesContent: "",
+    };
+
+    const [formData, setFormData] = useState<FertilityAssessmentType>(initialFormData);
+    type FormError = Partial<Record<keyof FertilityAssessmentType, string>>;
+
+    const initialFormError: FormError = {};
+    const [formError, setFormError] = useState<FormError>(initialFormError);
 
     const [showData, setShowData] = useState<any>(partnerDetailData);
 
@@ -64,6 +88,14 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         setAddPartner(true);
         setModalEditTab("medical history");
     }
+
+    const handleAddPhysicalAssessment = (e: FormEvent<HTMLFormElement>) => {
+        console.log("click ");
+
+        e.preventDefault();
+
+    }
+
     return (
         <>
             {showPartnerDetail && (
@@ -108,7 +140,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                 closeButton={true}
                 size="lg"
             >
-                <div className="mb-0">
+                {/* <div className="mb-0">
                     <AddPartnerDetailsForm
                         setShowContent={setShowContent}
                         setShowPartnerDetail={setShowPartnerDetail}
@@ -119,9 +151,19 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                         showData={showData}
                         eventKey={eventKey === 1}
                     />
-                </div>
-            </Modal>
+                </div> */}
+                <AddPartnerDetails
+                    setAddPartner={setAddPartner}
+                    setShowContent={setShowContent}
+                    setShowPartnerDetail={setShowPartnerDetail}
+                    setShowData={setShowData}
+                    modalEditTab={modalEditTab}
+                    setModalEditTab={setModalEditTab}
+                    showData={showData}
 
+                />
+
+            </Modal>
 
             {showContent && (
 
@@ -132,7 +174,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                 <div className='d-flex align-items-start align-items-sm-center gap-3 flex-column flex-sm-row'>
                                     <div>
                                         <Image
-                                            src={showData.profile.profileImage}
+                                            src={showData?.profile?.profileImage || Simpleeditpro}
                                             alt="PartnerImage"
                                             width={90}
                                             height={90}
@@ -175,9 +217,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                             </svg>
                                                 {showData.profile.basic_detail_email}</div>
                                         </div>
-
-
-
 
                                     </div>
                                 </div>
@@ -330,13 +369,23 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                         <ContentContainer>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <p className="contact-details-heading">Physical Assessment </p>
-                                <Button className="medical-history-add-btn medical-history-edit-btn-font mb-3" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(0); }}>
-                                    {/* <Image src={PhysicalAssessment} alt="Edit" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(0); }} /> */}
+
+                                {/* <Button className="medical-history-add-btn medical-history-edit-btn-font mb-3" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(0); }}>
+                                    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.7744 9.5C18.7744 9.69891 18.6954 9.88968 18.5547 10.0303C18.4141 10.171 18.2233 10.25 18.0244 10.25H10.5244V17.75C10.5244 17.9489 10.4454 18.1397 10.3047 18.2803C10.1641 18.421 9.97333 18.5 9.77441 18.5C9.5755 18.5 9.38474 18.421 9.24408 18.2803C9.10343 18.1397 9.02441 17.9489 9.02441 17.75V10.25H1.52441C1.3255 10.25 1.13474 10.171 0.994084 10.0303C0.853432 9.88968 0.774414 9.69891 0.774414 9.5C0.774414 9.30109 0.853432 9.11032 0.994084 8.96967C1.13474 8.82902 1.3255 8.75 1.52441 8.75H9.02441V1.25C9.02441 1.05109 9.10343 0.860322 9.24408 0.71967C9.38474 0.579018 9.5755 0.5 9.77441 0.5C9.97333 0.5 10.1641 0.579018 10.3047 0.71967C10.4454 0.860322 10.5244 1.05109 10.5244 1.25V8.75H18.0244C18.2233 8.75 18.4141 8.82902 18.5547 8.96967C18.6954 9.11032 18.7744 9.30109 18.7744 9.5Z" fill="#2B4360" />
+                                    </svg>
+
+                                </Button> */}
+                                <Button className="medical-history-add-btn medical-history-edit-btn-font mb-3" onClick={() => {
+                                    setAddPhysicalAssessment(true)
+                                }}>
+
                                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M18.7744 9.5C18.7744 9.69891 18.6954 9.88968 18.5547 10.0303C18.4141 10.171 18.2233 10.25 18.0244 10.25H10.5244V17.75C10.5244 17.9489 10.4454 18.1397 10.3047 18.2803C10.1641 18.421 9.97333 18.5 9.77441 18.5C9.5755 18.5 9.38474 18.421 9.24408 18.2803C9.10343 18.1397 9.02441 17.9489 9.02441 17.75V10.25H1.52441C1.3255 10.25 1.13474 10.171 0.994084 10.0303C0.853432 9.88968 0.774414 9.69891 0.774414 9.5C0.774414 9.30109 0.853432 9.11032 0.994084 8.96967C1.13474 8.82902 1.3255 8.75 1.52441 8.75H9.02441V1.25C9.02441 1.05109 9.10343 0.860322 9.24408 0.71967C9.38474 0.579018 9.5755 0.5 9.77441 0.5C9.97333 0.5 10.1641 0.579018 10.3047 0.71967C10.4454 0.860322 10.5244 1.05109 10.5244 1.25V8.75H18.0244C18.2233 8.75 18.4141 8.82902 18.5547 8.96967C18.6954 9.11032 18.7744 9.30109 18.7744 9.5Z" fill="#2B4360" />
                                     </svg>
 
                                 </Button>
+
                             </div>
                             <Accordion defaultActiveKey="0">
 
@@ -508,10 +557,39 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                             ))}
                         </ContentContainer>
                     </Col>
-
-
                 </Row>
+
             )}
+
+            <Modal
+                show={AddPhysicalAssessment}
+                onHide={() => setAddPhysicalAssessment(false)}
+                header="Physical Assessment"
+                closeButton={true}
+                size="lg"
+            >
+                {/* <h1>forms</h1> */}
+                <PhysicalAssessment
+                    formData={formData}
+                    setFormData={setFormData}
+                    setShowData={setShowData}
+                    showData={showData}
+                    initialData={initialData}
+                    formError={formError}
+                    setFormError={setFormError}
+                />
+
+                <div className='d-flex gap-2'>
+                    <Button className="w-100 mt-3" variant="outline" disabled={false} >
+                        Cancel
+                    </Button>
+                    <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleAddPhysicalAssessment(e)}
+                    >
+                        Save
+                    </Button>
+                </div>
+            </Modal>
+
         </>
     )
 }
