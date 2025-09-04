@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 
 import { IoAdd } from 'react-icons/io5'
 import Modal from './ui/Modal';
-import { AddPartnerDetailsForm } from './form/AddPartnerDetailsForm';
+import { AddPartnerDetailsForm, PhysicalAssessment } from './form/AddPartnerDetailsForm';
 import { Accordion, Col, Dropdown, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import PartnerImage from "../assets/images/Profile_Images.png";
@@ -22,7 +22,7 @@ import BloodGroup from '../assets/images/Physical-assement-blod-group-icons.png'
 import BloodPressure from '../assets/images/Physical-assement-presure-icons.png'
 import HeartRate from '../assets/images/Physical-assement-heart-rate-icons.png'
 import MedicalHistory from './form/MedicalHistory';
-import PhysicalAssessment from '../assets/images/Pluse Sine.png';
+// import PhysicalAssessment from '../assets/images/Pluse Sine.png';
 import Simpleeditpro from '@/assets/images/Simpleeditpro.png';
 import { partnerDetailData } from '@/utils/StaticData';
 import Button from './ui/Button';
@@ -568,8 +568,8 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                 closeButton={true}
                 size="lg"
             >
-                <h1>forms</h1>
-                {/* <PhysicalAssessment
+                {/* <h1>forms</h1> */}
+                <PhysicalAssessment
                     formData={formData}
                     setFormData={setFormData}
                     setShowData={setShowData}
@@ -577,7 +577,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                     initialData={initialData}
                     formError={formError}
                     setFormError={setFormError}
-                /> */}
+                />
 
                 <div className='d-flex gap-2'>
                     <Button className="w-100 mt-3" variant="outline" disabled={false} >
