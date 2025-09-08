@@ -9,11 +9,39 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: none;
 }
+  /* Umesh Code Start */
+.maiacare-input-field-container input[type="date"] {
+    cursor: pointer !important;
+}
 
+.maiacare-input-field-container select {
+    cursor: pointer !important;
+}
+
+.maiacare-phone-input-container input[type="tel"] {
+    box-shadow: none !important;
+}
+
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+
+/* Umesh Radadiya end */
 .maiacare-radio-group {
     display: flex;
     gap: 16px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .maiacare-radio-wrapper {
@@ -55,8 +83,10 @@
 
 
 .maiacare-button {
-    padding: 6px 12px;
+    padding: 9px 18px;
+    /* padding: 6px 12px !important; */
     border-radius: 8px;
+
 }
 
 .content-layout {
@@ -98,6 +128,10 @@
 
 .maiacare-phone-button .arrow {
     display: none !important;
+}
+
+.maiacare-modal{
+    padding-left: 0 !important;
 }
 
 .maiacare-modal .modal-content {

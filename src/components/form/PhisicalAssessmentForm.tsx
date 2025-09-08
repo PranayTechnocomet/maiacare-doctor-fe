@@ -214,12 +214,12 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
 
                     </Col>
 
-                    <Col md={5} className="input-custom-width">
+                    <Col md={5} className="input-custom-width ">
                         <InputFieldGroup
                             label="" // No label here to match the design
                             name="diastolic"
                             type="number"
-                            className="setting-password-input "
+                            className="setting-password-input input-custom-data "
                             placeholder="Diastolic(mmHg)"
                             required={false}
                             disabled={false}

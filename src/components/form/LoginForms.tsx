@@ -144,7 +144,8 @@ export function LoginForms() {
                     </a>
                 </div>
 
-                <Button className='login-button p-2' type='submit'> Sign In</Button>
+                <Button className='w-100 p-2' type='submit'> Sign In</Button>
+                
             </form>
         </div>
     )

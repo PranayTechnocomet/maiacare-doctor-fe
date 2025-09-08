@@ -21,7 +21,7 @@
   --color-profile-name: #131D2A;
   --color-progressbar-success: #2B4360;
   --color-progressbar-secondary: #E6F3F2;
-  --color-dander:#E85966;
+  --color-dander: #E85966;
   --color-age-select-item: #111928;
 
   --or-font-color: #B0B4C1;
@@ -32,13 +32,15 @@
   --dashboard-card-green: #2ECF98;
   --dashboard-card-red: #E85966;
   --dashboard-chart-patients: #057A55;
-  --waiting-box:#E78422;
-  --engaged-box:#5A94D9;
-  --done-box:#1CB384;
-  --modal-profile-color:#F5F7FA;
-  --modal-follw-btn-color:#7E3AF2;
-  --calender-day:#8e8e93;
+  --waiting-box: #E78422;
+  --engaged-box: #5A94D9;
+  --done-box: #1CB384;
+  --modal-profile-color: #F5F7FA;
+  --modal-follw-btn-color: #7E3AF2;
+  --calender-day: #8e8e93;
 
+  --font-geist-sans1: var(--font-geist-sans);
+  --font-geist-mono1: var(--font-geist-mono);
 }
 
 body {
@@ -49,12 +51,15 @@ body {
 }
 
 
+
 .input-email-data {
   position: absolute;
   top: 55%;
   left: 2%;
 }
-
+.maiacare-input-field{
+  box-shadow: none !important;
+}
 .maiacare-input-field-container .input-email-login-data::placeholder {
   padding-left: 20px !important;
 }
@@ -174,16 +179,18 @@ body {
   justify-content: center;
   cursor: pointer;
 }
-.patient-profile-card{
+
+.patient-profile-card {
   padding: 24px !important;
 }
 
-.doctor-listing-modal-profile-subtitle{
+.doctor-listing-modal-profile-subtitle {
   background-color: #EDEBFE;
   padding: 4px 8px;
   border-radius: 10px;
 }
-.doctor-listing-payment-unpaid{
+
+.doctor-listing-payment-unpaid {
   background-color: #FDF2F2;
   padding: 4px 8px;
   border-radius: 10px;
@@ -207,5 +214,3 @@ body {
   }
 
 }
-
-
