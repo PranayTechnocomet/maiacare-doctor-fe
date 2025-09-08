@@ -17,6 +17,7 @@ import SettingsSupport from "@/components/SettingsSupport";
 import passwordSettingImg from "@/assets/images/password-setting.png";
 import yourDeviceImg from "@/assets/images/your-device.png";
 import '../../style/settingsPassword.css'
+
 import SettingChangePassword from "@/components/SettingChangePassword";
 
 function Page() {

@@ -259,7 +259,6 @@ export const partnerDetailData = {
   },
   medicalHistory: {
     medication: "yes",
-
     medicationcontent: "This is Medical Condition",
     surgeriesContent: "This is Medical Condition",
     currentMedication: "CureAll 5000, HealMax Plus",

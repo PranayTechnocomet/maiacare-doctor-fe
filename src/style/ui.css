@@ -105,8 +105,8 @@
     padding: 24px;
     box-shadow: 0px 2px 10px 0px #2C313E0A;
     background-color: var(--color-white);
-    
-   }
+
+}
 
 .modal-close-icon {
     cursor: pointer;
@@ -118,6 +118,19 @@
     justify-content: center;
 }
 
+/* pankaj solanki start */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* pankaj solanki end */
 
 @media (max-width: 991px) {
     .content-layout {
@@ -150,7 +163,7 @@
 
 
 .login-google-button {
-    
+
     height: 48px;
     border-radius: 8px;
     border: 1px solid var(--google-icon-border);
