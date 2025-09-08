@@ -12,7 +12,7 @@ import Button from '../ui/Button';
 import Simpleeditpro from '../../assets/images/Simpleeditpro.png';
 import cameraicon from '../../assets/images/cameraicon.png';
 import { log, profile } from 'console';
-import { FertilityAssessmentType } from '@/utils/types/interfaces';
+import { EditFertilityAssessment, FertilityAssessmentType, MedicalHistoryType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 // import '../../style/PartnerDetails.css'
 
 
@@ -438,43 +438,42 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     )
 }
 
-export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, initialData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void, initialData?: any }) {
+export function MedicalHistoryForm({
+    setAddPartner,
+    setActiveTab,
+    setShowData,
+    initialData,
+    setEditMedicalHistory,
+    formDataMedicalHistory
+}: {
+    setAddPartner: (value: boolean) => void,
+    setActiveTab: (tab: string) => void,
+    setShowData: (value: any) => void,
+    initialData?: any,
+    setEditMedicalHistory?: (value: boolean) => void | any,
+    formDataMedicalHistory?: MedicalHistoryType
+}) {
+    type FormError = Partial<Record<keyof MedicalHistoryType, string>>;
 
-    type FormData = {
-        medication: string;
-        surgeries: string;
-        surgeriesContent: string;
-        medicalCondition: string;
-        familyMedicalHistory: string;
-        lifestyle: string;
-        stress: string;
-        exercise: string;
-        medicationcontent: string;
-        surgeriescontent: string;
-    };
-
-    type FormError = Partial<Record<keyof FormData, string>>;
-
-    const initialFormData: FormData = {
-        medication: initialData?.medication || "yes",
-        surgeries: initialData?.surgeries || "yes",
-        surgeriesContent: initialData?.surgeriescontent || "",
-        medicalCondition: initialData?.medicalCondition || "",
-        familyMedicalHistory: initialData?.familyMedicalHistory || "",
-        lifestyle: initialData?.lifestyle || "",
-        stress: initialData?.stress || "low",
-        exercise: initialData?.exercise || "never",
-        medicationcontent: initialData?.medicationcontent || "",
-        surgeriescontent: initialData?.surgeriescontent || "",
+    const initialFormData: MedicalHistoryType = {
+        medication: formDataMedicalHistory?.medication || "yes",
+        surgeries: formDataMedicalHistory?.surgeries || "yes",
+        surgeriesContent: formDataMedicalHistory?.surgeriescontent || "",
+        medicalCondition: formDataMedicalHistory?.medicalCondition || "",
+        familyMedicalHistory: formDataMedicalHistory?.familyMedicalHistory || "",
+        lifestyle: formDataMedicalHistory?.lifestyle || "",
+        stress: formDataMedicalHistory?.stress || "low",
+        exercise: formDataMedicalHistory?.exercise || "never",
+        medicationcontent: formDataMedicalHistory?.medicationcontent || "",
+        surgeriescontent: formDataMedicalHistory?.surgeriescontent || "",
     };
 
     const MedicalHistoryFormError: FormError = {};
 
-    const [FormData, setFormData] = useState<FormData>(initialFormData);
+    const [FormData, setFormData] = useState<MedicalHistoryType>(initialFormData);
     const [medicalHistoryFormError, setMedicalHistoryFormError] = useState<FormError>(MedicalHistoryFormError);
-    console.log("FormData1111111111111111112", FormData);
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: MedicalHistoryType): FormError => {
         const errors: FormError = {};
 
         if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
@@ -482,8 +481,6 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, i
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
         if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         // if (!data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
-
-
 
         return errors;
     };
@@ -504,17 +501,21 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, i
 
         if (Object.keys(errors).length === 0) {
             setActiveTab("physical & fertility assessment");
-            if (initialData) {
-                const updatedInitialData = { ...initialData, ...FormData };
+            if (formDataMedicalHistory) {
+
+                const updatedInitialData = { ...formDataMedicalHistory, ...FormData };
                 setShowData((prev: any) => ({ ...prev, medicalHistory: updatedInitialData }));
-                setAddPartner(false)
+                // setAddPartner(false);
+                // setEditMedicalHistory(false);
+                console.log("updatedInitialData", updatedInitialData);
+
             } else {
                 setShowData((prev: any) => ({ ...prev, medicalHistory: FormData }));
+                console.log("FormData", FormData);
             }
-            setFormData(initialFormData);
+            // setFormData(initialFormData);
         }
     };
-
 
     const [selectedValues, setSelectedValues] = useState<string[]>([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -768,7 +769,7 @@ export function MedicalHistoryForm({ setAddPartner, setActiveTab, setShowData, i
                         </Col>
                         <div className='d-flex gap-3'>
 
-                            <Button className="w-100" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
+                            <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false); }}>
                                 Cancel
                             </Button>
 
@@ -1220,17 +1221,16 @@ export function PhysicalAssessment({
     setFormData,
     setShowContent,
     setShowPartnerDetail,
-    setShowData, showData, initialData }:
+    setShowData, showData }:
     {
         formError?: any,
         setFormError?: any,
-        formData: FertilityAssessmentType,
-        setFormData: React.Dispatch<React.SetStateAction<FertilityAssessmentType>>,
+        formData: FertilityAssessmentType | PhysicalAssessmentDataModel,
+        setFormData: React.Dispatch<React.SetStateAction<FertilityAssessmentType | PhysicalAssessmentDataModel | any>>,
         setShowContent?: (value: boolean) => void,
         setShowPartnerDetail?:
-        (value: boolean) => void, setShowData: (value: any) => void, showData: any, initialData: any
+        (value: boolean) => void, setShowData: (value: any) => void, showData: any
     }) {
-
 
     type FormError = Partial<Record<keyof FertilityAssessmentType, string>>;
 
@@ -1241,14 +1241,13 @@ export function PhysicalAssessment({
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
         setFormError((prev: any) => ({ ...prev, [name]: "" }));
-
     };
 
     return (
         <>
-            <Row className="g-4">
+            <Row className="g-4 accordion-form-physical-assessment">
                 <Col md={6}>
 
                     <InputFieldGroup
@@ -1357,8 +1356,15 @@ export function PhysicalAssessment({
                     />
                 </Col>
 
-                <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
+                {/* <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
                     <span className="fs-1">/</span>
+                </Col> */}
+                <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
+                    {/* <span className="or-custom-slash">/</span> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
+                        <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
+                    </svg>
+
                 </Col>
 
                 <Col md={5} className='input-custom-width'>
@@ -1417,13 +1423,13 @@ export function FertilityAssessment({
     setShowContent?: (value: boolean) => void,
     setShowPartnerDetail?: (value: boolean) => void,
     setShowData?: (value: any) => void,
-    showData?: any, initialData?: any,
-    formData: FertilityAssessmentType,
-    setFormData: React.Dispatch<React.SetStateAction<FertilityAssessmentType>>,
+    showData?: any,
+    initialData?: any,
+    formData: FertilityAssessmentType | EditFertilityAssessment,
+    setFormData: React.Dispatch<React.SetStateAction<FertilityAssessmentType | EditFertilityAssessment | any>>,
     setFormError: React.Dispatch<React.SetStateAction<any>>,
     formError?: any
 }) {
-
 
     // type FormError = Partial<Record<keyof FertilityAssessmentType, string>>;
 
@@ -1435,7 +1441,7 @@ export function FertilityAssessment({
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
         setFormError((prev: any) => ({ ...prev, [name]: "" }));
 
     };

@@ -100,7 +100,6 @@ const SettingsSupport = () => {
                             })}
                         </Accordion>
 
-
                     </Col>
                 </Row>
 

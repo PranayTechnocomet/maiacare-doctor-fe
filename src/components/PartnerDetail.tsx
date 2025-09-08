@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 
 import { IoAdd } from 'react-icons/io5'
 import Modal from './ui/Modal';
-import { AddPartnerDetailsForm, PhysicalAssessment } from './form/AddPartnerDetailsForm';
+import { AddPartnerDetailsForm, FertilityAssessment, MedicalHistoryForm, PhysicalAssessment } from './form/AddPartnerDetailsForm';
 import { Accordion, Col, Dropdown, Row } from 'react-bootstrap';
 import Image from 'next/image';
 import PartnerImage from "../assets/images/Profile_Images.png";
@@ -27,20 +27,24 @@ import Simpleeditpro from '@/assets/images/Simpleeditpro.png';
 import { partnerDetailData } from '@/utils/StaticData';
 import Button from './ui/Button';
 import { AddPartnerDetails } from './AddPartnerDetails';
-import { FertilityAssessmentType } from '@/utils/types/interfaces';
+import { EditFertilityAssessment, FertilityAssessmentType, MedicalHistoryType, PhysicalAssessmentData, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 
 export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
+
     const [addPartner, setAddPartner] = useState(false);
     const [showContent, setShowContent] = useState(false);
     const [showPartnerDetail, setShowPartnerDetail] = useState(true);
     const [loading, setLoading] = useState({});
     const [eventKey, setEventKey] = useState(0);
-    console.log("eventKey", eventKey);
-
     const [modalEditTab, setModalEditTab] = useState<string | null>("basic");
     const [AddPhysicalAssessment, setAddPhysicalAssessment] = useState(false);
+    const [EditFertilityAssessment, setEditFertilityAssessment] = useState(false);
+    const [EditMedicalHistory, setEditMedicalHistory] = useState<boolean>(false);
 
-    const initialFormData: FertilityAssessmentType = {
+
+    const [showData, setShowData] = useState<any>(partnerDetailData);
+
+    const initialFormDataAddPhysicalAssessment: PhysicalAssessmentDataModel = {
         height: "",
         weight: "",
         bmi: "",
@@ -48,6 +52,9 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         systolic: "",
         diastolic: "",
         heartRate: "",
+
+    };
+    const initialFormDataEditFertilityAssessment: EditFertilityAssessment = {
         semenAnalysis: "",
         semenAnalysisContent: "",
         fertilityIssues: "",
@@ -56,15 +63,30 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         fertilityTreatmentContent: "",
         surgeries: "",
         surgeriesContent: "",
+
+
+        // semenAnalysis: initialData?.semenAnalysis || "yes",
+        // semenAnalysisContent: initialData?.semenAnalysisContent || "",
+        // fertilityIssues: initialData?.fertilityIssues || "no",
+        // fertilityIssuesContent: initialData?.fertilityIssuesContent || "",
+        // fertilityTreatment: initialData?.fertilityTreatment || "no",
+        // fertilityTreatmentContent: initialData?.fertilityTreatmentContent || "",
+        // surgeries: initialData?.surgeries || "no",
+        // surgeriesContent: initialData?.surgeriesContent || "",
+
     };
 
-    const [formData, setFormData] = useState<FertilityAssessmentType>(initialFormData);
-    type FormError = Partial<Record<keyof FertilityAssessmentType, string>>;
+    const [formDataAddPhysicalAssessment, setFormDataAddPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormDataAddPhysicalAssessment);
+    type FormErrorAddPhysicalAssessment = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
+    const initialFormErrorAddPhysicalAssessment: FormErrorAddPhysicalAssessment = {};
+    const [formErrorAddPhysicalAssessment, setFormErrorAddPhysicalAssessment] = useState<FormErrorAddPhysicalAssessment>(initialFormErrorAddPhysicalAssessment);
 
-    const initialFormError: FormError = {};
-    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [formDataEditFertilityAssessment, setFormDataEditFertilityAssessment] = useState<EditFertilityAssessment>(initialFormDataEditFertilityAssessment);
+    type FormErrorEditFertilityAssessment = Partial<Record<keyof EditFertilityAssessment, string>>;
+    const initialFormErrorEditFertilityAssessment: FormErrorEditFertilityAssessment = {};
+    const [formErrorEditFertilityAssessment, setFormErrorEditFertilityAssessment] = useState<FormErrorEditFertilityAssessment>(initialFormErrorEditFertilityAssessment);
 
-    const [showData, setShowData] = useState<any>(partnerDetailData);
+    const [formDataMedicalHistory, setFormDataMedicalHistory] = useState<MedicalHistoryType>();
 
     useEffect(() => {
         setLoading(true)
@@ -72,7 +94,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
     }, [])
 
-    console.log("showData", showData);
     const formatDate = (dateString?: string) => {
         const date = dateString ? new Date(dateString) : new Date();
         return date.toLocaleDateString("en-GB", {
@@ -83,16 +104,71 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         });
     }
 
-    const handelEdit = () => {
 
-        setAddPartner(true);
-        setModalEditTab("medical history");
-    }
+    const validateForm = (data: PhysicalAssessmentDataModel): FormErrorAddPhysicalAssessment => {
+        const errors: FormErrorAddPhysicalAssessment = {};
+
+        if (!data.height.trim()) errors.height = "Height is required";
+        if (!data.weight.trim()) errors.weight = "Weight is required";
+        if (!data.bmi.trim()) errors.bmi = "BMI is required";
+        if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
+        if (!data.systolic.trim()) errors.systolic = "Blood pressure is required";
+
+        if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
+
+        return errors;
+    };
+
+    const validateForm2 = (data: EditFertilityAssessment): FormErrorEditFertilityAssessment => {
+        const errors: FormErrorEditFertilityAssessment = {};
+
+        if (!data.semenAnalysis.trim()) errors.semenAnalysis = "Seminal Analysis is required";
+        if (data.semenAnalysis === 'yes' && !data.semenAnalysisContent.trim()) errors.semenAnalysisContent = "Seminal Analysis Content is required";
+        if (!data.fertilityIssues.trim()) errors.fertilityIssues = "Fertility Issues is required";
+        if (data.fertilityIssues === 'yes' && !data.fertilityIssuesContent.trim()) errors.fertilityIssuesContent = "Fertility Issues Content is required";
+        if (!data.fertilityTreatment.trim()) errors.fertilityTreatment = "Fertility Treatment is required";
+        if (data.fertilityTreatment === 'yes' && !data.fertilityTreatmentContent.trim()) errors.fertilityTreatmentContent = "Fertility Treatment Content is required";
+        if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
+        if (data.surgeries === 'yes' && !data.surgeriesContent.trim()) errors.surgeriesContent = "Surgeries Content is required";
+
+        return errors;
+    };
 
     const handleAddPhysicalAssessment = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log("click ", formDataAddPhysicalAssessment);
+
+        const errors = validateForm(formDataAddPhysicalAssessment);
+        console.log("Form submitted", formDataAddPhysicalAssessment);
+        setFormErrorAddPhysicalAssessment(errors);
+
+        if (Object.keys(errors).length === 0) {
+            // Handle form submission
+            setFormErrorAddPhysicalAssessment(initialFormErrorAddPhysicalAssessment);
+            // setAddPartner(false);
+            // setShowPartnerDetail(false);
+            setAddPhysicalAssessment(false);
+            setShowContent(true);
+
+            setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formDataAddPhysicalAssessment] }));
+        }
+    }
+
+    const handleEditFertilityAssessment = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         console.log("click ");
 
-        e.preventDefault();
+        const errors = validateForm2(formDataEditFertilityAssessment);
+        setFormErrorEditFertilityAssessment(errors);
+
+        if (Object.keys(errors).length === 0) {
+            setFormErrorEditFertilityAssessment(initialFormErrorEditFertilityAssessment);
+
+            setEditFertilityAssessment(false);
+            setShowContent(true);
+
+            setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formDataEditFertilityAssessment } }));
+        }
 
     }
 
@@ -244,7 +320,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                         </div>
                                         <div className='d-flex justify-content-between align-items-center'>
                                             <p className="contact-details-heading mb-3">Medical History</p>
-                                            <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => handelEdit()}>
+                                            <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => { setEditMedicalHistory(true); setFormDataMedicalHistory(item) }}>
                                                 <svg width="14" height="14" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                                 </svg> Edit
@@ -487,11 +563,17 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                 <div key={index} className="medical-history-details text-start">
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <p className="contact-details-heading mb-3">Fertility Assessment</p>
-                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(1); }}>
+                                        {/* <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => { setAddPartner(true); setModalEditTab("physical & fertility assessment"); setEventKey(1); }}>
+                                            <svg width="14" height="14" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
+                                            </svg> Edit
+                                        </Button> */}
+                                        <Button className="medical-history-edit-btn medical-history-edit-btn-font mb-3" onClick={() => { setEditFertilityAssessment(true); setFormDataEditFertilityAssessment(item) }}>
                                             <svg width="14" height="14" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                             </svg> Edit
                                         </Button>
+
                                     </div>
 
                                     <Row>
@@ -564,23 +646,23 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
             <Modal
                 show={AddPhysicalAssessment}
                 onHide={() => setAddPhysicalAssessment(false)}
-                header="Physical Assessment"
+                header="Add Physical Assessment"
                 closeButton={true}
                 size="lg"
             >
+
                 {/* <h1>forms</h1> */}
                 <PhysicalAssessment
-                    formData={formData}
-                    setFormData={setFormData}
+                    formData={formDataAddPhysicalAssessment}
+                    setFormData={setFormDataAddPhysicalAssessment}
                     setShowData={setShowData}
                     showData={showData}
-                    initialData={initialData}
-                    formError={formError}
-                    setFormError={setFormError}
+                    formError={formErrorAddPhysicalAssessment}
+                    setFormError={setFormErrorAddPhysicalAssessment}
                 />
 
                 <div className='d-flex gap-2'>
-                    <Button className="w-100 mt-3" variant="outline" disabled={false} >
+                    <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPhysicalAssessment(false)}>
                         Cancel
                     </Button>
                     <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleAddPhysicalAssessment(e)}
@@ -588,6 +670,55 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                         Save
                     </Button>
                 </div>
+            </Modal>
+
+            <Modal
+                show={EditFertilityAssessment}
+                onHide={() => setEditFertilityAssessment(false)}
+                header="Edit Fertility Assessment"
+                closeButton={true}
+                size="lg"
+            >
+
+                {/* <h1>forms</h1> */}
+                <FertilityAssessment
+                    formData={formDataEditFertilityAssessment}
+                    setFormData={setFormDataEditFertilityAssessment}
+                    setFormError={setFormErrorEditFertilityAssessment}
+                    formError={formErrorEditFertilityAssessment}
+                    setShowContent={setShowContent}
+                    setShowPartnerDetail={setShowPartnerDetail}
+                    setShowData={setShowData} showData={showData}
+
+                />
+
+
+                <div className='d-flex gap-2'>
+                    <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setEditFertilityAssessment(false)}>
+                        Cancel
+                    </Button>
+                    <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleEditFertilityAssessment(e)}
+                    >
+                        Save
+                    </Button>
+                </div>
+            </Modal>
+
+            <Modal
+                show={EditMedicalHistory}
+                onHide={() => setEditMedicalHistory(false)}
+                header="Edit Medical History"
+                closeButton={true}
+                size="lg"
+            >
+                <MedicalHistoryForm
+                    setEditMedicalHistory={setEditMedicalHistory}
+                    setAddPartner={setAddPartner}
+                    setActiveTab={setActiveTab}
+                    setShowData={setShowData}
+                    initialData={modalEditTab === "medical history" ? showData.medicalHistory : undefined}
+                    formDataMedicalHistory={formDataMedicalHistory}
+                />
             </Modal>
 
         </>

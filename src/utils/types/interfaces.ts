@@ -24,6 +24,8 @@ export interface PhysicalAssessmentDataModel {
   heartRate: string;
 };
 
+
+
 export interface PhysicalAssessmentData {
   date: string;
   height: string;
@@ -113,20 +115,44 @@ export interface BookAppointmentForm {
 }
 
 export interface FertilityAssessmentType {
-    height: string;
-    weight: string;
-    bmi: string;
-    bloodGroup: string;
-    systolic: string;
-    diastolic: string;
-    heartRate: string;
-    semenAnalysis: string;
-    semenAnalysisContent: string;
-    fertilityIssues: string;
-    fertilityIssuesContent: string;
-    fertilityTreatment: string;
-    fertilityTreatmentContent: string;
-    surgeries: string;
-    surgeriesContent: string;
+  height: string;
+  weight: string;
+  bmi: string;
+  bloodGroup: string;
+  systolic: string;
+  diastolic: string;
+  heartRate: string;
+  semenAnalysis: string;
+  semenAnalysisContent: string;
+  fertilityIssues: string;
+  fertilityIssuesContent: string;
+  fertilityTreatment: string;
+  fertilityTreatmentContent: string;
+  surgeries: string;
+  surgeriesContent: string;
 }
 
+export interface EditFertilityAssessment {
+  semenAnalysis: string;
+  semenAnalysisContent: string;
+  fertilityIssues: string;
+  fertilityIssuesContent: string;
+  fertilityTreatment: string;
+  fertilityTreatmentContent: string;
+  surgeries: string;
+  surgeriesContent: string;
+}
+
+export interface MedicalHistoryType {
+  medication: string,
+  surgeries: string,
+  surgeriesContent: string,
+  medicalCondition: string,
+  familyMedicalHistory: string,
+  lifestyle: string,
+  stress: string,
+  exercise: string,
+  medicationcontent: string,
+  surgeriescontent: string,
+
+};
