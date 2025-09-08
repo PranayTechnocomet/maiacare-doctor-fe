@@ -15,7 +15,9 @@
 .accordion-form-physical-assessment .input-custom-width {
     width: 47.83% !important;
 }
-
+.input-custom-data{
+    margin-top: 30px !important;
+}
 .accordion-form-physical-assessment .or-custom-width {
     width: 4.3% !important;
     padding: 0 !important;

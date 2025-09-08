@@ -6,6 +6,7 @@ import "../style/ui.css";
 import "../style/sitelayout.css";
 import "../style/globals.css";
 import MasterHelper from "@/utils/MasterHelper";
+import { Toaster } from "react-hot-toast";
 // import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const geistSans = Geist({
@@ -35,6 +36,23 @@ export default function RootLayout({
         <MasterHelper>
           {children}
         </MasterHelper>
+        <Toaster
+        position="top-right"
+        toastOptions={{
+          success: {
+            style: {
+              background: '#2ECF98',
+              color: '#fff',
+            },
+          },
+          error: {
+            style: {
+              background: 'red',
+              color: '#fff',
+            },
+          },
+        }}
+      />
       </body>
     </html>
   );

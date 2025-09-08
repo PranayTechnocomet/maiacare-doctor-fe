@@ -215,12 +215,14 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         }
     };
 
+    const [hasPhoneBeenTouched, setHasPhoneBeenTouched] = useState(false);
+
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
 
         if (!data.basic_detail_name.trim()) errors.basic_detail_name = "Name is required";
         if (!data.basic_detail_age.trim()) errors.basic_detail_age = "Age is required";
-        if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Phone number is required";
+        if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Contact number is required";
 
         // Only check required here
         // if (!data.profileImage.trim()) {
@@ -391,14 +393,18 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                             label="Contact Number"
                             value={formData.basic_detail_phone}
                             onChange={(phone: any) => {
-                                // setFormData((prev) => ({ ...prev, phone }));
-                                // setFormError((prev) => ({ ...prev, phone: "" }));
+                                // Track that user has entered phone number
+                                if (phone && phone.trim() !== '') {
+                                    setHasPhoneBeenTouched(true);
+                                }
+                                
                                 handleChange({
                                     target: { name: "basic_detail_phone", value: phone },
                                 } as React.ChangeEvent<HTMLInputElement>);
                             }}
                             placeholder='(000) 000-0000'
                             required
+                            
 
                             error={formError.basic_detail_phone}
                         />
@@ -1011,7 +1017,7 @@ export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerD
                                         label="" // No label here to match the design
                                         name="diastolic"
                                         type="number"
-                                        className="setting-password-input"
+                                        className="setting-password-input input-custom-data"
                                         placeholder="Diastolic(mmHg)"
                                         required={false}
                                         disabled={false}
@@ -1372,7 +1378,7 @@ export function PhysicalAssessment({
                         label="" // No label here to match the design
                         name="diastolic"
                         type="number"
-                        className="setting-password-input"
+                        className="setting-password-input input-custom-data"
                         placeholder="Diastolic(mmHg)"
                         required={false}
                         disabled={false}
