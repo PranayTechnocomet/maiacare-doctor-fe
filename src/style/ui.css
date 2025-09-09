@@ -9,7 +9,8 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     outline: none;
 }
-  /* Umesh Code Start */
+
+/* Umesh Code Start */
 .maiacare-input-field-container input[type="date"] {
     cursor: pointer !important;
 }
@@ -37,6 +38,7 @@ input[type=number] {
 
 
 /* Umesh Radadiya end */
+
 .maiacare-radio-group {
     display: flex;
     gap: 16px;
@@ -130,7 +132,7 @@ input[type=number] {
     display: none !important;
 }
 
-.maiacare-modal{
+.maiacare-modal {
     padding-left: 0 !important;
 }
 
@@ -154,17 +156,99 @@ input[type=number] {
 
 /* pankaj solanki start */
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.show-patient-box {
+    border: 1px solid var(--color-icon-border);
+    border-radius: 8px;
+    padding: 8px;
 }
 
-input[type=number] {
-    -moz-appearance: textfield;
+.show-patient-img {
+    border-radius: 4px;
+}
+
+.age-select-field .age-select-item {
+    border: 1px solid var(--color-age-select-item) !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+    color: var(--color-sidebar-icon) !important;
+
+}
+
+.age-select-field .btn-link {
+    text-decoration: none;
+}
+
+.age-select-field .btn-check:checked+.age-select-item {
+    border-color: var(--border-box) !important;
+    color: var(--border-box) !important;
+}
+
+.age-select-field .btn-group-vertical>.btn,
+.btn-group>.btn {
+    flex: none !important;
+}
+
+.Quantity-box {
+    border: 1px solid var(--color-icon-border);
+    border-radius: 8px;
+
+}
+
+.Quantity-box-minues {
+    background-color: var(--color-icon-border);
+    border-radius: 8px 0px 0px 8px;
+    padding: 11px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.Quantity-box-plus {
+    background-color: var(--color-icon-border);
+    border-radius: 0px 8px 8px 0px;
+    padding: 11px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+.timeslot-card {
+    border: 1px solid var(--border-check-box);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.timeslot-card.selected {
+    border-color: var(--login-font);
+
+}
+
+.timeslot-card .form-check-input:checked {
+    background-color: var(--login-font);
+    border: none !important;
+}
+
+.timeslot-card .form-check-input:focus {
+    border: none !important;
+}
+
+.timeslot-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Medication-form-Prescription-wrapper{
+    border: 1px solid var(--color-radio);
+    border-radius: 16px;
+    padding: 12px;
 }
 
 /* pankaj solanki end */
+
 
 @media (max-width: 991px) {
     .content-layout {

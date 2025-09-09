@@ -19,16 +19,6 @@ interface AddPartnerDetailsProps {
     showData: any;
 }
 
-// interface PhysicalAssessment{
-//     height?: string;
-//     weight?: string;
-//     bmi?: string;
-//     bloodGroup?: string;
-//     systolic?: string;
-//     diastolic?: string;
-//     heartRate: string;
-// }
-
 export function AddPartnerDetails({ setAddPartner, setShowContent,
     setShowPartnerDetail,
     setShowData, modalEditTab,
