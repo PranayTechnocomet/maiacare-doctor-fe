@@ -13,81 +13,9 @@ import Simpleeditpro from '../../assets/images/Simpleeditpro.png';
 import cameraicon from '../../assets/images/cameraicon.png';
 import { log, profile } from 'console';
 import { EditFertilityAssessment, FertilityAssessmentType, MedicalHistoryType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
+import { partnerDetailData } from '@/utils/StaticData';
 // import '../../style/PartnerDetails.css'
 
-
-export function AddPartnerDetailsForm({ setAddPartner, setShowContent, setShowPartnerDetail, setShowData, modalEditTab, setModalEditTab, showData, eventKey }: { setAddPartner: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowData: (value: any) => void, modalEditTab: string | null, setModalEditTab: (value: string | null) => void, showData: any, eventKey: any }) {
-
-    const [activeTab, setActiveTab] = useState<string>("basic");
-    // console.log("tetetetetet");
-    // Sync local state with prop
-    const handleTabChange = (tab: string) => {
-        setActiveTab(tab);
-    };
-
-    // In AddPartnerDetailsForm.tsx
-    useEffect(() => {
-        // console.log("modalEditTab changed:", modalEditTab);
-        if (modalEditTab) {
-            setActiveTab(modalEditTab);
-        }
-    }, [modalEditTab]);
-    // console.log("modalEditTab", modalEditTab);
-
-    const tabOptions = [
-        {
-            key: "basic",
-            label: "Basic Details",
-            content: (
-                <div>
-                    <BasicDetailsForm setAddPartner={setAddPartner} setActiveTab={setActiveTab} setShowData={setShowData} />
-                </div>
-            ),
-        },
-        {
-            key: "medical history",
-            label: "Medical History",
-            content: (
-                <MedicalHistoryForm
-                    setAddPartner={setAddPartner}
-                    setActiveTab={setActiveTab}
-                    setShowData={setShowData}
-                    initialData={modalEditTab === "medical history" ? showData.medicalHistory : undefined}
-                />
-            ),
-        },
-        {
-            key: "physical & fertility assessment",
-            label: "Physical & Fertility Assessment",
-            content: (
-                <PhysicalFertilityAssessmentForm
-                    setShowContent={setShowContent}
-                    setAddPartner={setAddPartner}
-                    setShowPartnerDetail={setShowPartnerDetail}
-                    setShowData={setShowData}
-                    showData={showData}
-                    initialData={modalEditTab === "physical & fertility assessment" ? showData.fertilityAssessment : undefined}
-                    eventKey={eventKey}
-                />
-            ),
-        },
-
-    ];
-    return (
-        <>
-            {/* <main className="bg-light min-vh-100 py-2"> */}
-            <div className="">
-
-                <CustomTabs
-                    tabOptions={tabOptions}
-                    className="mb-3"
-                    activeKey={activeTab}
-                    setActiveKey={handleTabChange}
-                />
-            </div>
-        </>
-    )
-}
 
 export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void }) {
 
@@ -220,7 +148,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
 
         if (!data.basic_detail_name.trim()) errors.basic_detail_name = "Name is required";
         if (!data.basic_detail_age.trim()) errors.basic_detail_age = "Age is required";
-        if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Contact number is required";
+        if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Phone number is required";
 
         // Only check required here
         // if (!data.profileImage.trim()) {
@@ -273,7 +201,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
             <form onSubmit={handleSubmit}>
                 <Row className="g-3">
                     <Col md={12}>
-                        <div className="d-flex align-items-center gap-4  mt-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
+                        <div className="d-flex align-items-center gap-4  flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
                             <div className="profile-wrapper position-relative" >
                                 <Image
                                     src={profileImage || Simpleeditpro}
@@ -281,7 +209,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                     className="object-fit-cover rounded-2"
                                     width={100}
                                     height={100}
-
 
                                 />
                                 <div
@@ -297,7 +224,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                     className="image-formate"
                                     onChange={(event) => handleFileChange(event)}
                                     name="profileImage"
-
 
                                 />
                             </div>
@@ -399,7 +325,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                             }}
                             placeholder='(000) 000-0000'
                             required
-                            
 
                             error={formError.basic_detail_phone}
                         />
@@ -443,6 +368,7 @@ export function MedicalHistoryForm({
     setAddPartner,
     setActiveTab,
     setShowData,
+    showData,
     initialData,
     setEditMedicalHistory,
     formDataMedicalHistory
@@ -451,7 +377,8 @@ export function MedicalHistoryForm({
     setActiveTab: (tab: string) => void,
     setShowData: (value: any) => void,
     initialData?: any,
-    setEditMedicalHistory?: (value: boolean) => void | any,
+    showData?: any,
+    setEditMedicalHistory?: React.Dispatch<React.SetStateAction<boolean>> | any;
     formDataMedicalHistory?: MedicalHistoryType
 }) {
     type FormError = Partial<Record<keyof MedicalHistoryType, string>>;
@@ -501,20 +428,27 @@ export function MedicalHistoryForm({
         setMedicalHistoryFormError(errors);
 
         if (Object.keys(errors).length === 0) {
-            setActiveTab("physical & fertility assessment");
+
             if (formDataMedicalHistory) {
 
-                const updatedInitialData = { ...formDataMedicalHistory, ...FormData };
-                setShowData((prev: any) => ({ ...prev, medicalHistory: updatedInitialData }));
-                // setAddPartner(false);
-                // setEditMedicalHistory(false);
-                console.log("updatedInitialData", updatedInitialData);
+                console.log("updated medicalHistory", {
+                    ...showData,
+                    medicalHistory: FormData
+                });
 
+                const updatedData = {
+                    ...showData,
+                    medicalHistory: FormData,
+                };
+
+                setShowData(updatedData);
+                setEditMedicalHistory(false)
             } else {
+                setActiveTab("physical & fertility assessment");
                 setShowData((prev: any) => ({ ...prev, medicalHistory: FormData }));
                 console.log("FormData", FormData);
             }
-            // setFormData(initialFormData);
+
         }
     };
 
@@ -547,43 +481,43 @@ export function MedicalHistoryForm({
     };
     return (
         <>
-            <div className='mt-3'>
-                <form >
-                    <Row className="g-2">
-                        <Col md={12}>
-                            <RadioButtonGroup
-                                label="Are you currently taking any medications?"
-                                name="medication"
-                                value={FormData.medication || 'yes'}
-                                onChange={(e) => handleChange(e)}
-                                required={true}
-                                error={medicalHistoryFormError.medication}
-                                options={[
-                                    { label: "Yes", value: "yes" },
-                                    { label: "No", value: "no" },
-                                ]}
-                            />
 
-                            {FormData.medication === 'yes' && (
-                                <InputFieldGroup
-                                    type="text"
-                                    value={FormData.medicationcontent}
-                                    name='medicationcontent'
-                                    onChange={handleChange}
-                                    error={medicalHistoryFormError.medicationcontent}
+            <form >
+                <Row className="g-3">
+                    <Col md={12}>
+                        <RadioButtonGroup
+                            label="Are you currently taking any medications?"
+                            name="medication"
+                            value={FormData.medication || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={medicalHistoryFormError.medication}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                                    placeholder="Enter medication"
+                        {FormData.medication === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={FormData.medicationcontent}
+                                name='medicationcontent'
+                                onChange={handleChange}
+                                error={medicalHistoryFormError.medicationcontent}
 
-                                    className={` `}
-                                >
+                                placeholder="Enter medication"
 
-                                </InputFieldGroup>
-                            )}
+                                className={`mt-2`}
+                            >
 
-                        </Col>
-                        <Col md={12}>
-                            <div >
-                                {/* <RadioButtonGroup
+                            </InputFieldGroup>
+                        )}
+
+                    </Col>
+                    <Col md={12}>
+                        <div >
+                            {/* <RadioButtonGroup
                                     label="Have you had any surgeries?"
                                     name="surgeries"
                                     value={medicalHistoryFormData.surgeries || 'yes'}
@@ -595,622 +529,136 @@ export function MedicalHistoryForm({
                                         { label: "No", value: "no" },
                                     ]}
                                 /> */}
-                                <RadioButtonGroup
-                                    label="Have you had any surgeries?"
-                                    name="surgeries"
-                                    value={FormData.surgeries || 'yes'}
-                                    onChange={(e) => handleChange(e)}
-                                    required={true}
-                                    error={medicalHistoryFormError.surgeries}
-                                    options={[
-                                        { label: "Yes", value: "yes" },
-                                        { label: "No", value: "no" },
-                                    ]}
-                                />
-
-                                {FormData.surgeries === 'yes' && (
-                                    <InputFieldGroup
-                                        type="text"
-                                        value={FormData.surgeriescontent}
-                                        name='surgeriescontent'
-                                        onChange={handleChange}
-                                        error={medicalHistoryFormError.surgeriescontent}
-
-                                        placeholder="Enter surgeries"
-
-                                        className={` `}
-                                    >
-
-                                    </InputFieldGroup>
-                                )}
-                            </div>
-                        </Col>
-                        <Col md={12} >
-                            <InputFieldGroup
-                                label="Do you have any medical condition? "
-                                name="medicalCondition"
-                                type="text"
-                                value={FormData.medicalCondition}
-
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                placeholder="Search Medical Condition or Allergies"
+                            <RadioButtonGroup
+                                label="Have you had any surgeries?"
+                                name="surgeries"
+                                value={FormData.surgeries || 'yes'}
+                                onChange={(e) => handleChange(e)}
                                 required={true}
-                                error={medicalHistoryFormError.medicalCondition}
-                                className="position-relative "
-                            ></InputFieldGroup>
-                        </Col>
-                        <Col md={12} >
-                            <InputFieldGroup
-                                label="Family Medical History "
-                                name="familyMedicalHistory"
-                                value={FormData.familyMedicalHistory}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                placeholder="Enter family medical history"
-                                required={false}
-                                error={medicalHistoryFormError.familyMedicalHistory}
-                                className="position-relative "
-                            ></InputFieldGroup>
-                        </Col>
-                        <Col md={12} >
-                            <InputSelect
-                                label="Lifestyle"
-                                name="lifestyle"
-                                value={FormData.lifestyle}
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                                required={true}
-                                disabled={false}
-                                error={medicalHistoryFormError.lifestyle}
+                                error={medicalHistoryFormError.surgeries}
                                 options={[
-                                    { id: "1", value: "PCOS", label: "PCOS" },
-                                    { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
-                                    { id: "3", value: "Diabetes", label: "Diabetes" },
-                                    { id: "4", value: "Obstructive Sleep Apnea", label: "Obstructive Sleep Apnea" },
-                                    { id: "5", value: "Chronic Stress", label: "Chronic Stress" },
-                                    { id: "6", value: "Chronic Stress", label: "Chronic Stress" },
+                                    { label: "Yes", value: "yes" },
+                                    { label: "No", value: "no" },
                                 ]}
                             />
-                            {/* <label className="form-label">Lifestyle</label>
-                           
-                            <div className="dropdown">
-                                <button
-                                    className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
-                                    type="button"
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    aria-expanded={isOpen}
+
+                            {FormData.surgeries === 'yes' && (
+                                <InputFieldGroup
+                                    type="text"
+                                    value={FormData.surgeriescontent}
+                                    name='surgeriescontent'
+                                    onChange={handleChange}
+                                    error={medicalHistoryFormError.surgeriescontent}
+
+                                    placeholder="Enter surgeries"
+
+                                    className={`mt-2`}
                                 >
-                                    {selectedValues.length === 0
-                                        ? "Select lifestyle options..."
-                                        : ` selected`
-                                    }
-                                </button>
 
-                                {isOpen && (
-                                    <ul className="dropdown-menu show w-100">
-                                        {options.map(option => (
-                                            <li key={option.value}>
-                                                <label className="dropdown-item d-flex align-items-center mb-0">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="form-check-input me-2"
-                                                        checked={selectedValues.includes(option.value)}
-                                                        onChange={() => toggleOption(option.value)}
-                                                    />
-                                                    {option.label}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-
-                            
-                            {selectedValues.length > 0 && (
-                                <div className="mt-2">
-                                    <small className="text-muted mb-1 d-block">
-                                        Selected ({selectedValues.length}):
-                                    </small>
-                                    <div className="d-flex flex-wrap gap-1">
-                                        {getSelectedLabels().map((label, index) => (
-                                            <span
-                                                key={selectedValues[index]}
-                                                className="badge bg-success d-flex align-items-center"
-                                            >
-                                                {label}
-                                                <button
-                                                    type="button"
-                                                    className="btn-close btn-close-white ms-2"
-                                                    style={{ fontSize: '0.7rem' }}
-                                                    onClick={() => removeOption(selectedValues[index])}
-                                                />
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )} */}
-                        </Col>
-
-                        <Col md={6} >
-                            <RadioButtonGroup
-                                label="How often do you exercise?"
-                                name="exercise"
-                                value={FormData.exercise || 'never'}
-                                onChange={(e) => handleChange(e)}
-                                required={true}
-                                error={medicalHistoryFormError.exercise}
-                                options={[
-                                    { label: "Never", value: "never" },
-                                    { label: "Rarely", value: "rarely" },
-                                    { label: "Regularly", value: "regularly" },
-                                ]}
-                            />
-                        </Col>
-                        <Col md={6} >
-                            <RadioButtonGroup
-                                label="How would you rate your stress levels?"
-                                name="stress"
-                                value={FormData.stress || 'low'}
-                                onChange={(e) => handleChange(e)}
-                                required={true}
-                                error={medicalHistoryFormError.stress}
-                                options={[
-                                    { label: "Low", value: "low" },
-                                    { label: "Moderate", value: "moderate" },
-                                    { label: "High", value: "high" },
-                                ]}
-                            />
-                        </Col>
-                        <div className='d-flex gap-3'>
-
-                            <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false); }}>
-                                Cancel
-                            </Button>
-
-                            <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
-                                Save
-                            </Button>
-
+                                </InputFieldGroup>
+                            )}
                         </div>
+                    </Col>
+                    <Col md={12} >
+                        <InputFieldGroup
+                            label="Do you have any medical condition? "
+                            name="medicalCondition"
+                            type="text"
+                            value={FormData.medicalCondition}
 
-                    </Row>
-                </form>
-            </div>
-        </>
-    )
-}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Search Medical Condition or Allergies"
+                            required={true}
+                            error={medicalHistoryFormError.medicalCondition}
+                            className="position-relative "
+                        ></InputFieldGroup>
+                    </Col>
+                    <Col md={12} >
+                        <InputFieldGroup
+                            label="Family Medical History "
+                            name="familyMedicalHistory"
+                            value={FormData.familyMedicalHistory}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter family medical history"
+                            required={false}
+                            error={medicalHistoryFormError.familyMedicalHistory}
+                            className="position-relative "
+                        ></InputFieldGroup>
+                    </Col>
+                    <Col md={12} >
+                        <InputSelect
+                            label="Lifestyle"
+                            name="lifestyle"
+                            value={FormData.lifestyle}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={medicalHistoryFormError.lifestyle}
+                            options={[
+                                { id: "1", value: "PCOS", label: "PCOS" },
+                                { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
+                                { id: "3", value: "Diabetes", label: "Diabetes" },
+                                { id: "4", value: "Obstructive Sleep Apnea", label: "Obstructive Sleep Apnea" },
+                                { id: "5", value: "Chronic Stress", label: "Chronic Stress" },
+                                { id: "6", value: "Chronic Stress", label: "Chronic Stress" },
+                            ]}
+                        />
+                    </Col>
 
-export function PhysicalFertilityAssessmentForm({ setAddPartner, setShowPartnerDetail, setShowContent, setShowData, showData, initialData, eventKey }: { setAddPartner: (value: boolean) => void, setShowPartnerDetail: (value: boolean) => void, setShowContent: (value: boolean) => void, setShowData: (value: any) => void, showData?: any, initialData?: any, eventKey?: any }) {
+                    <Col md={6} >
+                        <RadioButtonGroup
+                            label="How often do you exercise?"
+                            name="exercise"
+                            value={FormData.exercise || 'never'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={medicalHistoryFormError.exercise}
+                            options={[
+                                { label: "Never", value: "never" },
+                                { label: "Rarely", value: "rarely" },
+                                { label: "Regularly", value: "regularly" },
+                            ]}
+                        />
+                    </Col>
+                    <Col md={6} >
+                        <RadioButtonGroup
+                            label="How would you rate your stress levels?"
+                            name="stress"
+                            value={FormData.stress || 'low'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={medicalHistoryFormError.stress}
+                            options={[
+                                { label: "Low", value: "low" },
+                                { label: "Moderate", value: "moderate" },
+                                { label: "High", value: "high" },
+                            ]}
+                        />
+                    </Col>
+                    <div className='d-flex gap-3 mt-3'>
 
-    type FormData = {
-        semenAnalysis: string;
-        semenAnalysisContent: string;
-        fertilityIssues: string;
-        fertilityIssuesContent: string;
-        fertilityTreatment: string;
-        fertilityTreatmentContent: string;
-        surgeries: string;
-        surgeriesContent: string;
-        height: string;
-        weight: string;
-        bmi: string;
-        bloodGroup: string;
-        systolic: string;
-        diastolic: string;
-        heartRate: string;
-    };
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false); }}>
+                            Cancel
+                        </Button>
 
-    type FormError = Partial<Record<keyof FormData, string>>;
-    const initialFormData: FormData = {
-        semenAnalysis: initialData?.semenAnalysis || "yes",
-        semenAnalysisContent: initialData?.semenAnalysisContent || "",
-        fertilityIssues: initialData?.fertilityIssues || "no",
-        fertilityIssuesContent: initialData?.fertilityIssuesContent || "",
-        fertilityTreatment: initialData?.fertilityTreatment || "no",
-        fertilityTreatmentContent: initialData?.fertilityTreatmentContent || "",
-        surgeries: initialData?.surgeries || "no",
-        surgeriesContent: initialData?.surgeriesContent || "",
-        height: "",
-        weight: "",
-        bmi: "",
-        bloodGroup: "",
-        systolic: "",
-        diastolic: "",
-        heartRate: "",
-    };
-    const initialFormError: FormError = {};
+                        <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
+                            Save
+                        </Button>
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
-    const [formError, setFormError] = useState<FormError>(initialFormError);
-    console.log("formData1111111111", formData);
-    console.log("formError", formError);
+                    </div>
 
-    const validateForm = (data: FormData): FormError => {
-        const errors: FormError = {};
-
-        if (!data.semenAnalysis.trim()) errors.semenAnalysis = "Seminal Analysis is required";
-        if (data.semenAnalysis === 'yes' && !data.semenAnalysisContent.trim()) errors.semenAnalysisContent = "Seminal Analysis Content is required";
-        if (!data.fertilityIssues.trim()) errors.fertilityIssues = "Fertility Issues is required";
-        if (data.fertilityIssues === 'yes' && !data.fertilityIssuesContent.trim()) errors.fertilityIssuesContent = "Fertility Issues Content is required";
-        if (!data.fertilityTreatment.trim()) errors.fertilityTreatment = "Fertility Treatment is required";
-        if (data.fertilityTreatment === 'yes' && !data.fertilityTreatmentContent.trim()) errors.fertilityTreatmentContent = "Fertility Treatment Content is required";
-        if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
-        if (data.surgeries === 'yes' && !data.surgeriesContent.trim()) errors.surgeriesContent = "Surgeries Content is required";
-
-
-        if (!data.height.trim()) errors.height = "Height is required";
-        if (!data.weight.trim()) errors.weight = "Weight is required";
-        if (!data.bmi.trim()) errors.bmi = "BMI is required";
-        if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
-        if (!data.systolic.trim()) errors.systolic = "Blood pressure is required";
-        // if (!data.diastolic.trim()) errors.diastolic = "Diastolic is required";
-        if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
-        return errors;
-    };
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        console.log("testsstttttttttttttttttt");
-
-        e.preventDefault();
-        const errors = validateForm(formData);
-        console.log("Form submitted", formData);
-        setFormError(errors);
-
-        if (Object.keys(errors).length === 0) {
-            // Handle form submission
-            setFormError(initialFormError);
-            setAddPartner(false);
-            setShowPartnerDetail(false);
-            setShowContent(true);
-
-        }
-        setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
-        setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
-
-    };
-    const handleChange = (
-        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-    ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-        setFormError((prev) => ({ ...prev, [name]: "" }));
-
-    };
-    return (
-        <>
-            <form className="accordion-form-physical-assessment">
-                <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey={eventKey ? "1" : "0"} className="fertilitiy-assement-accodion-item mb-3 mt-3">
-                        <Accordion.Header>
-                            <div className="fertilitiy-assement-accodion-title">
-                                Physical Assessment
-                            </div>
-                        </Accordion.Header>
-                        <Accordion.Body className='pt-0'>
-                            <Row className="g-4">
-                                <Col md={6}>
-
-                                    <InputFieldGroup
-                                        label="Height"
-                                        name="height"
-                                        type="number"
-                                        className='setting-password-input'
-                                        value={formData.height}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                        placeholder="Enter height(in)"
-                                        required={true}
-                                        disabled={false}
-                                        readOnly={false}
-                                        error={formError.height}
-                                    />
-                                </Col>
-                                <Col md={6}>
-
-                                    <InputFieldGroup
-                                        label="Weight"
-                                        name="weight"
-                                        type="number"
-                                        className='setting-password-input'
-                                        value={formData.weight}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                        placeholder="Enter weight(kg)"
-                                        required={true}
-                                        disabled={false}
-                                        readOnly={false}
-                                        error={formError.weight}
-                                    />
-                                </Col>
-
-                                <Col md={6}>
-
-                                    <InputFieldGroup
-                                        label="BMI"
-                                        name="bmi"
-                                        type="number"
-                                        className='setting-password-input'
-                                        value={formData.bmi}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                        placeholder="Enter BMI"
-                                        required={true}
-                                        disabled={false}
-                                        readOnly={false}
-                                        error={formError.bmi}
-                                    />
-                                </Col>
-                                <Col md={6}>
-                                    <InputSelect
-                                        label="Blood Group"
-                                        name="bloodGroup"
-                                        value={formData.bloodGroup}
-                                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                            handleChange(e);
-                                        }}
-                                        onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                                        required={true}
-                                        disabled={false}
-                                        error={formError.bloodGroup}
-                                        placeholder="Select Blood Group"
-                                        // helperText="Select doctor"
-                                        options={[
-                                            { id: "1", value: "A+", label: "A+" },
-                                            { id: "2", value: "A-", label: "A-" },
-                                            { id: "3", value: "B+", label: "B+" },
-                                            { id: "4", value: "B-", label: "B-" },
-                                            { id: "5", value: "AB+", label: "AB+" },
-                                            { id: "6", value: "AB-", label: "AB-" },
-                                            { id: "7", value: "O+", label: "O+" },
-                                            { id: "8", value: "O-", label: "O-" },
-                                        ]}
-                                    />
-
-                                </Col>
-
-                                <Col md={5} className='input-custom-width'>
-                                    <InputFieldGroup
-                                        label="Blood Pressure"
-                                        name="systolic"
-                                        type="number"
-                                        className="setting-password-input"
-                                        placeholder="Systolic(mmHg)"
-                                        required={true}
-                                        disabled={false}
-                                        readOnly={false}
-                                        value={formData.systolic}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                        error={formError.systolic}
-                                    />
-                                </Col>
-
-                                <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
-                                    <span className="fs-1">/</span>
-                                </Col>
-
-                                <Col md={5} className='input-custom-width'>
-                                    <InputFieldGroup
-                                        label="" // No label here to match the design
-                                        name="diastolic"
-                                        type="number"
-                                        className="setting-password-input input-custom-data"
-                                        placeholder="Diastolic(mmHg)"
-                                        required={false}
-                                        disabled={false}
-                                        readOnly={false}
-                                        value={formData.diastolic}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                    //    error={formError.diastolic}
-                                    />
-                                </Col>
-
-                                <Col md={12}>
-
-                                    <InputFieldGroup
-                                        label="Heart Rate"
-                                        name="heartRate"
-                                        type="number"
-                                        className='setting-password-input'
-                                        value={formData.heartRate}
-                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                            handleChange(e);
-
-                                        }}
-                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                        placeholder="Enter Rate(bpm)"
-                                        required={true}
-                                        disabled={false}
-                                        readOnly={false}
-                                        error={formError.heartRate}
-                                    />
-                                </Col>
-                                {/* <Col md={6}>
-
-                                    <Button className="w-100" variant="outline" disabled={false} >
-                                        Cancel
-                                    </Button>
-                                </Col>
-                                <Col md={6}>
-                                    <Button className="w-100" variant="default" disabled={false} type="submit">
-                                        save
-                                    </Button>
-                                </Col> */}
-                            </Row>
-
-                        </Accordion.Body>
-                    </Accordion.Item>
-
-                    <Accordion.Item eventKey={eventKey ? "0" : "1"} className="fertilitiy-assement-accodion-item mb-3" >
-                        <Accordion.Header>
-
-                            <div className="fertilitiy-assement-accodion-title">
-                                Fertility Assessment
-                            </div>
-                        </Accordion.Header>
-                        <Accordion.Body className='pt-0'>
-                            <>
-                                <Row className='g-2'>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you ever had a semen analysis?"
-                                            name="semenAnalysis"
-                                            value={formData.semenAnalysis || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.semenAnalysis}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
-
-                                        {formData.semenAnalysis === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.semenAnalysisContent}
-                                                name='semenAnalysisContent'
-                                                onChange={handleChange}
-                                                error={formError.semenAnalysisContent}
-
-                                                placeholder="If yes, provide details if available"
-
-                                                className={` `}
-                                            >
-
-                                            </InputFieldGroup>
-                                        )}
-
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you experienced any fertility issues?"
-                                            name="fertilityIssues"
-                                            value={formData.fertilityIssues || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.fertilityIssues}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
-
-                                        {formData.fertilityIssues === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.fertilityIssuesContent}
-                                                name='fertilityIssuesContent'
-                                                onChange={handleChange}
-                                                error={formError.semenAnalysisContent}
-
-                                                placeholder="If yes, provide details if available"
-
-                                                className={` `}
-                                            >
-
-                                            </InputFieldGroup>
-                                        )}
-
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Have you previously undergone fertility treatments?"
-                                            name="fertilityTreatment"
-                                            value={formData.fertilityTreatment || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.fertilityTreatment}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
-
-                                        {formData.fertilityTreatment === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.fertilityTreatmentContent}
-                                                name='fertilityTreatmentContent'
-                                                onChange={handleChange}
-                                                error={formError.fertilityTreatmentContent}
-
-                                                placeholder="If yes, provide details if available"
-
-                                                className={` `}
-                                            >
-
-                                            </InputFieldGroup>
-                                        )}
-
-                                    </Col>
-                                    <Col md={12} >
-                                        <RadioButtonGroup
-                                            label="Any history of surgeries?"
-                                            name="surgeries"
-                                            value={formData.surgeries || 'yes'}
-                                            onChange={(e) => handleChange(e)}
-                                            required={true}
-                                            error={formError.surgeries}
-                                            options={[
-                                                { label: "Yes", value: "yes" },
-                                                { label: "No", value: "no" },
-                                            ]}
-                                        />
-
-                                        {formData.surgeries === 'yes' && (
-                                            <InputFieldGroup
-                                                type="text"
-                                                value={formData.surgeriesContent}
-                                                name='surgeriesContent'
-                                                onChange={handleChange}
-                                                error={formError.surgeriesContent}
-
-                                                placeholder="If yes, provide details if available"
-
-                                                className={` `}
-                                            >
-
-                                            </InputFieldGroup>
-                                        )}
-                                    </Col>
-                                </Row>
-                            </>
-                        </Accordion.Body>
-                    </Accordion.Item>
-                </Accordion>
-                <div className='d-flex gap-2'>
-                    <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
-                        Cancel
-                    </Button>
-                    <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}
-                    >
-                        Save
-                    </Button>
-                </div>
-
+                </Row>
             </form>
+
         </>
     )
 }
@@ -1248,7 +696,7 @@ export function PhysicalAssessment({
 
     return (
         <>
-            <Row className="g-4 accordion-form-physical-assessment">
+            <Row className="g-3 accordion-form-physical-assessment">
                 <Col md={6}>
 
                     <InputFieldGroup
@@ -1449,8 +897,7 @@ export function FertilityAssessment({
 
     return (
         <>
-
-            <Row className='g-2'>
+            <Row className='g-3'>
                 <Col md={12} >
                     <RadioButtonGroup
                         label="Have you ever had a semen analysis?"
@@ -1475,7 +922,7 @@ export function FertilityAssessment({
 
                             placeholder="If yes, provide details if available"
 
-                            className={` `}
+                            className={`mt-2`}
                         >
 
                         </InputFieldGroup>
@@ -1506,7 +953,7 @@ export function FertilityAssessment({
 
                             placeholder="If yes, provide details if available"
 
-                            className={` `}
+                            className={`mt-2`}
                         >
 
                         </InputFieldGroup>
@@ -1537,7 +984,7 @@ export function FertilityAssessment({
 
                             placeholder="If yes, provide details if available"
 
-                            className={` `}
+                            className={`mt-2`}
                         >
 
                         </InputFieldGroup>
@@ -1568,7 +1015,7 @@ export function FertilityAssessment({
 
                             placeholder="If yes, provide details if available"
 
-                            className={` `}
+                            className={`mt-2`}
                         >
 
                         </InputFieldGroup>
