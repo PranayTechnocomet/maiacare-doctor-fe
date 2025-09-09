@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Button from '../ui/Button';
 import { MdMailOutline } from 'react-icons/md';
 import Textarea from '../ui/Textarea';
+import toast from 'react-hot-toast';
 
 interface MedicalHistoryProps {
     setMedicalHistoryFormData: any;
@@ -97,6 +98,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
             } else {
                 // If creating new, add to the array
                 setMedicalHistoryFormData((prev: any) => [...prev, formData]);
+                toast.success('Medical history added successfully');
             }
             if (onClose) onClose();
         }
@@ -161,7 +163,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
                                     placeholder="Enter medication"
 
-                                    className={` `}
+                                    className={`mt-2`}
                                 >
 
                                 </InputFieldGroup>
@@ -193,7 +195,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
                                         placeholder="Enter surgeries"
 
-                                        className={` `}
+                                        className={`mt-2`}
                                     >
 
                                     </InputFieldGroup>

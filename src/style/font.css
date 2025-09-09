@@ -18,12 +18,12 @@
     font-size: 16px;
     font-weight: 500;
     color: var(--color-brand);
-    
+
 }
 
 .maiacare-input-field::placeholder {
     color: var(--color-radio);
-    
+
 }
 
 .maiacare-input-field-helper-text {
@@ -919,17 +919,44 @@
     color: var(--color-brand);
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1391px) {
+    .contact-detail {
+        font-size: 13px;
+    }
     .support-accordion-header {
         font-size: 15px;
     }
 }
 
-@media screen and (max-width: 1270px) {
+@media screen and (max-width: 1327px) {
     .contact-detail {
-        font-size: 13px;
+        font-size: 12px;
+    }
+
+}
+
+
+@media screen and (max-width: 1250px) {
+    .contact-detail {
+        font-size: 11px;
+    }
+
+    .support-accordion-header {
+        font-size: 14px;
     }
 }
+
+@media screen and (max-width: 1199px) {
+    .support-accordion-header {
+        font-size: 15px;
+    }
+
+
+    .contact-detail {
+        font-size: 12px;
+    }
+}
+
 
 @media screen and (max-width: 1111px) {
     .appointment-details-invoice-subtitle {
@@ -938,6 +965,9 @@
 }
 
 @media screen and (max-width: 1024px) {
+    .contact-detail {
+        font-size: 11px;
+    }
     .appointment-details-invoice-subtitle {
         font-size: 15px;
     }
@@ -960,7 +990,7 @@
     }
 
     .support-accordion-header {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .support-accordion-content {
@@ -969,6 +999,12 @@
 
     .forgate-password {
         font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .contact-detail {
+        font-size: 13px;
     }
 }
 
@@ -1099,10 +1135,6 @@
 
     .support-faqs-title {
         font-size: 15px;
-    }
-
-    .support-accordion-header {
-        font-size: 13px;
     }
 
     .support-accordion-content {

@@ -83,6 +83,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .medical-history-add-btn:hover {
  background-color: #fff;

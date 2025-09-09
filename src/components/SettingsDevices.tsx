@@ -23,13 +23,13 @@ const SettingsDevices = () => {
                         <Button variant="default" contentSize="small">
                             <div className='d-flex align-items-center justify-content-center gap-2'>
 
-                            <FiLogOut /> Log Out
+                                <FiLogOut /> Log Out
                             </div>
                         </Button>
                         <Button variant="outline" disabled={false} contentSize="small">
                             <div className='d-flex align-items-center justify-content-center gap-2'>
 
-                            <RiDeleteBin6Line /> Delete Devices
+                                <RiDeleteBin6Line /> Delete Devices
                             </div>
                         </Button>
 
