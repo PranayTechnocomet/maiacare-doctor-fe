@@ -14,11 +14,11 @@ function TreatmentPlan() {
 
     const [formData, setFormData] = useState({
         quantity: 0,
+        timeslot: []
 
     });
 
-    console.log("test", formData.quantity);
-    
+    // console.log("test", formData.quantity);
 
     const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
@@ -28,7 +28,8 @@ function TreatmentPlan() {
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        // setFormData((prev) => ({ ...prev, [name]: value }));
+
+        setFormData((prev) => ({ ...prev, [name]: value }));
         // setFormError((prev) => ({ ...prev, [name]: "" }));
     };
 
@@ -226,7 +227,14 @@ function TreatmentPlan() {
 
                         </Col>
                         <Col md={12}>
-                            <TimeSlotCheckBox />
+                            <TimeSlotCheckBox
+                                name="timeslot"
+                                value={formData.timeslot}
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement | any>) => {
+                                    handleChange(e);
+                                }}
+                            />
+
                         </Col>
 
                         <Col md={6}>
