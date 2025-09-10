@@ -52,9 +52,6 @@ export function LoginForms() {
             isValid = false;
         }
 
-
-
-
         // else if (formData.password.length < 8) {
         //     errors.password = "Minimum 8 characters";
         //     isValid = false;
@@ -102,9 +99,8 @@ export function LoginForms() {
 
                 >
                     {/* <MdMailOutline size={24} className='input-email-data' /> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
-                        <path d="M3.39966 5.57422H21.3997V18.3242C21.3997 18.5231 21.3206 18.7139 21.18 18.8545C21.0393 18.9952 20.8486 19.0742 20.6497 19.0742H4.14966C3.95075 19.0742 3.75998 18.9952 3.61933 18.8545C3.47868 18.7139 3.39966 18.5231 3.39966 18.3242V5.57422Z" stroke="#343330" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M21.3997 5.57422L12.3997 13.8242L3.39966 5.57422" stroke="#2B4360" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" className='input-email-data' width="24" height="24" viewBox="0 0 25 25" fill="none">
+                        <path d="M18.1003 3.89844H3.10034C2.8517 3.89844 2.61324 3.99721 2.43743 4.17302C2.26161 4.34884 2.16284 4.5873 2.16284 4.83594V15.4609C2.16284 15.8753 2.32746 16.2728 2.62049 16.5658C2.91351 16.8588 3.31094 17.0234 3.72534 17.0234H17.4753C17.8897 17.0234 18.2872 16.8588 18.5802 16.5658C18.8732 16.2728 19.0378 15.8753 19.0378 15.4609V4.83594C19.0378 4.5873 18.9391 4.34884 18.7633 4.17302C18.5874 3.99721 18.349 3.89844 18.1003 3.89844ZM15.6902 5.77344L10.6003 10.4391L5.5105 5.77344H15.6902ZM4.03784 15.1484V6.96719L9.96675 12.4023C10.1397 12.5609 10.3657 12.6489 10.6003 12.6489C10.8349 12.6489 11.061 12.5609 11.2339 12.4023L17.1628 6.96719V15.1484H4.03784Z" fill="#2B4360" />
                     </svg>
 
                 </InputFieldGroup>
@@ -145,18 +141,13 @@ export function LoginForms() {
                 </div>
 
                 <Button className='w-100 p-2' type='submit'> Sign In</Button>
-                
+
             </form>
         </div>
     )
 }
 
-
-
 export function ForgotPassword() {
-
-
-
     const defaultFormValue = {
         email: ''
 
@@ -220,9 +211,8 @@ export function ForgotPassword() {
 
                 >
                     {/* <MdMailOutline size={24} className='input-email-data' /> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
-                        <path d="M3.39966 5.57422H21.3997V18.3242C21.3997 18.5231 21.3206 18.7139 21.18 18.8545C21.0393 18.9952 20.8486 19.0742 20.6497 19.0742H4.14966C3.95075 19.0742 3.75998 18.9952 3.61933 18.8545C3.47868 18.7139 3.39966 18.5231 3.39966 18.3242V5.57422Z" stroke="#343330" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M21.3997 5.57422L12.3997 13.8242L3.39966 5.57422" stroke="#2B4360" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <svg xmlns="http://www.w3.org/2000/svg" className='input-email-data' width="24" height="24" viewBox="0 0 25 25" fill="none">
+                        <path d="M18.1003 3.89844H3.10034C2.8517 3.89844 2.61324 3.99721 2.43743 4.17302C2.26161 4.34884 2.16284 4.5873 2.16284 4.83594V15.4609C2.16284 15.8753 2.32746 16.2728 2.62049 16.5658C2.91351 16.8588 3.31094 17.0234 3.72534 17.0234H17.4753C17.8897 17.0234 18.2872 16.8588 18.5802 16.5658C18.8732 16.2728 19.0378 15.8753 19.0378 15.4609V4.83594C19.0378 4.5873 18.9391 4.34884 18.7633 4.17302C18.5874 3.99721 18.349 3.89844 18.1003 3.89844ZM15.6902 5.77344L10.6003 10.4391L5.5105 5.77344H15.6902ZM4.03784 15.1484V6.96719L9.96675 12.4023C10.1397 12.5609 10.3657 12.6489 10.6003 12.6489C10.8349 12.6489 11.061 12.5609 11.2339 12.4023L17.1628 6.96719V15.1484H4.03784Z" fill="#2B4360" />
                     </svg>
 
                 </InputFieldGroup>

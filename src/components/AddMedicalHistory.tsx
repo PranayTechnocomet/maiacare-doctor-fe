@@ -18,7 +18,6 @@ import PatientAppointment from './PatientAppointment';
 
 const AddMedicalHistory = () => {
   const [key, setKey] = useState<string>('basic');
-
   const [activeTab, setActiveTab] = useState<string>("basic");
 
   const profileData = {

@@ -18,7 +18,7 @@ function TreatmentPlan() {
 
     });
 
-    // console.log("test", formData.quantity);
+    console.log("test", formData);
 
     const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
@@ -230,9 +230,7 @@ function TreatmentPlan() {
                             <TimeSlotCheckBox
                                 name="timeslot"
                                 value={formData.timeslot}
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement | any>) => {
-                                    handleChange(e);
-                                }}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                             />
 
                         </Col>
