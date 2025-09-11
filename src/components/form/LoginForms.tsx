@@ -136,7 +136,7 @@ export function LoginForms() {
 
                 <div className="d-flex justify-content-end mb-3">
                     <a onClick={() => router.push("/forgotppassword")} className="input-forrgot-password  mt-2" >
-                        Forgot Password
+                        Forgot Passwordrouter
                     </a>
                 </div>
 
@@ -192,6 +192,9 @@ export function ForgotPassword() {
             alert("Form Submitted");
             router.push("/verificationcode");
             setFormError(defaultFormError);
+            console.log(data);
+            localStorage.setItem('useremail', data.email);
+
         }
     };
     return (

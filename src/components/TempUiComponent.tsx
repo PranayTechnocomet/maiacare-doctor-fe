@@ -1,4 +1,4 @@
-import { ChangeEvent, JSX, useEffect, useState } from "react";
+import { ChangeEvent, JSX, KeyboardEvent, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import { WiSunrise, WiDaySunny, WiSunset, WiNightClear } from "react-icons/wi"; // weather icons
 import { InputFieldLabel } from "./ui/InputField";
@@ -194,7 +194,7 @@ export function TimeSlotCheckBox({
 
     const [selectedSlots, setSelectedSlots] = useState<string[]>(value || []);
     // console.log("selectedSlots", selectedSlots);
-    
+
     // const handleToggle = (value: string) => {
     //     if (selectedSlots.includes(value)) {
     //         setSelectedSlots(selectedSlots.filter((v) => v !== value));
@@ -250,3 +250,34 @@ export function TimeSlotCheckBox({
         </>
     )
 }
+
+// export function TreatmentSteps({
+//     label,
+//     name,
+//     value,
+//     type,
+//     required,
+//     className,
+//     placeholder,
+//     onChange }: {
+//         label?: string;
+//         name?: string;
+//         value?: string[];
+//         type?: string;
+//         required?: boolean;
+//         placeholder?: string;
+//         className?: string;
+//         children?: React.ReactNode;
+//         onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void
+//     }) {
+//     return (
+//         <>
+//             <>
+
+//                 {label && <InputFieldLabel label={label} required={required} />}
+//                 <Form.Control className={`maiacare-input-field ${className} `} name={name} type={type} value={value} onChange={onChange} placeholder={placeholder} />
+//             </>
+//         </>
+//     )
+// }
+

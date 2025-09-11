@@ -9,16 +9,36 @@ import { InputFieldGroup } from "../ui/InputField";
 import { QuantityNumber, TimeSlotCheckBox } from "../TempUiComponent";
 import { RadioButtonGroup } from "../ui/RadioField";
 import Textarea from "../ui/Textarea";
+import { TempTreatmentSteps } from "@/utils/StaticData";
+import { TreatmentPlanFormData } from "@/utils/types/interfaces";
 
 function TreatmentPlan() {
 
-    const [formData, setFormData] = useState({
-        quantity: 0,
-        timeslot: []
+    const initialFormData: TreatmentPlanFormData = {
+        treatmentPlan: {
+            treatment: "",
+            duration: "",
+        },
+        medicationPrescription: [
+            {
+                medicineName: "",
+                type: "",
+                typeQuantity: "",
+                duration: "",
+                quantity: "",
+                timeslot: [],
+                meal: "",
+                intake: "",
+                description: "",
+            },
+        ],
+    };
 
-    });
+    type FormError = Partial<Record<keyof TreatmentPlanFormData, string>>;
 
-    console.log("test", formData);
+    const initialFormError: FormError = {};
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [formData, setFormData] = useState<TreatmentPlanFormData>(initialFormData);
 
     const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
@@ -29,14 +49,40 @@ function TreatmentPlan() {
     ) => {
         const { name, value } = e.target;
 
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({
+            ...prev,
+            treatmentPlan: {
+                ...prev.treatmentPlan,
+                [name]: value,
+            },
+        }));
         // setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    const validateForm = (formData: TreatmentPlanFormData) => {
+        const errors: FormError = {};
+        if (!formData.treatmentPlan.treatment) {
+            errors.treatmentPlan = "Treatment is required";
+        }
+        if (!formData.treatmentPlan.duration) {
+            errors.treatmentPlan = "Duration is required";
+        }
+        return errors;
     };
 
     const handelNext = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setStep((prev) => prev + 1);
-        setStepper((prev) => prev + 1);
+
+        const errors = validateForm(formData);
+        setFormError(errors);
+        console.log("errors", errors);
+        if (Object.keys(errors).length === 0) {
+          setFormError(initialFormError);
+          setStep((prev) => prev + 1);
+          setStepper((prev) => prev + 1);
+
+        }
+
     };
 
     const handelNextTwo = (e: React.FormEvent<HTMLFormElement>) => {
@@ -77,7 +123,7 @@ function TreatmentPlan() {
                             <InputSelect
                                 label="Select Treatment"
                                 name="treatment"
-                                //   value={formData.doctor}
+                                value={formData.treatmentPlan.treatment}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     handleChange(e);
                                 }}
@@ -85,7 +131,7 @@ function TreatmentPlan() {
                                 required={true}
                                 disabled={false}
                                 placeholder="Select Treatment"
-                                //   error={formError.doctor}
+                                error={formError.treatmentPlan}
                                 options={[
                                     { id: "1", value: "Treatment 1", label: "Treatment 1" },
                                     { id: "2", value: "Treatment 2", label: "Treatment 2" },
@@ -97,14 +143,14 @@ function TreatmentPlan() {
                             <InputSelect
                                 label="Select Duration "
                                 name="duration"
-                                //   value={formData.doctor}
+                                  value={formData.treatmentPlan.duration}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     handleChange(e);
                                 }}
                                 onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
                                 required={true}
                                 disabled={false}
-                                //   error={formError.doctor}
+                                error={formError.treatmentPlan}
                                 placeholder="Select Duration"
                                 options={[
                                     { id: "1", value: "1", label: "Duration 1" },
@@ -113,6 +159,23 @@ function TreatmentPlan() {
                                 ]}
                             />
                         </Col>
+                        <Col md={12}>
+
+                            {formData.treatmentPlan.treatment &&
+                                <Row className="g-2">
+                                    {TempTreatmentSteps.map((item) => (
+                                        <Col md={6} key={item.id}>
+                                            <div className="treatment-steps-box d-flex gap-2">
+                                                <span className="treatment-steps-box-item ">{item.id}.</span>
+                                                <p className="treatment-steps-box-item m-0">{item.step}</p>
+                                            </div>
+                                        </Col>
+                                    ))}
+                                </Row>
+                            }
+
+                        </Col>
+
                         <div className="d-flex justify-content-end">
 
                             <Button variant="default" type="submit" className="w-50">
@@ -219,7 +282,7 @@ function TreatmentPlan() {
                                 label="Quantity"
                                 name="quantity"
                                 required={true}
-                                value={formData.quantity}
+                                // value={formData.quantity}
                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     handleChange(e);
                                 }}
@@ -229,7 +292,7 @@ function TreatmentPlan() {
                         <Col md={12}>
                             <TimeSlotCheckBox
                                 name="timeslot"
-                                value={formData.timeslot}
+                                // value={formData.timeslot}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e)}
                             />
 

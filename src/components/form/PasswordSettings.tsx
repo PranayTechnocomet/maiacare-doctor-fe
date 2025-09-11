@@ -5,6 +5,7 @@ import Modal from '../ui/Modal';
 import { setHeaderData } from '@/utils/redux/slices/headerSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/utils/redux/store';
+import { useRouter } from 'next/navigation';
 
 type FormError = Partial<Record<keyof FormData, string>>;
 type FormData = {
@@ -15,6 +16,7 @@ type FormData = {
 
 function PasswordSettings() {
 
+    const router = useRouter();
     const dispatch: AppDispatch = useDispatch();
     useEffect(() => {
         dispatch(setHeaderData({ title: "Settings", subtitle: "Settings" }));
@@ -252,7 +254,7 @@ function PasswordSettings() {
                 />
                 <div className="d-flex justify-content-end align-items-center gap-3 mt-3">
 
-                    <a className="forgate-password">Forgot Password?</a>
+                    <a className="forgate-password" onClick={() => router.push("/forgotppassword") }>Forgot Password?</a>
 
                     <Button variant="default" disabled={false} type="submit" contentSize="medium">
                         Save Password

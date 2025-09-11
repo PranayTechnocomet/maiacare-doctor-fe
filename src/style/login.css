@@ -1,38 +1,41 @@
-.input-email-login-data .maiacare-input-field{
-    padding-left: 40px !important; 
+.input-email-login-data .maiacare-input-field {
+    padding-left: 40px !important;
     color: var(--color-radio-lable) !important;
-    
+
 }
 
 
-.input-email-login-data .maiacare-input-field::placeholder{
+.input-email-login-data .maiacare-input-field::placeholder {
     color: var(--color-radio) !important;
-   
+
 }
-.login-title .main-login-title 
-{
+
+.login-title .main-login-title {
     align-items: center !important;
 }
+
 .login-title1 .main-login-title {
     align-items: center !important;
 }
-.login-button{
+
+.login-button {
     padding: 12px 24px !important;
 }
-.input-forrgot-password{
+
+.input-forrgot-password {
     cursor: pointer !important;
 }
-.eye-color{
-   
+
+.eye-color {
+
     color: #B0B4C1 !important;
 }
 
-.forgot-password-screen{
-    padding-left: 9% !important;
-    padding-right: 9% !important;
+.forgot-password-screen {
+    width: 75%;
 }
 
-.profile-card{
+.profile-card {
     border: 1px solid var(--google-icon-border);
     background-color: #FFFFFF !important;
     padding: 16px;
@@ -40,7 +43,7 @@
     width: 480px !important;
 }
 
-.select-clinic-image{
+.select-clinic-image {
     border-radius: 50%;
 }
 
@@ -49,7 +52,8 @@
     padding: 8px;
 
 }
-.verificationcode-main{
+
+.verificationcode-main {
     padding: 48px;
     background-color: #FFFFFF;
     /* height: 420px ;
@@ -60,44 +64,55 @@
     border-radius: 24px !important;
 
 }
-.verfication-code-main{
+
+.verfication-code-main {
     height: 95vh !important;
 }
-.passwored-eye-icon{
+
+.passwored-eye-icon {
     cursor: pointer;
 }
 
-
-
-
-
-
-
-
+@media screen and (min-width: 1524px) {
+    .forgot-password-screen {
+        width: 45%;
+    }
+}
 
 @media screen and (max-width: 1024px) {
-    .profile-card{
+    .profile-card {
         width: 380px !important;
+    }
+    .forgot-password-screen {
+        width: 85%;
+    }
+}
+@media screen and (max-width: 991px){
+    .forgot-password-screen {
+        width: 87%;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .profile-card{
+    .profile-card {
         width: 280px !important;
     }
 }
+
 @media screen and (max-width: 575px) {
-    .profile-card{
+    .profile-card {
         width: 480px !important;
     }
 }
+
 @media screen and (max-width: 426px) {
-    .profile-card{
+    .profile-card {
         width: 380px !important;
     }
 }
+
 @media screen and (max-width: 376px) {
-    .profile-card{
+    .profile-card {
         width: 300px !important;
     }
 }

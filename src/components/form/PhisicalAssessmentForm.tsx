@@ -259,7 +259,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             Cancel
                         </Button>
                         <Button className="w-100" variant="default" disabled={false} type="submit">
-                            save
+                            Save
                         </Button>
                     </div>
 

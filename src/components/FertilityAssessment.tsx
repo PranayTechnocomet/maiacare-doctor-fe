@@ -76,7 +76,7 @@ const FertilityAssessment = () => {
                         </Col>
                         <Col md={6}>
                             <Button className="w-100" variant="default" disabled={false} type="submit">
-                                save
+                            Save
                             </Button>
                         </Col>
 

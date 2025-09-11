@@ -239,7 +239,7 @@ function AddPatientForm() {
                                                 </button>
 
                                                 <Button variant="default" disabled={false} contentSize="large" onClick={handleSave} >
-                                                    save
+                                                Save
                                                 </Button>
 
                                             </div>
