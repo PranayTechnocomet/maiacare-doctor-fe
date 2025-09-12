@@ -408,3 +408,47 @@ export const PatientsDetails = [
   { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
   { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
 ];
+
+export const TempTreatmentSteps = [
+  {
+    id: 1,
+    step: " Fertility Assessment",
+  },
+  {
+    id: 2,
+    step: " Ovarain Stimulation",
+  },
+  {
+    id: 3,
+    step: "Monitoring",
+  },
+  {
+    id: 4,
+    step: "Follow up (HCG trigger shot)",
+  },
+  {
+    id: 5,
+    step: "Egg Retrieval",
+  },
+  {
+    id: 6,
+    step: "Sperm Collection",
+  },
+  {
+    id: 7,
+    step: "Fertilisation",
+  },
+  {
+    id: 8,
+    step: "Embryo Culture",
+  },
+  {
+    id: 9,
+    step: "Embryo Transfer",
+  },
+  {
+    id: 10,
+    step: "Pregnancy Test",
+  },
+
+];

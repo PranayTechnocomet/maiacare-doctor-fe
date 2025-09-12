@@ -1475,6 +1475,14 @@
     color: var(--color-brand);
 }
 
+.treatment-steps-box-item {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+
 @media screen and (max-width: 1391px) {
     .contact-detail {
         font-size: 13px;

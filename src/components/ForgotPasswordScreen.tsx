@@ -16,10 +16,9 @@ export default function ForgotPasswordScreen() {
             <Container fluid>
                 <Row className='min-vh-100 ' >
 
-                    <Col md={6} className="d-flex align-items-center justify-content-center forgot-password-screen">
-                        <div className='' >
+                    <Col md={6} className="d-flex align-items-center justify-content-center ">
+                        <div className='forgot-password-screen'>
                             <div className='d-flex justify-content-start align-item-start'>
-
 
                                 {/* <Image
                                     src={Logo}
@@ -63,7 +62,7 @@ export default function ForgotPasswordScreen() {
 
                             />
                             <div className="position-absolute bottom-0 start-0 end-0 text-center p-2 " >
-                                <p className='login-image-contetnt'>Heal, Connect, & Lead-<br className="d-block md-none"/>
+                                <p className='login-image-contetnt'>Heal, Connect & Lead-<br className="d-block md-none"/>
                                     The Future of Fertility Support Starts Here.</p>
                             </div>
                         </div>

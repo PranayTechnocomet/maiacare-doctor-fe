@@ -102,8 +102,8 @@ export default function SelectClinic() {
               className="pregnecy-image w-100 h-100"
             />
             <div className="position-absolute bottom-0 end-0 start-0 text-center p-2">
-              <p className='login-image-contetnt m-0'>
-                Heal, Connect, & Lead -<br className="d-block md-none" />
+              <p className='login-image-contetnt'>
+                Heal, Connect & Lead -<br className="d-block md-none" />
                 The Future of Fertility Support Starts Here.
               </p>
             </div>

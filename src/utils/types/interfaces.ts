@@ -156,3 +156,27 @@ export interface MedicalHistoryType {
   surgeriescontent: string,
 
 };
+
+export interface TreatmentPlan {
+  treatment: string;
+  duration: string;
+}
+
+
+export interface MedicationPrescription {
+  medicineName: string;
+  type: string;          
+  typeQuantity: string;  
+  duration: string;      
+  quantity: string;      
+  timeslot: string[];   
+  meal: string;          
+  intake: string;        
+  description: string;   
+}
+
+export interface TreatmentPlanFormData {
+  treatmentPlan: TreatmentPlan;
+  medicationPrescription: MedicationPrescription[];
+}
+
