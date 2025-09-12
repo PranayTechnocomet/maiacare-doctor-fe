@@ -163,12 +163,12 @@ export interface TreatmentPlan {
 }
 
 
-export interface MedicationPrescription {
+export interface MedicationPrescriptionType {
   medicineName: string;
   type: string;          
   typeQuantity: string;  
   duration: string;      
-  quantity: string;      
+  quantity: number;      
   timeslot: string[];   
   meal: string;          
   intake: string;        
@@ -177,6 +177,6 @@ export interface MedicationPrescription {
 
 export interface TreatmentPlanFormData {
   treatmentPlan: TreatmentPlan;
-  medicationPrescription: MedicationPrescription[];
+  medicationPrescription: MedicationPrescriptionType[];
 }
 

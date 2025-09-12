@@ -10,7 +10,7 @@ import Button from './ui/Button';
 import Image from 'next/image';
 import { useState } from 'react';
 import Modal from './ui/Modal';
-import TreatmentPlan from './form/TreatmentPlan';
+import TreatmentPlan from './TreatmentPlan';
 
 
 const profileData = {

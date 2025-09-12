@@ -70,54 +70,65 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         fileInputRef.current?.click();
     };
 
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const file = event.target.files?.[0];
-    //     if (file) {
-    //         if (file.size > 5 * 1024 * 1024) {
-    //             alert("File size must be less than 5MB");
-    //             return;
+    // const handleFileChange = (
+    //     event: React.ChangeEvent<HTMLInputElement> | undefined
+    // ) => {
+    //     if (event) {
+    //         const file = event.target.files?.[0];
+    //         if (file) {
+    //             // Check size before converting
+    //             if (file.size > 5 * 1024 * 1024) {
+    //                 setFormData((prev) => ({
+    //                     ...prev,
+    //                     profileImage: "", // clear invalid image
+    //                 }));
+    //                 setFormError((prev) => ({
+    //                     ...prev,
+    //                     profileImage: "File size must be less than 5MB",
+    //                 }));
+    //                 return;
+    //             }
+
+    //             const reader = new FileReader();
+    //             reader.onload = () => {
+    //                 setProfileImage(reader.result as string);
+    //                 setFormData((prev) => ({
+    //                     ...prev,
+    //                     profileImage: reader.result as string, // store base64
+    //                 }));
+    //                 setFormError((prev) => ({
+    //                     ...prev,
+    //                     profileImage: "", // clear error if valid
+    //                 }));
+    //             };
+    //             reader.readAsDataURL(file);
     //         }
-    //         const reader = new FileReader();
-    //         reader.onload = () => {
-    //             setProfileImage(reader.result as string);
-    //         };
-    //         reader.readAsDataURL(file);
     //     }
     // };
-
-
-    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, data: FormData, errors: FormError) => {
-    //     const file = event.target.files?.[0];
-    //     if (file) {
-    //         if (file.size > 5 * 1024 * 1024) {
-    //             // alert("File size must be less than 5MB");
-    //             //  (!data.profileImage.trim())
-    //             //     errors.profileImage = "File size must be less than 5MB";
-    //             return;
-    //         }
-    //         const reader = new FileReader();
-    //         reader.onload = () => {
-    //             setProfileImage(reader.result as string);
-    //             setFormData((prev) => ({
-    //                 ...prev,
-    //                 profileImage: reader.result as string, // ✅ store base64 inside formData
-    //             }));
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
-
     const handleFileChange = (
         event: React.ChangeEvent<HTMLInputElement> | undefined
     ) => {
         if (event) {
             const file = event.target.files?.[0];
             if (file) {
-                // Check size before converting
+                const allowedTypes = ["image/jpeg", "image/png"];
+
+                if (!allowedTypes.includes(file.type)) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        profileImage: "",
+                    }));
+                    setFormError((prev) => ({
+                        ...prev,
+                        profileImage: "Only JPG and PNG files are allowed",
+                    }));
+                    return;
+                }
+
                 if (file.size > 5 * 1024 * 1024) {
                     setFormData((prev) => ({
                         ...prev,
-                        profileImage: "", // clear invalid image
+                        profileImage: "",
                     }));
                     setFormError((prev) => ({
                         ...prev,
@@ -131,11 +142,11 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                     setProfileImage(reader.result as string);
                     setFormData((prev) => ({
                         ...prev,
-                        profileImage: reader.result as string, // store base64
+                        profileImage: reader.result as string,
                     }));
                     setFormError((prev) => ({
                         ...prev,
-                        profileImage: "", // clear error if valid
+                        profileImage: "",
                     }));
                 };
                 reader.readAsDataURL(file);
@@ -233,9 +244,10 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                                 <div className="select-profile-subtitle">
                                     Allowed Jpg, png of max size 5MB
                                 </div>
+                                <small className="text-danger maiacare-input-field-error form-text ">{formError.profileImage}</small>
                             </div>
                         </div>
-                        <small className="text-danger maiacare-input-field-error form-text ">{formError.profileImage}</small>
+
                     </Col>
                     <Col md={12}>
 

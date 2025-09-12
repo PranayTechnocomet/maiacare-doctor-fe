@@ -1483,6 +1483,22 @@
     color: var(--color-heading);
 }
 
+.medication-prescription-accordion-subtitle{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-radio);
+}
+
+.medication-prescription-accordion-item{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    font-style: Regular;
+    color: var(--color-radio-labl);
+}
+
 @media screen and (max-width: 1391px) {
     .contact-detail {
         font-size: 13px;
@@ -1541,6 +1557,14 @@
     .contact-detail {
         font-size: 12px;
     }
+    .your-device-box-title {
+        font-size: 17px;
+    }
+    .your-device-box-subtitle {
+        font-size: 15px;
+
+    }
+    
 }
 
 
@@ -1549,7 +1573,15 @@
         font-size: 16px;
     }
 }
+@media screen and (max-width: 1032px){
+    .your-device-box-title {
+        font-size: 16px;
+    }
+    .your-device-box-subtitle {
+        font-size: 14px;
 
+    }
+}
 @media screen and (max-width: 1024px) {
     .contact-detail {
         font-size: 11px;
@@ -1733,13 +1765,13 @@
 
 @media screen and (max-width: 425px) {
 
-    .your-device-box-title {
+    /* .your-device-box-title {
         font-size: 16px;
     }
 
     .your-device-box-subtitle {
         font-size: 14px;
-    }
+    } */
 
     .accordion-title {
         font-size: 16px;
