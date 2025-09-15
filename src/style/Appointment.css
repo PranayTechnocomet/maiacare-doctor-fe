@@ -61,6 +61,11 @@
     border-top: 1px solid var(--color-icon-border);
 }
 
+.medication-prescription-accordion-item-main{
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
 .medication-prescription-accordion-item-main .accordion-button{
     padding: 12px;
 }

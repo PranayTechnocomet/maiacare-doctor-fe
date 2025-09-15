@@ -2,12 +2,14 @@ import { Col, Row } from "react-bootstrap";
 import InputSelect from "../ui/InputSelect";
 import { TempTreatmentSteps } from "@/utils/StaticData";
 import Button from "../ui/Button";
-import { MedicationPrescriptionType, TreatmentPlan } from "@/utils/types/interfaces";
+import { FollowUpActionFromType, MedicationPrescriptionType, TreatmentPlan } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
 import { InputFieldGroup } from "../ui/InputField";
 import { QuantityNumber, TimeSlotCheckBox } from "../TempUiComponent";
 import { RadioButtonGroup } from "../ui/RadioField";
 import Textarea from "../ui/Textarea";
+import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
+import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
 
 export function TreatmentPlanForm({
     setStep,
@@ -154,6 +156,7 @@ interface MedicationPrescriptionFormProps {
     stepper: number;
     setMedicalPrescription: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
     editForm?: MedicationPrescriptionType;
+    setShowEditFormShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function MedicationPrescriptionForm({
@@ -163,6 +166,7 @@ export function MedicationPrescriptionForm({
     stepper,
     setMedicalPrescription,
     editForm,
+    setShowEditFormShow
 }: MedicationPrescriptionFormProps) {
 
     const initialFormData: MedicationPrescriptionType = {
@@ -236,9 +240,11 @@ export function MedicationPrescriptionForm({
 
         if (Object.keys(errors).length === 0) {
             console.log("medical prescription add succesfully to open next step");
-
+            setStep((prev) => prev + 1);
+            setStepper((prev) => prev + 1);
             setFormError(initialFormError);
         }
+
     };
 
     const handleAddNewMedication = (e: React.FormEvent<HTMLFormElement>) => {
@@ -248,11 +254,16 @@ export function MedicationPrescriptionForm({
         // console.log("errors", errors);
 
         if (Object.keys(errors).length === 0) {
-            console.log("medical prescription add data succesfully", formData);
+            // console.log("medical prescription add data succesfully", formData);
+            if (editForm) {
+                setShowEditFormShow(false);
 
-            setMedicalPrescription((prev) => [...prev, formData]);
-            setFormData(initialFormData);
-            setFormError(initialFormError);
+            } else {
+
+                setMedicalPrescription((prev) => [...prev, formData]);
+                setFormData(initialFormData);
+                setFormError(initialFormError);
+            }
 
         }
 
@@ -260,10 +271,10 @@ export function MedicationPrescriptionForm({
 
     return (
         <>
-            <form onSubmit={handelNext}>
-                <h6 className="dashboard-chart-heading pb-4">Medication Prescription</h6>
+            
+            <form className="Medication-form-Prescription-wrapper" onSubmit={handelNext}>
 
-                <Row className="g-3 Medication-form-Prescription-wrapper">
+                <Row className="g-3">
 
                     <Col md={12}>
                         <InputFieldGroup
@@ -454,6 +465,187 @@ export function MedicationPrescriptionForm({
 
                     </Button>
                 </div>
+
+            </form>
+        </>
+    )
+}
+
+interface FollowUpActionFormProps {
+    setStep: React.Dispatch<React.SetStateAction<number>>;
+    setStepper: React.Dispatch<React.SetStateAction<number>>;
+    step: number;
+    stepper: number;
+    setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function FollowUpActionForm({
+    setStep,
+    setStepper,
+    step,
+    stepper,
+    setTreatmentPlanModel
+}: FollowUpActionFormProps) {
+
+    const initialFormData: FollowUpActionFromType = {
+        nextStep: "",
+        appointmentDate: "",
+        appointmentTime: "",
+        forTime: "",
+        instructionsForPatient: "",
+    };
+    type FormError = Partial<Record<keyof FollowUpActionFromType, string>>;
+
+    const initialFormError: FormError = {};
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [formData, setFormData] = useState<FollowUpActionFromType>(initialFormData);
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+        setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    const validateForm = (data: FollowUpActionFromType): FormError => {
+        const errors: FormError = {};
+        if (!data.nextStep) {
+            errors.nextStep = "Next Step is required";
+        }
+        if (!data.appointmentDate) {
+            errors.appointmentDate = "Appointment Date is required";
+        }
+        if (!data.appointmentTime) {
+            errors.appointmentTime = "Appointment Time is required";
+        }
+
+        return errors;
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors = validateForm(formData);
+        setFormError(errors);
+        if (Object.keys(errors).length === 0) {
+            console.log("Follow up action add succesfully");
+            setFormError(initialFormError);
+            setTreatmentPlanModel(false);
+        }
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <Row className="g-3">
+                    <h6 className="dashboard-chart-heading mb-0">Follow up action</h6>
+                    <Col md={12}>
+                        <InputSelect
+                            label="Next Step"
+                            name="nextStep"
+                            value={formData.nextStep}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            placeholder="Select Next Step"
+                            error={formError.nextStep}
+
+                            options={[
+                                { id: "1", value: "1 Ovarian Stimulation", label: "1 Ovarian Stimulation" },
+                                { id: "2", value: "2 Step-2", label: "2 Step-2" },
+                                { id: "3", value: "3 Step-3", label: "3 Step-3" },
+                                { id: "4", value: "4 Step-4", label: "4 Step-4" },
+
+                            ]}
+                        />
+                    </Col>
+
+                    {formData.nextStep &&
+                        <Row>
+                            <Col md={4}>
+                                <DatePickerFieldGroup
+                                    label="Appointment Date"
+                                    name="appointmentDate"
+                                    value={formData.appointmentDate}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    required={true}
+                                    error={formError.appointmentDate}
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <TimePickerFieldGroup
+                                    label="Appointment Time"
+                                    name="appointmentTime"
+                                    value={formData.appointmentTime}
+                                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    required={true}
+                                    error={formError.appointmentTime}
+                                />
+                            </Col>
+                            <Col md={4}>
+                                <InputSelect
+                                    label="For"
+                                    name="forTime"
+                                    value={formData.forTime}
+                                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                        handleChange(e);
+                                    }}
+                                    required={false}
+                                    placeholder="Select duration"
+                                    options={[
+                                        { id: "1", value: "30minutes", label: "30minutes" },
+                                        { id: "2", value: "1hour", label: "1hour" },
+                                        { id: "3", value: "2hours", label: "2hours" },
+                                    ]}
+                                />
+                            </Col>
+                        </Row>
+                    }
+
+                    <Col md={12}>
+                        <Textarea
+                            label="Instructions for patient"
+                            name="instructionsForPatient"
+                            value={formData.instructionsForPatient}
+                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+                            required={false}
+                            disabled={false}
+                            error={formError.instructionsForPatient}
+                            maxLength={100}
+
+                        />
+                    </Col>
+
+                    <div className="d-flex mt-3 gap-3">
+                        <Button variant="outline" className="w-100" onClick={() => { setStep(step - 1); setStepper(stepper - 1); }}>
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                    <path d="M19.1249 8.00001C19.1249 8.29838 19.0064 8.58452 18.7954 8.7955C18.5844 9.00648 18.2983 9.12501 17.9999 9.12501H4.21866L9.04866 13.9541C9.26 14.1654 9.37874 14.4521 9.37874 14.7509C9.37874 15.0498 9.26 15.3365 9.04866 15.5478C8.83732 15.7592 8.55067 15.8779 8.25179 15.8779C7.9529 15.8779 7.66625 15.7592 7.45491 15.5478L0.704911 8.79782C0.600031 8.6933 0.516814 8.56911 0.460033 8.43237C0.403252 8.29562 0.374023 8.14901 0.374023 8.00094C0.374023 7.85288 0.403252 7.70627 0.460033 7.56952C0.516814 7.43278 0.600031 7.30859 0.704911 7.20407L7.45491 0.454069C7.55956 0.349422 7.68379 0.266411 7.82052 0.209777C7.95725 0.153142 8.10379 0.123993 8.25179 0.123993C8.39978 0.123993 8.54632 0.153142 8.68305 0.209777C8.81978 0.266411 8.94401 0.349422 9.04866 0.454069C9.15331 0.558716 9.23632 0.68295 9.29295 0.819679C9.34959 0.956407 9.37874 1.10295 9.37874 1.25094C9.37874 1.39894 9.34959 1.54548 9.29295 1.68221C9.23632 1.81894 9.15331 1.94317 9.04866 2.04782L4.21866 6.87501H17.9999C18.2983 6.87501 18.5844 6.99353 18.7954 7.20451C19.0064 7.41549 19.1249 7.70164 19.1249 8.00001Z" fill="#2B4360" />
+                                </svg>
+                                Previous
+                            </div>
+                        </Button>
+                        <Button variant="default" type="submit" className="w-100">
+                            Create Plan
+
+                        </Button>
+                    </div>
+                </Row>
 
             </form>
         </>
