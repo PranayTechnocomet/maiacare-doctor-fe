@@ -1,7 +1,7 @@
 import { ChangeEvent, JSX, KeyboardEvent, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import { WiSunrise, WiDaySunny, WiSunset, WiNightClear } from "react-icons/wi"; // weather icons
-import { InputFieldLabel } from "./ui/InputField";
+import { InputFieldError, InputFieldLabel } from "./ui/InputField";
 
 interface TimeSlot {
     label: string;
@@ -126,12 +126,14 @@ export function QuantityNumber({
     required,
     value = 0,
     onChange,
+    error
 }: {
     name?: string;
     label?: string;
     required?: boolean;
     value?: number;
     onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void;
+    error?: string;
 }) {
     const [qty, setQty] = useState<number>(value);
 
@@ -179,6 +181,8 @@ export function QuantityNumber({
                     +
                 </span>
             </div>
+
+             {error && <InputFieldError error={error} />}
         </>
     );
 }
@@ -186,26 +190,15 @@ export function QuantityNumber({
 export function TimeSlotCheckBox({
     name,
     value,
+    error,
     onChange }: {
         name?: string;
         value?: string[];
+        error?: string;
         onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void
     }) {
 
     const [selectedSlots, setSelectedSlots] = useState<string[]>(value || []);
-    // console.log("selectedSlots", selectedSlots);
-
-    // const handleToggle = (value: string) => {
-    //     if (selectedSlots.includes(value)) {
-    //         setSelectedSlots(selectedSlots.filter((v) => v !== value));
-    //     } else {
-    //         setSelectedSlots([...selectedSlots, value]);
-    //     }
-    //     if (onChange) {
-    //         // onChange(selectedSlots as any);
-    //         onChange({ target: { name, value: selectedSlots } } as any);
-    //     }
-    // };
 
     const handleToggle = (value: string) => {
         if (selectedSlots.includes(value)) {
@@ -221,7 +214,6 @@ export function TimeSlotCheckBox({
             onChange({ target: { name, value: updatedSelectedSlots } } as any);
         }
     };
-
 
     return (
         <>
@@ -247,37 +239,10 @@ export function TimeSlotCheckBox({
                     </label>
                 ))}
             </div>
+
+            {error && <InputFieldError error={error} />}
         </>
     )
 }
 
-// export function TreatmentSteps({
-//     label,
-//     name,
-//     value,
-//     type,
-//     required,
-//     className,
-//     placeholder,
-//     onChange }: {
-//         label?: string;
-//         name?: string;
-//         value?: string[];
-//         type?: string;
-//         required?: boolean;
-//         placeholder?: string;
-//         className?: string;
-//         children?: React.ReactNode;
-//         onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void
-//     }) {
-//     return (
-//         <>
-//             <>
-
-//                 {label && <InputFieldLabel label={label} required={required} />}
-//                 <Form.Control className={`maiacare-input-field ${className} `} name={name} type={type} value={value} onChange={onChange} placeholder={placeholder} />
-//             </>
-//         </>
-//     )
-// }
 

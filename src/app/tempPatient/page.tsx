@@ -4,7 +4,7 @@ import { InputFieldGroup } from "@/components/ui/InputField";
 import { ChangeEvent } from "react";
 import '@/style/patientProfile.css'
 import Image from "next/image";
-import dummyPatientImg from "../../assets/images/dummpy-patient-list-img.png"
+import dummyPatientImg from "@/assets/images/dummpy-patient-list-img.png"
 import InputSelect from "@/components/ui/InputSelect";
 import Button from "@/components/ui/Button";
 import { useRouter } from "next/navigation";

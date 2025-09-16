@@ -218,18 +218,32 @@ input[type=number] {
     cursor: pointer;
 }
 
+/* .timeslot-card .form-check-input{
+    margin: 0;
+} 
+
+*/
+
+.timeslot-card .form-check-input:checked {
+    background-color: var(--login-font);
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .timeslot-card.selected {
     border-color: var(--login-font);
 
 }
 
-.timeslot-card .form-check-input:checked {
-    background-color: var(--login-font);
-    border: none !important;
+.timeslot-card .form-check-input {
+    box-shadow: none !important;
+    margin: 0 !important;
 }
 
 .timeslot-card .form-check-input:focus {
-    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    /* border: none !important; */
 }
 
 .timeslot-icon {
@@ -241,11 +255,32 @@ input[type=number] {
     justify-content: center;
 }
 
-.Medication-form-Prescription-wrapper{
+.Medication-form-Prescription-wrapper {
     border: 1px solid var(--color-radio);
     border-radius: 16px;
     padding: 12px;
 }
+
+.forgot-password-btn {
+    width: 100%;
+}
+
+.input-Amount .maiacare-input-field {
+    padding-left: 55px;
+}
+
+.input-Amount-box {
+    background-color: var(--color-bg);
+    border-right: 1px solid var(--color-radio);
+    border-radius: 8px 0px 0px 8px;
+    padding: 12px;
+    position: absolute;
+    top: 69%;
+    left: 24px;
+    transform: translate(-50%, -50%);
+}
+
+
 
 /* pankaj solanki end */
 
@@ -262,6 +297,13 @@ input[type=number] {
     .modal-close-icon {
         padding: 12px;
     }
+
+    .input-Amount-box {
+       
+        padding: 10px;
+        left: 21px;
+    }
+    
 }
 
 /* Optional: Smaller devices like phones (e.g., 575px and below) */
@@ -289,6 +331,3 @@ input[type=number] {
     background-color: var(--color-white);
 }
 
-.forgot-password-btn {
-    width: 100%;
-}

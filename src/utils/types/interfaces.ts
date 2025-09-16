@@ -25,7 +25,6 @@ export interface PhysicalAssessmentDataModel {
 };
 
 
-
 export interface PhysicalAssessmentData {
   date: string;
   height: string;
@@ -163,12 +162,13 @@ export interface TreatmentPlan {
 }
 
 
-export interface MedicationPrescription {
+export interface MedicationPrescriptionType {
+  id: string;
   medicineName: string;
   type: string;          
   typeQuantity: string;  
   duration: string;      
-  quantity: string;      
+  quantity: number;      
   timeslot: string[];   
   meal: string;          
   intake: string;        
@@ -177,6 +177,19 @@ export interface MedicationPrescription {
 
 export interface TreatmentPlanFormData {
   treatmentPlan: TreatmentPlan;
-  medicationPrescription: MedicationPrescription[];
+  medicationPrescription: MedicationPrescriptionType[];
 }
 
+export interface FollowUpActionFromType {
+  nextStep: string;
+  appointmentDate: string;  
+  appointmentTime: string;  
+  forTime: string;
+  instructionsForPatient: string;
+}
+
+export interface PaymentFormData {
+  amount: string;
+  status: string;
+  mode: string;
+}

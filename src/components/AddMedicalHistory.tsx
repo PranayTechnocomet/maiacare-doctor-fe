@@ -46,7 +46,6 @@ const AddMedicalHistory = () => {
         <div>
           <PartnerDetail setActiveTab={setActiveTab} />
         </div>
-
       ),
     },
     {

@@ -113,8 +113,6 @@ function SettingChangePassword() {
                                         </Accordion.Item>
 
                                     </ContentContainer>
-
-
                                 </Accordion>
 
                             </Tab.Pane>
