@@ -47,7 +47,7 @@ export default function InputSelect({
         onClick={onClick}
         // required={required}
         disabled={disabled}
-        className={`maiacare-input-field`}
+        className={`maiacare-input-field ${className}`}
         {...rest}
       >
         <option value={""}>{placeholder}</option>

@@ -14,7 +14,8 @@ import TreatmentPlan from './TreatmentPlan';
 import '@/style/Appointment.css'
 import "@/style/settingsPassword.css";
 import { AppointmentPaymentDetails } from './form/AppointmentPaymentDetails';
-import { PaymentFormData } from '@/utils/types/interfaces';
+import { MedicationPrescriptionType, PaymentFormData } from '@/utils/types/interfaces';
+import { MedicationPrescriptionForm } from './form/TreatmentPlanForm';
 
 
 const profileData = {
@@ -30,13 +31,32 @@ const profileData = {
 
 function AppointmentDetails() {
 
+    const [TreatmentDetailsTempShow, setTreatmentDetailsTempShow] = useState<boolean>(false);
     const [TreatmentPlanModel, setTreatmentPlanModel] = useState(false);
     const [PaymentFormShow, setPaymentFormShow] = useState(false);
+    const [showEditFormShowModel, setShowEditFormShowModel] = useState<boolean>(false);
     const [PaymentFormData, setPaymentFormData] = useState<PaymentFormData>({
         amount: "",
         status: "",
         mode: "",
     });
+    const [editForm, setEditForm] = useState<MedicationPrescriptionType>({
+        id: "",
+        medicineName: "",
+        type: "",
+        typeQuantity: "",
+        duration: "",
+        quantity: 0,
+        timeslot: ["morning"],
+        meal: "Before",
+        intake: "",
+        description: "",
+    });
+    const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
+    const [step, setStep] = useState<number | undefined>(1);
+    const [stepper, setStepper] = useState<number | undefined>(1);
+    const totalSteps = 3;
+
 
     return (
 
@@ -112,130 +132,162 @@ function AppointmentDetails() {
 
                     <ContentContainer className='mt-3'>
 
-                        <Accordion defaultActiveKey="0">
-                            <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
-                                <Accordion.Header className='phisical-assessment-accordion-title-showData'>
-                                    <div className='d-flex align-items-center gap-3'>
-                                        <h6 className='dashboard-treatment-success-title m-0'>IVF Cycle 1</h6>
-                                        <span className='patient-journey-badge-InProgress'>Ongoing</span>
-                                        <div className='patient-treatment-box-dot-btn'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
-                                                <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
-                                            </svg>
+                        <h6 className='accordion-title mb-0 pb-3'>Treatment Details</h6>
+
+                        {TreatmentDetailsTempShow ?
+                            <Accordion defaultActiveKey="0">
+                                <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
+                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                        <div className='d-flex align-items-center gap-3'>
+                                            <h6 className='dashboard-treatment-success-title m-0'>IVF Cycle 1</h6>
+                                            <span className='patient-journey-badge-InProgress'>Ongoing</span>
+                                            <div className='patient-treatment-box-dot-btn'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                                                    <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
+                                                </svg>
+                                            </div>
+
                                         </div>
+                                    </Accordion.Header>
+                                    <Accordion.Body className='pt-0'>
+                                        <Row className='g-3'>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Start Date</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
 
-                                    </div>
-                                </Accordion.Header>
-                                <Accordion.Body className='pt-0'>
-                                    <Row className='g-3'>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Start Date</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Start Date</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Duration</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>3 Months</p>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Start Date</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Duration</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>3 Months</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Ongoing Step</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>1. Fertility Assessment</p>
+                                            </Col>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Ongoing Step</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>1. Fertility Assessment</p>
-                                        </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Fees</p>
+                                                <p className="patient-treatment-box-subtitle-desc-fees m-0">₹12000</p>
 
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Fees</p>
-                                            <p className="patient-treatment-box-subtitle-desc-fees m-0">₹12000</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Amount Status</p>
+                                                <span className="patient-treatment-box-subtitle-desc-half-paid m-0">Half Paid</span>
+                                            </Col>
+                                        </Row>
+                                    </Accordion.Body>
+                                </Accordion.Item>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Amount Status</p>
-                                            <span className="patient-treatment-box-subtitle-desc-half-paid m-0">Half Paid</span>
-                                        </Col>
-                                    </Row>
-                                </Accordion.Body>
-                            </Accordion.Item>
+                                <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
+                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                        <div className='d-flex align-items-center gap-3'>
+                                            <h6 className='dashboard-treatment-success-title m-0'>Egg Freezing</h6>
+                                            <span className='patient-journey-badge-InProgress'>Ongoing</span>
+                                            <div className='patient-treatment-box-dot-btn'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+                                                    <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
+                                                </svg>
+                                            </div>
 
-                            <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
-                                <Accordion.Header className='phisical-assessment-accordion-title-showData'>
-                                    <div className='d-flex align-items-center gap-3'>
-                                        <h6 className='dashboard-treatment-success-title m-0'>Egg Freezing</h6>
-                                        <span className='patient-journey-badge-InProgress'>Ongoing</span>
-                                        <div className='patient-treatment-box-dot-btn'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
-                                                <path d="M18.914 6.33984V16.0898C18.914 16.2888 18.835 16.4795 18.6943 16.6202C18.5537 16.7608 18.3629 16.8398 18.164 16.8398C17.9651 16.8398 17.7743 16.7608 17.6337 16.6202C17.493 16.4795 17.414 16.2888 17.414 16.0898V8.15016L6.69462 18.8705C6.55389 19.0112 6.36301 19.0903 6.16399 19.0903C5.96497 19.0903 5.7741 19.0112 5.63337 18.8705C5.49264 18.7297 5.41357 18.5389 5.41357 18.3398C5.41357 18.1408 5.49264 17.9499 5.63337 17.8092L16.3537 7.08984H8.41399C8.21508 7.08984 8.02431 7.01083 7.88366 6.87017C7.74301 6.72952 7.66399 6.53876 7.66399 6.33984C7.66399 6.14093 7.74301 5.95017 7.88366 5.80951C8.02431 5.66886 8.21508 5.58984 8.41399 5.58984H18.164C18.3629 5.58984 18.5537 5.66886 18.6943 5.80951C18.835 5.95017 18.914 6.14093 18.914 6.33984Z" fill="#2B4360" />
-                                            </svg>
                                         </div>
+                                    </Accordion.Header>
+                                    <Accordion.Body className='pt-0'>
+                                        <Row className='g-3'>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Start Date</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
 
-                                    </div>
-                                </Accordion.Header>
-                                <Accordion.Body className='pt-0'>
-                                    <Row className='g-3'>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Start Date</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Start Date</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Duration</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>3 Months</p>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Start Date</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>7 Feb 2025</p>
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Duration</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>3 Months</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Ongoing Step</p>
+                                                <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>1. Fertility Assessment</p>
+                                            </Col>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Ongoing Step</p>
-                                            <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>1. Fertility Assessment</p>
-                                        </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Fees</p>
+                                                <p className="patient-treatment-box-subtitle-desc-fees m-0">₹12000</p>
 
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Fees</p>
-                                            <p className="patient-treatment-box-subtitle-desc-fees m-0">₹12000</p>
+                                            </Col>
+                                            <Col sm={6} className='col-6'>
+                                                <p className='contact-details-emergency mb-1'>Amount Status</p>
+                                                <span className="patient-treatment-box-subtitle-desc-half-paid m-0">Half Paid</span>
+                                            </Col>
+                                        </Row>
+                                    </Accordion.Body>
+                                </Accordion.Item>
+                            </Accordion>
+                            :
+                            <div>
+                                <div className='text-center mt-4'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="186" height="111" viewBox="0 0 186 111" fill="none">
+                                        <path d="M114.583 33.9167V0H71.4167V33.9167H37.5V55.5V77.0833H71.4167V111H114.583V77.0833H148.5V55.5V33.9167H114.583Z" fill="#DDE1E8" />
+                                        <path d="M80.6667 74H80.5063C79.8326 73.9655 79.1889 73.7109 78.6737 73.2754C78.1585 72.8399 77.8004 72.2474 77.6543 71.5889L73.3746 52.318L71.0929 56.8814C70.8364 57.3934 70.4423 57.8238 69.9549 58.1244C69.4675 58.425 68.906 58.5839 68.3333 58.5834H3.58334C1.88046 58.5834 0.5 57.2029 0.5 55.5C0.5 53.7972 1.88046 52.4167 3.58334 52.4167H66.4278L71.7404 41.7885C72.0211 41.2151 72.4748 40.7445 73.0375 40.4429C73.6002 40.1414 74.2433 40.0243 74.8762 40.108C75.5086 40.1852 76.1017 40.4563 76.5737 40.8842C77.0458 41.3121 77.3737 41.8758 77.5124 42.4976L81.2617 59.382L90.077 32.9424C90.2814 32.3287 90.6737 31.7948 91.1982 31.4163C91.7228 31.0378 92.3531 30.8339 93 30.8334H93.0493C93.7042 30.8438 94.3387 31.0625 94.8609 31.4578C95.3832 31.8531 95.7659 32.4044 95.9538 33.0318L103.32 57.5875L105.851 53.7888C106.133 53.3666 106.514 53.0205 106.962 52.7812C107.41 52.5418 107.909 52.4166 108.417 52.4167H182.417C184.12 52.4167 185.5 53.7972 185.5 55.5C185.5 57.2029 184.12 58.5834 182.417 58.5834H110.066L104.825 66.4613C104.497 66.9441 104.04 67.3253 103.507 67.5619C102.973 67.7984 102.384 67.8807 101.806 67.7995C101.227 67.7139 100.685 67.4656 100.242 67.0834C99.7995 66.7012 99.4746 66.201 99.3054 65.6411L92.8458 44.1287L83.5958 71.8787C83.3932 72.4957 83.0009 73.033 82.4749 73.4139C81.9489 73.7949 81.3161 74 80.6667 74Z" fill="#B0B4C1" />
+                                    </svg>
+                                    <p className="patient-accordion-content-subtitle my-3">No treatment plan</p>
+                                    <Button variant="outline" disabled={false} onClick={() => { setTreatmentPlanModel(true) }}>
+                                        <div className='d-flex justify-content-center align-items-center gap-2 '>
 
-                                        </Col>
-                                        <Col sm={6} className='col-6'>
-                                            <p className='contact-details-emergency mb-1'>Amount Status</p>
-                                            <span className="patient-treatment-box-subtitle-desc-half-paid m-0">Half Paid</span>
-                                        </Col>
-                                    </Row>
-                                </Accordion.Body>
-                            </Accordion.Item>
-                        </Accordion>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                <path d="M17.8125 10C17.8125 10.2486 17.7137 10.4871 17.5379 10.6629C17.3621 10.8387 17.1236 10.9375 16.875 10.9375H10.9375V16.875C10.9375 17.1236 10.8387 17.3621 10.6629 17.5379C10.4871 17.7137 10.2486 17.8125 10 17.8125C9.75136 17.8125 9.5129 17.7137 9.33709 17.5379C9.16127 17.3621 9.0625 17.1236 9.0625 16.875V10.9375H3.125C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 10C2.1875 9.75136 2.28627 9.5129 2.46209 9.33709C2.6379 9.16127 2.87636 9.0625 3.125 9.0625H9.0625V3.125C9.0625 2.87636 9.16127 2.6379 9.33709 2.46209C9.5129 2.28627 9.75136 2.1875 10 2.1875C10.2486 2.1875 10.4871 2.28627 10.6629 2.46209C10.8387 2.6379 10.9375 2.87636 10.9375 3.125V9.0625H16.875C17.1236 9.0625 17.3621 9.16127 17.5379 9.33709C17.7137 9.5129 17.8125 9.75136 17.8125 10Z" fill="#2B4360" />
+                                            </svg>
+                                            Start Treatment
+                                        </div>
+                                    </Button>
+                                </div>
 
-                        <div>
-                            <h6 className='accordion-title'>Treatment Details</h6>
-                            <div className='text-center mt-4'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="186" height="111" viewBox="0 0 186 111" fill="none">
-                                    <path d="M114.583 33.9167V0H71.4167V33.9167H37.5V55.5V77.0833H71.4167V111H114.583V77.0833H148.5V55.5V33.9167H114.583Z" fill="#DDE1E8" />
-                                    <path d="M80.6667 74H80.5063C79.8326 73.9655 79.1889 73.7109 78.6737 73.2754C78.1585 72.8399 77.8004 72.2474 77.6543 71.5889L73.3746 52.318L71.0929 56.8814C70.8364 57.3934 70.4423 57.8238 69.9549 58.1244C69.4675 58.425 68.906 58.5839 68.3333 58.5834H3.58334C1.88046 58.5834 0.5 57.2029 0.5 55.5C0.5 53.7972 1.88046 52.4167 3.58334 52.4167H66.4278L71.7404 41.7885C72.0211 41.2151 72.4748 40.7445 73.0375 40.4429C73.6002 40.1414 74.2433 40.0243 74.8762 40.108C75.5086 40.1852 76.1017 40.4563 76.5737 40.8842C77.0458 41.3121 77.3737 41.8758 77.5124 42.4976L81.2617 59.382L90.077 32.9424C90.2814 32.3287 90.6737 31.7948 91.1982 31.4163C91.7228 31.0378 92.3531 30.8339 93 30.8334H93.0493C93.7042 30.8438 94.3387 31.0625 94.8609 31.4578C95.3832 31.8531 95.7659 32.4044 95.9538 33.0318L103.32 57.5875L105.851 53.7888C106.133 53.3666 106.514 53.0205 106.962 52.7812C107.41 52.5418 107.909 52.4166 108.417 52.4167H182.417C184.12 52.4167 185.5 53.7972 185.5 55.5C185.5 57.2029 184.12 58.5834 182.417 58.5834H110.066L104.825 66.4613C104.497 66.9441 104.04 67.3253 103.507 67.5619C102.973 67.7984 102.384 67.8807 101.806 67.7995C101.227 67.7139 100.685 67.4656 100.242 67.0834C99.7995 66.7012 99.4746 66.201 99.3054 65.6411L92.8458 44.1287L83.5958 71.8787C83.3932 72.4957 83.0009 73.033 82.4749 73.4139C81.9489 73.7949 81.3161 74 80.6667 74Z" fill="#B0B4C1" />
-                                </svg>
-                                <p className="patient-accordion-content-subtitle my-3">No treatment plan</p>
-                                <Button variant="outline" disabled={false} onClick={() => { setTreatmentPlanModel(true) }}>
-                                    <div className='d-flex justify-content-center align-items-center gap-2 '>
+                                <Modal
+                                    show={TreatmentPlanModel}
+                                    onHide={() => setTreatmentPlanModel(false)}
+                                    header="Treatment Plan"
+                                    closeButton={true}
+                                >
+                                    <TreatmentPlan
+                                        setEditForm={setEditForm}
+                                        editForm={editForm}
+                                        setTreatmentPlanModel={setTreatmentPlanModel}
+                                        setShowEditFormShowModel={setShowEditFormShowModel}
+                                        showEditFormShowModel={showEditFormShowModel}
+                                        setStep={setStep}
+                                        setStepper={setStepper}
+                                        step={step}
+                                        stepper={stepper}
+                                        totalSteps={totalSteps}
+                                        setMedicalPrescription={setMedicalPrescription}
+                                        medicalPrescription={medicalPrescription}
+                                        setTreatmentDetailsTempShow={setTreatmentDetailsTempShow}
+                                    />
+                                </Modal>
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M17.8125 10C17.8125 10.2486 17.7137 10.4871 17.5379 10.6629C17.3621 10.8387 17.1236 10.9375 16.875 10.9375H10.9375V16.875C10.9375 17.1236 10.8387 17.3621 10.6629 17.5379C10.4871 17.7137 10.2486 17.8125 10 17.8125C9.75136 17.8125 9.5129 17.7137 9.33709 17.5379C9.16127 17.3621 9.0625 17.1236 9.0625 16.875V10.9375H3.125C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 10C2.1875 9.75136 2.28627 9.5129 2.46209 9.33709C2.6379 9.16127 2.87636 9.0625 3.125 9.0625H9.0625V3.125C9.0625 2.87636 9.16127 2.6379 9.33709 2.46209C9.5129 2.28627 9.75136 2.1875 10 2.1875C10.2486 2.1875 10.4871 2.28627 10.6629 2.46209C10.8387 2.6379 10.9375 2.87636 10.9375 3.125V9.0625H16.875C17.1236 9.0625 17.3621 9.16127 17.5379 9.33709C17.7137 9.5129 17.8125 9.75136 17.8125 10Z" fill="#2B4360" />
-                                        </svg>
-                                        Start Treatment
-                                    </div>
-                                </Button>
+                                <Modal
+                                    show={showEditFormShowModel}
+                                    onHide={() => setShowEditFormShowModel(false)}
+                                    header="Edit Medication Prescription"
+                                    closeButton={true}
+                                >
+                                    <MedicationPrescriptionForm setShowEditFormShowModel={setShowEditFormShowModel}
+                                        editForm={editForm}
+                                        setTreatmentPlanModel={setTreatmentPlanModel}
+                                        setMedicalPrescription={setMedicalPrescription}
+                                        medicalPrescription={medicalPrescription}
+
+                                    />
+                                </Modal>
                             </div>
-
-                            <Modal
-                                show={TreatmentPlanModel}
-                                onHide={() => setTreatmentPlanModel(false)}
-                                header="Treatment Plan"
-                                closeButton={true}
-                            >
-                                <TreatmentPlan setTreatmentPlanModel={setTreatmentPlanModel} />
-                            </Modal>
-                        </div>
+                        }
 
                     </ContentContainer>
 
@@ -246,7 +298,7 @@ function AppointmentDetails() {
                             <h6 className='accordion-title'>Payment Details</h6>
 
                             {PaymentFormData.amount &&
-                               (<div className='patient-journey-up-icon' onClick={() => setPaymentFormShow(true)} >
+                                (<div className='patient-journey-up-icon' onClick={() => setPaymentFormShow(true)} >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
                                         <path d="M21.3113 7.37845L17.1216 3.18971C16.9823 3.05038 16.8169 2.93986 16.6349 2.86446C16.4529 2.78905 16.2578 2.75024 16.0608 2.75024C15.8638 2.75024 15.6687 2.78905 15.4867 2.86446C15.3047 2.93986 15.1393 3.05038 15 3.18971L3.4397 14.75C3.2998 14.8888 3.18889 15.054 3.11341 15.236C3.03792 15.4181 2.99938 15.6133 3.00001 15.8103V20C3.00001 20.3978 3.15804 20.7794 3.43935 21.0607C3.72065 21.342 4.10218 21.5 4.50001 21.5H20.25C20.4489 21.5 20.6397 21.421 20.7803 21.2803C20.921 21.1397 21 20.9489 21 20.75C21 20.5511 20.921 20.3603 20.7803 20.2197C20.6397 20.079 20.4489 20 20.25 20H10.8113L21.3113 9.50002C21.4506 9.36072 21.5611 9.19535 21.6365 9.01334C21.7119 8.83133 21.7507 8.63625 21.7507 8.43924C21.7507 8.24222 21.7119 8.04714 21.6365 7.86513C21.5611 7.68312 21.4506 7.51775 21.3113 7.37845ZM8.6897 20H4.50001V15.8103L12.75 7.56033L16.9397 11.75L8.6897 20ZM18 10.6897L13.8113 6.50002L16.0613 4.25002L20.25 8.4397L18 10.6897Z" fill="#2B4360" />
                                     </svg>

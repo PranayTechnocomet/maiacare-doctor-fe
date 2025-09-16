@@ -73,3 +73,21 @@
 .medication-prescription-accordion-item-main .accordion-body{
     padding: 12px;
 }
+
+.payment-details-Paid select{
+    /* border-radius: 8px;
+    padding: 4px 8px;
+    background-color: #DEF7EC;
+    color: #057A55;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+     */
+    color: green;
+    font-size: 12px;
+}
+
+.payment-details-Unpaid select{
+    color: red;
+}

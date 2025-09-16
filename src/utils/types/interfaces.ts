@@ -163,6 +163,7 @@ export interface TreatmentPlan {
 
 
 export interface MedicationPrescriptionType {
+  id: string;
   medicineName: string;
   type: string;          
   typeQuantity: string;  
