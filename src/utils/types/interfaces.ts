@@ -193,3 +193,7 @@ export interface PaymentFormData {
   status: string;
   mode: string;
 }
+
+export interface MedicationTests {
+    tests: string;
+}

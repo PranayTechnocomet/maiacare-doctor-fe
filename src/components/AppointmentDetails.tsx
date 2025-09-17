@@ -16,7 +16,7 @@ import "@/style/settingsPassword.css";
 import { AppointmentPaymentDetails } from './form/AppointmentPaymentDetails';
 import { MedicationPrescriptionType, PaymentFormData } from '@/utils/types/interfaces';
 import { MedicationPrescriptionForm } from './form/TreatmentPlanForm';
-
+import MedicationAndTests from './MedicationAndTests';
 
 const profileData = {
     name: "Rani Desai",
@@ -30,16 +30,16 @@ const profileData = {
 };
 
 function AppointmentDetails() {
-
-    const [TreatmentDetailsTempShow, setTreatmentDetailsTempShow] = useState<boolean>(false);
+    const [MedicationAndTestsModel, setMedicationAndTestsModel] = useState<boolean>(false);
     const [TreatmentPlanModel, setTreatmentPlanModel] = useState(false);
+    // const [TreatmentPlanModelWithTests, setTreatmentPlanModelWithTests] = useState(false);
+
+    const [TreatmentDetailsTempShow, setTreatmentDetailsTempShow] = useState<any[]>([]);
+    const [medicalPrescriptionDataShowHide, setMedicalPrescriptionDataShowHide] = useState<boolean>(false);
     const [PaymentFormShow, setPaymentFormShow] = useState(false);
     const [showEditFormShowModel, setShowEditFormShowModel] = useState<boolean>(false);
-    const [PaymentFormData, setPaymentFormData] = useState<PaymentFormData>({
-        amount: "",
-        status: "",
-        mode: "",
-    });
+    const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
+
     const [editForm, setEditForm] = useState<MedicationPrescriptionType>({
         id: "",
         medicineName: "",
@@ -52,11 +52,40 @@ function AppointmentDetails() {
         intake: "",
         description: "",
     });
-    const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
+
+    const [editFormWithTests, setEditFormWithTests] = useState<MedicationPrescriptionType>({
+        id: "",
+        medicineName: "",
+        type: "",
+        typeQuantity: "",
+        duration: "",
+        quantity: 0,
+        timeslot: ["morning"],
+        meal: "Before",
+        intake: "",
+        description: "",
+    });
+
+    const [medicalPrescriptionWithTests, setMedicalPrescriptionWithTests] = useState<MedicationPrescriptionType[]>([]);
+    const [medicalPrescriptionWithTestsDataShowHide, setMedicalPrescriptionWithTestsDataShowHide] = useState<boolean>(false);
+    const [showEditFormShowModelWithTests, setShowEditFormShowModelWithTests] = useState<boolean>(false);
+
     const [step, setStep] = useState<number | undefined>(1);
     const [stepper, setStepper] = useState<number | undefined>(1);
     const totalSteps = 3;
 
+    const [MedicationAndTestsStep, setMedicationAndTestsStep] = useState<number | undefined>(1);
+    const [MedicationAndTestsStepper, setMedicationAndTestsStepper] = useState<number | undefined>(1);
+    const MedicationAndTestsTotalSteps = 2;
+
+
+    const [PaymentFormData, setPaymentFormData] = useState<PaymentFormData>({
+        amount: "",
+        status: "",
+        mode: "",
+    });
+
+    console.log("medicalPrescriptionWithTests11", medicalPrescriptionWithTests);
 
     return (
 
@@ -134,7 +163,7 @@ function AppointmentDetails() {
 
                         <h6 className='accordion-title mb-0 pb-3'>Treatment Details</h6>
 
-                        {TreatmentDetailsTempShow ?
+                        {TreatmentDetailsTempShow.length > 0 ?
                             <Accordion defaultActiveKey="0">
                                 <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
@@ -251,7 +280,7 @@ function AppointmentDetails() {
 
                                 <Modal
                                     show={TreatmentPlanModel}
-                                    onHide={() => setTreatmentPlanModel(false)}
+                                    onHide={() => { setTreatmentPlanModel(false); setStep(1); setStepper(1); setMedicalPrescription([]); }}
                                     header="Treatment Plan"
                                     closeButton={true}
                                 >
@@ -269,12 +298,15 @@ function AppointmentDetails() {
                                         setMedicalPrescription={setMedicalPrescription}
                                         medicalPrescription={medicalPrescription}
                                         setTreatmentDetailsTempShow={setTreatmentDetailsTempShow}
+                                        setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                                        medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
                                     />
                                 </Modal>
 
+                                {/* edit time show model */}
                                 <Modal
                                     show={showEditFormShowModel}
-                                    onHide={() => setShowEditFormShowModel(false)}
+                                    onHide={() => { setShowEditFormShowModel(false); setTreatmentPlanModel(true); setMedicalPrescriptionDataShowHide(false); }}
                                     header="Edit Medication Prescription"
                                     closeButton={true}
                                 >
@@ -283,7 +315,8 @@ function AppointmentDetails() {
                                         setTreatmentPlanModel={setTreatmentPlanModel}
                                         setMedicalPrescription={setMedicalPrescription}
                                         medicalPrescription={medicalPrescription}
-
+                                        setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                                        medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
                                     />
                                 </Modal>
                             </div>
@@ -355,7 +388,8 @@ function AppointmentDetails() {
                     </ContentContainer>
 
                     <ContentContainer className='mt-3'>
-
+                     
+                        <>
                         <h6 className='accordion-title'>Medication & Tests </h6>
                         <div className='text-center mt-4'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -374,7 +408,7 @@ function AppointmentDetails() {
                                 <path d="M52.3091 71.3695H79.3873V77.1352C79.3873 78.7176 78.1045 80.0005 76.5221 80.0005H55.1743C53.5919 80.0005 52.3091 78.7176 52.3091 77.1352V71.3695Z" fill="#9CA3AF" />
                             </svg>
                             <p className="patient-accordion-content-subtitle my-3">No medication & tests</p>
-                            <Button variant="outline" disabled={false} >
+                            <Button variant="outline" disabled={false} onClick={() => setMedicationAndTestsModel(true)} >
                                 <div className='d-flex justify-content-center align-items-center gap-2 '>
 
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -385,6 +419,35 @@ function AppointmentDetails() {
                             </Button>
                         </div>
 
+                        <Modal
+                            show={MedicationAndTestsModel}
+                            onHide={() => setMedicationAndTestsModel(false)}
+                            header="Medication & Tests"
+                            closeButton={true}
+                        >
+                            <MedicationAndTests
+                                setStep={setMedicationAndTestsStep}
+                                setStepper={setMedicationAndTestsStepper}
+                                step={MedicationAndTestsStep}
+                                stepper={MedicationAndTestsStepper}
+                                totalSteps={MedicationAndTestsTotalSteps}
+                                setMedicationAndTestsModel={setMedicationAndTestsModel}
+                                setEditForm={setEditFormWithTests}
+                                editForm={editFormWithTests}
+                                setMedicalPrescription={setMedicalPrescriptionWithTests}
+                                medicalPrescription={medicalPrescriptionWithTests}
+                                setMedicalPrescriptionDataShowHide={setMedicalPrescriptionWithTestsDataShowHide}
+                                medicalPrescriptionDataShowHide={medicalPrescriptionWithTestsDataShowHide}
+                                showEditFormShowModel={showEditFormShowModel}
+                                setShowEditFormShowModel={setShowEditFormShowModel}
+                                setMedicalPrescriptionWithTests={setMedicalPrescriptionWithTests}
+                                medicalPrescriptionWithTests={medicalPrescriptionWithTests}
+                                setMedicalPrescriptionWithTestsDataShowHide={setMedicalPrescriptionWithTestsDataShowHide}
+                                medicalPrescriptionWithTestsDataShowHide={medicalPrescriptionWithTestsDataShowHide}
+                                setTreatmentPlanModel={setTreatmentPlanModel}
+                            />
+                        </Modal>
+                        </>
                     </ContentContainer>
 
                     <ContentContainer className='mt-3'>

@@ -1371,6 +1371,14 @@
     color: var(--color-radio-lable);
 }
 
+.blood-test-box-label{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    font-style: Medium;
+    color: var(--color-radio-lable);
+}
+
 .progressbar-step {
     font-size: 14px;
     font-weight: 400;
