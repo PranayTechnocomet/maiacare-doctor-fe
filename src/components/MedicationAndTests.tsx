@@ -1,58 +1,55 @@
 "use client"
 
-import { ChangeEvent, useState } from "react";
-import { Accordion, Col, ProgressBar, Row } from "react-bootstrap";
-import InputSelect from "./ui/InputSelect";
+import { Accordion, ProgressBar } from "react-bootstrap";
+import { TestsForm } from "./form/MedicationAndTestsForm";
+import { MedicationPrescriptionType } from "@/utils/types/interfaces";
 import Button from "./ui/Button";
-import '@/style/Appointment.css'
-import "@/style/settingsPassword.css";
-import { InputFieldGroup } from "./ui/InputField";
-import { QuantityNumber, TimeSlotCheckBox } from "./TempUiComponent";
-import { RadioButtonGroup } from "./ui/RadioField";
-import Textarea from "./ui/Textarea";
-import { TempTreatmentSteps } from "@/utils/StaticData";
-import { MedicationPrescriptionType, TreatmentPlanFormData } from "@/utils/types/interfaces";
-import { FollowUpActionForm, MedicationPrescriptionForm, TreatmentPlanForm } from "./form/TreatmentPlanForm";
+import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
 import Modal from "./ui/Modal";
+import { useState } from "react";
 
-function TreatmentPlan({
-    setTreatmentPlanModel,
-    setShowEditFormShowModel,
-    showEditFormShowModel,
-    editForm,
-    setEditForm,
+interface MedicationAndTestsProps {
+    setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setStepper: React.Dispatch<React.SetStateAction<number | undefined>>;
+    step: number | undefined;
+    stepper: number | undefined;
+    totalSteps: number;
+    setMedicationAndTestsModel: React.Dispatch<React.SetStateAction<boolean>>;
+    setEditForm: React.Dispatch<React.SetStateAction<MedicationPrescriptionType>>;
+    editForm: MedicationPrescriptionType;
+    setMedicalPrescription: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
+    medicalPrescription: MedicationPrescriptionType[];
+    setMedicalPrescriptionDataShowHide: React.Dispatch<React.SetStateAction<boolean>>;
+    medicalPrescriptionDataShowHide: boolean;
+    showEditFormShowModel: boolean;
+    setShowEditFormShowModel: React.Dispatch<React.SetStateAction<boolean>>;
+    setMedicalPrescriptionWithTests: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
+    medicalPrescriptionWithTests: MedicationPrescriptionType[];
+    setMedicalPrescriptionWithTestsDataShowHide: React.Dispatch<React.SetStateAction<boolean>>;
+    medicalPrescriptionWithTestsDataShowHide: boolean;
+    setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function MedicationAndTests({
     setStep,
     setStepper,
     step,
     stepper,
     totalSteps,
+    setMedicationAndTestsModel,
+    setEditForm,
+    editForm,
     setMedicalPrescription,
     medicalPrescription,
-    setTreatmentDetailsTempShow,
     setMedicalPrescriptionDataShowHide,
-    medicalPrescriptionDataShowHide
+    medicalPrescriptionDataShowHide,
+    showEditFormShowModel,
+    setShowEditFormShowModel,
+    setTreatmentPlanModel
 
-}:
-    {
-        setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>,
-        setShowEditFormShowModel: React.Dispatch<React.SetStateAction<boolean>>,
-        showEditFormShowModel: boolean,
-        editForm: MedicationPrescriptionType,
-        setEditForm: React.Dispatch<React.SetStateAction<MedicationPrescriptionType>>,
-        setStep: React.Dispatch<React.SetStateAction<number | undefined>>,
-        setStepper: React.Dispatch<React.SetStateAction<number | undefined>>,
-        step: number | undefined,
-        stepper: number | undefined,
-        totalSteps: number,
-        setMedicalPrescription: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>,
-        medicalPrescription: MedicationPrescriptionType[],
-        setTreatmentDetailsTempShow: React.Dispatch<React.SetStateAction<any[]>>,
-        setMedicalPrescriptionDataShowHide: React.Dispatch<React.SetStateAction<boolean>>,
-        medicalPrescriptionDataShowHide: boolean
-    }) {
+}: MedicationAndTestsProps) {
 
-    
-    // console.log("medicalPrescriptionDataShowHide", medicalPrescriptionDataShowHide);
+    const [saveBtnShow , setSaveBtnShow] = useState<string>("save");
 
     return (
         <>
@@ -77,7 +74,7 @@ function TreatmentPlan({
             </div>
 
             {step == 1 && (
-                <TreatmentPlanForm setStep={setStep} setStepper={setStepper} />
+                <TestsForm setStep={setStep} setStepper={setStepper} setMedicationAndTestsModel={setMedicationAndTestsModel} />
 
             )}
 
@@ -146,7 +143,7 @@ function TreatmentPlan({
                         </>
                     )}
 
-                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} />
+                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} saveBtnShow={saveBtnShow} setMedicationAndTestsModel={setMedicationAndTestsModel} />
 
                     <Modal
                         show={showEditFormShowModel}
@@ -160,14 +157,9 @@ function TreatmentPlan({
                 </>
             )}
 
-            {step == 3 && (
-                <>
-                    <FollowUpActionForm setTreatmentDetailsTempShow={setTreatmentDetailsTempShow} setStep={setStep} setStepper={setStepper} step={step} stepper={stepper} setTreatmentPlanModel={setTreatmentPlanModel} />
-                </>
-            )}
-
         </>
     )
 }
 
-export default TreatmentPlan;
+export default MedicationAndTests
+

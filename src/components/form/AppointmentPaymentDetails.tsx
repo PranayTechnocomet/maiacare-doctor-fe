@@ -124,6 +124,8 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                                 { id: "3", value: "Partially Paid", label: "Partially Paid" },
                             ]}
                         />
+                   
+                            <span className="payment-details-Paid "> Paid </span>
                     </Col>
                     <Col sm={6}>
                         <InputSelect

@@ -269,6 +269,10 @@ input[type=number] {
     padding-left: 55px;
 }
 
+.blood-test-search .maiacare-input-field {
+    padding-right: 55px;
+}
+
 .input-Amount-box {
     background-color: var(--color-bg);
     border-right: 1px solid var(--color-radio);
@@ -280,7 +284,12 @@ input[type=number] {
     transform: translate(-50%, -50%);
 }
 
-
+.blood-test-search-icon{
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: translate(-50%, -50%);
+}
 
 /* pankaj solanki end */
 
