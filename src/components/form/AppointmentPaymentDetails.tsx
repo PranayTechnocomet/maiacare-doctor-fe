@@ -35,11 +35,11 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
         if (name === "status") {
             const newClass =
                 value === "Paid"
-                    ? "payment-details-Paid"
+                    ? "patient-journey-badge-success"
                     : value === "Unpaid"
-                        ? "payment-details-Unpaid"
-                        : value === "Partially Paid"
-                            ? "payment-details-PartiallyPaid"
+                        ? "patient-journey-badge-pending"
+                        : value === "other"
+                            ? "patient-journey-badge-InProgress"
                             : "";
 
             setStatusClass(newClass);
@@ -104,7 +104,7 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                         </InputFieldGroup>
 
                     </Col>
-                    <Col sm={6}>
+                    <Col sm={6} className="position-relative">
 
                         <InputSelect
                             label="Status"
@@ -114,18 +114,18 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                                 handleChange(e);
                             }}
                             onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                            className={statusClass}
+
                             required={true}
                             disabled={false}
                             error={formError.status}
                             options={[
                                 { id: "1", value: "Paid", label: "Paid" },
                                 { id: "2", value: "Unpaid", label: "Unpaid" },
-                                { id: "3", value: "Partially Paid", label: "Partially Paid" },
+                                { id: "3", value: "other", label: "other" },
                             ]}
                         />
-                   
-                            <span className="payment-details-Paid "> Paid </span>
+                        <span className={`payment-status ${statusClass}`}> {formData.status} </span>
+
                     </Col>
                     <Col sm={6}>
                         <InputSelect

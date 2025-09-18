@@ -146,10 +146,15 @@ const PatientAppointment = () => {
     }, []);
 
     return (
-        <div>
-            <BaseTable data={tableData} columns={columns} />
+        <>
 
-        </div>
+            <div className="d-flex">
+
+
+            <BaseTable data={tableData} columns={columns} />
+            </div>
+
+        </>
     );
 };
 

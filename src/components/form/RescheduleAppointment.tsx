@@ -158,7 +158,7 @@ export function RescheduleAppointment({
                         ]}
                     />
 
-                    <div className="d-flex gap-3 mt-3">
+                    <div className="d-flex gap-3 mt-4">
                         <Button variant="outline" className="w-100" type="button">
                             Previous
                         </Button>
@@ -172,8 +172,8 @@ export function RescheduleAppointment({
             {/* Step 2 */}
             {step === 2 && (
                 <>
-                    <form onSubmit={handelSubmit}>
-                        <Row className="g-2">
+                    <form className="mt-3" onSubmit={handelSubmit}>
+                        <Row className="g-3">
                             <Col md={12}>
                                 <InputSelect
                                     label="Type"

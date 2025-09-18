@@ -427,7 +427,6 @@ export function CalendarView() {
 
                 </div>
 
-
                 <div className="p-3 " >
                   <div className="d-flex justify-content-between align-items-center mb-2">
                     <h6 className="mb-0 doctor-listing-calender-heading">Filter</h6>
@@ -489,7 +488,6 @@ export function CalendarView() {
               {selectedView === 'day'
                 &&
                 <>
-
 
                   <div className=" min-vh-100 d-flex align-items-center justify-content-center">
                     <div className="w-100 bg-white rounded shadow-lg d-flex" style={{ maxWidth: '64rem', height: '90vh' }}>
@@ -632,7 +630,7 @@ export function CalendarView() {
                               </div>
                             </div>
                             <div>
-                              <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
+                              <AppointmentRequestCancelModel opcationShowDot={"appointmentsList"} setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
                             </div>
 
                           </div>
