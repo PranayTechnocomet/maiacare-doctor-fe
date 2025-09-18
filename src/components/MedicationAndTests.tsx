@@ -14,7 +14,6 @@ interface MedicationAndTestsProps {
     step: number | undefined;
     stepper: number | undefined;
     totalSteps: number;
-    setMedicationAndTestsModel: React.Dispatch<React.SetStateAction<boolean>>;
     setEditForm: React.Dispatch<React.SetStateAction<MedicationPrescriptionType>>;
     editForm: MedicationPrescriptionType;
     setMedicalPrescription: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
@@ -36,7 +35,6 @@ function MedicationAndTests({
     step,
     stepper,
     totalSteps,
-    setMedicationAndTestsModel,
     setEditForm,
     editForm,
     setMedicalPrescription,
@@ -74,7 +72,7 @@ function MedicationAndTests({
             </div>
 
             {step == 1 && (
-                <TestsForm setStep={setStep} setStepper={setStepper} setMedicationAndTestsModel={setMedicationAndTestsModel} />
+                <TestsForm setStep={setStep} setStepper={setStepper} setMedicationAndTestsModel={setTreatmentPlanModel} />
 
             )}
 
@@ -143,7 +141,7 @@ function MedicationAndTests({
                         </>
                     )}
 
-                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} saveBtnShow={saveBtnShow} setMedicationAndTestsModel={setMedicationAndTestsModel} />
+                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} saveBtnShow={saveBtnShow} setMedicationAndTestsModel={setTreatmentPlanModel} />
 
                     <Modal
                         show={showEditFormShowModel}
