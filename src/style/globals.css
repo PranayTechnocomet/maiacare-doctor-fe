@@ -48,7 +48,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--color-bg);
- 
+
   font-family: var(--font-popins) !important;
 
 }
@@ -60,9 +60,11 @@ body {
   top: 55%;
   left: 2%;
 }
-.maiacare-input-field{
+
+.maiacare-input-field {
   box-shadow: none !important;
 }
+
 .maiacare-input-field-container .input-email-login-data::placeholder {
   padding-left: 20px !important;
 }
@@ -78,6 +80,9 @@ body {
 /* .xyz .maiacare-input-field {
   padding-left: 35px;
 } */
+
+
+
 
 .abc {
   position: absolute;
@@ -101,9 +106,69 @@ body {
   color: var(--color-placeholder-input) !important;
 }
 
+.input-Amount .maiacare-input-field {
+  padding-left: 55px;
+}
+
+.blood-test-search .maiacare-input-field {
+  padding-right: 55px;
+}
+
+.patient-header-search-width {
+  width: 25%;
+}
+
+.patient-header-search .maiacare-input-field {
+  border: 1px solid var(--color-icon-border) !important;
+  width: 100%;
+  /* padding: 15px !important; */
+}
+
+.patient-header-select-filter .maiacare-input-field {
+  border: 1px solid var(--color-icon-border) !important;
+  width: 130px;
+  /* padding: 15px !important; */
+}
+
+.patient-header-filter-icon-box {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-icon-border) !important;
+  border-radius: 8px !important;
+  padding: 12px !important;
+}
+
+.patient-header-button {
+  /* padding: 15px !important; */
+}
+
+.sort-by-lable {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  font-style: Medium;
+  color: var(--color-heading);
+}
+
+.input-Amount-box {
+  background-color: var(--color-bg);
+  border-right: 1px solid var(--color-radio);
+  border-radius: 8px 0px 0px 8px;
+  padding: 12px;
+  position: absolute;
+  top: 69%;
+  left: 24px;
+  transform: translate(-50%, -50%);
+}
+
+.blood-test-search-icon {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translate(-50%, -50%);
+}
+
+
 /* pankaj solanki end */
-
-
 
 .timeline-marker {
   position: relative;
@@ -199,14 +264,136 @@ body {
   border-radius: 10px;
 }
 
+/* 1440 > big screen apply */
+@media (min-width: 1640px) {
+  .patient-header-search-width {
+    width: 20%;
+  }
+}
+
+/* @media screen and (max-width: 1199px) {
+  .patient-header-search .maiacare-input-field {
+    padding: 14px !important;
+  }
+  
+  .patient-header-select-filter .maiacare-input-field {
+    padding: 14px !important;
+  }
+  
+  .patient-header-filter-icon-box{
+    padding: 14px !important;
+  }
+  .patient-header-button{
+    padding: 14px !important;
+  }
+  
+}
+
+@media screen and (max-width: 1024px) {
+  .patient-header-search .maiacare-input-field {
+    padding: 13px !important;
+  }
+  .patient-header-select-filter .maiacare-input-field {
+    padding: 13px !important;
+  }
+  
+  .patient-header-filter-icon-box{
+    padding: 13px !important;
+  }
+  .patient-header-button{
+    padding: 13px !important;
+  }
+  .patient-header-search-width {
+    width: 30%;
+  }
+  
+}
+@media screen and (max-width: 991px) {
+  .patient-header-search .maiacare-input-field {
+    padding: 12px !important;
+  }
+  
+  .patient-header-select-filter .maiacare-input-field {
+    padding: 12px !important;
+  }
+  
+  .patient-header-filter-icon-box{
+    padding: 12px !important;
+  }
+  .patient-header-button{
+    padding: 12px !important;
+  }
+} */
+
+@media screen and (max-width: 1024px){
+  .patient-header-search-width {
+    width: 28%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* .patient-header-search .maiacare-input-field {
+    padding: 11px !important;
+  }
+  
+  .patient-header-select-filter .maiacare-input-field {
+    padding: 11px !important;
+  }
+  
+  .patient-header-filter-icon-box{
+    padding: 11px !important;
+  }
+  .patient-header-button{
+    padding: 11px !important;
+  } */
+
+  .sort-by-lable {
+    font-size: 15px;
+
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .patient-header-search-width {
+    width: 45%;
+  }
+  .patient-header-filter-icon-box {
+    padding: 12px !important;
+  }
+  
+}
 
 @media screen and (max-width: 575px) {
   .patient-journey-up-icon1 {
     width: 45px;
     height: 45px;
-
   }
 
+  .patient-header-search-width {
+    width: 100%;
+  }
+  .patient-header-filter-icon-box {
+    padding: 10px !important;
+  }
+  
+  /* .patient-header-search .maiacare-input-field {
+    padding: 10px !important;
+  }
+  
+  .patient-header-select-filter .maiacare-input-field {
+    padding: 10px !important;
+  }
+  
+  .patient-header-filter-icon-box{
+    padding: 10px !important;
+  }
+  .patient-header-button{
+    padding: 10px !important;
+  } */
+
+  .sort-by-lable {
+    font-size: 14px;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -215,5 +402,4 @@ body {
     height: 40px;
 
   }
-
 }

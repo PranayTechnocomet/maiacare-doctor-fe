@@ -24,7 +24,6 @@ function Page() {
   return (
     <>
       <AddMedicalHistory />
-
     </>
 
   );
