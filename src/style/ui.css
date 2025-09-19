@@ -265,32 +265,6 @@ input[type=number] {
     width: 100%;
 }
 
-.input-Amount .maiacare-input-field {
-    padding-left: 55px;
-}
-
-.blood-test-search .maiacare-input-field {
-    padding-right: 55px;
-}
-
-.input-Amount-box {
-    background-color: var(--color-bg);
-    border-right: 1px solid var(--color-radio);
-    border-radius: 8px 0px 0px 8px;
-    padding: 12px;
-    position: absolute;
-    top: 69%;
-    left: 24px;
-    transform: translate(-50%, -50%);
-}
-
-.blood-test-search-icon{
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: translate(-50%, -50%);
-}
-
 /* pankaj solanki end */
 
 
@@ -308,11 +282,11 @@ input[type=number] {
     }
 
     .input-Amount-box {
-       
+
         padding: 10px;
         left: 21px;
     }
-    
+
 }
 
 /* Optional: Smaller devices like phones (e.g., 575px and below) */
@@ -339,4 +313,3 @@ input[type=number] {
     padding: 10px 16px;
     background-color: var(--color-white);
 }
-
