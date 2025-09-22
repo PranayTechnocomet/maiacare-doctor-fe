@@ -563,6 +563,13 @@
     font-style: medium;
     color: var(--color-heading);
 }
+.appointments-total-box-item {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 21px;
+    font-style: medium;
+    color: var(--color-heading);
+}
 
 .doctor-listing-calender-filter {
     font-size: 12px;

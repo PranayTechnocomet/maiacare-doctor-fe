@@ -131,8 +131,8 @@ export function AppointmentRequestCancelModel({
 export function BookAppointmentModal() {
 
   const [BookAppointmentModal, setBookAppointmentModal] = useState(false);
-  // independent success modal
   const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
+  // independent success modal
 
   return (
     <>
