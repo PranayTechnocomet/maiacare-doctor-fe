@@ -14,18 +14,7 @@
     justify-content: center;
 }
 
-.progressbar-step-success {
-    height: 10px;
-    border-radius: 8px;
-    background-color: var(--color-progressbar-success) !important;
-}
 
-.progressbar-step-secondary {
-    height: 10px;
-    border-radius: 8px;
-    background-color: var(--color-progressbar-secondary) !important;
-
-}
 
 .Appointment-dot {
     width: 24px;

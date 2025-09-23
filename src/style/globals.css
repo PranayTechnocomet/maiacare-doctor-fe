@@ -82,17 +82,8 @@ body {
 } */
 
 
-
-
 .abc {
   position: absolute;
-}
-
-.pregnecy-image {
-  /* height:45.5em !important; */
-  /* width: 105vh !important; */
-  /* object-fit: contain !important; */
-
 }
 
 .main-pregnancy-img image {
@@ -117,6 +108,9 @@ body {
 .patient-header-search-width {
   width: 25%;
 }
+.patient-header-search-width-doctor-list{
+  width: 57%;
+}
 
 .patient-header-search .maiacare-input-field {
   border: 1px solid var(--color-icon-border) !important;
@@ -135,11 +129,9 @@ body {
   border: 1px solid var(--color-icon-border) !important;
   border-radius: 8px !important;
   padding: 12px !important;
+  cursor: pointer;
 }
 
-.patient-header-button {
-  /* padding: 15px !important; */
-}
 
 .sort-by-lable {
   font-size: 16px;
@@ -167,6 +159,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.appointments-total-box{
+  background-color: var(--color-white);
+  border: 1px solid var(--color-icon-border);
+  border-radius: 8px;
+  padding: 8px;
+/* width: 300px; */
+}
+
+.progressbar-step-success {
+  height: 10px;
+  border-radius: 8px;
+  background-color: var(--color-progressbar-success) !important;
+}
+
+.progressbar-step-secondary {
+  height: 10px;
+  border-radius: 8px;
+  background-color: var(--color-progressbar-secondary) !important;
+
+}
 
 /* pankaj solanki end */
 
@@ -271,60 +283,6 @@ body {
   }
 }
 
-/* @media screen and (max-width: 1199px) {
-  .patient-header-search .maiacare-input-field {
-    padding: 14px !important;
-  }
-  
-  .patient-header-select-filter .maiacare-input-field {
-    padding: 14px !important;
-  }
-  
-  .patient-header-filter-icon-box{
-    padding: 14px !important;
-  }
-  .patient-header-button{
-    padding: 14px !important;
-  }
-  
-}
-
-@media screen and (max-width: 1024px) {
-  .patient-header-search .maiacare-input-field {
-    padding: 13px !important;
-  }
-  .patient-header-select-filter .maiacare-input-field {
-    padding: 13px !important;
-  }
-  
-  .patient-header-filter-icon-box{
-    padding: 13px !important;
-  }
-  .patient-header-button{
-    padding: 13px !important;
-  }
-  .patient-header-search-width {
-    width: 30%;
-  }
-  
-}
-@media screen and (max-width: 991px) {
-  .patient-header-search .maiacare-input-field {
-    padding: 12px !important;
-  }
-  
-  .patient-header-select-filter .maiacare-input-field {
-    padding: 12px !important;
-  }
-  
-  .patient-header-filter-icon-box{
-    padding: 12px !important;
-  }
-  .patient-header-button{
-    padding: 12px !important;
-  }
-} */
-
 @media screen and (max-width: 1024px){
   .patient-header-search-width {
     width: 28%;
@@ -332,21 +290,6 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  /* .patient-header-search .maiacare-input-field {
-    padding: 11px !important;
-  }
-  
-  .patient-header-select-filter .maiacare-input-field {
-    padding: 11px !important;
-  }
-  
-  .patient-header-filter-icon-box{
-    padding: 11px !important;
-  }
-  .patient-header-button{
-    padding: 11px !important;
-  } */
-
   .sort-by-lable {
     font-size: 15px;
 
@@ -376,21 +319,6 @@ body {
     padding: 10px !important;
   }
   
-  /* .patient-header-search .maiacare-input-field {
-    padding: 10px !important;
-  }
-  
-  .patient-header-select-filter .maiacare-input-field {
-    padding: 10px !important;
-  }
-  
-  .patient-header-filter-icon-box{
-    padding: 10px !important;
-  }
-  .patient-header-button{
-    padding: 10px !important;
-  } */
-
   .sort-by-lable {
     font-size: 14px;
   }
