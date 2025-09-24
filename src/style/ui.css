@@ -200,19 +200,23 @@ input[type=number] {
 .Quantity-box {
     border: 1px solid var(--color-icon-border);
     border-radius: 8px;
-
 }
 
 .Quantity-box-minues {
-    background-color: var(--color-icon-border);
+    background-color: var(--color-bg);
     border-radius: 8px 0px 0px 8px;
     padding: 11px;
     overflow: hidden;
     cursor: pointer;
+
+    /* font-size: 20px;
+    font-weight: 600;
+    line-height: 1; */
+    
 }
 
 .Quantity-box-plus {
-    background-color: var(--color-icon-border);
+    background-color: var(--color-bg);
     border-radius: 0px 8px 8px 0px;
     padding: 11px;
     overflow: hidden;

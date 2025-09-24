@@ -247,6 +247,7 @@
     line-height: 28px;
     font-style: SemiBold;
     color: var(--profile-text);
+    transition: color 0.3s ease;
 }
 
 .select-profile-subtitle {
@@ -401,6 +402,7 @@
     line-height: 28px;
     font-style: SemiBold;
     color: var(--profile-text);
+    transition: color 0.3s ease;
 }
 
 .select-profile-subtitle {
@@ -1516,6 +1518,13 @@
     line-height: 18px;
     font-style: Regular;
     color: var(--color-radio-labl);
+}
+
+.Quantity-box-show{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    color : var(--color-radio-lable);
 }
 
 @media screen and (max-width: 1391px) {
