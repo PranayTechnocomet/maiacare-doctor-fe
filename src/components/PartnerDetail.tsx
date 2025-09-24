@@ -267,7 +267,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                     </g>
                                                     <defs>
                                                         <clipPath id="clip0_2367_101200">
-                                                            <rect width="20" height="20" fill="white" transform="translate(0.164062)" />
+                                                            <rect width="19" height="19" fill="white" transform="translate(0.164062)" />
                                                         </clipPath>
                                                     </defs>
                                                 </svg>
