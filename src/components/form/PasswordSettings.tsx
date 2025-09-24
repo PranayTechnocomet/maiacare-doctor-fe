@@ -123,12 +123,12 @@ function PasswordSettings() {
     return (
         <>
             <p className="settings-accordion-subtitle my-4">For your security, please enter your current password followed by your new password.</p>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='setting-passwored-label'>
                 <InputFieldGroup
                     label="Current Password"
                     name="currentpassword"
                     type="password"
-                    className='setting-password-input'
+                    className='setting-password-input '
                     value={formData.currentpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);

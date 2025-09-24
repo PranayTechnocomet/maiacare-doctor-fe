@@ -1,14 +1,19 @@
 .maiacare-input-field {
     padding: 12px;
-    border: 1px solid var(--color-brand) !important;
+    /* border: 1px solid var(--color-brand) !important; */
     border-radius: 8px;
 }
 
 .maiacare-input-field:focus {
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    outline: none;
+    border: 1px solid var(--color-brand) !important;
+   
 }
+.maiacare-input-field:disabled,
+.maiacare-input-field[readonly] {
+    border-color: 2px solid var(--color-icon-border);
+    cursor: not-allowed;
+}
+
 
 /* Umesh Code Start */
 .maiacare-input-field-container input[type="date"] {
@@ -88,7 +93,11 @@ input[type=number] {
     padding: 9px 18px;
     /* padding: 6px 12px !important; */
     border-radius: 8px;
+    /* border: none !important; */
+}
 
+.maiacare-button.default-layout {
+    border: none !important;
 }
 
 .content-layout {
