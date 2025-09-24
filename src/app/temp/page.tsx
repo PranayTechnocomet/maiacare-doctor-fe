@@ -412,8 +412,8 @@ export default function Page() {
         <h4>Patient List</h4>
         <BaseTable data={tableData} columns={columns} />
       </div>
-
       <InputFieldHelperText helperText="Helper Text" />
+
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}

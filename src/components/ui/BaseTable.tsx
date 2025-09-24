@@ -41,6 +41,7 @@ export default function CommonTable<TData>({ data, columns }: CommonTableProps<T
               {row.getVisibleCells().map(cell => (
                 <td key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  
                 </td>
               ))}
             </tr>
