@@ -13,9 +13,9 @@
     border-color: 2px solid var(--color-icon-border);
     cursor: not-allowed;
 }
-
-
 /* Umesh Code Start */
+
+
 .maiacare-input-field-container input[type="date"] {
     cursor: pointer !important;
 }
