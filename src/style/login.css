@@ -43,6 +43,10 @@
     width: 480px !important;
 }
 
+.profile-card:hover .select-profile-title{
+    color: var(--color-modal-heading);
+}
+
 .select-clinic-image {
     border-radius: 50%;
 }

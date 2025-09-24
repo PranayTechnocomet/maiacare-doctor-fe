@@ -318,6 +318,7 @@ const PatientAppointment = () => {
                     showSuccessModalBook={showSuccessModalBook}
                     setShowSuccessModalBook={setShowSuccessModalBook}
                 />
+                
             </>
 
             <BaseTable data={tableData} columns={columns} />

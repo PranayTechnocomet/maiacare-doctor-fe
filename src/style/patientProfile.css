@@ -32,7 +32,7 @@
     padding: 16px;
 }
 
-.patient-journey-box-item{
+.patient-journey-box-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,13 +82,46 @@
     background-color: var(--color-white);
 }
 
-
 .patient-report-box {
     background-color: var(--color-white);
     border: 1px solid var(--color-icon-border);
     border-radius: 12px;
     padding: 16px;
 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    transition: all 0.3s ease !important;
+
+    
+    min-height: 220px;
+    /* overflow: hidden; */
+}
+
+.patient-report-img {
+    width: 90px;
+    height: 90px;
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.patient-report-box:hover {
+    border: 1px solid var(--color-modal-heading);
+}
+
+.patient-report-box:hover .patient-report-img {
+    width: 50px;
+    height: 50px;
+}
+
+.patient-report-box .icons-wrapper {
+    display: none !important;
+    /* hide by default */
+}
+
+.patient-report-box:hover .icons-wrapper {
+    display: flex !important;
+    /* show when hovering on the card */
 }
 
 .patient-treatment-box {
@@ -150,13 +183,13 @@
 
 .disabled-accordion-header {
     cursor: not-allowed !important;
-  }
-  
-  .disabled-accordion-header .accordion-button {
+}
+
+.disabled-accordion-header .accordion-button {
     cursor: not-allowed !important;
     background-color: #f8f9fa !important;
     color: #6c757d !important;
-  }
+}
 
 @media screen and (max-width: 575px) {
     .patient-profile-dot {

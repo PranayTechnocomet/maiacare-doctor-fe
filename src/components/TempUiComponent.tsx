@@ -1,5 +1,5 @@
 import { ChangeEvent, JSX, KeyboardEvent, useEffect, useState } from "react";
-import { Form, FormControl } from "react-bootstrap";
+import { Col, Form, FormControl, Row } from "react-bootstrap";
 import { WiSunrise, WiDaySunny, WiSunset, WiNightClear } from "react-icons/wi"; // weather icons
 import { InputFieldError, InputFieldLabel } from "./ui/InputField";
 
@@ -172,7 +172,7 @@ export function QuantityNumber({
                     name={name}
                     value={qty}
                     readOnly
-                    className="text-center w-100 rounded-0"
+                    className="text-center w-100 rounded-0 Quantity-box-show"
                 />
                 <span
                     className="Quantity-box-plus w-100 d-flex align-items-center justify-content-center"
@@ -180,9 +180,9 @@ export function QuantityNumber({
                 >
                     +
                 </span>
-            </div>
+            </div>  
 
-             {error && <InputFieldError error={error} />}
+            {error && <InputFieldError error={error} />}
         </>
     );
 }
@@ -217,28 +217,30 @@ export function TimeSlotCheckBox({
 
     return (
         <>
-            <div className="d-flex gap-3 flex-wrap">
-                {timeSlots.map((slot) => (
-                    <label
-                        key={slot.value}
-                        className={`timeslot-card d-flex gap-2 ${selectedSlots.includes(slot.value) ? "selected" : ""}`}
-                    >
-                        <div className="d-flex align-items-center gap-2">
-                            <div className="timeslot-icon">
-                                {slot.icon}
+            <Row className="g-3">
+                {timeSlots.map((slot, index) => (
+                    <Col lg={3} sm={6} key={index}>
+                        <label
+                            key={slot.value}
+                            className={`timeslot-card d-flex justify-content-between ${selectedSlots.includes(slot.value) ? "selected" : ""}`}
+                        >
+                            <div className="d-flex align-items-center gap-2">
+                                <div className="timeslot-icon">
+                                    {slot.icon}
+                                </div>
+                                <span className="ms-2">{slot.label}</span>
                             </div>
-                            <span className="ms-2">{slot.label}</span>
-                        </div>
-                        <Form.Check
-                            type="checkbox"
-                            name={name}
-                            checked={selectedSlots.includes(slot.value)}
-                            onChange={() => { handleToggle(slot.value); }}
-                            className="m-0"
-                        />
-                    </label>
+                            <Form.Check
+                                type="checkbox"
+                                name={name}
+                                checked={selectedSlots.includes(slot.value)}
+                                onChange={() => { handleToggle(slot.value); }}
+                                className="m-0"
+                            />
+                        </label>
+                    </Col>
                 ))}
-            </div>
+            </Row>
 
             {error && <InputFieldError error={error} />}
         </>

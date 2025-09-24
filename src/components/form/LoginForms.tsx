@@ -233,7 +233,9 @@ export function ForgotPassword() {
 
 
 
-export function ResetPasswordScreen() {
+export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
+    setPasswordChangedSuccessModel: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 
     const [newshowPassword, setNewShowPassword] = useState(false);
     const [confirmshowPassword, setConfirmShowPassword] = useState(false);
@@ -304,11 +306,12 @@ export function ResetPasswordScreen() {
             alert("Form Submitted");
             router.push("/");
             setFormError(defaultFormError);
+            setPasswordChangedSuccessModel(true)
         }
+
     };
     return (
-
-        <div>
+        <>
             <form onSubmit={handleFormSubmit}>
 
                 <div className='pt-3'>
@@ -369,10 +372,9 @@ export function ResetPasswordScreen() {
 
                 <Button className='login-button p-2 mt-4' type='submit'>Reset Password</Button>
             </form>
-        </div>
+        </>
     )
 }
-
 
 export function VerifyOtp() {
     const defaultFormValue = {

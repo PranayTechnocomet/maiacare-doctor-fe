@@ -63,8 +63,8 @@
     padding: 12px;
 }
 
-.payment-status{
-    position:absolute;
+.payment-status {
+    position: absolute;
     top: 56%;
     left: 20px;
 }
@@ -101,9 +101,31 @@
     color: white;
   } */
 
-  @media screen and (max-width: 575px) {
+.schedule-time-off-check-box .form-check-input {
+    accent-color: var(--color-brand, #2B4360);
+    /* Use variable, fallback to #2B4360 */
+}
 
-    .payment-status{
+.schedule-time-off-check-box .form-check-input {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-brand, #2B4360);
+    border-radius: 4px;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+}
+
+.schedule-time-off-check-box .form-check-input:checked {
+    background-color: var(--color-brand, #2B4360);
+    border-color: var(--color-brand, #2B4360);
+}
+
+
+@media screen and (max-width: 575px) {
+
+    .payment-status {
         left: 15px;
     }
-  }
+}

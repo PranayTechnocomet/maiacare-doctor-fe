@@ -197,3 +197,12 @@ export interface PaymentFormData {
 export interface MedicationTests {
     tests: string;
 }
+
+export type ScheduleTimeOff = {
+  startDate: string;          
+  toDate: string;            
+  noOfDays: string;          
+  reason?: string;            
+  checkbox1: boolean;         
+  additionalNote?: string;    
+};

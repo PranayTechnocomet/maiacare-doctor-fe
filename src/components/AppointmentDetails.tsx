@@ -92,6 +92,8 @@ function AppointmentDetails() {
     const [RescheduleModal, setRescheduleModal] = useState<boolean>(false);
     const [CancelModal, setCancelModal] = useState<boolean>(false);
 
+    const [FinishAppointmentBtnShowHide, setFinishAppointmentBtnShowHide] = useState<boolean>(false);
+
     return (
 
         <>
@@ -118,14 +120,14 @@ function AppointmentDetails() {
                                 <p className='modal-custom-content m-0'>Appointment ID <span className='patient-treatment-box-subtitle-desc'>#123456</span></p>
                             </div>
 
-                            <AppointmentRequestCancelModel 
-                            opcationShowDot={"appointmentDetails"} 
-                            RescheduleModal={RescheduleModal} 
-                            setRescheduleModal={setRescheduleModal} 
-                            setCancelModal={setCancelModal} 
-                            CancelModal={CancelModal} 
+                            <AppointmentRequestCancelModel
+                                opcationShowDot={"appointmentDetails"}
+                                RescheduleModal={RescheduleModal}
+                                setRescheduleModal={setRescheduleModal}
+                                setCancelModal={setCancelModal}
+                                CancelModal={CancelModal}
                             />
-                            
+
                         </div>
                         <div className='d-flex justify-content-between mt-3 w-75'>
                             <div className='d-flex justify-content-center align-items-center gap-2'>
@@ -156,16 +158,30 @@ function AppointmentDetails() {
                         </div>
 
                         <Row className='g-3'>
-                            <Col md={6}>
-                                <Button className='w-100' variant="outline" disabled={false} >
-                                    No Show
-                                </Button>
-                            </Col>
-                            <Col md={6}>
-                                <Button className='w-100' variant="default" disabled={false} type="submit">
-                                    Check In
-                                </Button>
-                            </Col>
+                            {FinishAppointmentBtnShowHide
+                                ?
+                                <Col md={12}>
+                                    <Button className='w-100' variant="default" disabled={false} type="submit">
+                                        Finish Appointment
+                                    </Button>
+                                </Col>
+
+                                :
+                                <>
+                                    <Col md={6}>
+                                        <Button className='w-100' variant="outline" disabled={false} >
+                                            No Show
+                                        </Button>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Button className='w-100' variant="default" disabled={false} type="submit" onClick={() => setFinishAppointmentBtnShowHide(true)}>
+                                            Check In
+                                        </Button>
+                                    </Col>
+                                </>
+                            }
+
+
                         </Row>
                     </ContentContainer>
 
