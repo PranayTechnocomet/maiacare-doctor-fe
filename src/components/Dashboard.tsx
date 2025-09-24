@@ -197,8 +197,8 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
 
   return (
     <div className="card shadow-sm">
-      <div className="card-header bg-light text-center">
-        <div className="d-flex align-items-center justify-content-between">
+      <div className="px-3 pt-3 text-center">
+        <div className="d-flex align-items-center justify-content-between px-2">
           <h6 className="mb-0 d-flex align-items-start justify-content-start dashboard-chart-heading">Patient Dropout Rate</h6>
 
           <InputSelect
@@ -222,7 +222,7 @@ const WaveChart: React.FC<WaveChartProps> = ({ width = 800, height = 400 }) => {
 
       </div>
 
-      <div className="card-body p-3">
+      <div className="card-body px-4"> 
         <div style={{ height: `${height}px`, width: "100%" }}>
           <canvas ref={chartRef} className="dashboard-chart-canvas" />
         </div>
@@ -503,7 +503,7 @@ if (!mounted) return null;
                   </div>
                 </div>
                 <div >
-                  <DoughnutChart data={patientChartData} options={{ responsive: true }} />
+                  <DoughnutChart data={patientChartData} options={{ responsive: true }}  />
                 </div>
               </Card.Body>
             </Card>
