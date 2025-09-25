@@ -861,8 +861,6 @@
 
 /* pankaj solanki start*/
 
-
-
 .setting-password-item-name {
     font-size: 14px;
     font-weight: 500;
@@ -1212,8 +1210,6 @@
     line-height: 22px;
     font-style: Medium;
     color: var(--color-invoice-no-title);
-
-
 }
 
 .invoice-no-title-subtitle {
@@ -1528,6 +1524,14 @@
     font-weight: 500;
     line-height: 22px;
     color : var(--color-radio-lable);
+}
+
+.phisical-assessment-accordion-item-edit{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--color-brand);
 }
 
 @media screen and (max-width: 1391px) {

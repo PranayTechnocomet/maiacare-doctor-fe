@@ -15,6 +15,7 @@ export interface Patient {
 };
 
 export interface PhysicalAssessmentDataModel {
+  id: string;
   height: string;
   weight: string;
   bmi: string;
@@ -206,3 +207,15 @@ export type ScheduleTimeOff = {
   checkbox1: boolean;         
   additionalNote?: string;    
 };
+
+export interface FertilityAssessmentFormType {
+  ageAtFirstMenstruation: string;
+  cycleLength: string;
+  periodLength: string;
+  date: string;
+  isCycleRegular: string;
+  menstrualIssues: string;
+  pregnancy: string;
+  timeduration: string;
+  ectopicpregnancy: string;
+}

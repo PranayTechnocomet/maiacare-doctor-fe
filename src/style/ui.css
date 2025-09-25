@@ -334,24 +334,19 @@ input[type=number] {
 .Quantity-box-minues {
     background-color: var(--color-bg);
     border-radius: 8px 0px 0px 8px;
-    padding: 11px;
+    padding: 23px 0px;
     overflow: hidden;
     cursor: pointer;
 
-    /* font-size: 20px;
-    font-weight: 600;
-    line-height: 1; */
-    
 }
 
 .Quantity-box-plus {
     background-color: var(--color-bg);
     border-radius: 0px 8px 8px 0px;
-    padding: 11px;
+    /* padding: 11px; */
     overflow: hidden;
     cursor: pointer;
 }
-
 
 .timeslot-card {
     border: 1px solid var(--border-check-box);
@@ -405,6 +400,17 @@ input[type=number] {
 
 .forgot-password-btn {
     width: 100%;
+}
+
+.input-Amount-box {
+    background-color: var(--color-bg);
+    border-right: 1px solid var(--color-radio);
+    border-radius: 8px 0px 0px 8px;
+    padding: 12px;
+    position: absolute;
+    top: 69%;
+    left: 24px;
+    transform: translate(-50%, -50%);
 }
 
 /* pankaj solanki end */

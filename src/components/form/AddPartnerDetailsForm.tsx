@@ -738,14 +738,14 @@ export function PhysicalAssessment({
                     </Col>
                     <Col md={6}>
 
-                        <InputFieldGroup
-                            label="Weight"
-                            name="weight"
-                            type="number"
-                            className='setting-password-input'
-                            value={formData.weight}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                    <InputFieldGroup
+                        label="Weight"
+                        name="weight"
+                        type="number"
+                        
+                        value={formData.weight}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
@@ -759,14 +759,14 @@ export function PhysicalAssessment({
 
                     <Col md={6}>
 
-                        <InputFieldGroup
-                            label="BMI"
-                            name="bmi"
-                            type="number"
-                            className='setting-password-input'
-                            value={formData.bmi}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                    <InputFieldGroup
+                        label="BMI"
+                        name="bmi"
+                        type="number"
+                  
+                        value={formData.bmi}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
@@ -805,19 +805,19 @@ export function PhysicalAssessment({
 
                     </Col>
 
-                    <Col md={5} className='input-custom-width'>
-                        <InputFieldGroup
-                            label="Blood Pressure"
-                            name="systolic"
-                            type="number"
-                            className="setting-password-input"
-                            placeholder="Systolic(mmHg)"
-                            required={true}
-                            disabled={false}
-                            readOnly={false}
-                            value={formData.systolic}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                <Col md={5} className='input-custom-width'>
+                    <InputFieldGroup
+                        label="Blood Pressure"
+                        name="systolic"
+                        type="number"
+                       
+                        placeholder="Systolic(mmHg)"
+                        required={true}
+                        disabled={false}
+                        readOnly={false}
+                        value={formData.systolic}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(e);
 
                             }}
                             error={formError.systolic}
@@ -835,19 +835,19 @@ export function PhysicalAssessment({
 
                     </Col>
 
-                    <Col md={5} className='input-custom-width'>
-                        <InputFieldGroup
-                            label="" // No label here to match the design
-                            name="diastolic"
-                            type="number"
-                            className="setting-password-input input-custom-data"
-                            placeholder="Diastolic(mmHg)"
-                            required={false}
-                            disabled={false}
-                            readOnly={false}
-                            value={formData.diastolic}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                <Col md={5} className='input-custom-width'>
+                    <InputFieldGroup
+                        label="" // No label here to match the design
+                        name="diastolic"
+                        type="number"
+                        className="input-custom-data"
+                        placeholder="Diastolic(mmHg)"
+                        required={false}
+                        disabled={false}
+                        readOnly={false}
+                        value={formData.diastolic}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(e);
 
                             }}
                             error={formError.diastolic}
@@ -857,14 +857,13 @@ export function PhysicalAssessment({
 
                     <Col md={12}>
 
-                        <InputFieldGroup
-                            label="Heart Rate"
-                            name="heartRate"
-                            type="number"
-                            className='setting-password-input'
-                            value={formData.heartRate}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                    <InputFieldGroup
+                        label="Heart Rate"
+                        name="heartRate"
+                        type="number"
+                        value={formData.heartRate}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}

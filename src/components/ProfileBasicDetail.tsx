@@ -29,6 +29,7 @@ import { physicalAssessmentData } from '@/utils/StaticData';
 import MenstrualCycleIcon from '../assets/images/MenstrualCycle-icons.png'
 import PregnancyIcon from '../assets/images/Pregnancy-icons.png'
 import PencilEditIcons from '../assets/images/EditIcon.png'
+import { FertilityAssessmentFormType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 
 const contactData = {
     phone: '+91 12345 67890',
@@ -41,29 +42,7 @@ const contactData = {
     }
 };
 
-type FormData = {
-    ageAtFirstMenstruation: string;
-    cycleLength: string;
-    periodLength: string;
-    date: string;
-    isCycleRegular: string;
-    menstrualIssues: string;
-    pregnancy: string;
-    timeduration: string;
-    ectopicpregnancy: string;
-};
 
-const initialFormData: FormData = {
-    ageAtFirstMenstruation: "",
-    cycleLength: "",
-    periodLength: "",
-    date: "",
-    isCycleRegular: "Regular",
-    menstrualIssues: "yes",
-    pregnancy: "yes",
-    timeduration: "",
-    ectopicpregnancy: "yes"
-};
 
 
 const patientJourneyData = [
@@ -147,30 +126,51 @@ const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string[]>(['0', '1', '2']);
     const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+
     const [showModal, setShowModal] = useState(false);
     const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<any>([]);
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
 
-    console.log("medicalHistoryFormData", medicalHistoryFormData);
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<any>([]);
     const [modalFormFertilityData, setModalFormFertilityData] = useState<any>([]);
 
+    const [editFertilityAssessment, setEditFertilityAssessment] = useState<FertilityAssessmentFormType>({
+        ageAtFirstMenstruation: "",
+        cycleLength: "",
+        periodLength: "",
+        date: "",
+        isCycleRegular: "Regular",
+        menstrualIssues: "yes",
+        pregnancy: "yes",
+        timeduration: "",
+        ectopicpregnancy: "yes"
+    });
 
     const handleEdit = (item: any) => {
-        setFormData({
-            ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
-            cycleLength: item.cycleLength || "",
-            periodLength: item.periodLength || "",
-            date: item.date || "",
-            isCycleRegular: item.isCycleRegular || "",
-            menstrualIssues: item.menstrualIssues || "",
-            pregnancy: item.pregnancy || "",
-            timeduration: item.timeduration || "",
-            ectopicpregnancy: item.ectopicpregnancy || ""
-        });
+        // setFormData({
+        //     ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
+        //     cycleLength: item.cycleLength || "",
+        //     periodLength: item.periodLength || "",
+        //     date: item.date || "",
+        //     isCycleRegular: item.isCycleRegular || "",
+        //     menstrualIssues: item.menstrualIssues || "",
+        //     pregnancy: item.pregnancy || "",
+        //     timeduration: item.timeduration || "",
+        //     ectopicpregnancy: item.ectopicpregnancy || ""
+        // });
         setShowFertilityAssessment(true);
     }
+
+    const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>({
+        id: "",
+        height: "",
+        weight: "",
+        bmi: "",
+        bloodGroup: "",
+        systolic: "",
+        diastolic: "",
+        heartRate: ""
+    });
 
     const accordionData = [
         {
@@ -247,9 +247,19 @@ const ProfileBasicDetail = () => {
                                 {modalFormPhisicalData?.map((item: any, index: any): any => {
                                     return (
                                         <Accordion.Item eventKey={index.toString()} className='phisical-assessment-accordion-item mb-3' key={index}>
-                                            <Accordion.Header className='phisical-assessment-accordion-title-showData'>
-                                                <div className='phisical-assessment-accordion-title-showData'>
-                                                    {item.date}
+                                            <Accordion.Header >
+                                                <div className='d-flex align-items-center gap-2'>
+                                                    <h6 className='phisical-assessment-accordion-title-showData m-0'>
+                                                        {item.date}
+                                                    </h6>
+                                                    <div className='phisical-assessment-accordion-item-edit' onClick={(e) => { setShowPhisicalAssessment(true); setEditPhysicalAssessment(item); e.stopPropagation() }}>
+                                                        <p className='m-0'>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" className='me-1' width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                                                <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
+                                                            </svg>
+                                                            Edit
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </Accordion.Header>
                                             <Accordion.Body className='pt-0'>
@@ -400,9 +410,8 @@ const ProfileBasicDetail = () => {
                         </div>
                     ) : (
                         <div>
-                            <Button className='mb-3' onClick={() => {
-                                handleEdit(modalFormFertilityData)
-                            }} variant="outline" disabled={false} contentSize="small">
+                            <Button className='mb-3' onClick={() => {setEditFertilityAssessment(modalFormFertilityData); setShowFertilityAssessment(true)}} 
+                            variant="outline" disabled={false} contentSize="small">
                                 <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                 </svg>
@@ -760,37 +769,38 @@ const ProfileBasicDetail = () => {
                             </Accordion.Item>
                         ))}
                     </Accordion>
-
                     <Modal
-                        className=""
                         show={showPhisicalAssessment}
                         onHide={() => setShowPhisicalAssessment(false)}
-                        header="Physical Assessment"
+                        header={modalFormPhisicalData.length === 0 ? "Physical Assessment" : "Add New Physical Assessment"}
                         closeButton={true}
                         size="lg"
                     >
                         <div className="mb-0 ">
-                            <PhisicalAssessmentForm setModalFormPhisicalData={setModalFormPhisicalData} setShowPhisicalAssessment={setShowPhisicalAssessment} />
+                            <PhisicalAssessmentForm setModalFormPhisicalData={setModalFormPhisicalData} setShowPhisicalAssessment={setShowPhisicalAssessment} editPhysicalAssessment={editPhysicalAssessment} setEditPhysicalAssessment={setEditPhysicalAssessment} />
                         </div>
                     </Modal>
 
                     <Modal
                         show={showFertilityAssessment}
-                        onHide={() => { setShowFertilityAssessment(false); setFormData(initialFormData); }}
-                        header="Fertility Assessment"
+                        onHide={() => { setShowFertilityAssessment(false) }}
+                        header={Object.keys(modalFormFertilityData).length === 0 ? "Fertility Assessment" : "Edit Fertility Assessment"}
                         closeButton={true}
                         size="lg"
                     >
-                        <div className="mb-0 ">
-                            <FertilityAssessmentForm setShowFertilityAssessment={setShowFertilityAssessment} setModalFormFertilityData={setModalFormFertilityData} setFormData={setFormData} formData={formData} initialFormData={initialFormData} />
-
+                        <div className="mb-0">
+                            <FertilityAssessmentForm
+                                setShowFertilityAssessment={setShowFertilityAssessment} 
+                                setModalFormFertilityData={setModalFormFertilityData}
+                                editFertilityAssessment={editFertilityAssessment}
+                            />
                         </div>
                     </Modal>
                     <Modal
                         className=""
                         show={showModal}
                         onHide={() => setShowModal(false)}
-                        header="Add Medical History"
+                        header={medicalHistoryFormData.length === 0 ? "Add Medical History" : "Edit Medical History"}
                         size="lg"
                         closeButton={true}
                     >
@@ -803,8 +813,6 @@ const ProfileBasicDetail = () => {
                             />
                         </div>
                     </Modal>
-
-
                 </Col>
 
                 {/* Right Side - Patient Journey pe-auto pe-lg-0 ps-lg-auto ps-1*/}
@@ -865,7 +873,6 @@ const ProfileBasicDetail = () => {
                     })}
 
                 </Col>
-
             </Row>
 
         </Container>

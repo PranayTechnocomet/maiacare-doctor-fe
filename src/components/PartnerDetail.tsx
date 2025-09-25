@@ -46,6 +46,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
     const [showData, setShowData] = useState<any>(partnerDetailData);
 
     const initialFormDataAddPhysicalAssessment: PhysicalAssessmentDataModel = {
+        id:"",
         height: "",
         weight: "",
         bmi: "",
@@ -158,7 +159,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
         if (Object.keys(errors).length === 0) {
             setFormErrorEditFertilityAssessment(initialFormErrorEditFertilityAssessment);
-
             setEditFertilityAssessment(false);
             setShowContent(true);
 
@@ -167,7 +167,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                 icon: <BsInfoCircle size={22} color="white" />,
             });
         }
-
     }
 
     return (
@@ -689,7 +688,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
             <Modal
                 show={AddPhysicalAssessment}
                 onHide={() => setAddPhysicalAssessment(false)}
-                header="Add Physical Assessment"
+                header="Add New Physical Assessment"
                 closeButton={true}
                 size="lg"
             >
@@ -704,7 +703,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                     setFormError={setFormErrorAddPhysicalAssessment}
                 />
 
-                <div className='d-flex gap-2'>
+                <div className='d-flex gap-3'>
                     <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPhysicalAssessment(false)}>
                         Cancel
                     </Button>
@@ -736,7 +735,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                 />
 
 
-                <div className='d-flex gap-2'>
+                <div className='d-flex gap-3'>
                     <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setEditFertilityAssessment(false)}>
                         Cancel
                     </Button>
@@ -764,8 +763,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                     formDataMedicalHistory={formDataMedicalHistory}
                 />
             </Modal>
-
-            {console.log("show data is : ", showData)}
 
         </>
     )

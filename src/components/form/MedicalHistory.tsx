@@ -355,7 +355,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                             />
                         </Col>
 
-                        <div className='d-flex gap-2'>
+                        <div className='d-flex gap-3'>
                             <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>

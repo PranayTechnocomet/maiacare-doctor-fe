@@ -201,7 +201,7 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
                 </Accordion.Item>
             </Accordion>
 
-            <div className='d-flex gap-2'>
+            <div className='d-flex gap-3'>
                 <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={()=> setAddPartner(false)}>
                     Cancel
                 </Button>

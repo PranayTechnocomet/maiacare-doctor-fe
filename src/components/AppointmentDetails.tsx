@@ -130,17 +130,17 @@ function AppointmentDetails() {
 
                         </div>
                         <div className='d-flex justify-content-between mt-3 w-75'>
-                            <div className='d-flex justify-content-center align-items-center gap-2'>
+                            <div className='d-flex align-items-center gap-2'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18" fill="none">
                                     <path d="M14.25 2.1875H12.6875V1.875C12.6875 1.62636 12.5887 1.3879 12.4129 1.21209C12.2371 1.03627 11.9986 0.9375 11.75 0.9375C11.5014 0.9375 11.2629 1.03627 11.0871 1.21209C10.9113 1.3879 10.8125 1.62636 10.8125 1.875V2.1875H5.1875V1.875C5.1875 1.62636 5.08873 1.3879 4.91291 1.21209C4.7371 1.03627 4.49864 0.9375 4.25 0.9375C4.00136 0.9375 3.7629 1.03627 3.58709 1.21209C3.41127 1.3879 3.3125 1.62636 3.3125 1.875V2.1875H1.75C1.3356 2.1875 0.938171 2.35212 0.645146 2.64515C0.35212 2.93817 0.1875 3.3356 0.1875 3.75V16.25C0.1875 16.6644 0.35212 17.0618 0.645146 17.3549C0.938171 17.6479 1.3356 17.8125 1.75 17.8125H14.25C14.6644 17.8125 15.0618 17.6479 15.3549 17.3549C15.6479 17.0618 15.8125 16.6644 15.8125 16.25V3.75C15.8125 3.3356 15.6479 2.93817 15.3549 2.64515C15.0618 2.35212 14.6644 2.1875 14.25 2.1875ZM3.3125 4.0625C3.3125 4.31114 3.41127 4.5496 3.58709 4.72541C3.7629 4.90123 4.00136 5 4.25 5C4.49864 5 4.7371 4.90123 4.91291 4.72541C5.08873 4.5496 5.1875 4.31114 5.1875 4.0625H10.8125C10.8125 4.31114 10.9113 4.5496 11.0871 4.72541C11.2629 4.90123 11.5014 5 11.75 5C11.9986 5 12.2371 4.90123 12.4129 4.72541C12.5887 4.5496 12.6875 4.31114 12.6875 4.0625H13.9375V5.9375H2.0625V4.0625H3.3125ZM2.0625 15.9375V7.8125H13.9375V15.9375H2.0625Z" fill="#2B4360" />
                                 </svg>
-                                <span>26 Feb 2025</span>
+                                <span className='patient-treatment-box-subtitle-desc mt-1'>26 Feb 2025</span>
                             </div>
-                            <div className='d-flex justify-content-center align-items-center gap-2'>
+                            <div className='d-flex align-items-center gap-2'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
                                     <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
                                 </svg>
-                                <span>5:30 PM</span>
+                                <span className='patient-treatment-box-subtitle-desc'>5:30 PM</span>
                             </div>
                         </div>
                         <div className='my-3'>
@@ -168,12 +168,12 @@ function AppointmentDetails() {
 
                                 :
                                 <>
-                                    <Col md={6}>
+                                    <Col md={6} className='col-6'>
                                         <Button className='w-100' variant="outline" disabled={false} >
                                             No Show
                                         </Button>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} className='col-6'>
                                         <Button className='w-100' variant="default" disabled={false} type="submit" onClick={() => setFinishAppointmentBtnShowHide(true)}>
                                             Check In
                                         </Button>
@@ -372,7 +372,7 @@ function AppointmentDetails() {
                             <Row className='g-sm-3 g-2'>
                                 <Col sm={12} className='col-12'>
                                     <p className='contact-details-emergency mb-1'>Amount</p>
-                                    <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>{PaymentFormData.amount}</p>
+                                    <p className='phisical-assessment-accordion-showData-box-subtitle m-0'>₹{PaymentFormData.amount}</p>
                                 </Col>
                                 <Col sm={6} className='col-6'>
                                     <p className='contact-details-emergency mb-1'>Status</p>
@@ -426,8 +426,7 @@ function AppointmentDetails() {
                                         </svg>
                                         Add New
                                     </Button>
-                                )
-                                }
+                                )}
                             </div>
 
                             {medicalPrescriptionWithTests.length > 0 ?
