@@ -128,7 +128,7 @@ function PasswordSettings() {
                     label="Current Password"
                     name="currentpassword"
                     type="password"
-                    className='setting-password-input'
+                    
                     value={formData.currentpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
@@ -145,7 +145,7 @@ function PasswordSettings() {
                     label="New Password"
                     name="newpassword"
                     type="password"
-                    className='setting-password-input mt-3'
+                    className='mt-3'
                     value={formData.newpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);
@@ -240,7 +240,7 @@ function PasswordSettings() {
                     label="Confirm Password"
                     name="confirmpassword"
                     type="password"
-                    className='setting-password-input'
+                   
                     value={formData.confirmpassword}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         handleChange(e);

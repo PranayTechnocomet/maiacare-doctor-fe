@@ -147,7 +147,7 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                         />
                     </Col>
 
-                    <div className='d-flex gap-2'>
+                    <div className='d-flex gap-3'>
                         <Button className="w-100" variant="outline" disabled={false} onClick={() => setPaymentFormShow(false)}>
                             Cancel
                         </Button>

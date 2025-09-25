@@ -715,7 +715,6 @@ export function PhysicalAssessment({
                         label="Height"
                         name="height"
                         type="number"
-                        className='setting-password-input'
                         value={formData.height}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             handleChange(e);
@@ -735,7 +734,7 @@ export function PhysicalAssessment({
                         label="Weight"
                         name="weight"
                         type="number"
-                        className='setting-password-input'
+                        
                         value={formData.weight}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             handleChange(e);
@@ -756,7 +755,7 @@ export function PhysicalAssessment({
                         label="BMI"
                         name="bmi"
                         type="number"
-                        className='setting-password-input'
+                  
                         value={formData.bmi}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             handleChange(e);
@@ -803,7 +802,7 @@ export function PhysicalAssessment({
                         label="Blood Pressure"
                         name="systolic"
                         type="number"
-                        className="setting-password-input"
+                       
                         placeholder="Systolic(mmHg)"
                         required={true}
                         disabled={false}
@@ -833,7 +832,7 @@ export function PhysicalAssessment({
                         label="" // No label here to match the design
                         name="diastolic"
                         type="number"
-                        className="setting-password-input input-custom-data"
+                        className="input-custom-data"
                         placeholder="Diastolic(mmHg)"
                         required={false}
                         disabled={false}
@@ -854,7 +853,6 @@ export function PhysicalAssessment({
                         label="Heart Rate"
                         name="heartRate"
                         type="number"
-                        className='setting-password-input'
                         value={formData.heartRate}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                             handleChange(e);
