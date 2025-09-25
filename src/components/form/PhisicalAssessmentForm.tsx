@@ -11,35 +11,38 @@ import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
 import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
 
-// Types for form data and form error
-// type FormData = {
-//     height: string;
-//     weight: string;
-//     bmi: string;
-//     bloodGroup: string
-//     systolic: string;
-//     diastolic: string;
-//     heartRate: string;
-// };
-type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
+interface PropsPhisicalAssessmentForm {
+    setShowPhisicalAssessment: any;
+    setModalFormPhisicalData: any;
+    editPhysicalAssessment?: PhysicalAssessmentDataModel,
+    setEditPhysicalAssessment?: any,
+}
 
-const initialFormData: PhysicalAssessmentDataModel = {
-    height: "",
-    weight: "",
-    bmi: "",
-    bloodGroup: "",
-    systolic: "",
-    diastolic: "",
-    heartRate: "",
-};
+const PhisicalAssessmentForm = ({
+    setShowPhisicalAssessment,
+    setModalFormPhisicalData,
+    editPhysicalAssessment,
+    setEditPhysicalAssessment,
+}: PropsPhisicalAssessmentForm) => {
 
-const initialFormError: FormError = {};
-
-const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisicalData }: any) => {
-
+    type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
+    const initialFormError: FormError = {};
+    const initialFormData: PhysicalAssessmentDataModel = {
+        id: editPhysicalAssessment?.id || "",
+        height: editPhysicalAssessment?.height || "",
+        weight: editPhysicalAssessment?.weight || "",
+        bmi: editPhysicalAssessment?.bmi || "",
+        bloodGroup: editPhysicalAssessment?.bloodGroup || "",
+        systolic: editPhysicalAssessment?.systolic || "",
+        diastolic: editPhysicalAssessment?.diastolic || "",
+        heartRate: editPhysicalAssessment?.heartRate || "",
+    };
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
+    const generateRandomId = (): string => {
+        return Math.random().toString(36).substr(2, 9);
+    }
 
     const validateForm = (data: PhysicalAssessmentDataModel): FormError => {
         const errors: FormError = {};
@@ -75,6 +78,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
         console.log("errors", errors);
 
         if (Object.keys(errors).length === 0) {
+
             const formattedDate = new Date().toLocaleDateString('en-GB', {
                 weekday: 'short',
                 day: '2-digit',
@@ -84,12 +88,54 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
 
             const updatedFormData = {
                 ...formData,
-                date: formattedDate
+                date: formattedDate,
+                id: generateRandomId(),
             };
 
-            setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
-            setShowPhisicalAssessment(false);
-            setFormError(initialFormError);
+            // setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+            // setShowPhisicalAssessment(false);
+            // setFormError(initialFormError);
+console.log("editPhysicalAssessment", editPhysicalAssessment);
+            // if (editPhysicalAssessment) {
+            //     console.log("editPhysicalAssessment edit time", formData);
+            //     setModalFormPhisicalData((prev: any) =>
+            //         prev.map((item: any) =>
+            //             item.id === editPhysicalAssessment.id ? { ...updatedFormData, formData } : item
+            //         )
+            //     );
+            //     setShowPhisicalAssessment(false);
+            //     setFormError(initialFormError);
+            //     setFormData(initialFormData);
+            //     setEditPhysicalAssessment({})
+
+            // } else {
+            //     setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+            //     setShowPhisicalAssessment(false);
+            //     setFormError(initialFormError);
+            //     setFormData(initialFormData);
+            //     console.log("else part",);
+
+            // }
+
+            if (editPhysicalAssessment && editPhysicalAssessment.id) {
+                // console.log("editPhysicalAssessment edit time", formData);
+            
+                setModalFormPhisicalData((prev: any) =>
+                    prev.map((item: any) =>
+                        item.id === editPhysicalAssessment.id ? { ...item, ...formData } : item
+                    )
+                );
+                setShowPhisicalAssessment(false);
+                setFormError(initialFormError);
+                setFormData(initialFormData);
+                setEditPhysicalAssessment({});
+            } else {
+                setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+                setShowPhisicalAssessment(false);
+                setFormError(initialFormError);
+                setFormData(initialFormData);
+            }
+            
         }
     };
 
@@ -103,7 +149,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="Height"
                             name="height"
                             type="number"
-                            className='setting-password-input'
+
                             value={formData.height}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
@@ -123,7 +169,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="Weight"
                             name="weight"
                             type="number"
-                            className='setting-password-input'
+
                             value={formData.weight}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
@@ -144,7 +190,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="BMI"
                             name="bmi"
                             type="number"
-                            className='setting-password-input'
+
                             value={formData.bmi}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
@@ -171,7 +217,6 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             disabled={false}
                             error={formError.bloodGroup}
                             placeholder="Select Blood Group"
-                            // helperText="Select doctor"
                             options={[
                                 { id: "1", value: "A+", label: "A+" },
                                 { id: "2", value: "A-", label: "A-" },
@@ -191,7 +236,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="Blood Pressure"
                             name="systolic"
                             type="number"
-                            className="setting-password-input"
+
                             placeholder="Systolic(mmHg)"
                             required={true}
                             disabled={false}
@@ -204,7 +249,6 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             error={formError.systolic}
                         />
                     </Col>
-
 
                     <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
                         {/* <span className="or-custom-slash">/</span> */}
@@ -219,7 +263,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="" // No label here to match the design
                             name="diastolic"
                             type="number"
-                            className="setting-password-input input-custom-data "
+                            className="input-custom-data "
                             placeholder="Diastolic(mmHg)"
                             required={false}
                             disabled={false}
@@ -239,7 +283,6 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                             label="Heart Rate"
                             name="heartRate"
                             type="number"
-                            className='setting-password-input'
                             value={formData.heartRate}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
@@ -254,7 +297,7 @@ const PhisicalAssessmentForm = ({ setShowPhisicalAssessment, setModalFormPhisica
                         />
                     </Col>
 
-                    <div className='d-flex gap-2'>
+                    <div className='d-flex gap-3'>
                         <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
                             Cancel
                         </Button>

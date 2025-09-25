@@ -21,6 +21,7 @@ export interface PartnerData {
     surgeries: string;
     medicalConditionAllergies: string[];
     familyMedicalHistory: string[];
+    medicalCondition: string[];
     lifestyle: string[];
     exercise: string;
     stressLevel: string;
@@ -46,6 +47,8 @@ export const partnerData: PartnerData = {
     currentMedication: "CureAll 5000, HealMax Plus",
     surgeries: "No",
     medicalConditionAllergies: ["PCOS", "Thyroid Disorder", "Peanut Allergy", "Lactose Intolerant"],
+    medicalCondition: ["PCOS", "Thyroid Disorder", "Peanut Allergy", "Lactose Intolerant"],
+    
     familyMedicalHistory: ["Mother had endometriosis", "Father had thyroid"],
     lifestyle: ["Non-smoker", "Occasional alcohol", "Vegetarian diet"],
     exercise: "never",

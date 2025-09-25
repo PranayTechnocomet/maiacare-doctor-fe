@@ -7,6 +7,9 @@ import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { RadioButtonGroup } from "../ui/RadioField";
 import { InputFieldGroup } from "../ui/InputField";
 import Button from "../ui/Button";
+import toast from 'react-hot-toast';
+import { BsInfoCircle } from 'react-icons/bs';
+import { FertilityAssessmentFormType } from "@/utils/types/interfaces";
 
 // Types for form data and form error
 type FormData = {
@@ -21,39 +24,50 @@ type FormData = {
     ectopicpregnancy: string;
 };
 
-// const initialFormData: FormData = {
-//     ageAtFirstMenstruation: "" ,
-//     cycleLength: "",
-//     periodLength: "",
-//     date: "",
-//     isCycleRegular: "Regular",
-//     menstrualIssues: "yes",
-//     pregnancy: "yes",
-//     timeduration: "",
-//     ectopicpregnancy: "yes"
-// };
 
-type FormError = Partial<Record<keyof FormData, string>>;
+// interface FertilityAssessmentFormProps {
+//     setShowFertilityAssessment: (show: boolean) => void;
+//     setModalFormFertilityData: (data: any) => void;
+//     setFormData: (data: any) => void;
+//     formData: any;
+//     initialFormData: any;
+//     initialData?: any;
+//     onClose?: () => void;
+//     setShowModal?: (show: boolean) => void;
+//     editFertilityAssessment: FertilityAssessmentFormType;
+// }
+
 
 interface FertilityAssessmentFormProps {
     setShowFertilityAssessment: (show: boolean) => void;
     setModalFormFertilityData: (data: any) => void;
-    setFormData: (data: any) => void;
-    formData: any;
-    initialFormData: any;
+    editFertilityAssessment: FertilityAssessmentFormType;
 }
-const initialFormError: FormError = {};
 
 export const FertilityAssessmentForm = ({
     setShowFertilityAssessment,
     setModalFormFertilityData,
-    setFormData,
-    formData,
-    initialFormData
+    editFertilityAssessment
 }: FertilityAssessmentFormProps) => {
 
+    type FormError = Partial<Record<keyof FormData, string>>;
+    const initialFormError: FormError = {};
+
+    const initialFormData: FormData = {
+        ageAtFirstMenstruation: editFertilityAssessment.ageAtFirstMenstruation || "",
+        cycleLength: editFertilityAssessment.cycleLength || "",
+        periodLength: editFertilityAssessment.periodLength || "",
+        date: editFertilityAssessment.date || "",
+        isCycleRegular: editFertilityAssessment.isCycleRegular || "Regular",
+        menstrualIssues: editFertilityAssessment.menstrualIssues || "yes",
+        pregnancy: editFertilityAssessment.pregnancy ||"yes",
+        timeduration:editFertilityAssessment.timeduration || "",
+        ectopicpregnancy: editFertilityAssessment.ectopicpregnancy ||"yes"
+        
+    };
 
     // const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<FormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
     const validateForm = (data: FormData): FormError => {
         const errors: FormError = {};
@@ -90,6 +104,9 @@ export const FertilityAssessmentForm = ({
             setModalFormFertilityData(formData);
             setShowFertilityAssessment(false);
             setFormError(initialFormError);
+            toast.success('Medical history added successfully', {
+                icon: <BsInfoCircle    size={22} color="white" />,  
+              });
         }
     };
 
@@ -233,7 +250,7 @@ export const FertilityAssessmentForm = ({
                                         label="How long have you been trying to conceive?"
                                         name="timeduration"
                                         type="text"
-                                        className="setting-password-input"
+
                                         placeholder="Enter Duration"
                                         required
                                         disabled={false}
@@ -266,7 +283,7 @@ export const FertilityAssessmentForm = ({
                 </Accordion>
 
                 {/* Submit buttons */}
-                <div className='d-flex gap-2 mt-3'>
+                <div className='d-flex gap-3 mt-3'>
                     <Button className="w-100" variant="outline" type="button" onClick={() => {
                         setShowFertilityAssessment(false); setFormData(initialFormData);
                     }}>

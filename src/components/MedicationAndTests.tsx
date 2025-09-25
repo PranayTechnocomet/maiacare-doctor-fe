@@ -47,8 +47,6 @@ function MedicationAndTests({
 
 }: MedicationAndTestsProps) {
 
-    const [saveBtnShow , setSaveBtnShow] = useState<string>("save");
-
     return (
         <>
             <div className="d-flex align-items-center mb-4">
@@ -141,7 +139,17 @@ function MedicationAndTests({
                         </>
                     )}
 
-                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} saveBtnShow={saveBtnShow} setMedicationAndTestsModel={setTreatmentPlanModel} />
+                    <MedicationPrescriptionForm
+                        setMedicalPrescription={setMedicalPrescription}
+                        setStep={setStep}
+                        setStepper={setStepper}
+                        setShowEditFormShowModel={setShowEditFormShowModel}
+                        medicalPrescription={medicalPrescription}
+                        medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                        setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                        saveBtnShow={"save"}
+                        setMedicationAndTestsModel={setTreatmentPlanModel}
+                    />
 
                     <Modal
                         show={showEditFormShowModel}

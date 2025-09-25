@@ -8,6 +8,7 @@ import Button from '../ui/Button';
 import { MdMailOutline } from 'react-icons/md';
 import Textarea from '../ui/Textarea';
 import toast from 'react-hot-toast';
+import { BsInfoCircle } from 'react-icons/bs';
 
 interface MedicalHistoryProps {
     setMedicalHistoryFormData: any;
@@ -59,7 +60,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
         // if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        // if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         // if (!data.exercise.trim()) errors.exercise = "Exercise is required";
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
 
@@ -95,10 +96,15 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                         item === initialData ? formData : item
                     )
                 );
+                toast.success('Medical history edited successfully', {
+                    icon: <BsInfoCircle    size={22} color="white" />,  
+                });
             } else {
-                // If creating new, add to the array
+                // If creating new, add to the arrayd
                 setMedicalHistoryFormData((prev: any) => [...prev, formData]);
-                toast.success('Medical history added successfully');
+                toast.success('Medical history added successfully', {
+                    icon: <BsInfoCircle    size={22} color="white" />,  
+                  });
             }
             if (onClose) onClose();
         }
@@ -234,6 +240,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 className="position-relative "
                             ></InputFieldGroup>
                         </Col>
+                        {/* Button Section Start */}
                         {/* <Col md={12} className=''>
                             <label className="form-label">Lifestyle</label>
 
@@ -295,6 +302,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 </div>
                             )}
                         </Col> */}
+                        {/* Button Section End */}
                         <Col md={12}>
                             <InputSelect
                                 label="Lifestyle"
@@ -347,7 +355,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                             />
                         </Col>
 
-                        <div className='d-flex gap-2'>
+                        <div className='d-flex gap-3'>
                             <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowModal(false)}>
                                 Cancel
                             </Button>
