@@ -14,8 +14,137 @@
     cursor: not-allowed;
 }
 
+.maiacare-input-field:focus {
+    border: 1px solid var(--color-brand) !important;
+}
+
+
+.maiacare-input-field:not(:placeholder-shown) {
+    border: 1px solid var(--color-brand)!important;
+}
+/* .maiacare-input-field:not([value=""]) {
+    border: 1px solid var(--color-brand) !important;
+  } */
+      
+
+.maiacare-input-field:disabled,
+.maiacare-input-field[readonly] {
+    border: 2px solid var(--color-icon-border); 
+    cursor: not-allowed;
+}
+
+
 
 /* Umesh Code Start */
+.maiacare-input-field-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .input-select-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  /* Trigger box */
+  .input-select-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    min-height: 48px;
+    font-size: 16px;
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+  
+  .input-select-trigger:hover {
+    border-color: #2b4360;
+  }
+  
+  .input-select-trigger:focus,
+  .input-select-trigger:focus-visible {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+  
+  .input-select-trigger.error {
+    border-color: #dc3545;
+  }
+  
+  .input-select-trigger.disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  /* Value / Placeholder */
+  .input-select-value.placeholder {
+    color: #999;
+  }
+  .input-select-value.has-value {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  /* Arrow */
+  .input-select-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #666;
+    transition: transform 0.3s ease;
+  }
+  
+  .input-select-trigger.open .input-select-arrow {
+    transform: rotate(180deg);
+  }
+  
+  /* Dropdown */
+  .input-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 250px;
+    overflow-y: auto;
+  }
+  
+  /* Options */
+  .input-select-option {
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: white;
+    color: #333;
+  }
+  
+  .input-select-option:last-child {
+    border-bottom: none;
+  }
+  
+  .input-select-option:hover,
+  .input-select-option.selected {
+    background-color: #2b4360;
+    color: white;
+    font-weight: 600;
+  }
+  
+
 .maiacare-input-field-container input[type="date"] {
     cursor: pointer !important;
 }

@@ -144,7 +144,7 @@ const getStatusBadgeClass = (status: string) => {
 };
 
 const ProfileBasicDetail = () => {
-    const [activeAccordion, setActiveAccordion] = useState<string | null>('0');
+    const [activeAccordion, setActiveAccordion] = useState<string[]>(['0', '1', '2']);
     const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
     const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
     const [formData, setFormData] = useState<FormData>(initialFormData);
@@ -746,10 +746,14 @@ const ProfileBasicDetail = () => {
                     </Card>
 
                     {/* Single Rendered Accordion using JSON */}
-                    <Accordion activeKey={activeAccordion} className="mb-3">
+                    <Accordion className="mb-3" alwaysOpen activeKey={activeAccordion}>
                         {accordionData.map((item) => (
                             <Accordion.Item eventKey={item.id} key={item.id} className='patient-accordion-item shadow-sm mb-3'>
-                                <Accordion.Header onClick={() => setActiveAccordion(activeAccordion === item.id ? null : item.id)} >
+                                <Accordion.Header onClick={() => setActiveAccordion(prev => 
+                                    prev.includes(item.id) 
+                                        ? prev.filter(id => id !== item.id)
+                                        : [...prev, item.id]
+                                )} >
                                     <p className='contact-details-heading m-0'>{item.title}</p>
                                 </Accordion.Header>
                                 <Accordion.Body className='pt-0'>{item.content}</Accordion.Body>

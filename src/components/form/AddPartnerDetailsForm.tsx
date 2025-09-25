@@ -14,6 +14,8 @@ import cameraicon from '../../assets/images/cameraicon.png';
 import { log, profile } from 'console';
 import { EditFertilityAssessment, FertilityAssessmentType, MedicalHistoryType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 import { partnerDetailData } from '@/utils/StaticData';
+import toast from 'react-hot-toast';
+import { BsInfoCircle } from 'react-icons/bs';
 // import '../../style/PartnerDetails.css'
 
 
@@ -447,6 +449,9 @@ export function MedicalHistoryForm({
                     ...showData,
                     medicalHistory: FormData
                 });
+                toast.success('Medical History Edited Successfully', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
 
                 const updatedData = {
                     ...showData,
@@ -454,7 +459,8 @@ export function MedicalHistoryForm({
                 };
 
                 setShowData(updatedData);
-                setEditMedicalHistory(false)
+                setEditMedicalHistory(false);
+
             } else {
                 setActiveTab("physical & fertility assessment");
                 setShowData((prev: any) => ({ ...prev, medicalHistory: FormData }));
@@ -708,167 +714,169 @@ export function PhysicalAssessment({
 
     return (
         <>
-            <Row className="g-3 accordion-form-physical-assessment">
-                <Col md={6}>
+            <form >
+                <Row className="g-3 accordion-form-physical-assessment">
+                    <Col md={6}>
 
-                    <InputFieldGroup
-                        label="Height"
-                        name="height"
-                        type="number"
-                        className='setting-password-input'
-                        value={formData.height}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="Height"
+                            name="height"
+                            type="number"
+                            className='setting-password-input'
+                            value={formData.height}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                        placeholder="Enter height(in)"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        error={formError.height}
-                    />
-                </Col>
-                <Col md={6}>
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter height(in)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.height}
+                        />
+                    </Col>
+                    <Col md={6}>
 
-                    <InputFieldGroup
-                        label="Weight"
-                        name="weight"
-                        type="number"
-                        className='setting-password-input'
-                        value={formData.weight}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="Weight"
+                            name="weight"
+                            type="number"
+                            className='setting-password-input'
+                            value={formData.weight}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                        placeholder="Enter weight(kg)"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        error={formError.weight}
-                    />
-                </Col>
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter weight(kg)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.weight}
+                        />
+                    </Col>
 
-                <Col md={6}>
+                    <Col md={6}>
 
-                    <InputFieldGroup
-                        label="BMI"
-                        name="bmi"
-                        type="number"
-                        className='setting-password-input'
-                        value={formData.bmi}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="BMI"
+                            name="bmi"
+                            type="number"
+                            className='setting-password-input'
+                            value={formData.bmi}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                        placeholder="Enter BMI"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        error={formError.bmi}
-                    />
-                </Col>
-                <Col md={6}>
-                    <InputSelect
-                        label="Blood Group"
-                        name="bloodGroup"
-                        value={formData.bloodGroup}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                            handleChange(e);
-                        }}
-                        onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                        required={true}
-                        disabled={false}
-                        error={formError.bloodGroup}
-                        placeholder="Select Blood Group"
-                        // helperText="Select doctor"
-                        options={[
-                            { id: "1", value: "A+", label: "A+" },
-                            { id: "2", value: "A-", label: "A-" },
-                            { id: "3", value: "B+", label: "B+" },
-                            { id: "4", value: "B-", label: "B-" },
-                            { id: "5", value: "AB+", label: "AB+" },
-                            { id: "6", value: "AB-", label: "AB-" },
-                            { id: "7", value: "O+", label: "O+" },
-                            { id: "8", value: "O-", label: "O-" },
-                        ]}
-                    />
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter BMI"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.bmi}
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <InputSelect
+                            label="Blood Group"
+                            name="bloodGroup"
+                            value={formData.bloodGroup}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={formError.bloodGroup}
+                            placeholder="Select Blood Group"
+                            // helperText="Select doctor"
+                            options={[
+                                { id: "1", value: "A+", label: "A+" },
+                                { id: "2", value: "A-", label: "A-" },
+                                { id: "3", value: "B+", label: "B+" },
+                                { id: "4", value: "B-", label: "B-" },
+                                { id: "5", value: "AB+", label: "AB+" },
+                                { id: "6", value: "AB-", label: "AB-" },
+                                { id: "7", value: "O+", label: "O+" },
+                                { id: "8", value: "O-", label: "O-" },
+                            ]}
+                        />
 
-                </Col>
+                    </Col>
 
-                <Col md={5} className='input-custom-width'>
-                    <InputFieldGroup
-                        label="Blood Pressure"
-                        name="systolic"
-                        type="number"
-                        className="setting-password-input"
-                        placeholder="Systolic(mmHg)"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        value={formData.systolic}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                    <Col md={5} className='input-custom-width'>
+                        <InputFieldGroup
+                            label="Blood Pressure"
+                            name="systolic"
+                            type="number"
+                            className="setting-password-input"
+                            placeholder="Systolic(mmHg)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            value={formData.systolic}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        error={formError.systolic}
-                    />
-                </Col>
+                            }}
+                            error={formError.systolic}
+                        />
+                    </Col>
 
-                {/* <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
+                    {/* <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
                     <span className="fs-1">/</span>
                 </Col> */}
-                <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
-                    {/* <span className="or-custom-slash">/</span> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
-                        <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
-                    </svg>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
+                        {/* <span className="or-custom-slash">/</span> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
+                            <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
+                        </svg>
 
-                </Col>
+                    </Col>
 
-                <Col md={5} className='input-custom-width'>
-                    <InputFieldGroup
-                        label="" // No label here to match the design
-                        name="diastolic"
-                        type="number"
-                        className="setting-password-input input-custom-data"
-                        placeholder="Diastolic(mmHg)"
-                        required={false}
-                        disabled={false}
-                        readOnly={false}
-                        value={formData.diastolic}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                    <Col md={5} className='input-custom-width'>
+                        <InputFieldGroup
+                            label="" // No label here to match the design
+                            name="diastolic"
+                            type="number"
+                            className="setting-password-input input-custom-data"
+                            placeholder="Diastolic(mmHg)"
+                            required={false}
+                            disabled={false}
+                            readOnly={false}
+                            value={formData.diastolic}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        error={formError.diastolic}
+                            }}
+                            error={formError.diastolic}
 
-                    />
-                </Col>
+                        />
+                    </Col>
 
-                <Col md={12}>
+                    <Col md={12}>
 
-                    <InputFieldGroup
-                        label="Heart Rate"
-                        name="heartRate"
-                        type="number"
-                        className='setting-password-input'
-                        value={formData.heartRate}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="Heart Rate"
+                            name="heartRate"
+                            type="number"
+                            className='setting-password-input'
+                            value={formData.heartRate}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
-                        }}
-                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                        placeholder="Enter Rate(bpm)"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        error={formError.heartRate}
-                    />
-                </Col>
-            </Row>
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter Rate(bpm)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.heartRate}
+                        />
+                    </Col>
+                </Row>
+            </form>
         </>
     )
 }
@@ -906,134 +914,139 @@ export function FertilityAssessment({
         setFormError((prev: any) => ({ ...prev, [name]: "" }));
 
     };
+    const handleSubmitData = (e: React.FormEvent) => {
+       console.log(formData);
+    };
 
     return (
         <>
-            <Row className='g-3'>
-                <Col md={12} >
-                    <RadioButtonGroup
-                        label="Have you ever had a semen analysis?"
-                        name="semenAnalysis"
-                        value={formData.semenAnalysis || 'yes'}
-                        onChange={(e) => handleChange(e)}
-                        required={true}
-                        error={formError.semenAnalysis}
-                        options={[
-                            { label: "Yes", value: "yes" },
-                            { label: "No", value: "no" },
-                        ]}
-                    />
+            <form onClick={handleSubmitData}>
+                <Row className='g-3'>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Have you ever had a semen analysis?"
+                            name="semenAnalysis"
+                            value={formData.semenAnalysis || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.semenAnalysis}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                    {formData.semenAnalysis === 'yes' && (
-                        <InputFieldGroup
-                            type="text"
-                            value={formData.semenAnalysisContent}
-                            name='semenAnalysisContent'
-                            onChange={handleChange}
-                            error={formError.semenAnalysisContent}
+                        {formData.semenAnalysis === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.semenAnalysisContent}
+                                name='semenAnalysisContent'
+                                onChange={handleChange}
+                                error={formError.semenAnalysisContent}
 
-                            placeholder="If yes, provide details if available"
+                                placeholder="If yes, provide details if available"
 
-                            className={`mt-2`}
-                        >
+                                className={`mt-2`}
+                            >
 
-                        </InputFieldGroup>
-                    )}
+                            </InputFieldGroup>
+                        )}
 
-                </Col>
-                <Col md={12} >
-                    <RadioButtonGroup
-                        label="Have you experienced any fertility issues?"
-                        name="fertilityIssues"
-                        value={formData.fertilityIssues || 'yes'}
-                        onChange={(e) => handleChange(e)}
-                        required={true}
-                        error={formError.fertilityIssues}
-                        options={[
-                            { label: "Yes", value: "yes" },
-                            { label: "No", value: "no" },
-                        ]}
-                    />
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Have you experienced any fertility issues?"
+                            name="fertilityIssues"
+                            value={formData.fertilityIssues || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.fertilityIssues}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                    {formData.fertilityIssues === 'yes' && (
-                        <InputFieldGroup
-                            type="text"
-                            value={formData.fertilityIssuesContent}
-                            name='fertilityIssuesContent'
-                            onChange={handleChange}
-                            error={formError.semenAnalysisContent}
+                        {formData.fertilityIssues === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.fertilityIssuesContent}
+                                name='fertilityIssuesContent'
+                                onChange={handleChange}
+                                error={formError.semenAnalysisContent}
 
-                            placeholder="If yes, provide details if available"
+                                placeholder="If yes, provide details if available"
 
-                            className={`mt-2`}
-                        >
+                                className={`mt-2`}
+                            >
 
-                        </InputFieldGroup>
-                    )}
+                            </InputFieldGroup>
+                        )}
 
-                </Col>
-                <Col md={12} >
-                    <RadioButtonGroup
-                        label="Have you previously undergone fertility treatments?"
-                        name="fertilityTreatment"
-                        value={formData.fertilityTreatment || 'yes'}
-                        onChange={(e) => handleChange(e)}
-                        required={true}
-                        error={formError.fertilityTreatment}
-                        options={[
-                            { label: "Yes", value: "yes" },
-                            { label: "No", value: "no" },
-                        ]}
-                    />
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Have you previously undergone fertility treatments?"
+                            name="fertilityTreatment"
+                            value={formData.fertilityTreatment || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.fertilityTreatment}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                    {formData.fertilityTreatment === 'yes' && (
-                        <InputFieldGroup
-                            type="text"
-                            value={formData.fertilityTreatmentContent}
-                            name='fertilityTreatmentContent'
-                            onChange={handleChange}
-                            error={formError.fertilityTreatmentContent}
+                        {formData.fertilityTreatment === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.fertilityTreatmentContent}
+                                name='fertilityTreatmentContent'
+                                onChange={handleChange}
+                                error={formError.fertilityTreatmentContent}
 
-                            placeholder="If yes, provide details if available"
+                                placeholder="If yes, provide details if available"
 
-                            className={`mt-2`}
-                        >
+                                className={`mt-2`}
+                            >
 
-                        </InputFieldGroup>
-                    )}
+                            </InputFieldGroup>
+                        )}
 
-                </Col>
-                <Col md={12} >
-                    <RadioButtonGroup
-                        label="Any history of surgeries?"
-                        name="surgeries"
-                        value={formData.surgeries || 'yes'}
-                        onChange={(e) => handleChange(e)}
-                        required={true}
-                        error={formError.surgeries}
-                        options={[
-                            { label: "Yes", value: "yes" },
-                            { label: "No", value: "no" },
-                        ]}
-                    />
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Any history of surgeries?"
+                            name="surgeries"
+                            value={formData.surgeries || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.surgeries}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                    {formData.surgeries === 'yes' && (
-                        <InputFieldGroup
-                            type="text"
-                            value={formData.surgeriesContent}
-                            name='surgeriesContent'
-                            onChange={handleChange}
-                            error={formError.surgeriesContent}
+                        {formData.surgeries === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.surgeriesContent}
+                                name='surgeriesContent'
+                                onChange={handleChange}
+                                error={formError.surgeriesContent}
 
-                            placeholder="If yes, provide details if available"
+                                placeholder="If yes, provide details if available"
 
-                            className={`mt-2`}
-                        >
+                                className={`mt-2`}
+                            >
 
-                        </InputFieldGroup>
-                    )}
-                </Col>
-            </Row>
+                            </InputFieldGroup>
+                        )}
+                    </Col>
+                </Row>
+            </form>
         </>
     )
 }

@@ -25,7 +25,7 @@ type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
 
 const initialFormData: PhysicalAssessmentDataModel = {
     height: "",
-    weight: "",
+    weight: "(kg)",
     bmi: "",
     bloodGroup: "",
     systolic: "",
