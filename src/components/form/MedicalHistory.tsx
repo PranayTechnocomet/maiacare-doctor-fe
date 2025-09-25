@@ -60,7 +60,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
         // if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
         if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        // if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         // if (!data.exercise.trim()) errors.exercise = "Exercise is required";
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
 

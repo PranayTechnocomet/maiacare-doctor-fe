@@ -403,6 +403,7 @@ export function MedicalHistoryForm({
         surgeriesContent: formDataMedicalHistory?.surgeriescontent || "",
         medicalCondition: formDataMedicalHistory?.medicalCondition || "",
         familyMedicalHistory: formDataMedicalHistory?.familyMedicalHistory || "",
+        
         lifestyle: formDataMedicalHistory?.lifestyle || "",
         stress: formDataMedicalHistory?.stress || "low",
         exercise: formDataMedicalHistory?.exercise || "never",
@@ -664,7 +665,7 @@ export function MedicalHistoryForm({
                     </Col>
                     <div className='d-flex gap-3 mt-3'>
 
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false); }}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false);setEditMedicalHistory(false) }}>
                             Cancel
                         </Button>
 
