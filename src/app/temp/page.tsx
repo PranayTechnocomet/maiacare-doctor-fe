@@ -25,6 +25,8 @@ import Textarea from "@/components/ui/Textarea";
 import CustomTabs from "@/components/ui/CustomTabs";
 import { TimePickerFieldGroup } from "@/components/ui/CustomTimePicker";
 import toast from "react-hot-toast";
+import { FaSmile } from "react-icons/fa";
+import { BsInfoCircle } from "react-icons/bs";
 
 const data: Patient[] = [
   {
@@ -154,6 +156,34 @@ export default function Page() {
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const options = [
+    { value: "1", label: "Non-smoker" },
+    { value: "2", label: "Occasional alcohol" },
+    { value: "3", label: "Vegetarian diet" },
+  ];
+
+  const toggleOption = (value: string) => {
+    setSelectedValues(prev =>
+      prev.includes(value)
+        ? prev.filter(v => v !== value)
+        : [...prev, value]
+    );
+  };
+
+  const removeOption = (value: string) => {
+    setSelectedValues(prev => prev.filter(v => v !== value));
+  };
+
+  const getSelectedLabels = () => {
+    return selectedValues.map(value => {
+      const option = options.find(opt => opt.value === value);
+      return option ? option.label : value;
+    });
+  };
+
 
 
   // Validation Function
@@ -199,7 +229,9 @@ export default function Page() {
     }
     setTempShowData(formData);
     setFormData(initialFormData);
-    toast.success('Success message!');
+    toast.success('Form Submitted Successfully', {
+      icon: <BsInfoCircle    size={22} color="white" />,  
+    });
   };
 
   const handleClose = () => {
@@ -392,6 +424,69 @@ export default function Page() {
       </ContentContainer>
 
       <ContentContainer>
+        {/* Button Section Start */}
+
+        <label className="form-label">Lifestyle</label>
+
+
+        <div className="dropdown">
+          <button
+            className="btn btn-outline-secondary dropdown-toggle w-100 text-start "
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+          >
+            {selectedValues.length === 0
+              ? "Select lifestyle options..."
+              : ` Selected`
+            }
+          </button>
+
+          {isOpen && (
+            <ul className="dropdown-menu show w-100">
+              {options.map(option => (
+                <li key={option.value}>
+                  <label className="dropdown-item d-flex align-items-center mb-0">
+                    <input
+                      type="checkbox"
+                      className="form-check-input me-2"
+                      checked={selectedValues.includes(option.value)}
+                      onChange={() => toggleOption(option.value)}
+                    />
+                    {option.label}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+
+        {selectedValues.length > 0 && (
+          <div className="">
+            <small className="text-muted mb-1 d-block">
+              {selectedValues.length} Selected
+            </small>
+            <div className="d-flex flex-wrap gap-1">
+              {getSelectedLabels().map((label, index) => (
+                <span
+                  key={selectedValues[index]}
+                  className="badge  d-inline-block border-box-orange-font box-border-orange  d-flex align-items-center"
+                >
+                  {label}
+                  <button
+                    type="button"
+                    className="btn-close btn-close-orange ms-2"
+                    style={{ fontSize: '0.7rem' }}
+                    onClick={() => removeOption(selectedValues[index])}
+                  />
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Button Section End */}
 
         <div className="my-4 bg-warning">
           <div>{tempShowData.name}</div>
@@ -423,5 +518,6 @@ export default function Page() {
         <h2 className="mb-0 text-center">Form Submitted Successfully</h2>
       </Modal>
     </form>
+
   );
 }

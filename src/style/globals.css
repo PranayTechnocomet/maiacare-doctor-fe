@@ -85,7 +85,9 @@ body {
 .abc {
   position: absolute;
 }
-
+.input-forgot-password-btn{
+  padding: 14px 24px !important;
+}
 .main-pregnancy-img image {
   height: 100% !important;
   /* width: 105vh !important; */
@@ -93,9 +95,9 @@ body {
 
 /* pankaj solanki start */
 
-.setting-password-input .maiacare-input-field::placeholder {
+/* .setting-password-input .maiacare-input-field::placeholder {
   color: var(--color-placeholder-input) !important;
-}
+} */
 
 .input-Amount .maiacare-input-field {
   padding-left: 55px;

@@ -7,6 +7,8 @@ import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { RadioButtonGroup } from "../ui/RadioField";
 import { InputFieldGroup } from "../ui/InputField";
 import Button from "../ui/Button";
+import toast from 'react-hot-toast';
+import { BsInfoCircle } from 'react-icons/bs';
 
 // Types for form data and form error
 type FormData = {
@@ -41,6 +43,9 @@ interface FertilityAssessmentFormProps {
     setFormData: (data: any) => void;
     formData: any;
     initialFormData: any;
+    initialData?: any;
+    onClose?: () => void;
+    setShowModal?: (show: boolean) => void;
 }
 const initialFormError: FormError = {};
 
@@ -49,7 +54,10 @@ export const FertilityAssessmentForm = ({
     setModalFormFertilityData,
     setFormData,
     formData,
-    initialFormData
+    initialFormData,
+    initialData,
+    onClose,
+    setShowModal
 }: FertilityAssessmentFormProps) => {
 
 
@@ -90,6 +98,9 @@ export const FertilityAssessmentForm = ({
             setModalFormFertilityData(formData);
             setShowFertilityAssessment(false);
             setFormError(initialFormError);
+            toast.success('Medical history added successfully', {
+                icon: <BsInfoCircle    size={22} color="white" />,  
+              });
         }
     };
 

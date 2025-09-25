@@ -136,11 +136,11 @@ export function LoginForms() {
 
                 <div className="d-flex justify-content-end mb-3">
                     <a onClick={() => router.push("/forgotppassword")} className="input-forrgot-password  mt-2" >
-                        Forgot Passwordrouter
+                    Forgot Password
                     </a>
                 </div>
 
-                <Button className='w-100 p-2' type='submit'> Sign In</Button>
+                <Button className='w-100 input-forgot-password-btn' type='submit'> Sign In</Button>
 
             </form>
         </div>
@@ -223,7 +223,7 @@ export function ForgotPassword() {
 
 
 
-                <Button className='login-button p-2 mt-4' type='submit'> Submit</Button>
+                <Button className='login-button input-forgot-password-btn mt-4' type='submit'> Submit</Button>
             </form>
         </div>
     )
@@ -367,7 +367,7 @@ export function ResetPasswordScreen() {
                 </div>
 
 
-                <Button className='login-button p-2 mt-4' type='submit'>Reset Password</Button>
+                <Button className='login-button input-forgot-password-btn mt-4' type='submit'>Reset Password</Button>
             </form>
         </div>
     )
@@ -451,7 +451,7 @@ export function VerifyOtp() {
 
 
 
-                <Button className='login-button p-2 mt-4' type='submit'> Verify</Button>
+                <Button className='login-button input-forgot-password-btn mt-4' type='submit'> Verify</Button>
             </form>
         </div>
     )

@@ -22,8 +22,11 @@
 }
 
 .maiacare-input-field::placeholder {
-    color: var(--color-radio);
+    color: var(--color-radio) !important;
 
+}
+.maiacare-input-field-label::placeholder{
+    color: var(--color-radio) !important;
 }
 
 .maiacare-input-field-helper-text {

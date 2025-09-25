@@ -8,6 +8,7 @@ import Button from "./ui/Button";
 import '../style/fertilityassessment.css'
 import { FertilityAssessmentType } from "@/utils/types/interfaces";
 import toast from "react-hot-toast";
+import { BsInfoCircle } from "react-icons/bs";
 
 interface AddPartnerDetailsProps {
     setAddPartner: (value: boolean) => void;
@@ -165,7 +166,9 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
             setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
             setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
             
-            toast.success('Partner added successfully');
+            toast.success('Partner added successfully', {
+                icon: <BsInfoCircle    size={22} color="white" />,  
+              });
         }
         // setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
         // setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
