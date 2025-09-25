@@ -141,16 +141,7 @@ body {
   color: var(--color-heading);
 }
 
-.input-Amount-box {
-  background-color: var(--color-bg);
-  border-right: 1px solid var(--color-radio);
-  border-radius: 8px 0px 0px 8px;
-  padding: 12px;
-  position: absolute;
-  top: 69%;
-  left: 24px;
-  transform: translate(-50%, -50%);
-}
+
 
 .blood-test-search-icon {
   position: absolute;
