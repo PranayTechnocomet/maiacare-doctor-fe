@@ -95,10 +95,6 @@ body {
 
 /* pankaj solanki start */
 
-/* .setting-password-input .maiacare-input-field::placeholder {
-  color: var(--color-placeholder-input) !important;
-} */
-
 .input-Amount .maiacare-input-field {
   padding-left: 55px;
 }
@@ -143,8 +139,6 @@ body {
   color: var(--color-heading);
 }
 
-
-
 .blood-test-search-icon {
   position: absolute;
   top: 50%;
@@ -170,8 +164,23 @@ body {
   height: 10px;
   border-radius: 8px;
   background-color: var(--color-progressbar-secondary) !important;
+}
+
+/* all accordion open close icon for global */
+.accordion-button:after {
+  width: var(--bs-accordion-btn-icon-width) !important;
+  height: var(--bs-accordion-btn-icon-width) !important;
+  content: "" !important;
+
+  background-image: url("../assets/images/AccodionButton.png") !important;
+  background-repeat: no-repeat !important;
+  background-size: var(--bs-accordion-btn-icon-width) !important;
+  transition: var(--bs-accordion-btn-icon-transition) !important;
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
 
 }
+
 
 /* pankaj solanki end */
 
