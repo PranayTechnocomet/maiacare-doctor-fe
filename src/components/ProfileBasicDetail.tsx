@@ -146,7 +146,6 @@ const ProfileBasicDetail = () => {
         ectopicpregnancy: "yes"
     });
 
-
     const initialFormData: PhysicalAssessmentDataModel = {
         id: "",
         height: "",
@@ -160,6 +159,8 @@ const ProfileBasicDetail = () => {
     };
     const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormData);
 
+    // console.log("modalFormPhisicalData : ", modalFormPhisicalData)
+    
     const accordionData = [
         {
             id: '0',
@@ -408,7 +409,7 @@ const ProfileBasicDetail = () => {
 
                             <Accordion defaultActiveKey="0">
                                 <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
-                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                    <Accordion.Header >
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
 
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
@@ -419,7 +420,7 @@ const ProfileBasicDetail = () => {
                                                 <path d="M17.6503 17.6144C17.7079 17.7212 17.8411 17.7622 17.9482 17.7043C18.0554 17.6468 18.0955 17.5136 18.0382 17.4064C17.6019 16.594 17.0774 15.7911 16.8717 15.4834C16.7307 15.2734 16.4235 15.274 16.2839 15.4837C15.7185 16.3296 14.4033 18.3996 14.4033 19.3535C14.4033 20.5526 15.3787 21.528 16.5778 21.528C16.6993 21.528 16.7978 21.4295 16.7978 21.308C16.7978 21.1865 16.6993 21.088 16.5778 21.088C15.6213 21.088 14.8433 20.31 14.8433 19.3535C14.8433 18.6915 15.7259 17.1237 16.5778 15.8364C16.813 16.1924 17.2673 16.9005 17.6503 17.6144Z" fill="#0062D2" stroke="#0062D2" strokeWidth="0.289362" />
                                                 <path d="M18.7704 21.8644C19.555 21.8644 20.1933 21.2261 20.1933 20.4414C20.1933 19.8576 19.4588 18.6645 19.0211 18.0053C18.9091 17.8368 18.6318 17.8368 18.5199 18.0053C18.0821 18.6645 17.3477 19.8576 17.3477 20.4414C17.3477 21.2261 17.986 21.8644 18.7704 21.8644ZM18.7704 18.3045C19.2887 19.0957 19.8194 20.0456 19.8194 20.4414C19.8194 21.0199 19.3488 21.4904 18.7704 21.4904C18.1922 21.4904 17.7216 21.0199 17.7216 20.4414C17.7216 20.0456 18.2523 19.0954 18.7704 18.3045Z" fill="#0062D2" stroke="#0062D2" strokeWidth="0.245915" />
                                             </svg>
-                                            <span className='fertilityAssessment-subAccordion-title'>
+                                            <span className='patient-report-box-title'>
                                                 Menstrual Cycle
                                             </span>
 
@@ -498,7 +499,7 @@ const ProfileBasicDetail = () => {
                                 </Accordion.Item>
 
                                 <Accordion.Item eventKey="1" className='phisical-assessment-accordion-item mb-3'>
-                                    <Accordion.Header className='phisical-assessment-accordion-title-showData'>
+                                    <Accordion.Header>
                                         <div className='d-flex justify-content-center align-items-center gap-2'>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35" fill="none">
                                                 <rect x="0.399414" y="0.5" width="34" height="34" rx="6" fill="#FFE3E8" />
@@ -511,9 +512,7 @@ const ProfileBasicDetail = () => {
                                                     </clipPath>
                                                 </defs>
                                             </svg>
-
-
-                                            <span className='fertilityAssessment-subAccordion-title'>
+                                            <span className='patient-report-box-title'>
                                                 Pregnancy
                                             </span>
                                         </div>
@@ -776,6 +775,7 @@ const ProfileBasicDetail = () => {
                                 setShowPhisicalAssessment={setShowPhisicalAssessment}
                                 editPhysicalAssessment={editPhysicalAssessment}
                                 setEditPhysicalAssessment={setEditPhysicalAssessment}
+                                modalFormPhisicalData={modalFormPhisicalData}
                             />
                         </div>
                     </Modal>

@@ -79,6 +79,7 @@
     cursor: pointer;
 }
 
+/* apply this media 1524px > big screen */
 @media screen and (min-width: 1524px) {
     .forgot-password-screen {
         width: 45%;
