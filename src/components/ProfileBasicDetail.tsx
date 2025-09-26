@@ -146,22 +146,8 @@ const ProfileBasicDetail = () => {
         ectopicpregnancy: "yes"
     });
 
-    const handleEdit = (item: any) => {
-        // setFormData({
-        //     ageAtFirstMenstruation: item.ageAtFirstMenstruation || "",
-        //     cycleLength: item.cycleLength || "",
-        //     periodLength: item.periodLength || "",
-        //     date: item.date || "",
-        //     isCycleRegular: item.isCycleRegular || "",
-        //     menstrualIssues: item.menstrualIssues || "",
-        //     pregnancy: item.pregnancy || "",
-        //     timeduration: item.timeduration || "",
-        //     ectopicpregnancy: item.ectopicpregnancy || ""
-        // });
-        setShowFertilityAssessment(true);
-    }
 
-    const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>({
+    const initialFormData: PhysicalAssessmentDataModel = {
         id: "",
         height: "",
         weight: "",
@@ -170,7 +156,9 @@ const ProfileBasicDetail = () => {
         systolic: "",
         diastolic: "",
         heartRate: ""
-    });
+        
+    };
+    const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormData);
 
     const accordionData = [
         {
@@ -410,8 +398,8 @@ const ProfileBasicDetail = () => {
                         </div>
                     ) : (
                         <div>
-                            <Button className='mb-3' onClick={() => {setEditFertilityAssessment(modalFormFertilityData); setShowFertilityAssessment(true)}} 
-                            variant="outline" disabled={false} contentSize="small">
+                            <Button className='mb-3' onClick={() => { setEditFertilityAssessment(modalFormFertilityData); setShowFertilityAssessment(true)}}
+                                variant="outline" disabled={false} contentSize="small">
                                 <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                 </svg>
@@ -771,13 +759,24 @@ const ProfileBasicDetail = () => {
                     </Accordion>
                     <Modal
                         show={showPhisicalAssessment}
-                        onHide={() => setShowPhisicalAssessment(false)}
-                        header={modalFormPhisicalData.length === 0 ? "Physical Assessment" : "Add New Physical Assessment"}
+                        onHide={() => {setShowPhisicalAssessment(false); setEditPhysicalAssessment(initialFormData)}}
+                        header={
+                            editPhysicalAssessment && editPhysicalAssessment.id
+                                ? "Edit Physical Assessment"
+                                : modalFormPhisicalData.length === 0
+                                    ? "Physical Assessment"
+                                    : "Add New Physical Assessment"
+                        }
                         closeButton={true}
                         size="lg"
                     >
                         <div className="mb-0 ">
-                            <PhisicalAssessmentForm setModalFormPhisicalData={setModalFormPhisicalData} setShowPhisicalAssessment={setShowPhisicalAssessment} editPhysicalAssessment={editPhysicalAssessment} setEditPhysicalAssessment={setEditPhysicalAssessment} />
+                            <PhisicalAssessmentForm
+                                setModalFormPhisicalData={setModalFormPhisicalData}
+                                setShowPhisicalAssessment={setShowPhisicalAssessment}
+                                editPhysicalAssessment={editPhysicalAssessment}
+                                setEditPhysicalAssessment={setEditPhysicalAssessment}
+                            />
                         </div>
                     </Modal>
 
@@ -790,7 +789,7 @@ const ProfileBasicDetail = () => {
                     >
                         <div className="mb-0">
                             <FertilityAssessmentForm
-                                setShowFertilityAssessment={setShowFertilityAssessment} 
+                                setShowFertilityAssessment={setShowFertilityAssessment}
                                 setModalFormFertilityData={setModalFormFertilityData}
                                 editFertilityAssessment={editFertilityAssessment}
                             />
