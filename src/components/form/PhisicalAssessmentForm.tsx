@@ -10,6 +10,7 @@ import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
 import InputSelect from "@/components/ui/InputSelect";
 import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
+import toast from "react-hot-toast";
 
 interface PropsPhisicalAssessmentForm {
     setShowPhisicalAssessment: any;
@@ -92,31 +93,6 @@ const PhisicalAssessmentForm = ({
                 id: generateRandomId(),
             };
 
-            // setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
-            // setShowPhisicalAssessment(false);
-            // setFormError(initialFormError);
-console.log("editPhysicalAssessment", editPhysicalAssessment);
-            // if (editPhysicalAssessment) {
-            //     console.log("editPhysicalAssessment edit time", formData);
-            //     setModalFormPhisicalData((prev: any) =>
-            //         prev.map((item: any) =>
-            //             item.id === editPhysicalAssessment.id ? { ...updatedFormData, formData } : item
-            //         )
-            //     );
-            //     setShowPhisicalAssessment(false);
-            //     setFormError(initialFormError);
-            //     setFormData(initialFormData);
-            //     setEditPhysicalAssessment({})
-
-            // } else {
-            //     setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
-            //     setShowPhisicalAssessment(false);
-            //     setFormError(initialFormError);
-            //     setFormData(initialFormData);
-            //     console.log("else part",);
-
-            // }
-
             if (editPhysicalAssessment && editPhysicalAssessment.id) {
                 // console.log("editPhysicalAssessment edit time", formData);
             
@@ -127,13 +103,16 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                 );
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
-                setFormData(initialFormData);
                 setEditPhysicalAssessment({});
+                toast.success('Physical assessment edited successfully');
+
             } else {
                 setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
                 setFormData(initialFormData);
+                toast.success('Physical assessment added successfully');
+                
             }
             
         }
@@ -298,7 +277,7 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                     </Col>
 
                     <div className='d-flex gap-3'>
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => {setShowPhisicalAssessment(false); setEditPhysicalAssessment({})} }>
                             Cancel
                         </Button>
                         <Button className="w-100" variant="default" disabled={false} type="submit">

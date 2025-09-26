@@ -8,22 +8,7 @@ import { RadioButtonGroup } from "../ui/RadioField";
 import { InputFieldGroup } from "../ui/InputField";
 import Button from "../ui/Button";
 import { FertilityAssessmentFormType } from "@/utils/types/interfaces";
-
-// Types for form data and form error
-type FormData = {
-    ageAtFirstMenstruation: string;
-    cycleLength: string;
-    periodLength: string;
-    date: string;
-    isCycleRegular: string;
-    menstrualIssues: string;
-    pregnancy: string;
-    timeduration: string;
-    ectopicpregnancy: string;
-};
-
-
-
+import toast from "react-hot-toast";
 
 interface FertilityAssessmentFormProps {
     setShowFertilityAssessment: (show: boolean) => void;
@@ -37,26 +22,25 @@ export const FertilityAssessmentForm = ({
     editFertilityAssessment
 }: FertilityAssessmentFormProps) => {
 
-    type FormError = Partial<Record<keyof FormData, string>>;
+    type FormError = Partial<Record<keyof FertilityAssessmentFormType, string>>;
     const initialFormError: FormError = {};
 
-    const initialFormData: FormData = {
+    const initialFormData: FertilityAssessmentFormType = {
         ageAtFirstMenstruation: editFertilityAssessment.ageAtFirstMenstruation || "",
         cycleLength: editFertilityAssessment.cycleLength || "",
         periodLength: editFertilityAssessment.periodLength || "",
         date: editFertilityAssessment.date || "",
         isCycleRegular: editFertilityAssessment.isCycleRegular || "Regular",
         menstrualIssues: editFertilityAssessment.menstrualIssues || "yes",
-        pregnancy: editFertilityAssessment.pregnancy ||"yes",
-        timeduration:editFertilityAssessment.timeduration || "",
-        ectopicpregnancy: editFertilityAssessment.ectopicpregnancy ||"yes"
-        
+        pregnancy: editFertilityAssessment.pregnancy || "yes",
+        timeduration: editFertilityAssessment.timeduration || "",
+        ectopicpregnancy: editFertilityAssessment.ectopicpregnancy || "yes"
+
     };
 
-    // const [formData, setFormData] = useState<FormData>(initialFormData);
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<FertilityAssessmentFormType>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: FertilityAssessmentFormType): FormError => {
         const errors: FormError = {};
 
         if (!data.ageAtFirstMenstruation.trim()) errors.ageAtFirstMenstruation = "Age at first menstruation is required";
@@ -91,13 +75,17 @@ export const FertilityAssessmentForm = ({
             setModalFormFertilityData(formData);
             setShowFertilityAssessment(false);
             setFormError(initialFormError);
+
+            if (editFertilityAssessment && editFertilityAssessment.ageAtFirstMenstruation) {
+                toast.success('Fertility assessment edited successfully');
+            } else {
+                toast.success('Fertility assessment added successfully');
+            }
         }
     };
 
     return (
         <>
-            {/* <h1>Fertility Assessment Form</h1> */}
-
             <form onSubmit={handleSubmit}>
                 <Accordion defaultActiveKey="0">
                     <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3">
