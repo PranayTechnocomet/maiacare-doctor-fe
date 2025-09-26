@@ -62,7 +62,7 @@ export default function SelectClinic() {
 
             <div className='d-flex flex-column align-items-center select-profile-main'>
               {profileData.map((profile) => (
-                <div key={profile.id} className='profile-card d-flex justify-content-between align-items-center my-2 w-100' onClick={() => router.push(profile.route)}>
+                <div key={profile.id} className='profile-card shadow-sm d-flex justify-content-between align-items-center my-2 w-100' onClick={() => router.push(profile.route)}>
                   {/* Left side: image + title + subtitle */}
                   <div className='d-flex gap-3 align-items-center'>
                     <div className='select-profile-img-wrapeer'>
@@ -71,11 +71,11 @@ export default function SelectClinic() {
                         alt={`${profile.title} Logo`}
                         width={70}
                         height={70}
-                        className="mb-2 select-clinic-image"
+                        className="select-clinic-image"
                       />
                     </div>
                     <div>
-                      <h2 className='select-profile-title'>{profile.title}</h2>
+                      <h2 className='select-profile-title m-0'>{profile.title}</h2>
                     </div>
                   </div>
 

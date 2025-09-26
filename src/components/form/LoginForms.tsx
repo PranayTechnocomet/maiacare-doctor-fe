@@ -223,7 +223,7 @@ export function ForgotPassword() {
 
 
 
-                <Button className='login-button input-forgot-password-btn mt-4' type='submit'> Submit</Button>
+                <Button className='w-100 input-forgot-password-btn mt-4' type='submit'> Submit</Button>
             </form>
         </div>
     )
@@ -370,7 +370,7 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
                 </div>
 
 
-                <Button className='login-button input-forgot-password-btn mt-4' type='submit'>Reset Password</Button>
+                <Button className='w-100 input-forgot-password-btn mt-4' type='submit'>Reset Password</Button>
             </form>
         </>
     )
@@ -453,7 +453,7 @@ export function VerifyOtp() {
 
 
 
-                <Button className='login-button input-forgot-password-btn mt-4' type='submit'> Verify</Button>
+                <Button className='w-100 input-forgot-password-btn mt-4' type='submit'> Verify</Button>
             </form>
         </div>
     )

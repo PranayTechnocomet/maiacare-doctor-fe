@@ -44,8 +44,8 @@ export const InputFieldGroup = ({
     )}
     <InputField name={name} type={type} value={value} onChange={onChange} onBlur={onBlur} onClick={onClick} placeholder={placeholder} disabled={disabled} readOnly={readOnly} children={children} {...rest} />
     {helperText && <InputFieldHelperText helperText={helperText} />}
-    {error && <InputFieldError error={error} />}
   </div> 
+    {error && <InputFieldError error={error} />}
   </>
     )   
 }

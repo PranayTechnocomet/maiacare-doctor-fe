@@ -39,7 +39,7 @@
     border: 1px solid var(--google-icon-border);
     background-color: #FFFFFF !important;
     padding: 16px !important;
-    
+    cursor: pointer !important;
     border-radius: 16px;
     width: 480px !important;
     height: 102px !important;
