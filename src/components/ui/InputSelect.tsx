@@ -49,10 +49,12 @@ export default function InputSelect({
         disabled={disabled}
         className={`maiacare-input-field ${className}`}
         {...rest}
+
       >
         <option value={""}>{placeholder}</option>
         {options.map(option => (
           <option key={option.id} value={option.value}>{option.label}</option>
+
         ))}
       </Form.Select>
       {error && <InputFieldError error={error} />}

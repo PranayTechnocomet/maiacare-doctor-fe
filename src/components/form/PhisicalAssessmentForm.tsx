@@ -14,12 +14,14 @@ import toast from "react-hot-toast";
 import { BsInfoCircle } from 'react-icons/bs';
 
 interface PropsPhisicalAssessmentForm {
-    setShowPhisicalAssessment: any;
-    setModalFormPhisicalData: any;
+    setShowPhisicalAssessment: React.Dispatch<React.SetStateAction<boolean>>,
+    setModalFormPhisicalData: React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel[]>>;
     editPhysicalAssessment?: PhysicalAssessmentDataModel,
-    setEditPhysicalAssessment?: any,
-    modalFormPhisicalData?: any,
+    setEditPhysicalAssessment?: React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel>>,
+    modalFormPhisicalData?: PhysicalAssessmentDataModel[],
 }
+
+// React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel>>  PhysicalAssessmentDataModel
 
 const PhisicalAssessmentForm = ({
     setShowPhisicalAssessment,
@@ -42,6 +44,17 @@ const PhisicalAssessmentForm = ({
         diastolic: editPhysicalAssessment?.diastolic || "",
         heartRate: editPhysicalAssessment?.heartRate || "",
     };
+    const initialFormDataForClear: PhysicalAssessmentDataModel = {
+        id: "",
+        height: "",
+        weight: "",
+        bmi: "",
+        bloodGroup: "",
+        systolic: "",
+        diastolic: "",
+        heartRate: ""
+
+    };
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
@@ -56,7 +69,7 @@ const PhisicalAssessmentForm = ({
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
 
-        if (modalFormPhisicalData.length === 0) {
+        if (modalFormPhisicalData?.length === 0) {
             if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
         }
 
@@ -102,22 +115,20 @@ const PhisicalAssessmentForm = ({
             };
 
             if (editPhysicalAssessment && editPhysicalAssessment.id) {
-                // console.log("editPhysicalAssessment edit time", formData);
-
-                setModalFormPhisicalData((prev: any) =>
-                    prev.map((item: any) =>
+                setModalFormPhisicalData((prev) =>
+                    prev.map((item) =>
                         item.id === editPhysicalAssessment.id ? { ...item, ...formData } : item
                     )
                 );
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
-                setEditPhysicalAssessment({});
+                setEditPhysicalAssessment?.(initialFormDataForClear);
                 toast.success('Physical assessment edited successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 
             } else {
-                setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+                setModalFormPhisicalData((prev) => [...prev, updatedFormData]);
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
                 setFormData(initialFormData);
@@ -199,7 +210,7 @@ const PhisicalAssessmentForm = ({
                         <InputSelect
                             label="Blood Group"
                             name="bloodGroup"
-                            value={formData.bloodGroup || modalFormPhisicalData[0]?.bloodGroup}
+                            value={formData.bloodGroup || modalFormPhisicalData?.[0]?.bloodGroup}
                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                 handleChange(e);
                             }}
@@ -210,7 +221,7 @@ const PhisicalAssessmentForm = ({
                             //     ? false : modalFormPhisicalData.length == 0 ? false : true
                             //     }
 
-                            disabled={modalFormPhisicalData.length == 0 ? false : true}
+                            disabled={modalFormPhisicalData?.length == 0 ? false : true}
                             error={formError.bloodGroup}
                             placeholder="Select Blood Group"
                             options={[
@@ -294,7 +305,7 @@ const PhisicalAssessmentForm = ({
                     </Col>
 
                     <div className='d-flex gap-3'>
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setShowPhisicalAssessment(false); setEditPhysicalAssessment({}) }}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setShowPhisicalAssessment(false); setEditPhysicalAssessment?.(initialFormDataForClear) }}>
                             Cancel
                         </Button>
                         <Button className="w-100" variant="default" disabled={false} type="submit">

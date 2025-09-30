@@ -9,31 +9,23 @@ import { MdMailOutline } from 'react-icons/md';
 import Textarea from '../ui/Textarea';
 import toast from 'react-hot-toast';
 import { BsInfoCircle } from 'react-icons/bs';
+import { MedicalHistoryType } from '@/utils/types/interfaces';
 
 interface MedicalHistoryProps {
-    setMedicalHistoryFormData: any;
-    setShowModal: any;
+    setMedicalHistoryFormData: any ;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
     initialData?: any;
     onClose?: () => void;
 }
 
-export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal, initialData, onClose }: MedicalHistoryProps) {
+export default function MedicalHistory({ 
+    setMedicalHistoryFormData, 
+    setShowModal,
+     initialData, 
+     onClose }: MedicalHistoryProps) {
 
-    type FormData = {
-        medication: string;
-        surgeries: string;
-        surgeriesContent: string;
-        medicalCondition: string;
-        familyMedicalHistory: string;
-        lifestyle: string;
-        stress: string;
-        exercise: string;
-        medicationcontent: string;
-        surgeriescontent: string;
-    };
-
-    type FormError = Partial<Record<keyof FormData, string>>;
-    const initialFormData: FormData = {
+    type FormError = Partial<Record<keyof MedicalHistoryType, string>>;
+    const initialFormData: MedicalHistoryType = {
         medication: initialData?.medication || "no",
         surgeries: initialData?.surgeries || "yes",
         surgeriesContent: initialData?.surgeriescontent || "",
@@ -48,10 +40,10 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
     const initialFormError: FormError = {};
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<MedicalHistoryType>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: MedicalHistoryType): FormError => {
         const errors: FormError = {};
         if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
         if (data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
@@ -63,8 +55,6 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
         if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
         // if (!data.exercise.trim()) errors.exercise = "Exercise is required";
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
-
-
 
         return errors;
     };

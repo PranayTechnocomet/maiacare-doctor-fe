@@ -160,9 +160,9 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
 
   const options = [
-    { value: "1", label: "Non-smoker" },
-    { value: "2", label: "Occasional alcohol" },
-    { value: "3", label: "Vegetarian diet" },
+    { value: "Non-smoker", label: "Non-smoker" },
+    { value: "Occasional alcohol", label: "Occasional alcohol" },
+    { value: "Vegetarian diet", label: "Vegetarian diet" },
   ];
 
   const toggleOption = (value: string) => {
@@ -171,6 +171,8 @@ export default function Page() {
         ? prev.filter(v => v !== value)
         : [...prev, value]
     );
+    console.log("value", value);
+
   };
 
   const removeOption = (value: string) => {
@@ -230,7 +232,7 @@ export default function Page() {
     setTempShowData(formData);
     setFormData(initialFormData);
     toast.success('Form Submitted Successfully', {
-      icon: <BsInfoCircle    size={22} color="white" />,  
+      icon: <BsInfoCircle size={22} color="white" />,
     });
   };
 
@@ -428,10 +430,9 @@ export default function Page() {
 
         <label className="form-label">Lifestyle</label>
 
-
         <div className="dropdown">
           <button
-            className="btn btn-outline-secondary dropdown-toggle w-100 text-start "
+            className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
@@ -443,7 +444,8 @@ export default function Page() {
           </button>
 
           {isOpen && (
-            <ul className="dropdown-menu show w-100">
+            <ul className="dropdown-menu d-flex show w-100">
+
               {options.map(option => (
                 <li key={option.value}>
                   <label className="dropdown-item d-flex align-items-center mb-0">
@@ -460,7 +462,6 @@ export default function Page() {
             </ul>
           )}
         </div>
-
 
         {selectedValues.length > 0 && (
           <div className="">
@@ -485,6 +486,25 @@ export default function Page() {
             </div>
           </div>
         )}
+
+        <div className="mt-3">
+
+          <select id="reasonSelect" className="w-100">
+            <option value="">Select reason</option>
+            <option value="doctor">Doctor Unavailability</option>
+            <option value="patient">Patient Request</option>
+            <option value="emergency">Emergency</option>
+          </select>
+          <div id="box-doctor" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
+            Doctor Unavailability box content
+          </div>
+          <div id="box-patient" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
+            Patient Request box content
+          </div>
+          <div id="box-emergency" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
+            Emergency box content
+          </div>
+        </div>
 
         {/* Button Section End */}
 

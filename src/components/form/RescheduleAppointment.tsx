@@ -15,10 +15,10 @@ import SuccessImage from "@/assets/images/rescheduleAppointment.png";
 import Textarea from "../ui/Textarea";
 
 interface RescheduleAppointmentProps {
-    setRescheduleModal?: (show: boolean) => void;
+    setRescheduleModal?: React.Dispatch<React.SetStateAction<boolean>>;
     onSuccess?: () => void;
     showSuccessModal?: boolean;
-    setShowSuccessModal?: (show: boolean) => void;
+    setShowSuccessModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type FormError = Partial<Record<keyof RescheduleAppointmentForm, string>>;
@@ -139,7 +139,8 @@ export function RescheduleAppointment({
             {step === 1 && (
                 <form className="mt-4" onSubmit={handelNext}>
                     <InputSelect
-                        label="Reason of Rescheduling Appointment "
+                        label="Reason of Rescheduling Appointment"
+                        className="input-select"
                         name="reason"
                         value={formData.reason}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {

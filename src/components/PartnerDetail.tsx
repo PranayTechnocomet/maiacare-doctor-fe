@@ -66,7 +66,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         surgeries: "",
         surgeriesContent: "",
 
-
     };
 
     const [formDataAddPhysicalAssessment, setFormDataAddPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormDataAddPhysicalAssessment);

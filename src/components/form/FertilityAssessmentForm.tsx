@@ -13,9 +13,9 @@ import { FertilityAssessmentFormType } from "@/utils/types/interfaces";
 
 
 interface FertilityAssessmentFormProps {
-    setShowFertilityAssessment: (show: boolean) => void;
-    setModalFormFertilityData: (data: any) => void;
-    editFertilityAssessment: FertilityAssessmentFormType;
+    setShowFertilityAssessment: React.Dispatch<React.SetStateAction<boolean>>;
+    setModalFormFertilityData: React.Dispatch<React.SetStateAction<FertilityAssessmentFormType>>;
+    editFertilityAssessment: FertilityAssessmentFormType; 
 }
 
 export const FertilityAssessmentForm = ({
@@ -272,21 +272,6 @@ export const FertilityAssessmentForm = ({
                     </Button>
                 </div>
 
-                {/* <Row className="mt-4 g-2">
-                    <Col md={6}>
-                        <Button className="w-100" variant="outline" type="button" onClick={() => {
-                            setShowFertilityAssessment(false); setFormData(initialFormData);
-                        }}>
-                            Cancel
-                        </Button>
-
-                    </Col>
-                    <Col md={6}>
-                        <Button className="w-100" variant="default" type="submit">
-                            Save
-                        </Button>
-                    </Col>
-                </Row> */}
             </form>
 
         </>

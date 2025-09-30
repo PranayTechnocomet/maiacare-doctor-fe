@@ -18,8 +18,8 @@ import { PatientAutocomplete, PatientShow, SelecteAgeBox } from "../TempPatientA
 import { PatientsDetails } from "@/utils/StaticData";
 
 interface BookAppointmentProps {
-    setBookAppointmentModal: (show: boolean) => void;
-    setShowSuccessModalBook: (show: boolean) => void;
+    setBookAppointmentModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowSuccessModalBook: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 type FormError = Partial<Record<keyof BookAppointmentForm, string>>;
@@ -397,9 +397,7 @@ export function BookAppointment({
 
                     </Row>
                 </form>
-
             )}
-
         </>
     )
 }
@@ -409,7 +407,7 @@ export function SuccessModalBookAppointment({
     setShowSuccessModalBook,
 }: {
     showSuccessModalBook: boolean;
-    setShowSuccessModalBook: (show: boolean) => void;
+    setShowSuccessModalBook: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     return (
         <Modal

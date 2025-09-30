@@ -29,7 +29,7 @@ import { physicalAssessmentData } from '@/utils/StaticData';
 import MenstrualCycleIcon from '../assets/images/MenstrualCycle-icons.png'
 import PregnancyIcon from '../assets/images/Pregnancy-icons.png'
 import PencilEditIcons from '../assets/images/EditIcon.png'
-import { FertilityAssessmentFormType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
+import { FertilityAssessmentFormType, MedicalHistoryType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 
 const contactData = {
     phone: '+91 12345 67890',
@@ -124,15 +124,16 @@ const getStatusBadgeClass = (status: string) => {
 
 const ProfileBasicDetail = () => {
     const [activeAccordion, setActiveAccordion] = useState<string[]>(['0', '1', '2']);
-    const [showPhisicalAssessment, setShowPhisicalAssessment] = useState(false);
-    const [showFertilityAssessment, setShowFertilityAssessment] = useState(false);
+    const [showPhisicalAssessment, setShowPhisicalAssessment] = useState<boolean>(false);
+    const [showFertilityAssessment, setShowFertilityAssessment] = useState<boolean>(false);
 
-    const [showModal, setShowModal] = useState(false);
-    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<any>([]);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryType[] | any>([]);
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
 
-    const [modalFormPhisicalData, setModalFormPhisicalData] = useState<any>([]);
-    const [modalFormFertilityData, setModalFormFertilityData] = useState<any>([]);
+    const [modalFormPhisicalData, setModalFormPhisicalData] = useState<PhysicalAssessmentDataModel[]>([]);
+    const [modalFormFertilityData, setModalFormFertilityData] = useState<FertilityAssessmentFormType | any>([]);
+
 
     const [editFertilityAssessment, setEditFertilityAssessment] = useState<FertilityAssessmentFormType>({
         ageAtFirstMenstruation: "",

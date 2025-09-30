@@ -146,7 +146,7 @@ function AddPatientForm() {
                 <ContentContainer>
 
                     <h3 className="add-patient-form-title">Personal Details</h3>
-                    <Row className="mt-1 g-3" >
+                    <Row className="mt-1 g-3">
                         <Col md={12} sm={12}>
 
                             <div className="d-flex align-items-center gap-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
