@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import { Accordion, Col, ProgressBar, Row } from "react-bootstrap";
-import InputSelect from "./ui/InputSelect";
+import {InputSelect} from "./ui/InputSelect";
 import Button from "./ui/Button";
 import '@/style/Appointment.css'
 import "@/style/settingsPassword.css";

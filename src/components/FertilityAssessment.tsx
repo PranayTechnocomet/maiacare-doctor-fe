@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import Modal from "./ui/Modal"
 import Button from "./ui/Button";
 import { Accordion, Col, Row } from "react-bootstrap";
-import InputSelect from "./ui/InputSelect";
+import { InputSelect } from "./ui/InputSelect";
 import { DatePickerFieldGroup } from "./ui/CustomDatePicker";
 import { RadioButtonGroup } from "./ui/RadioField";
 import { InputFieldGroup } from "./ui/InputField";

@@ -10,7 +10,7 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
-import InputSelect from "@/components/ui/InputSelect";
+import { InputSelect } from "@/components/ui/InputSelect";
 import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
 import "@/style/patientProfile.css";

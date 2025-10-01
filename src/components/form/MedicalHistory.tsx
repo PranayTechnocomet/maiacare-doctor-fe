@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { RadioButtonGroup } from '../ui/RadioField'
 import { InputFieldGroup } from '../ui/InputField';
-import InputSelect from '../ui/InputSelect';
+import { InputSelect, InputSelectMultiSelect } from '../ui/InputSelect';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../ui/Button';
@@ -12,17 +12,17 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { MedicalHistoryType } from '@/utils/types/interfaces';
 
 interface MedicalHistoryProps {
-    setMedicalHistoryFormData: any ;
+    setMedicalHistoryFormData: any;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
     initialData?: any;
     onClose?: () => void;
 }
 
-export default function MedicalHistory({ 
-    setMedicalHistoryFormData, 
+export default function MedicalHistory({
+    setMedicalHistoryFormData,
     setShowModal,
-     initialData, 
-     onClose }: MedicalHistoryProps) {
+    initialData,
+    onClose }: MedicalHistoryProps) {
 
     type FormError = Partial<Record<keyof MedicalHistoryType, string>>;
     const initialFormData: MedicalHistoryType = {
@@ -31,7 +31,7 @@ export default function MedicalHistory({
         surgeriesContent: initialData?.surgeriescontent || "",
         medicalCondition: initialData?.medicalCondition || "",
         familyMedicalHistory: initialData?.familyMedicalHistory || "",
-        lifestyle: initialData?.lifestyle || "",
+        lifestyle: initialData?.lifestyle || [],
         stress: initialData?.stress || "high",
         exercise: initialData?.exercise || "rarely",
         medicationcontent: initialData?.medicationcontent || "",
@@ -87,14 +87,14 @@ export default function MedicalHistory({
                     )
                 );
                 toast.success('Medical history edited successfully', {
-                    icon: <BsInfoCircle    size={22} color="white" />,  
+                    icon: <BsInfoCircle size={22} color="white" />,
                 });
             } else {
                 // If creating new, add to the arrayd
                 setMedicalHistoryFormData((prev: any) => [...prev, formData]);
                 toast.success('Medical history added successfully', {
-                    icon: <BsInfoCircle    size={22} color="white" />,  
-                  });
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
             }
             if (onClose) onClose();
         }
@@ -294,7 +294,27 @@ export default function MedicalHistory({
                         </Col> */}
                         {/* Button Section End */}
                         <Col md={12}>
-                            <InputSelect
+                            <InputSelectMultiSelect
+                                label="Lifestyle"
+                                name="lifestyle"
+                                // values={selected}
+                                values={[]}
+                                onChange={(values) => console.log(values) }
+                                // onChange={(values) => console.log(values) }
+                                options={[
+                                    { value: "Non-smoker", label: "Non-smoker" },
+                                    { value: "Occasional alcohol", label: "Occasional alcohol" },
+                                    { value: "Vegetarian diet", label: "Vegetarian diet" },
+
+                                ]}
+                                placeholder="Search Medical Condition or Allergies"
+                                required={true}
+                                addPlaceholder="Add Medical Condition or Allergies"
+                                selectedOptionColor="blue"
+                                selectedOptionBorderColor="blue"
+                            />
+
+                            {/* <InputSelect
                                 label="Lifestyle"
                                 name="lifestyle"
                                 placeholder='Select lifestyle'
@@ -311,7 +331,8 @@ export default function MedicalHistory({
                                     { id: "2", value: "lifestyle 2", label: "lifestyle 2" },
                                     { id: "3", value: "lifestyle 3", label: "lifestyle 3" },
                                 ]}
-                            />
+                            /> */}
+
                         </Col>
 
                         <Col lg={6}>

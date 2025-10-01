@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import { InputFieldGroup } from "../ui/InputField";
 import { ChangeEvent, useEffect, useState } from "react";
-import InputSelect from "../ui/InputSelect";
+import {InputSelect} from "../ui/InputSelect";
 import Button from "../ui/Button";
 import { PaymentFormData } from "@/utils/types/interfaces";
 

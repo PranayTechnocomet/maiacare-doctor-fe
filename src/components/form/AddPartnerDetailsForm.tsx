@@ -6,7 +6,7 @@ import Modal from '../ui/Modal';
 import { InputFieldGroup } from '../ui/InputField';
 import { Accordion, Col, Row } from 'react-bootstrap';
 import { RadioButtonGroup } from '../ui/RadioField';
-import InputSelect from '../ui/InputSelect';
+import {InputSelect} from '../ui/InputSelect';
 import { PhoneNumberInput } from '../ui/PhoneNumberInput';
 import Button from '../ui/Button';
 import Simpleeditpro from '../../assets/images/Simpleeditpro.png';

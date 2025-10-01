@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import InputSelect from "../ui/InputSelect"
+import {InputSelect} from "../ui/InputSelect"
 import Textarea from "../ui/Textarea";
 import Button from "../ui/Button";
 import AppointmentProfile from "../ui/Custom/AppointmentProfile";

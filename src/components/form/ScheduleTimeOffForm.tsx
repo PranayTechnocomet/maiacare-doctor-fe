@@ -3,7 +3,7 @@
 import { Col, Form, Row } from "react-bootstrap";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { ChangeEvent, useState } from "react";
-import InputSelect from "../ui/InputSelect";
+import {InputSelect} from "../ui/InputSelect";
 import { InputFieldGroup } from "../ui/InputField";
 import Button from "../ui/Button";
 import { ScheduleTimeOff } from "@/utils/types/interfaces";

@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react";
 import { Col, Row } from "react-bootstrap"
 import { BsThreeDots } from "react-icons/bs";
 import { InputFieldGroup } from "./ui/InputField";
-import InputSelect from "./ui/InputSelect";
+import {InputSelect} from "./ui/InputSelect";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import TreatmentPlan from "./TreatmentPlan";

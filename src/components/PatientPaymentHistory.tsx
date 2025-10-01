@@ -9,7 +9,7 @@ import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { PaymentHistoryData } from "@/utils/StaticData";
 import BaseTable from "@/components/ui/BaseTable";
 import { InputFieldGroup } from "./ui/InputField";
-import InputSelect from "./ui/InputSelect";
+import { InputSelect } from "./ui/InputSelect";
 
 const columns: ColumnDef<any>[] = [
     {

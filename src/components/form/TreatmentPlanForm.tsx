@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import InputSelect from "../ui/InputSelect";
+import {InputSelect} from "../ui/InputSelect";
 import { TempTreatmentSteps } from "@/utils/StaticData";
 import Button from "../ui/Button";
 import { FollowUpActionFromType, MedicationPrescriptionType, TreatmentPlan } from "@/utils/types/interfaces";

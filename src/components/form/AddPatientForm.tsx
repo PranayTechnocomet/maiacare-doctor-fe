@@ -15,7 +15,7 @@ import Button from "../ui/Button"
 import { InputFieldGroup } from "../ui/InputField"
 import { RadioButtonGroup } from "../ui/RadioField"
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker"
-import InputSelect from "../ui/InputSelect"
+import {InputSelect} from "../ui/InputSelect"
 import { PhoneNumberInput } from "../ui/PhoneNumberInput"
 import { AddPatientFormData } from "@/utils/types/interfaces"
 import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'

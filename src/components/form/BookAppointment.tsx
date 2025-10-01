@@ -2,7 +2,7 @@
 
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import { InputFieldGroup } from "../ui/InputField";
-import InputSelect from "../ui/InputSelect";
+import {InputSelect} from "../ui/InputSelect";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
 import Textarea from "../ui/Textarea";

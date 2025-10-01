@@ -24,7 +24,7 @@ import {
   ChartData,
 } from "chart.js";
 import Image from "next/image";
-import InputSelect from "./ui/InputSelect";
+import { InputSelect } from "./ui/InputSelect";
 
 import dynamic from "next/dynamic";
 

@@ -12,7 +12,7 @@ import fileIcon from "@/assets/images/file-icon-table.png";
 import dotsIcon from "../assets/images/three-dot-icon-table.png"
 import Image from "next/image";
 import { InputFieldGroup } from "./ui/InputField";
-import InputSelect from "./ui/InputSelect";
+import {InputSelect} from "./ui/InputSelect";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { BookAppointment, SuccessModalBookAppointment } from "./form/BookAppointment";

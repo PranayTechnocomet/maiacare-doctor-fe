@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import InputSelect from "../ui/InputSelect";
+import {InputSelect} from "../ui/InputSelect";
 import Button from "../ui/Button";
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";

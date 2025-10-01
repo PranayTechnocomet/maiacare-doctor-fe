@@ -8,7 +8,7 @@ import {
   InputFieldGroup,
   InputFieldHelperText,
 } from "@/components/ui/InputField";
-import InputSelect from "@/components/ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
 
@@ -27,6 +27,8 @@ import { TimePickerFieldGroup } from "@/components/ui/CustomTimePicker";
 import toast from "react-hot-toast";
 import { FaSmile } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
+import Select from "react-dropdown-select";
+
 
 const data: Patient[] = [
   {
@@ -96,6 +98,11 @@ const columns: ColumnDef<Patient>[] = [
   },
 ];
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 // Types for form data and form error
 type FormData = {
   name: string;
@@ -152,6 +159,8 @@ export default function Page() {
       endTime: "",
     }
   )
+
+  const [selected, setSelected] = useState<Option[]>([]);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
@@ -163,6 +172,7 @@ export default function Page() {
     { value: "Non-smoker", label: "Non-smoker" },
     { value: "Occasional alcohol", label: "Occasional alcohol" },
     { value: "Vegetarian diet", label: "Vegetarian diet" },
+
   ];
 
   const toggleOption = (value: string) => {
@@ -323,6 +333,7 @@ export default function Page() {
             <IoIosEye size={25} />
           </div>
         </InputFieldGroup>
+
         <InputSelect
           label="Select Doctor"
           name="doctor"
@@ -487,24 +498,63 @@ export default function Page() {
           </div>
         )}
 
+
+        {/* <div className="mt-3">
+          <h3>test select 2</h3>
+          <div className={`maiacare-input-field-container `}>
+
+            <Select
+              name="name"
+              className="react-dropdown-select-custom maiacare-input-field"
+              options={options}
+              multi={true}
+              values={selected}
+              placeholder="Search Medical Condition or Allergies"
+              onChange={(values) => setSelected(values)}
+              required={true}
+              addPlaceholder="Add Medical Condition or Allergies"
+            />
+
+            {selected.length > 0 && <span className="mt-3">{selected.length} selected</span>}
+
+            <div className="mt-3 d-flex gap-2 flex-wrap" >
+              {selected.map((item) => (
+                <div
+                  key={item.value}
+                  className="input-select-item-box"
+                >
+                  {item.label}
+                  <span className="ms-2"
+                    onClick={() => setSelected(selected.filter((s) => s.value !== item.value))}
+                  >
+                    ✕
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div> */}
+
         <div className="mt-3">
 
-          <select id="reasonSelect" className="w-100">
-            <option value="">Select reason</option>
-            <option value="doctor">Doctor Unavailability</option>
-            <option value="patient">Patient Request</option>
-            <option value="emergency">Emergency</option>
-          </select>
-          <div id="box-doctor" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
-            Doctor Unavailability box content
-          </div>
-          <div id="box-patient" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
-            Patient Request box content
-          </div>
-          <div id="box-emergency" className="reason-box" style={{ display: "none", border: "1px solid #ccc", padding: "10px", margin: "10px" }}>
-            Emergency box content
-          </div>
+          <InputSelectMultiSelect
+            label="Do you have any medical condition?"
+            values={selected}
+            onChange={(values) => setSelected(values)}
+            options={[
+              { value: "Non-smoker", label: "Non-smoker" },
+              { value: "Occasional alcohol", label: "Occasional alcohol" },
+              { value: "Vegetarian diet", label: "Vegetarian diet" },
+          
+            ]}
+            placeholder="Search Medical Condition or Allergies"
+            required={true}
+            addPlaceholder="Add Medical Condition or Allergies"
+            selectedOptionColor="blue"
+            selectedOptionBorderColor="blue"
+          />
         </div>
+
 
         {/* Button Section End */}
 

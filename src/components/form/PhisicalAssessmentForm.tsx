@@ -8,7 +8,7 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
-import InputSelect from "@/components/ui/InputSelect";
+import {InputSelect} from "@/components/ui/InputSelect";
 import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
 import toast from "react-hot-toast";
 import { BsInfoCircle } from 'react-icons/bs';

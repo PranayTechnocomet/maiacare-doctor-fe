@@ -15,9 +15,9 @@
 }
 
 .maiacare-input-field {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-brand);
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--color-brand) !important;
 
 }
 
@@ -1532,6 +1532,15 @@
     line-height: 20px;
     font-style: medium;
     color: var(--color-brand);
+}
+
+.input-select-item-box{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    /* color: var(--border-box);     */
+
 }
 
 @media screen and (max-width: 1391px) {
