@@ -46,7 +46,6 @@ export function AddPartnerDetails({
                         setActiveTab={setActiveTab}
                         setShowData={setShowData}
                     />
-
                 </div>
             ),
         },

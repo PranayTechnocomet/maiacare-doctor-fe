@@ -2,7 +2,7 @@
 
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import { InputFieldGroup } from "../ui/InputField";
-import {InputSelect} from "../ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "../ui/InputSelect";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
 import Textarea from "../ui/Textarea";
@@ -28,7 +28,7 @@ const initialFormData: BookAppointmentForm = {
     //Appointment Details
     appointmentId: "",
     type: "",
-    concernsTreatment: "",
+    reasonForVisit: [],
     appointmentDate: "",
     appointmentTime: "",
     forTime: "",
@@ -71,7 +71,7 @@ export function BookAppointment({
         const errors: FormError = {};
         if (!data.appointmentId.trim()) errors.appointmentId = "Appointment ID is required";
         if (!data.type.trim()) errors.type = "Type is required";
-        if (!data.concernsTreatment.trim()) errors.concernsTreatment = "Concerns / Treatment is required";
+        if (!data.reasonForVisit.length) errors.reasonForVisit = "reasonForVisit is required";
         if (!data.appointmentDate.trim()) errors.appointmentDate = "Appointment Date is required";
         if (!data.appointmentTime.trim()) errors.appointmentTime = "Appointment Time is required";
 
@@ -176,22 +176,43 @@ export function BookAppointment({
                             />
                         </Col>
                         <Col md={12}>
-                            <InputFieldGroup
-                                label="Concerns / Treatment "
-                                name="concernsTreatment"
+
+                            <InputSelectMultiSelect
+                                label="Reason for visit"
+                                name="reasonForVisit"
+                                values={formData.reasonForVisit}
+                                onChange={(values) => { setFormData((prev : any) => ({ ...prev, reasonForVisit: values })); setFormError((prev) => ({ ...prev, reasonForVisit: "" })); }}
+                                options={[
+                                    { id: "1", value: "Fertility Support", label: "Fertility Support" },
+                                    { id: "2", value: "IUI", label: "IUI" },
+                                    { id: "3", value: "IVF", label: "IVF" },
+                                    { id: "4", value: "ICSI", label: "ICSI" },
+                                    { id: "5", value: "Other", label: "Other" },
+
+                                ]}
+                                placeholder="Select Lifestyle"
+                                addPlaceholder="Add Lifestyle"
+                                required={true}
+                                error={formError.reasonForVisit}
+                            />
+
+                            {/* <InputFieldGroup
+                                label="Reason for visit"
+                                name="reasonForVisit"
                                 type="text"
-                                value={formData.concernsTreatment}
+                                value={formData.reasonForVisit}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);
                                 }}
                                 onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                                placeholder="Enter Concerns / Treament"
+                                placeholder="Enter Reason for visit"
                                 required={true}
                                 disabled={false}
                                 readOnly={false}
-                                error={formError.concernsTreatment}
+                                error={formError.reasonForVisit}
 
-                            ></InputFieldGroup>
+                            ></InputFieldGroup> */}
+
                         </Col>
                         <Col md={4}>
                             <DatePickerFieldGroup

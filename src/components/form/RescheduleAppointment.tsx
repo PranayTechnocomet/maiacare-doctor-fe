@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import {InputSelect} from "../ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "../ui/InputSelect";
 import Button from "../ui/Button";
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
@@ -26,7 +26,7 @@ type FormError = Partial<Record<keyof RescheduleAppointmentForm, string>>;
 const initialFormData: RescheduleAppointmentForm = {
     reason: "",
     type: "",
-    reasonForVisit: "",
+    reasonForVisit: [],
     appointmentDate: "",
     appointmentTime: "",
     forTime: "",
@@ -66,7 +66,7 @@ export function RescheduleAppointment({
     const validateForm2 = (data: RescheduleAppointmentForm): FormError => {
         const errors: FormError = {};
         if (!data.type.trim()) errors.type = "Type is required";
-        if (!data.reasonForVisit.trim())
+        if (!data.reasonForVisit.length)
             errors.reasonForVisit = "Reason for visit is required";
         if (!data.appointmentDate.trim())
             errors.appointmentDate = "Appointment date is required";
@@ -192,9 +192,33 @@ export function RescheduleAppointment({
                                     ]}
                                 />
                             </Col>
+
                             <Col md={12}>
-                                <InputSelect
-                                    label="Reason for visit "
+
+                                <InputSelectMultiSelect
+                                    label="Reason for visit"
+                                    name="reasonForVisit"
+                                    values={formData.reasonForVisit}
+                                    onChange={(values) => { setFormData((prev : any) => ({ ...prev, reasonForVisit: values })); setFormError((prev) => ({ ...prev, reasonForVisit: "" })); }}
+                                    options={[
+                                        { id: "1", value: "Fertility Support", label: "Fertility Support" },
+                                        { id: "2", value: "IUI", label: "IUI" },
+                                        { id: "3", value: "IVF", label: "IVF" },
+                                        {id: "4", value: "Egg Freezing", label: "Egg Freezing"},
+                                        {id: "5", value: "other", label: "other"}
+
+                                    ]}
+                                    placeholder="Select Services"
+                                    addPlaceholder="Add Services"
+                                    required={true}
+                                    selectedOptionColor="var(--border-box)"
+                                    selectedOptionBorderColor="var(--border-box)"
+                                    error={formError.reasonForVisit}
+
+                                />
+
+                                {/* <InputSelect
+                                    label="Reason for visit"
                                     name="reasonForVisit"
                                     value={formData.reasonForVisit}
                                     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -210,7 +234,8 @@ export function RescheduleAppointment({
                                         { id: "4", value: "Egg Freezing", label: "Egg Freezing" },
                                         { id: "5", value: "other", label: "other" },
                                     ]}
-                                />
+                                /> */}
+
                             </Col>
                             <Col md={4}>
                                 <DatePickerFieldGroup

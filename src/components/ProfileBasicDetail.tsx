@@ -128,7 +128,8 @@ const ProfileBasicDetail = () => {
     const [showFertilityAssessment, setShowFertilityAssessment] = useState<boolean>(false);
 
     const [showModal, setShowModal] = useState<boolean>(false);
-    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryType[] | any>([]);
+    const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryType | any>([]);
+    
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
 
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<PhysicalAssessmentDataModel[]>([]);
@@ -156,12 +157,10 @@ const ProfileBasicDetail = () => {
         systolic: "",
         diastolic: "",
         heartRate: ""
-        
+
     };
     const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormData);
 
-    // console.log("modalFormPhisicalData : ", modalFormPhisicalData)
-    
     const accordionData = [
         {
             id: '0',
@@ -400,7 +399,7 @@ const ProfileBasicDetail = () => {
                         </div>
                     ) : (
                         <div>
-                            <Button className='mb-3' onClick={() => { setEditFertilityAssessment(modalFormFertilityData); setShowFertilityAssessment(true)}}
+                            <Button className='mb-3' onClick={() => { setEditFertilityAssessment(modalFormFertilityData); setShowFertilityAssessment(true) }}
                                 variant="outline" disabled={false} contentSize="small">
                                 <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
@@ -566,97 +565,8 @@ const ProfileBasicDetail = () => {
             content: (
 
                 <div>
-                    {medicalHistoryFormData && medicalHistoryFormData.length > 0 ? (
-                        <div className="mb-3">
-                            <Button
-                                onClick={() => {
-                                    setEditingMedicalHistory(medicalHistoryFormData[0]);
-                                    setShowModal(true);
-                                }}
-                                className="mb-3"
-                                variant="outline"
-                                contentSize="small"
-                            >
-                                <svg width="16" height="16" viewBox="0 0 14 14" className='me-2' fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
-                                </svg>
-                                Edit
-                            </Button>
+                    {Object.keys(medicalHistoryFormData).length == 0 ? (
 
-                            <Row className="">
-                                <Col sm={5}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Current Medications</h6>
-                                        <p className=" accordion-title-detail">
-                                            {medicalHistoryFormData[0]?.medicationcontent || 'No medications recorded'}
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={7}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Surgeries</h6>
-                                        <p className=" accordion-title-detail">
-                                            {medicalHistoryFormData[0]?.surgeries === 'yes'
-                                                ? medicalHistoryFormData[0]?.surgeriescontent || 'Yes'
-                                                : 'No'}
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={12}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Medical condition / Allergies</h6>
-                                        <p className=" accordion-title-detail d-inline-block border-box-orange-font box-border-orange ">
-                                            {medicalHistoryFormData[0]?.medicalCondition || 'No medical conditions recorded'}
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={5}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Family History</h6>
-                                        <p className=" accordion-title-detail">
-                                            <ul>
-                                                <li className='medical-emergency-fimily-history'>{medicalHistoryFormData[0]?.familyMedicalHistory || 'No family history recorded'}</li>
-                                            </ul>
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={7}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Lifestyle</h6>
-                                        <p className=" accordion-title-detail d-inline-block border-box-blue-font box-border-blue me-2">
-                                            {medicalHistoryFormData[0]?.lifestyle || 'No lifestyle information'}
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={5}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Physical Exercise</h6>
-                                        <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
-                                            {medicalHistoryFormData[0]?.exercise ?
-                                                medicalHistoryFormData[0].exercise.charAt(0).toUpperCase() + medicalHistoryFormData[0].exercise.slice(1)
-                                                : 'Not specified'}
-                                        </p>
-                                    </div>
-                                </Col>
-
-                                <Col sm={7}>
-                                    <div className="">
-                                        <h6 className=" contact-details-emergency">Stress Level</h6>
-                                        <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
-                                            {medicalHistoryFormData[0]?.stress ?
-                                                medicalHistoryFormData[0].stress.charAt(0).toUpperCase() + medicalHistoryFormData[0].stress.slice(1)
-                                                : 'Not specified'}
-                                        </p>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </div>
-                    ) : (
                         <div className="text-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="78" height="78" viewBox="0 0 78 78" fill="none">
                                 <path d="M60.6072 15.509V57.2116C60.6072 59.5787 58.6882 61.4977 56.3211 61.4977H22.0085C19.6414 61.4977 17.7224 59.5787 17.7224 57.2116V6.70801C17.7224 4.34086 19.6414 2.42188 22.0085 2.42188H47.5739C51.0628 5.92883 54.5519 9.43579 58.0453 12.9382C58.8964 13.7937 59.7518 14.6491 60.6072 15.509Z" fill="#F3F4F6" />
@@ -680,8 +590,119 @@ const ProfileBasicDetail = () => {
                                 <span className='ms-1'>Add Medical History</span>
                             </Button>
                         </div>
-                    )}
-                </div>
+
+
+                    ) : (
+                        <>
+                            <div className="mb-3">
+
+                                <Button
+                                    onClick={() => {
+                                        setEditingMedicalHistory(medicalHistoryFormData);
+                                        setShowModal(true);
+                                    }}
+                                    className="mb-3"
+                                    variant="outline"
+                                    contentSize="small"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 14 14" className='me-2' fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
+                                    </svg>
+                                    Edit
+                                </Button>
+                                <Row className="">
+                                    <Col sm={5}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Current Medications</h6>
+                                            <p className=" accordion-title-detail">
+                                                {medicalHistoryFormData?.medication === 'yes'
+                                                    ? medicalHistoryFormData?.medicationcontent || 'Yes'
+                                                    : 'No'}
+                                                
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={7}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Surgeries</h6>
+                                            <p className=" accordion-title-detail">
+                                                {medicalHistoryFormData.surgeries === 'yes'
+                                                    ? medicalHistoryFormData.surgeriescontent || 'Yes'
+                                                    : 'No'}
+                                                
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={12}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Medical condition / Allergies</h6>
+
+                                            {medicalHistoryFormData.medicalCondition.map((item: any) => {
+                                                return (
+                                                    <p key={item.id} className="accordion-title-detail d-inline-block border-box-orange-font box-border-orange me-2 mb-2">
+                                                        {item.value}
+                                                    </p>
+                                                )
+                                            })}
+
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={5}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Family History</h6>
+                                            <div className=" accordion-title-detail">
+                                                <ul>
+                                                    <li className='medical-emergency-fimily-history'>{medicalHistoryFormData.familyMedicalHistory}</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={7}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Lifestyle</h6>
+                                            {medicalHistoryFormData.lifestyle.map((item: any) => {
+                                                return (
+                                                    <p key={item.id} className="accordion-title-detail d-inline-block border-box-blue-font box-border-blue me-2 mb-2">
+                                                        {item.value}
+                                                    </p>
+                                                )
+                                            })}
+                                           
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={5}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Physical Exercise</h6>
+                                            <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
+
+                                                {medicalHistoryFormData.exercise}
+                                                
+                                            </p>
+                                        </div>
+                                    </Col>
+
+                                    <Col sm={7}>
+                                        <div className="">
+                                            <h6 className=" contact-details-emergency">Stress Level</h6>
+                                            <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
+                                                {medicalHistoryFormData.stress}
+                                            </p>
+                                        </div>
+                                    </Col>
+                                </Row>
+
+                            </div>
+                        </>
+
+                    )
+                    }
+                </div >
             ),
         },
     ];
@@ -746,8 +767,8 @@ const ProfileBasicDetail = () => {
                     <Accordion className="mb-3" alwaysOpen activeKey={activeAccordion}>
                         {accordionData.map((item) => (
                             <Accordion.Item eventKey={item.id} key={item.id} className='patient-accordion-item shadow-sm mb-3'>
-                                <Accordion.Header onClick={() => setActiveAccordion(prev => 
-                                    prev.includes(item.id) 
+                                <Accordion.Header onClick={() => setActiveAccordion(prev =>
+                                    prev.includes(item.id)
                                         ? prev.filter(id => id !== item.id)
                                         : [...prev, item.id]
                                 )} >
@@ -759,7 +780,7 @@ const ProfileBasicDetail = () => {
                     </Accordion>
                     <Modal
                         show={showPhisicalAssessment}
-                        onHide={() => {setShowPhisicalAssessment(false); setEditPhysicalAssessment(initialFormData)}}
+                        onHide={() => { setShowPhisicalAssessment(false); setEditPhysicalAssessment(initialFormData) }}
                         header={
                             editPhysicalAssessment && editPhysicalAssessment.id
                                 ? "Edit Physical Assessment"
@@ -800,7 +821,7 @@ const ProfileBasicDetail = () => {
                         className=""
                         show={showModal}
                         onHide={() => setShowModal(false)}
-                        header={medicalHistoryFormData.length === 0 ? "Add Medical History" : "Edit Medical History"}
+                        header={Object.keys(medicalHistoryFormData).length === 0 ? "Add Medical History" : "Edit Medical History"}
                         size="lg"
                         closeButton={true}
                     >

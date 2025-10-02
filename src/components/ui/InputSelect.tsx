@@ -69,7 +69,7 @@ type OptionType = { value: string; label: string };
 interface InputSelectMultiSelectProps {
   values: OptionType[];
   onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
-  options: OptionType[];
+  options: { id: string, value: string, label: string }[];
   placeholder?: string;
   addPlaceholder?: string;
   label?: string;
@@ -108,11 +108,7 @@ export function InputSelectMultiSelect({
 
   return (
     <div className={`maiacare-input-field-container ${className}`}>
-      {label && (
-        <label className="mb-1 d-block">
-          {label} {required && <span className="text-danger">*</span>}
-        </label>
-      )}
+{label && <InputFieldLabel label={label} required={required} />}
 
       <Select
         {...rest}
@@ -124,17 +120,17 @@ export function InputSelectMultiSelect({
         placeholder={placeholder}
         disabled={disabled}
         onChange={(vals) => onChange(vals)}
-        required={required}
+        // required={required}
         addPlaceholder={addPlaceholder || placeholder}
       />
 
       {values.length > 0 && (
-        <span className="mt-2 d-block small text-muted">
+        <p className="my-2 maiacare-input-field-helper-text">
           {values.length} selected
-        </span>
+        </p>
       )}
 
-      <div className="mt-2 d-flex gap-2 flex-wrap">
+      <div className="my-2 d-flex gap-2 flex-wrap">
         {values.map((item) => (
           <div key={item.value} className="input-select-item-box" style={{color: selectedOptionColor, borderColor: selectedOptionBorderColor}}>
             {item.label}

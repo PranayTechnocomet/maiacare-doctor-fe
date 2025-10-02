@@ -175,6 +175,8 @@ export default function Page() {
 
   ];
 
+  // console.log("selected", selected);
+
   const toggleOption = (value: string) => {
     setSelectedValues(prev =>
       prev.includes(value)
@@ -539,19 +541,21 @@ export default function Page() {
 
           <InputSelectMultiSelect
             label="Do you have any medical condition?"
+            name="medicalCondition"
             values={selected}
             onChange={(values) => setSelected(values)}
             options={[
-              { value: "Non-smoker", label: "Non-smoker" },
-              { value: "Occasional alcohol", label: "Occasional alcohol" },
-              { value: "Vegetarian diet", label: "Vegetarian diet" },
+              { id: "1", value: "Non-smoker", label: "Non-smoker" },
+              { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
+              { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
           
             ]}
             placeholder="Search Medical Condition or Allergies"
-            required={true}
             addPlaceholder="Add Medical Condition or Allergies"
+            required={true}
             selectedOptionColor="blue"
             selectedOptionBorderColor="blue"
+            error="validation"
           />
         </div>
 

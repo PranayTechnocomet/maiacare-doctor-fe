@@ -80,11 +80,11 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
     const [formDataMedicalHistory, setFormDataMedicalHistory] = useState<MedicalHistoryType>();
 
-    useEffect(() => {
-        setLoading(true)
-        setShowData(partnerDetailData);
+    // useEffect(() => {
+    //     setLoading(true)
+    //     setShowData(partnerDetailData);
 
-    }, [])
+    // }, [])
 
     const formatDate = (dateString?: string) => {
         const date = dateString ? new Date(dateString) : new Date();
@@ -167,6 +167,8 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
             });
         }
     }
+
+    // console.log("showData.medicalHistory", showData.medicalHistory);
 
     return (
         <>
@@ -304,7 +306,114 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
                             </div>
                         </ContentContainer>
+
                         <ContentContainer className="mt-4">
+
+                            <Button
+                                onClick={() => {
+                                    setEditMedicalHistory(true);
+                                    setFormDataMedicalHistory(showData.medicalHistory)
+                                }}
+                                className="mb-3"
+                                variant="outline"
+                                contentSize="small"
+                            >
+                                <svg width="16" height="16" viewBox="0 0 14 14" className='me-2' fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
+                                </svg>
+                                Edit
+                            </Button>
+
+                            <Row className="">
+                                <Col sm={5}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Current Medications</h6>
+                                        <p className=" accordion-title-detail">
+                                            {showData.medicalHistory?.medication === 'yes'
+                                                ? showData.medicalHistory?.medicationcontent || 'Yes'
+                                                : 'No'}
+
+                                        </p>
+                                    </div>
+                                </Col>
+
+                                <Col sm={7}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Surgeries</h6>
+                                        <p className=" accordion-title-detail">
+                                            {showData.medicalHistory.surgeries === 'yes'
+                                                ? showData.medicalHistory.surgeriescontent || 'Yes'
+                                                : 'No'}
+
+                                        </p>
+                                    </div>
+                                </Col>
+
+                                <Col sm={12}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Medical condition / Allergies</h6>
+
+                                        {showData.medicalHistory?.medicalCondition.map((item: any) => {
+                                            return (
+                                                <p key={item.id} className="accordion-title-detail d-inline-block border-box-orange-font box-border-orange me-2 mb-2">
+                                                    {item.value}
+                                                </p>
+                                            )
+                                        })}
+
+                                    </div>
+                                </Col>
+
+                                <Col sm={5}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Family History</h6>
+                                        <div className=" accordion-title-detail">
+                                            <ul>
+                                                <li className='medical-emergency-fimily-history'>{showData.medicalHistory.familyMedicalHistory}</li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </Col>
+
+                                <Col sm={7}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Lifestyle</h6>
+                                        {showData.medicalHistory?.lifestyle.map((item: any) => {
+                                            return (
+                                                <p key={item.id} className="accordion-title-detail d-inline-block border-box-blue-font box-border-blue me-2 mb-2">
+                                                    {item.value}
+                                                </p>
+                                            )
+                                        })}
+
+                                    </div>
+                                </Col>
+
+                                <Col sm={5}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Physical Exercise</h6>
+                                        <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
+
+                                            {showData.medicalHistory.exercise}
+
+                                        </p>
+                                    </div>
+                                </Col>
+
+                                <Col sm={7}>
+                                    <div className="">
+                                        <h6 className=" contact-details-emergency">Stress Level</h6>
+                                        <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
+                                            {showData.medicalHistory.stress}
+                                        </p>
+                                    </div>
+                                </Col>
+                            </Row>
+
+                        </ContentContainer>
+
+                        {/* <ContentContainer className="mt-4">
                             {[
                                 {
                                     ...showData.medicalHistory,
@@ -365,21 +474,11 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                             <Col lg={12} md={12}>
                                                 <div className="mb-3">
                                                     <h6 className="mb-1 contact-details-emergency">Medical condition / Allergies</h6>
-                                                   
+
                                                     <p className=" accordion-title-detail d-inline-block border-box-orange-font box-border-orange ">
                                                         {item.medical_medical_condition || 'No medical conditions recorded'}
                                                     </p>
-                                                    {/* {item.MedicalconditionAllergies?.length > 0 ? (
-                                                        item.MedicalconditionAllergies.map((cond: string, i: number) => (
-                                                            <p key={i} className="mb-2 d-inline-block border-box-orange-font box-border-orange me-2">
-                                                                {cond.trim()}
-                                                            </p>
-                                                        ))
-                                                    ) : (
-                                                        <p className="mb-2 d-inline-block border-box-orange-font box-border-orange">
-                                                            No medical conditions recorded
-                                                        </p>
-                                                    )} */}
+                                                    
                                                 </div>
                                             </Col>
 
@@ -448,7 +547,8 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                     </div>
                                 );
                             })}
-                        </ContentContainer>
+                        </ContentContainer> */}
+
                     </Col>
                     <Col md={5}>
                         <ContentContainer>
