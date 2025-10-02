@@ -15,7 +15,7 @@ import Button from "../ui/Button"
 import { InputFieldGroup } from "../ui/InputField"
 import { RadioButtonGroup } from "../ui/RadioField"
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker"
-import InputSelect from "../ui/InputSelect"
+import {InputSelect} from "../ui/InputSelect"
 import { PhoneNumberInput } from "../ui/PhoneNumberInput"
 import { AddPatientFormData } from "@/utils/types/interfaces"
 import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'
@@ -146,7 +146,7 @@ function AddPatientForm() {
                 <ContentContainer>
 
                     <h3 className="add-patient-form-title">Personal Details</h3>
-                    <Row className="mt-1 g-3" >
+                    <Row className="mt-1 g-3">
                         <Col md={12} sm={12}>
 
                             <div className="d-flex align-items-center gap-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">

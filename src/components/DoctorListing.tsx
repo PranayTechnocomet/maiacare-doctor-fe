@@ -12,7 +12,7 @@ import '../style/Appointment.css';
 import { BsClock } from 'react-icons/bs';
 import { doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
-import InputSelect from './ui/InputSelect';
+import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
 import ScheduleTimeOff from './ScheduleTimeOff';
 

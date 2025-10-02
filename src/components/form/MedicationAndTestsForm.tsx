@@ -1,7 +1,7 @@
 "use client"
 
 import { Accordion, Col, Row } from "react-bootstrap";
-import InputSelect from "../ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "../ui/InputSelect";
 import { ChangeEvent, useState } from "react";
 import Button from "../ui/Button";
 import { MedicationTests } from "@/utils/types/interfaces";
@@ -40,7 +40,7 @@ export function TestsForm({
 }) {
 
     const initialFormData: MedicationTests = {
-        tests: ""
+        tests: []
     };
 
     type FormError = Partial<Record<keyof MedicationTests, string>>;
@@ -59,7 +59,7 @@ export function TestsForm({
         }
         return errors;
     };
-    
+
     const handelNext = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -99,26 +99,28 @@ export function TestsForm({
                 <Row className="g-3">
                     <h6 className="dashboard-chart-heading">Tests</h6>
                     <Col md={12}>
-                        <InputSelect
+
+                        <InputSelectMultiSelect
                             label="Select Tests"
                             name="tests"
-                            value={formData.tests}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                            required={true}
-                            disabled={false}
-                            placeholder="Select Tests"
-                            error={formError.tests}
+                            values={formData.tests}
+                            onChange={(values) => { setFormData((prev) => ({ ...prev, tests: values })); setFormError((prev) => ({ ...prev, tests: "" })); }}
                             options={[
                                 { id: "1", value: "Blood Test", label: "Blood Test" },
                                 { id: "2", value: "Sonography", label: "Sonography" },
                                 { id: "3", value: "other", label: "other" },
+
                             ]}
+                            placeholder="Select Treatment"
+                            addPlaceholder="Add Treatment"
+                            required={true}
+                            selectedOptionColor="var(--border-box)"
+                            selectedOptionBorderColor="var(--border-box)"
+                            error={formError.tests}
                         />
 
-                        {formData.tests && (
+
+                        {formData.tests.length > 0 && (
                             <Accordion defaultActiveKey="0" className="mt-3">
                                 <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>

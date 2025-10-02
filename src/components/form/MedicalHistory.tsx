@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { RadioButtonGroup } from '../ui/RadioField'
 import { InputFieldGroup } from '../ui/InputField';
-import InputSelect from '../ui/InputSelect';
+import { InputSelect, InputSelectMultiSelect } from '../ui/InputSelect';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from '../ui/Button';
@@ -9,37 +9,29 @@ import { MdMailOutline } from 'react-icons/md';
 import Textarea from '../ui/Textarea';
 import toast from 'react-hot-toast';
 import { BsInfoCircle } from 'react-icons/bs';
+import { MedicalHistoryType } from '@/utils/types/interfaces';
 
 interface MedicalHistoryProps {
     setMedicalHistoryFormData: any;
-    setShowModal: any;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
     initialData?: any;
     onClose?: () => void;
 }
 
-export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal, initialData, onClose }: MedicalHistoryProps) {
+export default function MedicalHistory({
+    setMedicalHistoryFormData,
+    setShowModal,
+    initialData,
+    onClose }: MedicalHistoryProps) {
 
-    type FormData = {
-        medication: string;
-        surgeries: string;
-        surgeriesContent: string;
-        medicalCondition: string;
-        familyMedicalHistory: string;
-        lifestyle: string;
-        stress: string;
-        exercise: string;
-        medicationcontent: string;
-        surgeriescontent: string;
-    };
-
-    type FormError = Partial<Record<keyof FormData, string>>;
-    const initialFormData: FormData = {
+    type FormError = Partial<Record<keyof MedicalHistoryType, string>>;
+    const initialFormData: MedicalHistoryType = {
         medication: initialData?.medication || "no",
         surgeries: initialData?.surgeries || "yes",
         surgeriesContent: initialData?.surgeriescontent || "",
-        medicalCondition: initialData?.medicalCondition || "",
+        medicalCondition: initialData?.medicalCondition || [],
         familyMedicalHistory: initialData?.familyMedicalHistory || "",
-        lifestyle: initialData?.lifestyle || "",
+        lifestyle: initialData?.lifestyle || [],
         stress: initialData?.stress || "high",
         exercise: initialData?.exercise || "rarely",
         medicationcontent: initialData?.medicationcontent || "",
@@ -48,27 +40,23 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
 
     const initialFormError: FormError = {};
 
-    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [formData, setFormData] = useState<MedicalHistoryType>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
-    const validateForm = (data: FormData): FormError => {
+    const validateForm = (data: MedicalHistoryType): FormError => {
         const errors: FormError = {};
         if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
         if (data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
-
-        // if(data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
-        // if (!data.medication.trim()) errors.medication = "Medication is required";
         if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
-        if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
-        // if (!data.exercise.trim()) errors.exercise = "Exercise is required";
+
+
+        if (!data.medicalCondition?.length) errors.medicalCondition = "Medical Condition is required";
+        if (!data.lifestyle?.length) errors.lifestyle = "Lifestyle is required";
+
         if (!data.stress.trim()) errors.stress = "Stress Level is required";
-
-
 
         return errors;
     };
-
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -80,63 +68,32 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
         // Validate the formData and return any errors found
         const errors = validateForm(formData);
         setFormError(errors);
-        console.log("errors", errors);
+        // console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
             setShowModal(false);
             setFormError(initialFormError);
             if (initialData) {
                 // If editing, update the existing entry
-                setMedicalHistoryFormData((prev: any) =>
-                    prev.map((item: any) =>
-                        item === initialData ? formData : item
-                    )
-                );
+                setMedicalHistoryFormData(formData);
                 toast.success('Medical history edited successfully', {
-                    icon: <BsInfoCircle    size={22} color="white" />,  
+                    icon: <BsInfoCircle size={22} color="white" />,
                 });
+
             } else {
                 // If creating new, add to the arrayd
-                setMedicalHistoryFormData((prev: any) => [...prev, formData]);
+
+                setMedicalHistoryFormData(formData)
+                // setMedicalHistoryFormData((prev: any) => [...prev, formData]);
                 toast.success('Medical history added successfully', {
-                    icon: <BsInfoCircle    size={22} color="white" />,  
-                  });
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
             }
             if (onClose) onClose();
         }
-    };
-
-
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
-    const [isOpen, setIsOpen] = useState(false);
-
-    const options = [
-        { value: "1", label: "Non-smoker" },
-        { value: "2", label: "Occasional alcohol" },
-        { value: "3", label: "Vegetarian diet" },
-    ];
-
-    const toggleOption = (value: string) => {
-        setSelectedValues(prev =>
-            prev.includes(value)
-                ? prev.filter(v => v !== value)
-                : [...prev, value]
-        );
-    };
-
-    const removeOption = (value: string) => {
-        setSelectedValues(prev => prev.filter(v => v !== value));
-    };
-
-    const getSelectedLabels = () => {
-        return selectedValues.map(value => {
-            const option = options.find(opt => opt.value === value);
-            return option ? option.label : value;
-        });
     };
 
     return (
@@ -166,9 +123,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                     name='medicationcontent'
                                     onChange={handleChange}
                                     error={formError.medicationcontent}
-
                                     placeholder="Enter medication"
-
                                     className={`mt-2`}
                                 >
 
@@ -198,9 +153,7 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                         name='surgeriescontent'
                                         onChange={handleChange}
                                         error={formError.surgeriescontent}
-
                                         placeholder="Enter surgeries"
-
                                         className={`mt-2`}
                                     >
 
@@ -209,21 +162,28 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                             </div>
                         </Col>
                         <Col md={12} className=''>
-                            <InputFieldGroup
-                                label="Do you have any medical condition? "
-                                name="medicalCondition"
-                                type="text"
-                                value={formData.medicalCondition}
 
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            <InputSelectMultiSelect
+                                label="Do you have any medical condition?"
+                                name="medicalCondition"
+                                values={formData.medicalCondition}
+                                onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })); }}
+                                options={[
+                                    { id: "1", value: "PCOS", label: "PCOS" },
+                                    { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
+                                    { id: "3", value: "Diabetes", label: "Diabetes" },
+                                    { id: "4", value: "Hypertension", label: "Hypertension" },
+
+                                ]}
                                 placeholder="Search Medical Condition or Allergies"
+                                addPlaceholder="Add Medical Condition or Allergies"
                                 required={true}
+                                selectedOptionColor="var(--border-box)"
+                                selectedOptionBorderColor="var(--border-box)"
                                 error={formError.medicalCondition}
-                                className="position-relative "
-                            ></InputFieldGroup>
+
+                            />
+
                         </Col>
                         <Col md={12} className=''>
                             <InputFieldGroup
@@ -240,88 +200,27 @@ export default function MedicalHistory({ setMedicalHistoryFormData, setShowModal
                                 className="position-relative "
                             ></InputFieldGroup>
                         </Col>
-                        {/* Button Section Start */}
-                        {/* <Col md={12} className=''>
-                            <label className="form-label">Lifestyle</label>
 
-                            
-                            <div className="dropdown">
-                                <button
-                                    className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
-                                    type="button"
-                                    onClick={() => setIsOpen(!isOpen)}
-                                    aria-expanded={isOpen}
-                                >
-                                    {selectedValues.length === 0
-                                        ? "Select lifestyle options..."
-                                        : ` selected`
-                                    }
-                                </button>
-
-                                {isOpen && (
-                                    <ul className="dropdown-menu show w-100">
-                                        {options.map(option => (
-                                            <li key={option.value}>
-                                                <label className="dropdown-item d-flex align-items-center mb-0">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="form-check-input me-2"
-                                                        checked={selectedValues.includes(option.value)}
-                                                        onChange={() => toggleOption(option.value)}
-                                                    />
-                                                    {option.label}
-                                                </label>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-
-                           
-                            {selectedValues.length > 0 && (
-                                <div className="">
-                                    <small className="text-muted mb-1 d-block">
-                                        Selected ({selectedValues.length}):
-                                    </small>
-                                    <div className="d-flex flex-wrap gap-1">
-                                        {getSelectedLabels().map((label, index) => (
-                                            <span
-                                                key={selectedValues[index]}
-                                                className="badge bg-success d-flex align-items-center"
-                                            >
-                                                {label}
-                                                <button
-                                                    type="button"
-                                                    className="btn-close btn-close-white ms-2"
-                                                    style={{ fontSize: '0.7rem' }}
-                                                    onClick={() => removeOption(selectedValues[index])}
-                                                />
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-                        </Col> */}
-                        {/* Button Section End */}
                         <Col md={12}>
-                            <InputSelect
+                            <InputSelectMultiSelect
                                 label="Lifestyle"
                                 name="lifestyle"
-                                placeholder='Select lifestyle'
-                                value={formData.lifestyle}
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    handleChange(e);
-                                }}
-                                onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                                required={true}
-                                disabled={false}
-                                error={formError.lifestyle}
+                                values={formData.lifestyle}
+                                onChange={(values) => {setFormData((prev) => ({ ...prev, lifestyle: values })); setFormError((prev) => ({ ...prev, lifestyle: "" })); }}
                                 options={[
-                                    { id: "1", value: "lifestyle 1", label: "lifestyle 1" },
-                                    { id: "2", value: "lifestyle 2", label: "lifestyle 2" },
-                                    { id: "3", value: "lifestyle 3", label: "lifestyle 3" },
+                                    { id: "1", value: "Non-smoker", label: "Non-smoker" },
+                                    { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
+                                    { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
+
                                 ]}
+                                placeholder="Select Lifestyle"
+                                addPlaceholder="Add Lifestyle"
+                                required={true}
+                                selectedOptionColor="var(--border-box-blue)"
+                                selectedOptionBorderColor="var(--border-box-blue)"
+                                error={formError.lifestyle}
                             />
+
                         </Col>
 
                         <Col lg={6}>

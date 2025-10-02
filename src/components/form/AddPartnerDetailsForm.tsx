@@ -6,7 +6,7 @@ import Modal from '../ui/Modal';
 import { InputFieldGroup } from '../ui/InputField';
 import { Accordion, Col, Row } from 'react-bootstrap';
 import { RadioButtonGroup } from '../ui/RadioField';
-import InputSelect from '../ui/InputSelect';
+import { InputSelect, InputSelectMultiSelect } from '../ui/InputSelect';
 import { PhoneNumberInput } from '../ui/PhoneNumberInput';
 import Button from '../ui/Button';
 import Simpleeditpro from '../../assets/images/Simpleeditpro.png';
@@ -44,7 +44,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     };
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
-    console.log("formData", formData);
+    // console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
     // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     //     const { name, value } = e.target;
@@ -201,7 +201,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         setFormError(errors);
         // console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
-            console.log("FormData111111 ", formData);
+            // console.log("FormData111111 ", formData);
             setFormError(initialFormError);
             setActiveTab("medical history");
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -401,10 +401,10 @@ export function MedicalHistoryForm({
         medication: formDataMedicalHistory?.medication || "yes",
         surgeries: formDataMedicalHistory?.surgeries || "yes",
         surgeriesContent: formDataMedicalHistory?.surgeriescontent || "",
-        medicalCondition: formDataMedicalHistory?.medicalCondition || "",
+        medicalCondition: formDataMedicalHistory?.medicalCondition || [],
         familyMedicalHistory: formDataMedicalHistory?.familyMedicalHistory || "",
-        
-        lifestyle: formDataMedicalHistory?.lifestyle || "",
+
+        lifestyle: formDataMedicalHistory?.lifestyle || [],
         stress: formDataMedicalHistory?.stress || "low",
         exercise: formDataMedicalHistory?.exercise || "never",
         medicationcontent: formDataMedicalHistory?.medicationcontent || "",
@@ -421,8 +421,9 @@ export function MedicalHistoryForm({
 
         if (data.medication === 'yes' && !data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
         if (data.surgeries === 'yes' && !data.surgeriescontent.trim()) errors.surgeriescontent = "Surgeries Content is required";
-        if (!data.medicalCondition.trim()) errors.medicalCondition = "Medical Condition is required";
-        if (!data.lifestyle.trim()) errors.lifestyle = "Lifestyle is required";
+        if (!data.medicalCondition.length) errors.medicalCondition = "Medical Condition is required";
+        if (!data.lifestyle.length) errors.lifestyle = "Lifestyle is required";
+
         // if (!data.medicationcontent.trim()) errors.medicationcontent = "Medication Content is required";
 
         return errors;
@@ -464,15 +465,15 @@ export function MedicalHistoryForm({
 
             } else {
                 setActiveTab("physical & fertility assessment");
+                console.log("FormData55", FormData);
                 setShowData((prev: any) => ({ ...prev, medicalHistory: FormData }));
-                console.log("FormData", FormData);
+
             }
 
         }
     };
 
     const [selectedValues, setSelectedValues] = useState<string[]>([]);
-    const [isOpen, setIsOpen] = useState(false);
 
     const options = [
         { value: "1", label: "Non-smoker" },
@@ -480,24 +481,6 @@ export function MedicalHistoryForm({
         { value: "3", label: "Vegetarian diet" },
     ];
 
-    const toggleOption = (value: string) => {
-        setSelectedValues(prev =>
-            prev.includes(value)
-                ? prev.filter(v => v !== value)
-                : [...prev, value]
-        );
-    };
-
-    const removeOption = (value: string) => {
-        setSelectedValues(prev => prev.filter(v => v !== value));
-    };
-
-    const getSelectedLabels = () => {
-        return selectedValues.map(value => {
-            const option = options.find(opt => opt.value === value);
-            return option ? option.label : value;
-        });
-    };
     return (
         <>
 
@@ -568,9 +551,7 @@ export function MedicalHistoryForm({
                                     name='surgeriescontent'
                                     onChange={handleChange}
                                     error={medicalHistoryFormError.surgeriescontent}
-
                                     placeholder="Enter surgeries"
-
                                     className={`mt-2`}
                                 >
 
@@ -578,8 +559,31 @@ export function MedicalHistoryForm({
                             )}
                         </div>
                     </Col>
-                    <Col md={12} >
-                        <InputFieldGroup
+                    <Col md={12}>
+
+                        <InputSelectMultiSelect
+                            label="Do you have any medical condition?"
+                            name="medicalCondition"
+                            values={FormData.medicalCondition}
+
+                            onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setMedicalHistoryFormError((prev) => ({ ...prev, medicalCondition: "" })); }}
+                            options={[
+                                { id: "1", value: "PCOS", label: "PCOS" },
+                                { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
+                                { id: "3", value: "Diabetes", label: "Diabetes" },
+                                { id: "4", value: "Hypertension", label: "Hypertension" },
+
+                            ]}
+                            placeholder="Search Medical Condition or Allergies"
+                            addPlaceholder="Add Medical Condition or Allergies"
+                            required={true}
+                            selectedOptionColor="var(--border-box)"
+                            selectedOptionBorderColor="var(--border-box)"
+                            error={medicalHistoryFormError.medicalCondition}
+
+                        />
+
+                        {/* <InputFieldGroup
                             label="Do you have any medical condition? "
                             name="medicalCondition"
                             type="text"
@@ -593,7 +597,9 @@ export function MedicalHistoryForm({
                             required={true}
                             error={medicalHistoryFormError.medicalCondition}
                             className="position-relative "
-                        ></InputFieldGroup>
+                        ></InputFieldGroup> */}
+
+
                     </Col>
                     <Col md={12} >
                         <InputFieldGroup
@@ -611,7 +617,27 @@ export function MedicalHistoryForm({
                         ></InputFieldGroup>
                     </Col>
                     <Col md={12} >
-                        <InputSelect
+
+                        <InputSelectMultiSelect
+                            label="Lifestyle"
+                            name="lifestyle"
+                            values={FormData.lifestyle}
+                            onChange={(values) => { setFormData((prev) => ({ ...prev, lifestyle: values })); setMedicalHistoryFormError((prev) => ({ ...prev, lifestyle: "" })); }}
+                            options={[
+                                { id: "1", value: "Non-smoker", label: "Non-smoker" },
+                                { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
+                                { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
+
+                            ]}
+                            placeholder="Select Lifestyle"
+                            addPlaceholder="Add Lifestyle"
+                            required={true}
+                            selectedOptionColor="var(--border-box-blue)"
+                            selectedOptionBorderColor="var(--border-box-blue)"
+                            error={medicalHistoryFormError.lifestyle}
+                        />
+
+                        {/* <InputSelect
                             label="Lifestyle"
                             name="lifestyle"
                             value={FormData.lifestyle}
@@ -630,7 +656,9 @@ export function MedicalHistoryForm({
                                 { id: "5", value: "Chronic Stress", label: "Chronic Stress" },
                                 { id: "6", value: "Chronic Stress", label: "Chronic Stress" },
                             ]}
-                        />
+                        /> */}
+
+
                     </Col>
 
                     <Col md={6} >
@@ -665,7 +693,7 @@ export function MedicalHistoryForm({
                     </Col>
                     <div className='d-flex gap-3 mt-3'>
 
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false);setEditMedicalHistory(false) }}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setAddPartner(false); setEditMedicalHistory(false) }}>
                             Cancel
                         </Button>
 
@@ -739,14 +767,14 @@ export function PhysicalAssessment({
                     </Col>
                     <Col md={6}>
 
-                    <InputFieldGroup
-                        label="Weight"
-                        name="weight"
-                        type="number"
-                        
-                        value={formData.weight}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="Weight"
+                            name="weight"
+                            type="number"
+
+                            value={formData.weight}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
@@ -760,14 +788,14 @@ export function PhysicalAssessment({
 
                     <Col md={6}>
 
-                    <InputFieldGroup
-                        label="BMI"
-                        name="bmi"
-                        type="number"
-                  
-                        value={formData.bmi}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="BMI"
+                            name="bmi"
+                            type="number"
+
+                            value={formData.bmi}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
@@ -806,19 +834,19 @@ export function PhysicalAssessment({
 
                     </Col>
 
-                <Col md={5} className='input-custom-width'>
-                    <InputFieldGroup
-                        label="Blood Pressure"
-                        name="systolic"
-                        type="number"
-                       
-                        placeholder="Systolic(mmHg)"
-                        required={true}
-                        disabled={false}
-                        readOnly={false}
-                        value={formData.systolic}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                    <Col md={5} className='input-custom-width'>
+                        <InputFieldGroup
+                            label="Blood Pressure"
+                            name="systolic"
+                            type="number"
+
+                            placeholder="Systolic(mmHg)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            value={formData.systolic}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
                             }}
                             error={formError.systolic}
@@ -836,19 +864,19 @@ export function PhysicalAssessment({
 
                     </Col>
 
-                <Col md={5} className='input-custom-width'>
-                    <InputFieldGroup
-                        label="" // No label here to match the design
-                        name="diastolic"
-                        type="number"
-                        className="input-custom-data"
-                        placeholder="Diastolic(mmHg)"
-                        required={false}
-                        disabled={false}
-                        readOnly={false}
-                        value={formData.diastolic}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                    <Col md={5} className='input-custom-width'>
+                        <InputFieldGroup
+                            label="" // No label here to match the design
+                            name="diastolic"
+                            type="number"
+                            className="input-custom-data"
+                            placeholder="Diastolic(mmHg)"
+                            required={false}
+                            disabled={false}
+                            readOnly={false}
+                            value={formData.diastolic}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
                             }}
                             error={formError.diastolic}
@@ -858,13 +886,13 @@ export function PhysicalAssessment({
 
                     <Col md={12}>
 
-                    <InputFieldGroup
-                        label="Heart Rate"
-                        name="heartRate"
-                        type="number"
-                        value={formData.heartRate}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            handleChange(e);
+                        <InputFieldGroup
+                            label="Heart Rate"
+                            name="heartRate"
+                            type="number"
+                            value={formData.heartRate}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
 
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
@@ -915,7 +943,7 @@ export function FertilityAssessment({
 
     };
     const handleSubmitData = (e: React.FormEvent) => {
-       console.log(formData);
+        console.log(formData);
     };
 
     return (

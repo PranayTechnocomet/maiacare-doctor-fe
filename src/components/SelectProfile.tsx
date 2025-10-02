@@ -64,7 +64,7 @@ export default function SelectProfile() {
 
             <div className='d-flex flex-column align-items-center select-profile-main'>
               {profileData.map((profile) => (
-                <div key={profile.id} className='profile-card d-flex justify-content-between align-items-center my-2 w-100' onClick={() => router.push(profile.route)}>
+                <div key={profile.id} className='profile-card shadow-sm d-flex justify-content-between align-items-center my-2 w-100' onClick={() => router.push(profile.route)}>
                   {/* Left side: image + title + subtitle */}
                   <div className='d-flex gap-3 align-items-center'>
                     <Image

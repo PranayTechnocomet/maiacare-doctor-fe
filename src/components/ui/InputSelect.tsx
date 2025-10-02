@@ -2,8 +2,9 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
+import Select from 'react-dropdown-select';
 
-export default function InputSelect({
+export function InputSelect({
     label="",
     name,
     defaultValue,
@@ -49,10 +50,12 @@ export default function InputSelect({
         disabled={disabled}
         className={`maiacare-input-field ${className}`}
         {...rest}
+
       >
         <option value={""}>{placeholder}</option>
         {options.map(option => (
           <option key={option.id} value={option.value}>{option.label}</option>
+
         ))}
       </Form.Select>
       {error && <InputFieldError error={error} />}
@@ -60,6 +63,95 @@ export default function InputSelect({
     </div>
   )
 }
+
+type OptionType = { value: string; label: string };
+
+interface InputSelectMultiSelectProps {
+  values: OptionType[];
+  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
+  options: { id: string, value: string, label: string }[];
+  placeholder?: string;
+  addPlaceholder?: string;
+  label?: string;
+  name?: string;
+  required?: boolean;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  className?: string;
+  selectedOptionColor?: string;
+  selectedOptionBorderColor?: string;
+  [key: string]: any;
+}
+
+export function InputSelectMultiSelect({
+  values,
+  onChange,
+  options,
+  placeholder,
+  addPlaceholder,
+  label,
+  name,
+  required,
+  disabled,
+  error,
+  helperText,
+  className = "",
+  selectedOptionColor= "var(--border-box)",
+  selectedOptionBorderColor= "var(--border-box)",
+  ...rest
+}: InputSelectMultiSelectProps) {
+  const handleRemove = (value: string) => {
+    const newValues = values.filter((v) => v.value !== value);
+    onChange(newValues);
+  };
+
+  return (
+    <div className={`maiacare-input-field-container ${className}`}>
+{label && <InputFieldLabel label={label} required={required} />}
+
+      <Select
+        {...rest}
+        name={name}
+        className="maiacare-input-field custom-react-dropdown"
+        options={options}
+        multi
+        values={values}
+        placeholder={placeholder}
+        disabled={disabled}
+        onChange={(vals) => onChange(vals)}
+        // required={required}
+        addPlaceholder={addPlaceholder || placeholder}
+      />
+
+      {values.length > 0 && (
+        <p className="my-2 maiacare-input-field-helper-text">
+          {values.length} selected
+        </p>
+      )}
+
+      <div className="my-2 d-flex gap-2 flex-wrap">
+        {values.map((item) => (
+          <div key={item.value} className="input-select-item-box" style={{color: selectedOptionColor, borderColor: selectedOptionBorderColor}}>
+            {item.label}
+            <span
+              className="ms-2 cursor-pointer"
+              onClick={() => handleRemove(item.value)}
+            >
+              ✕
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {helperText && !error && (
+        <div className="form-text">{helperText}</div>
+      )}
+      {error && <div className="text-danger mt-1">{error}</div>}
+    </div>
+  );
+}
+
 
 // "use client";
 // import React, { useState, useRef, useEffect } from 'react';

@@ -83,7 +83,7 @@ export interface AddPatientFormData {
 export interface RescheduleAppointmentForm {
   reason: string;
   type: string;
-  reasonForVisit: string;
+  reasonForVisit: [];
   appointmentDate: string;
   appointmentTime: string;
   forTime: string;
@@ -100,7 +100,7 @@ export interface BookAppointmentForm {
 
   appointmentId: string;
   type: string;
-  concernsTreatment: string;
+  reasonForVisit: [];
   appointmentDate: string;
   appointmentTime: string;
   forTime: string;
@@ -143,13 +143,15 @@ export interface EditFertilityAssessment {
   surgeriesContent: string;
 }
 
+export type OptionType = { value: string; label: string };
+
 export interface MedicalHistoryType {
   medication: string,
   surgeries: string,
   surgeriesContent: string,
-  medicalCondition: string,
+  medicalCondition: OptionType[],
   familyMedicalHistory: string,
-  lifestyle: string,
+  lifestyle: OptionType[],
   stress: string,
   exercise: string,
   medicationcontent: string,
@@ -196,7 +198,7 @@ export interface PaymentFormData {
 }
 
 export interface MedicationTests {
-    tests: string;
+    tests: OptionType[],
 }
 
 export type ScheduleTimeOff = {
@@ -219,3 +221,5 @@ export interface FertilityAssessmentFormType {
   timeduration: string;
   ectopicpregnancy: string;
 }
+
+

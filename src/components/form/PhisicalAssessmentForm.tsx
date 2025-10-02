@@ -8,21 +8,28 @@ import Modal from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 import { InputFieldGroup } from "@/components/ui/InputField";
 import { Col, Row } from "react-bootstrap";
-import InputSelect from "@/components/ui/InputSelect";
+import {InputSelect} from "@/components/ui/InputSelect";
 import { PhysicalAssessmentDataModel } from "@/utils/types/interfaces";
+import toast from "react-hot-toast";
+import { BsInfoCircle } from 'react-icons/bs';
 
 interface PropsPhisicalAssessmentForm {
-    setShowPhisicalAssessment: any;
-    setModalFormPhisicalData: any;
+    setShowPhisicalAssessment: React.Dispatch<React.SetStateAction<boolean>>,
+    setModalFormPhisicalData: React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel[]>>;
     editPhysicalAssessment?: PhysicalAssessmentDataModel,
-    setEditPhysicalAssessment?: any,
+    setEditPhysicalAssessment?: React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel>>,
+    modalFormPhisicalData?: PhysicalAssessmentDataModel[],
 }
+
+// React.Dispatch<React.SetStateAction<PhysicalAssessmentDataModel>>  PhysicalAssessmentDataModel
 
 const PhisicalAssessmentForm = ({
     setShowPhisicalAssessment,
     setModalFormPhisicalData,
     editPhysicalAssessment,
     setEditPhysicalAssessment,
+    modalFormPhisicalData
+
 }: PropsPhisicalAssessmentForm) => {
 
     type FormError = Partial<Record<keyof PhysicalAssessmentDataModel, string>>;
@@ -37,6 +44,17 @@ const PhisicalAssessmentForm = ({
         diastolic: editPhysicalAssessment?.diastolic || "",
         heartRate: editPhysicalAssessment?.heartRate || "",
     };
+    const initialFormDataForClear: PhysicalAssessmentDataModel = {
+        id: "",
+        height: "",
+        weight: "",
+        bmi: "",
+        bloodGroup: "",
+        systolic: "",
+        diastolic: "",
+        heartRate: ""
+
+    };
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
@@ -50,7 +68,11 @@ const PhisicalAssessmentForm = ({
         if (!data.height.trim()) errors.height = "Height is required";
         if (!data.weight.trim()) errors.weight = "Weight is required";
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
-        if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
+
+        if (modalFormPhisicalData?.length === 0) {
+            if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
+        }
+
         if (!data.systolic.trim() && !data.diastolic.trim()) {
             errors.systolic = "At least one of systolic or diastolic is required";
 
@@ -92,59 +114,41 @@ const PhisicalAssessmentForm = ({
                 id: generateRandomId(),
             };
 
-            // setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
-            // setShowPhisicalAssessment(false);
-            // setFormError(initialFormError);
-console.log("editPhysicalAssessment", editPhysicalAssessment);
-            // if (editPhysicalAssessment) {
-            //     console.log("editPhysicalAssessment edit time", formData);
-            //     setModalFormPhisicalData((prev: any) =>
-            //         prev.map((item: any) =>
-            //             item.id === editPhysicalAssessment.id ? { ...updatedFormData, formData } : item
-            //         )
-            //     );
-            //     setShowPhisicalAssessment(false);
-            //     setFormError(initialFormError);
-            //     setFormData(initialFormData);
-            //     setEditPhysicalAssessment({})
-
-            // } else {
-            //     setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
-            //     setShowPhisicalAssessment(false);
-            //     setFormError(initialFormError);
-            //     setFormData(initialFormData);
-            //     console.log("else part",);
-
-            // }
-
             if (editPhysicalAssessment && editPhysicalAssessment.id) {
-                // console.log("editPhysicalAssessment edit time", formData);
-            
-                setModalFormPhisicalData((prev: any) =>
-                    prev.map((item: any) =>
+                setModalFormPhisicalData((prev) =>
+                    prev.map((item) =>
                         item.id === editPhysicalAssessment.id ? { ...item, ...formData } : item
                     )
                 );
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
-                setFormData(initialFormData);
-                setEditPhysicalAssessment({});
+                setEditPhysicalAssessment?.(initialFormDataForClear);
+                toast.success('Physical assessment edited successfully', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
+
             } else {
-                setModalFormPhisicalData((prev: any) => [...prev, updatedFormData]);
+                setModalFormPhisicalData((prev) => [...prev, updatedFormData]);
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
                 setFormData(initialFormData);
+                toast.success('Physical assessment added successfully', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
+
             }
-            
+
         }
     };
+
+    console.log("modalFormPhisicalData--modal", modalFormPhisicalData);
+    console.log("editPhysicalAssessment--modal", editPhysicalAssessment);
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <Row className="g-md-4 g-2 accordion-form-physical-assessment" >
+                <Row className="g-md-4 g-2 accordion-form-physical-assessment">
                     <Col md={6}>
-
                         <InputFieldGroup
                             label="Height"
                             name="height"
@@ -164,7 +168,6 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                         />
                     </Col>
                     <Col md={6}>
-
                         <InputFieldGroup
                             label="Weight"
                             name="weight"
@@ -185,7 +188,6 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                     </Col>
 
                     <Col md={6}>
-
                         <InputFieldGroup
                             label="BMI"
                             name="bmi"
@@ -208,13 +210,18 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                         <InputSelect
                             label="Blood Group"
                             name="bloodGroup"
-                            value={formData.bloodGroup}
+                            value={formData.bloodGroup || modalFormPhisicalData?.[0]?.bloodGroup}
                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                 handleChange(e);
                             }}
                             onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
                             required={true}
-                            disabled={false}
+                            // disabled={
+                            //     modalFormPhisicalData.includes(editPhysicalAssessment) 
+                            //     ? false : modalFormPhisicalData.length == 0 ? false : true
+                            //     }
+
+                            disabled={modalFormPhisicalData?.length == 0 ? false : true}
                             error={formError.bloodGroup}
                             placeholder="Select Blood Group"
                             options={[
@@ -298,7 +305,7 @@ console.log("editPhysicalAssessment", editPhysicalAssessment);
                     </Col>
 
                     <div className='d-flex gap-3'>
-                        <Button className="w-100" variant="outline" disabled={false} onClick={() => setShowPhisicalAssessment(false)}>
+                        <Button className="w-100" variant="outline" disabled={false} onClick={() => { setShowPhisicalAssessment(false); setEditPhysicalAssessment?.(initialFormDataForClear) }}>
                             Cancel
                         </Button>
                         <Button className="w-100" variant="default" disabled={false} type="submit">

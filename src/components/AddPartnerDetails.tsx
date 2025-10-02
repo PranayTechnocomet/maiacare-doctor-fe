@@ -20,11 +20,14 @@ interface AddPartnerDetailsProps {
     showData: any;
 }
 
-export function AddPartnerDetails({ setAddPartner, setShowContent,
+export function AddPartnerDetails({
+    setAddPartner,
+    setShowContent,
     setShowPartnerDetail,
-    setShowData, modalEditTab,
-    setModalEditTab, showData, }
-
+    setShowData,
+    modalEditTab,
+    setModalEditTab,
+    showData, }
     : AddPartnerDetailsProps) {
 
     const [activeTab, setActiveTab] = useState<string>("basic");
@@ -39,11 +42,10 @@ export function AddPartnerDetails({ setAddPartner, setShowContent,
             label: "Basic Details",
             content: (
                 <div>
-                    <BasicDetailsForm setAddPartner={setAddPartner} 
-                    setActiveTab={setActiveTab} 
-                    setShowData={setShowData} 
+                    <BasicDetailsForm setAddPartner={setAddPartner}
+                        setActiveTab={setActiveTab}
+                        setShowData={setShowData}
                     />
-
                 </div>
             ),
         },
@@ -133,7 +135,7 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
         if (!data.bmi.trim()) errors.bmi = "BMI is required";
         if (!data.bloodGroup.trim()) errors.bloodGroup = "Blood group is required";
         if (!data.systolic.trim()) errors.systolic = "Blood pressure is required";
-        
+
         if (!data.heartRate.trim()) errors.heartRate = "Heart rate is required";
 
         if (!data.semenAnalysis.trim()) errors.semenAnalysis = "Seminal Analysis is required";
@@ -165,10 +167,10 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
 
             setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
             setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
-            
+
             toast.success('Partner added successfully', {
-                icon: <BsInfoCircle    size={22} color="white" />,  
-              });
+                icon: <BsInfoCircle size={22} color="white" />,
+            });
         }
         // setShowData((prev: any) => ({ ...prev, PhysicalAssessmentData: [...prev.PhysicalAssessmentData, formData] }));
         // setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formData } }));
@@ -184,7 +186,7 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
                         </div>
                     </Accordion.Header>
                     <Accordion.Body className='pt-0'>
-                        <PhysicalAssessment setFormError={setFormError} formError={formError} formData={formData} setFormData={setFormData} setShowContent={setShowContent} setShowPartnerDetail={setShowPartnerDetail} setShowData={setShowData} showData={showData}  />
+                        <PhysicalAssessment setFormError={setFormError} formError={formError} formData={formData} setFormData={setFormData} setShowContent={setShowContent} setShowPartnerDetail={setShowPartnerDetail} setShowData={setShowData} showData={showData} />
 
                     </Accordion.Body>
                 </Accordion.Item>
@@ -202,7 +204,7 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
             </Accordion>
 
             <div className='d-flex gap-3'>
-                <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={()=> setAddPartner(false)}>
+                <Button className="w-100 mt-3" variant="outline" disabled={false} onClick={() => setAddPartner(false)}>
                     Cancel
                 </Button>
                 <Button className="w-100 mt-3" variant="default" disabled={false} type="button" onClick={(e: any) => handleSubmit(e)}

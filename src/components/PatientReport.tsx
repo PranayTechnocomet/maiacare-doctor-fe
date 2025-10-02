@@ -7,7 +7,7 @@ import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
 import { patientReportData } from "@/utils/StaticData"
 import { ChangeEvent } from "react"
 import { InputFieldGroup } from "./ui/InputField"
-import InputSelect from "./ui/InputSelect"
+import {InputSelect} from "./ui/InputSelect"
 import Button from "./ui/Button"
 
 const PatientReport = () => {

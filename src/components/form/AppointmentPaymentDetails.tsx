@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import { InputFieldGroup } from "../ui/InputField";
-import { ChangeEvent, useState } from "react";
-import InputSelect from "../ui/InputSelect";
+import { ChangeEvent, useEffect, useState } from "react";
+import {InputSelect} from "../ui/InputSelect";
 import Button from "../ui/Button";
 import { PaymentFormData } from "@/utils/types/interfaces";
 
@@ -32,19 +32,36 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
 
-        if (name === "status") {
-            const newClass =
-                value === "Paid"
-                    ? "patient-journey-badge-success"
-                    : value === "Unpaid"
-                        ? "patient-journey-badge-pending"
-                        : value === "other"
-                            ? "patient-journey-badge-InProgress"
-                            : "";
+        // if (name === "status") {
+        //     const newClass =
+        //         value === "Paid"
+        //             ? "patient-journey-badge-success"
+        //             : value === "Unpaid"
+        //                 ? "patient-journey-badge-pending"
+        //                 : value === "other"
+        //                     ? "patient-journey-badge-InProgress"
+        //                     : "";
 
-            setStatusClass(newClass);
-        }
+        //     setStatusClass(newClass);
+        // }
     };
+
+    useEffect(() => {
+        if (!formData.status) {
+            setStatusClass("");
+            return;
+        }
+        const newClass =
+            formData.status === "Paid"
+                ? "patient-journey-badge-success"
+                : formData.status === "Unpaid"
+                    ? "patient-journey-badge-pending"
+                    : formData.status === "other"
+                        ? "patient-journey-badge-InProgress"
+                        : "";
+
+        setStatusClass(newClass);
+    }, [formData.status]);
 
     const validateForm = (data: PaymentFormData): FormError => {
         const errors: FormError = {};
@@ -65,10 +82,8 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
 
         const errors = validateForm(formData);
         setFormError(errors);
-        // console.log("errors", errors);
 
         if (Object.keys(errors).length === 0) {
-            console.log("payment details succesfully", formData);
             setPaymentFormData(formData);
             setFormError(initialFormError);
             setPaymentFormShow(false);

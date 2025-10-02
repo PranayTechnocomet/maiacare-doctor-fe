@@ -61,10 +61,11 @@
     overflow: hidden !important;
 }
 
-.phisical-assessment-accordion-item-edit{
+.phisical-assessment-accordion-item-edit {
     border-bottom: 1px solid var(--color-brand);
     cursor: pointer;
 }
+
 .phisical-assessment-accordion-showData-box {
     border: 1px solid var(--google-icon-border);
     padding: 14px;
@@ -96,7 +97,7 @@
     align-items: center !important;
     transition: all 0.3s ease !important;
 
-    
+
     min-height: 220px;
     /* overflow: hidden; */
 }

@@ -15,9 +15,9 @@
 }
 
 .maiacare-input-field {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--color-brand);
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: var(--color-brand) !important;
 
 }
 
@@ -25,8 +25,17 @@
     color: var(--color-radio) !important;
 
 }
-.maiacare-input-field-label::placeholder{
+
+.maiacare-input-field-label::placeholder {
     color: var(--color-radio) !important;
+}
+
+.custom-react-dropdown input::placeholder {
+    color: var(--color-placeholder-input);    
+    opacity: 1 ;
+    font-size: 16px;
+    font-weight: 500 ;
+    line-height: 22px ;
 }
 
 .maiacare-input-field-helper-text {
@@ -568,6 +577,7 @@
     font-style: medium;
     color: var(--color-heading);
 }
+
 .appointments-total-box-item {
     font-size: 16px;
     font-weight: 500;
@@ -732,6 +742,9 @@
     .maiacare-input-field {
         font-size: 15px;
     }
+    .custom-react-dropdown input::placeholder {
+        font-size: 15px;
+    }
 
     .maiacare-input-field-helper-text,
     .maiacare-input-field-error {
@@ -800,6 +813,9 @@
     }
 
     .maiacare-input-field {
+        font-size: 14px;
+    }
+    .custom-react-dropdown input::placeholder {
         font-size: 14px;
     }
 
@@ -1034,7 +1050,7 @@
     height: fit-content;
 }
 
-.patient-treatment-status-Completed select{
+.patient-treatment-status-Completed select {
     color: red;
 }
 
@@ -1379,7 +1395,7 @@
     color: var(--color-radio-lable);
 }
 
-.blood-test-box-label{
+.blood-test-box-label {
     font-size: 18px;
     font-weight: 500;
     line-height: 24px;
@@ -1503,7 +1519,7 @@
     color: var(--color-heading);
 }
 
-.medication-prescription-accordion-subtitle{
+.medication-prescription-accordion-subtitle {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -1511,7 +1527,7 @@
     color: var(--color-radio);
 }
 
-.medication-prescription-accordion-item{
+.medication-prescription-accordion-item {
     font-size: 14px;
     font-weight: 400;
     line-height: 18px;
@@ -1519,19 +1535,28 @@
     color: var(--color-radio-labl);
 }
 
-.Quantity-box-show{
+.Quantity-box-show {
     font-size: 16px;
     font-weight: 500;
     line-height: 22px;
-    color : var(--color-radio-lable);
+    color: var(--color-radio-lable);
 }
 
-.phisical-assessment-accordion-item-edit{
+.phisical-assessment-accordion-item-edit {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
     font-style: medium;
     color: var(--color-brand);
+}
+
+.input-select-item-box {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    /* color: var(--border-box);     */
+
 }
 
 @media screen and (max-width: 1391px) {
@@ -1592,14 +1617,16 @@
     .contact-detail {
         font-size: 12px;
     }
+
     .your-device-box-title {
         font-size: 17px;
     }
+
     .your-device-box-subtitle {
         font-size: 15px;
 
     }
-    
+
 }
 
 
@@ -1608,15 +1635,18 @@
         font-size: 16px;
     }
 }
-@media screen and (max-width: 1032px){
+
+@media screen and (max-width: 1032px) {
     .your-device-box-title {
         font-size: 16px;
     }
+
     .your-device-box-subtitle {
         font-size: 14px;
 
     }
 }
+
 @media screen and (max-width: 1024px) {
     .contact-detail {
         font-size: 11px;

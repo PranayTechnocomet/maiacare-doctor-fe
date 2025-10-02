@@ -8,7 +8,7 @@ import {
   InputFieldGroup,
   InputFieldHelperText,
 } from "@/components/ui/InputField";
-import InputSelect from "@/components/ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
 
@@ -27,6 +27,8 @@ import { TimePickerFieldGroup } from "@/components/ui/CustomTimePicker";
 import toast from "react-hot-toast";
 import { FaSmile } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
+import Select from "react-dropdown-select";
+
 
 const data: Patient[] = [
   {
@@ -96,6 +98,11 @@ const columns: ColumnDef<Patient>[] = [
   },
 ];
 
+interface Option {
+  value: string;
+  label: string;
+}
+
 // Types for form data and form error
 type FormData = {
   name: string;
@@ -152,6 +159,8 @@ export default function Page() {
       endTime: "",
     }
   )
+
+  const [selected, setSelected] = useState<Option[]>([]);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
@@ -160,10 +169,13 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState(false);
 
   const options = [
-    { value: "1", label: "Non-smoker" },
-    { value: "2", label: "Occasional alcohol" },
-    { value: "3", label: "Vegetarian diet" },
+    { value: "Non-smoker", label: "Non-smoker" },
+    { value: "Occasional alcohol", label: "Occasional alcohol" },
+    { value: "Vegetarian diet", label: "Vegetarian diet" },
+
   ];
+
+  // console.log("selected", selected);
 
   const toggleOption = (value: string) => {
     setSelectedValues(prev =>
@@ -171,6 +183,8 @@ export default function Page() {
         ? prev.filter(v => v !== value)
         : [...prev, value]
     );
+    console.log("value", value);
+
   };
 
   const removeOption = (value: string) => {
@@ -230,7 +244,7 @@ export default function Page() {
     setTempShowData(formData);
     setFormData(initialFormData);
     toast.success('Form Submitted Successfully', {
-      icon: <BsInfoCircle    size={22} color="white" />,  
+      icon: <BsInfoCircle size={22} color="white" />,
     });
   };
 
@@ -321,6 +335,7 @@ export default function Page() {
             <IoIosEye size={25} />
           </div>
         </InputFieldGroup>
+
         <InputSelect
           label="Select Doctor"
           name="doctor"
@@ -428,10 +443,9 @@ export default function Page() {
 
         <label className="form-label">Lifestyle</label>
 
-
         <div className="dropdown">
           <button
-            className="btn btn-outline-secondary dropdown-toggle w-100 text-start "
+            className="btn btn-outline-secondary dropdown-toggle w-100 text-start"
             type="button"
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
@@ -443,7 +457,8 @@ export default function Page() {
           </button>
 
           {isOpen && (
-            <ul className="dropdown-menu show w-100">
+            <ul className="dropdown-menu d-flex show w-100">
+
               {options.map(option => (
                 <li key={option.value}>
                   <label className="dropdown-item d-flex align-items-center mb-0">
@@ -460,7 +475,6 @@ export default function Page() {
             </ul>
           )}
         </div>
-
 
         {selectedValues.length > 0 && (
           <div className="">
@@ -485,6 +499,66 @@ export default function Page() {
             </div>
           </div>
         )}
+
+
+        {/* <div className="mt-3">
+          <h3>test select 2</h3>
+          <div className={`maiacare-input-field-container `}>
+
+            <Select
+              name="name"
+              className="react-dropdown-select-custom maiacare-input-field"
+              options={options}
+              multi={true}
+              values={selected}
+              placeholder="Search Medical Condition or Allergies"
+              onChange={(values) => setSelected(values)}
+              required={true}
+              addPlaceholder="Add Medical Condition or Allergies"
+            />
+
+            {selected.length > 0 && <span className="mt-3">{selected.length} selected</span>}
+
+            <div className="mt-3 d-flex gap-2 flex-wrap" >
+              {selected.map((item) => (
+                <div
+                  key={item.value}
+                  className="input-select-item-box"
+                >
+                  {item.label}
+                  <span className="ms-2"
+                    onClick={() => setSelected(selected.filter((s) => s.value !== item.value))}
+                  >
+                    ✕
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div> */}
+
+        <div className="mt-3">
+
+          <InputSelectMultiSelect
+            label="Do you have any medical condition?"
+            name="medicalCondition"
+            values={selected}
+            onChange={(values) => setSelected(values)}
+            options={[
+              { id: "1", value: "Non-smoker", label: "Non-smoker" },
+              { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
+              { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
+          
+            ]}
+            placeholder="Search Medical Condition or Allergies"
+            addPlaceholder="Add Medical Condition or Allergies"
+            required={true}
+            selectedOptionColor="blue"
+            selectedOptionBorderColor="blue"
+            error="validation"
+          />
+        </div>
+
 
         {/* Button Section End */}
 

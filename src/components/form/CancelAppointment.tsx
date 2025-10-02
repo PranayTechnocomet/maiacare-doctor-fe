@@ -1,7 +1,7 @@
 "use client"
 
 import { ChangeEvent, FormEvent, useState } from "react";
-import InputSelect from "../ui/InputSelect"
+import {InputSelect} from "../ui/InputSelect"
 import Textarea from "../ui/Textarea";
 import Button from "../ui/Button";
 import AppointmentProfile from "../ui/Custom/AppointmentProfile";
@@ -21,8 +21,13 @@ const initialFormData: CancelAppointmentForm = {
 
 const initialFormError: FormError = {};
 
-export function CancelAppointment({ setCancelModal, setShowSuccessModalCancel }: any) {
-
+export function CancelAppointment({
+    setCancelModal,
+    setShowSuccessModalCancel
+}: {
+    setCancelModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setShowSuccessModalCancel: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     const [formData, setFormData] = useState<CancelAppointmentForm>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
