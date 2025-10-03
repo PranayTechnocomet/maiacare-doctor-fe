@@ -208,7 +208,7 @@ export const FertilityAssessmentForm = ({
                             </div>
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
-                            <Row className="g-md-3 g-1">
+                            <Row className="g-md-2 g-1">
                                 <Col md={12}>
                                     <RadioButtonGroup
                                         label="Have you been pregnant before?"

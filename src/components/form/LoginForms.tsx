@@ -95,7 +95,7 @@ export function LoginForms() {
 
                 </InputFieldGroup>
                 <div className='pt-3'>
-                    <InputFieldGroup
+                    {/* <InputFieldGroup
                         type={showPassword ? 'text' : 'password'}
                         label="Password"
                         placeholder="********"
@@ -112,6 +112,36 @@ export function LoginForms() {
 
                         <span
                             onClick={togglePasswordVisibility}
+                            className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
+                            style={{ zIndex: 8 }}
+                        >
+                            {showPassword ? <BiShow size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
+
+                        </span>
+                    </InputFieldGroup> */}
+
+
+
+
+
+                    <InputFieldGroup
+                        type={showPassword ? 'text' : 'password'}
+                        label="Password"
+                        placeholder="********"
+                        required={true}
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        error={formError.password}
+                        className="position-relative  input-email-login-data"
+                    >
+                        {/* <BiLockAlt size={24} className="input-email-data" /> */}
+                        <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
+                            <path d="M16.8503 6.39844H14.6628V4.83594C14.6628 3.7585 14.2348 2.72518 13.473 1.96332C12.7111 1.20145 11.6778 0.773438 10.6003 0.773438C9.5229 0.773438 8.48959 1.20145 7.72772 1.96332C6.96585 2.72518 6.53784 3.7585 6.53784 4.83594V6.39844H4.35034C3.93594 6.39844 3.53851 6.56306 3.24549 6.85608C2.95246 7.14911 2.78784 7.54654 2.78784 7.96094V16.7109C2.78784 17.1253 2.95246 17.5228 3.24549 17.8158C3.53851 18.1088 3.93594 18.2734 4.35034 18.2734H16.8503C17.2647 18.2734 17.6622 18.1088 17.9552 17.8158C18.2482 17.5228 18.4128 17.1253 18.4128 16.7109V7.96094C18.4128 7.54654 18.2482 7.14911 17.9552 6.85608C17.6622 6.56306 17.2647 6.39844 16.8503 6.39844ZM8.41284 4.83594C8.41284 4.25578 8.64331 3.69938 9.05355 3.28914C9.46378 2.87891 10.0202 2.64844 10.6003 2.64844C11.1805 2.64844 11.7369 2.87891 12.1471 3.28914C12.5574 3.69938 12.7878 4.25578 12.7878 4.83594V6.39844H8.41284V4.83594ZM16.5378 16.3984H4.66284V8.27344H16.5378V16.3984Z" fill="#2B4360" />
+                        </svg>
+
+                        <span
+                            onClick={() => setShowPassword(!showPassword)}
                             className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
                             style={{ zIndex: 8 }}
                         >
@@ -327,6 +357,7 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
 
                         </span>
                     </InputFieldGroup>
+                    
                 </div>
                 <div className='pt-3'>
                     <InputFieldGroup

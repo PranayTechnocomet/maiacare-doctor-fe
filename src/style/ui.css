@@ -422,10 +422,6 @@ input[type=number] {
     display: none !important;
 }
 
-/* input select item box none hide aroow  */
-.custom-react-dropdown .react-dropdown-select-dropdown-handle {
-    /* display: none; */
-}
 
 .custom-react-dropdown .react-dropdown-select-item-selected {
     background-color: var(--color-brand) !important;
@@ -434,7 +430,7 @@ input[type=number] {
 .custom-react-dropdown .react-dropdown-select-dropdown-handle svg {
     width: 20px !important;
     height: 20px !important;
-    /* color: red !important; */
+    color: var(--color-radio) !important;
 }
 
 .input-select-item-box {
@@ -455,7 +451,6 @@ input[type=number] {
     border-radius: 10px;
     margin-bottom: 8px;
 }
-
 
 /* pankaj solanki end */
 
