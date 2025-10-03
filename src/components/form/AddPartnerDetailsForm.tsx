@@ -565,7 +565,6 @@ export function MedicalHistoryForm({
                             label="Do you have any medical condition?"
                             name="medicalCondition"
                             values={FormData.medicalCondition}
-
                             onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setMedicalHistoryFormError((prev) => ({ ...prev, medicalCondition: "" })); }}
                             options={[
                                 { id: "1", value: "PCOS", label: "PCOS" },
@@ -577,6 +576,8 @@ export function MedicalHistoryForm({
                             placeholder="Search Medical Condition or Allergies"
                             addPlaceholder="Add Medical Condition or Allergies"
                             required={true}
+                            dropdownHandle={false} // open close arrow icon show hide
+
                             selectedOptionColor="var(--border-box)"
                             selectedOptionBorderColor="var(--border-box)"
                             error={medicalHistoryFormError.medicalCondition}
@@ -632,6 +633,7 @@ export function MedicalHistoryForm({
                             placeholder="Select Lifestyle"
                             addPlaceholder="Add Lifestyle"
                             required={true}
+                            dropdownHandle={true} // open close arrow icon show hide
                             selectedOptionColor="var(--border-box-blue)"
                             selectedOptionBorderColor="var(--border-box-blue)"
                             error={medicalHistoryFormError.lifestyle}

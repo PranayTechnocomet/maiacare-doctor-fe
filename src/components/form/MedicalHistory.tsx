@@ -178,6 +178,8 @@ export default function MedicalHistory({
                                 placeholder="Search Medical Condition or Allergies"
                                 addPlaceholder="Add Medical Condition or Allergies"
                                 required={true}
+                                dropdownHandle={false} // open close arrow icon show hide
+
                                 selectedOptionColor="var(--border-box)"
                                 selectedOptionBorderColor="var(--border-box)"
                                 error={formError.medicalCondition}
@@ -216,6 +218,7 @@ export default function MedicalHistory({
                                 placeholder="Select Lifestyle"
                                 addPlaceholder="Add Lifestyle"
                                 required={true}
+                                dropdownHandle={true} // open close arrow icon show hide
                                 selectedOptionColor="var(--border-box-blue)"
                                 selectedOptionBorderColor="var(--border-box-blue)"
                                 error={formError.lifestyle}

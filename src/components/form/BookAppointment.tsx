@@ -193,6 +193,8 @@ export function BookAppointment({
                                 placeholder="Select Lifestyle"
                                 addPlaceholder="Add Lifestyle"
                                 required={true}
+                                dropdownHandle={false} // open close arrow icon show hide
+                                
                                 error={formError.reasonForVisit}
                             />
 
