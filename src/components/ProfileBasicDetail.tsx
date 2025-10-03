@@ -129,7 +129,7 @@ const ProfileBasicDetail = () => {
 
     const [showModal, setShowModal] = useState<boolean>(false);
     const [medicalHistoryFormData, setMedicalHistoryFormData] = useState<MedicalHistoryType | any>([]);
-    
+
     const [editingMedicalHistory, setEditingMedicalHistory] = useState<any>(null);
 
     const [modalFormPhisicalData, setModalFormPhisicalData] = useState<PhysicalAssessmentDataModel[]>([]);
@@ -618,7 +618,7 @@ const ProfileBasicDetail = () => {
                                                 {medicalHistoryFormData?.medication === 'yes'
                                                     ? medicalHistoryFormData?.medicationcontent || 'Yes'
                                                     : 'No'}
-                                                
+
                                             </p>
                                         </div>
                                     </Col>
@@ -630,7 +630,7 @@ const ProfileBasicDetail = () => {
                                                 {medicalHistoryFormData.surgeries === 'yes'
                                                     ? medicalHistoryFormData.surgeriescontent || 'Yes'
                                                     : 'No'}
-                                                
+
                                             </p>
                                         </div>
                                     </Col>
@@ -655,8 +655,9 @@ const ProfileBasicDetail = () => {
                                             <h6 className=" contact-details-emergency">Family History</h6>
                                             <div className=" accordion-title-detail">
                                                 <ul>
-                                                    <li className='medical-emergency-fimily-history'>{medicalHistoryFormData.familyMedicalHistory}</li>
-
+                                                    {medicalHistoryFormData.familyMedicalHistory && (
+                                                        <li className='medical-emergency-fimily-history'>{medicalHistoryFormData.familyMedicalHistory}</li>
+                                                    )}
                                                 </ul>
                                             </div>
                                         </div>
@@ -672,7 +673,7 @@ const ProfileBasicDetail = () => {
                                                     </p>
                                                 )
                                             })}
-                                           
+
                                         </div>
                                     </Col>
 
@@ -682,7 +683,7 @@ const ProfileBasicDetail = () => {
                                             <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
 
                                                 {medicalHistoryFormData.exercise}
-                                                
+
                                             </p>
                                         </div>
                                     </Col>

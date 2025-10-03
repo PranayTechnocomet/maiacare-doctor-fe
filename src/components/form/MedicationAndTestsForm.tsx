@@ -114,6 +114,8 @@ export function TestsForm({
                             placeholder="Select Treatment"
                             addPlaceholder="Add Treatment"
                             required={true}
+                            dropdownHandle={false} // open close arrow icon show hide
+
                             selectedOptionColor="var(--border-box)"
                             selectedOptionBorderColor="var(--border-box)"
                             error={formError.tests}

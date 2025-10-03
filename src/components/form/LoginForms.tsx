@@ -39,33 +39,6 @@ export function LoginForms() {
         }
     };
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = e.target;
-
-    //     if (name === "password") {
-           
-    //         if (value.length > formData.password.length) {
-               
-    //             const newChar = value[value.length - 1];
-    //             setFormData({ ...formData, password: formData.password + newChar });
-    //         } else {
-               
-    //             setFormData({ ...formData, password: formData.password.slice(0, -1) });
-    //         }
-
-    //         // always set masked value with same length
-    //         setMaskedValue("*".repeat(value.length));
-
-    //         // clear error
-    //         setFormError({ ...formError, [name]: "" });
-    //     } else {
-    //         setFormData({ ...formData, [name]: value });
-    //         setFormError({ ...formError, [name]: "" });
-    //     }
-    // };
-
-
-
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
@@ -83,23 +56,6 @@ export function LoginForms() {
             errors.email = "Invalid email format";
             isValid = false;
         }
-
-        // else if (formData.password.length < 8) {
-        //     errors.password = "Minimum 8 characters";
-        //     isValid = false;
-        // } else if (!/(?=.*[a-z])/.test(formData.password)) {
-        //     errors.password = "At least one lowercase letter";
-        //     isValid = false;
-        // } else if (!/(?=.*[A-Z])/.test(formData.password)) {
-        //     errors.password = "At least one uppercase letter";
-        //     isValid = false;
-        // } else if (!/(?=.*\d)/.test(formData.password)) {
-        //     errors.password = "At least one number";
-        //     isValid = false;
-        // } else if (!/(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/.test(formData.password)) {
-        //     errors.password = "At least one special character (e.g., !@#$%^&*)";
-        //     isValid = false;
-        // }
 
         setFormError(errors);
         return isValid;
@@ -141,14 +97,11 @@ export function LoginForms() {
                 <div className='pt-3'>
                     <InputFieldGroup
                         type={showPassword ? 'text' : 'password'}
-                        // type="text"
-
                         label="Password"
                         placeholder="********"
                         required={true}
                         name="password"
                         value={formData.password}
-
                         onChange={handleChange}
                         error={formError.password}
                         className="position-relative input-email-login-data"

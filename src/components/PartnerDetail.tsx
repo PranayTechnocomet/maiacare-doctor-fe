@@ -369,7 +369,9 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                         <h6 className=" contact-details-emergency">Family History</h6>
                                         <div className=" accordion-title-detail">
                                             <ul>
+                                                {showData.medicalHistory.familyMedicalHistory && (
                                                 <li className='medical-emergency-fimily-history'>{showData.medicalHistory.familyMedicalHistory}</li>
+                                                )}
 
                                             </ul>
                                         </div>

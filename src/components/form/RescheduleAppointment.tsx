@@ -211,6 +211,7 @@ export function RescheduleAppointment({
                                     placeholder="Select Services"
                                     addPlaceholder="Add Services"
                                     required={true}
+                                    dropdownHandle={false} // open close arrow icon show hide
                                     selectedOptionColor="var(--border-box)"
                                     selectedOptionBorderColor="var(--border-box)"
                                     error={formError.reasonForVisit}

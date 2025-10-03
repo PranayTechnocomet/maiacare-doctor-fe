@@ -75,6 +75,7 @@ interface InputSelectMultiSelectProps {
   label?: string;
   name?: string;
   required?: boolean;
+  dropdownHandle?: boolean;
   disabled?: boolean;
   error?: string;
   helperText?: string;
@@ -93,6 +94,7 @@ export function InputSelectMultiSelect({
   label,
   name,
   required,
+  dropdownHandle,
   disabled,
   error,
   helperText,
@@ -115,7 +117,9 @@ export function InputSelectMultiSelect({
         name={name}
         className="maiacare-input-field custom-react-dropdown"
         options={options}
-        multi
+        multi={true}
+        closeOnSelect={true}
+        dropdownHandle={dropdownHandle}
         values={values}
         placeholder={placeholder}
         disabled={disabled}

@@ -19,7 +19,7 @@ import Modal from "@/components/ui/Modal";
 import BaseTable from "@/components/ui/BaseTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { IoIosEye } from "react-icons/io";
-import { Patient } from "@/utils/types/interfaces";
+import { OptionType, Patient } from "@/utils/types/interfaces";
 import { tableResponse } from "@/utils/StaticData";
 import Textarea from "@/components/ui/Textarea";
 import CustomTabs from "@/components/ui/CustomTabs";
@@ -113,6 +113,7 @@ type FormData = {
   phone: string;
   startTime: string;
   endTime: string;
+  medicalCondition: OptionType[];
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
@@ -126,6 +127,7 @@ const initialFormData: FormData = {
   phone: "",
   startTime: "",
   endTime: "",
+  medicalCondition: [],
 };
 
 const initialFormError: FormError = {};
@@ -218,6 +220,7 @@ export default function Page() {
 
     if (!data.startTime.trim()) errors.startTime = "Start time is required";
     if (!data.endTime.trim()) errors.endTime = "End time is required";
+    if (!data.medicalCondition?.length) errors.medicalCondition = "Medical Condition is required";
 
     return errors;
   };
@@ -428,6 +431,29 @@ export default function Page() {
           helperText="Enter operational end time"
         />
 
+        <div className="mt-3">
+          <InputSelectMultiSelect
+            label="Do you have any medical condition?"
+            name="medicalCondition"
+            values={formData.medicalCondition}
+            onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
+            options={[
+              { id: "1", value: "Non-smoker", label: "Non-smoker" },
+              { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
+              { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
+
+            ]}
+            placeholder="Search Medical Condition or Allergies"
+            addPlaceholder="Add Medical Condition or Allergies"
+            required={true}
+            dropdownHandle={true} // open close arrow icon show hide
+
+            selectedOptionColor="blue"
+            selectedOptionBorderColor="blue"
+            error={formError.medicalCondition}
+          />
+        </div>
+
         <div className="d-flex gap-2">
           <Button variant="default" disabled={false} type="submit">
             Submit
@@ -537,27 +563,7 @@ export default function Page() {
           </div>
         </div> */}
 
-        <div className="mt-3">
 
-          <InputSelectMultiSelect
-            label="Do you have any medical condition?"
-            name="medicalCondition"
-            values={selected}
-            onChange={(values) => setSelected(values)}
-            options={[
-              { id: "1", value: "Non-smoker", label: "Non-smoker" },
-              { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
-              { id: "3", value: "Vegetarian diet", label: "Vegetarian diet" },
-          
-            ]}
-            placeholder="Search Medical Condition or Allergies"
-            addPlaceholder="Add Medical Condition or Allergies"
-            required={true}
-            selectedOptionColor="blue"
-            selectedOptionBorderColor="blue"
-            error="validation"
-          />
-        </div>
 
 
         {/* Button Section End */}
