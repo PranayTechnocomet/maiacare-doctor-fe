@@ -314,13 +314,57 @@ export default function Page() {
     },
   ];
 
+
+  const [password, setPassword] = useState("");
+
+  // State for masked input
+  const [realValue, setRealValue] = useState("");
+  const [maskedValue, setMaskedValue] = useState("");
+
+  // Handle change for custom masked input
+  const handleMaskedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newInput = e.target.value;
+
+    if (newInput.length > maskedValue.length) {
+      // User typed new character
+      const newChar = newInput[newInput.length - 1];
+      setRealValue((prev) => prev + newChar);
+    } else {
+      // User deleted character
+      setRealValue((prev) => prev.slice(0, -1));
+    }
+
+    setMaskedValue("*".repeat(newInput.length));
+  };
+
+
+
+
+
+
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
+
+        <div style={{ padding: "20px", fontFamily: "Arial" }}>
+
+
+          <h2 style={{ marginTop: "30px" }}>2. Custom Masked Input (* only)</h2>
+          <input
+            type="text"
+            value={maskedValue}
+            onChange={handleMaskedChange}
+            placeholder="Enter text"
+          />
+
+        </div>
+
+
+
         <InputFieldGroup
           label="Name"
           name="name"
-          type="text"
+          type="password"
           value={formData.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
