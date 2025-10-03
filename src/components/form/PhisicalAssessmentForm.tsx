@@ -74,7 +74,7 @@ const PhisicalAssessmentForm = ({
         }
 
         if (!data.systolic.trim() && !data.diastolic.trim()) {
-            errors.systolic = "At least one of systolic or diastolic is required";
+            errors.systolic = " systolic is required";
 
             // errors.diastolic = "At least one of systolic or diastolic is required";
         }
@@ -147,7 +147,7 @@ const PhisicalAssessmentForm = ({
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <Row className="g-md-4 g-2 accordion-form-physical-assessment">
+                <Row className="g-md-3 g-1 accordion-form-physical-assessment">
                     <Col md={6}>
                         <InputFieldGroup
                             label="Height"
@@ -257,7 +257,7 @@ const PhisicalAssessmentForm = ({
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-md-3 mt-0 " : "or-custom-width d-flex justify-content-center align-items-center mt-4"}>
                         {/* <span className="or-custom-slash">/</span> */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
                             <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
