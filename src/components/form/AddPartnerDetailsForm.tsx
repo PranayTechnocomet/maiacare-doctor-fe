@@ -46,15 +46,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     // console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prev) => ({
-    //         ...prev,
-    //         [name]: value,
-    //     }));
-    // };
-
-    // console.log("formData", formData);
+    
 
 
     const handleChange = (
@@ -72,41 +64,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         fileInputRef.current?.click();
     };
 
-    // const handleFileChange = (
-    //     event: React.ChangeEvent<HTMLInputElement> | undefined
-    // ) => {
-    //     if (event) {
-    //         const file = event.target.files?.[0];
-    //         if (file) {
-    //             // Check size before converting
-    //             if (file.size > 5 * 1024 * 1024) {
-    //                 setFormData((prev) => ({
-    //                     ...prev,
-    //                     profileImage: "", // clear invalid image
-    //                 }));
-    //                 setFormError((prev) => ({
-    //                     ...prev,
-    //                     profileImage: "File size must be less than 5MB",
-    //                 }));
-    //                 return;
-    //             }
-
-    //             const reader = new FileReader();
-    //             reader.onload = () => {
-    //                 setProfileImage(reader.result as string);
-    //                 setFormData((prev) => ({
-    //                     ...prev,
-    //                     profileImage: reader.result as string, // store base64
-    //                 }));
-    //                 setFormError((prev) => ({
-    //                     ...prev,
-    //                     profileImage: "", // clear error if valid
-    //                 }));
-    //             };
-    //             reader.readAsDataURL(file);
-    //         }
-    //     }
-    // };
     const handleFileChange = (
         event: React.ChangeEvent<HTMLInputElement> | undefined
     ) => {
@@ -212,7 +169,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         <>
 
             <form onSubmit={handleSubmit}>
-                <Row className="g-3">
+                <Row className="g-md-3 g-1">
                     <Col md={12}>
                         <div className="d-flex align-items-center gap-4  flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
                             <div className="profile-wrapper position-relative" >
@@ -473,19 +430,11 @@ export function MedicalHistoryForm({
         }
     };
 
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
-
-    const options = [
-        { value: "1", label: "Non-smoker" },
-        { value: "2", label: "Occasional alcohol" },
-        { value: "3", label: "Vegetarian diet" },
-    ];
-
     return (
         <>
 
             <form >
-                <Row className="g-3">
+                <Row>
                     <Col md={12}>
                         <RadioButtonGroup
                             label="Are you currently taking any medications?"
@@ -518,19 +467,7 @@ export function MedicalHistoryForm({
 
                     </Col>
                     <Col md={12}>
-                        <div >
-                            {/* <RadioButtonGroup
-                                    label="Have you had any surgeries?"
-                                    name="surgeries"
-                                    value={medicalHistoryFormData.surgeries || 'yes'}
-                                    onChange={(e) => handleChange(e)}
-                                    required={true}
-                                    error={medicalHistoryFormError.surgeries}
-                                    options={[
-                                        { label: "Yes", value: "yes" },
-                                        { label: "No", value: "no" },
-                                    ]}
-                                /> */}
+                        <div>
                             <RadioButtonGroup
                                 label="Have you had any surgeries?"
                                 name="surgeries"
@@ -560,7 +497,6 @@ export function MedicalHistoryForm({
                         </div>
                     </Col>
                     <Col md={12}>
-
                         <InputSelectMultiSelect
                             label="Do you have any medical condition?"
                             name="medicalCondition"
@@ -583,23 +519,6 @@ export function MedicalHistoryForm({
                             error={medicalHistoryFormError.medicalCondition}
 
                         />
-
-                        {/* <InputFieldGroup
-                            label="Do you have any medical condition? "
-                            name="medicalCondition"
-                            type="text"
-                            value={FormData.medicalCondition}
-
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Search Medical Condition or Allergies"
-                            required={true}
-                            error={medicalHistoryFormError.medicalCondition}
-                            className="position-relative "
-                        ></InputFieldGroup> */}
-
 
                     </Col>
                     <Col md={12} >
@@ -638,28 +557,6 @@ export function MedicalHistoryForm({
                             selectedOptionBorderColor="var(--border-box-blue)"
                             error={medicalHistoryFormError.lifestyle}
                         />
-
-                        {/* <InputSelect
-                            label="Lifestyle"
-                            name="lifestyle"
-                            value={FormData.lifestyle}
-                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                handleChange(e);
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-                            required={true}
-                            disabled={false}
-                            error={medicalHistoryFormError.lifestyle}
-                            options={[
-                                { id: "1", value: "PCOS", label: "PCOS" },
-                                { id: "2", value: "Thyroid Disorder", label: "Thyroid Disorder" },
-                                { id: "3", value: "Diabetes", label: "Diabetes" },
-                                { id: "4", value: "Obstructive Sleep Apnea", label: "Obstructive Sleep Apnea" },
-                                { id: "5", value: "Chronic Stress", label: "Chronic Stress" },
-                                { id: "6", value: "Chronic Stress", label: "Chronic Stress" },
-                            ]}
-                        /> */}
-
 
                     </Col>
 
@@ -748,7 +645,6 @@ export function PhysicalAssessment({
             <form >
                 <Row className="g-3 accordion-form-physical-assessment">
                     <Col md={6}>
-
                         <InputFieldGroup
                             label="Height"
                             name="height"
@@ -768,7 +664,6 @@ export function PhysicalAssessment({
                         />
                     </Col>
                     <Col md={6}>
-
                         <InputFieldGroup
                             label="Weight"
                             name="weight"
@@ -855,11 +750,7 @@ export function PhysicalAssessment({
                         />
                     </Col>
 
-                    {/* <Col md={1} className="or-custom-width d-flex justify-content-center align-items-end ">
-                    <span className="fs-1">/</span>
-                </Col> */}
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
-                        {/* <span className="or-custom-slash">/</span> */}
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-3" : "or-custom-width d-flex justify-content-center align-items-center mt-4"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
                             <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
                         </svg>

@@ -79,7 +79,7 @@ export default function MedicalHistory({
             if (initialData) {
                 // If editing, update the existing entry
                 setMedicalHistoryFormData(formData);
-                toast.success('Medical history edited successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 
@@ -101,7 +101,7 @@ export default function MedicalHistory({
         <>
             <div className=''>
                 <form onSubmit={handleSubmit}>
-                    <Row className='g-3'>
+                    <Row>
                         <Col md={12}>
                             <RadioButtonGroup
                                 label="Are you currently taking any medications?"
@@ -124,7 +124,7 @@ export default function MedicalHistory({
                                     onChange={handleChange}
                                     error={formError.medicationcontent}
                                     placeholder="Enter medication"
-                                    className={`mt-2`}
+
                                 >
 
                                 </InputFieldGroup>
@@ -154,7 +154,6 @@ export default function MedicalHistory({
                                         onChange={handleChange}
                                         error={formError.surgeriescontent}
                                         placeholder="Enter surgeries"
-                                        className={`mt-2`}
                                     >
 
                                     </InputFieldGroup>
@@ -162,7 +161,6 @@ export default function MedicalHistory({
                             </div>
                         </Col>
                         <Col md={12} className=''>
-
                             <InputSelectMultiSelect
                                 label="Do you have any medical condition?"
                                 name="medicalCondition"

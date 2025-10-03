@@ -96,7 +96,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
         });
     }
 
-
     const validateForm = (data: PhysicalAssessmentDataModel): FormErrorAddPhysicalAssessment => {
         const errors: FormErrorAddPhysicalAssessment = {};
 
