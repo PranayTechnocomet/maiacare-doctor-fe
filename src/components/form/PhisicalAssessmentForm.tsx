@@ -143,7 +143,6 @@ const PhisicalAssessmentForm = ({
 
     console.log("modalFormPhisicalData--modal", modalFormPhisicalData);
     console.log("editPhysicalAssessment--modal", editPhysicalAssessment);
-
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -152,15 +151,18 @@ const PhisicalAssessmentForm = ({
                         <InputFieldGroup
                             label="Height"
                             name="height"
-                            type="number"
-
+                            type="text"
                             value={formData.height}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                                const newValue = e.target.value;
 
+                                // Allow only digits, single quote, double quote
+                                if (/^[0-9'"]*$/.test(newValue)) {
+                                    handleChange(e);
+                                }
                             }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Enter height(in)"
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+                            placeholder="Enter height "
                             required={true}
                             disabled={false}
                             readOnly={false}
@@ -172,11 +174,9 @@ const PhisicalAssessmentForm = ({
                             label="Weight"
                             name="weight"
                             type="number"
-
                             value={formData.weight}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
-
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                             placeholder="Enter weight(kg)"

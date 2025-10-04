@@ -46,7 +46,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     // console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    
+
 
 
     const handleChange = (
@@ -465,32 +465,32 @@ export function MedicalHistoryForm({
 
                     </Col>
                     <Col md={12} className='mt-md-3 mt-2 '>
-                            <RadioButtonGroup
-                                label="Have you had any surgeries?"
-                                name="surgeries"
-                                value={FormData.surgeries || 'yes'}
-                                onChange={(e) => handleChange(e)}
-                                required={true}
-                                error={medicalHistoryFormError.surgeries}
-                                options={[
-                                    { label: "Yes", value: "yes" },
-                                    { label: "No", value: "no" },
-                                ]}
-                            />
+                        <RadioButtonGroup
+                            label="Have you had any surgeries?"
+                            name="surgeries"
+                            value={FormData.surgeries || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={medicalHistoryFormError.surgeries}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                            {FormData.surgeries === 'yes' && (
-                                <InputFieldGroup
-                                    type="text"
-                                    value={FormData.surgeriescontent}
-                                    name='surgeriescontent'
-                                    onChange={handleChange}
-                                    error={medicalHistoryFormError.surgeriescontent}
-                                    placeholder="Enter surgeries"
-                                    className={`mt-md-3 mt-2`}
-                                >
-                                </InputFieldGroup>
-                            )}
-                        
+                        {FormData.surgeries === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={FormData.surgeriescontent}
+                                name='surgeriescontent'
+                                onChange={handleChange}
+                                error={medicalHistoryFormError.surgeriescontent}
+                                placeholder="Enter surgeries"
+                                className={`mt-md-3 mt-2`}
+                            >
+                            </InputFieldGroup>
+                        )}
+
                     </Col>
                     <Col md={12} className='mt-md-3 mt-2'>
                         <InputSelectMultiSelect
@@ -639,7 +639,7 @@ export function PhysicalAssessment({
             <form >
                 <Row className="g-3 accordion-form-physical-assessment">
                     <Col md={6}>
-                        <InputFieldGroup
+                        {/* <InputFieldGroup
                             label="Height"
                             name="height"
                             type="number"
@@ -651,6 +651,27 @@ export function PhysicalAssessment({
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                             placeholder="Enter height(in)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.height}
+                        /> */}
+                        <InputFieldGroup
+                            label="Height"
+                            name="height"
+                            type="text"
+                            className='setting-password-input'
+                            value={formData.height}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                const newValue = e.target.value;
+
+                                // Allow only digits, single quote, double quote
+                                if (/^[0-9'"]*$/.test(newValue)) {
+                                    handleChange(e);
+                                }
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter height (in)"
                             required={true}
                             disabled={false}
                             readOnly={false}

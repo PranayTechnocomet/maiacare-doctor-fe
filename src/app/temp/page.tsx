@@ -346,18 +346,7 @@ export default function Page() {
     <form onSubmit={handleSubmit}>
       <ContentContainer>
 
-        <div style={{ padding: "20px", fontFamily: "Arial" }}>
-
-
-          <h2 style={{ marginTop: "30px" }}>2. Custom Masked Input (* only)</h2>
-          <input
-            type="text"
-            value={maskedValue}
-            onChange={handleMaskedChange}
-            placeholder="Enter text"
-          />
-
-        </div>
+       
 
 
 
@@ -401,6 +390,11 @@ export default function Page() {
             { id: "3", value: "3", label: "Doctor 3" },
           ]}
         />
+
+
+
+
+        
         <DatePickerFieldGroup
           label="Select Date"
           name="date"

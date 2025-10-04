@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
 import Select from 'react-dropdown-select';
 
-export function InputSelect({
+export function   InputSelect({
   label = "",
   name,
   defaultValue,
@@ -189,5 +189,6 @@ export function InputSelectMultiSelect({
       {error && <div className="text-danger mt-1">{error}</div>}
     </div>
   );
+  
 }
 
