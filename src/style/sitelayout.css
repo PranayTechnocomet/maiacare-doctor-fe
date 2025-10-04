@@ -184,7 +184,7 @@
   
   .layout__body {
     padding: 1rem 2rem;
-    height: 100vh;
+    min-height: calc(100vh - 80px);
     overflow: auto;
   }
   

@@ -123,7 +123,7 @@ const PhisicalAssessmentForm = ({
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
                 setEditPhysicalAssessment?.(initialFormDataForClear);
-                toast.success('Physical assessment edited successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 
@@ -143,24 +143,26 @@ const PhisicalAssessmentForm = ({
 
     console.log("modalFormPhisicalData--modal", modalFormPhisicalData);
     console.log("editPhysicalAssessment--modal", editPhysicalAssessment);
-
     return (
         <>
             <form onSubmit={handleSubmit}>
-                <Row className="g-md-3 g-1 accordion-form-physical-assessment">
+                <Row className="g-md-4 g-2 accordion-form-physical-assessment">
                     <Col md={6}>
                         <InputFieldGroup
                             label="Height"
                             name="height"
-                            type="number"
-
+                            type="text"
                             value={formData.height}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
+                                const newValue = e.target.value;
 
+                                // Allow only digits, single quote, double quote
+                                if (/^[0-9'"]*$/.test(newValue)) {
+                                    handleChange(e);
+                                }
                             }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Enter height(in)"
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => {}}
+                            placeholder="Enter height "
                             required={true}
                             disabled={false}
                             readOnly={false}
@@ -172,11 +174,9 @@ const PhisicalAssessmentForm = ({
                             label="Weight"
                             name="weight"
                             type="number"
-
                             value={formData.weight}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
-
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                             placeholder="Enter weight(kg)"
@@ -257,7 +257,7 @@ const PhisicalAssessmentForm = ({
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-md-3 mt-0 " : "or-custom-width d-flex justify-content-center align-items-center mt-4"}>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-md-4 " : "or-custom-width d-flex justify-content-center align-items-center mt-5"}>
                         {/* <span className="or-custom-slash">/</span> */}
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
                             <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />

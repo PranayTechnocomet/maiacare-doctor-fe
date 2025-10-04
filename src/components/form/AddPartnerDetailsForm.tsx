@@ -46,7 +46,7 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     const [formData, setFormData] = useState<FormData>(initialFormData);
     // console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
-    
+
 
 
     const handleChange = (
@@ -408,7 +408,7 @@ export function MedicalHistoryForm({
                     ...showData,
                     medicalHistory: FormData
                 });
-                toast.success('Medical History Edited Successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 
@@ -434,7 +434,7 @@ export function MedicalHistoryForm({
         <>
 
             <form >
-                <Row>
+                <Row className='g-md-2 g-1'>
                     <Col md={12}>
                         <RadioButtonGroup
                             label="Are you currently taking any medications?"
@@ -456,47 +456,43 @@ export function MedicalHistoryForm({
                                 name='medicationcontent'
                                 onChange={handleChange}
                                 error={medicalHistoryFormError.medicationcontent}
-
                                 placeholder="Enter medication"
-
-                                className={`mt-2`}
+                                className={`mt-md-3 mt-2`}
                             >
 
                             </InputFieldGroup>
                         )}
 
                     </Col>
-                    <Col md={12}>
-                        <div>
-                            <RadioButtonGroup
-                                label="Have you had any surgeries?"
-                                name="surgeries"
-                                value={FormData.surgeries || 'yes'}
-                                onChange={(e) => handleChange(e)}
-                                required={true}
-                                error={medicalHistoryFormError.surgeries}
-                                options={[
-                                    { label: "Yes", value: "yes" },
-                                    { label: "No", value: "no" },
-                                ]}
-                            />
+                    <Col md={12} className='mt-md-3 mt-2 '>
+                        <RadioButtonGroup
+                            label="Have you had any surgeries?"
+                            name="surgeries"
+                            value={FormData.surgeries || 'yes'}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={medicalHistoryFormError.surgeries}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
 
-                            {FormData.surgeries === 'yes' && (
-                                <InputFieldGroup
-                                    type="text"
-                                    value={FormData.surgeriescontent}
-                                    name='surgeriescontent'
-                                    onChange={handleChange}
-                                    error={medicalHistoryFormError.surgeriescontent}
-                                    placeholder="Enter surgeries"
-                                    className={`mt-2`}
-                                >
+                        {FormData.surgeries === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={FormData.surgeriescontent}
+                                name='surgeriescontent'
+                                onChange={handleChange}
+                                error={medicalHistoryFormError.surgeriescontent}
+                                placeholder="Enter surgeries"
+                                className={`mt-md-3 mt-2`}
+                            >
+                            </InputFieldGroup>
+                        )}
 
-                                </InputFieldGroup>
-                            )}
-                        </div>
                     </Col>
-                    <Col md={12}>
+                    <Col md={12} className='mt-md-3 mt-2'>
                         <InputSelectMultiSelect
                             label="Do you have any medical condition?"
                             name="medicalCondition"
@@ -513,7 +509,6 @@ export function MedicalHistoryForm({
                             addPlaceholder="Add Medical Condition or Allergies"
                             required={true}
                             dropdownHandle={false} // open close arrow icon show hide
-
                             selectedOptionColor="var(--border-box)"
                             selectedOptionBorderColor="var(--border-box)"
                             error={medicalHistoryFormError.medicalCondition}
@@ -536,7 +531,7 @@ export function MedicalHistoryForm({
                             className="position-relative "
                         ></InputFieldGroup>
                     </Col>
-                    <Col md={12} >
+                    <Col md={12} className='mt-md-3 mt-2'>
 
                         <InputSelectMultiSelect
                             label="Lifestyle"
@@ -599,7 +594,6 @@ export function MedicalHistoryForm({
                         <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
                             Save
                         </Button>
-
                     </div>
 
                 </Row>
@@ -645,7 +639,7 @@ export function PhysicalAssessment({
             <form >
                 <Row className="g-3 accordion-form-physical-assessment">
                     <Col md={6}>
-                        <InputFieldGroup
+                        {/* <InputFieldGroup
                             label="Height"
                             name="height"
                             type="number"
@@ -657,6 +651,27 @@ export function PhysicalAssessment({
                             }}
                             onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                             placeholder="Enter height(in)"
+                            required={true}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.height}
+                        /> */}
+                        <InputFieldGroup
+                            label="Height"
+                            name="height"
+                            type="text"
+                            className='setting-password-input'
+                            value={formData.height}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                const newValue = e.target.value;
+
+                                // Allow only digits, single quote, double quote
+                                if (/^[0-9'"]*$/.test(newValue)) {
+                                    handleChange(e);
+                                }
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter height (in)"
                             required={true}
                             disabled={false}
                             readOnly={false}
@@ -750,7 +765,7 @@ export function PhysicalAssessment({
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-3" : "or-custom-width d-flex justify-content-center align-items-center mt-4"}>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5 "}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
                             <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
                         </svg>
@@ -842,7 +857,7 @@ export function FertilityAssessment({
     return (
         <>
             <form onClick={handleSubmitData}>
-                <Row className='g-3'>
+                <Row className='g-md-3 g-2'>
                     <Col md={12} >
                         <RadioButtonGroup
                             label="Have you ever had a semen analysis?"

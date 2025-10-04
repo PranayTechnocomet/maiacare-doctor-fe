@@ -161,6 +161,52 @@ const ProfileBasicDetail = () => {
     };
     const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormData);
 
+    const convertHeightToCm = (heightStr: string): string => {
+        if (!heightStr) return '';
+
+        // Remove any whitespace
+        const cleanHeight = heightStr.trim();
+
+        // Check if it's already in cm
+        if (cleanHeight.toLowerCase().includes('cm')) {
+            return cleanHeight.replace(/[^\d.]/g, '');
+        }
+
+        // Match feet and inches format (e.g., "5'8", "5'8"", "5 ft 8 in")
+        const feetInchesMatch = cleanHeight.match(/(\d+)['′]?\s*(\d+)["″]?/);
+        if (feetInchesMatch) {
+            const feet = parseInt(feetInchesMatch[1], 10);
+            const inches = parseInt(feetInchesMatch[2], 10);
+            const totalInches = feet * 12 + inches;
+            return (totalInches * 2.54).toFixed(0);
+        }
+
+        // Match feet only format (e.g., "5'", "5 ft")
+        const feetOnlyMatch = cleanHeight.match(/(\d+)['′]?\s*(ft|feet)?$/i);
+        if (feetOnlyMatch) {
+            const feet = parseInt(feetOnlyMatch[1], 10);
+            const totalInches = feet * 12;
+            return (totalInches * 2.54).toFixed(0);
+        }
+
+        // Check if it's just inches (numeric value)
+        const numericValue = parseFloat(cleanHeight);
+        if (!isNaN(numericValue)) {
+            // Assume it's inches if it's a reasonable height value (24-96 inches)
+            if (numericValue >= 24 && numericValue <= 96) {
+                return (numericValue * 2.54).toFixed(0);
+            }
+            // If it's a small number, assume it's already in feet (convert to inches first)
+            if (numericValue >= 3 && numericValue <= 8) {
+                return (numericValue * 12 * 2.54).toFixed(0);
+            }
+        }
+
+        return '';
+    };
+
+
+
     const accordionData = [
         {
             id: '0',
@@ -274,11 +320,19 @@ const ProfileBasicDetail = () => {
 
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='contact-details-emergency'>Height</span>
-                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span> */}
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>
+
+                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>
                                                                     {item.height} <span>({(item.height * 2.54).toFixed(0)} cm)</span>
+                                                                </span> */}
+
+                                                                <span className="phisical-assessment-accordion-showData-box-subtitle">
+                                                                    {item.height} 
+                                                                    {convertHeightToCm(item.height) && (
+                                                                        <span> ({convertHeightToCm(item.height)} cm)</span>
+                                                                    )}
                                                                 </span>
                                                             </div>
+
                                                         </div>
                                                     </Col>
                                                     <Col md={4} sm={6} >

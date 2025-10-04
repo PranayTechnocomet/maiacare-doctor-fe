@@ -161,18 +161,60 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
             setShowContent(true);
 
             setShowData((prev: any) => ({ ...prev, fertilityAssessment: { ...prev.fertilityAssessment, ...formDataEditFertilityAssessment } }));
-            toast.success('Fertility Assessment Edited Successfully', {
+            toast.success('Changes saved successfully', {
                 icon: <BsInfoCircle size={22} color="white" />,
             });
         }
     }
+    const convertHeightToCm = (heightStr: string): string => {
+        if (!heightStr) return '';
 
+        // Remove any whitespace
+        const cleanHeight = heightStr.trim();
+
+        // Check if it's already in cm
+        if (cleanHeight.toLowerCase().includes('cm')) {
+            return cleanHeight.replace(/[^\d.]/g, '');
+        }
+
+        // Match feet and inches format (e.g., "5'8", "5'8"", "5 ft 8 in")
+        const feetInchesMatch = cleanHeight.match(/(\d+)['′]?\s*(\d+)["″]?/);
+        if (feetInchesMatch) {
+            const feet = parseInt(feetInchesMatch[1], 10);
+            const inches = parseInt(feetInchesMatch[2], 10);
+            const totalInches = feet * 12 + inches;
+            return (totalInches * 2.54).toFixed(0);
+        }
+
+        // Match feet only format (e.g., "5'", "5 ft")
+        const feetOnlyMatch = cleanHeight.match(/(\d+)['′]?\s*(ft|feet)?$/i);
+        if (feetOnlyMatch) {
+            const feet = parseInt(feetOnlyMatch[1], 10);
+            const totalInches = feet * 12;
+            return (totalInches * 2.54).toFixed(0);
+        }
+
+        // Check if it's just inches (numeric value)
+        const numericValue = parseFloat(cleanHeight);
+        if (!isNaN(numericValue)) {
+            // Assume it's inches if it's a reasonable height value (24-96 inches)
+            if (numericValue >= 24 && numericValue <= 96) {
+                return (numericValue * 2.54).toFixed(0);
+            }
+            // If it's a small number, assume it's already in feet (convert to inches first)
+            if (numericValue >= 3 && numericValue <= 8) {
+                return (numericValue * 12 * 2.54).toFixed(0);
+            }
+        }
+
+        return '';
+    };
     // console.log("showData.medicalHistory", showData.medicalHistory);
 
     return (
         <>
             {showPartnerDetail && (
-                <div className='d-flex align-items-center justify-content-center vh-100'>
+                <div className='d-flex align-items-center justify-content-center partner-detail-main '>
                     <div className="text-center">
                         <svg width="86" height="79" viewBox="0 0 86 79" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M34.387 52.6988L31.187 56.6988C29.587 58.5988 26.687 58.5988 25.087 56.6988L21.887 52.6988L23.4869 44.8984H32.7869L34.387 52.6988Z" fill="#F3F4F6" />
@@ -239,7 +281,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
             {showContent && (
 
-                <Row className="mt-4 g-3">
+                <Row className="mt-2 g-3">
                     <Col md={7}>
                         <ContentContainer>
                             <div className='d-flex justify-content-between align-items-start '>
@@ -283,7 +325,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
                                             </div>
                                         </div>
-                                        <div className='pt-sm-2 p-0 d-flex flex-wrap gap-2'>
+                                        <div className='pt-sm-1 p-0 d-flex flex-wrap gap-2'>
                                             <div className='d-flex justify-content-center align-items-center gap-1'>
                                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M17.482 12.7819L13.8016 11.1327L13.7914 11.128C13.6003 11.0462 13.3919 11.0134 13.185 11.0325C12.978 11.0516 12.7791 11.122 12.6063 11.2373C12.5859 11.2508 12.5663 11.2654 12.5477 11.2811L10.6461 12.9022C9.44141 12.317 8.19766 11.0827 7.61251 9.89359L9.23594 7.96312C9.25157 7.94359 9.26641 7.92406 9.28048 7.90297C9.39331 7.73055 9.46177 7.53291 9.47976 7.32763C9.49775 7.12236 9.46472 6.91582 9.3836 6.7264V6.71703L7.72969 3.03031C7.62246 2.78286 7.43807 2.57673 7.20406 2.44268C6.97005 2.30864 6.69895 2.25387 6.43126 2.28656C5.37264 2.42586 4.40093 2.94575 3.69761 3.74914C2.99429 4.55252 2.60747 5.58444 2.60938 6.65219C2.60938 12.8553 7.65626 17.9022 13.8594 17.9022C14.9271 17.9041 15.9591 17.5173 16.7624 16.814C17.5658 16.1106 18.0857 15.1389 18.225 14.0803C18.2578 13.8127 18.2031 13.5417 18.0692 13.3077C17.9353 13.0737 17.7293 12.8892 17.482 12.7819ZM13.8594 16.6522C11.2081 16.6493 8.66625 15.5948 6.79151 13.7201C4.91678 11.8453 3.86228 9.30346 3.85938 6.65219C3.85644 5.88929 4.1313 5.1514 4.63261 4.57633C5.13393 4.00126 5.82743 3.62833 6.5836 3.52719C6.58329 3.5303 6.58329 3.53344 6.5836 3.53656L8.22423 7.20844L6.60938 9.14125C6.59299 9.16011 6.5781 9.18022 6.56485 9.2014C6.44728 9.38181 6.37832 9.58953 6.36463 9.80442C6.35094 10.0193 6.393 10.2341 6.48673 10.428C7.19454 11.8756 8.65313 13.3233 10.1164 14.0303C10.3117 14.1232 10.5277 14.1638 10.7434 14.1482C10.9591 14.1325 11.167 14.0613 11.3469 13.9412C11.3669 13.9277 11.3862 13.9131 11.4047 13.8975L13.3039 12.2772L16.9758 13.9217C16.9758 13.9217 16.982 13.9217 16.9844 13.9217C16.8845 14.679 16.5121 15.3739 15.9369 15.8764C15.3617 16.379 14.6232 16.6548 13.8594 16.6522Z" fill="#8A8D93" />
@@ -346,8 +388,8 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Surgeries</h6>
                                         <p className=" accordion-title-detail">
-                                            {showData.medicalHistory.surgeries === 'yes'
-                                                ? showData.medicalHistory.surgeriescontent || 'Yes'
+                                            {showData.medicalHistory?.surgeries === 'yes'
+                                                ? showData.medicalHistory?.surgeriescontent || 'Yes'
                                                 : 'No'}
 
                                         </p>
@@ -358,7 +400,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Medical condition / Allergies</h6>
 
-                                        {showData.medicalHistory?.medicalCondition.map((item: any) => {
+                                        {showData.medicalHistory?.medicalCondition?.map((item: any) => {
                                             return (
                                                 <p key={item.id} className="accordion-title-detail d-inline-block border-box-orange-font box-border-orange me-2 mb-2">
                                                     {item.value}
@@ -374,8 +416,8 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                         <h6 className=" contact-details-emergency">Family History</h6>
                                         <div className=" accordion-title-detail">
                                             <ul>
-                                                {showData.medicalHistory.familyMedicalHistory && (
-                                                    <li className='medical-emergency-fimily-history'>{showData.medicalHistory.familyMedicalHistory}</li>
+                                                {showData.medicalHistory?.familyMedicalHistory && (
+                                                    <li className='medical-emergency-fimily-history'>{showData.medicalHistory?.familyMedicalHistory}</li>
                                                 )}
 
                                             </ul>
@@ -386,10 +428,10 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                 <Col sm={7}>
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Lifestyle</h6>
-                                        {showData.medicalHistory?.lifestyle.map((item: any) => {
+                                        {showData.medicalHistory?.lifestyle?.map((item: any) => {
                                             return (
                                                 <p key={item.id} className="accordion-title-detail d-inline-block border-box-blue-font box-border-blue me-2 mb-2">
-                                                    {item.value}
+                                                    {item?.value}
                                                 </p>
                                             )
                                         })}
@@ -402,7 +444,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                         <h6 className=" contact-details-emergency">Physical Exercise</h6>
                                         <p className="accordion-title-detail border-box-orange-font box-border-orange d-inline-block ">
 
-                                            {showData.medicalHistory.exercise}
+                                            {showData.medicalHistory?.exercise}
 
                                         </p>
                                     </div>
@@ -412,7 +454,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                     <div className="">
                                         <h6 className=" contact-details-emergency">Stress Level</h6>
                                         <p className="accordion-title-detail d-inline-block border-box-red-font box-border-red">
-                                            {showData.medicalHistory.stress}
+                                            {showData.medicalHistory?.stress}
                                         </p>
                                     </div>
                                 </Col>
@@ -612,8 +654,14 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
                                                         <div className='d-flex flex-column gap-1'>
                                                             <span className='contact-details-emergency'>Height</span>
-                                                            <span className='phisical-assessment-accordion-showData-box-subtitle'>
+                                                            {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>
                                                                 {item.height} <span>({(item.height * 2.54).toFixed(0)} cm)</span>
+                                                            </span> */}
+                                                            <span className="phisical-assessment-accordion-showData-box-subtitle">
+                                                                {item.height}
+                                                                {convertHeightToCm(item.height) && (
+                                                                    <span> ({convertHeightToCm(item.height)} cm)</span>
+                                                                )}
                                                             </span>
                                                         </div>
                                                     </div>
