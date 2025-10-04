@@ -408,7 +408,7 @@ export function MedicalHistoryForm({
                     ...showData,
                     medicalHistory: FormData
                 });
-                toast.success('Medical History Edited Successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 

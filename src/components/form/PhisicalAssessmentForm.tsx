@@ -123,7 +123,7 @@ const PhisicalAssessmentForm = ({
                 setShowPhisicalAssessment(false);
                 setFormError(initialFormError);
                 setEditPhysicalAssessment?.(initialFormDataForClear);
-                toast.success('Physical assessment edited successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
 

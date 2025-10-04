@@ -80,11 +80,23 @@
 }
 
 /* apply this media 1524px > big screen */
-@media screen and (min-width: 1524px) {
+/* @media screen and (min-width: 1940px) {
     .forgot-password-screen {
-        width: 45%;
+        width: 35%;
     }
 }
+
+@media screen and (min-width: 1536px) {
+    .forgot-password-screen {
+        width: 46%;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .forgot-password-screen {
+        width: 62%;
+    }
+} */
 
 @media screen and (max-width: 1024px) {
     .profile-card {
@@ -94,21 +106,28 @@
         width: 85%;
     }
 }
-@media screen and (max-width: 991px){
+@media screen and (max-width: 992px){
     .forgot-password-screen {
         width: 87%;
     }
+
 }
 
 @media screen and (max-width: 768px) {
     .profile-card {
         width: 280px !important;
     }
+    .forgot-password-screen {
+        width: 52%;
+    }
 }
 
-@media screen and (max-width: 575px) {
+@media screen and (max-width: 576px) {
     .profile-card {
         width: 480px !important;
+    }
+    .forgot-password-screen {
+        width: 70%;
     }
 }
 
@@ -116,10 +135,40 @@
     .profile-card {
         width: 380px !important;
     }
+    .forgot-password-screen {
+        width: 79%;
+    }
 }
 
 @media screen and (max-width: 376px) {
     .profile-card {
         width: 300px !important;
+    }
+    .forgot-password-screen {
+        width: 90%;
+    }
+}
+@media screen and (max-width: 321px) {
+    .forgot-password-screen {
+        width: 98%;
+    }
+}
+
+
+@media screen and (min-width: 1441px) {
+    .forgot-password-screen {
+        width: 59%;
+    }
+}
+
+@media screen and (min-width: 1537px) {
+    .forgot-password-screen {
+        width: 46%;
+    }
+}
+
+@media screen and (min-width: 1941px) {
+    .forgot-password-screen {
+        width: 35%;
     }
 }

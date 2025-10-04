@@ -101,7 +101,7 @@ const AddMedicalHistory = () => {
         status={profileData.status}
       />
 
-      <main className="bg-light min-vh-100 py-2">
+      <main className="bg-light py-2">
         <div className="">
 
           <CustomTabs
