@@ -119,7 +119,7 @@ body {
 .patient-header-select-filter .maiacare-input-field {
   border: 1px solid var(--color-icon-border) !important;
   width: 130px;
-  /* padding: 15px !important; */
+  
 }
 
 .patient-header-filter-icon-box {

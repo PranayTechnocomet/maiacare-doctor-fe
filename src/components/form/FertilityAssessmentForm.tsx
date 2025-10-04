@@ -79,7 +79,7 @@ export const FertilityAssessmentForm = ({
             setFormError(initialFormError);
 
             if (editFertilityAssessment && editFertilityAssessment.ageAtFirstMenstruation) {
-                toast.success('Fertility assessment edited successfully', {
+                toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
             } else {

@@ -25,7 +25,7 @@ export default function ResetPassword() {
                 <Row className='min-vh-100 ' >
 
                     <Col md={6} className="d-flex align-items-center justify-content-center">
-                        <div className='' >
+                        <div className=''>
                             <div className='d-flex justify-content-start align-item-start'>
 
 

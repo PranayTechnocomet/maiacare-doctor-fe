@@ -206,7 +206,7 @@ const PatientAppointment = () => {
                             required={true}
                             disabled={false}
                             placeholder="All Time"
-                            className="patient-header-select-filter"
+                            className="patient-header-select-filter "
                             // error={formError.tests}
                             options={[
                                 { id: "1", value: "Today", label: "Today" },
