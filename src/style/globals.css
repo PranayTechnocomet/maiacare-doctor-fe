@@ -96,7 +96,7 @@ body {
 /* pankaj solanki start */
 
 .input-Amount .maiacare-input-field {
-  padding-left: 55px;
+  padding-left: 55px !important;
 }
 
 .blood-test-search .maiacare-input-field {

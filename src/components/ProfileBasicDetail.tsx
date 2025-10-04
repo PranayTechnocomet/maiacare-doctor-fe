@@ -161,6 +161,22 @@ const ProfileBasicDetail = () => {
     };
     const [editPhysicalAssessment, setEditPhysicalAssessment] = useState<PhysicalAssessmentDataModel>(initialFormData);
 
+    const convertHeightToCm = (heightStr: string): string => {
+        if (!heightStr) return '';
+
+        // Match feet and inches
+        const match = heightStr.match(/(\d+)'(\d+)/);
+        if (!match) return '';
+
+        const feet = parseInt(match[1], 10);
+        const inches = parseInt(match[2], 10);
+
+        const totalInches = feet * 12 + inches;
+        return (totalInches * 2.54).toFixed(0); // round to nearest cm
+    };
+
+
+
     const accordionData = [
         {
             id: '0',
@@ -274,11 +290,16 @@ const ProfileBasicDetail = () => {
 
                                                             <div className='d-flex flex-column gap-1'>
                                                                 <span className='contact-details-emergency'>Height</span>
-                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>{item.height} <span>(162 cm)</span></span> */}
-                                                                <span className='phisical-assessment-accordion-showData-box-subtitle'>
+
+                                                                {/* <span className='phisical-assessment-accordion-showData-box-subtitle'>
                                                                     {item.height} <span>({(item.height * 2.54).toFixed(0)} cm)</span>
+                                                                </span> */}
+
+                                                                <span className="phisical-assessment-accordion-showData-box-subtitle">
+                                                                    {item.height} <span>({convertHeightToCm(item.height)} cm)</span>
                                                                 </span>
                                                             </div>
+
                                                         </div>
                                                     </Col>
                                                     <Col md={4} sm={6} >
