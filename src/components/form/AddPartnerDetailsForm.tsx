@@ -434,7 +434,7 @@ export function MedicalHistoryForm({
         <>
 
             <form >
-                <Row>
+                <Row className='g-md-2 g-1'>
                     <Col md={12}>
                         <RadioButtonGroup
                             label="Are you currently taking any medications?"
@@ -456,18 +456,15 @@ export function MedicalHistoryForm({
                                 name='medicationcontent'
                                 onChange={handleChange}
                                 error={medicalHistoryFormError.medicationcontent}
-
                                 placeholder="Enter medication"
-
-                                className={`mt-2`}
+                                className={`mt-md-3 mt-2`}
                             >
 
                             </InputFieldGroup>
                         )}
 
                     </Col>
-                    <Col md={12}>
-                        <div>
+                    <Col md={12} className='mt-md-3 mt-2 '>
                             <RadioButtonGroup
                                 label="Have you had any surgeries?"
                                 name="surgeries"
@@ -489,14 +486,13 @@ export function MedicalHistoryForm({
                                     onChange={handleChange}
                                     error={medicalHistoryFormError.surgeriescontent}
                                     placeholder="Enter surgeries"
-                                    className={`mt-2`}
+                                    className={`mt-md-3 mt-2`}
                                 >
-
                                 </InputFieldGroup>
                             )}
-                        </div>
+                        
                     </Col>
-                    <Col md={12}>
+                    <Col md={12} className='mt-md-3 mt-2'>
                         <InputSelectMultiSelect
                             label="Do you have any medical condition?"
                             name="medicalCondition"
@@ -513,7 +509,6 @@ export function MedicalHistoryForm({
                             addPlaceholder="Add Medical Condition or Allergies"
                             required={true}
                             dropdownHandle={false} // open close arrow icon show hide
-
                             selectedOptionColor="var(--border-box)"
                             selectedOptionBorderColor="var(--border-box)"
                             error={medicalHistoryFormError.medicalCondition}
@@ -536,7 +531,7 @@ export function MedicalHistoryForm({
                             className="position-relative "
                         ></InputFieldGroup>
                     </Col>
-                    <Col md={12} >
+                    <Col md={12} className='mt-md-3 mt-2'>
 
                         <InputSelectMultiSelect
                             label="Lifestyle"
@@ -599,7 +594,6 @@ export function MedicalHistoryForm({
                         <Button className="w-100" variant="default" disabled={false} type="submit" onClick={handleSubmit}>
                             Save
                         </Button>
-
                     </div>
 
                 </Row>
@@ -750,7 +744,7 @@ export function PhysicalAssessment({
                         />
                     </Col>
 
-                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-3" : "or-custom-width d-flex justify-content-center align-items-center mt-4"}>
+                    <Col md={1} className={formError.systolic ? "or-custom-width d-flex justify-content-center align-items-center mt-4" : "or-custom-width d-flex justify-content-center align-items-center mt-5 "}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="28" viewBox="0 0 10 28" fill="none">
                             <path d="M9.45417 0.843998L2.92617 27.7H0.23817L6.74217 0.843998H9.45417Z" fill="#3E4A57" />
                         </svg>
@@ -842,7 +836,7 @@ export function FertilityAssessment({
     return (
         <>
             <form onClick={handleSubmitData}>
-                <Row className='g-3'>
+                <Row className='g-md-3 g-2'>
                     <Col md={12} >
                         <RadioButtonGroup
                             label="Have you ever had a semen analysis?"

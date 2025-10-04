@@ -208,7 +208,7 @@ export const FertilityAssessmentForm = ({
                             </div>
                         </Accordion.Header>
                         <Accordion.Body className="custom-accordion-body">
-                            <Row className="g-md-2 g-1">
+                            <Row className="g-md-3 g-2">
                                 <Col md={12}>
                                     <RadioButtonGroup
                                         label="Have you been pregnant before?"
@@ -245,7 +245,6 @@ export const FertilityAssessmentForm = ({
                                     <RadioButtonGroup
                                         label="Any history of miscarriage or ectopic pregnancy?"
                                         name="ectopicpregnancy"
-                                        className="mt-2"
                                         value={formData.ectopicpregnancy || 'yes'}
                                         onChange={handleChange}
                                         required

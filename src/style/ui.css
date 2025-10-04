@@ -39,11 +39,12 @@
 
 
 /* Umesh Code Start */
-.maiacare-input-field-container {
+
+/* .maiacare-input-field-container {
     position: relative;
     width: 100%;
     margin-bottom: 16px;
-}
+} */
 
 .input-select-wrapper {
     position: relative;
@@ -422,15 +423,20 @@ input[type=number] {
     display: none !important;
 }
 
-
 .custom-react-dropdown .react-dropdown-select-item-selected {
     background-color: var(--color-brand) !important;
 }
 
-.custom-react-dropdown .react-dropdown-select-dropdown-handle svg {
-    width: 20px !important;
-    height: 20px !important;
-    color: var(--color-radio) !important;
+.custom-react-dropdown .rotate-0 {
+    transform: rotate(0deg);
+}
+
+.custom-react-dropdown .rotate-180 {
+    transform: rotate(180deg);
+}
+
+.custom-react-dropdown .transition-transform {
+    transition: transform 0.3s ease;
 }
 
 .input-select-item-box {
@@ -443,8 +449,8 @@ input[type=number] {
 .custom-react-dropdown .react-dropdown-select-dropdown {
     border-radius: 10px;
     width: 100% !important;
-    top: 55px;
-    padding: 8px 8px 0px 8px;
+    top: 55px !important;
+    padding: 8px 8px 0px 8px !important;
 }
 
 .custom-react-dropdown .react-dropdown-select-item {
