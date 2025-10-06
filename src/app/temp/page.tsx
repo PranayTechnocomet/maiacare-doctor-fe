@@ -164,6 +164,8 @@ export default function Page() {
 
   const [selected, setSelected] = useState<Option[]>([]);
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  console.log("form Data",formData);
+  
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");

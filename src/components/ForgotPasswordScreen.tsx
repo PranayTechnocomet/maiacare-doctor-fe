@@ -17,7 +17,7 @@ export default function ForgotPasswordScreen() {
                 <Row className='min-vh-100 ' >
 
                     <Col md={6} className="d-flex align-items-center justify-content-center ">
-                        <div className='forgot-password-screen'>
+                        <div className='forgot-passwored-detail'>
                             <div className='d-flex justify-content-start align-item-start'>
 
                                 {/* <Image
@@ -39,12 +39,11 @@ export default function ForgotPasswordScreen() {
                                 Forgot Password
 
                             </h2>
-                            <p className="login-subtitle text-start">Enter the email address associated with your account and we'll send you instructions to reset your password.</p>
-                            {/* <LoginTitle className="login-title1" title="Sign In To Your Account." subtitle="Please enter details to access your dashboard" /> */}
-                           
-                           
+                            <p className="login-subtitle text-start ">Enter the email address associated with your account and we'll send you instructions to reset your password.</p>
+
+
                             <ForgotPassword />
-                                                                                                      
+
                         </div>
                     </Col>
 
@@ -62,7 +61,7 @@ export default function ForgotPasswordScreen() {
 
                             />
                             <div className="position-absolute bottom-0 start-0 end-0 text-center p-2 " >
-                                <p className='login-image-contetnt'>Heal, Connect & Lead-<br className="d-block md-none"/>
+                                <p className='login-image-contetnt'>Heal, Connect & Lead-<br className="d-block md-none" />
                                     The Future of Fertility Support Starts Here.</p>
                             </div>
                         </div>
