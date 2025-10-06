@@ -25,7 +25,7 @@ export default function ResetPassword() {
                 <Row className='min-vh-100 ' >
 
                     <Col md={6} className="d-flex align-items-center justify-content-center">
-                        <div className=''>
+                        <div className='forgot-passwored-detail'>
                             <div className='d-flex justify-content-start align-item-start'>
 
 
@@ -52,7 +52,7 @@ export default function ResetPassword() {
 
                             </h2>
                             <p className="login-subtitle text-start">Secure your account by setting a new password.</p>
-                            {/* <LoginTitle className="login-title1" title="Sign In To Your Account." subtitle="Please enter details to access your dashboard" /> */}
+                           
 
                             <ResetPasswordScreen setPasswordChangedSuccessModel={setPasswordChangedSuccessModel}
                             />

@@ -691,6 +691,7 @@ export function FollowUpActionForm({
                                 <TimePickerFieldGroup
                                     label="Appointment Time"
                                     name="appointmentTime"
+                                    placeholder="Select Time"
                                     value={formData.appointmentTime}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         handleChange(e);

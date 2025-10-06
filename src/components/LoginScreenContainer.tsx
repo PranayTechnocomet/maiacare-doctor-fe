@@ -21,7 +21,7 @@ export default function LoginScreenContainer() {
                 <Row className='min-vh-100' >
 
                     <Col md={6} className="d-flex align-items-center justify-content-center">
-                        <div className='' >
+                        <div className='forgot-passwored-detail' >
                             <div className='d-flex justify-content-center align-item-center'>
 
 
