@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
 import Select from 'react-dropdown-select';
 
-export function   InputSelect({
+export function InputSelect({
   label = "",
   name,
   defaultValue,
@@ -112,28 +112,6 @@ export function InputSelectMultiSelect({
     <div className={`maiacare-input-field-container ${className}`}>
       {label && <InputFieldLabel label={label} required={required} />}
 
-      {/* <Select
-        {...rest}
-        name={name}
-        className="maiacare-input-field custom-react-dropdown"
-        options={options}
-        multi={true}
-        closeOnSelect={true}
-        dropdownHandle={dropdownHandle}
-        dropdownHandleRenderer={() => (
-          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-          <path d="M16.9396 9.06491L10.6896 15.3149C10.6025 15.4023 10.499 15.4717 10.3851 15.519C10.2711 15.5663 10.1489 15.5906 10.0256 15.5906C9.90216 15.5906 9.77999 15.5663 9.66604 15.519C9.55208 15.4717 9.44859 15.4023 9.36149 15.3149L3.11149 9.06491C2.93537 8.88879 2.83643 8.64992 2.83643 8.40084C2.83643 8.15177 2.93537 7.9129 3.11149 7.73678C3.28761 7.56066 3.52648 7.46172 3.77555 7.46172C4.02462 7.46172 4.26349 7.56066 4.43961 7.73678L10.0263 13.3235L15.6131 7.736C15.7892 7.55988 16.028 7.46094 16.2771 7.46094C16.5262 7.46094 16.7651 7.55988 16.9412 7.736C17.1173 7.91212 17.2162 8.15099 17.2162 8.40006C17.2162 8.64914 17.1173 8.88801 16.9412 9.06413L16.9396 9.06491Z" fill="#B0B4C1"/>
-          </svg>
-        )}
-
-        values={values}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={(vals) => onChange(vals)}
-        // required={required}
-        addPlaceholder={addPlaceholder || placeholder}
-      /> */}
-
       <Select
         {...rest}
         name={name}
@@ -152,8 +130,8 @@ export function InputSelectMultiSelect({
             className={`transition-transform duration-300 ${state.dropdown ? "rotate-180" : "rotate-0"
               }`}
           >
-            <path d="M16.9396 9.06491L10.6896 15.3149C10.6025 15.4023 10.499 15.4717 10.3851 15.519C10.2711 15.5663 10.1489 15.5906 10.0256 15.5906C9.90216 15.5906 9.77999 15.5663 9.66604 15.519C9.55208 15.4717 9.44859 15.4023 9.36149 15.3149L3.11149 9.06491C2.93537 8.88879 2.83643 8.64992 2.83643 8.40084C2.83643 8.15177 2.93537 7.9129 3.11149 7.73678C3.28761 7.56066 3.52648 7.46172 3.77555 7.46172C4.02462 7.46172 4.26349 7.56066 4.43961 7.73678L10.0263 13.3235L15.6131 7.736C15.7892 7.55988 16.028 7.46094 16.2771 7.46094C16.5262 7.46094 16.7651 7.55988 16.9412 7.736C17.1173 7.91212 17.2162 8.15099 17.2162 8.40006C17.2162 8.64914 17.1173 8.88801 16.9412 9.06413L16.9396 9.06491Z" 
-            fill="currentColor" />
+            <path d="M16.9396 9.06491L10.6896 15.3149C10.6025 15.4023 10.499 15.4717 10.3851 15.519C10.2711 15.5663 10.1489 15.5906 10.0256 15.5906C9.90216 15.5906 9.77999 15.5663 9.66604 15.519C9.55208 15.4717 9.44859 15.4023 9.36149 15.3149L3.11149 9.06491C2.93537 8.88879 2.83643 8.64992 2.83643 8.40084C2.83643 8.15177 2.93537 7.9129 3.11149 7.73678C3.28761 7.56066 3.52648 7.46172 3.77555 7.46172C4.02462 7.46172 4.26349 7.56066 4.43961 7.73678L10.0263 13.3235L15.6131 7.736C15.7892 7.55988 16.028 7.46094 16.2771 7.46094C16.5262 7.46094 16.7651 7.55988 16.9412 7.736C17.1173 7.91212 17.2162 8.15099 17.2162 8.40006C17.2162 8.64914 17.1173 8.88801 16.9412 9.06413L16.9396 9.06491Z"
+              fill="currentColor" />
           </svg>
 
         )}
@@ -168,27 +146,27 @@ export function InputSelectMultiSelect({
           {values.length} selected
         </p>
       )}
-
-      <div className="mt-2 d-flex gap-2 flex-wrap">
-        {values.map((item) => (
-          <div key={item.value} className="input-select-item-box" style={{ color: selectedOptionColor, borderColor: selectedOptionBorderColor }}>
-            {item.label}
-            <span
-              className="ms-2 cursor-pointer"
-              onClick={() => handleRemove(item.value)}
-            >
-              ✕
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {helperText && !error && (
-        <div className="form-text">{helperText}</div>
+      {values.length > 0 && (
+        <div className="mt-2 d-flex gap-2 flex-wrap">
+          {values.map((item) => (
+            <div key={item.value} className="input-select-item-box" style={{ color: selectedOptionColor, borderColor: selectedOptionBorderColor }}>
+              {item.label}
+              <span
+                className="ms-2 cursor-pointer"
+                onClick={() => handleRemove(item.value)}
+              >
+                ✕
+              </span>
+            </div>
+          ))}
+        </div>
       )}
-      {error && <div className="text-danger mt-1">{error}</div>}
+
+      {error && <InputFieldError error={error} />}
+      {helperText && <InputFieldHelperText helperText={helperText} />}
+
     </div>
   );
-  
+
 }
 

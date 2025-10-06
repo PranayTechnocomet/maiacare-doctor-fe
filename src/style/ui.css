@@ -49,7 +49,7 @@
 
 
 
-    
+
 
 .input-select-wrapper {
     position: relative;
@@ -179,7 +179,7 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.partner-detail-main{
+.partner-detail-main {
     min-height: calc(100vh - 330px) !important;
 
 }
@@ -468,6 +468,27 @@ input[type=number] {
     border-radius: 10px;
     margin-bottom: 8px;
 }
+
+/* calender-timepicker-placeholder */
+/* calender-timepicker-icon */
+.calender-timepicker-placeholder {
+    background-color: var(--color-white);
+    width: fit-content;
+    /* width: 150px; */
+    position: absolute;
+    top: 27%;
+    left: 12px;
+    pointer-events: none; 
+
+}
+.calender-timepicker-icon {
+    background-color: var(--color-white);
+    position: absolute;
+    right: 13px;
+    top: 27%;
+    pointer-events: none;  
+}
+
 
 /* pankaj solanki end */
 

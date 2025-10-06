@@ -326,7 +326,7 @@ const ProfileBasicDetail = () => {
                                                                 </span> */}
 
                                                                 <span className="phisical-assessment-accordion-showData-box-subtitle">
-                                                                    {item.height} 
+                                                                    {item.height}
                                                                     {convertHeightToCm(item.height) && (
                                                                         <span> ({convertHeightToCm(item.height)} cm)</span>
                                                                     )}
@@ -709,9 +709,7 @@ const ProfileBasicDetail = () => {
                                             <h6 className=" contact-details-emergency">Family History</h6>
                                             <div className=" accordion-title-detail">
                                                 <ul>
-                                                    {medicalHistoryFormData.familyMedicalHistory && (
-                                                        <li className='medical-emergency-fimily-history'>{medicalHistoryFormData.familyMedicalHistory}</li>
-                                                    )}
+                                                    <li className='medical-emergency-fimily-history'>{medicalHistoryFormData.familyMedicalHistory || "No added family history"}</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -768,7 +766,7 @@ const ProfileBasicDetail = () => {
                 {/* Left Side - Contact Details & Accordion */}
                 <Col lg={8} md={12} className='ps-0 pe-0 pe-lg-2'>
                     {/* Contact Card */}
-                    <Card className="mb-4 shadow-sm">
+                    <Card className="mb-3 shadow-sm">
                         <Card.Body className="p-4">
                             <Row>
                                 <h6 className="mb-3 contact-details-heading">Contact Details</h6>

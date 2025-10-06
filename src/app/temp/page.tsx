@@ -164,8 +164,6 @@ export default function Page() {
 
   const [selected, setSelected] = useState<Option[]>([]);
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  console.log("form Data",formData);
-  
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -348,7 +346,7 @@ export default function Page() {
     <form onSubmit={handleSubmit}>
       <ContentContainer>
 
-       
+
 
 
 
@@ -393,13 +391,10 @@ export default function Page() {
           ]}
         />
 
-
-
-
-        
         <DatePickerFieldGroup
           label="Select Date"
           name="date"
+          placeholder="Select Date"
           value={formData.date}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
@@ -408,7 +403,7 @@ export default function Page() {
           required={true}
           disabled={false}
           error={formError.date}
-          helperText="Select date"
+          helperText="select date"
         />
 
         <RadioButtonGroup
@@ -457,6 +452,7 @@ export default function Page() {
         <TimePickerFieldGroup
           label="Start Time"
           name="startTime"
+          placeholder="Select Start Time"
           value={startTime}
           onChange={(e) => setStartTime(e.target.value)}
           required
@@ -466,6 +462,7 @@ export default function Page() {
         <TimePickerFieldGroup
           label="End Time"
           name="endTime"
+          // placeholder="Select End Time"
           value={endTime}
           onChange={(e) => setEndTime(e.target.value)}
           helperText="Enter operational end time"
@@ -494,7 +491,7 @@ export default function Page() {
           />
         </div>
 
-        <div className="d-flex gap-2">
+        <div className="d-flex gap-2 mt-3">
           <Button variant="default" disabled={false} type="submit">
             Submit
           </Button>

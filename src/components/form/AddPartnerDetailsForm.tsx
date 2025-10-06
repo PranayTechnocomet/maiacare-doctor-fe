@@ -639,23 +639,6 @@ export function PhysicalAssessment({
             <form >
                 <Row className="g-3 accordion-form-physical-assessment">
                     <Col md={6}>
-                        {/* <InputFieldGroup
-                            label="Height"
-                            name="height"
-                            type="number"
-                            className='setting-password-input'
-                            value={formData.height}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                handleChange(e);
-
-                            }}
-                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
-                            placeholder="Enter height(in)"
-                            required={true}
-                            disabled={false}
-                            readOnly={false}
-                            error={formError.height}
-                        /> */}
                         <InputFieldGroup
                             label="Height"
                             name="height"
