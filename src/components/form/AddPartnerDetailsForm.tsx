@@ -53,8 +53,23 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
+        const isValidNumber = /^[0-9]*$/.test(value);
+
+
         setFormData((prev) => ({ ...prev, [name]: value }));
-        setFormError((prev) => ({ ...prev, [name]: "" }));
+        // setFormError((prev) => ({ ...prev, [name]: "" }));
+
+
+        console.log("value",value);
+
+        if (name === "basic_detail_phone") {
+            if (isValidNumber) {
+                setFormError((prev) => ({ ...prev, [name]: "" }));
+            }
+        } else {
+            setFormError((prev) => ({ ...prev, [name]: "" }));
+        }
+
     };
 
     const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -130,26 +145,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
         return errors;
     };
 
-
-    // const validateForm = (data: FormData): FormError => {
-    //     const errors: FormError = {};
-
-    //     if (!data.basic_detail_name.trim()) errors.basic_detail_name = "Name is required";
-    //     if (!data.basic_detail_age.trim()) errors.basic_detail_age = "Age is required";
-    //     if (!data.basic_detail_phone.trim()) errors.basic_detail_phone = "Phone number is required";
-
-    //     if (data.profileImage && data.profileImage.length > 5 * 1024 * 1024) {
-    //         console.log("data.profileImage", data.profileImage);
-    //         errors.profileImage = "File size must be less than 5MB";
-    //     } else if (!data.profileImage.trim()) {
-    //         errors.profileImage = "Profile Image is required";
-    //     }
-
-    //     if (!data.basic_detail_email.trim())
-    //         errors.basic_detail_email = "Email is required";
-
-    //     return errors;
-    // };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -296,7 +291,6 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
                             }}
                             placeholder='(000) 000-0000'
                             required
-
                             error={formError.basic_detail_phone}
                         />
                     </Col>
@@ -432,8 +426,7 @@ export function MedicalHistoryForm({
 
     return (
         <>
-
-            <form >
+            <form>
                 <Row className='g-md-2 g-1'>
                     <Col md={12}>
                         <RadioButtonGroup

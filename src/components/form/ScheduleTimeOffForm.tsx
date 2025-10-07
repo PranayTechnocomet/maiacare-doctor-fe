@@ -86,6 +86,7 @@ function ScheduleTimeOffForm({
                         <DatePickerFieldGroup
                             label="Starting from Date"
                             name="startDate"
+                            placeholder="Select Start Date"
                             value={formData.startDate}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
@@ -101,6 +102,7 @@ function ScheduleTimeOffForm({
                         <DatePickerFieldGroup
                             label="To Date"
                             name="toDate"
+                            placeholder="Select Start Date"
                             value={formData.toDate}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 handleChange(e);
