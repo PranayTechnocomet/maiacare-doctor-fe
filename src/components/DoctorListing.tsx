@@ -766,7 +766,7 @@ export function CalendarView() {
           <Row>
             <div className="d-flex justify-content-between ">
               <div>
-                <p className='doctor-listing-date-heading  m-0 '>November 2024</p>
+                <p className='doctor-listing-date-heading  m-0 '>November 2024 (Mon 01 - Sat 07)</p>
                 <p className='doctor-listing-date-subtitle '>0 Appointments</p>
               </div>
               <div className='doctor-listing-day-week-month-main'>

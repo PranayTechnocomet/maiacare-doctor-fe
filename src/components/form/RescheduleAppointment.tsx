@@ -242,12 +242,14 @@ export function RescheduleAppointment({
                                 <DatePickerFieldGroup
                                     label="Appointment Date"
                                     name="appointmentDate"
+                                    placeholder="Select Date"
                                     value={formData.appointmentDate}
                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                         handleChange(e);
                                     }}
                                     required={true}
                                     error={formError.appointmentDate}
+                                    iconColor="var(--color-radio)"
                                 />
                             </Col>
                             <Col md={4}>

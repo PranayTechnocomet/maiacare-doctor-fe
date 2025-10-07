@@ -53,7 +53,6 @@ const PhisicalAssessmentForm = ({
         systolic: "",
         diastolic: "",
         heartRate: ""
-
     };
     const [formData, setFormData] = useState<PhysicalAssessmentDataModel>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -90,6 +89,13 @@ const PhisicalAssessmentForm = ({
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
+
+        // if (name === "height") {
+        //     const heightValue = value.replace(/[^0-9]/g, '');
+        //     const displayValue = heightValue ? heightValue + "(kg)" : "";
+        //     setFormData((prev) => ({ ...prev, height: displayValue }));
+        // }
+        
     };
 
     // Submit Handler
@@ -141,8 +147,6 @@ const PhisicalAssessmentForm = ({
         }
     };
 
-    console.log("modalFormPhisicalData--modal", modalFormPhisicalData);
-    console.log("editPhysicalAssessment--modal", editPhysicalAssessment);
     return (
         <>
             <form onSubmit={handleSubmit}>

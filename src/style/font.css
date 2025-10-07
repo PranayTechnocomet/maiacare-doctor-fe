@@ -31,11 +31,11 @@
 }
 
 .custom-react-dropdown input::placeholder {
-    color: var(--color-placeholder-input);    
-    opacity: 1 ;
+    color: var(--color-placeholder-input);
+    opacity: 1;
     font-size: 16px;
-    font-weight: 500 ;
-    line-height: 22px ;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 .maiacare-input-field-helper-text {
@@ -161,7 +161,7 @@
 
 .login-title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 44px;
     font-style: SemiBold;
     color: var(--login-font);
@@ -316,7 +316,7 @@
 
 .login-title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 44px;
     font-style: SemiBold;
     color: var(--login-font);
@@ -703,9 +703,15 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .login-title {
+        font-size: 32px;
+    }
+}
+
 @media screen and (max-width: 1199px) {
     .login-title {
-        font-size: 35px;
+        font-size: 32px;
     }
 
     .login-image-contetnt {
@@ -715,7 +721,7 @@
 
 @media screen and (max-width: 1024px) {
     .login-title {
-        font-size: 33px;
+        font-size: 30px;
         line-height: 40px;
     }
 
@@ -742,6 +748,7 @@
     .maiacare-input-field {
         font-size: 15px;
     }
+
     .custom-react-dropdown input::placeholder {
         font-size: 15px;
     }
@@ -760,7 +767,7 @@
     }
 
     .login-title {
-        font-size: 31px;
+        font-size: 30px;
         line-height: 35px;
     }
 
@@ -815,6 +822,7 @@
     .maiacare-input-field {
         font-size: 14px;
     }
+
     .custom-react-dropdown input::placeholder {
         font-size: 14px;
     }
@@ -1556,7 +1564,13 @@
     line-height: 20px;
     font-style: medium;
     /* color: var(--border-box);     */
+}
 
+
+.calender-timepicker-placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-radio);
 }
 
 @media screen and (max-width: 1391px) {
