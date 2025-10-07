@@ -185,7 +185,6 @@ export default function Page() {
         ? prev.filter(v => v !== value)
         : [...prev, value]
     );
-    console.log("value", value);
 
   };
 
@@ -337,19 +336,9 @@ export default function Page() {
     setMaskedValue("*".repeat(newInput.length));
   };
 
-
-
-
-
-
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
-
-
-
-
-
         <InputFieldGroup
           label="Name"
           name="name"
@@ -404,6 +393,7 @@ export default function Page() {
           disabled={false}
           error={formError.date}
           helperText="select date"
+          // iconColor = "red"
         />
 
         <RadioButtonGroup
@@ -599,9 +589,6 @@ export default function Page() {
             </div>
           </div>
         </div> */}
-
-
-
 
         {/* Button Section End */}
 

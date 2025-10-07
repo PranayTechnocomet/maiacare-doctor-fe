@@ -85,9 +85,11 @@ body {
 .abc {
   position: absolute;
 }
-.input-forgot-password-btn{
+
+.input-forgot-password-btn {
   padding: 14px 24px !important;
 }
+
 .main-pregnancy-img image {
   height: 100% !important;
   /* width: 105vh !important; */
@@ -100,13 +102,14 @@ body {
 }
 
 .blood-test-search .maiacare-input-field {
-  padding-right: 55px;
+  padding-right: 50px !important;
 }
 
 .patient-header-search-width {
   width: 25%;
 }
-.patient-header-search-width-doctor-list{
+
+.patient-header-search-width-doctor-list {
   width: 57%;
 }
 
@@ -119,7 +122,7 @@ body {
 .patient-header-select-filter .maiacare-input-field {
   border: 1px solid var(--color-icon-border) !important;
   width: 130px;
-  
+
 }
 
 .patient-header-filter-icon-box {
@@ -146,12 +149,12 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.appointments-total-box{
+.appointments-total-box {
   background-color: var(--color-white);
   border: 1px solid var(--color-icon-border);
   border-radius: 8px;
   padding: 8px;
-/* width: 300px; */
+  /* width: 300px; */
 }
 
 .progressbar-step-success {
@@ -180,7 +183,8 @@ body {
   margin-left: auto !important;
 
 }
-.add-new-button{
+
+.add-new-button {
   padding: 6px 12px !important;
 }
 
@@ -287,7 +291,7 @@ body {
   }
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1024px) {
   .patient-header-search-width {
     width: 28%;
   }
@@ -304,10 +308,11 @@ body {
   .patient-header-search-width {
     width: 45%;
   }
+
   .patient-header-filter-icon-box {
     padding: 12px !important;
   }
-  
+
 }
 
 @media screen and (max-width: 575px) {
@@ -319,10 +324,11 @@ body {
   .patient-header-search-width {
     width: 100%;
   }
+
   .patient-header-filter-icon-box {
     padding: 10px !important;
   }
-  
+
   .sort-by-lable {
     font-size: 14px;
   }

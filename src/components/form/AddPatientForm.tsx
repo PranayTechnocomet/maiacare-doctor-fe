@@ -315,6 +315,7 @@ function AddPatientForm() {
                             <DatePickerFieldGroup
                                 label="Select Date"
                                 name="date"
+                                placeholder="Enter DOB"
                                 value={formData.date}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);

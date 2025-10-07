@@ -31,11 +31,11 @@
 }
 
 .custom-react-dropdown input::placeholder {
-    color: var(--color-placeholder-input);    
-    opacity: 1 ;
+    color: var(--color-placeholder-input);
+    opacity: 1;
     font-size: 16px;
-    font-weight: 500 ;
-    line-height: 22px ;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 .maiacare-input-field-helper-text {
@@ -742,6 +742,7 @@
     .maiacare-input-field {
         font-size: 15px;
     }
+
     .custom-react-dropdown input::placeholder {
         font-size: 15px;
     }
@@ -815,6 +816,7 @@
     .maiacare-input-field {
         font-size: 14px;
     }
+
     .custom-react-dropdown input::placeholder {
         font-size: 14px;
     }
@@ -1556,7 +1558,13 @@
     line-height: 20px;
     font-style: medium;
     /* color: var(--border-box);     */
+}
 
+
+.calender-timepicker-placeholder {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-radio);
 }
 
 @media screen and (max-width: 1391px) {
