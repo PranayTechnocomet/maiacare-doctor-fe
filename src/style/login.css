@@ -1,5 +1,6 @@
 .input-email-login-data .maiacare-input-field {
     padding-left: 40px !important;
+    padding-right: 40px !important;
     color: var(--color-radio-lable) !important;
 
 }
@@ -177,13 +178,25 @@
 }
 
 
-@media  screen and (min-width: 1440px) {
+@media  screen and (min-width: 1300px) {
     .forgot-passwored-detail{
         width: 53% !important;
     }
 }
+
+@media  screen and (min-width: 1400px) {
+    .forgot-passwored-detail{
+        width: 53% !important;
+    }
+}
+
 @media screen and (max-width:767px) {
     .forgot-passwored-detail{
         width: 68% !important;
+    }
+}
+@media screen and (max-width:575px) {
+    .forgot-passwored-detail{
+        width: 95% !important;
     }
 }

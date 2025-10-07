@@ -161,7 +161,7 @@
 
 .login-title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 44px;
     font-style: SemiBold;
     color: var(--login-font);
@@ -316,7 +316,7 @@
 
 .login-title {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 34px;
     line-height: 44px;
     font-style: SemiBold;
     color: var(--login-font);
@@ -703,9 +703,15 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .login-title {
+        font-size: 32px;
+    }
+}
+
 @media screen and (max-width: 1199px) {
     .login-title {
-        font-size: 35px;
+        font-size: 32px;
     }
 
     .login-image-contetnt {
@@ -715,7 +721,7 @@
 
 @media screen and (max-width: 1024px) {
     .login-title {
-        font-size: 33px;
+        font-size: 30px;
         line-height: 40px;
     }
 
@@ -760,7 +766,7 @@
     }
 
     .login-title {
-        font-size: 31px;
+        font-size: 30px;
         line-height: 35px;
     }
 

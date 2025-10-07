@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { AppDispatch } from "@/utils/redux/store";
 import {
   InputFieldGroup,
@@ -338,22 +338,46 @@ export default function Page() {
   };
 
 
+  const [value, setValue] = useState<string>("");
+  console.log("value1121212", value);
+  
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
+  const handleChang = (e: ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, ""); // only numbers
+    const displayValue = input ? input + "(kg)" : "";
 
+    setValue(displayValue);
+
+    // Move cursor before " kg"
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(input.length, input.length);
+      }
+    }, 0);
+  };
+  
 
 
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
 
-
-
+      <input
+      ref={inputRef}
+      type="text"
+      value={value}
+      onChange={handleChang}
+      placeholder="Enter weight"
+      className="border rounded-md p-2 outline-none"
+    />
+        
 
 
         <InputFieldGroup
           label="Name"
           name="name"
-          type="password"
+          type="text"
           value={formData.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             handleChange(e);
@@ -370,6 +394,7 @@ export default function Page() {
           <div className="position-absolute abc">
             <IoIosEye size={25} />
           </div>
+
         </InputFieldGroup>
 
         <InputSelect
