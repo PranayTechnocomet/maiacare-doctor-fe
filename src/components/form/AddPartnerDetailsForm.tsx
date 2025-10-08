@@ -19,7 +19,15 @@ import { BsInfoCircle } from 'react-icons/bs';
 // import '../../style/PartnerDetails.css'
 
 
-export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: { setAddPartner: (value: boolean) => void, setActiveTab: (tab: string) => void, setShowData: (value: any) => void }) {
+export function BasicDetailsForm({
+    setAddPartner,
+    setActiveTab,
+    setShowData
+}: {
+    setAddPartner: (value: boolean) => void,
+    setActiveTab: (tab: string) => void,
+    setShowData: (value: any) => void
+}) {
 
     const initialFormError: FormError = {};
     type FormData = {
@@ -47,30 +55,60 @@ export function BasicDetailsForm({ setAddPartner, setActiveTab, setShowData }: {
     // console.log("formData", formData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
 
+    // const handleChange = (
+    //     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    // ) => {
+    //     const { name, value } = e.target;
+    //     const isValidNumber = /^[0-9]*$/.test(value);
 
+    //     setFormData((prev) => ({ ...prev, [name]: value }));
+    //     // setFormError((prev) => ({ ...prev, [name]: "" }));
+
+    //     console.log("value", value);
+
+    //     if (name === "basic_detail_phone") {
+    //         if (isValidNumber) {
+    //           // clear error only if numbers are entered
+    //           setFormError((prev) => ({ ...prev, [name]: "" }));
+
+    //         }
+    //         // else keep the error until user fixes
+    //       } else {
+    //         // for other fields, clear error on any input
+    //         setFormError((prev) => ({ ...prev, [name]: "" }));
+
+    //       }
+    // };
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-        const isValidNumber = /^[0-9]*$/.test(value);
-
 
         setFormData((prev) => ({ ...prev, [name]: value }));
-        // setFormError((prev) => ({ ...prev, [name]: "" }));
-
-
-        console.log("value",value);
 
         if (name === "basic_detail_phone") {
-            if (isValidNumber) {
+            // Allow only digits
+            const isOnlyNumbers = /^[0-9]*$/.test(value);
+
+            if (isOnlyNumbers) {
+                // clear error only when it's numeric
                 setFormError((prev) => ({ ...prev, [name]: "" }));
+            } else {
+                // keep "required" style error if invalid
+                setFormError((prev) => ({
+                    ...prev,
+                    [name]: "Phone number is required",
+                }));
             }
         } else {
+            // for other fields, clear error on any change
             setFormError((prev) => ({ ...prev, [name]: "" }));
         }
 
+        console.log("value", value);
     };
+
 
     const [profileImage, setProfileImage] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -398,10 +436,10 @@ export function MedicalHistoryForm({
 
             if (formDataMedicalHistory) {
 
-                console.log("updated medicalHistory", {
-                    ...showData,
-                    medicalHistory: FormData
-                });
+                // console.log("updated medicalHistory", {
+                //     ...showData,
+                //     medicalHistory: FormData
+                // });
                 toast.success('Changes saved successfully', {
                     icon: <BsInfoCircle size={22} color="white" />,
                 });
@@ -416,7 +454,7 @@ export function MedicalHistoryForm({
 
             } else {
                 setActiveTab("physical & fertility assessment");
-                console.log("FormData55", FormData);
+                // console.log("FormData55", FormData);
                 setShowData((prev: any) => ({ ...prev, medicalHistory: FormData }));
 
             }

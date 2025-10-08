@@ -70,7 +70,11 @@ function MedicationAndTests({
             </div>
 
             {step == 1 && (
-                <TestsForm setStep={setStep} setStepper={setStepper} setMedicationAndTestsModel={setTreatmentPlanModel} />
+                <TestsForm
+                    setStep={setStep}
+                    setStepper={setStepper}
+                    setMedicationAndTestsModel={setTreatmentPlanModel}
+                />
 
             )}
 
