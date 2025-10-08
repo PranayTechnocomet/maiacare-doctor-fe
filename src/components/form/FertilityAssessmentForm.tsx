@@ -167,6 +167,7 @@ export const FertilityAssessmentForm = ({
                                         required
                                         disabled={false}
                                         helperText=""
+                                        max={new Date().toISOString().split("T")[0]} // future date is disabled
                                     />
                                 </Col>
 

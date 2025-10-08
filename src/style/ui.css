@@ -342,6 +342,21 @@ input[type=number] {
     flex: none !important;
 }
 
+.Quantity-box-show {
+    border: none !important;       
+    box-shadow: none !important;   
+    background: transparent;       
+    cursor: default;             
+  }
+  
+  /* Remove border/shadow on focus */
+  .Quantity-box-show:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+
 .Quantity-box {
     border: 1px solid var(--color-icon-border);
     border-radius: 8px;
@@ -432,6 +447,10 @@ input[type=number] {
 /* input select item box none hide */
 .custom-react-dropdown .react-dropdown-select-option {
     display: none !important;
+}
+
+.custom-react-dropdown .react-dropdown-select-input{
+    width: 100% !important;
 }
 
 .custom-react-dropdown .react-dropdown-select-item-selected {

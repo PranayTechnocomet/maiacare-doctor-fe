@@ -1,9 +1,11 @@
 import { Col, Row } from "react-bootstrap";
 import { InputFieldGroup } from "../ui/InputField";
 import { ChangeEvent, useEffect, useState } from "react";
-import {InputSelect} from "../ui/InputSelect";
+import { InputSelect } from "../ui/InputSelect";
 import Button from "../ui/Button";
 import { PaymentFormData } from "@/utils/types/interfaces";
+import toast from "react-hot-toast";
+import { BsInfoCircle } from "react-icons/bs";
 
 export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormData, PaymentFormData }: {
     setPaymentFormShow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -61,6 +63,7 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                         : "";
 
         setStatusClass(newClass);
+        
     }, [formData.status]);
 
     const validateForm = (data: PaymentFormData): FormError => {
@@ -87,6 +90,16 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
             setPaymentFormData(formData);
             setFormError(initialFormError);
             setPaymentFormShow(false);
+
+            if (PaymentFormData.amount) {
+                toast.success('Changes saved successfully', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
+            } else {
+                toast.success('Payment details added successfully', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
+            }
         }
     };
 
@@ -139,7 +152,9 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
                                 { id: "3", value: "other", label: "other" },
                             ]}
                         />
-                        <span className={`payment-status ${statusClass}`}> {formData.status} </span>
+                        <span className={`${formError.mode ? "payment-status-error-time" : "payment-status"} ${statusClass}`}>
+                            {formData.status}
+                        </span>
 
                     </Col>
                     <Col sm={6}>

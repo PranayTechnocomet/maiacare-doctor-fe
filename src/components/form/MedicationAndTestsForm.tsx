@@ -160,7 +160,7 @@ export function TestsForm({
                                                         test.name.toLowerCase().includes(searchTerm.toLowerCase())
                                                     )
                                                     .map((test) => (
-                                                        <Col md={4} key={test.id}>
+                                                        <Col lg={4} md={6} sm={12} key={test.id}>
                                                             <div className="blood-test-box">
                                                                 <div className="form-check d-flex gap-2 align-items-center ">
                                                                     <input

@@ -55,6 +55,20 @@
     overflow: hidden !important;
 }
 
+.medication-prescription-accordion-item-main .accordion-button:after {
+    width: var(--bs-accordion-btn-icon-width) !important;
+    height: var(--bs-accordion-btn-icon-width) !important;
+    content: "" !important;
+  
+    background-image: url("../assets/images/medication-accordion-arrow.png") !important;
+    background-repeat: no-repeat !important;
+    background-size: var(--bs-accordion-btn-icon-width) !important;
+    transition: var(--bs-accordion-btn-icon-transition) !important;
+    flex-shrink: 0 !important;
+    margin-left: auto !important;
+  
+  }
+
 .medication-prescription-accordion-item-main .accordion-button {
     padding: 12px;
 }
@@ -68,6 +82,12 @@
     top: 56%;
     left: 20px;
 }
+.payment-status-error-time{
+    position: absolute;
+    top: 43%;
+    left: 20px;
+}
+
 
 .blood-test-box .form-check-input {
     accent-color: var(--color-brand, #2B4360);
@@ -127,6 +147,9 @@
 @media screen and (max-width: 575px) {
 
     .payment-status {
+        left: 15px;
+    }
+    .payment-status-error-time{
         left: 15px;
     }
 }

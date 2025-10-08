@@ -228,6 +228,8 @@ export function BookAppointment({
                                 required={true}
                                 error={formError.appointmentDate}
                                 iconColor="var(--color-radio)"
+                                min={new Date().toISOString().split("T")[0]}
+                                
                             />
                         </Col>
                         <Col md={4}>
