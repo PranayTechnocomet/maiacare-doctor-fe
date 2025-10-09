@@ -244,7 +244,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                             </svg>
                             <span className='ms-1'>Add Partner Details</span>
                         </Button>
-
                     </div>
                 </div>
             )}
@@ -256,18 +255,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                 closeButton={true}
                 size="lg"
             >
-                {/* <div className="mb-0">
-                    <AddPartnerDetailsForm
-                        setShowContent={setShowContent}
-                        setShowPartnerDetail={setShowPartnerDetail}
-                        setAddPartner={setAddPartner}
-                        setShowData={setShowData}
-                        modalEditTab={modalEditTab}
-                        setModalEditTab={setModalEditTab}
-                        showData={showData}
-                        eventKey={eventKey === 1}
-                    />
-                </div> */}
                 <AddPartnerDetails
                     setAddPartner={setAddPartner}
                     setShowContent={setShowContent}

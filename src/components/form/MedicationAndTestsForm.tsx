@@ -97,7 +97,7 @@ export function TestsForm({
         <>
             <form onSubmit={handelNext}>
                 <Row className="g-3">
-                    <h6 className="dashboard-chart-heading">Tests</h6>
+                    <h6 className="dashboard-chart-heading mb-0">Tests</h6>
                     <Col md={12}>
 
                         <InputSelectMultiSelect
@@ -123,7 +123,7 @@ export function TestsForm({
 
 
                         {formData.tests.length > 0 && (
-                            <Accordion defaultActiveKey="0" className="mt-3">
+                            <Accordion defaultActiveKey="0" className="mt-md-4 mt-2">
                                 <Accordion.Item eventKey="0" className='phisical-assessment-accordion-item mb-3' >
                                     <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                         <h6 className="doctor-listing-modal-profile-title m-0">Blood Test</h6>

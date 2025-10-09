@@ -182,7 +182,7 @@ export default function MedicalHistory({
                         />
 
                     </Col>
-                    <Col md={12}>
+                    <Col md={12} className='mt-md-3 mt-2'>
                         <InputFieldGroup
                             label="Family Medical History "
                             name="familyMedicalHistory"
@@ -221,7 +221,7 @@ export default function MedicalHistory({
 
                     </Col>
 
-                    <Col lg={6}>
+                    <Col lg={6} className='mt-md-3 mt-2'>
                         <RadioButtonGroup
                             label="How often do you exercise?"
                             name="exercise"
@@ -236,7 +236,7 @@ export default function MedicalHistory({
                             ]}
                         />
                     </Col>
-                    <Col lg={6} className='mt-md-0 mt-2'>
+                    <Col lg={6} className='mt-md-3 mt-2'>
                         <RadioButtonGroup
                             label="How would you rate your stress levels?"
                             name="stress"
