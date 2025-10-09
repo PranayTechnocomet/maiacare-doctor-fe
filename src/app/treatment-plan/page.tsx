@@ -4,13 +4,21 @@ import { AppDispatch } from "@/utils/redux/store";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
+import Treatment from "@/components/Treatment";
+import '@/style/treatment.css'
 
 function Page() {
-    const dispatch: AppDispatch = useDispatch();
-useEffect(() => {
-  dispatch(setHeaderData({ title: "Treatment Plan", subtitle: "Treatment Plan" }));
-}, []);
-  return <div>Treatment Plan</div>;
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setHeaderData({ title: "Treatment Plan", subtitle: "Treatment Plan" }));
+  }, []);
+  return (
+    <>
+
+      <Treatment />
+
+    </>
+  )
 }
 
 export default Page

@@ -137,7 +137,7 @@ export function RescheduleAppointment({
 
             {/* Step 1 */}
             {step === 1 && (
-                <form className="mt-4" onSubmit={handelNext}>
+                <form className="mt-3" onSubmit={handelNext}>
                     <InputSelect
                         label="Reason of Rescheduling Appointment"
                         className="input-select"
