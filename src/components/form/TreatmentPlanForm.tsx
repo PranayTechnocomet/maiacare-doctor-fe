@@ -74,7 +74,7 @@ export function TreatmentPlanForm({
         <>
             <form onSubmit={handelNext}>
                 <Row className="g-3">
-                    <h6 className="dashboard-chart-heading">Treatment Plan</h6>
+                    <h6 className="dashboard-chart-heading mb-0">Treatment Plan</h6>
                     <Col md={6}>
                         <InputSelect
                             label="Select Treatment"
@@ -121,7 +121,7 @@ export function TreatmentPlanForm({
                             <Row className="g-2">
                                 {TempTreatmentSteps.map((item) => (
                                     <Col md={6} key={item.id}>
-                                        <div className="treatment-steps-box d-flex gap-2">
+                                        <div className="treatment-steps-box d-flex gap-2 ps-4">
                                             <span className="treatment-steps-box-item ">{item.id}.</span>
                                             <p className="treatment-steps-box-item m-0">{item.step}</p>
                                         </div>

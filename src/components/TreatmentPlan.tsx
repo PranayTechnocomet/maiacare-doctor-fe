@@ -91,7 +91,7 @@ function TreatmentPlan({
                             <Accordion defaultActiveKey="0">
                                 {medicalPrescription.map((item, index) => {
                                     return (
-                                        <Accordion.Item eventKey={index.toString()} className='medication-prescription-accordion-item-main mb-3' key={index}>
+                                        <Accordion.Item eventKey={index.toString()} className='medication-prescription-accordion-item-main mb-3 shadow-sm' key={index}>
                                             <Accordion.Header className='phisical-assessment-accordion-title-showData'>
                                                 <div className='d-flex align-items-center gap-2'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="45" height="44" viewBox="0 0 45 44" fill="none">

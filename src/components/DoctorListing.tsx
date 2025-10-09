@@ -605,7 +605,7 @@ export function CalendarView() {
               </clipPath>
             </defs>
           </svg>
-          <p className='appointments-total-box-item m-0'>98 Appointments111</p>
+          <p className='appointments-total-box-item m-0'>98 Appointments</p>
 
         </div>
 
