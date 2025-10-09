@@ -214,6 +214,15 @@ export default function Page() {
       errors.phone = "Phone number is required";
     }
 
+   
+    
+
+    // if (!data.phone.trim()) {
+    //   errors.phone = "Phone number is required";
+    // } else if (/^[0-9]+$/.test(data.phone.trim())) {
+    //   errors.phone = "Only numbers are allowed";
+    // }
+    
     if (!data.description.trim())
       errors.description = "Description is required";
 
@@ -339,7 +348,7 @@ export default function Page() {
 
   const [value, setValue] = useState<string>("");
   console.log("value1121212", value);
-  
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChang = (e: ChangeEvent<HTMLInputElement>) => {
@@ -355,21 +364,31 @@ export default function Page() {
       }
     }, 0);
   };
-  
+
+
+ 
+  const todaya = new Date();
+  const year = todaya.getFullYear();
+  const month = String(todaya.getMonth() + 1).padStart(2, '0');
+  const day = String(todaya.getDate()).padStart(2, '0');
+
+  const today = `${year}-${month}-${day}`;
+
+  console.log(today); // e.g. "2025-10-09"
 
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
 
-      <input
-      ref={inputRef}
-      type="text"
-      value={value}
-      onChange={handleChang}
-      placeholder="Enter weight"
-      className="border rounded-md p-2 outline-none"
-    />
-        
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={handleChang}
+          placeholder="Enter weight"
+          className="border rounded-md p-2 outline-none"
+        />
+
 
 
         <InputFieldGroup
@@ -427,8 +446,12 @@ export default function Page() {
           disabled={false}
           error={formError.date}
           helperText="select date"
-          // iconColor = "red"
+          max={today}
+        // iconColor = "red"
         />
+
+
+
 
         <RadioButtonGroup
           label="Gender"

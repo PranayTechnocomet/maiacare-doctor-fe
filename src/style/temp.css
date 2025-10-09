@@ -21,6 +21,7 @@
     border-radius: 8px;
     border: 2px solid #DDE1E8;
     padding: 8px 4px;
+    cursor: pointer !important;
 }
 
 .upcoming-box {

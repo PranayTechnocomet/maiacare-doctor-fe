@@ -133,7 +133,7 @@ export function LoginForms() {
                         value={formData.password}
                         onChange={handleChange}
                         error={formError.password}
-                        className="position-relative  input-email-login-data"
+                        className="position-relative  input-email-login-data login-password-data"
                     >
                         {/* <BiLockAlt size={24} className="input-email-data" /> */}
                         <svg xmlns="http://www.w3.org/2000/svg" className="input-email-data" width="24" height="24" viewBox="0 0 25 25" fill="none">
