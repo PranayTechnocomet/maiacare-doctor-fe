@@ -379,6 +379,52 @@ export function CalendarView() {
   const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
   const [blockCalendarModal, setBlockCalendarModal] = useState(false);
 
+
+
+
+
+
+  // week range formatter
+  const getSelectedWeekRange = (date: Date) => {
+    const day = date.getDay();
+    const start = new Date(date);
+    start.setDate(date.getDate() - day + 1); // Monday
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6); // Sunday
+
+    const monthYear = date.toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
+
+    const startDayName = start
+      .toLocaleString("default", { weekday: "short" })
+      .replace(".", "");
+    const endDayName = end
+      .toLocaleString("default", { weekday: "short" })
+      .replace(".", "");
+
+    const startDate = start.getDate().toString().padStart(2, "0");
+    const endDate = end.getDate().toString().padStart(2, "0");
+
+    return `${monthYear} (${startDayName} ${startDate} - ${endDayName} ${endDate})`;
+  };
+
+  // calendar renderer
+
+  // check if date belongs to selected week
+  const isDateInSelectedWeek = (date: Date, selected: Date) => {
+    const start = new Date(selected);
+    start.setDate(selected.getDate() - selected.getDay() + 1);
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6);
+    return date >= start && date <= end;
+  };
+
+
+
+
+
   return (
     <>
 
@@ -704,7 +750,7 @@ export function CalendarView() {
 
 
 
-                  <div className="bg-light  d-flex align-items-center justify-content-center ">
+                  {/* <div className="bg-light  d-flex align-items-center justify-content-center ">
                     <Card className="shadow-sm calendar-card ">
                       <Card.Body>
                         <Stack direction="horizontal" className="mb-3">
@@ -728,6 +774,57 @@ export function CalendarView() {
                           ))}
                           {renderCalendar()}
                         </div>
+                      </Card.Body>
+                    </Card>
+                  </div> */}
+
+
+
+
+
+                  <div className="bg-light d-flex align-items-center justify-content-center p-3">
+                    <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
+                      <Card.Body>
+                        <Stack direction="horizontal" className="mb-3">
+                          <h2 className="calendar-header mb-0">Calendar</h2>
+                          <div className="ms-auto">^</div>
+                        </Stack>
+
+                        <Stack direction="horizontal" className="align-items-center mb-3">
+                          <div className="month-header">
+                            {currentDate.toLocaleString("default", {
+                              month: "long",
+                              year: "numeric",
+                            })}
+                          </div>
+                          <Stack direction="horizontal" className="ms-auto">
+                            <Button
+                              variant="link"
+                              className="nav-btn p-0"
+                              onClick={handlePrevMonth}
+                            >
+                              &lt;
+                            </Button>
+                            <Button
+                              variant="link"
+                              className="nav-btn p-0"
+                              onClick={handleNextMonth}
+                            >
+                              &gt;
+                            </Button>
+                          </Stack>
+                        </Stack>
+
+                        <div className="calendar-grid">
+                          {daysOfWeek.map((day, index) => (
+                            <div key={index} className="day-of-week">
+                              {day}
+                            </div>
+                          ))}
+                          {renderCalendar()}
+                        </div>
+
+
                       </Card.Body>
                     </Card>
                   </div>
@@ -766,7 +863,12 @@ export function CalendarView() {
           <Row>
             <div className="d-flex justify-content-between ">
               <div>
-                <p className='doctor-listing-date-heading  m-0 '>November 2024 (Mon 01 - Sat 07)</p>
+                {/* <p className='doctor-listing-date-heading  m-0 '>November 2024 (Mon 01 - Sat 07)</p> */}
+                {selectedDate && (
+                  <p className="doctor-listing-date-heading m-0">
+                    {getSelectedWeekRange(selectedDate)}
+                  </p>
+                )}
                 <p className='doctor-listing-date-subtitle '>0 Appointments</p>
               </div>
               <div className='doctor-listing-day-week-month-main'>
@@ -833,7 +935,15 @@ export function CalendarView() {
                           <div className="d-flex align-items-center">
                             <p className="small fw-semibold mb-0 me-2" style={{ color: '#f57c00' }}>Monday</p>
                             <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold" style={styles.dateCircle}>
-                              01
+                              {selectedDate && (
+                                <div className="text-center  fw-bold">
+                                  {selectedDate.toLocaleDateString("en-IN", {
+                                    day: "2-digit",
+                                    // month: "long",
+                                    // year: "numeric",
+                                  })}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>

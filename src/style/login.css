@@ -178,7 +178,7 @@
 }
 
 
-@media  screen and (min-width: 1300px) {
+@media  screen and (min-width: 1100px) {
     .forgot-passwored-detail{
         width: 53% !important;
     }
@@ -195,6 +195,15 @@
         width: 68% !important;
     }
 }
+.login-subtitle br {
+    display: none;
+}
+@media screen and (min-width: 768px) and (max-width: 1100px) {
+    .login-subtitle br {
+        display: block;
+    }
+}
+
 @media screen and (max-width:575px) {
     .forgot-passwored-detail{
         width: 95% !important;
