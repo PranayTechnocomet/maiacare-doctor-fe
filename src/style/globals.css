@@ -284,7 +284,15 @@ body {
   padding: 4px 8px;
   border-radius: 10px;
 }
-
+.login-password-data::placeholder{
+  margin-top: 250px !important;
+  padding-top: 250px !important;
+}
+.calander-card-data{
+  border: 1px solid  #e78422;
+  cursor: pointer !important;
+  color: #fff !important;
+}
 /* 1440 > big screen apply */
 @media (min-width: 1640px) {
   .patient-header-search-width {

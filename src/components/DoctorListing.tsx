@@ -385,6 +385,30 @@ export function CalendarView() {
 
 
   // week range formatter
+  const getSelectedDayRange = (date: Date) => {
+    const day = date.getDay();
+    const start = new Date(date);
+    start.setDate(date.getDate() - day + 1); // Monday
+    const end = new Date(start);
+    end.setDate(start.getDate() + 6); // Sunday
+
+    const monthYear = date.toLocaleString("default", {
+      month: "long",
+      year: "numeric",
+    });
+
+    const startDayName = start
+      .toLocaleString("default", { weekday: "short" })
+      .replace(".", "");
+    const endDayName = end
+      .toLocaleString("default", { weekday: "short" })
+      .replace(".", "");
+
+    const startDate = start.getDate().toString().padStart(2, "0");
+    const endDate = end.getDate().toString().padStart(2, "0");
+
+    return `${monthYear}`;
+  };
   const getSelectedWeekRange = (date: Date) => {
     const day = date.getDay();
     const start = new Date(date);
@@ -421,7 +445,13 @@ export function CalendarView() {
     return date >= start && date <= end;
   };
 
-
+  const [selectedCard, setSelectedCard] = useState<"Upcoming" | "Waiting" | "Engaged" | "Done" | null>(null);
+  const displayLimits: Record<"Upcoming" | "Waiting" | "Engaged" | "Done", number> = {
+    Upcoming: 5,
+    Waiting: 3,
+    Engaged: 2,
+    Done: 4,
+  };
 
 
 
@@ -862,15 +892,55 @@ export function CalendarView() {
         <Col md={9}>
           <Row>
             <div className="d-flex justify-content-between ">
-              <div>
-                {/* <p className='doctor-listing-date-heading  m-0 '>November 2024 (Mon 01 - Sat 07)</p> */}
+              {/* <div>
                 {selectedDate && (
                   <p className="doctor-listing-date-heading m-0">
                     {getSelectedWeekRange(selectedDate)}
                   </p>
                 )}
                 <p className='doctor-listing-date-subtitle '>0 Appointments</p>
+              </div> */}
+
+              <div className="mt-3">
+                {selectedView === "day" && (
+                  <div>
+                    <p className="doctor-listing-date-heading m-0">
+                      {selectedDate && (
+                        <p className="doctor-listing-date-heading m-0">
+                          {getSelectedDayRange(selectedDate)}
+                        </p>
+                      )}
+                      <p className="doctor-listing-date-subtitle">10 Appointments</p>
+                    </p>
+                  </div>
+                )}
+
+                {selectedView === "week" && (
+                  <div>
+                    {selectedDate && (
+                      <p className="doctor-listing-date-heading m-0">
+                        {getSelectedWeekRange(selectedDate)}
+                      </p>
+                    )}
+                    <p className="doctor-listing-date-subtitle">0 Appointments</p>
+                  </div>
+                )}
+
+                {selectedView === "month" && (
+                  <div>
+                    <p className="doctor-listing-date-heading m-0">
+
+                      {selectedDate && (
+                        <p className="doctor-listing-date-heading m-0">
+                          {getSelectedDayRange(selectedDate)}
+                        </p>
+                      )}
+                      <p className="doctor-listing-date-subtitle">20 Appointments</p>
+                    </p>
+                  </div>
+                )}
               </div>
+
               <div className='doctor-listing-day-week-month-main'>
 
                 <Nav
@@ -1173,43 +1243,83 @@ export function CalendarView() {
 
                 <div className='today-schedule-box-section h-100'>
                   <div className='d-flex justify-content-between align-items-center gap-1 p-0'>
-                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+                    <div
+                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
+                      style={selectedCard === 'Upcoming' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                      onClick={() => setSelectedCard('Upcoming')}
+                    >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
-                      <div className='upcoming-box doctor-listing-all-box'>0</div>
+                      <div
+                        className='upcoming-box doctor-listing-all-box'
+                        style={selectedCard === 'Upcoming' ? { color: '#fff' } : {}}
+                      >
+                        5
+                      </div>
                     </div>
-                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+
+                    <div
+                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
+                      style={selectedCard === 'Waiting' ? {border:'1px solid #e78422', color: '#fff' } : {}}
+                      onClick={() => setSelectedCard('Waiting')}
+                    >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Waiting</p>
-                      <div className='waiting-box doctor-listing-all-box'>0</div>
+                      <div
+                        className='waiting-box doctor-listing-all-box'
+                        style={selectedCard === 'Waiting' ? {  color: '#fff' } : {}}
+                      >
+                        3
+                      </div>
                     </div>
-                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+
+                    <div
+                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
+                      onClick={() => setSelectedCard('Engaged')}
+                      style={selectedCard === 'Engaged' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                    >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Engaged</p>
-                      <div className='engaged-box doctor-listing-all-box'>0</div>
+                      <div
+                        className='engaged-box doctor-listing-all-box'
+                        style={selectedCard === 'Engaged' ? { color: '#fff' } : {}}
+                      >
+                        2
+                      </div>
                     </div>
-                    <div className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'>
+
+                    <div
+                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
+                      style={selectedCard === 'Done' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                      onClick={() => setSelectedCard('Done')}
+                    >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Done</p>
-                      <div className='done-box doctor-listing-all-box'>0</div>
+                      <div
+                        className='done-box doctor-listing-all-box'
+                        style={selectedCard === 'Done' ? { color: '#fff' } : {}}
+                      >
+                        4
+                      </div>
                     </div>
                   </div>
-                  {doctorlistingModalData.map((item: any, index: number) => (
-                    <div key={index}>
 
+                  {/* Use the selectedCard to limit how many items to display */}
+                  {(selectedCard
+                    ? doctorlistingModalData.slice(0, displayLimits[selectedCard])
+                    : doctorlistingModalData
+                  ).map((item: any, index: number) => (
+                    <div key={index}>
                       <div className='docotor-listing-today-schedule-datas'>
                         <Card className="d-flex flex-row align-items-center p-2 shadow-sm rounded-3 border-0" style={{ maxWidth: "350px" }}>
-                          {/* Profile Image */}
                           <Image src={item.patient_profile} alt="Profile" width={50} height={50} className="me-2 rounded-circle" />
-
-                          {/* User Info */}
                           <div className="flex-grow-1">
                             <p className="doctor-listing-modal-patient-name m-0">{item.patient_name}</p>
-                            <div className="d-flex align-items-center doctor-listing-modal-label " >
+                            <div className="d-flex align-items-center doctor-listing-modal-label ">
                               <BsClock className=" me-1 " /> {item.patient_time}
                             </div>
                           </div>
-
-                          {/* Button */}
-                          <Button variant="default" className="doctor-listing-modal-button" onClick={() => {
-                            setDoctorListingModal(true); setSelectedPatient(item);
-                          }}>
+                          <Button
+                            variant="default"
+                            className="doctor-listing-modal-button"
+                            onClick={() => { setDoctorListingModal(true); setSelectedPatient(item); }}
+                          >
                             Check-In
                           </Button>
                         </Card>
