@@ -4,6 +4,7 @@ import CustomTabs from './ui/CustomTabs';
 import { Badge, Card, Col, Form, Nav, Row, Stack, Tab } from 'react-bootstrap';
 import Button from './ui/Button';
 import '../style/temp.css';
+import '../style/doctorlisting.css';
 import Modal from './ui/Modal';
 import Image from 'next/image';
 import PriyaGupta from '../assets/images/Priya Gupta.png';
@@ -15,6 +16,12 @@ import { InputFieldGroup } from './ui/InputField';
 import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
 import ScheduleTimeOff from './ScheduleTimeOff';
+import AppointmentsMonth from './AppointmentsMonth';
+import dayjs, { Dayjs } from 'dayjs';
+import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -454,6 +461,8 @@ export function CalendarView() {
   };
 
 
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs('2022-04-17'));
+
 
   return (
     <>
@@ -757,7 +766,7 @@ export function CalendarView() {
       </div>
 
       <Row className='mt-3'>
-        <Col md={3}>
+        <Col xl={3}>
           <ContentContainer>
             <>
               <div>
@@ -812,15 +821,15 @@ export function CalendarView() {
 
 
 
-                  <div className="bg-light d-flex align-items-center justify-content-center p-3">
+                  <div className="bg-light d-flex align-items-center justify-content-center ">
                     <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
-                      <Card.Body>
+                      
                         <Stack direction="horizontal" className="mb-3">
                           <h2 className="calendar-header mb-0">Calendar</h2>
                           <div className="ms-auto">^</div>
                         </Stack>
 
-                        <Stack direction="horizontal" className="align-items-center mb-3">
+                        {/* <Stack direction="horizontal" className="align-items-center mb-3">
                           <div className="month-header">
                             {currentDate.toLocaleString("default", {
                               month: "long",
@@ -844,7 +853,6 @@ export function CalendarView() {
                             </Button>
                           </Stack>
                         </Stack>
-
                         <div className="calendar-grid">
                           {daysOfWeek.map((day, index) => (
                             <div key={index} className="day-of-week">
@@ -852,10 +860,19 @@ export function CalendarView() {
                             </div>
                           ))}
                           {renderCalendar()}
-                        </div>
+                        </div> */}
+
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={['DateCalendar', 'DateCalendar']}>
+
+                            <DemoItem>
+                              <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
+                            </DemoItem>
+                          </DemoContainer>
+                        </LocalizationProvider>
 
 
-                      </Card.Body>
+                      
                     </Card>
                   </div>
 
@@ -889,7 +906,7 @@ export function CalendarView() {
             </>
           </ContentContainer>
         </Col>
-        <Col md={9}>
+        <Col xl={9}>
           <Row>
             <div className="d-flex justify-content-between ">
               {/* <div>
@@ -1223,7 +1240,7 @@ export function CalendarView() {
 
               {selectedView === 'month'
                 &&
-                <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} Month View</h1>
+                <AppointmentsMonth />
 
 
               }
@@ -1245,7 +1262,7 @@ export function CalendarView() {
                   <div className='d-flex justify-content-between align-items-center gap-1 p-0'>
                     <div
                       className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Upcoming' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                      style={selectedCard === 'Upcoming' ? { border: '1px solid #e78422', color: '#fff' } : {}}
                       onClick={() => setSelectedCard('Upcoming')}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
@@ -1259,13 +1276,13 @@ export function CalendarView() {
 
                     <div
                       className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Waiting' ? {border:'1px solid #e78422', color: '#fff' } : {}}
+                      style={selectedCard === 'Waiting' ? { border: '1px solid #e78422', color: '#fff' } : {}}
                       onClick={() => setSelectedCard('Waiting')}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Waiting</p>
                       <div
                         className='waiting-box doctor-listing-all-box'
-                        style={selectedCard === 'Waiting' ? {  color: '#fff' } : {}}
+                        style={selectedCard === 'Waiting' ? { color: '#fff' } : {}}
                       >
                         3
                       </div>
@@ -1274,7 +1291,7 @@ export function CalendarView() {
                     <div
                       className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
                       onClick={() => setSelectedCard('Engaged')}
-                      style={selectedCard === 'Engaged' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                      style={selectedCard === 'Engaged' ? { border: '1px solid #e78422', color: '#fff' } : {}}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Engaged</p>
                       <div
@@ -1287,7 +1304,7 @@ export function CalendarView() {
 
                     <div
                       className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Done' ? { border:'1px solid #e78422',  color: '#fff' } : {}}
+                      style={selectedCard === 'Done' ? { border: '1px solid #e78422', color: '#fff' } : {}}
                       onClick={() => setSelectedCard('Done')}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Done</p>
