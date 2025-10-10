@@ -1,0 +1,128 @@
+/* .custom-month-datepicker .fc-header-toolbar {
+    display: none;
+}
+.custom-month-datepicker .fc-col-header-cell-cushion{
+    color: #8A8D93 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+
+}
+.custom-month-datepicker .fc-daygrid-day-number{
+    color: #8A8D93 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+
+}
+.custom-month-datepicker .fc-daygrid-day-top{
+    display: flex; 
+    align-items: start;
+    justify-content: start;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+} */
+
+
+.custom-month-datepicker {
+    position: relative;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide top toolbar */
+.custom-month-datepicker .fc-header-toolbar {
+    display: none;
+}
+
+/* Weekday header (Mon, Tue...) */
+.custom-month-datepicker .fc-col-header-cell-cushion {
+    color: #8A8D93 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+}
+
+/* Day number (1,2,3...) */
+.custom-month-datepicker .fc-daygrid-day-number {
+    color: #8A8D93 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+}
+
+/* Day cell layout */
+.custom-month-datepicker .fc-daygrid-day-top {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+}
+
+/* Hover effect */
+.custom-month-datepicker .fc-daygrid-day:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+/* Today highlight circle */
+.custom-month-datepicker .fc-day-today {
+    background: none !important;
+}
+
+.custom-month-datepicker .fc-day-today .fc-daygrid-day-number {
+    background-color: #f6b49c !important;
+    color: white !important;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tooltip box */
+.calendar-tooltip {
+    position: absolute;
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 18px;
+    width: 260px;
+    font-size: 14px;
+    color: #3c3c3c;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.calendar-tooltip p {
+    margin: 0;
+    color: #3c3c3c;
+    line-height: 20px;
+}
+
+.calendar-tooltip span {
+    color: #f0704b;
+    font-weight: 600;
+    margin-top: 6px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.calendar-tooltip::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 12px;
+    height: 12px;
+    background: white;
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
+}
