@@ -126,3 +126,12 @@
     background: white;
     box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
 }
+.custom-month-datepicker .fc-daygrid-day-frame{
+    width: 102px !important;
+    height: 150px !important;
+}
+.custom-month-datepicker .fc-col-header-cell {
+   border-bottom: none !important;
+  justify-content: start;
+  align-items: start;
+}
