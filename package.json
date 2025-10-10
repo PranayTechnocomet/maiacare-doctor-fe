@@ -9,6 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fullcalendar/daygrid": "^6.1.19",
+    "@fullcalendar/interaction": "^6.1.19",
+    "@fullcalendar/react": "^6.1.19",
+    "@fullcalendar/timegrid": "^6.1.19",
+    "@mui/material": "^7.3.4",
+    "@mui/x-date-pickers": "^8.14.0",
     "@reduxjs/toolkit": "^2.8.2",
     "@tanstack/react-table": "^8.21.3",
     "axios": "^1.11.0",
@@ -16,6 +24,8 @@
     "chart.js": "^4.5.0",
     "classnames": "^2.5.1",
     "datepicker": "^0.0.0",
+    "dayjs": "^1.11.18",
+    "fullcalendar": "^6.1.19",
     "next": "15.4.2",
     "react": "19.1.0",
     "react-bootstrap": "^2.10.10",

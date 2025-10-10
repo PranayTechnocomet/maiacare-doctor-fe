@@ -1,4 +1,4 @@
-import { Patient, PhysicalAssessmentData } from "./types/interfaces";
+import { Patient, PhysicalAssessmentData, SelectPatientType } from "./types/interfaces";
 import dummyPdfImg from "../assets/images/dummy-pdf-img.png"
 import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
 import appointmentProfile from "../assets/images/appoiment-img-1.png"
@@ -402,11 +402,11 @@ export const umeshData = [
     appointment_id: "1234",
   },
 ]
-export const PatientsDetails = [
-  { id: 1, ProfilePhoto: patientImg1, name: "Nisha S" },
-  { id: 2, ProfilePhoto: patientImg2, name: "Kavita Sharma" },
-  { id: 3, ProfilePhoto: patientImg3, name: "Anjali Rao" },
-  { id: 4, ProfilePhoto: patientImg4, name: "Priya Desai" },
+export const PatientsDetails: SelectPatientType[] = [
+  { id: "1", ProfilePhoto: patientImg1, name: "Nisha S" },
+  { id: "2", ProfilePhoto: patientImg2, name: "Kavita Sharma" },
+  { id: "3", ProfilePhoto: patientImg3, name: "Anjali Rao" },
+  { id: "4", ProfilePhoto: patientImg4, name: "Priya Desai" },
 ];
 
 export const TempTreatmentSteps = [

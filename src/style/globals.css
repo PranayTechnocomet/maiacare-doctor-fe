@@ -189,6 +189,13 @@ body {
   padding: 6px 12px !important;
 }
 
+.treatment-steps-box {
+  border: 1px solid var(--color-icon-border);
+  border-radius: 12px;
+  padding: 15px;
+
+}
+
 /* pankaj solanki end */
 
 .timeline-marker {
@@ -292,6 +299,10 @@ body {
   border: 1px solid  #e78422;
   cursor: pointer !important;
   color: #fff !important;
+}
+
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #e78422 !important;
 }
 /* 1440 > big screen apply */
 @media (min-width: 1640px) {
