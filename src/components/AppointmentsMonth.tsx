@@ -6,13 +6,7 @@ function AppointmentsMonth() {
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
 
-    const handleDateClick = (info) => {
-        setShowTooltip(true);
-        setTooltipPos({
-            top: info.jsEvent.clientY,
-            left: info.jsEvent.clientX,
-        });
-    };
+    
     return (
         <>
             {/* <div className='custom-month-datepicker'>
@@ -26,11 +20,11 @@ function AppointmentsMonth() {
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
-                    dateClick={handleDateClick}
+                    
                     selectable={true}
                 />
 
-                {/* {showTooltip && (
+                {showTooltip && (
                     <div
                         className="calendar-tooltip"
                         style={{
@@ -41,7 +35,7 @@ function AppointmentsMonth() {
                         <p>Get started by clicking anywhere on the calendar to add your first appointment</p>
                         <span onClick={() => setShowTooltip(false)}>OK. GOT IT!</span>
                     </div>
-                )} */}
+                )}
             </div>
         </>
     )
