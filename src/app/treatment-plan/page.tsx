@@ -14,11 +14,10 @@ function Page() {
   }, []);
   return (
     <>
-
       <Treatment />
-
     </>
   )
 }
 
 export default Page
+
