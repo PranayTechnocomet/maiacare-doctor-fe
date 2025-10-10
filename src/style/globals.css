@@ -300,6 +300,10 @@ body {
   cursor: pointer !important;
   color: #fff !important;
 }
+
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+  background-color: #e78422 !important;
+}
 /* 1440 > big screen apply */
 @media (min-width: 1640px) {
   .patient-header-search-width {
