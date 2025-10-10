@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export interface User {
   id: string;
   name: string;
@@ -107,7 +109,8 @@ export interface BookAppointmentForm {
   additionalNote: string;
 
   //Patient Details
-  patientName: string;
+  // patientName: SelectPatientType | null;
+  patientName: any;
   phone: string;
   email: string;
   patientAge: string;
@@ -144,6 +147,11 @@ export interface EditFertilityAssessment {
 }
 
 export type OptionType = { value: string; label: string };
+export interface SelectPatientType {
+  id: string;
+  ProfilePhoto: StaticImageData; 
+  name: string;
+}
 
 export interface MedicalHistoryType {
   medication: string,
@@ -164,18 +172,24 @@ export interface TreatmentPlan {
   duration: string;
 }
 
+export interface TreatmentForm {
+  patientName: any;
+  treatment: string;
+  duration: string;
+}
+
 
 export interface MedicationPrescriptionType {
   id: string;
   medicineName: string;
-  type: string;          
-  typeQuantity: string;  
-  duration: string;      
-  quantity: number;      
-  timeslot: string[];   
-  meal: string;          
-  intake: string;        
-  description: string;   
+  type: string;
+  typeQuantity: string;
+  duration: string;
+  quantity: number;
+  timeslot: string[];
+  meal: string;
+  intake: string;
+  description: string;
 }
 
 export interface TreatmentPlanFormData {
@@ -185,8 +199,8 @@ export interface TreatmentPlanFormData {
 
 export interface FollowUpActionFromType {
   nextStep: string;
-  appointmentDate: string;  
-  appointmentTime: string;  
+  appointmentDate: string;
+  appointmentTime: string;
   forTime: string;
   instructionsForPatient: string;
 }
@@ -198,16 +212,16 @@ export interface PaymentFormData {
 }
 
 export interface MedicationTests {
-    tests: OptionType[],
+  tests: OptionType[],
 }
 
 export type ScheduleTimeOff = {
-  startDate: string;          
-  toDate: string;            
-  noOfDays: string;          
-  reason?: string;            
-  checkbox1: boolean;         
-  additionalNote?: string;    
+  startDate: string;
+  toDate: string;
+  noOfDays: string;
+  reason?: string;
+  checkbox1: boolean;
+  additionalNote?: string;
 };
 
 export interface FertilityAssessmentFormType {
@@ -221,5 +235,7 @@ export interface FertilityAssessmentFormType {
   timeduration: string;
   ectopicpregnancy: string;
 }
+
+
 
 

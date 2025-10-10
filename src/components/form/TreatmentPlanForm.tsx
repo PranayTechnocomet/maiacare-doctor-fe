@@ -68,8 +68,8 @@ export function TreatmentPlanForm({
             setStepper((prev: any) => prev + 1);
             setFormError(initialFormError);
         }
-
     };
+
     return (
         <>
             <form onSubmit={handelNext}>

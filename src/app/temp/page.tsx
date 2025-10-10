@@ -339,7 +339,7 @@ export default function Page() {
 
   const [value, setValue] = useState<string>("");
   console.log("value1121212", value);
-  
+
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChang = (e: ChangeEvent<HTMLInputElement>) => {
@@ -355,22 +355,20 @@ export default function Page() {
       }
     }, 0);
   };
-  
+
 
   return (
     <form onSubmit={handleSubmit}>
       <ContentContainer>
 
-      <input
-      ref={inputRef}
-      type="text"
-      value={value}
-      onChange={handleChang}
-      placeholder="Enter weight"
-      className="border rounded-md p-2 outline-none"
-    />
-        
-
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={handleChang}
+          placeholder="Enter weight"
+          className="border rounded-md p-2 outline-none"
+        />
 
         <InputFieldGroup
           label="Name"
@@ -427,7 +425,7 @@ export default function Page() {
           disabled={false}
           error={formError.date}
           helperText="select date"
-          // iconColor = "red"
+        // iconColor = "red"
         />
 
         <RadioButtonGroup
