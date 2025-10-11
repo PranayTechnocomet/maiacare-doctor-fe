@@ -196,6 +196,32 @@ body {
 
 }
 
+.accordion-item:not(:first-of-type) {
+  border: 1px solid var(--color-border);
+}
+
+/* Remove background and shadow on accordion expansion  FOR ALL ACCORDION*/
+.accordion-button:not(.collapsed) {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Remove background and text color change on hover or active */
+.custome-patient-dropdown .dropdown-item:hover,
+.custome-patient-dropdown .dropdown-item:active,
+.custome-patient-dropdown .dropdown-item.active,
+.custome-patient-dropdown .dropdown-item:focus {
+  background-color: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+
+
 /* pankaj solanki end */
 
 .timeline-marker {
@@ -291,15 +317,18 @@ body {
   padding: 4px 8px;
   border-radius: 10px;
 }
-.login-password-data::placeholder{
+
+.login-password-data::placeholder {
   margin-top: 250px !important;
   padding-top: 250px !important;
 }
-.calander-card-data{
-  border: 1px solid  #e78422;
+
+.calander-card-data {
+  border: 1px solid #e78422;
   cursor: pointer !important;
   color: #fff !important;
 }
+
 /* 1440 > big screen apply */
 @media (min-width: 1640px) {
   .patient-header-search-width {
