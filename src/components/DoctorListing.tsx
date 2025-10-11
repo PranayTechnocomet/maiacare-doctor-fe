@@ -22,6 +22,7 @@ import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import Box from '@mui/material/Box';
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -669,56 +670,41 @@ export function CalendarView() {
 
                   <div className="bg-light d-flex align-items-center justify-content-center ">
                     <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
+
+                      <Stack direction="horizontal" className="mb-3">
+                        <h2 className="calendar-header mb-0">Calendar</h2>
+                        <div className="ms-auto">^</div>
+                      </Stack>
+
                       
-                        <Stack direction="horizontal" className="mb-3">
-                          <h2 className="calendar-header mb-0">Calendar</h2>
-                          <div className="ms-auto">^</div>
-                        </Stack>
 
-                        {/* <Stack direction="horizontal" className="align-items-center mb-3">
-                          <div className="month-header">
-                            {currentDate.toLocaleString("default", {
-                              month: "long",
-                              year: "numeric",
-                            })}
-                          </div>
-                          <Stack direction="horizontal" className="ms-auto">
-                            <Button
-                              variant="link"
-                              className="nav-btn p-0"
-                              onClick={handlePrevMonth}
-                            >
-                              &lt;
-                            </Button>
-                            <Button
-                              variant="link"
-                              className="nav-btn p-0"
-                              onClick={handleNextMonth}
-                            >
-                              &gt;
-                            </Button>
-                          </Stack>
-                        </Stack>
-                        <div className="calendar-grid">
-                          {daysOfWeek.map((day, index) => (
-                            <div key={index} className="day-of-week">
-                              {day}
-                            </div>
-                          ))}
-                          {renderCalendar()}
-                        </div> */}
-
+                      <Box
+                        sx={{
+                          overflow: "hidden", // ✅ removes scrollbar
+                          ".MuiDateCalendar-root": {
+                            overflow: "hidden", // ✅ ensures internal container doesn’t scroll
+                          },
+                        }}
+                      >
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DemoContainer components={['DateCalendar', 'DateCalendar']}>
-
-                            <DemoItem>
-                              <DateCalendar value={value} onChange={(newValue) => setValue(newValue)} />
-                            </DemoItem>
-                          </DemoContainer>
+                          <DateCalendar
+                            value={value}
+                            onChange={(newValue) => setValue(newValue)}
+                            views={["year", "month", "day"]} // optional
+                            disableFuture={false} // optional: prevent selecting future dates
+                            disablePast={false} // optional: prevent selecting past dates
+                            readOnly={false} // optional: make calendar read-only
+                            showDaysOutsideCurrentMonth // optional: shows adjacent month days
+                            sx={{
+                              "&::-webkit-scrollbar": { display: "none" }, // ✅ hides scroll in WebKit browsers
+                              overflow: "hidden", // ✅ hides overflow content
+                            }}
+                          />
                         </LocalizationProvider>
+                      </Box>
 
 
-                      
+
                     </Card>
                   </div>
 
@@ -1087,6 +1073,7 @@ export function CalendarView() {
               {selectedView === 'month'
                 &&
                 <AppointmentsMonth />
+                // <h1>Mont</h1>
 
 
               }
@@ -1447,7 +1434,7 @@ export function ListView() {
 
         </div>
       </div>
-      
+
       <>
         <Modal
           show={BookAppointmentModal}
