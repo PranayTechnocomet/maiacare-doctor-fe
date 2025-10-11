@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import { Accordion, Col, ProgressBar, Row } from "react-bootstrap";
-import {InputSelect} from "./ui/InputSelect";
+import { InputSelect } from "./ui/InputSelect";
 import Button from "./ui/Button";
 import '@/style/Appointment.css'
 import "@/style/settingsPassword.css";
@@ -51,7 +51,7 @@ function TreatmentPlan({
         medicalPrescriptionDataShowHide: boolean
     }) {
 
-    
+
     // console.log("medicalPrescriptionDataShowHide", medicalPrescriptionDataShowHide);
 
     return (
@@ -146,7 +146,15 @@ function TreatmentPlan({
                         </>
                     )}
 
-                    <MedicationPrescriptionForm setMedicalPrescription={setMedicalPrescription} setStep={setStep} setStepper={setStepper} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} />
+                    <MedicationPrescriptionForm
+                        setStep={setStep}
+                        setStepper={setStepper}
+                        setMedicalPrescription={setMedicalPrescription}
+                        medicalPrescription={medicalPrescription}
+                        setShowEditFormShowModel={setShowEditFormShowModel}
+                        medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                        setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                    />
 
                     <Modal
                         show={showEditFormShowModel}
@@ -154,7 +162,14 @@ function TreatmentPlan({
                         header="Edit Medication Prescription"
                         closeButton={true}
                     >
-                        <MedicationPrescriptionForm editForm={editForm} setMedicalPrescription={setMedicalPrescription} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} />
+                        <MedicationPrescriptionForm
+                            editForm={editForm}
+                            setMedicalPrescription={setMedicalPrescription}
+                            setShowEditFormShowModel={setShowEditFormShowModel}
+                            medicalPrescription={medicalPrescription}
+                            medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                            setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                        />
                     </Modal>
 
                 </>
@@ -162,7 +177,14 @@ function TreatmentPlan({
 
             {step == 3 && (
                 <>
-                    <FollowUpActionForm setTreatmentDetailsTempShow={setTreatmentDetailsTempShow} setStep={setStep} setStepper={setStepper} step={step} stepper={stepper} setTreatmentPlanModel={setTreatmentPlanModel} />
+                    <FollowUpActionForm
+                        setTreatmentDetailsTempShow={setTreatmentDetailsTempShow}
+                        setStep={setStep}
+                        setStepper={setStepper}
+                        step={step}
+                        stepper={stepper}
+                        setTreatmentPlanModel={setTreatmentPlanModel}
+                    />
                 </>
             )}
 

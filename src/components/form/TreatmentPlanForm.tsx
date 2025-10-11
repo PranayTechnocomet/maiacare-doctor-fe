@@ -341,7 +341,6 @@ export function MedicationPrescriptionForm({
                 icon: <BsInfoCircle size={22} color="white" />,
             });
         }
-
     }
 
     return (
@@ -351,7 +350,6 @@ export function MedicationPrescriptionForm({
                     <div className="Medication-form-Prescription-wrapper">
 
                         <Row className="g-3">
-
                             <Col md={12}>
                                 <InputFieldGroup
                                     label="Medicine Name"
@@ -584,7 +582,8 @@ interface FollowUpActionFormProps {
     step: number | undefined;
     stepper: number | undefined;
     setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>;
-    setTreatmentDetailsTempShow: React.Dispatch<React.SetStateAction<any[]>>;
+    setTreatmentDetailsTempShow?: React.Dispatch<React.SetStateAction<any[]>>;
+    setSuccessModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function FollowUpActionForm({
@@ -593,7 +592,8 @@ export function FollowUpActionForm({
     step,
     stepper,
     setTreatmentPlanModel,
-    setTreatmentDetailsTempShow
+    setTreatmentDetailsTempShow,
+    setSuccessModal
 }: FollowUpActionFormProps) {
 
     const initialFormData: FollowUpActionFromType = {
@@ -645,7 +645,9 @@ export function FollowUpActionForm({
             console.log("Follow up action add succesfully");
             setFormError(initialFormError);
             setTreatmentPlanModel(false);
-            setTreatmentDetailsTempShow([formData]); // show static data state
+            setTreatmentDetailsTempShow?.([formData]); // show static data state
+
+            setSuccessModal?.(true); // show suceess  model needed
             toast.success('Treatment Plan added successfully', {
                 icon: <BsInfoCircle size={22} color="white" />,
             });
