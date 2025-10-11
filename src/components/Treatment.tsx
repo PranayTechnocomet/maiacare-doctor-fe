@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ContentContainer from "./ui/ContentContainer";
 import CustomTabs from "./ui/CustomTabs";
-import { All } from "./TreatmentHeaderComponent";
+import { All, IVF } from "./TreatmentHeaderComponent";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
@@ -32,7 +32,7 @@ function Treatment() {
             label: "IVF",
             content: (
                 <div className="mt-3">
-                    IVF components
+                    <IVF />
                 </div>
             ),
         },
