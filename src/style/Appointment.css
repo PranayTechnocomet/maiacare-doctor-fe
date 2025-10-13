@@ -54,15 +54,15 @@
     width: var(--bs-accordion-btn-icon-width) !important;
     height: var(--bs-accordion-btn-icon-width) !important;
     content: "" !important;
-  
+
     background-image: url("../assets/images/medication-accordion-arrow.png") !important;
     background-repeat: no-repeat !important;
     background-size: var(--bs-accordion-btn-icon-width) !important;
     transition: var(--bs-accordion-btn-icon-transition) !important;
     flex-shrink: 0 !important;
     margin-left: auto !important;
-  
-  }
+
+}
 
 .medication-prescription-accordion-item-main .accordion-button {
     padding: 12px;
@@ -77,7 +77,8 @@
     top: 56%;
     left: 20px;
 }
-.payment-status-error-time{
+
+.payment-status-error-time {
     position: absolute;
     top: 43%;
     left: 20px;
@@ -138,13 +139,163 @@
     border-color: var(--color-brand, #2B4360);
 }
 
+/* AppointmentsWeek Start */
+
+.aw-card {
+    border-color: #E9EEF5 !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.aw-scroll {
+    overflow: hidden;
+}
+
+.aw-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #fff;
+}
+
+.aw-time-header {
+    color: #96A0AF;
+}
+
+/* clock badge look */
+.aw-time-header i {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #DDE1E8;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #96A0AF;
+}
+
+.aw-days-row {
+    min-width: 100%;
+}
+
+.aw-day-col {
+    flex: 0 0 20%;
+    max-width: 20%;
+    text-align: center;
+}
+
+.aw-date-circle {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+.aw-date-circle-active {
+    background: #fde9e2;
+    color: #f46a36;
+    font-weight: 600;
+}
+
+/* day title default muted, Monday highlighted like screenshot */
+.aw-day-col>div:first-child {
+    color: #96A0AF;
+}
+
+.aw-days-row .aw-day-col:first-child>div:first-child {
+    color: #f46a36;
+    font-weight: 600;
+}
+
+.aw-body {
+    max-height: 640px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.aw-time-col {
+    background: #F8FAFC;
+}
+
+.aw-sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: inherit;
+}
+
+
+.appointments-week-time,
+.time-cell {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+    color: #96A0AF;
+}
+
+.aw-slot {
+    height: 64px;
+    cursor: pointer;
+    position: relative;
+}
+
+.aw-booked-line {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 28%;
+    height: 2px;
+    background-color: #f46a36;
+    border-radius: 2px;
+}
+
+.aw-selected-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #f46a36;
+    border-radius: 50%;
+}
+    
+.aw-card .col>.border-bottom,
+.aw-time-col .border-bottom {
+    border-color: #EEF2F7 !important;
+}
+
+/* Tooltip styling to match design */
+.appointments-week-tooltip .tooltip-inner {
+    background: #fff;
+    color: #2B2B2B;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 12px 14px;
+}
+
+.appointments-week-tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #fff !important;
+}
+
+.appointments-week-time {
+    padding-top: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media screen and (max-width: 575px) {
 
     .payment-status {
         left: 15px;
     }
-    .payment-status-error-time{
+
+    .payment-status-error-time {
         left: 15px;
     }
 }
