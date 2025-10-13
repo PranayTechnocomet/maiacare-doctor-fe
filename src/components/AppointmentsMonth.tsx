@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
@@ -9,12 +9,28 @@ type AppointmentDay = {
 
 type AppointmentsMonthProps = {
   appointmentsData?: AppointmentDay[]; // optional: if not passed, demo data will be used
+  selectedDate?: string | null; // selected date from DateCalendar
 };
 
-function AppointmentsMonth({ appointmentsData }: AppointmentsMonthProps) {
+function AppointmentsMonth({ appointmentsData, selectedDate: externalSelectedDate }: AppointmentsMonthProps) {
     const [showTooltip, setShowTooltip] = useState(false);
     const [tooltipPos, setTooltipPos] = useState({ top: 0, left: 0 });
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
+    const calendarRef = useRef<FullCalendar>(null);
+
+    // Sync external selected date with internal state and navigate to month
+    useEffect(() => {
+        if (externalSelectedDate) {
+            setSelectedDate(externalSelectedDate);
+            
+            // Navigate FullCalendar to the selected month
+            if (calendarRef.current) {
+                const calendarApi = calendarRef.current.getApi();
+                const selectedDateObj = new Date(externalSelectedDate);
+                calendarApi.gotoDate(selectedDateObj);
+            }
+        }
+    }, [externalSelectedDate]);
 
     const handleDateClick = (arg: any) => {
         const clickedDate = arg.dateStr;
@@ -45,143 +61,10 @@ function AppointmentsMonth({ appointmentsData }: AppointmentsMonthProps) {
     );
     return (
         <>
-            {/* <div className='custom-month-datepicker'>
-                <FullCalendar
-                    plugins={[dayGridPlugin]}
-                    initialView="dayGridMonth"
-                />
-            </div> */}
-
-            {/* <div className="custom-month-datepicker">
-                <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
-                    initialView="dayGridMonth"
-                    
-                    selectable={true}
-                />
-
-                {showTooltip && (
-                    <div
-                        className="calendar-tooltip"
-                        style={{
-                            top: tooltipPos.top + 10,
-                            left: tooltipPos.left - 120,
-                        }}
-                    >
-                        <p>Get started by clicking anywhere on the calendar to add your first appointment</p>
-                        <span onClick={() => setShowTooltip(false)}>OK. GOT IT!</span>
-                    </div>
-                )}
-            </div> */}
-
-            {/* <div className="custom-month-datepicker">
-                <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
-                    initialView="dayGridMonth"
-                    selectable={true}
-                    // dateClick={handleDateClick}
-                    height="auto" // ✅ important: prevents inner scroll
-                    contentHeight="auto"
-                    dayCellContent={(arg) => {
-                        const date = arg.date;
-                        const day = date.getDate();
-                        const monthName = date.toLocaleString("default", { month: "long" });
-
-                        // ✅ If it's the first day of the month, show month name too
-                        if (day === 1) {
-                            return {
-                                html: `<div style="font-weight: bold;">${day} <span style="font-size: 0.75rem; color: #f57c00;">${monthName}</span></div>`,
-                            };
-                        }
-
-                        // Otherwise, just show the date
-                        return { html: `${day}` };
-                    }}
-                />
-
-                {showTooltip && (
-                    <div
-                        className="calendar-tooltip"
-                        style={{
-                            top: tooltipPos.top + 10,
-                            left: tooltipPos.left - 120,
-                        }}
-                    >
-                        <p>Get started by clicking anywhere on the calendar to add your first appointment</p>
-                        <span onClick={() => setShowTooltip(false)}>OK. GOT IT!</span>
-                    </div>
-                )}
-            </div> */}
-
-            {/* <div className="custom-month-datepicker position-relative">
-                <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
-                    initialView="dayGridMonth"
-                    selectable={true}
-                    height="auto" // ✅ prevents inner scroll
-                    contentHeight="auto"
-                    dayCellContent={(arg) => {
-                        const date = arg.date;
-                        const day = date.getDate();
-                        const monthAbbr = date
-                            .toLocaleString("default", { month: "short" })
-                            .replace(".", ""); // ensures e.g., 'Nov' not 'Nov.'
-
-                        // ✅ Show "Nov 1" format on the first day of the month
-                        if (day === 1) {
-                            return {
-                                html: `<div style="font-size: 0.85rem; color: #6c757d; font-weight: 500;">
-                      ${monthAbbr} ${day}
-                    </div>`,
-                            };
-                        }
-
-                        // Otherwise, show only the day number
-                        return {
-                            html: `<div style="font-size: 0.85rem; color: #6c757d;">${day}</div>`,
-                        };
-                    }}
-                />
-
-                {showTooltip && (
-                    <div
-                        className="calendar-tooltip"
-                        style={{
-                            position: "absolute",
-                            top: tooltipPos.top + 10,
-                            left: tooltipPos.left - 120,
-                            background: "#fff",
-                            border: "1px solid #ddd",
-                            borderRadius: "6px",
-                            padding: "10px 12px",
-                            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                            width: "250px",
-                            zIndex: 10,
-                        }}
-                    >
-                        <p style={{ margin: 0, fontSize: "0.85rem", color: "#555" }}>
-                            Get started by clicking anywhere on the calendar to add your first appointment
-                        </p>
-                        <span
-                            style={{
-                                display: "block",
-                                textAlign: "right",
-                                marginTop: "6px",
-                                color: "#f57c00",
-                                fontWeight: "600",
-                                cursor: "pointer",
-                            }}
-                            onClick={() => setShowTooltip(false)}
-                        >
-                            OK. GOT IT!
-                        </span>
-                    </div>
-                )}
-            </div> */}
-
-
+           
             <div className="custom-month-datepicker">
                 <FullCalendar
+                    ref={calendarRef}
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView="dayGridMonth"
                     selectable={true}
@@ -240,49 +123,3 @@ function AppointmentsMonth({ appointmentsData }: AppointmentsMonthProps) {
 }
 
 export default AppointmentsMonth
-
-
-
-// import React from 'react'
-// import FullCalendar from "@fullcalendar/react";
-// import timeGridPlugin from "@fullcalendar/timegrid";
-// import interactionPlugin from "@fullcalendar/interaction";
-
-
-// export default function AppointmentsMonth() {
-//     return (
-//         <>
-//             <div>
-//                 <div
-//                     className="calendar-container"
-//                     style={{
-//                         maxWidth: "600px",
-//                         margin: "2rem auto",
-//                         background: "#fff",
-//                         borderRadius: "16px",
-//                         boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-//                         padding: "1rem",
-//                     }}
-//                 >
-//                     <FullCalendar
-//                         plugins={[timeGridPlugin, interactionPlugin]}
-//                         initialView="timeGridDay"
-//                         slotMinTime="08:00:00"
-//                         slotMaxTime="18:00:00"
-//                         slotDuration="00:30:00"
-//                         allDaySlot={false}
-//                         headerToolbar={false}
-//                         nowIndicator={true}
-//                         selectable={true}
-//                         selectMirror={true}
-
-//                         events={[
-//                             { title: "Morning Meeting", start: "2025-10-10T10:30:00" },
-//                             { title: "Lunch Break", start: "2025-10-10T12:30:00" },
-//                         ]}
-//                     />
-//                 </div>
-//             </div>
-//         </>
-//     )
-// }
