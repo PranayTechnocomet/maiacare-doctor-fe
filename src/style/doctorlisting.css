@@ -28,10 +28,10 @@
 
 .custom-month-datepicker {
     position: relative;
-    padding: 20px;
+    /* padding: 20px; */
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    /* box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08); */
 }
 
 /* Hide top toolbar */
@@ -118,20 +118,94 @@
 .calendar-tooltip::before {
     content: "";
     position: absolute;
-    top: -6px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
-    width: 12px;
     height: 12px;
     background: white;
     box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.05);
 }
-.custom-month-datepicker .fc-daygrid-day-frame{
+
+.custom-month-datepicker .fc-daygrid-day-frame {
     width: 102px !important;
     height: 150px !important;
+    border-bottom: none !important;
+    justify-content: start;
+    align-items: start;
 }
-.custom-month-datepicker .fc-col-header-cell {
-   border-bottom: none !important;
-  justify-content: start;
-  align-items: start;
+
+.fc-col-header-cell {
+    border-bottom: none !important;
+}
+/* Remove scrollbar inside the calendar */
+.fc {
+    overflow: hidden !important;
+}
+
+/* Adjust layout if needed */
+.fc-scroller {
+    overflow: hidden !important;
+}
+
+/* ====================
+   Appointment name pills
+   ==================== */
+.fc-daygrid-day-events {
+    padding: 6px 8px 10px 8px; /* spacing inside the day cell for events */
+}
+
+/* Remove default FC event look */
+.fc-daygrid-event {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* Our custom pill renderer from eventContent */
+.pill {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 6px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #2B4360;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* margin-top: 6px; */
+}
+
+.pill-soft {
+    background: #E7F3F0; /* soft mint background similar to screenshot */
+}
+
+.fc-daygrid-day-number {
+    font-weight: 600;
+}
+
+.fc-daygrid-day-number span {
+    font-size: 0.7rem;
+    color: #f57c00;
+    margin-left: 4px;
+}
+
+/* Hide FullCalendar's default number style spacing */
+.fc-daygrid-day-number {
+    display: block;
+}
+
+/* Dot below the date (selected indicator) */
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #f57c00;
+    margin-top: 60px !important;
+    box-shadow: 0 0 6px rgba(245, 124, 0, 0.4);
+}
+
+.fc .fc-highlight {
+    background: none !important;
 }

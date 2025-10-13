@@ -1,3 +1,51 @@
-.test {
-    color: red;
+.custom-side-bar-box{
+    padding: 16px;
+    background-color: var(--color-white);
+    border-radius: 12px;
 }
+
+.treament-sidebar-item{
+    /* background-color: var(--modal-profile-color); */
+   
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+
+.custom-side-bar .nav-link {
+    background-color: var(--modal-profile-color) !important;
+    padding: 0 !important;
+}
+
+.custom-side-bar .nav-link.active {
+    background-color: var(--color-modal-heading) !important;
+    color: var(--color-white) !important;
+}
+
+/* side bar custome using boostrap tabs */
+
+/* .custom-side-bar .nav-link {
+    background-color: transparent;
+    color: var(--color-sidebar-icon);
+    padding: 0 !important;
+}
+
+.custom-side-bar .nav-link .nav-icon {
+    color: var(--color-sidebar-icon);
+}
+
+.custom-side-bar .nav-link.active {
+    background-color: var(--color-modal-heading) !important;
+    color: var(--color-white) !important;
+}
+
+.custom-side-bar .nav-link.active .nav-icon {
+    color: var(--color-white);
+
+}
+
+.custom-side-bar .nav-link.active span {
+    color: var(--color-white);
+} */

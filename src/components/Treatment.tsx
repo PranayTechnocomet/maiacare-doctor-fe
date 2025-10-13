@@ -3,15 +3,19 @@
 import { useState } from "react";
 import ContentContainer from "./ui/ContentContainer";
 import CustomTabs from "./ui/CustomTabs";
-import { All } from "./TreatmentHeaderComponent";
+import { All, IVF } from "./TreatmentHeaderComponent";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
+import { MedicationPrescriptionType } from "@/utils/types/interfaces";
+import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
+import { TreatmentSuccessModal } from "./form/TreatmentAllForm";
 
 function Treatment() {
 
     const [activeTab, setActiveTab] = useState<string>("all");
     const [treatmentModel, setTreatmentModel] = useState<boolean>(false);
+    const [successModal, setSuccessModal] = useState<boolean>(false);
 
     const tabOptions = [
         {
@@ -28,7 +32,7 @@ function Treatment() {
             label: "IVF",
             content: (
                 <div className="mt-3">
-                    IVF components
+                    <IVF />
                 </div>
             ),
         },
@@ -61,18 +65,37 @@ function Treatment() {
         }
     ];
 
+    const [step, setStep] = useState<number | undefined>(1);
+    const [stepper, setStepper] = useState<number | undefined>(1);
+    const totalSteps = 3;
+
+    const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
+    const [medicalPrescriptionDataShowHide, setMedicalPrescriptionDataShowHide] = useState<boolean>(false);
+    const [showEditFormShowModel, setShowEditFormShowModel] = useState<boolean>(false);
+    const [editForm, setEditForm] = useState<MedicationPrescriptionType>({
+        id: "",
+        medicineName: "",
+        type: "",
+        typeQuantity: "",
+        duration: "",
+        quantity: 0,
+        timeslot: ["morning"],
+        meal: "Before",
+        intake: "",
+        description: "",
+    });
+
     return (
         <>
-            <div className="">
-                <div>
-                    <CustomTabs
-                        className="w-75"
-                        activeKey={activeTab}
-                        setActiveKey={setActiveTab}
-                        tabOptions={tabOptions}
-                    />
-                </div>
-                <div>
+            <div className="position-relative">
+                <CustomTabs
+                    className="w-50"
+                    activeKey={activeTab}
+                    setActiveKey={setActiveTab}
+                    tabOptions={tabOptions}
+                />
+
+                <div className="position-absolute top-0 end-0">
                     <Button variant="default" type="submit" className="patient-header-button" onClick={() => {
                         setTreatmentModel(true);
                     }}>
@@ -89,14 +112,58 @@ function Treatment() {
 
             <Modal
                 show={treatmentModel}
-                onHide={() => setTreatmentModel(false)}
+                onHide={() => { setTreatmentModel(false); setStep(1); setStepper(1); setMedicalPrescription([]); }}
                 header="Treatment Plan"
                 closeButton={true}
             >
-                <TreatmentForm />
+                <TreatmentForm
+                    setStep={setStep}
+                    setStepper={setStepper}
+                    step={step}
+                    stepper={stepper}
+                    totalSteps={totalSteps}
+
+                    medicalPrescription={medicalPrescription}
+                    setMedicalPrescription={setMedicalPrescription}
+                    medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                    setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                    showEditFormShowModel={showEditFormShowModel}
+                    setShowEditFormShowModel={setShowEditFormShowModel}
+
+                    setTreatmentPlanModel={setTreatmentModel}
+                    setEditForm={setEditForm}
+                    editForm={editForm}
+                    setSuccessModal={setSuccessModal}
+                />
 
             </Modal>
 
+            {/* edittime show model for Medication & Tests */}
+            <Modal
+                show={showEditFormShowModel}
+                onHide={() => { setShowEditFormShowModel(false); setTreatmentModel(true); setMedicalPrescriptionDataShowHide(false); }}
+                header="Edit Medication Prescription"
+                closeButton={true}
+            >
+                <MedicationPrescriptionForm
+                    setShowEditFormShowModel={setShowEditFormShowModel}
+                    editForm={editForm}
+                    setTreatmentPlanModel={setTreatmentModel}
+                    setMedicalPrescription={setMedicalPrescription}
+                    medicalPrescription={medicalPrescription}
+                    setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                    medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                />
+            </Modal>
+
+            {/* success modal */}
+            <TreatmentSuccessModal
+                successModal={successModal}
+                setSuccessModal={setSuccessModal}
+                setStep={setStep}
+                setStepper={setStepper}
+                setMedicalPrescription={setMedicalPrescription}
+            />
         </>
     )
 }

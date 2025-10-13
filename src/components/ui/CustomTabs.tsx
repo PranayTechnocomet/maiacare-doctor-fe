@@ -23,6 +23,7 @@ const CustomTabs: React.FC<CustomTabsProps> = ({
   setActiveKey
 }) => {
   return (
+    
     <Tabs
       activeKey={activeKey}
       onSelect={(k) => k && setActiveKey(k)}

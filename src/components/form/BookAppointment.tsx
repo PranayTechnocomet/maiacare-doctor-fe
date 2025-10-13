@@ -55,6 +55,7 @@ export function BookAppointment({
     const [formError, setFormError] = useState<FormError>(initialFormError);
     const [step, setStep] = useState<number>(1);
     const [stepper, setStepper] = useState(1);
+    const totalSteps = 2;
 
 
     const [txtPatinetName, setTxtPatinetName] = useState("");
@@ -70,7 +71,6 @@ export function BookAppointment({
     })();
 
 
-    const totalSteps = 2;
 
     const handleChange = (
         e:
@@ -94,7 +94,13 @@ export function BookAppointment({
     };
     const validateForm2 = (data: BookAppointmentForm): FormError => {
         const errors: FormError = {};
-        if (!data.patientName.length) errors.patientName = "Patient Name is required";
+
+        if (Object.keys(formData?.patientName).length == 0) {
+            errors.patientName = "Patient is required";
+        }
+
+        // if (!data.patientName.length) errors.patientName = "Patient Name is required";
+
         if (!data.phone.trim()) errors.phone = "Phone is required";
         if (!data.email.trim()) errors.email = "Email is required";
         if (!data.patientAge.trim()) errors.patientAge = "Patient Age is required";
@@ -124,10 +130,10 @@ export function BookAppointment({
             setBookAppointmentModal?.(false);
             setShowSuccessModalBook?.(true);
 
-            console.log("test", formData);
         }
     };
-
+    
+    // console.log("test", formData.patientName);
     return (
         <>
 
@@ -302,21 +308,22 @@ export function BookAppointment({
 
                         </Col> */}
 
+                        {/* {Object.keys(formData?.patientName).length > 0 */}
                         <Col md={12}>
-                            {formData?.patientName?.length > 0
+                            {Object.keys(formData?.patientName).length > 0
                                 ? (
                                     <div className="show-patient-box d-flex align-items-center justify-content-between">
                                         <div className="d-flex align-items-center gap-2">
                                             <Image
                                                 className="show-patient-img"
-                                                src={temppatientImg1}
+                                                src={formData.patientName?.ProfilePhoto?.src || temppatientImg1 }
                                                 alt="doctor"
                                                 width={48}
                                                 height={48}
                                             />
-                                            <span className="patient-treatment-box-subtitle-desc">{formData.patientName}</span>
+                                            <span className="patient-treatment-box-subtitle-desc">{formData.patientName?.name}</span>
                                         </div>
-                                        <div onClick={() => { setFormData({ ...formData, patientName: null }); setTxtPatinetName(""); }}>
+                                        <div onClick={() => { setFormData({ ...formData, patientName: {} }); setTxtPatinetName(""); }}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
                                                 <path d="M23.3035 20.9465C23.5501 21.193 23.6886 21.5275 23.6886 21.8762C23.6886 22.2249 23.5501 22.5593 23.3035 22.8059C23.057 23.0524 22.7226 23.1909 22.3739 23.1909C22.0252 23.1909 21.6907 23.0524 21.4442 22.8059L14.5 15.8594L7.55355 22.8037C7.30698 23.0502 6.97256 23.1888 6.62386 23.1888C6.27516 23.1888 5.94074 23.0502 5.69417 22.8037C5.4476 22.5571 5.30908 22.2227 5.30908 21.874C5.30908 21.5253 5.4476 21.1909 5.69417 20.9443L12.6406 14.0001L5.69636 7.05366C5.44979 6.80709 5.31127 6.47268 5.31127 6.12398C5.31127 5.77528 5.44979 5.44086 5.69636 5.19429C5.94293 4.94772 6.27735 4.8092 6.62605 4.8092C6.97475 4.8092 7.30917 4.94772 7.55573 5.19429L14.5 12.1407L21.4464 5.19319C21.6929 4.94663 22.0273 4.80811 22.376 4.80811C22.7247 4.80811 23.0592 4.94663 23.3057 5.19319C23.5523 5.43976 23.6908 5.77418 23.6908 6.12288C23.6908 6.47158 23.5523 6.806 23.3057 7.05257L16.3593 14.0001L23.3035 20.9465Z" fill="#B0B4C1" />
                                             </svg>
@@ -349,7 +356,7 @@ export function BookAppointment({
                                         />
                                         <InputFieldError error={formError.patientName} />
 
-                                        <Dropdown show={open && filtered.length > 0}>
+                                        <Dropdown className="custome-patient-dropdown" show={open && filtered.length > 0}>
                                             <Dropdown.Menu className="w-100 mt-1 shadow">
                                                 {filtered.map((item) => (
                                                     <Dropdown.Item
@@ -359,8 +366,8 @@ export function BookAppointment({
 
                                                             // update formData using handleChange
                                                             handleChange({
-                                                                target: { name: "patientName", value: item.name },
-                                                            } as React.ChangeEvent<HTMLInputElement>);
+                                                                target: { name: "patientName", value: item },
+                                                            } as React.ChangeEvent<HTMLInputElement | any>);
                                                         }}
                                                         className="d-flex align-items-center gap-2"
                                                     >

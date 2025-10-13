@@ -1,11 +1,17 @@
 "use client"
 
-import { TreatmentForm, TreatmentPlan } from "@/utils/types/interfaces";
+import { MedicationPrescriptionType, TreatmentForm } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
-import { Col, Row } from "react-bootstrap";
+import { Col, Dropdown, Form, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
-import { TempTreatmentSteps } from "@/utils/StaticData";
+import { PatientsDetails, TempTreatmentSteps } from "@/utils/StaticData";
 import Button from "../ui/Button";
+import { InputFieldError, InputFieldLabel } from "../ui/InputField";
+import Image from "next/image";
+import temppatientImg1 from "@/assets/images/patient-img-1.png"
+import Modal from "../ui/Modal";
+import TreatmentSuccessImage from "@/assets/images/TreatmentAddedSuccess.png";
+
 
 interface TreatmentPatientFormProps {
     setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -19,7 +25,7 @@ export function TreatmentPatientForm({
     TreatmentPatientFormProps) {
 
     const initialFormData: TreatmentForm = {
-        patientName: "",
+        patientName: [],
         treatment: "",
         duration: "",
 
@@ -43,11 +49,28 @@ export function TreatmentPatientForm({
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
 
+    const [txtPatinetName, setTxtPatinetName] = useState("");
+    const [open, setOpen] = useState(false);
+
+    const patientData = PatientsDetails;
+    const filtered = (() => {
+        if (txtPatinetName.trim().length === 0) return [];
+        const matches = patientData.filter((item) =>
+            item.name.toLowerCase().includes(txtPatinetName.toLowerCase())
+        );
+        return matches.length > 0 ? matches : patientData;
+    })();
+
     const validateForm = (data: TreatmentForm): FormError => {
         const errors: FormError = {};
-        if (!data.patientName) {
-            errors.patientName = "Patient Name is required";
+
+        // if (!data.patientName) {
+        //     errors.patientName = "Patient Name is required";
+        // }
+        if (Object.keys(formData?.patientName).length == 0) {
+            errors.patientName = "Patient is required";
         }
+
         if (!data.treatment) {
             errors.treatment = "Treatment is required";
         }
@@ -56,6 +79,7 @@ export function TreatmentPatientForm({
         }
         return errors;
     };
+
 
     const handelNext = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -78,7 +102,85 @@ export function TreatmentPatientForm({
                     <h6 className="dashboard-chart-heading mb-0">Treatment Plan</h6>
 
                     <Col md={12}>
-                        select profile
+
+                        {Object.keys(formData?.patientName).length > 0
+                            ? (
+                                <div className="show-patient-box d-flex align-items-center justify-content-between">
+                                    <div className="d-flex align-items-center gap-2">
+                                        <Image
+                                            className="show-patient-img"
+                                            src={formData.patientName?.ProfilePhoto?.src || temppatientImg1}
+                                            alt="doctor"
+                                            width={48}
+                                            height={48}
+                                        />
+                                        <span className="patient-treatment-box-subtitle-desc">{formData.patientName?.name}</span>
+                                    </div>
+                                    <div onClick={() => { setFormData({ ...formData, patientName: {} }); setTxtPatinetName(""); }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
+                                            <path d="M23.3035 20.9465C23.5501 21.193 23.6886 21.5275 23.6886 21.8762C23.6886 22.2249 23.5501 22.5593 23.3035 22.8059C23.057 23.0524 22.7226 23.1909 22.3739 23.1909C22.0252 23.1909 21.6907 23.0524 21.4442 22.8059L14.5 15.8594L7.55355 22.8037C7.30698 23.0502 6.97256 23.1888 6.62386 23.1888C6.27516 23.1888 5.94074 23.0502 5.69417 22.8037C5.4476 22.5571 5.30908 22.2227 5.30908 21.874C5.30908 21.5253 5.4476 21.1909 5.69417 20.9443L12.6406 14.0001L5.69636 7.05366C5.44979 6.80709 5.31127 6.47268 5.31127 6.12398C5.31127 5.77528 5.44979 5.44086 5.69636 5.19429C5.94293 4.94772 6.27735 4.8092 6.62605 4.8092C6.97475 4.8092 7.30917 4.94772 7.55573 5.19429L14.5 12.1407L21.4464 5.19319C21.6929 4.94663 22.0273 4.80811 22.376 4.80811C22.7247 4.80811 23.0592 4.94663 23.3057 5.19319C23.5523 5.43976 23.6908 5.77418 23.6908 6.12288C23.6908 6.47158 23.5523 6.806 23.3057 7.05257L16.3593 14.0001L23.3035 20.9465Z" fill="#B0B4C1" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            )
+                            :
+                            (
+                                <div className={`maiacare-input-field-container`}>
+                                    <InputFieldLabel label="Name" required={true} />
+                                    <Form.Control
+                                        type="text"
+                                        name="patientName"
+                                        className="maiacare-input-field w-100"
+                                        placeholder="Type patient name"
+                                        value={txtPatinetName}
+
+                                        onChange={(e) => {
+                                            setTxtPatinetName(e.target.value);
+                                            setOpen(true);
+                                            // onChange?.(null);
+                                            setFormError((prev) => ({ ...prev, patientName: "" }));
+                                        }}
+
+                                        onFocus={() => {
+                                            if (txtPatinetName.trim().length > 0) setOpen(true);
+                                        }}
+                                        onBlur={() => setTimeout(() => setOpen(false), 150)}
+
+                                    />
+                                    <InputFieldError error={formError.patientName} />
+
+                                    <Dropdown className="custome-patient-dropdown" show={open && filtered.length > 0}>
+                                        <Dropdown.Menu className="w-100 mt-1 shadow">
+                                            {filtered.map((item) => (
+                                                <Dropdown.Item
+                                                    key={item.id}
+                                                    onClick={() => {
+                                                        setOpen(false);
+
+                                                        // update formData using handleChange
+                                                        handleChange({
+                                                            target: { name: "patientName", value: item },
+                                                        } as React.ChangeEvent<HTMLInputElement | any>);
+                                                    }}
+                                                    className="d-flex align-items-center gap-2"
+                                                >
+                                                    {item.ProfilePhoto && (
+                                                        <Image
+                                                            className="show-patient-img"
+                                                            src={item.ProfilePhoto.src}
+                                                            alt={item.name}
+                                                            width={48}
+                                                            height={48}
+                                                        />
+                                                    )}
+                                                    <span className="settings-accordion-subtitle">{item.name}</span>
+                                                </Dropdown.Item>
+                                            ))}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                </div>
+                            )
+                        }
                     </Col>
                     <Col md={6}>
                         <InputSelect
@@ -155,3 +257,52 @@ export function TreatmentPatientForm({
     )
 }
 
+export function TreatmentSuccessModal({
+    successModal,
+    setSuccessModal,
+    setStep,
+    setStepper,
+    setMedicalPrescription
+}: {
+    successModal: boolean;
+    setSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setStep?: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setStepper?: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setMedicalPrescription?: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
+}) {
+    return (
+        <Modal
+            show={successModal}
+            onHide={() => { setSuccessModal(false); setStep?.(1); setStepper?.(1); setMedicalPrescription?.([]); }}
+            header=""
+            closeButton={true}
+        >
+            <div className="text-center">
+                <Image src={TreatmentSuccessImage} alt="successImg" width={290} height={240} />
+                <h3 className="modal-custom-header mt-4">
+                    Treatment Added Submitted!
+                </h3>
+                <p className="modal-custom-content">
+                    Manage treatment seamlesly
+                </p>
+            </div>
+
+            <div className="d-flex justify-content-center gap-3">
+                <Button
+                    variant="outline"
+                    className="w-100"
+                    onClick={() => { setSuccessModal(false); setStep?.(1); setStepper?.(1); setMedicalPrescription?.([]); }}
+                >
+                    Okay
+                </Button>
+                <Button
+                    variant="default"
+                    className="w-100"
+                >
+                    View Details
+                </Button>
+            </div>
+
+        </Modal>
+    )
+}
