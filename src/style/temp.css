@@ -15,8 +15,8 @@
 }
 
 .doctor-listing-today-schedule-box {
-    width: 67px;
-    height: 63px;
+    width: 100%;
+    height: 100%;
     /* background-color: #DDE1E8; */
     border-radius: 8px;
     border: 2px solid #DDE1E8;

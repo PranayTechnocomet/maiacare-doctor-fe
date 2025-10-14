@@ -139,12 +139,13 @@
     border-color: var(--color-brand, #2B4360);
 }
 
-/* AppointmentsWeek Start */
+/* AppointmentsWeek Start Umesbhai Radadiya Sarkar */
 
 .aw-card {
     border-color: #E9EEF5 !important;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
 }
 
 .aw-scroll {
@@ -288,6 +289,363 @@
     align-items: center;
     justify-content: center;
 }
+.aw-date-circle{
+    font-size: 20px !important;
+}
+
+/* Month Header */
+.aw-month-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #E9EEF5;
+}
+
+.aw-month-header h5 {
+    color: #2B4360;
+    margin: 0;
+    font-size: 18px;
+}
+
+.aw-month-header p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 13px;
+}
+
+/* Scroll Container */
+.aw-scroll-container {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+}
+
+/* Header Wrapper */
+.aw-header-wrapper {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #fff;
+    border-bottom: 1px solid #E9EEF5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.aw-time-header-cell {
+    width: 120px;
+    min-width: 120px;
+    padding: 16px 12px;
+    background: #f8f9fa;
+    border-right: 1px solid #E9EEF5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #96A0AF;
+    font-size: 14px;
+    font-weight: 500;
+    position: sticky;
+    left: 0;
+    z-index: 11;
+}
+
+.aw-time-header-cell i {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #DDE1E8;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #96A0AF;
+}
+
+.aw-days-header {
+    display: flex;
+    flex: 1;
+    min-width: 700px;
+}
+
+.aw-day-header {
+    flex: 1;
+    min-width: 100px;
+    padding: 16px 8px;
+    text-align: center;
+    border-right: 1px solid #E9EEF5;
+    background: #fff;
+}
+
+.aw-day-name {
+    font-size: 13px;
+    color: #96A0AF;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.aw-day-highlighted {
+    color: #f46a36 !important;
+    font-weight: 600 !important;
+}
+
+.aw-date-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: #495057;
+    position: relative;
+}
+
+.aw-date-circle-active {
+    background: #fde9e2;
+    color: #f46a36;
+    font-weight: 600;
+}
+
+.aw-selected-indicator {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #f57c00;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Calendar Body */
+.aw-calendar-body {
+    display: flex;
+    height: calc(600px - 80px);
+    overflow: hidden;
+}
+
+.aw-time-column {
+    width: 120px;
+    min-width: 120px;
+    background: #f8f9fa;
+    border-right: 1px solid #E9EEF5;
+    overflow-y: hidden;
+    position: sticky;
+    left: 0;
+    z-index: 5;
+}
+
+.aw-time-cell {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 12px;
+    color: #96A0AF;
+    font-size: 12px;
+    border-bottom: 1px solid #EEF2F7;
+    background: #f8f9fa;
+}
+
+.aw-calendar-grid {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.aw-days-container {
+    display: flex;
+    min-width: 700px;
+    height: 100%;
+}
+
+.aw-day-column {
+    flex: 1;
+    min-width: 100px;
+    border-right: 1px solid #E9EEF5;
+}
+
+.aw-time-slot {
+    height: 60px;
+    cursor: pointer;
+    position: relative;
+    border-bottom: 1px solid #EEF2F7;
+    transition: background-color 0.2s ease;
+}
+
+.aw-time-slot:hover {
+    background-color: #f8f9fa;
+}
+
+.aw-booked-indicator {
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    transform: translateY(-50%);
+    width: 30%;
+    height: 3px;
+    background-color: #f46a36;
+    border-radius: 2px;
+}
+
+.aw-selected-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #f46a36;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Custom Scrollbars */
+.aw-calendar-grid::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.aw-calendar-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.aw-calendar-grid::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.aw-calendar-grid::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.aw-calendar-grid::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
+
+/* Firefox Scrollbar */
+.aw-calendar-grid {
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .aw-time-header-cell {
+        width: 80px;
+        min-width: 80px;
+        padding: 12px 8px;
+        font-size: 12px;
+    }
+    
+    .aw-time-column {
+        width: 80px;
+        min-width: 80px;
+    }
+    
+    .aw-time-cell {
+        padding-left: 8px;
+        font-size: 11px;
+    }
+    
+    .aw-day-header {
+        min-width: 80px;
+        padding: 12px 4px;
+    }
+    
+    .aw-day-column {
+        min-width: 80px;
+    }
+    
+    .aw-days-container {
+        min-width: 560px;
+    }
+}
+
+/* Tooltip styling to match design */
+.appointments-week-tooltip .tooltip-inner {
+    background: #fff;
+    color: #2B2B2B;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 12px 14px;
+    max-width: 250px;
+}
+
+.appointments-week-tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #fff !important;
+}
+
+/* Legacy styles for backward compatibility */
+.appointments-week-time {
+    padding-top: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove old conflicting styles */
+.aw-scroll {
+    overflow: hidden;
+}
+
+.aw-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #fff;
+}
+
+.aw-time-header {
+    color: #96A0AF;
+}
+
+.aw-days-row {
+    min-width: 100%;
+}
+
+.aw-day-col {
+    flex: 0 0 20%;
+    max-width: 20%;
+    text-align: center;
+}
+
+.aw-body {
+    max-height: 640px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.aw-sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: inherit;
+}
+
+.aw-slot {
+    height: 64px;
+    cursor: pointer;
+    position: relative;
+}
+
+.aw-booked-line {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 28%;
+    height: 2px;
+    background-color: #f46a36;
+    border-radius: 2px;
+}
+
+.aw-card .col>.border-bottom,
+.aw-time-col .border-bottom {
+    border-color: #EEF2F7 !important;
+}
 
 @media screen and (max-width: 575px) {
 
@@ -298,4 +656,13 @@
     .payment-status-error-time {
         left: 15px;
     }
+}
+.fc-col-header-cell-cushion{
+    display: flex !important;
+    align-items: start !important;
+margin-left: 7px !important;
+}
+
+.aw-scroll{
+    overflow: scroll;
 }

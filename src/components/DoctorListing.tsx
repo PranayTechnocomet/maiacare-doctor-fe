@@ -24,6 +24,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Box from '@mui/material/Box';
 import AppointmentsWeek from './AppointmentsWeek';
+import { FaChevronDown } from 'react-icons/fa';
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -122,6 +123,24 @@ export default function DoctorListing() {
 
 export function CalendarView() {
   const [filters, setFilters] = useState<string[]>([]);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const [selectedView, setSelectedView] = useState<string>("day");
+  const [doctorListingModal, setDoctorListingModal] = useState(false);
+  const [selectedPatient, setSelectedPatient] = useState<tempAppointmentProfileData | any>();
+  const [RescheduleModal, setRescheduleModal] = useState(false);
+  const [CancelModal, setCancelModal] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [weekRange, setWeekRange] = useState<{ start: Date; end: Date } | null>(null);
+  const [BookAppointmentModal, setBookAppointmentModal] = useState(false);
+  const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
+  const [blockCalendarModal, setBlockCalendarModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const [events, setEvents] = useState<Event[] | any>([]);
+  const [showTooltip, setShowTooltip] = useState(true);
   interface Appointment {
     id: string;
     time: string;
@@ -153,18 +172,7 @@ export function CalendarView() {
     setFilters([]);
   };
 
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
-  const calendarRef = useRef<HTMLDivElement>(null);
-  const [selectedView, setSelectedView] = useState<string>("day");
-  const [doctorListingModal, setDoctorListingModal] = useState(false);
-  const [selectedPatient, setSelectedPatient] = useState<tempAppointmentProfileData | any>();
-  const [RescheduleModal, setRescheduleModal] = useState(false);
-  const [CancelModal, setCancelModal] = useState(false);
 
-
-  const [events, setEvents] = useState<Event[] | any>([]);
-  const [showTooltip, setShowTooltip] = useState(true);
 
   // Refs for the scrollable areas
   const scheduleRef = useRef<HTMLDivElement>(null);
@@ -277,9 +285,7 @@ export function CalendarView() {
 
 
 
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [weekRange, setWeekRange] = useState<{ start: Date; end: Date } | null>(null);
+
 
   // --- Date Calculation Helpers ---
   const getDaysInMonth = (year: number, month: number) => {
@@ -379,9 +385,6 @@ export function CalendarView() {
   const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
 
-  const [BookAppointmentModal, setBookAppointmentModal] = useState(false);
-  const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
-  const [blockCalendarModal, setBlockCalendarModal] = useState(false);
 
 
 
@@ -460,14 +463,14 @@ export function CalendarView() {
 
   const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   // console.log("Value",value);
-  
+
   // Format: "October 2025"
   const monthYearFormat = value ? value.format('MMMM YYYY') : '';
-  
+
   // Format: "Monday 13"
   const dayDateFormat = value ? value.format('dddd ') : '';
   const dateDateFormat = value ? value.format('DD') : '';
-  
+
   // Format: "October 2025 (Mon 13 - Sun 19)"
   const monthYearWithWeekRange = value ? (() => {
     const startOfWeek = value.startOf('week');
@@ -477,11 +480,12 @@ export function CalendarView() {
     const endDay = endOfWeek.format('ddd DD');
     return `${monthYear} (${startDay} - ${endDay})`;
   })() : '';
-  
+
   console.log("Month Year Format:", monthYearFormat); // October 2025
-  console.log("Day  Format:", dayDateFormat); 
+  console.log("Day  Format:", dayDateFormat);
   console.log("Date Format:", dateDateFormat);
   console.log("Month Year with Week Range:", monthYearWithWeekRange); // October 2025 (Mon 13 - Sun 19) 
+
 
 
   return (
@@ -693,7 +697,7 @@ export function CalendarView() {
 
 
                   <div className="bg-light d-flex align-items-center justify-content-center ">
-                    <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
+                    {/* <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
 
                       <Stack direction="horizontal" className="mb-3">
                         <h2 className="calendar-header mb-0">Calendar</h2>
@@ -704,9 +708,9 @@ export function CalendarView() {
 
                       <Box
                         sx={{
-                          overflow: "hidden", 
+                          overflow: "hidden",
                           ".MuiDateCalendar-root": {
-                            overflow: "hidden", 
+                            overflow: "hidden",
                           },
                         }}
                       >
@@ -714,23 +718,68 @@ export function CalendarView() {
                           <DateCalendar
                             value={value}
                             onChange={(newValue) => setValue(newValue)}
-                            views={["year", "month", "day"]} 
-                            disableFuture={false} 
-                            disablePast={false} 
-                            readOnly={false} 
-                            showDaysOutsideCurrentMonth 
+                            views={["year", "month", "day"]}
+                            disableFuture={false}
+                            disablePast={false}
+                            readOnly={false}
+                            showDaysOutsideCurrentMonth
                             disableHighlightToday={true}
                             sx={{
-                              "&::-webkit-scrollbar": { display: "none" }, 
-                              overflow: "hidden", 
+                              "&::-webkit-scrollbar": { display: "none" },
+                              overflow: "hidden",
                             }}
-            
+
                           />
                         </LocalizationProvider>
                       </Box>
 
 
 
+                    </Card> */}
+                    <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
+                      <Stack direction="horizontal" className="mb-0 p-3 ">
+                        <h2 className="calendar-header mb-0 fs-5">Calendar</h2>
+
+                        <div
+                          className="ms-auto d-flex align-items-center"
+                          role="button"
+                          onClick={() => setIsOpen(!isOpen)}
+                          style={{
+                            transition: 'transform 0.3s ease',
+                            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <FaChevronDown size={18} />
+                        </div>
+                      </Stack>
+
+                      {/* Collapsible Calendar Section */}
+                      {isOpen && (
+                        <Box
+                          sx={{
+                            overflow: 'hidden',
+                            transition: 'max-height 0.4s ease',
+                            '.MuiDateCalendar-root': {
+                              overflow: 'hidden',
+                            },
+                          }}
+                        >
+                          <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateCalendar
+                              value={value}
+                              onChange={(newValue) => setValue(newValue)}
+                              views={['year', 'month', 'day']}
+                              showDaysOutsideCurrentMonth
+                              disableHighlightToday
+                              sx={{
+                                '&::-webkit-scrollbar': { display: 'none' },
+                                overflow: 'hidden',
+                              }}
+                            />
+                          </LocalizationProvider>
+                        </Box>
+                      )}
                     </Card>
                   </div>
 
@@ -780,11 +829,11 @@ export function CalendarView() {
                 {selectedView === "day" && (
                   <div>
                     <p className="doctor-listing-date-heading m-0">
-                       
-                        <p className="doctor-listing-date-heading m-0">
-                          {monthYearFormat}
-                        </p>
-                      
+
+                      <p className="doctor-listing-date-heading m-0">
+                        {monthYearFormat}
+                      </p>
+
                       <p className="doctor-listing-date-subtitle">10 Appointments</p>
                     </p>
                   </div>
@@ -970,6 +1019,7 @@ export function CalendarView() {
 
               </>
             </Modal>
+            <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
             <Col md={8}>
               {selectedView === 'day'
                 &&
@@ -1014,7 +1064,7 @@ export function CalendarView() {
                             <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold" style={datasforcss.dateCircle}>
                               {selectedDate && (
                                 <div className="text-center  fw-bold">
-                                 {dateDateFormat}
+                                  {dateDateFormat}
                                 </div>
                               )}
                             </div>
@@ -1067,7 +1117,7 @@ export function CalendarView() {
                     </div>
                   </div>
 
-                  <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
+
 
 
                 </>
@@ -1078,26 +1128,13 @@ export function CalendarView() {
               {selectedView === 'week'
                 &&
                 <>
-                  {/* <Button
-                    onClick={() => setDoctorListingModal(true)}
-                    variant="primary"
-                    size="sm"
-                    className="mb-3"
-                  >
-                    Open Modal
-                  </Button> */}
-
                   <AppointmentsWeek selectedDate={value ? value.format('YYYY-MM-DD') : null} />
-
-
                 </>
               }
 
               {selectedView === 'month'
                 &&
                 <AppointmentsMonth selectedDate={value ? value.format('YYYY-MM-DD') : null} />
-
-
               }
 
               {/* <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} View</h1> */}
@@ -1114,7 +1151,7 @@ export function CalendarView() {
 
 
                 <div className='today-schedule-box-section h-100'>
-                  <div className='d-flex justify-content-between align-items-center gap-1 p-0'>
+                  <div className='d-flex justify-content-between align-items-center gap-2 p-0'>
                     <div
                       className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
                       style={selectedCard === 'Upcoming' ? { border: '1px solid #e78422', color: '#fff' } : {}}
@@ -1125,7 +1162,7 @@ export function CalendarView() {
                         className='upcoming-box doctor-listing-all-box'
                         style={selectedCard === 'Upcoming' ? { color: '#fff' } : {}}
                       >
-                        5
+                        4
                       </div>
                     </div>
 
