@@ -262,18 +262,27 @@ export function TreatmentSuccessModal({
     setSuccessModal,
     setStep,
     setStepper,
-    setMedicalPrescription
+    setMedicalPrescription,
+    setShowContent
 }: {
     successModal: boolean;
     setSuccessModal: React.Dispatch<React.SetStateAction<boolean>>;
     setStep?: React.Dispatch<React.SetStateAction<number | undefined>>;
     setStepper?: React.Dispatch<React.SetStateAction<number | undefined>>;
     setMedicalPrescription?: React.Dispatch<React.SetStateAction<MedicationPrescriptionType[]>>;
+    setShowContent?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
     return (
         <Modal
             show={successModal}
-            onHide={() => { setSuccessModal(false); setStep?.(1); setStepper?.(1); setMedicalPrescription?.([]); }}
+            onHide={() => {
+                setSuccessModal(false);
+                setStep?.(1);
+                setStepper?.(1);
+                setMedicalPrescription?.([]);
+                setShowContent?.(true); // show patient content 
+
+            }}
             header=""
             closeButton={true}
         >
@@ -291,7 +300,13 @@ export function TreatmentSuccessModal({
                 <Button
                     variant="outline"
                     className="w-100"
-                    onClick={() => { setSuccessModal(false); setStep?.(1); setStepper?.(1); setMedicalPrescription?.([]); }}
+                    onClick={() => {
+                        setSuccessModal(false);
+                        setStep?.(1);
+                        setStepper?.(1);
+                        setMedicalPrescription?.([]);
+                        setShowContent?.(true);  // show patient content 
+                    }}
                 >
                     Okay
                 </Button>
