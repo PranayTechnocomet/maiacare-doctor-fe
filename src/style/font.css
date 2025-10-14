@@ -910,6 +910,7 @@
     font-size: 22px;
     font-weight: 600;
     line-height: 26px;
+    font-style: 'SemiBold';
     color: var(--color-heading);
 
 }
@@ -1566,12 +1567,20 @@
     /* color: var(--border-box);     */
 }
 
-
 .calender-timepicker-placeholder {
     font-size: 16px;
     font-weight: 500;
     color: var(--color-radio);
 }
+
+.ivf-progress-completed {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16px;
+    font-style: SemiBold;
+    color: var(--color-completed);
+}
+
 
 @media screen and (max-width: 1391px) {
     .contact-detail {
@@ -1600,7 +1609,6 @@
     .accordion-title-detail {
         font-size: 15px;
     }
-
 }
 
 
@@ -1608,7 +1616,6 @@
     .contact-detail {
         font-size: 12px;
     }
-
 }
 
 
@@ -1640,7 +1647,6 @@
         font-size: 15px;
 
     }
-
 }
 
 
@@ -1657,7 +1663,6 @@
 
     .your-device-box-subtitle {
         font-size: 14px;
-
     }
 }
 
@@ -1698,8 +1703,6 @@
     .forgate-password {
         font-size: 15px;
     }
-
-
 }
 
 @media screen and (max-width: 991px) {
@@ -1737,7 +1740,6 @@
     .service-details-box-content-data-total {
         font-size: 22px;
     }
-
 }
 
 @media screen and (max-width: 575px) {

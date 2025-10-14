@@ -7,6 +7,7 @@ import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import Treatment from "@/components/Treatment";
 import '@/style/treatment.css'
 import '@/style/Appointment.css'
+import '@/style/patientProfile.css';
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();

@@ -29,7 +29,17 @@
 .patient-journey-box {
     background-color: var(--color-white);
     border-radius: 12px;
-    padding: 16px;
+    padding: 15px;
+}
+
+.patient-journey-success-box {
+    border: 1px solid var(--border-status-success);
+    background-color: var(--background-color-staus-success);
+}
+
+.patient-journey-other-box{
+    border: 1px solid var(--color-icon-border);
+
 }
 
 .patient-journey-box-item {
@@ -221,9 +231,9 @@
 
 @media screen and (max-width: 375px) {
     .patient-journey-box-item {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        align-items: center !important;
     }
 }
