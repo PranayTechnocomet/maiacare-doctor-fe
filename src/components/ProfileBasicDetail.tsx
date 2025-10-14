@@ -205,8 +205,6 @@ const ProfileBasicDetail = () => {
         return '';
     };
 
-
-
     const accordionData = [
         {
             id: '0',
