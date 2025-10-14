@@ -193,34 +193,26 @@
     font-size: 12px;
 }
 
-.aw-date-circle-active {
-    background: #fde9e2;
-    color: #f46a36;
-    font-weight: 600;
-}
+
 
 /* day title default muted, Monday highlighted like screenshot */
 .aw-day-col>div:first-child {
     color: #96A0AF;
 }
 
-.aw-days-row .aw-day-col:first-child>div:first-child {
+/* .aw-days-row .aw-day-col:first-child>div:first-child {
     color: #f46a36;
     font-weight: 600;
-}
+} */
 
-.aw-body {
-    max-height: 640px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+
 
 .aw-time-col {
     background: #F8FAFC;
 }
 
 .aw-sticky-col {
-    position: sticky;
+    /* position: sticky; */
     left: 0;
     z-index: 2;
     background: inherit;
@@ -229,7 +221,7 @@
 
 .appointments-week-time,
 .time-cell {
-    height: 64px;
+    height: 94px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -237,11 +229,7 @@
     color: #96A0AF;
 }
 
-.aw-slot {
-    height: 64px;
-    cursor: pointer;
-    position: relative;
-}
+
 
 .aw-booked-line {
     position: absolute;
@@ -265,10 +253,10 @@
     border-radius: 50%;
 }
     
-.aw-card .col>.border-bottom,
+/* .aw-card .col>.border-bottom,
 .aw-time-col .border-bottom {
     border-color: #EEF2F7 !important;
-}
+} */
 
 /* Tooltip styling to match design */
 .appointments-week-tooltip .tooltip-inner {
@@ -283,12 +271,7 @@
     border-top-color: #fff !important;
 }
 
-.appointments-week-time {
-    padding-top: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 .aw-date-circle{
     font-size: 20px !important;
 }
@@ -400,8 +383,8 @@
 }
 
 .aw-date-circle-active {
-    background: #fde9e2;
-    color: #f46a36;
+    background: #E29578;
+    color: #FFFFFF;
     font-weight: 600;
 }
 
@@ -580,7 +563,7 @@
 
 /* Legacy styles for backward compatibility */
 .appointments-week-time {
-    padding-top: 42px;
+    /* padding-top: 10px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -614,19 +597,19 @@
 
 .aw-body {
     max-height: 640px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* overflow-y: auto;
+    overflow-x: hidden; */
 }
 
 .aw-sticky-col {
-    position: sticky;
+    /* position: sticky; */
     left: 0;
     z-index: 2;
     background: inherit;
 }
 
 .aw-slot {
-    height: 64px;
+    height: 94px;
     cursor: pointer;
     position: relative;
 }
@@ -642,10 +625,10 @@
     border-radius: 2px;
 }
 
-.aw-card .col>.border-bottom,
+/* .aw-card .col>.border-bottom,
 .aw-time-col .border-bottom {
     border-color: #EEF2F7 !important;
-}
+} */
 
 @media screen and (max-width: 575px) {
 

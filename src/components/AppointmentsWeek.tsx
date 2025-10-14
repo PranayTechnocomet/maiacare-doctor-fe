@@ -114,7 +114,7 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
   }, [selectedDate]);
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-3">
       <div className="border rounded shadow-sm bg-white aw-card">
        
         
