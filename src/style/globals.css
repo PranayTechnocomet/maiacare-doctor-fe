@@ -26,6 +26,9 @@
   --border-check-box: #CBD5E1;
   --border-accordion-arrow: #F4F4F4;
 
+  --background-color-staus-success: #F2F2FF;
+  --border-status-success: #3E5A91;
+  --color-completed: #F4C47E;
   --or-font-color: #B0B4C1;
   --border-box: #FF8A4C;
   --border-box-blue: #3F83F8;
@@ -392,3 +395,61 @@ body {
 
   }
 }
+
+
+
+.appointment-card {
+  background-color: #f0f7f6;
+  border-radius: 8px;
+  padding: 6px;
+  margin: 2px;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.appointment-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.appointment-header img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.appointment-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.appointment-time {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.appointment-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 3px;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+  color: #d9534f;
+  background-color: #f9eaea;
+}
+
+.aw-highlighted {
+  background-color: #fff9f0;
+}
+
+
+
