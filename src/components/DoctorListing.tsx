@@ -9,7 +9,7 @@ import Modal from './ui/Modal';
 import Image from 'next/image';
 import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
-import '../style/Appointment.css';
+import '../style/appointment.css';
 import { BsClock } from 'react-icons/bs';
 import { doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
@@ -269,11 +269,7 @@ export function CalendarView() {
 
   // CSS datasforcss that will be applied inline
   const datasforcss = {
-    timeColumn: { width: '120px', backgroundColor: '#fafafa', flexShrink: 0 },
-    dateCircle: { width: '40px', height: '40px', backgroundColor: '#fce5d8', color: '#f57c00' },
-    eventLine: { left: '5px', right: '0', height: '1px' }, // Adjusted left position
-    eventDot: { width: '10px', height: '10px', left: '-5px', top: '-4.5px', zIndex: 1 },
-    tooltipCustom: { top: '25%', left: '30%' },
+    eventLine: { left: '5px', right: '0', height: '1px' },
     tooltipDot: { width: '12px', height: '12px', top: '-4px', left: '-4px' },
     pingAnimation: { animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' }
   };
@@ -736,11 +732,11 @@ export function CalendarView() {
 
 
                     </Card> */}
-                    <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
+                    <Card className="shadow-sm calendar-card w-100 calender-card-main" >
                       <Stack direction="horizontal" className="mb-0 p-3 ">
                         <h2 className="calendar-header mb-0 fs-5">Calendar</h2>
 
-                        <div
+                        {/* <div
                           className="ms-auto d-flex align-items-center"
                           role="button"
                           onClick={() => setIsOpen(!isOpen)}
@@ -749,7 +745,14 @@ export function CalendarView() {
                             transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                             cursor: 'pointer',
                           }}
+                        > */}
+                        <div
+                          className={`ms-auto d-flex align-items-center dropdown-toggle-icon ${isOpen ? "open" : ""}`}
+                          role="button"
+                          onClick={() => setIsOpen(!isOpen)}
                         >
+
+
                           <FaChevronDown size={18} />
                         </div>
                       </Stack>
@@ -1026,12 +1029,12 @@ export function CalendarView() {
                 <>
 
                   <div className=" min-vh-100 d-flex align-items-center justify-content-center">
-                    <div className="w-100 bg-white rounded shadow-lg d-flex" style={{ maxWidth: '64rem', height: '90vh' }}>
+                    <div className="w-100 bg-white rounded shadow-lg d-flex day-calender-mian-card" >
                       {/* Time Column with Icon and Times */}
-                      <div className="border-end d-flex flex-column" style={datasforcss.timeColumn}>
+                      <div className={`border-end d-flex flex-column timeColumn-days-colum`}>
                         {/* Header with Icon */}
-                        <div className="d-flex align-items-center justify-content-center border-bottom" style={{ height: '96px', flexShrink: 0 }}>
-                          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg" style={{ color: 'rgb(156 163 175)' }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <div className="d-flex align-items-center justify-content-center border-bottom header-icon-day">
+                          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg" className='header-icon-day-color'><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         </div>
 
                         {/* Scrollable Time Slots */}
@@ -1045,7 +1048,7 @@ export function CalendarView() {
                             const ampm = displayTime < 12 ? 'AM' : 'PM';
                             const formattedHour = displayTime > 12 ? displayTime - 12 : (displayTime === 0 ? 12 : displayTime);
                             return (
-                              <div key={index} className="d-flex align-items-center justify-content-center border-top" style={{ height: '48px' }}>
+                              <div key={index} className="d-flex align-items-center justify-content-center border-top time-slot-day">
                                 <span className="small text-secondary">
                                   {`${formattedHour}:${minute} ${ampm}`}
                                 </span>
@@ -1058,10 +1061,10 @@ export function CalendarView() {
                       {/* Main Content Area */}
                       <div className="flex-grow-1 d-flex flex-column">
                         {/* Header with Day and Date */}
-                        <div className="d-flex align-items-center border-bottom p-3" style={{ height: '96px', flexShrink: 0 }}>
+                        <div className="d-flex align-items-center border-bottom p-3 day-date-header" >
                           <div className="d-flex align-items-center">
-                            <p className="small fw-semibold mb-0 me-2" style={{ color: '#f57c00' }}>{dayDateFormat}</p>
-                            <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold" style={datasforcss.dateCircle}>
+                            <p className="small fw-semibold mb-0 me-2 day-formate-text" >{dayDateFormat}</p>
+                            <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold dateCircle-days-colum ">
                               {selectedDate && (
                                 <div className="text-center  fw-bold">
                                   {dateDateFormat}
@@ -1080,7 +1083,7 @@ export function CalendarView() {
                           {/* Grid Lines Container */}
                           <div className="position-relative" style={{ height: `${timeSlots.length * 48}px` }}>
                             {timeSlots.map((_, index) => (
-                              <div key={index} className="border-top" style={{ height: '48px' }}></div>
+                              <div key={index} className="border-top grid-line-calendar" ></div>
                             ))}
 
                             {/* Static 12:30 PM Line */}
@@ -1088,7 +1091,7 @@ export function CalendarView() {
                               className="position-absolute bg-warning"
                               style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
                             >
-                              <div className="bg-warning rounded-circle position-absolute" style={datasforcss.eventDot}></div>
+                              <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
                             </div>
 
                             {/* Dynamic Event Lines */}
@@ -1098,16 +1101,16 @@ export function CalendarView() {
                                 className="position-absolute bg-warning"
                                 style={{ ...datasforcss.eventLine, top: `${event.top}px` }}
                               >
-                                <div className="bg-warning rounded-circle position-absolute" style={datasforcss.eventDot}></div>
+                                <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
                               </div>
                             ))}
                           </div>
 
                           {/* Initial Tooltip */}
                           {showTooltip && (
-                            <div className="position-absolute bg-white p-4 rounded shadow-lg" style={datasforcss.tooltipCustom}>
+                            <div className="position-absolute bg-white p-4 rounded shadow-lg tooltipCustom" >
                               <div className="position-absolute bg-warning rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
-                              <div className="position-absolute bg-warning rounded-circle" style={datasforcss.tooltipDot}></div>
+                              <div className="position-absolute bg-warning rounded-circle tooltipDot" ></div>
                               <p className="small text-secondary">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
                               <button onClick={() => setShowTooltip(false)} className="btn btn-link p-0 mt-3 small fw-bold text-warning text-decoration-none">OK, GOT IT!</button>
                             </div>
@@ -1153,22 +1156,22 @@ export function CalendarView() {
                 <div className='today-schedule-box-section h-100'>
                   <div className='d-flex justify-content-between align-items-center gap-2 p-0'>
                     <div
-                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Upcoming' ? { border: '1px solid #e78422', color: '#fff' } : {}}
+                      className={`doctor-listing-today-schedule-box d-flex flex-column align-items-center ${selectedCard === 'Upcoming' ? 'today-schedule-box-color' : ''
+                        }`}
                       onClick={() => setSelectedCard('Upcoming')}
                     >
+
                       <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
                       <div
-                        className='upcoming-box doctor-listing-all-box'
-                        style={selectedCard === 'Upcoming' ? { color: '#fff' } : {}}
+                        className={`upcoming-box doctor-listing-all-box ${selectedCard === 'Upcoming' ? 'today-shedule-color' : ''}`}
+                        
                       >
                         4
                       </div>
                     </div>
 
                     <div
-                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Waiting' ? { border: '1px solid #e78422', color: '#fff' } : {}}
+                      className={`doctor-listing-today-schedule-box d-flex flex-column  align-items-center ${selectedCard === 'Waiting' ? 'today-schedule-box-color' : ''}`}
                       onClick={() => setSelectedCard('Waiting')}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Waiting</p>
@@ -1181,28 +1184,27 @@ export function CalendarView() {
                     </div>
 
                     <div
-                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
+                      className={`doctor-listing-today-schedule-box d-flex flex-column  align-items-center ${selectedCard === 'Engaged' ? 'today-schedule-box-color' : ''}`}
                       onClick={() => setSelectedCard('Engaged')}
-                      style={selectedCard === 'Engaged' ? { border: '1px solid #e78422', color: '#fff' } : {}}
+                      
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Engaged</p>
                       <div
-                        className='engaged-box doctor-listing-all-box'
-                        style={selectedCard === 'Engaged' ? { color: '#fff' } : {}}
+                        className={`engaged-box doctor-listing-all-box ${selectedCard === 'Engaged' ? 'today-shedule-color' : ''}`}
+                        
                       >
                         2
                       </div>
                     </div>
 
                     <div
-                      className='doctor-listing-today-schedule-box d-flex flex-column  align-items-center'
-                      style={selectedCard === 'Done' ? { border: '1px solid #e78422', color: '#fff' } : {}}
+                      className={`doctor-listing-today-schedule-box d-flex flex-column  align-items-center ${selectedCard === 'Done' ? 'today-schedule-box-color' : ''}`}
                       onClick={() => setSelectedCard('Done')}
                     >
                       <p className='doctor-listing-today-schedule-boxs text-center'>Done</p>
                       <div
-                        className='done-box doctor-listing-all-box'
-                        style={selectedCard === 'Done' ? { color: '#fff' } : {}}
+                        className={`done-box doctor-listing-all-box ${selectedCard === 'Done' ? 'today-shedule-color' : ''}`}
+                        
                       >
                         4
                       </div>
@@ -1216,7 +1218,7 @@ export function CalendarView() {
                   ).map((item: any, index: number) => (
                     <div key={index}>
                       <div className='docotor-listing-today-schedule-datas'>
-                        <Card className="d-flex flex-row align-items-center p-2 shadow-sm rounded-3 border-0" style={{ maxWidth: "350px" }}>
+                        <Card className="d-flex flex-row align-items-center p-2 shadow-sm rounded-3 border-0 selected-calender-data" >
                           <Image src={item.patient_profile} alt="Profile" width={50} height={50} className="me-2 rounded-circle" />
                           <div className="flex-grow-1">
                             <p className="doctor-listing-modal-patient-name m-0">{item.patient_name}</p>

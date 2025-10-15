@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import '../style/Appointment.css'
+import '../style/appointment.css'
 
 interface AppointmentsWeekProps {
   selectedDate?: string | null;
@@ -133,17 +133,10 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
                   
                   return (
                     <div className="aw-day-col py-3 border-end" key={day}>
-                      <div className={isHighlighted ? "text-danger fw-bold" : ""}>{day}</div>
+                      <div className={isHighlighted ? "day-text-color " : ""}>{day}</div>
                       <div className={`mt-1 mx-auto rounded-circle d-flex align-items-center justify-content-center aw-date-circle ${isHighlighted ? 'aw-date-circle-active' : 'text-secondary'}`}>
                         {dateNumber < 10 ? `0${dateNumber}` : dateNumber}
-                        {isHighlighted && <div className="position-absolute" style={{
-                          width: '6px',
-                          height: '6px',
-                          backgroundColor: '#f57c00',
-                          borderRadius: '50%',
-                          bottom: '-2px',
-                          boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
-                        }}></div>}
+                        
                       </div>
                     </div>
                   );
