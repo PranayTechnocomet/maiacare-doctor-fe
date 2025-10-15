@@ -54,14 +54,28 @@
     top: 25%;
 }
 
+.patient-journey-dot-add-steps{
+    top : 10%;
+}
+
 .patient-journey-box-wrapper::before {
     content: "";
     position: absolute;
     top: 33px;
     left: 14px;
-    /* Align to dot center */
     width: 1px;
     height: 100%;
+    border-left: 2px dotted var(--color-icon-border);
+    z-index: 0;
+}
+
+.patient-journey-add-steps-box-wrapper::before{
+    content: "";
+    position: absolute;
+    top: -38px;
+    left: 14px;
+    width: 1px;
+    height: 45%;
     border-left: 2px dotted var(--color-icon-border);
     z-index: 0;
 }
