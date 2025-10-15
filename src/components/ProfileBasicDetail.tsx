@@ -13,7 +13,7 @@ import Modal from './ui/Modal';
 import { IoAdd } from "react-icons/io5";
 import { FertilityAssessmentForm } from './form/FertilityAssessmentForm';
 import PhisicalAssessmentForm from './form/PhisicalAssessmentForm';
-import { MedicalHistoryData } from '@/utils/StaticData';
+import { journeyData, MedicalHistoryData } from '@/utils/StaticData';
 import hiegthImg from '../assets/images/Physical-assement-hiegth-icons.png'
 import weightImg from '../assets/images/Physical-assement-weight-icons.png'
 import BMIIMG from '../assets/images/Physical-assement-bmi.png'
@@ -29,7 +29,7 @@ import { physicalAssessmentData } from '@/utils/StaticData';
 import MenstrualCycleIcon from '../assets/images/MenstrualCycle-icons.png'
 import PregnancyIcon from '../assets/images/Pregnancy-icons.png'
 import PencilEditIcons from '../assets/images/EditIcon.png'
-import { FertilityAssessmentFormType, MedicalHistoryType, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
+import { FertilityAssessmentFormType, MedicalHistoryType, PatientJourneyItem, PhysicalAssessmentDataModel } from '@/utils/types/interfaces';
 
 const contactData = {
     phone: '+91 12345 67890',
@@ -43,71 +43,6 @@ const contactData = {
 };
 
 
-
-
-const patientJourneyData = [
-    {
-        id: 1,
-        title: 'Online Consultation',
-        date: 'on 09 Jul 2024',
-        time: '12:11 PM',
-        status: 'success' as const
-    },
-    {
-        id: 2,
-        title: 'Appointment Booked',
-        date: 'on 09 Jul 2024',
-        time: '12:11 PM',
-        status: 'success' as const
-    }
-];
-
-export interface PatientJourneyItem {
-    id: string;
-    title: string;
-    date: string;
-    time: string;
-    status: 'Success' | "In Progress" | 'Pending' | 'Failed';
-}
-
-const journeyData: PatientJourneyItem[] = [
-    {
-        id: "1",
-        title: "Online Consultation",
-        date: "on 09 Jul 2024",
-        time: "12:11 PM",
-        status: "Success"
-    },
-    {
-        id: "2",
-        title: "Appointment Booked",
-        date: "on 09 Jul 2024",
-        time: "12:11 PM",
-        status: "Success"
-    },
-    {
-        id: "3",
-        title: "Clinic Visits",
-        date: "on 09 Jul 2024",
-        time: "12:11 PM",
-        status: "In Progress",
-    },
-    {
-        id: "4",
-        title: "Treatment Started",
-        date: "on 09 Jul 2024",
-        time: "10:30 AM",
-        status: "Pending"
-    },
-    {
-        id: "5",
-        title: "Pregnancy Confirmed",
-        date: "on 09 Jul 2024",
-        time: "12:11 PM",
-        status: "Pending"
-    },
-
-];
 
 const getStatusBadgeClass = (status: string) => {
     switch (status) {

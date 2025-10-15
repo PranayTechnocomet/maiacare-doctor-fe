@@ -2,41 +2,43 @@
 
 import { ChangeEvent, useState } from "react";
 import { Accordion, Col, Row } from "react-bootstrap";
-import {InputSelect} from "../ui/InputSelect";
+import { InputSelect } from "../ui/InputSelect";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { RadioButtonGroup } from "../ui/RadioField";
 import { InputFieldGroup } from "../ui/InputField";
 import Button from "../ui/Button";
 import toast from 'react-hot-toast';
 import { BsInfoCircle } from 'react-icons/bs';
-import { FertilityAssessmentFormType } from "@/utils/types/interfaces";
+import { FertilityAssessmentFormType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 
 
 interface FertilityAssessmentFormProps {
-    setShowFertilityAssessment: React.Dispatch<React.SetStateAction<boolean>>;
-    setModalFormFertilityData: React.Dispatch<React.SetStateAction<FertilityAssessmentFormType>>;
-    editFertilityAssessment: FertilityAssessmentFormType; 
+    setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<FertilityAssessmentFormType | TreatmentFertilityAssessmentFormType>>;
+    editFertilityAssessment?: FertilityAssessmentFormType;
+    setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const FertilityAssessmentForm = ({
     setShowFertilityAssessment,
     setModalFormFertilityData,
-    editFertilityAssessment
+    editFertilityAssessment,
+    setActiveTab,
 }: FertilityAssessmentFormProps) => {
 
     type FormError = Partial<Record<keyof FertilityAssessmentFormType, string>>;
     const initialFormError: FormError = {};
 
     const initialFormData: FertilityAssessmentFormType = {
-        ageAtFirstMenstruation: editFertilityAssessment.ageAtFirstMenstruation || "",
-        cycleLength: editFertilityAssessment.cycleLength || "",
-        periodLength: editFertilityAssessment.periodLength || "",
-        date: editFertilityAssessment.date || "",
-        isCycleRegular: editFertilityAssessment.isCycleRegular || "Regular",
-        menstrualIssues: editFertilityAssessment.menstrualIssues || "yes",
-        pregnancy: editFertilityAssessment.pregnancy || "yes",
-        timeduration: editFertilityAssessment.timeduration || "",
-        ectopicpregnancy: editFertilityAssessment.ectopicpregnancy || "yes"
+        ageAtFirstMenstruation: editFertilityAssessment?.ageAtFirstMenstruation || "",
+        cycleLength: editFertilityAssessment?.cycleLength || "",
+        periodLength: editFertilityAssessment?.periodLength || "",
+        date: editFertilityAssessment?.date || "",
+        isCycleRegular: editFertilityAssessment?.isCycleRegular || "Regular",
+        menstrualIssues: editFertilityAssessment?.menstrualIssues || "yes",
+        pregnancy: editFertilityAssessment?.pregnancy || "yes",
+        timeduration: editFertilityAssessment?.timeduration || "",
+        ectopicpregnancy: editFertilityAssessment?.ectopicpregnancy || "yes"
 
     };
 
@@ -74,9 +76,10 @@ export const FertilityAssessmentForm = ({
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
             //   setShowModal(true);
-            setModalFormFertilityData(formData);
-            setShowFertilityAssessment(false);
+            setModalFormFertilityData?.(formData);
+            setShowFertilityAssessment?.(false);
             setFormError(initialFormError);
+            setActiveTab?.("partner");
 
             if (editFertilityAssessment && editFertilityAssessment.ageAtFirstMenstruation) {
                 toast.success('Changes saved successfully', {
@@ -263,7 +266,7 @@ export const FertilityAssessmentForm = ({
                 {/* Submit buttons */}
                 <div className='d-flex gap-3 mt-3'>
                     <Button className="w-100" variant="outline" type="button" onClick={() => {
-                        setShowFertilityAssessment(false); setFormData(initialFormData);
+                        setShowFertilityAssessment?.(false); setFormData(initialFormData);
                     }}>
                         Cancel
                     </Button>

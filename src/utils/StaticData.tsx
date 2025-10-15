@@ -1,4 +1,4 @@
-import { Patient, PhysicalAssessmentData, SelectPatientType } from "./types/interfaces";
+import { MedicationPrescriptionType, Patient, PatientJourneyItem, PhysicalAssessmentData, SelectPatientType } from "./types/interfaces";
 import dummyPdfImg from "../assets/images/dummy-pdf-img.png"
 import dummyJpgImg from "../assets/images/dummy-jpg-img.png"
 import appointmentProfile from "../assets/images/appoiment-img-1.png"
@@ -451,4 +451,112 @@ export const TempTreatmentSteps = [
     step: "Pregnancy Test",
   },
 
+];
+
+export const journeyData: PatientJourneyItem[] = [
+  {
+    id: "1",
+    title: "Online Consultation",
+    date: "on 09 Jul 2024",
+    time: "12:11 PM",
+    status: "Success"
+  },
+  {
+    id: "2",
+    title: "Appointment Booked",
+    date: "on 09 Jul 2024",
+    time: "12:11 PM",
+    status: "Success"
+  },
+  {
+    id: "3",
+    title: "Clinic Visits",
+    date: "on 09 Jul 2024",
+    time: "12:11 PM",
+    status: "In Progress",
+  },
+  {
+    id: "4",
+    title: "Treatment Started",
+    date: "on 09 Jul 2024",
+    time: "10:30 AM",
+    status: "Pending"
+  },
+  {
+    id: "5",
+    title: "Pregnancy Confirmed",
+    date: "on 09 Jul 2024",
+    time: "12:11 PM",
+    status: "Pending"
+  },
+
+];
+
+export const IVFProgressData = [
+  {
+    id: 1,
+    title: 'Fertility Assessment',
+    date: 'on 09 Jul 2024',
+    time: '12:11 PM',
+    Complete: "50",
+    status: 'Success' as const
+  },
+  {
+    id: 2,
+    title: 'Ovarian Stimulation',
+    date: 'on 09 Jul 2024',
+    time: '12:11 PM',
+    status: 'In Progress' as const
+  },
+  {
+    id: 3,
+    title: 'Monitoring',
+    // date: 'on 09 Jul 2024',
+    // time: '12:11 PM',
+    // Complete: "50",
+    status: 'Pending' as const
+  },
+  {
+    id: 4,
+    title: 'Follow up',
+    status: 'Pending' as const
+  },
+  {
+    id: 5,
+    title: 'Egg Retrieval',
+    status: 'Pending' as const
+  },
+  {
+    id: 6,
+    title: 'Sperm Collection',
+    status: 'Pending' as const
+  },
+];
+
+
+export const medicationPrescriptionData: MedicationPrescriptionType[] = [
+  {
+    id: "1",
+    medicineName: "Follistim",
+    type: "Capsule",
+    typeQuantity: "50",
+    duration: "12",
+    quantity: 1,
+    timeslot: ["morning", "evening"],
+    meal: "Before",
+    intake: "1",
+    description: "This is description",
+  },
+  {
+    id: "2",
+    medicineName: "Progesterone",
+    type: "Tablet",
+    typeQuantity: "200",
+    duration: "12",
+    quantity: 1,
+    timeslot: ["morning", "evening"],
+    meal: "Before",
+    intake: "1",
+    description: "This is description",
+  },
 ];
