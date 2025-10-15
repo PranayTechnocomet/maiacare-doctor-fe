@@ -8,6 +8,7 @@ import Treatment from "@/components/Treatment";
 import '@/style/treatment.css'
 import '@/style/Appointment.css'
 import '@/style/patientProfile.css';
+import '@/style/fertilityassessment.css'
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();

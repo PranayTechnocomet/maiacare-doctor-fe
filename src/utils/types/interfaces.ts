@@ -236,6 +236,17 @@ export interface FertilityAssessmentFormType {
   ectopicpregnancy: string;
 }
 
+export interface TreatmentFertilityAssessmentFormType {
+    Patient: FertilityAssessmentFormType;
+    Partner: any;
+}
 
+export interface PatientJourneyItem {
+    id: string;
+    title: string;
+    date: string;
+    time: string;
+    status: 'Success' | "In Progress" | 'Pending' | 'Failed';
+}
 
 
