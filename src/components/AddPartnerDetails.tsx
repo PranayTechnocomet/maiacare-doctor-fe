@@ -151,8 +151,7 @@ export function PhysicalFertilityAssessmentAccordion({ setShowContent, setAddPar
     };
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        // console.log("click ", formData);
-
+        
         e.preventDefault();
         const errors = validateForm(formData);
         console.log("Form submitted", formData);

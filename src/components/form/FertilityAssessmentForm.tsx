@@ -14,16 +14,15 @@ import { FertilityAssessmentFormType, TreatmentFertilityAssessmentFormType } fro
 
 interface FertilityAssessmentFormProps {
     setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
-    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<FertilityAssessmentFormType | TreatmentFertilityAssessmentFormType>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<FertilityAssessmentFormType>>;
     editFertilityAssessment?: FertilityAssessmentFormType;
-    setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
+    
 }
 
 export const FertilityAssessmentForm = ({
     setShowFertilityAssessment,
     setModalFormFertilityData,
     editFertilityAssessment,
-    setActiveTab,
 }: FertilityAssessmentFormProps) => {
 
     type FormError = Partial<Record<keyof FertilityAssessmentFormType, string>>;
@@ -79,7 +78,6 @@ export const FertilityAssessmentForm = ({
             setModalFormFertilityData?.(formData);
             setShowFertilityAssessment?.(false);
             setFormError(initialFormError);
-            setActiveTab?.("partner");
 
             if (editFertilityAssessment && editFertilityAssessment.ageAtFirstMenstruation) {
                 toast.success('Changes saved successfully', {

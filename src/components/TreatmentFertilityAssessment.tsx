@@ -4,11 +4,14 @@ import { useState } from "react";
 import CustomTabs from "./ui/CustomTabs";
 import { FertilityAssessmentForm } from "./form/FertilityAssessmentForm";
 import { TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
+import { TreatmentFertilityAssessmentPartner, TreatmentFertilityAssessmentPatient } from "./form/TreatmentAllForm";
 
 function TreatmentFertilityAssessment({
-    setTreatmentFertilityAssessmentData
+    setTreatmentFertilityAssessmentData,
+    setTreatmentFertilityAssessmentModel
 }: {
-    setTreatmentFertilityAssessmentData: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>; 
+    setTreatmentFertilityAssessmentData: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+    setTreatmentFertilityAssessmentModel: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 
     const [activeTab, setActiveTab] = useState<string>("patient");
@@ -18,29 +21,32 @@ function TreatmentFertilityAssessment({
             key: "patient",
             label: "Patient",
             content: (
-                <div>
-
-                    <FertilityAssessmentForm
-                        // setModalFormFertilityData={setTreatmentFertilityAssessmentData}
+                <>
+                    <TreatmentFertilityAssessmentPatient
+                        setShowFertilityAssessment={setTreatmentFertilityAssessmentModel}
+                        setModalFormFertilityData={setTreatmentFertilityAssessmentData}
                         setActiveTab={setActiveTab}
                     />
-                </div>
+                </>
             ),
         },
         {
             key: "partner",
             label: "Partner",
             content: (
-                <div>
-                    <h6>Partner</h6>
-                </div>
+                <>
+                    <TreatmentFertilityAssessmentPartner
+                        setShowFertilityAssessment={setTreatmentFertilityAssessmentModel}
+                        setModalFormFertilityData={setTreatmentFertilityAssessmentData}
+                    />
+                </>
             ),
         }
     ];
 
     return (
         <>
-           <CustomTabs
+            <CustomTabs
                 tabOptions={tabOptions}
                 className="mb-3"
                 activeKey={activeTab}

@@ -1,16 +1,20 @@
 "use client"
 
-import { MedicationPrescriptionType, TreatmentForm } from "@/utils/types/interfaces";
+import { FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
-import { Col, Dropdown, Form, Row } from "react-bootstrap";
+import { Accordion, Col, Dropdown, Form, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
 import { PatientsDetails, TempTreatmentSteps } from "@/utils/StaticData";
 import Button from "../ui/Button";
-import { InputFieldError, InputFieldLabel } from "../ui/InputField";
+import { InputFieldError, InputFieldGroup, InputFieldLabel } from "../ui/InputField";
 import Image from "next/image";
 import temppatientImg1 from "@/assets/images/patient-img-1.png"
 import Modal from "../ui/Modal";
 import TreatmentSuccessImage from "@/assets/images/TreatmentAddedSuccess.png";
+import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
+import { RadioButtonGroup } from "../ui/RadioField";
+import toast from "react-hot-toast";
+import { BsInfoCircle } from "react-icons/bs";
 
 
 interface TreatmentPatientFormProps {
@@ -32,8 +36,8 @@ export function TreatmentPatientForm({
     };
 
     type FormError = Partial<Record<keyof TreatmentForm, string>>;
-
     const initialFormError: FormError = {};
+
     const [formError, setFormError] = useState<FormError>(initialFormError);
     const [formData, setFormData] = useState<TreatmentForm>(initialFormData);
 
@@ -319,5 +323,583 @@ export function TreatmentSuccessModal({
             </div>
 
         </Modal>
+    )
+}
+
+interface FertilityAssessmentFormProps {
+    setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+    setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
+}
+export function TreatmentFertilityAssessmentPatient({
+    setShowFertilityAssessment,
+    setModalFormFertilityData,
+    setActiveTab
+}: FertilityAssessmentFormProps) {
+
+    type FormError = Partial<Record<keyof FertilityAssessmentFormType, string>>;
+    const initialFormError: FormError = {};
+
+    const initialFormData: FertilityAssessmentFormType = {
+        ageAtFirstMenstruation: "",
+        cycleLength: "",
+        periodLength: "",
+        date: "",
+        isCycleRegular: "Regular",
+        menstrualIssues: "yes",
+        pregnancy: "yes",
+        timeduration: "",
+        ectopicpregnancy: "yes"
+
+    };
+
+    const [formData, setFormData] = useState<FertilityAssessmentFormType>(initialFormData);
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const validateForm = (data: FertilityAssessmentFormType): FormError => {
+        const errors: FormError = {};
+
+        if (!data.ageAtFirstMenstruation.trim()) errors.ageAtFirstMenstruation = "Age at first menstruation is required";
+        if (!data.cycleLength.trim()) errors.cycleLength = "Cycle length is required";
+        if (!data.periodLength.trim()) errors.periodLength = "Period length is required";
+        if (!data.date) errors.date = "Date is required";
+        if (!data.isCycleRegular) errors.isCycleRegular = "Is cycle regular is required";
+        if (!data.menstrualIssues) errors.menstrualIssues = "Menstrual issues is required";
+        if (!data.pregnancy) errors.pregnancy = "Pregnancy is required";
+        if (!data.timeduration) errors.timeduration = "Duration is required";
+        if (!data.ectopicpregnancy) errors.ectopicpregnancy = "Ectopic pregnancy is required";
+
+        return errors;
+    };
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev: any) => ({ ...prev, [name]: value }));
+        setFormError((prev: any) => ({ ...prev, [name]: "" }));
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors = validateForm(formData);
+        setFormError(errors);
+        console.log("errors", errors);
+
+        if (Object.keys(errors).length === 0) {
+            setModalFormFertilityData?.((prev: any) => ({ ...prev, patient: formData }));
+            setFormError(initialFormError);
+            setActiveTab?.("partner");
+
+        }
+
+    };
+
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <Accordion defaultActiveKey="0">
+                    <Accordion.Item eventKey="0" className="fertilitiy-assement-accodion-item mb-3">
+                        <Accordion.Header>
+                            <div className="fertilitiy-assement-accodion-title">
+                                Menstrual Cycle
+                            </div>
+                        </Accordion.Header>
+                        <Accordion.Body className="custom-accordion-body">
+                            <Row className="g-md-3 g-1">
+                                <Col md={6}>
+                                    <InputSelect
+                                        label="Age at first menstruation"
+                                        name="ageAtFirstMenstruation"
+                                        value={formData.ageAtFirstMenstruation}
+                                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        error={formError.ageAtFirstMenstruation}
+                                        onBlur={() => { }}
+                                        required
+                                        disabled={false}
+                                        placeholder="Select Age"
+                                        options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
+                                    />
+                                </Col>
+
+                                <Col md={6}>
+                                    <InputSelect
+                                        label="Cycle Length"
+                                        name="cycleLength"
+                                        value={formData.cycleLength}
+                                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        error={formError.cycleLength}
+                                        onBlur={() => { }}
+                                        required
+                                        disabled={false}
+                                        placeholder="Select Cycle Length"
+                                        options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
+                                    />
+                                </Col>
+
+                                <Col md={6}>
+                                    <InputSelect
+                                        label="Period Length"
+                                        name="periodLength"
+                                        value={formData.periodLength}
+                                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        error={formError.periodLength}
+                                        onBlur={() => { }}
+                                        required
+                                        disabled={false}
+                                        placeholder="Select Period Length"
+                                        options={[{ id: "1", value: "1", label: "1" }, { id: "2", value: "2", label: "2" } /* ... */]}
+                                    />
+                                </Col>
+
+                                <Col md={6}>
+                                    <DatePickerFieldGroup
+                                        label="Last Period Date"
+                                        name="date"
+                                        value={formData.date}
+                                        placeholder="Enter last period date"
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        error={formError.date}
+                                        onBlur={() => { }}
+                                        required
+                                        disabled={false}
+                                        helperText=""
+                                        max={new Date().toISOString().split("T")[0]} // future date is disabled
+                                    />
+                                </Col>
+
+                                <Col md={12}>
+                                    <RadioButtonGroup
+                                        label="Is your cycle regular?"
+                                        name="isCycleRegular"
+                                        value={formData.isCycleRegular || 'Regular'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Regular", value: "Regular" },
+                                            { label: "Sometimes Irregular", value: "Sometimes Irregular" },
+                                            { label: "Irregular", value: "Irregular" }
+                                        ]}
+                                    />
+
+                                    <RadioButtonGroup
+                                        label="Do you experience menstrual issues?"
+                                        name="menstrualIssues"
+                                        className="mt-2"
+                                        value={formData.menstrualIssues || 'yes'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" }
+                                        ]}
+                                    />
+                                </Col>
+                            </Row>
+                        </Accordion.Body>
+                    </Accordion.Item>
+
+                    <Accordion.Item eventKey="1" className="fertilitiy-assement-accodion-item" >
+                        <Accordion.Header>
+                            <div className="fertilitiy-assement-accodion-title">
+                                Pregnancy
+                            </div>
+                        </Accordion.Header>
+                        <Accordion.Body className="custom-accordion-body">
+                            <Row className="g-md-3 g-2">
+                                <Col md={12}>
+                                    <RadioButtonGroup
+                                        label="Have you been pregnant before?"
+                                        name="pregnancy"
+                                        className="mt-2"
+                                        value={formData.pregnancy || 'yes'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" }
+                                        ]}
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <InputFieldGroup
+                                        label="How long have you been trying to conceive?"
+                                        name="timeduration"
+                                        type="text"
+
+                                        placeholder="Enter Duration"
+                                        required
+                                        disabled={false}
+                                        readOnly={false}
+                                        value={formData.timeduration}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                            handleChange(e);
+                                        }}
+                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                        error={formError.timeduration}
+                                    />
+                                </Col>
+                                <Col md={12}>
+                                    <RadioButtonGroup
+                                        label="Any history of miscarriage or ectopic pregnancy?"
+                                        name="ectopicpregnancy"
+                                        value={formData.ectopicpregnancy || 'yes'}
+                                        onChange={handleChange}
+                                        required
+                                        options={[
+                                            { label: "Yes", value: "yes" },
+                                            { label: "No", value: "no" }
+                                        ]}
+                                    />
+                                </Col>
+                            </Row>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+
+                {/* Submit buttons */}
+                <div className='d-flex gap-3 mt-3'>
+                    <Button className="w-100" variant="outline" type="button" onClick={() => {
+                        setShowFertilityAssessment?.(false);
+                    }}>
+                        Cancel
+                    </Button>
+                    <Button className="w-100" variant="default" type="submit">
+                        Save
+                    </Button>
+                </div>
+
+            </form>
+        </>
+    )
+}
+
+export function TreatmentFertilityAssessmentPartner({
+    setShowFertilityAssessment,
+    setModalFormFertilityData,
+}: {
+    setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+}) {
+
+    type FormError = Partial<Record<keyof FertilityAssessmentHistory, string>>;
+    const initialFormError: FormError = {};
+
+    const initialFormData: FertilityAssessmentHistory = {
+        semenAnalysis: "yes",
+        semenAnalysisContent: "",
+        fertilityIssues: "no",
+        fertilityIssuesContent: "",
+        fertilityTreatment: "no",
+        fertilityTreatmentContent: "",
+        surgeries: "no",
+        surgeriesContent: "",
+    };
+
+    const [formData, setFormData] = useState<FertilityAssessmentHistory>(initialFormData);
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    const validateForm = (data: FertilityAssessmentHistory): FormError => {
+        const errors: FormError = {};
+
+        if (!data.semenAnalysis.trim()) errors.semenAnalysis = "Seminal Analysis is required";
+        if (data.semenAnalysis === 'yes' && !data.semenAnalysisContent?.trim()) errors.semenAnalysisContent = "Seminal Analysis Content is required";
+        if (!data.fertilityIssues.trim()) errors.fertilityIssues = "Fertility Issues is required";
+        if (data.fertilityIssues === 'yes' && !data.fertilityIssuesContent?.trim()) errors.fertilityIssuesContent = "Fertility Issues Content is required";
+        if (!data.fertilityTreatment.trim()) errors.fertilityTreatment = "Fertility Treatment is required";
+        if (data.fertilityTreatment === 'yes' && !data.fertilityTreatmentContent?.trim()) errors.fertilityTreatmentContent = "Fertility Treatment Content is required";
+        if (!data.surgeries.trim()) errors.surgeries = "Surgeries is required";
+        if (data.surgeries === 'yes' && !data.surgeriesContent?.trim()) errors.surgeriesContent = "Surgeries Content is required";
+
+        return errors;
+    }
+    const handleSubmitData = (e: React.FormEvent) => {
+        e.preventDefault();
+        const errors = validateForm(formData);
+        setFormError(errors);
+
+        if (Object.keys(errors).length === 0) {
+            setModalFormFertilityData?.((prev: any) => ({ ...prev, partner: formData }));
+            setFormError(initialFormError);
+            setShowFertilityAssessment?.(false);
+            toast.success('Fertility assessment saved', {
+                icon: <BsInfoCircle size={22} color="white" />,
+            });
+        }
+    };
+    return (
+        <>
+            <form onSubmit={handleSubmitData}>
+                <Row className='g-md-3 g-2'>
+                    <Col md={12}>
+                        <RadioButtonGroup
+                            label="Have you ever had a semen analysis?"
+                            name="semenAnalysis"
+                            value={formData.semenAnalysis}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.semenAnalysis}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
+
+                        {formData.semenAnalysis === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.semenAnalysisContent}
+                                name='semenAnalysisContent'
+                                onChange={handleChange}
+                                error={formError.semenAnalysisContent}
+                                placeholder="If yes, provide details if available"
+                                className={`mt-2`}
+                            >
+
+                            </InputFieldGroup>
+                        )}
+
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Have you experienced any fertility issues?"
+                            name="fertilityIssues"
+                            value={formData.fertilityIssues}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.fertilityIssues}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
+
+                        {formData.fertilityIssues === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.fertilityIssuesContent}
+                                name='fertilityIssuesContent'
+                                onChange={handleChange}
+                                error={formError.fertilityIssuesContent}
+
+                                placeholder="If yes, provide details if available"
+
+                                className={`mt-2`}
+                            >
+
+                            </InputFieldGroup>
+                        )}
+
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Have you previously undergone fertility treatments?"
+                            name="fertilityTreatment"
+                            value={formData.fertilityTreatment}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.fertilityTreatment}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
+
+                        {formData.fertilityTreatment === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.fertilityTreatmentContent}
+                                name='fertilityTreatmentContent'
+                                onChange={handleChange}
+                                error={formError.fertilityTreatmentContent}
+
+                                placeholder="If yes, provide details if available"
+
+                                className={`mt-2`}
+                            >
+                            </InputFieldGroup>
+                        )}
+
+                    </Col>
+                    <Col md={12} >
+                        <RadioButtonGroup
+                            label="Any history of surgeries?"
+                            name="surgeries"
+                            value={formData.surgeries}
+                            onChange={(e) => handleChange(e)}
+                            required={true}
+                            error={formError.surgeries}
+                            options={[
+                                { label: "Yes", value: "yes" },
+                                { label: "No", value: "no" },
+                            ]}
+                        />
+
+                        {formData.surgeries === 'yes' && (
+                            <InputFieldGroup
+                                type="text"
+                                value={formData.surgeriesContent}
+                                name='surgeriesContent'
+                                onChange={handleChange}
+                                error={formError.surgeriesContent}
+
+                                placeholder="If yes, provide details if available"
+
+                                className={`mt-2`}
+                            />
+                        )}
+                    </Col>
+                    <div className='d-flex gap-3 mt-3'>
+                        <Button className="w-100" variant="outline" type="button" onClick={() => {
+                            setShowFertilityAssessment?.(false);
+                        }}>
+                            Cancel
+                        </Button>
+                        <Button className="w-100" variant="default" type="submit">
+                            Save
+                        </Button>
+                    </div>
+
+                </Row>
+            </form>
+        </>
+    )
+}
+
+export function TreatmentPlanEditForm() {
+
+    const initialFormData: TreatmentPlanEditType = {
+        selectpatient: "partner",
+        treatment: "",
+        duration: "",
+    };
+
+    type FormError = Partial<Record<keyof TreatmentPlanEditType, string>>;
+    const initialFormError: FormError = {};
+
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [formData, setFormData] = useState<TreatmentPlanEditType>(initialFormData);
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    return (
+        <>
+            <form>
+                <Row className="g-3">
+                    <Col md={12}>
+                        <RadioButtonGroup
+                            label="select"
+                            name="selectpatient"
+                            value="partner"
+                            onChange={(e) => handleChange(e)}
+                            required
+                            options={[
+                                { label: "Partner", value: "partner" },
+                                { label: "Donor", value: "donor" },
+                                { label: "Individual", value: "individual" },
+                            ]}
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <InputSelect
+                            label="Select Treatment"
+                            name="treatment"
+                            value={formData.treatment}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            placeholder="Select Treatment"
+                            error={formError.treatment}
+                            options={[
+                                { id: "1", value: "Treatment 1", label: "Treatment 1" },
+                                { id: "2", value: "Treatment 2", label: "Treatment 2" },
+                                { id: "3", value: "Treatment 3", label: "Treatment 3" },
+                            ]}
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <InputSelect
+                            label="Select Duration "
+                            name="duration"
+                            value={formData.duration}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={formError.duration}
+                            placeholder="Select Duration"
+                            options={[
+                                { id: "1", value: "1", label: "Duration 1" },
+                                { id: "2", value: "2", label: "Duration 2" },
+                                { id: "3", value: "3", label: "Duration 3" },
+                            ]}
+                        />
+                    </Col>
+                    <Col md={12}>
+
+                        {formData.treatment &&
+                            <Row className="g-2">
+                                {TempTreatmentSteps.map((item) => (
+                                    <Col md={6} key={item.id}>
+                                        <div className="treatment-steps-box d-flex gap-2 ps-4">
+                                            <span className="treatment-steps-box-item ">{item.id}.</span>
+                                            <p className="treatment-steps-box-item m-0">{item.step}</p>
+                                        </div>
+                                    </Col>
+                                ))}
+                            </Row>
+                        }
+                    </Col>
+                    <div className="d-flex gap-3 mt-3">
+                        <Button variant="outline" onClick={() => { }} className="w-100">
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                    <path d="M19.1249 8.00001C19.1249 8.29838 19.0064 8.58452 18.7954 8.7955C18.5844 9.00648 18.2983 9.12501 17.9999 9.12501H4.21866L9.04866 13.9541C9.26 14.1654 9.37874 14.4521 9.37874 14.7509C9.37874 15.0498 9.26 15.3365 9.04866 15.5478C8.83732 15.7592 8.55067 15.8779 8.25179 15.8779C7.9529 15.8779 7.66625 15.7592 7.45491 15.5478L0.704911 8.79782C0.600031 8.6933 0.516814 8.56911 0.460033 8.43237C0.403252 8.29562 0.374023 8.14901 0.374023 8.00094C0.374023 7.85288 0.403252 7.70627 0.460033 7.56952C0.516814 7.43278 0.600031 7.30859 0.704911 7.20407L7.45491 0.454069C7.55956 0.349422 7.68379 0.266411 7.82052 0.209777C7.95725 0.153142 8.10379 0.123993 8.25179 0.123993C8.39978 0.123993 8.54632 0.153142 8.68305 0.209777C8.81978 0.266411 8.94401 0.349422 9.04866 0.454069C9.15331 0.558716 9.23632 0.68295 9.29295 0.819679C9.34959 0.956407 9.37874 1.10295 9.37874 1.25094C9.37874 1.39894 9.34959 1.54548 9.29295 1.68221C9.23632 1.81894 9.15331 1.94317 9.04866 2.04782L4.21866 6.87501H17.9999C18.2983 6.87501 18.5844 6.99353 18.7954 7.20451C19.0064 7.41549 19.1249 7.70164 19.1249 8.00001Z" fill="#2B4360" />
+                                </svg>
+                                Previous
+                            </div>
+                        </Button>
+
+                         <Button variant="default" type="submit" className="w-100">
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+
+                                Next
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                    <path d="M19.2959 8.79592L12.5459 15.5459C12.3346 15.7573 12.0479 15.876 11.7491 15.876C11.4502 15.876 11.1635 15.7573 10.9522 15.5459C10.7408 15.3346 10.6221 15.0479 10.6221 14.749C10.6221 14.4502 10.7408 14.1635 10.9522 13.9522L15.7812 9.12498H2C1.70163 9.12498 1.41548 9.00645 1.2045 8.79548C0.993526 8.5845 0.875 8.29835 0.875 7.99998C0.875 7.70161 0.993526 7.41546 1.2045 7.20449C1.41548 6.99351 1.70163 6.87498 2 6.87498H15.7812L10.9541 2.04498C10.7427 1.83364 10.624 1.54699 10.624 1.24811C10.624 0.94922 10.7427 0.662575 10.9541 0.451231C11.1654 0.239887 11.4521 0.121155 11.7509 0.121155C12.0498 0.121155 12.3365 0.239887 12.5478 0.451231L19.2978 7.20123C19.4027 7.30589 19.4859 7.43024 19.5426 7.56714C19.5993 7.70403 19.6284 7.85079 19.6282 7.99896C19.6281 8.14714 19.5986 8.29383 19.5416 8.43059C19.4846 8.56736 19.4011 8.69151 19.2959 8.79592Z" fill="white" />
+                                </svg>
+                            </div>
+                        </Button>
+
+                    </div>
+                </Row>
+            </form>
+        </>
     )
 }
