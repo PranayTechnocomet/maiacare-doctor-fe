@@ -39,8 +39,6 @@
     color: inherit !important;
 }
 
-
-
 .medication-prescription-accordion-hr-row {
     border-top: 1px solid var(--color-icon-border);
 }
@@ -717,7 +715,7 @@
 .timeColumn-days-colum {
     width: 120px;
     background-color: #fafafa;
-    fex-shrink: 0;
+    flex-shrink: 0;
 }
 
 .dateCircle-days-colum {

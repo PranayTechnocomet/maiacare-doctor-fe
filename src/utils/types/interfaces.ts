@@ -178,6 +178,11 @@ export interface TreatmentForm {
   duration: string;
 }
 
+export interface TreatmentPlanEditType {
+  selectpatient: string;
+  treatment: string;
+  duration: string;
+}
 
 export interface MedicationPrescriptionType {
   id: string;
@@ -237,8 +242,8 @@ export interface FertilityAssessmentFormType {
 }
 
 export interface TreatmentFertilityAssessmentFormType {
-    Patient: FertilityAssessmentFormType;
-    Partner: any;
+    patient: FertilityAssessmentFormType;
+    partner: FertilityAssessmentHistory;
 }
 
 export interface PatientJourneyItem {

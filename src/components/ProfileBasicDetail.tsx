@@ -472,7 +472,7 @@ const ProfileBasicDetail = () => {
                                             <Col sm={6}>
                                                 <div className="d-flex flex-column gap-1">
                                                     <span className="contact-details-emergency">
-                                                        Do you experience menstrual issues?  *
+                                                        Do you experience menstrual issues? 
                                                     </span>
                                                     <span className="accordion-title-detail">
                                                         {modalFormFertilityData.menstrualIssues}
