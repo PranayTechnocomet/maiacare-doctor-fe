@@ -6,7 +6,7 @@ import Appointments from "../assets/images/Appointments.png";
 import ActivePatients from "../assets/images/Active Patients.png";
 import NewPatients from "../assets/images/New Patients.png";
 import NoShowRate from "../assets/images/No Show Rate.png";
-import '../style/dashboard.css'
+import '../style/dashboard.css';
 
 import {
   Chart as ChartJS,
