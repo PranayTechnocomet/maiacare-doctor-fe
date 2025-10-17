@@ -4,7 +4,7 @@ import { Accordion, Col, Row } from "react-bootstrap";
 import { InputSelect, InputSelectMultiSelect } from "../ui/InputSelect";
 import { ChangeEvent, useState } from "react";
 import Button from "../ui/Button";
-import { MedicationTests } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, MedicationTests } from "@/utils/types/interfaces";
 import { InputFieldGroup } from "../ui/InputField";
 
 
@@ -33,14 +33,15 @@ export function TestsForm({
     setStep,
     setStepper,
     setMedicationAndTestsModel,
+    editTreatmentData,
 }: {
     setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
     setStepper: React.Dispatch<React.SetStateAction<number | undefined>>;
-    setMedicationAndTestsModel: React.Dispatch<React.SetStateAction<boolean>>;
+    setMedicationAndTestsModel?: React.Dispatch<React.SetStateAction<boolean>>;
+    editTreatmentData?: EditTreatmentPlanType;
 }) {
-
     const initialFormData: MedicationTests = {
-        tests: []
+        tests: editTreatmentData?.tests || [],
     };
 
     type FormError = Partial<Record<keyof MedicationTests, string>>;
@@ -254,7 +255,7 @@ export function TestsForm({
                     </Col>
 
                     <div className="d-flex gap-3">
-                        <Button variant="outline" onClick={() => setMedicationAndTestsModel(false)} className="w-100">
+                        <Button variant="outline" onClick={() => setMedicationAndTestsModel?.(false)} className="w-100">
                             Cancel
                         </Button>
                         <Button variant="default" type="submit" className="w-100">

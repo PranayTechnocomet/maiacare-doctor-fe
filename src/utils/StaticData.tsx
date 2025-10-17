@@ -560,3 +560,50 @@ export const medicationPrescriptionData: MedicationPrescriptionType[] = [
     description: "This is description",
   },
 ];
+
+export const EditTreatmentStaticData = {
+  treatmentplan: {
+    selectpatient: "partner",
+    treatment: "Embryo Transfer",
+    duration: "6 Months",
+  },
+  medicalPrescription: [
+    {
+      id: "1",
+      medicineName: "Progesterone",
+      type: "Tablet",
+      typeQuantity: "200 mg",
+      duration: "14",
+      quantity: 1,
+      timeslot: ["morning"],
+      meal: "After",
+      intake: "test",
+      description: "test description",
+    },
+    {
+      id: "2",
+      medicineName: "Follistim",
+      type: "Capsule",
+      typeQuantity: "50 mg",
+      duration: "14",
+      quantity: 1,
+      timeslot: ["morning"],
+      meal: "After",
+      intake: "test2",
+      description: "test description2",
+    }
+  ],
+  tests: [
+    { id: "1", value: "Blood Test", label: "Blood Test" },
+    { id: "2", value: "Sonography", label: "Sonography" },
+  ],
+  followUpAction: {
+    nextStep: "1 Ovarian Stimulation",
+    appointmentDate: "2025-10-16",
+    appointmentTime: "15:50",
+    forTime: "30minutes",
+    instructionsForPatient: "1.Report any abdominal pain, spotting, or unusual symptoms immediately",
+  }
+
+}
+

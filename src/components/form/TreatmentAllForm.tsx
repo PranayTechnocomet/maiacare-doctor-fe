@@ -1,6 +1,6 @@
 "use client"
 
-import { FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
 import { Accordion, Col, Dropdown, Form, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
@@ -782,12 +782,22 @@ export function TreatmentFertilityAssessmentPartner({
     )
 }
 
-export function TreatmentPlanEditForm() {
+export function TreatmentPlanEditForm({
+    setStep,
+    setStepper,
+    editTreatmentData,
+    setEditTreatmentData,
+}: {
+    setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setStepper: React.Dispatch<React.SetStateAction<number | undefined>>;
+    editTreatmentData?: EditTreatmentPlanType;
+    setEditTreatmentData?: React.Dispatch<React.SetStateAction<EditTreatmentPlanType>>;
+}) {
 
     const initialFormData: TreatmentPlanEditType = {
-        selectpatient: "partner",
-        treatment: "",
-        duration: "",
+        selectpatient: editTreatmentData?.treatmentplan?.selectpatient || "partner",
+        treatment: editTreatmentData?.treatmentplan?.treatment || "",
+        duration: editTreatmentData?.treatmentplan?.duration || "",
     };
 
     type FormError = Partial<Record<keyof TreatmentPlanEditType, string>>;
@@ -804,15 +814,46 @@ export function TreatmentPlanEditForm() {
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
 
+    const validateForm = (data: TreatmentPlanEditType): FormError => {
+        const errors: FormError = {};
+
+        if (!data.treatment) {
+            errors.treatment = "Treatment is required";
+        }
+        if (!data.duration) {
+            errors.duration = "Duration is required";
+        }
+        return errors;
+    };
+
+    const handelNext = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors = validateForm(formData);
+        setFormError(errors);
+
+        if (Object.keys(errors).length === 0) {
+
+            // setEditTreatmentData?.((prev) => ({
+            //     ...prev,
+            //     treatmentplan: formData,
+            // })) // setEditTreatmentData
+
+            setStep((prev: any) => prev + 1);
+            setStepper((prev: any) => prev + 1);
+            setFormError(initialFormError);
+        }
+    };
+
     return (
         <>
-            <form>
+            <form onSubmit={handelNext}>
                 <Row className="g-3">
                     <Col md={12}>
                         <RadioButtonGroup
                             label="select"
                             name="selectpatient"
-                            value="partner"
+                            value={formData.selectpatient}
                             onChange={(e) => handleChange(e)}
                             required
                             options={[
@@ -836,7 +877,7 @@ export function TreatmentPlanEditForm() {
                             placeholder="Select Treatment"
                             error={formError.treatment}
                             options={[
-                                { id: "1", value: "Treatment 1", label: "Treatment 1" },
+                                { id: "1", value: "Embryo Transfer", label: "Embryo Transfer" },
                                 { id: "2", value: "Treatment 2", label: "Treatment 2" },
                                 { id: "3", value: "Treatment 3", label: "Treatment 3" },
                             ]}
@@ -856,9 +897,9 @@ export function TreatmentPlanEditForm() {
                             error={formError.duration}
                             placeholder="Select Duration"
                             options={[
-                                { id: "1", value: "1", label: "Duration 1" },
-                                { id: "2", value: "2", label: "Duration 2" },
-                                { id: "3", value: "3", label: "Duration 3" },
+                                { id: "1", value: "1 Months", label: "1 Months" },
+                                { id: "2", value: "3 Months", label: "3 Months" },
+                                { id: "3", value: "6 Months", label: "6 Months" },
                             ]}
                         />
                     </Col>
@@ -887,7 +928,7 @@ export function TreatmentPlanEditForm() {
                             </div>
                         </Button>
 
-                         <Button variant="default" type="submit" className="w-100">
+                        <Button variant="default" type="submit" className="w-100">
                             <div className="d-flex justify-content-center align-items-center gap-2">
 
                                 Next

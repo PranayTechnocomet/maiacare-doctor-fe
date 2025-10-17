@@ -389,8 +389,6 @@ export default function Page() {
           className="border rounded-md p-2 outline-none"
         />
 
-
-
         <InputFieldGroup
           label="Name"
           name="name"
@@ -449,9 +447,6 @@ export default function Page() {
           max={today}
         // iconColor = "red"
         />
-
-
-
 
         <RadioButtonGroup
           label="Gender"
