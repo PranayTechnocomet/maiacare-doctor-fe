@@ -27,7 +27,7 @@ export const PhoneNumberInput = ({
   ...rest
 }: PhoneNumberInputProps) => {
   return (
-    <div className={`maiacare-input-field-container shadow-none  ${className}`}>
+    <div className={`maiacare-input-field-container ${className}`}>
       <InputFieldLabel label={label} required={required} />
 
       <PhoneInput

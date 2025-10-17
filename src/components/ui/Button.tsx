@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, MouseEvent } from 'react'
+import React from 'react'
 import { Button as BootstrapButton } from 'react-bootstrap'
 export default function Button({
     children,
@@ -15,7 +15,7 @@ export default function Button({
     className?: string;
     variant?: string;
     disabled?: boolean;
-    onClick?: (e: any) => void;
+    onClick?: () => void;
     type?: "button" | "submit" | "reset";
     [key: string]: any;
     contentSize?: "small" | "medium" | "large";

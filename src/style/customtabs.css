@@ -19,15 +19,15 @@
   
   /* Active Tab */
   .custom-tabs .nav-link.active {
-    color: #1E2A37; /* Dark text */
+    color: #2B4360 !important; /* Dark text */
     font-weight: 600;
-    border-bottom: 2px solid #284b73; /* Blue underline */
+    border-bottom: 2px solid #284b73 !important; /* Blue underline */
     background-color: transparent;
   }
   
   /* Hover State */
   .custom-tabs .nav-link:hover {
-    color: #1E2A37;
+    color: #2B4360 !important;
   }
   
   /* Disabled Tabs */
