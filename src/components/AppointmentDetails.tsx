@@ -1,7 +1,7 @@
 "use client"
 
 import ProfileImage from '@/assets/images/Profile_Image.png'
-import { ProfileCard } from './ui/Custom/ProfileCard';
+import { ProfileCard } from './ui/custom/ProfileCard';
 import '@/style/patientProfile.css'
 import { Accordion, Col, Row } from 'react-bootstrap';
 import ContentContainer from './ui/ContentContainer';

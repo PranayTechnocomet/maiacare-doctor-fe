@@ -7,7 +7,7 @@ import { Col, ProgressBar, Row } from "react-bootstrap";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
 import { RescheduleAppointmentForm } from "@/utils/types/interfaces";
-import AppointmentProfile from "../ui/Custom/AppointmentProfile";
+import AppointmentProfile from "../ui/custom/AppointmentProfile";
 import { tempAppointmentProfileData } from "@/utils/StaticData";
 import Modal from "../ui/Modal";
 import Image from "next/image";

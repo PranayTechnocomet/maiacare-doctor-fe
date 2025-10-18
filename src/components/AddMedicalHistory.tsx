@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Head from 'next/head';
 import ProfileImage from '../assets/images/Profile_Image.png'
-import { ProfileCard } from './ui/Custom/ProfileCard';
+import { ProfileCard } from './ui/custom/ProfileCard';
 import ContentContainer from './ui/ContentContainer';
 import CustomTabs from './ui/CustomTabs';
 import ProfileBasicDetail from './ProfileBasicDetail';

@@ -11,7 +11,7 @@ import { EditTreatmentPlanType, MedicationPrescriptionType, ProgressUpdatesType,
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
 import { TreatmentSuccessModal } from "./form/TreatmentAllForm";
 import ProfileImage from '@/assets/images/Profile_Image.png'
-import { ProfileCard } from "./ui/Custom/ProfileCard";
+import { ProfileCard } from "./ui/custom/ProfileCard";
 import { Accordion, Col, Dropdown, Row } from "react-bootstrap";
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { InputFieldGroup } from "./ui/InputField";
