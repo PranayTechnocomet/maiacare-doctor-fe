@@ -9,7 +9,7 @@ import Modal from './ui/Modal';
 import Image from 'next/image';
 import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
-import '../style/appointment.css';
+import '../style/Appointment.css';
 import { BsClock } from 'react-icons/bs';
 import { doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
