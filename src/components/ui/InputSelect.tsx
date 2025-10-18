@@ -2,8 +2,30 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
+import Select from 'react-dropdown-select';
 
-export default function InputSelect({
+type OptionType = { value: string; label: string };
+
+interface InputSelectMultiSelectProps {
+  values: OptionType[];
+  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
+  options: { id: string, value: string, label: string }[];
+  placeholder?: string;
+  addPlaceholder?: string;
+  label?: string;
+  name?: string;
+  required?: boolean;
+  dropdownHandle?: boolean;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  className?: string;
+  selectedOptionColor?: string;
+  selectedOptionBorderColor?: string;
+  [key: string]: any;
+}
+
+export function InputSelect({
     label="",
     name,
     defaultValue,
@@ -59,27 +81,6 @@ export default function InputSelect({
       {helperText && <InputFieldHelperText helperText={helperText} />}
     </div>
   )
-}
-
-type OptionType = { value: string; label: string };
-
-interface InputSelectMultiSelectProps {
-  values: OptionType[];
-  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
-  options: { id: string, value: string, label: string }[];
-  placeholder?: string;
-  addPlaceholder?: string;
-  label?: string;
-  name?: string;
-  required?: boolean;
-  dropdownHandle?: boolean;
-  disabled?: boolean;
-  error?: string;
-  helperText?: string;
-  className?: string;
-  selectedOptionColor?: string;
-  selectedOptionBorderColor?: string;
-  [key: string]: any;
 }
 
 
