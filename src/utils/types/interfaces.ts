@@ -191,6 +191,13 @@ export interface EditTreatmentPlanType {
   followUpAction: FollowUpActionFromType
 }
 
+export interface ProgressUpdatesType {
+  patient: FertilityAssessmentFormType;
+  partner: FertilityAssessmentHistory;
+  medicalPrescription: MedicationPrescriptionType[];
+  
+}
+
 export interface MedicationPrescriptionType {
   id: string;
   medicineName: string;

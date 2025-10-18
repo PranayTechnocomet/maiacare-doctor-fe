@@ -4,6 +4,7 @@ import Image from "next/image"
 
 function AppointmentProfile({ tempProfileData }: any) {
 
+    
     return (
         <>
             <div className="appointment-reschedule-profile-box">

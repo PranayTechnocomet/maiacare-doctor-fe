@@ -7,7 +7,7 @@ import { All, IVF } from "./TreatmentHeaderComponent";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
-import { EditTreatmentPlanType, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
 import { TreatmentSuccessModal } from "./form/TreatmentAllForm";
 import ProfileImage from '@/assets/images/Profile_Image.png'
@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { BsInfoCircle } from "react-icons/bs";
 import TreatmentFertilityAssessment from "./TreatmentFertilityAssessment";
 import TreatmentEditForm from "./TreatmentEditForm";
+import { ProgressUpdatesEditForm } from "./ProgressUpdatesEditForm";
 
 function Treatment() {
 
@@ -76,6 +77,56 @@ function Treatment() {
         }
     ];
 
+    const ProgressUpdatesStaticData = {
+        patient: {
+            ageAtFirstMenstruation: "",
+            cycleLength: "",
+            periodLength: "",
+            date: "",
+            isCycleRegular: "Regular",
+            menstrualIssues: "yes",
+            pregnancy: "yes",
+            timeduration: "",
+            ectopicpregnancy: "yes"
+        },
+        partner: {
+            semenAnalysis: "yes",
+            semenAnalysisContent: "",
+            fertilityIssues: "no",
+            fertilityIssuesContent: "",
+            fertilityTreatment: "no",
+            fertilityTreatmentContent: "",
+            surgeries: "no",
+            surgeriesContent: "",
+        },
+        medicalPrescription: medicationPrescriptionData,
+    }
+
+    const initialProgressUpdatesData = {
+        patient: {
+            ageAtFirstMenstruation: "",
+            cycleLength: "",
+            periodLength: "",
+            date: "",
+            isCycleRegular: "Regular",
+            menstrualIssues: "yes",
+            pregnancy: "yes",
+            timeduration: "",
+            ectopicpregnancy: "yes"
+        },
+        partner: {
+            semenAnalysis: "yes",
+            semenAnalysisContent: "",
+            fertilityIssues: "no",
+            fertilityIssuesContent: "",
+            fertilityTreatment: "no",
+            fertilityTreatmentContent: "",
+            surgeries: "no",
+            surgeriesContent: "",
+        },
+        medicalPrescription: [],
+    }
+
     const profileData = {
         name: "Rani Desai",
         image: ProfileImage.src,
@@ -95,6 +146,10 @@ function Treatment() {
     const [stepsTreatment, setStepsTreatment] = useState<number | undefined>(1);
     const [stepperTreatment, setStepperTreatment] = useState<number | undefined>(1);
     const totalTreatmentSteps = 4;
+
+    const [stepProgressUpdates, setStepProgressUpdates] = useState<number | undefined>(1);
+    const [stepperProgressUpdates, setStepperProgressUpdates] = useState<number | undefined>(1);
+    const totalProgressUpdatesSteps = 4;
 
     const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
     const [medicalPrescriptionDataShowHide, setMedicalPrescriptionDataShowHide] = useState<boolean>(false);
@@ -116,37 +171,16 @@ function Treatment() {
     const [isAddingStep, setIsAddingStep] = useState(false);
     const [newStepName, setNewStepName] = useState("");
     const [newStepError, setNewStepError] = useState("");
-    const [medicationPrescriptionwithProgress, setMedicationPrescriptionwithProgress] = useState<MedicationPrescriptionType[]>(medicationPrescriptionData);
 
     const [treatmentFertilityAssessmentModel, setTreatmentFertilityAssessmentModel] = useState<boolean>(false);
     const [editTreatmentModel, setEditTreatmentModel] = useState<boolean>(false);
+    const [editProgressUpdatesModel, setEditProgressUpdatesModel] = useState<boolean>(false);
 
-    const [editTreatmentData, setEditTreatmentData] = useState<EditTreatmentPlanType>(EditTreatmentStaticData)
     const [editMedicalPrescriptionDataShowHide, setEditMedicalPrescriptionDataShowHide] = useState<boolean>(false)
+    const [editTreatmentData, setEditTreatmentData] = useState<EditTreatmentPlanType>(EditTreatmentStaticData)
 
-    const [treatmentFertilityAssessmentData, setTreatmentFertilityAssessmentData] = useState<TreatmentFertilityAssessmentFormType>({
-        patient: {
-            ageAtFirstMenstruation: "",
-            cycleLength: "",
-            periodLength: "",
-            date: "",
-            isCycleRegular: "Regular",
-            menstrualIssues: "yes",
-            pregnancy: "yes",
-            timeduration: "",
-            ectopicpregnancy: "yes"
-        },
-        partner: {
-            semenAnalysis: "yes",
-            semenAnalysisContent: "",
-            fertilityIssues: "no",
-            fertilityIssuesContent: "",
-            fertilityTreatment: "no",
-            fertilityTreatmentContent: "",
-            surgeries: "no",
-            surgeriesContent: "",
-        }
-    });
+    const [progressUpdatesData, setProgressUpdatesData] = useState<ProgressUpdatesType>(ProgressUpdatesStaticData)
+    const [editProgressUpdatesData, setEditProgressUpdatesData] = useState<ProgressUpdatesType>(initialProgressUpdatesData)
 
     const isFertilityDataEmpty = (data: TreatmentFertilityAssessmentFormType) => {
         const defaultValues = ["", "yes", "no", "Regular"];
@@ -194,8 +228,6 @@ function Treatment() {
             icon: <BsInfoCircle size={22} color="white" />,
         });
     };
-
-    // console.log("medicalPrescription" , editTreatmentData?.medicalPrescription);
 
     return (
         <>
@@ -472,7 +504,7 @@ function Treatment() {
                                             </div>
                                             <p className="patient-journey-box-subtitle m-0">09 Jul 2024 , 12:11 PM</p>
                                         </div>
-                                        <Button variant="outline" contentSize="small" onClick={() => { }}>
+                                        <Button variant="outline" contentSize="small" onClick={() => { setEditProgressUpdatesModel(true); setEditProgressUpdatesData(progressUpdatesData) }}>
                                             <div className="d-flex justify-content-center align-items-center gap-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                                                     <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
@@ -480,9 +512,28 @@ function Treatment() {
                                                 Edit
                                             </div>
                                         </Button>
+
+                                        <Modal
+                                            show={editProgressUpdatesModel}
+                                            onHide={() => { setEditProgressUpdatesModel(false); }}
+                                            header="Fertility Assessment"
+                                            closeButton={true}
+                                        >
+                                            <ProgressUpdatesEditForm
+                                                setStep={setStepProgressUpdates}
+                                                setStepper={setStepperProgressUpdates}
+                                                step={stepProgressUpdates}
+                                                stepper={stepperProgressUpdates}
+                                                totalSteps={totalProgressUpdatesSteps}
+
+                                                editProgressUpdatesData={editProgressUpdatesData}
+                                                setModalFormFertilityData={setProgressUpdatesData}
+                                            />
+                                        </Modal>
+
                                     </div>
 
-                                    {isFertilityDataEmpty(treatmentFertilityAssessmentData) ? (
+                                    {isFertilityDataEmpty(progressUpdatesData) ? (
                                         <div className="progressUpdates-border-box text-center mt-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="64" viewBox="0 0 65 64" fill="none">
                                                 <path d="M59.748 31.7903C58.778 30.3103 58.768 28.3903 59.728 26.9003L59.758 26.8603C61.918 23.5103 60.438 19.0203 56.708 17.6103H56.678C55.008 16.9703 53.878 15.4103 53.788 13.6303V13.5803C53.588 9.58029 49.738 6.80029 45.878 7.86029C44.168 8.33029 42.338 7.74029 41.218 6.37029L41.168 6.31029C38.658 3.22029 33.938 3.23029 31.448 6.33029L31.408 6.39029C30.298 7.77029 28.478 8.36029 26.768 7.90029L26.708 7.88029C22.848 6.84029 19.018 9.64029 18.838 13.6303V13.6603C18.758 15.4403 17.628 17.0003 15.958 17.6403H15.928C12.198 19.0803 10.738 23.5903 12.928 26.9303C13.898 28.4103 13.908 30.3303 12.948 31.8203L12.918 31.8603C10.758 35.2103 12.238 39.7003 15.968 41.1103H15.998C17.668 41.7503 18.798 43.3103 18.888 45.0903V45.1403C19.088 49.1403 22.938 51.9203 26.798 50.8603C28.508 50.3903 30.338 50.9803 31.458 52.3503L31.508 52.4103C34.018 55.5003 38.738 55.4903 41.228 52.3903L41.268 52.3303C42.378 50.9503 44.198 50.3603 45.908 50.8203L45.968 50.8403C49.828 51.8803 53.658 49.0803 53.838 45.0903V45.0603C53.918 43.2803 55.048 41.7203 56.718 41.0803H56.748C60.478 39.6403 61.938 35.1303 59.748 31.7903Z" fill="#B0B4C1" />
@@ -510,10 +561,9 @@ function Treatment() {
                                             >
                                                 <TreatmentFertilityAssessment
                                                     setTreatmentFertilityAssessmentModel={setTreatmentFertilityAssessmentModel}
-                                                    setTreatmentFertilityAssessmentData={setTreatmentFertilityAssessmentData}
+                                                    setTreatmentFertilityAssessmentData={setProgressUpdatesData}
 
                                                 />
-
                                             </Modal>
                                         </div>
                                     ) : (
@@ -548,7 +598,7 @@ function Treatment() {
                                                                             Age at first menstruation
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.ageAtFirstMenstruation}
+                                                                            {progressUpdatesData.patient.ageAtFirstMenstruation}
                                                                         </span>
                                                                     </div>
 
@@ -559,7 +609,7 @@ function Treatment() {
                                                                             Cycle Length
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.cycleLength}
+                                                                            {progressUpdatesData.patient.cycleLength}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -570,7 +620,7 @@ function Treatment() {
                                                                             Period Length
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.periodLength}
+                                                                            {progressUpdatesData.patient.periodLength}
                                                                         </span>
                                                                     </div>
 
@@ -581,7 +631,7 @@ function Treatment() {
                                                                             Last Period Date
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.date}
+                                                                            {progressUpdatesData.patient.date}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -591,7 +641,7 @@ function Treatment() {
                                                                             Is your cycle regular?
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.isCycleRegular}
+                                                                            {progressUpdatesData.patient.isCycleRegular}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -601,7 +651,7 @@ function Treatment() {
                                                                             Do you experience menstrual issues?
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.menstrualIssues}
+                                                                            {progressUpdatesData.patient.menstrualIssues}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -638,7 +688,7 @@ function Treatment() {
                                                                             Have you been pregnant before?
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.pregnancy}
+                                                                            {progressUpdatesData.patient.pregnancy}
                                                                         </span>
                                                                     </div>
 
@@ -649,7 +699,7 @@ function Treatment() {
                                                                             How long have you been trying to conceive?
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.timeduration}
+                                                                            {progressUpdatesData.patient.timeduration}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -659,7 +709,7 @@ function Treatment() {
                                                                             Any history of miscarriage or ectopic pregnancy?
                                                                         </span>
                                                                         <span className="accordion-title-detail">
-                                                                            {treatmentFertilityAssessmentData.patient.ectopicpregnancy}
+                                                                            {progressUpdatesData.patient.ectopicpregnancy}
                                                                         </span>
                                                                     </div>
                                                                 </Col>
@@ -678,10 +728,10 @@ function Treatment() {
                                                             <div className="mb-3">
                                                                 <h6 className="mb-1 contact-details-emergency">Semen Analysis</h6>
                                                                 <p className="mb-2 settings-accordion-subtitle">
-                                                                    {treatmentFertilityAssessmentData.partner.semenAnalysis
+                                                                    {progressUpdatesData.partner.semenAnalysis
                                                                         === 'yes'
-                                                                        ? treatmentFertilityAssessmentData.partner.semenAnalysisContent
-                                                                            ? `Yes, ${treatmentFertilityAssessmentData.partner.semenAnalysisContent}`
+                                                                        ? progressUpdatesData.partner.semenAnalysisContent
+                                                                            ? `Yes, ${progressUpdatesData.partner.semenAnalysisContent}`
                                                                             : 'Yes'
                                                                         : 'No'}
                                                                 </p>
@@ -692,10 +742,10 @@ function Treatment() {
                                                             <div className="mb-3">
                                                                 <h6 className="mb-1 contact-details-emergency">Fertility Issues</h6>
                                                                 <p className="mb-2 settings-accordion-subtitle">
-                                                                    {treatmentFertilityAssessmentData.partner.fertilityIssues
+                                                                    {progressUpdatesData.partner.fertilityIssues
                                                                         === 'yes'
-                                                                        ? treatmentFertilityAssessmentData.partner.fertilityIssuesContent
-                                                                            ? `Yes, ${treatmentFertilityAssessmentData.partner.fertilityIssuesContent}`
+                                                                        ? progressUpdatesData.partner.fertilityIssuesContent
+                                                                            ? `Yes, ${progressUpdatesData.partner.fertilityIssuesContent}`
                                                                             : 'Yes'
                                                                         : 'No'}
                                                                 </p>
@@ -707,10 +757,10 @@ function Treatment() {
                                                                 <h6 className="mb-1 contact-details-emergency">Surgeries</h6>
                                                                 <p className="mb-0 settings-accordion-subtitle">
 
-                                                                    {treatmentFertilityAssessmentData.partner.surgeries
+                                                                    {progressUpdatesData.partner.surgeries
                                                                         === 'yes'
-                                                                        ? treatmentFertilityAssessmentData.partner.surgeriesContent
-                                                                            ? `Yes, ${treatmentFertilityAssessmentData.partner.surgeriesContent}`
+                                                                        ? progressUpdatesData.partner.surgeriesContent
+                                                                            ? `Yes, ${progressUpdatesData.partner.surgeriesContent}`
                                                                             : 'Yes'
                                                                         : 'No'}
                                                                 </p>
@@ -723,10 +773,10 @@ function Treatment() {
                                                                 <h6 className="mb-1 contact-details-emergency">Fertility Treatment</h6>
                                                                 <p className="mb-0 settings-accordion-subtitle">
 
-                                                                    {treatmentFertilityAssessmentData.partner.fertilityTreatment
+                                                                    {progressUpdatesData.partner.fertilityTreatment
                                                                         === 'yes'
-                                                                        ? treatmentFertilityAssessmentData.partner.fertilityTreatmentContent
-                                                                            ? `Yes, ${treatmentFertilityAssessmentData.partner.fertilityTreatmentContent}`
+                                                                        ? progressUpdatesData.partner.fertilityTreatmentContent
+                                                                            ? `Yes, ${progressUpdatesData.partner.fertilityTreatmentContent}`
                                                                             : 'Yes'
                                                                         : 'No'}
                                                                 </p>
@@ -736,7 +786,6 @@ function Treatment() {
                                                     </Row>
                                                 </div>
                                             </Col>
-
                                         </Row>
                                     )}
 
@@ -744,7 +793,7 @@ function Treatment() {
                                         <h6 className="patient-treatment-box-subtitle my-2">Medication</h6>
                                         <Accordion >
                                             <Row className="g-3">
-                                                {medicationPrescriptionwithProgress?.map((item, index) => {
+                                                {progressUpdatesData?.medicalPrescription?.map((item, index) => {
 
                                                     return (
                                                         <Col md={6} key={item.id}>
