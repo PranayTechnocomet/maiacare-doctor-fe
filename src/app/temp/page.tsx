@@ -515,7 +515,7 @@ export default function Page() {
             label="Do you have any medical condition?"
             name="medicalCondition"
             values={formData.medicalCondition}
-            onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
+            onChange={(values:any) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
             options={[
               { id: "1", value: "Non-smoker", label: "Non-smoker" },
               { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },

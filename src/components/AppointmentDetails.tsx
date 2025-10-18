@@ -1,7 +1,7 @@
 "use client"
 
 import ProfileImage from '@/assets/images/Profile_Image.png'
-import { ProfileCard } from './ui/Custom/ProfileCard';
+import { ProfileCard } from './ui/custom/ProfileCard';
 import '@/style/patientProfile.css'
 import { Accordion, Col, Row } from 'react-bootstrap';
 import ContentContainer from './ui/ContentContainer';
@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Modal from './ui/Modal';
 import TreatmentPlan from './TreatmentPlan';
-import '@/style/appointment.css'
+import '@/style/Appointment.css'
 import "@/style/settingsPassword.css";
 import { AppointmentPaymentDetails } from './form/AppointmentPaymentDetails';
 import { MedicationPrescriptionType, PaymentFormData } from '@/utils/types/interfaces';
