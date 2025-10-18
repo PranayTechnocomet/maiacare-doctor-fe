@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import {InputSelect} from "../ui/InputSelect"
 import Textarea from "../ui/Textarea";
 import Button from "../ui/Button";
-import AppointmentProfile from "../ui/Custom/AppointmentProfile";
+import AppointmentProfile from "../ui/custom/AppointmentProfile";
 import { tempAppointmentProfileData } from "@/utils/StaticData";
 import Modal from "../ui/Modal";
 import Image from "next/image";
