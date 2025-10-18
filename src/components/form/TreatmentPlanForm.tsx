@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
 import { TempTreatmentSteps } from "@/utils/StaticData";
 import Button from "../ui/Button";
-import { FollowUpActionFromType, MedicationPrescriptionType, TreatmentPlan } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, FollowUpActionFromType, MedicationPrescriptionType, TreatmentPlan } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
 import { InputFieldGroup } from "../ui/InputField";
 import { QuantityNumber, TimeSlotCheckBox } from "../TempUiComponent";
@@ -343,6 +343,8 @@ export function MedicationPrescriptionForm({
         }
     }
 
+    // console.log("test" , medicalPrescription);
+    
     return (
         <>
             <form onSubmit={handelNext}>
@@ -584,6 +586,7 @@ interface FollowUpActionFormProps {
     setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>;
     setTreatmentDetailsTempShow?: React.Dispatch<React.SetStateAction<any[]>>;
     setSuccessModal?: React.Dispatch<React.SetStateAction<boolean>>;
+    editTreatmentData?: EditTreatmentPlanType;
 }
 
 export function FollowUpActionForm({
@@ -593,15 +596,16 @@ export function FollowUpActionForm({
     stepper,
     setTreatmentPlanModel,
     setTreatmentDetailsTempShow,
-    setSuccessModal
+    setSuccessModal,
+    editTreatmentData
 }: FollowUpActionFormProps) {
 
     const initialFormData: FollowUpActionFromType = {
-        nextStep: "",
-        appointmentDate: "",
-        appointmentTime: "",
-        forTime: "",
-        instructionsForPatient: "",
+        nextStep: editTreatmentData?.followUpAction?.nextStep || "",
+        appointmentDate: editTreatmentData?.followUpAction?.appointmentDate || "",
+        appointmentTime: editTreatmentData?.followUpAction?.appointmentTime || "",
+        forTime: editTreatmentData?.followUpAction?.forTime || "",
+        instructionsForPatient: editTreatmentData?.followUpAction?.instructionsForPatient || "",
     };
     type FormError = Partial<Record<keyof FollowUpActionFromType, string>>;
 
@@ -620,6 +624,7 @@ export function FollowUpActionForm({
         }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
+    
 
     const validateForm = (data: FollowUpActionFromType): FormError => {
         const errors: FormError = {};
@@ -642,7 +647,7 @@ export function FollowUpActionForm({
         const errors = validateForm(formData);
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
-            console.log("Follow up action add succesfully");
+            
             setFormError(initialFormError);
             setTreatmentPlanModel(false);
             setTreatmentDetailsTempShow?.([formData]); // show static data state
@@ -651,6 +656,13 @@ export function FollowUpActionForm({
             toast.success('Treatment Plan added successfully', {
                 icon: <BsInfoCircle size={22} color="white" />,
             });
+
+            if(editTreatmentData?.followUpAction){   
+                setStep?.(1); // only when Treatment edit steps
+                setStepper?.(1);
+                setFormData(initialFormData);
+            }
+
         }
     };
 

@@ -389,8 +389,6 @@ export default function Page() {
           className="border rounded-md p-2 outline-none"
         />
 
-
-
         <InputFieldGroup
           label="Name"
           name="name"
@@ -449,9 +447,6 @@ export default function Page() {
           max={today}
         // iconColor = "red"
         />
-
-
-
 
         <RadioButtonGroup
           label="Gender"
@@ -520,7 +515,7 @@ export default function Page() {
             label="Do you have any medical condition?"
             name="medicalCondition"
             values={formData.medicalCondition}
-            onChange={(values) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
+            onChange={(values:any) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
             options={[
               { id: "1", value: "Non-smoker", label: "Non-smoker" },
               { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },

@@ -149,7 +149,7 @@ export interface EditFertilityAssessment {
 export type OptionType = { value: string; label: string };
 export interface SelectPatientType {
   id: string;
-  ProfilePhoto: StaticImageData; 
+  ProfilePhoto: StaticImageData;
   name: string;
 }
 
@@ -182,6 +182,13 @@ export interface TreatmentPlanEditType {
   selectpatient: string;
   treatment: string;
   duration: string;
+}
+
+export interface EditTreatmentPlanType {
+  treatmentplan: TreatmentPlanEditType,
+  medicalPrescription: MedicationPrescriptionType[],
+  tests: OptionType[],
+  followUpAction: FollowUpActionFromType
 }
 
 export interface MedicationPrescriptionType {
@@ -242,16 +249,16 @@ export interface FertilityAssessmentFormType {
 }
 
 export interface TreatmentFertilityAssessmentFormType {
-    patient: FertilityAssessmentFormType;
-    partner: FertilityAssessmentHistory;
+  patient: FertilityAssessmentFormType;
+  partner: FertilityAssessmentHistory;
 }
 
 export interface PatientJourneyItem {
-    id: string;
-    title: string;
-    date: string;
-    time: string;
-    status: 'Success' | "In Progress" | 'Pending' | 'Failed';
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  status: 'Success' | "In Progress" | 'Pending' | 'Failed';
 }
 
 

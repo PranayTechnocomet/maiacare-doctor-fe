@@ -7,7 +7,7 @@ import { All, IVF } from "./TreatmentHeaderComponent";
 import Button from "./ui/Button";
 import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
-import { MedicationPrescriptionType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
 import { TreatmentSuccessModal } from "./form/TreatmentAllForm";
 import ProfileImage from '@/assets/images/Profile_Image.png'
@@ -15,7 +15,7 @@ import { ProfileCard } from "./ui/Custom/ProfileCard";
 import { Accordion, Col, Dropdown, Row } from "react-bootstrap";
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { InputFieldGroup } from "./ui/InputField";
-import { IVFProgressData, medicationPrescriptionData } from "@/utils/StaticData";
+import { EditTreatmentStaticData, IVFProgressData, medicationPrescriptionData } from "@/utils/StaticData";
 import toast from "react-hot-toast";
 import { BsInfoCircle } from "react-icons/bs";
 import TreatmentFertilityAssessment from "./TreatmentFertilityAssessment";
@@ -87,13 +87,14 @@ function Treatment() {
         status: "Active" as const,
     };
 
+
     const [step, setStep] = useState<number | undefined>(1);
     const [stepper, setStepper] = useState<number | undefined>(1);
     const totalSteps = 3;
 
     const [stepsTreatment, setStepsTreatment] = useState<number | undefined>(1);
     const [stepperTreatment, setStepperTreatment] = useState<number | undefined>(1);
-    const totalTreatmentSteps = 3;
+    const totalTreatmentSteps = 4;
 
     const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
     const [medicalPrescriptionDataShowHide, setMedicalPrescriptionDataShowHide] = useState<boolean>(false);
@@ -111,6 +112,7 @@ function Treatment() {
         description: "",
     });
     const [showContent, setShowContent] = useState<boolean>(true); // for show content
+
     const [isAddingStep, setIsAddingStep] = useState(false);
     const [newStepName, setNewStepName] = useState("");
     const [newStepError, setNewStepError] = useState("");
@@ -118,6 +120,9 @@ function Treatment() {
 
     const [treatmentFertilityAssessmentModel, setTreatmentFertilityAssessmentModel] = useState<boolean>(false);
     const [editTreatmentModel, setEditTreatmentModel] = useState<boolean>(false);
+
+    const [editTreatmentData, setEditTreatmentData] = useState<EditTreatmentPlanType>(EditTreatmentStaticData)
+    const [editMedicalPrescriptionDataShowHide, setEditMedicalPrescriptionDataShowHide] = useState<boolean>(false)
 
     const [treatmentFertilityAssessmentData, setTreatmentFertilityAssessmentData] = useState<TreatmentFertilityAssessmentFormType>({
         patient: {
@@ -176,7 +181,6 @@ function Treatment() {
             setNewStepError("Step name is required");
             return;
         }
-
         const newStep = {
             id: ivfProgressData.length + 1,
             title: newStepName,
@@ -190,6 +194,8 @@ function Treatment() {
             icon: <BsInfoCircle size={22} color="white" />,
         });
     };
+
+    // console.log("medicalPrescription" , editTreatmentData?.medicalPrescription);
 
     return (
         <>
@@ -218,7 +224,6 @@ function Treatment() {
                                             className="bg-transparent border-0 p-1 no-caret"
                                         >
                                             <div className='patient-profile-dot'>
-
                                                 <HiOutlineDotsHorizontal />
                                             </div>
                                         </Dropdown.Toggle>
@@ -244,13 +249,57 @@ function Treatment() {
 
                                     <Modal
                                         show={editTreatmentModel}
-                                        onHide={() => { setEditTreatmentModel(false); }}
+                                        onHide={() => { setEditTreatmentModel(false); setEditTreatmentData(EditTreatmentStaticData); setStepsTreatment(1); setStepperTreatment(1); }}
                                         header="Fertility Assessment"
                                         closeButton={true}
                                     >
-                                        <TreatmentEditForm />
+                                        <TreatmentEditForm
+                                            setStep={setStepsTreatment}
+                                            step={stepsTreatment}
+                                            setStepper={setStepperTreatment}
+                                            stepper={stepperTreatment}
+                                            totalSteps={totalTreatmentSteps}
+
+                                            editTreatmentData={editTreatmentData}
+                                            setEditTreatmentData={setEditTreatmentData}
+                                            medicalPrescriptionDataShowHide={editMedicalPrescriptionDataShowHide}
+                                            setMedicalPrescriptionDataShowHide={setEditMedicalPrescriptionDataShowHide}
+
+                                            setEditForm={setEditForm}
+                                            setShowEditFormShowModel={setShowEditFormShowModel}
+                                            setTreatmentPlanModel={setEditTreatmentModel}
+                                        />
 
                                     </Modal>
+
+                                    {/* edit time show model for Medication & Tests */}
+                                    <Modal
+                                        show={showEditFormShowModel}
+                                        onHide={() => { setShowEditFormShowModel(false); setEditTreatmentModel(true); setMedicalPrescriptionDataShowHide(false); }}
+                                        header="Edit Medication Prescription"
+                                        closeButton={true}
+                                    >
+                                        <MedicationPrescriptionForm
+                                            setShowEditFormShowModel={setShowEditFormShowModel}
+                                            editForm={editForm}
+                                            setTreatmentPlanModel={setEditTreatmentModel}
+
+                                            setMedicalPrescription={(newPrescriptions) =>
+                                                setEditTreatmentData((prev) => ({
+                                                    ...prev,
+                                                    medicalPrescription:
+                                                        typeof newPrescriptions === "function"
+                                                            ? newPrescriptions(prev.medicalPrescription)
+                                                            : newPrescriptions,
+                                                }))
+                                            }
+                                            medicalPrescription={medicalPrescription}
+
+                                            setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                                            medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                                        />
+                                    </Modal>
+
                                 </div>
 
                                 {ivfProgressData.map((item, index) => {
