@@ -3,14 +3,14 @@
 import { useState } from "react";
 import CustomTabs from "./ui/CustomTabs";
 import { FertilityAssessmentForm } from "./form/FertilityAssessmentForm";
-import { TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
+import { ProgressUpdatesType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 import { TreatmentFertilityAssessmentPartner, TreatmentFertilityAssessmentPatient } from "./form/TreatmentAllForm";
 
 function TreatmentFertilityAssessment({
     setTreatmentFertilityAssessmentData,
     setTreatmentFertilityAssessmentModel
 }: {
-    setTreatmentFertilityAssessmentData: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+    setTreatmentFertilityAssessmentData: React.Dispatch<React.SetStateAction<ProgressUpdatesType>>;
     setTreatmentFertilityAssessmentModel: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 

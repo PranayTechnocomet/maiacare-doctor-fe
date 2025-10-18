@@ -1,6 +1,6 @@
 "use client"
 
-import { EditTreatmentPlanType, FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
+import { EditTreatmentPlanType, FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
 import { ChangeEvent, useState } from "react";
 import { Accordion, Col, Dropdown, Form, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
@@ -328,28 +328,30 @@ export function TreatmentSuccessModal({
 
 interface FertilityAssessmentFormProps {
     setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
-    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<ProgressUpdatesType>>;
     setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
+    editProgressUpdatesData?: ProgressUpdatesType;
 }
 export function TreatmentFertilityAssessmentPatient({
     setShowFertilityAssessment,
     setModalFormFertilityData,
-    setActiveTab
+    setActiveTab,
+    editProgressUpdatesData
 }: FertilityAssessmentFormProps) {
 
     type FormError = Partial<Record<keyof FertilityAssessmentFormType, string>>;
     const initialFormError: FormError = {};
 
     const initialFormData: FertilityAssessmentFormType = {
-        ageAtFirstMenstruation: "",
-        cycleLength: "",
-        periodLength: "",
-        date: "",
-        isCycleRegular: "Regular",
-        menstrualIssues: "yes",
-        pregnancy: "yes",
-        timeduration: "",
-        ectopicpregnancy: "yes"
+        ageAtFirstMenstruation: editProgressUpdatesData?.patient?.ageAtFirstMenstruation || "",
+        cycleLength: editProgressUpdatesData?.patient?.cycleLength || "",
+        periodLength: editProgressUpdatesData?.patient?.periodLength || "",
+        date: editProgressUpdatesData?.patient?.date || "",
+        isCycleRegular: editProgressUpdatesData?.patient?.isCycleRegular || "Regular",
+        menstrualIssues: editProgressUpdatesData?.patient?.menstrualIssues || "yes",
+        pregnancy: editProgressUpdatesData?.patient?.pregnancy || "yes",
+        timeduration: editProgressUpdatesData?.patient?.timeduration || "",
+        ectopicpregnancy: editProgressUpdatesData?.patient?.ectopicpregnancy || "yes"
 
     };
 
@@ -585,23 +587,30 @@ export function TreatmentFertilityAssessmentPatient({
 export function TreatmentFertilityAssessmentPartner({
     setShowFertilityAssessment,
     setModalFormFertilityData,
+    editProgressUpdatesData,
+    setStep,
+    setStepper,
 }: {
     setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
-    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<TreatmentFertilityAssessmentFormType>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<ProgressUpdatesType>>;
+    editProgressUpdatesData?: ProgressUpdatesType;
+    setStep?: React.Dispatch<React.SetStateAction<number | undefined>>;
+    setStepper?: React.Dispatch<React.SetStateAction<number | undefined>>;
+
 }) {
 
     type FormError = Partial<Record<keyof FertilityAssessmentHistory, string>>;
     const initialFormError: FormError = {};
 
     const initialFormData: FertilityAssessmentHistory = {
-        semenAnalysis: "yes",
-        semenAnalysisContent: "",
-        fertilityIssues: "no",
-        fertilityIssuesContent: "",
-        fertilityTreatment: "no",
-        fertilityTreatmentContent: "",
-        surgeries: "no",
-        surgeriesContent: "",
+        semenAnalysis: editProgressUpdatesData?.partner?.semenAnalysis || "yes",
+        semenAnalysisContent: editProgressUpdatesData?.partner?.semenAnalysisContent || "",
+        fertilityIssues: editProgressUpdatesData?.partner?.fertilityIssues || "no",
+        fertilityIssuesContent: editProgressUpdatesData?.partner?.fertilityIssuesContent || "",
+        fertilityTreatment: editProgressUpdatesData?.partner?.fertilityTreatment || "no",
+        fertilityTreatmentContent: editProgressUpdatesData?.partner?.fertilityTreatmentContent || "",
+        surgeries: editProgressUpdatesData?.partner?.surgeries || "no",
+        surgeriesContent: editProgressUpdatesData?.partner?.surgeriesContent || "",
     };
 
     const [formData, setFormData] = useState<FertilityAssessmentHistory>(initialFormData);
@@ -638,9 +647,15 @@ export function TreatmentFertilityAssessmentPartner({
             setModalFormFertilityData?.((prev: any) => ({ ...prev, partner: formData }));
             setFormError(initialFormError);
             setShowFertilityAssessment?.(false);
-            toast.success('Fertility assessment saved', {
-                icon: <BsInfoCircle size={22} color="white" />,
-            });
+
+            if (editProgressUpdatesData) {
+
+            } else {
+                toast.success('Fertility assessment saved', {
+                    icon: <BsInfoCircle size={22} color="white" />,
+                });
+            }
+
         }
     };
     return (
