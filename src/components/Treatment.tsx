@@ -528,6 +528,9 @@ function Treatment() {
 
                                                 editProgressUpdatesData={editProgressUpdatesData}
                                                 setModalFormFertilityData={setProgressUpdatesData}
+                                                progressUpdatesData={progressUpdatesData}
+                                                medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                                                setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
                                             />
                                         </Modal>
 

@@ -642,13 +642,17 @@ export function TreatmentFertilityAssessmentPartner({
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
-
+            console.log("true");
         if (Object.keys(errors).length === 0) {
             setModalFormFertilityData?.((prev: any) => ({ ...prev, partner: formData }));
             setFormError(initialFormError);
             setShowFertilityAssessment?.(false);
 
+
             if (editProgressUpdatesData) {
+                setStep?.((prev: any) => prev + 1);
+                setStepper?.((prev: any) => prev + 1);
+                
 
             } else {
                 toast.success('Fertility assessment saved', {
