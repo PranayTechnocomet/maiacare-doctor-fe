@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Modal from './ui/Modal';
 import TreatmentPlan from './TreatmentPlan';
-import '@/style/Appointment.css'
+import '@/style/appointment.css'
 import "@/style/settingsPassword.css";
 import { AppointmentPaymentDetails } from './form/AppointmentPaymentDetails';
 import { MedicationPrescriptionType, PaymentFormData } from '@/utils/types/interfaces';

@@ -1,7 +1,7 @@
 "use client"
 
 import {  AppointmentRequestCancelModel, BookAppointmentModal } from "@/components/TempAppoRequstCancelModel"
-import '../../style/Appointment.css'
+import '../../style/appointment.css'
 
 function page() {
     return (

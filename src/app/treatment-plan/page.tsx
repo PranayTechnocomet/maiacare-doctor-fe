@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import Treatment from "@/components/Treatment";
 import '@/style/treatment.css'
-import '@/style/Appointment.css'
+import '@/style/appointment.css'
 import '@/style/patientProfile.css';
 import '@/style/fertilityassessment.css'
 
