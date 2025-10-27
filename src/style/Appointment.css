@@ -70,18 +70,6 @@
     padding: 12px;
 }
 
-.payment-status {
-    position: absolute;
-    top: 56%;
-    left: 20px;
-}
-
-.payment-status-error-time {
-    position: absolute;
-    top: 43%;
-    left: 20px;
-}
-
 
 .blood-test-box .form-check-input {
     accent-color: var(--color-brand, #2B4360);
@@ -628,16 +616,6 @@
     border-color: #EEF2F7 !important;
 } */
 
-@media screen and (max-width: 575px) {
-
-    .payment-status {
-        left: 15px;
-    }
-
-    .payment-status-error-time {
-        left: 15px;
-    }
-}
 
 .fc-col-header-cell-cushion {
     display: flex !important;

@@ -133,7 +133,6 @@ export function AppointmentPaymentDetails({ setPaymentFormShow, setPaymentFormDa
 
                     </Col>
                     <Col sm={6} className="position-relative">
-
                         <InputSelect
                             label="Status"
                             name="status"

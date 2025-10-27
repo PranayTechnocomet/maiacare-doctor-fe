@@ -224,6 +224,18 @@ body {
   box-shadow: none !important;
 }
 
+.payment-status {
+  position: absolute;
+  top: 56%;
+  left: 20px;
+}
+
+.payment-status-error-time {
+  position: absolute;
+  top: 43%;
+  left: 20px;
+}
+
 
 /* pankaj solanki end */
 
@@ -332,12 +344,14 @@ body {
   color: #fff !important;
 }
 
-.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+.css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
   background-color: #e78422 !important;
 }
-.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root .Mui-selected{
+
+.css-qct7wd-MuiButtonBase-root-MuiPickersDay-root .Mui-selected {
   background-color: #e78422 !important;
 }
+
 /* 1440 > big screen apply */
 @media (min-width: 1640px) {
   .patient-header-search-width {
@@ -386,6 +400,14 @@ body {
   .sort-by-lable {
     font-size: 14px;
   }
+
+  .payment-status {
+    left: 15px;
+  }
+
+  .payment-status-error-time {
+    left: 15px;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -406,7 +428,7 @@ body {
   font-size: 12px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .appointment-header {
@@ -450,6 +472,3 @@ body {
 .aw-highlighted {
   background-color: #fff9f0;
 }
-
-
-

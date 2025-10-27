@@ -9,13 +9,13 @@ import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
 import { EditTreatmentPlanType, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
-import { TreatmentSuccessModal } from "./form/TreatmentAllForm";
+import { TreatmentSuccessModal, TreatmentTerminate } from "./form/TreatmentAllForm";
 import ProfileImage from '@/assets/images/Profile_Image.png'
 import { ProfileCard } from "./ui/custom/ProfileCard";
 import { Accordion, Col, Dropdown, Row } from "react-bootstrap";
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { InputFieldGroup } from "./ui/InputField";
-import { EditTreatmentStaticData, IVFProgressData, medicationPrescriptionData } from "@/utils/StaticData";
+import { EditTreatmentStaticData, IVFProgressData, medicationPrescriptionData, StatusAndUpdatesData } from "@/utils/StaticData";
 import toast from "react-hot-toast";
 import { BsInfoCircle } from "react-icons/bs";
 import TreatmentFertilityAssessment from "./TreatmentFertilityAssessment";
@@ -100,6 +100,7 @@ function Treatment() {
             surgeriesContent: "",
         },
         medicalPrescription: medicationPrescriptionData,
+        StatusAndUpdates: StatusAndUpdatesData
     }
 
     const initialProgressUpdatesData = {
@@ -125,6 +126,11 @@ function Treatment() {
             surgeriesContent: "",
         },
         medicalPrescription: [],
+        StatusAndUpdates: {
+            stepName: "",
+            status: "",
+            notes: "",
+        }
     }
 
     const profileData = {
@@ -154,6 +160,7 @@ function Treatment() {
     const [medicalPrescription, setMedicalPrescription] = useState<MedicationPrescriptionType[]>([]);
     const [medicalPrescriptionDataShowHide, setMedicalPrescriptionDataShowHide] = useState<boolean>(false);
     const [showEditFormShowModel, setShowEditFormShowModel] = useState<boolean>(false);
+    const [EditFormShowModel, setEditFormShowModel] = useState<boolean>(false);
     const [editForm, setEditForm] = useState<MedicationPrescriptionType>({
         id: "",
         medicineName: "",
@@ -174,6 +181,7 @@ function Treatment() {
 
     const [treatmentFertilityAssessmentModel, setTreatmentFertilityAssessmentModel] = useState<boolean>(false);
     const [editTreatmentModel, setEditTreatmentModel] = useState<boolean>(false);
+    const [TreatmentTerminateModel, setTreatmentTerminateModel] = useState<boolean>(false);
     const [editProgressUpdatesModel, setEditProgressUpdatesModel] = useState<boolean>(false);
 
     const [editMedicalPrescriptionDataShowHide, setEditMedicalPrescriptionDataShowHide] = useState<boolean>(false)
@@ -269,7 +277,7 @@ function Treatment() {
                                                 </div>
                                             </Dropdown.Item>
                                             <Dropdown.Item className="no-hover">
-                                                <div className="d-flex align-items-center gap-2 ">
+                                                <div className="d-flex align-items-center gap-2" onClick={() => { setTreatmentTerminateModel(true) }}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                                                         <path d="M11.4018 10.4735C11.5251 10.5968 11.5943 10.764 11.5943 10.9383C11.5943 11.1127 11.5251 11.2799 11.4018 11.4032C11.2785 11.5265 11.1113 11.5957 10.9369 11.5957C10.7626 11.5957 10.5954 11.5265 10.4721 11.4032L6.99998 7.92997L3.52677 11.4021C3.40349 11.5254 3.23628 11.5946 3.06193 11.5946C2.88758 11.5946 2.72037 11.5254 2.59709 11.4021C2.4738 11.2788 2.40454 11.1116 2.40454 10.9372C2.40454 10.7629 2.4738 10.5957 2.59709 10.4724L6.07029 7.00028L2.59818 3.52708C2.4749 3.40379 2.40563 3.23658 2.40563 3.06223C2.40563 2.88788 2.4749 2.72067 2.59818 2.59739C2.72146 2.4741 2.88867 2.40484 3.06302 2.40484C3.23737 2.40484 3.40458 2.4741 3.52787 2.59739L6.99998 6.07059L10.4732 2.59684C10.5965 2.47356 10.7637 2.4043 10.938 2.4043C11.1124 2.4043 11.2796 2.47356 11.4029 2.59684C11.5262 2.72013 11.5954 2.88733 11.5954 3.06169C11.5954 3.23604 11.5262 3.40324 11.4029 3.52653L7.92966 7.00028L11.4018 10.4735Z" fill="#E85966" />
                                                     </svg>
@@ -304,7 +312,17 @@ function Treatment() {
 
                                     </Modal>
 
-                                    {/* edit time show model for Medication & Tests */}
+                                    <Modal
+                                        show={TreatmentTerminateModel}
+                                        onHide={() => {setTreatmentTerminateModel(false)}}
+                                        header="Request to Terminate Treatment"
+                                        closeButton={true}
+                                    >
+                                        <TreatmentTerminate />
+
+                                    </Modal>
+
+                                    {/* edit time show model for IVF progress */}
                                     <Modal
                                         show={showEditFormShowModel}
                                         onHide={() => { setShowEditFormShowModel(false); setEditTreatmentModel(true); setMedicalPrescriptionDataShowHide(false); }}
@@ -515,7 +533,7 @@ function Treatment() {
 
                                         <Modal
                                             show={editProgressUpdatesModel}
-                                            onHide={() => { setEditProgressUpdatesModel(false); }}
+                                            onHide={() => { setEditProgressUpdatesModel(false); setStepProgressUpdates(1); setStepperProgressUpdates(1); }}
                                             header="Fertility Assessment"
                                             closeButton={true}
                                         >
@@ -531,6 +549,39 @@ function Treatment() {
                                                 progressUpdatesData={progressUpdatesData}
                                                 medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
                                                 setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                                                setEditProgressUpdatesModel={setEditProgressUpdatesModel}
+
+                                                setEditForm={setEditForm}
+                                                setShowEditFormShowModel={setEditFormShowModel}
+                                                setTreatmentPlanModel={setEditProgressUpdatesModel}
+                                            />
+                                        </Modal>
+
+                                        {/* edit time show model for Progress Updates */}
+                                        <Modal
+                                            show={EditFormShowModel}
+                                            onHide={() => { setEditFormShowModel(false); setEditProgressUpdatesModel(true); setMedicalPrescriptionDataShowHide(false); }}
+                                            header="Edit Medication Prescription"
+                                            closeButton={true}
+                                        >
+                                            <MedicationPrescriptionForm
+                                                setShowEditFormShowModel={setEditFormShowModel}
+                                                editForm={editForm}
+                                                setTreatmentPlanModel={setEditProgressUpdatesModel}
+
+                                                setMedicalPrescription={(newPrescriptions) =>
+                                                    setProgressUpdatesData((prev) => ({
+                                                        ...prev,
+                                                        medicalPrescription:
+                                                            typeof newPrescriptions === "function"
+                                                                ? newPrescriptions(prev.medicalPrescription)
+                                                                : newPrescriptions,
+                                                    }))
+                                                }
+                                                medicalPrescription={medicalPrescription}
+
+                                                setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                                                medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
                                             />
                                         </Modal>
 
@@ -840,7 +891,7 @@ function Treatment() {
                                                                         </div>
                                                                     </div>
 
-                                                                    <Button className='mt-3' variant="outline" disabled={false} contentSize="small" onClick={() => { }}>
+                                                                    <Button className='mt-3' variant="outline" disabled={false} contentSize="small" onClick={() => { /*setEditForm(item); setEditFormShowModel(true); */ }}>
                                                                         <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                             <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
                                                                         </svg>
@@ -849,7 +900,6 @@ function Treatment() {
 
                                                                 </Accordion.Body>
                                                             </Accordion.Item>
-
                                                         </Col>
                                                     )
                                                 })}

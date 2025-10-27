@@ -255,9 +255,6 @@ export function TestsForm({
                     </Col>
 
                     <div className="d-flex gap-3">
-
-
-
                         {editTreatmentData ? (
                             <Button variant="outline" onClick={() => { setStep?.((prev: any) => prev - 1); setStepper?.((prev: any) => prev - 1); }} className="w-100">
                                 <div className="d-flex justify-content-center align-items-center gap-2">

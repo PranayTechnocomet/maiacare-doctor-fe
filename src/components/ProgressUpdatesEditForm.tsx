@@ -1,8 +1,8 @@
 "use client"
 
-import { ProgressUpdatesType } from "@/utils/types/interfaces";
+import { MedicationPrescriptionType, ProgressUpdatesType } from "@/utils/types/interfaces";
 import { Accordion, ProgressBar } from "react-bootstrap";
-import { TreatmentFertilityAssessmentPartner, TreatmentFertilityAssessmentPatient } from "./form/TreatmentAllForm";
+import { TreatmentFertilityAssessmentPartner, TreatmentFertilityAssessmentPatient, TreatmentProgressStatus } from "./form/TreatmentAllForm";
 import { useState } from "react";
 import CustomTabs from "./ui/CustomTabs";
 import Button from "./ui/Button";
@@ -18,7 +18,11 @@ export function ProgressUpdatesEditForm({
     setModalFormFertilityData,
     progressUpdatesData,
     medicalPrescriptionDataShowHide,
-    setMedicalPrescriptionDataShowHide
+    setMedicalPrescriptionDataShowHide,
+    setEditProgressUpdatesModel,
+    setEditForm,
+    setShowEditFormShowModel,
+    setTreatmentPlanModel,
 }: {
     setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
     setStepper: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -30,6 +34,10 @@ export function ProgressUpdatesEditForm({
     progressUpdatesData: ProgressUpdatesType;
     medicalPrescriptionDataShowHide: boolean;
     setMedicalPrescriptionDataShowHide: React.Dispatch<React.SetStateAction<boolean>>;
+    setEditProgressUpdatesModel: React.Dispatch<React.SetStateAction<boolean>>;
+    setEditForm: React.Dispatch<React.SetStateAction<MedicationPrescriptionType>>;
+    setShowEditFormShowModel: React.Dispatch<React.SetStateAction<boolean>>;
+    setTreatmentPlanModel: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 
     const [activeTab, setActiveTab] = useState<string>("patient");
@@ -149,7 +157,7 @@ export function ProgressUpdatesEditForm({
                                                 </div>
 
                                                 <Button className='mt-3' variant="outline" disabled={false} contentSize="small" onClick={() => {
-                                                   /* setEditForm(item); setShowEditFormShowModel(true); setTreatmentPlanModel(false);  setMedicalPrescriptionDataShowHide(true); */ console.log("cick", item);
+                                                   setEditForm(item); setShowEditFormShowModel(true);  setTreatmentPlanModel(false);  setMedicalPrescriptionDataShowHide(true);
                                                 }}>
                                                     <svg width="16" height="16" viewBox="0 0 14 14" className='me-1' fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M13.5484 3.40848L10.7553 0.615983C10.5209 0.381644 10.203 0.25 9.87157 0.25C9.54011 0.25 9.22223 0.381644 8.98782 0.615983L1.28032 8.32286C1.16385 8.43861 1.0715 8.57633 1.00863 8.72803C0.945765 8.87973 0.913622 9.0424 0.914067 9.20661V11.9997C0.914067 12.3313 1.04576 12.6492 1.28018 12.8836C1.5146 13.118 1.83255 13.2497 2.16407 13.2497H12.6641C12.863 13.2497 13.0537 13.1707 13.1944 13.0301C13.3351 12.8894 13.4141 12.6986 13.4141 12.4997C13.4141 12.3008 13.3351 12.1101 13.1944 11.9694C13.0537 11.8288 12.863 11.7497 12.6641 11.7497H6.97657L13.5484 5.17661C13.6646 5.06053 13.7567 4.92271 13.8195 4.77102C13.8824 4.61933 13.9147 4.45674 13.9147 4.29255C13.9147 4.12835 13.8824 3.96576 13.8195 3.81407C13.7567 3.66238 13.6646 3.52456 13.5484 3.40848ZM4.85157 11.7497H2.41407V9.31223L7.66407 4.06223L10.1016 6.49973L4.85157 11.7497ZM11.1641 5.43723L8.72657 2.99973L9.87282 1.85348L12.3103 4.29098L11.1641 5.43723Z" fill="#2B4360" />
@@ -168,7 +176,6 @@ export function ProgressUpdatesEditForm({
                     <MedicationPrescriptionForm
                         setStep={setStep}
                         setStepper={setStepper}
-
                         // setMedicalPrescription={setEditTreatmentData?.medicalPrescription}
                         setMedicalPrescription={(newPrescriptions) =>
                             setModalFormFertilityData((prev) => ({
@@ -179,13 +186,11 @@ export function ProgressUpdatesEditForm({
                                         : newPrescriptions,
                             }))
                         }
-
                         // setShowEditFormShowModel={setShowEditFormShowModel}
 
                         medicalPrescription={progressUpdatesData?.medicalPrescription}
                         medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
                         setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
-
                     />
 
                 </>
@@ -222,8 +227,16 @@ export function ProgressUpdatesEditForm({
 
             )}
 
-            {step == 3 && (
-                <h6>final model call</h6>
+            {step == 4 && (
+
+                <TreatmentProgressStatus
+                    editProgressUpdatesData={editProgressUpdatesData}
+                    setEditProgressUpdatesModel={setEditProgressUpdatesModel}
+                    setStep={setStep}
+                    setStepper={setStepper}
+
+                />
+
             )}
 
         </>

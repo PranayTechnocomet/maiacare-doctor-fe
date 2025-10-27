@@ -184,6 +184,12 @@ export interface TreatmentPlanEditType {
   duration: string;
 }
 
+export interface TreatmentProgressStatusType {
+  stepName : string;
+  status: string;
+  notes: string;
+}
+
 export interface EditTreatmentPlanType {
   treatmentplan: TreatmentPlanEditType,
   medicalPrescription: MedicationPrescriptionType[],
@@ -195,7 +201,7 @@ export interface ProgressUpdatesType {
   patient: FertilityAssessmentFormType;
   partner: FertilityAssessmentHistory;
   medicalPrescription: MedicationPrescriptionType[];
-  
+  StatusAndUpdates : TreatmentProgressStatusType;
 }
 
 export interface MedicationPrescriptionType {

@@ -561,6 +561,12 @@ export const medicationPrescriptionData: MedicationPrescriptionType[] = [
   },
 ];
 
+export const StatusAndUpdatesData = {
+  stepName: "Fertility Assessment",
+  status: "Success",
+  notes: "Cycle is normal, no fertility related issue",
+}
+
 export const EditTreatmentStaticData = {
   treatmentplan: {
     selectpatient: "partner",

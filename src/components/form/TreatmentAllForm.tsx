@@ -1,7 +1,7 @@
 "use client"
 
-import { EditTreatmentPlanType, FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType } from "@/utils/types/interfaces";
-import { ChangeEvent, useState } from "react";
+import { EditTreatmentPlanType, FertilityAssessmentFormType, FertilityAssessmentHistory, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType, TreatmentForm, TreatmentPlanEditType, TreatmentProgressStatusType } from "@/utils/types/interfaces";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Accordion, Col, Dropdown, Form, Row } from "react-bootstrap";
 import { InputSelect } from "../ui/InputSelect";
 import { PatientsDetails, TempTreatmentSteps } from "@/utils/StaticData";
@@ -15,11 +15,19 @@ import { DatePickerFieldGroup } from "../ui/CustomDatePicker";
 import { RadioButtonGroup } from "../ui/RadioField";
 import toast from "react-hot-toast";
 import { BsInfoCircle } from "react-icons/bs";
+import Textarea from "../ui/Textarea";
 
 
 interface TreatmentPatientFormProps {
     setStep: React.Dispatch<React.SetStateAction<number | undefined>>;
     setStepper: React.Dispatch<React.SetStateAction<number | undefined>>;
+}
+
+interface FertilityAssessmentFormProps {
+    setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
+    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<ProgressUpdatesType>>;
+    setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
+    editProgressUpdatesData?: ProgressUpdatesType;
 }
 
 export function TreatmentPatientForm({
@@ -326,12 +334,6 @@ export function TreatmentSuccessModal({
     )
 }
 
-interface FertilityAssessmentFormProps {
-    setShowFertilityAssessment?: React.Dispatch<React.SetStateAction<boolean>>;
-    setModalFormFertilityData?: React.Dispatch<React.SetStateAction<ProgressUpdatesType>>;
-    setActiveTab?: React.Dispatch<React.SetStateAction<string>>;
-    editProgressUpdatesData?: ProgressUpdatesType;
-}
 export function TreatmentFertilityAssessmentPatient({
     setShowFertilityAssessment,
     setModalFormFertilityData,
@@ -386,7 +388,6 @@ export function TreatmentFertilityAssessmentPatient({
 
         const errors = validateForm(formData);
         setFormError(errors);
-        console.log("errors", errors);
 
         if (Object.keys(errors).length === 0) {
             setModalFormFertilityData?.((prev: any) => ({ ...prev, patient: formData }));
@@ -574,9 +575,19 @@ export function TreatmentFertilityAssessmentPatient({
                     }}>
                         Cancel
                     </Button>
-                    <Button className="w-100" variant="default" type="submit">
-                        Save
-                    </Button>
+                    {editProgressUpdatesData?.patient ?
+                        <Button className="w-100" variant="default" type="submit">
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+                                Next
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                    <path d="M19.2959 8.79592L12.5459 15.5459C12.3346 15.7573 12.0479 15.876 11.7491 15.876C11.4502 15.876 11.1635 15.7573 10.9522 15.5459C10.7408 15.3346 10.6221 15.0479 10.6221 14.749C10.6221 14.4502 10.7408 14.1635 10.9522 13.9522L15.7812 9.12498H2C1.70163 9.12498 1.41548 9.00645 1.2045 8.79548C0.993526 8.5845 0.875 8.29835 0.875 7.99998C0.875 7.70161 0.993526 7.41546 1.2045 7.20449C1.41548 6.99351 1.70163 6.87498 2 6.87498H15.7812L10.9541 2.04498C10.7427 1.83364 10.624 1.54699 10.624 1.24811C10.624 0.94922 10.7427 0.662575 10.9541 0.451231C11.1654 0.239887 11.4521 0.121155 11.7509 0.121155C12.0498 0.121155 12.3365 0.239887 12.5478 0.451231L19.2978 7.20123C19.4027 7.30589 19.4859 7.43024 19.5426 7.56714C19.5993 7.70403 19.6284 7.85079 19.6282 7.99896C19.6281 8.14714 19.5986 8.29383 19.5416 8.43059C19.4846 8.56736 19.4011 8.69151 19.2959 8.79592Z" fill="white" />
+                                </svg>
+                            </div>
+                        </Button> :
+                        <Button className="w-100" variant="default" type="submit">
+                            Save
+                        </Button>
+                    }
                 </div>
 
             </form>
@@ -642,17 +653,14 @@ export function TreatmentFertilityAssessmentPartner({
         e.preventDefault();
         const errors = validateForm(formData);
         setFormError(errors);
-            console.log("true");
         if (Object.keys(errors).length === 0) {
             setModalFormFertilityData?.((prev: any) => ({ ...prev, partner: formData }));
             setFormError(initialFormError);
             setShowFertilityAssessment?.(false);
 
-
             if (editProgressUpdatesData) {
                 setStep?.((prev: any) => prev + 1);
                 setStepper?.((prev: any) => prev + 1);
-                
 
             } else {
                 toast.success('Fertility assessment saved', {
@@ -695,7 +703,7 @@ export function TreatmentFertilityAssessmentPartner({
                         )}
 
                     </Col>
-                    <Col md={12} >
+                    <Col md={12}>
                         <RadioButtonGroup
                             label="Have you experienced any fertility issues?"
                             name="fertilityIssues"
@@ -790,9 +798,19 @@ export function TreatmentFertilityAssessmentPartner({
                         }}>
                             Cancel
                         </Button>
-                        <Button className="w-100" variant="default" type="submit">
-                            Save
-                        </Button>
+                        {editProgressUpdatesData?.patient ?
+                            <Button className="w-100" variant="default" type="submit">
+                                <div className="d-flex justify-content-center align-items-center gap-2">
+                                    Next
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                        <path d="M19.2959 8.79592L12.5459 15.5459C12.3346 15.7573 12.0479 15.876 11.7491 15.876C11.4502 15.876 11.1635 15.7573 10.9522 15.5459C10.7408 15.3346 10.6221 15.0479 10.6221 14.749C10.6221 14.4502 10.7408 14.1635 10.9522 13.9522L15.7812 9.12498H2C1.70163 9.12498 1.41548 9.00645 1.2045 8.79548C0.993526 8.5845 0.875 8.29835 0.875 7.99998C0.875 7.70161 0.993526 7.41546 1.2045 7.20449C1.41548 6.99351 1.70163 6.87498 2 6.87498H15.7812L10.9541 2.04498C10.7427 1.83364 10.624 1.54699 10.624 1.24811C10.624 0.94922 10.7427 0.662575 10.9541 0.451231C11.1654 0.239887 11.4521 0.121155 11.7509 0.121155C12.0498 0.121155 12.3365 0.239887 12.5478 0.451231L19.2978 7.20123C19.4027 7.30589 19.4859 7.43024 19.5426 7.56714C19.5993 7.70403 19.6284 7.85079 19.6282 7.99896C19.6281 8.14714 19.5986 8.29383 19.5416 8.43059C19.4846 8.56736 19.4011 8.69151 19.2959 8.79592Z" fill="white" />
+                                    </svg>
+                                </div>
+                            </Button> :
+                            <Button className="w-100" variant="default" type="submit">
+                                Save
+                            </Button>
+                        }
                     </div>
 
                 </Row>
@@ -960,6 +978,239 @@ export function TreatmentPlanEditForm({
                     </div>
                 </Row>
             </form>
+        </>
+    )
+}
+
+export function TreatmentProgressStatus({
+    editProgressUpdatesData,
+    setEditProgressUpdatesModel,
+    setStep,
+    setStepper
+
+}: {
+    editProgressUpdatesData: ProgressUpdatesType,
+    setEditProgressUpdatesModel: React.Dispatch<React.SetStateAction<boolean>>,
+    setStep?: React.Dispatch<React.SetStateAction<number | undefined>>,
+    setStepper?: React.Dispatch<React.SetStateAction<number | undefined>>
+
+}) {
+
+    const initialFormData: TreatmentProgressStatusType = {
+        stepName: editProgressUpdatesData.StatusAndUpdates.stepName || "",
+        status: editProgressUpdatesData.StatusAndUpdates.status || "",
+        notes: editProgressUpdatesData.StatusAndUpdates.notes || "",
+    };
+
+    type FormError = Partial<Record<keyof TreatmentProgressStatusType, string>>;
+    const initialFormError: FormError = {};
+
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [formData, setFormData] = useState<TreatmentProgressStatusType>(initialFormData);
+
+    const [statusClass, setStatusClass] = useState<string>("");
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+    useEffect(() => {
+        if (!formData.status) {
+            setStatusClass("");
+            return;
+        }
+        const newClass =
+            formData.status === "Success"
+                ? "patient-journey-badge-success"
+                : formData.status === "Pending"
+                    ? "patient-journey-badge-pending"
+                    : formData.status === "InProgress"
+                        ? "patient-journey-badge-InProgress"
+                        : "";
+
+        setStatusClass(newClass);
+    }, [formData.status]);
+
+    const validateForm = (data: TreatmentProgressStatusType): FormError => {
+        const errors: FormError = {};
+
+        if (!data.stepName) {
+            errors.stepName = "Step Name is required";
+        }
+        if (!data.status) {
+            errors.status = "Status is required";
+        }
+        if (!data.notes) {
+            errors.notes = "Notes is required";
+        }
+        return errors;
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors = validateForm(formData);
+        setFormError(errors);
+
+        if (Object.keys(errors).length === 0) {
+
+            // console.log("Form Data : ", formData);
+            setFormError(initialFormError);
+            setStep?.(1);
+            setStepper?.(1);
+            setEditProgressUpdatesModel(false);
+        }
+    };
+
+    return (
+        <>
+            <h6 className="dashboard-chart-heading pb-2">Status & Updates</h6>
+            <form onSubmit={handleSubmit}>
+                <Row className="g-3">
+                    <Col md={6}>
+                        <InputFieldGroup
+                            label="Step Name"
+                            name="stepName"
+                            type="text"
+                            value={formData.stepName}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                            placeholder="Enter step name"
+                            required={false}
+                            disabled={false}
+                            readOnly={false}
+                            error={formError.stepName}
+                        />
+                    </Col>
+                    <Col sm={6} className="position-relative">
+                        <InputSelect
+                            label="Status"
+                            name="status"
+                            value={formData.status}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={formError.status}
+                            options={[
+                                { id: "1", value: "Success", label: "Success" },
+                                { id: "2", value: "Pending", label: "Pending" },
+                                { id: "3", value: "InProgress", label: "InProgress" },
+                            ]}
+                        />
+                        <span className={`${formError.stepName ? "payment-status-error-time" : "payment-status"} ${statusClass}`}>
+                            {formData.status}
+                        </span>
+
+                    </Col>
+                    <Col md={12}>
+                        <Textarea
+                            label="Notes / Updates"
+                            name="notes"
+                            value={formData.notes}
+                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                                handleChange(e);
+                            }}
+                            onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+                            required={true}
+                            disabled={false}
+                            error={formError.notes}
+                            maxLength={100}
+
+                        />
+                    </Col>
+
+                    <div className="d-flex gap-3 mt-3">
+                        <Button variant="outline" onClick={() => { }} className="w-100">
+                            <div className="d-flex justify-content-center align-items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
+                                    <path d="M19.1249 8.00001C19.1249 8.29838 19.0064 8.58452 18.7954 8.7955C18.5844 9.00648 18.2983 9.12501 17.9999 9.12501H4.21866L9.04866 13.9541C9.26 14.1654 9.37874 14.4521 9.37874 14.7509C9.37874 15.0498 9.26 15.3365 9.04866 15.5478C8.83732 15.7592 8.55067 15.8779 8.25179 15.8779C7.9529 15.8779 7.66625 15.7592 7.45491 15.5478L0.704911 8.79782C0.600031 8.6933 0.516814 8.56911 0.460033 8.43237C0.403252 8.29562 0.374023 8.14901 0.374023 8.00094C0.374023 7.85288 0.403252 7.70627 0.460033 7.56952C0.516814 7.43278 0.600031 7.30859 0.704911 7.20407L7.45491 0.454069C7.55956 0.349422 7.68379 0.266411 7.82052 0.209777C7.95725 0.153142 8.10379 0.123993 8.25179 0.123993C8.39978 0.123993 8.54632 0.153142 8.68305 0.209777C8.81978 0.266411 8.94401 0.349422 9.04866 0.454069C9.15331 0.558716 9.23632 0.68295 9.29295 0.819679C9.34959 0.956407 9.37874 1.10295 9.37874 1.25094C9.37874 1.39894 9.34959 1.54548 9.29295 1.68221C9.23632 1.81894 9.15331 1.94317 9.04866 2.04782L4.21866 6.87501H17.9999C18.2983 6.87501 18.5844 6.99353 18.7954 7.20451C19.0064 7.41549 19.1249 7.70164 19.1249 8.00001Z" fill="#2B4360" />
+                                </svg>
+                                Previous
+                            </div>
+                        </Button>
+
+                        <Button variant="default" type="submit" className="w-100">
+                            Save
+                        </Button>
+
+                    </div>
+
+                </Row>
+            </form>
+
+        </>
+    )
+}
+
+
+export function TreatmentTerminate() {
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        // setFormData((prev) => ({ ...prev, [name]: value }));
+        // setFormError((prev) => ({ ...prev, [name]: "" }));
+    };
+
+
+    return (
+        <>
+            <form>
+
+                <InputSelect
+                    label="Reason for Termination"
+                    name="reasonForTermination"
+                    className="mb-md-3 mb-2"
+                    // value={formData.reasonForTermination}
+                    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                        handleChange(e);
+                    }}
+                    onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+                    required={true}
+                    disabled={false}
+                    // error={formError.doctor}
+                    options={[
+                        { id: "1", value: "1", label: "Reason 1" },
+                        { id: "2", value: "2", label: "Reason 2" },
+                        { id: "3", value: "3", label: "Reason 3" },
+                    ]}
+                />
+                <Textarea
+                    label="Additional Note"
+                    name="additionalNote"
+                    value=""
+                    className="mb-md-3 mb-2"
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+                        handleChange(e);
+                    }}
+                    placeholder="Enter any additional details"
+                    onBlur={(e: React.FocusEvent<HTMLTextAreaElement>) => { }}
+                    required={true}
+                    disabled={false}
+                    // error={formError.description}
+                    maxLength={100}
+                />
+                <div className='d-flex gap-3'>
+                    <Button className="w-100" variant="outline" type="button" onClick={() => { }}>
+                        Cancel
+                    </Button>
+
+                    <Button className="w-100" variant="default" type="submit">
+                        Send
+                    </Button>
+                </div>
+
+            </form>
+
         </>
     )
 }
