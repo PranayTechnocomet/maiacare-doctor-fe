@@ -9,7 +9,7 @@ import Modal from "./ui/Modal";
 import { TreatmentForm } from "./TreatmentForm";
 import { EditTreatmentPlanType, MedicationPrescriptionType, ProgressUpdatesType, TreatmentFertilityAssessmentFormType } from "@/utils/types/interfaces";
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
-import { TreatmentSuccessModal, TreatmentTerminate } from "./form/TreatmentAllForm";
+import { TerminationSuccessModal, TreatmentSuccessModal, TreatmentTerminate } from "./form/TreatmentAllForm";
 import ProfileImage from '@/assets/images/Profile_Image.png'
 import { ProfileCard } from "./ui/custom/ProfileCard";
 import { Accordion, Col, Dropdown, Row } from "react-bootstrap";
@@ -27,6 +27,9 @@ function Treatment() {
     const [activeTab, setActiveTab] = useState<string>("all");
     const [treatmentModel, setTreatmentModel] = useState<boolean>(false);
     const [successModal, setSuccessModal] = useState<boolean>(false);
+    const [terminationSuccessModal, setTerminationSuccessModal] = useState<boolean>(false);
+    // console.log("terminationSuccessModal", terminationSuccessModal);
+
     const [ivfProgressData, setIvfProgressData] = useState(IVFProgressData);
 
     const tabOptions = [
@@ -290,7 +293,7 @@ function Treatment() {
                                     <Modal
                                         show={editTreatmentModel}
                                         onHide={() => { setEditTreatmentModel(false); setEditTreatmentData(EditTreatmentStaticData); setStepsTreatment(1); setStepperTreatment(1); }}
-                                        header="Fertility Assessment"
+                                        header="Treatment Plan"
                                         closeButton={true}
                                     >
                                         <TreatmentEditForm
@@ -314,13 +317,21 @@ function Treatment() {
 
                                     <Modal
                                         show={TreatmentTerminateModel}
-                                        onHide={() => {setTreatmentTerminateModel(false)}}
+                                        onHide={() => { setTreatmentTerminateModel(false) }}
                                         header="Request to Terminate Treatment"
                                         closeButton={true}
                                     >
-                                        <TreatmentTerminate />
-
+                                        <TreatmentTerminate
+                                            setSuccessModal={setTerminationSuccessModal}
+                                            setTreatmentTerminateModel={setTreatmentTerminateModel}
+                                        />
                                     </Modal>
+
+                                    {/* success modal Termination */}
+                                    <TerminationSuccessModal
+                                        successModal={terminationSuccessModal}
+                                        setSuccessModal={setTerminationSuccessModal}
+                                    />
 
                                     {/* edit time show model for IVF progress */}
                                     <Modal
@@ -457,10 +468,10 @@ function Treatment() {
                                             />
 
                                             <div className="d-flex gap-2 mt-3">
-                                                <Button variant="outline" className="w-100" onClick={() => { setIsAddingStep(false); setNewStepName(""); setNewStepError(""); }} >
+                                                <Button variant="outline" className="w-100" contentSize="small" onClick={() => { setIsAddingStep(false); setNewStepName(""); setNewStepError(""); }} >
                                                     Cancel
                                                 </Button>
-                                                <Button variant="default" className="w-100" type="submit" onClick={handleSaveStep} >
+                                                <Button variant="default" className="w-100" contentSize="small" type="submit" onClick={handleSaveStep} >
                                                     Save
                                                 </Button>
                                             </div>
@@ -534,7 +545,7 @@ function Treatment() {
                                         <Modal
                                             show={editProgressUpdatesModel}
                                             onHide={() => { setEditProgressUpdatesModel(false); setStepProgressUpdates(1); setStepperProgressUpdates(1); }}
-                                            header="Fertility Assessment"
+                                            header="Edit Fertility Assessment"
                                             closeButton={true}
                                         >
                                             <ProgressUpdatesEditForm
@@ -785,7 +796,7 @@ function Treatment() {
                                                                     {progressUpdatesData.partner.semenAnalysis
                                                                         === 'yes'
                                                                         ? progressUpdatesData.partner.semenAnalysisContent
-                                                                            ? `Yes, ${progressUpdatesData.partner.semenAnalysisContent}`
+                                                                            ? `Yes | ${progressUpdatesData.partner.semenAnalysisContent}`
                                                                             : 'Yes'
                                                                         : 'No'}
                                                                 </p>
@@ -1003,7 +1014,7 @@ function Treatment() {
                         />
                     </Modal>
 
-                    {/* success modal */}
+                    {/* success modal add treatment*/}
                     <TreatmentSuccessModal
                         successModal={successModal}
                         setSuccessModal={setSuccessModal}
@@ -1012,6 +1023,7 @@ function Treatment() {
                         setMedicalPrescription={setMedicalPrescription}
                         setShowContent={setShowContent}
                     />
+
                 </>
             )}
 

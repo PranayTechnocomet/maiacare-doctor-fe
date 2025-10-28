@@ -190,6 +190,11 @@ export interface TreatmentProgressStatusType {
   notes: string;
 }
 
+export interface TreatmentTerminationType {
+  reasonForTermination: string;
+  additionalNote: string;
+}
+
 export interface EditTreatmentPlanType {
   treatmentplan: TreatmentPlanEditType,
   medicalPrescription: MedicationPrescriptionType[],

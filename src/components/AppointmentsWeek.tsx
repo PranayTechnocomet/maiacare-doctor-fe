@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import '../style/appointment.css'
+import '../style/appointments.css'
 
 interface AppointmentsWeekProps {
   selectedDate?: string | null;

@@ -344,7 +344,7 @@ export function MedicationPrescriptionForm({
     }
 
     // console.log("test" , medicalPrescription);
-    
+
     return (
         <>
             <form onSubmit={handelNext}>
@@ -624,7 +624,7 @@ export function FollowUpActionForm({
         }));
         setFormError((prev) => ({ ...prev, [name]: "" }));
     };
-    
+
 
     const validateForm = (data: FollowUpActionFromType): FormError => {
         const errors: FormError = {};
@@ -647,22 +647,21 @@ export function FollowUpActionForm({
         const errors = validateForm(formData);
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
-            
+
             setFormError(initialFormError);
             setTreatmentPlanModel(false);
             setTreatmentDetailsTempShow?.([formData]); // show static data state
 
-            setSuccessModal?.(true); // show suceess  model needed
+            setSuccessModal?.(true); // show suceess model
             toast.success('Treatment Plan added successfully', {
                 icon: <BsInfoCircle size={22} color="white" />,
             });
 
-            if(editTreatmentData?.followUpAction){   
+            if (editTreatmentData?.followUpAction) {
                 setStep?.(1); // only when Treatment edit steps
                 setStepper?.(1);
                 setFormData(initialFormData);
             }
-
         }
     };
 
