@@ -5,8 +5,10 @@ import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { AppDispatch } from "@/utils/redux/store";
 import {
+  InputFieldError,
   InputFieldGroup,
   InputFieldHelperText,
+  InputFieldLabel,
 } from "@/components/ui/InputField";
 import { InputSelect, InputSelectMultiSelect } from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
@@ -28,7 +30,9 @@ import toast from "react-hot-toast";
 import { FaSmile } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import Select from "react-dropdown-select";
-
+import { Form } from "react-bootstrap";
+import '@/style/appointments.css'
+import { MultiSelect } from "react-multi-select-component";
 
 const data: Patient[] = [
   {
@@ -114,6 +118,7 @@ type FormData = {
   startTime: string;
   endTime: string;
   medicalCondition: OptionType[];
+  status: string;
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
@@ -128,6 +133,7 @@ const initialFormData: FormData = {
   startTime: "",
   endTime: "",
   medicalCondition: [],
+  status: "",
 };
 
 const initialFormError: FormError = {};
@@ -214,15 +220,16 @@ export default function Page() {
       errors.phone = "Phone number is required";
     }
 
-   
-    
+    if (!data.status.trim()) {
+      errors.status = "Status is required";
+    }
 
     // if (!data.phone.trim()) {
     //   errors.phone = "Phone number is required";
     // } else if (/^[0-9]+$/.test(data.phone.trim())) {
     //   errors.phone = "Only numbers are allowed";
     // }
-    
+
     if (!data.description.trim())
       errors.description = "Description is required";
 
@@ -240,6 +247,8 @@ export default function Page() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setFormError((prev) => ({ ...prev, [name]: "" }));
+
+    console.log("formData : ", formData.status);
   };
 
   // Submit Handler
@@ -323,6 +332,12 @@ export default function Page() {
   ];
 
 
+  const tempOptions = [
+    { id: "1", value: "status 1", label: "status 1" },
+    { id: "2", value: "status 2", label: "status 2" },
+    { id: "3", value: "status 3", label: "status 3" },
+  ];
+
   const [password, setPassword] = useState("");
 
   // State for masked input
@@ -347,7 +362,7 @@ export default function Page() {
 
 
   const [value, setValue] = useState<string>("");
-  console.log("value1121212", value);
+  // console.log("value1121212", value);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -366,7 +381,7 @@ export default function Page() {
   };
 
 
- 
+
   const todaya = new Date();
   const year = todaya.getFullYear();
   const month = String(todaya.getMonth() + 1).padStart(2, '0');
@@ -374,7 +389,7 @@ export default function Page() {
 
   const today = `${year}-${month}-${day}`;
 
-  console.log(today); // e.g. "2025-10-09"
+  // console.log(today); // e.g. "2025-10-09"
 
   return (
     <form onSubmit={handleSubmit}>
@@ -515,7 +530,7 @@ export default function Page() {
             label="Do you have any medical condition?"
             name="medicalCondition"
             values={formData.medicalCondition}
-            onChange={(values:any) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
+            onChange={(values: any) => { setFormData((prev) => ({ ...prev, medicalCondition: values })); setFormError((prev) => ({ ...prev, medicalCondition: "" })) }}
             options={[
               { id: "1", value: "Non-smoker", label: "Non-smoker" },
               { id: "2", value: "Occasional alcohol", label: "Occasional alcohol" },
@@ -532,6 +547,47 @@ export default function Page() {
             error={formError.medicalCondition}
           />
         </div>
+        <div className="mt-3">
+          <div className={`maiacare-input-field-container`}>
+            <InputFieldLabel label="Select Status" required={false} />
+            <Form.Select
+              name="status"
+              value={formData.status}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                handleChange(e);
+              }}
+              onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
+              className={`maiacare-input-field`}
+            //  onClick={onClick}
+            // required={required}
+            //  disabled={disabled}
+            //  {...rest}
+
+            >
+              <option value={""}>select</option>
+              {tempOptions.map(option => (
+                <option key={option.id} value={option.value}>{option.label}</option>
+
+              ))}
+            </Form.Select>
+            {formError.status && <InputFieldError error={formError.doctor} />}
+            {/* {helperText && <InputFieldHelperText helperText={helperText} />} */}
+
+          </div>
+        </div>
+
+        <div className="mt-3">
+          <div className={`maiacare-input-field-container`}>
+            <InputFieldLabel label="Select Status" required={false} />
+            <MultiSelect
+              className="maiacare-input-field custom-react-dropdown"
+              options={tempOptions}
+              value={selected}
+              onChange={setSelected}
+              labelledBy="Select Status"
+            />
+          </div>
+        </div>
 
         <div className="d-flex gap-2 mt-3">
           <Button variant="default" disabled={false} type="submit">
@@ -541,6 +597,7 @@ export default function Page() {
             Cancel
           </Button>
         </div>
+
       </ContentContainer>
 
       <ContentContainer>

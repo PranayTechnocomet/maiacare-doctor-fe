@@ -4,6 +4,27 @@ import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
 import Select from 'react-dropdown-select';
 
+type OptionType = { value: string; label: string };
+
+interface InputSelectMultiSelectProps {
+  values: OptionType[];
+  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
+  options: { id: string, value: string, label: string }[];
+  placeholder?: string;
+  addPlaceholder?: string;
+  label?: string;
+  name?: string;
+  required?: boolean;
+  dropdownHandle?: boolean;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  className?: string;
+  selectedOptionColor?: string;
+  selectedOptionBorderColor?: string;
+  [key: string]: any;
+}
+
 export function InputSelect({
   label = "",
   name,
@@ -63,28 +84,6 @@ export function InputSelect({
     </div>
   )
 }
-
-type OptionType = { value: string; label: string };
-
-interface InputSelectMultiSelectProps {
-  values: OptionType[];
-  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
-  options: { id: string, value: string, label: string }[];
-  placeholder?: string;
-  addPlaceholder?: string;
-  label?: string;
-  name?: string;
-  required?: boolean;
-  dropdownHandle?: boolean;
-  disabled?: boolean;
-  error?: string;
-  helperText?: string;
-  className?: string;
-  selectedOptionColor?: string;
-  selectedOptionBorderColor?: string;
-  [key: string]: any;
-}
-
 
 export function InputSelectMultiSelect({
   values,

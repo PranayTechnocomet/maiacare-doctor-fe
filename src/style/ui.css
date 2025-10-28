@@ -469,6 +469,13 @@ input[type=number] {
     transition: transform 0.3s ease;
 }
 
+/* Target the placeholder text inside the multiselect heading */
+/* .custom-react-dropdown .dropdown-heading .dropdown-heading-value {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+} */
+
 .input-select-item-box {
     border: 1px solid;
     padding: 4px 8px;
