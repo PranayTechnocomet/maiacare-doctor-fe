@@ -147,6 +147,7 @@ export interface EditFertilityAssessment {
 }
 
 export type OptionType = { value: string; label: string };
+
 export interface SelectPatientType {
   id: string;
   ProfilePhoto: StaticImageData;

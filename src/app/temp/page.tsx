@@ -10,7 +10,7 @@ import {
   InputFieldHelperText,
   InputFieldLabel,
 } from "@/components/ui/InputField";
-import { InputSelect, InputSelectMultiSelect } from "@/components/ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect, MultiSelectWithCheckbox } from "@/components/ui/InputSelect";
 import { DatePickerFieldGroup } from "@/components/ui/CustomDatePicker";
 import { RadioButtonGroup } from "@/components/ui/RadioField";
 
@@ -102,10 +102,6 @@ const columns: ColumnDef<Patient>[] = [
   },
 ];
 
-interface Option {
-  value: string;
-  label: string;
-}
 
 // Types for form data and form error
 type FormData = {
@@ -118,7 +114,7 @@ type FormData = {
   startTime: string;
   endTime: string;
   medicalCondition: OptionType[];
-  status: string;
+  status: OptionType[];
 };
 
 type FormError = Partial<Record<keyof FormData, string>>;
@@ -133,8 +129,9 @@ const initialFormData: FormData = {
   startTime: "",
   endTime: "",
   medicalCondition: [],
-  status: "",
+  status: [],
 };
+
 
 const initialFormError: FormError = {};
 
@@ -168,13 +165,17 @@ export default function Page() {
     }
   )
 
-  const [selected, setSelected] = useState<Option[]>([]);
+  const [selected, setSelected] = useState<OptionType[]>([]);
+  const [isOpen, setIsOpen] = useState(false); // track dropdown open/close
+
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+
+  // console.log("formData", formData.status);
 
   const options = [
     { value: "Non-smoker", label: "Non-smoker" },
@@ -220,7 +221,7 @@ export default function Page() {
       errors.phone = "Phone number is required";
     }
 
-    if (!data.status.trim()) {
+    if (!data.status.length) {
       errors.status = "Status is required";
     }
 
@@ -336,6 +337,10 @@ export default function Page() {
     { id: "1", value: "status 1", label: "status 1" },
     { id: "2", value: "status 2", label: "status 2" },
     { id: "3", value: "status 3", label: "status 3" },
+    { id: "4", value: "status 4", label: "status 4" },
+    { id: "5", value: "status 5", label: "status 5" },
+    { id: "6", value: "status 6", label: "status 6" },
+    { id: "7", value: "status 7", label: "status 7" },
   ];
 
   const [password, setPassword] = useState("");
@@ -379,8 +384,6 @@ export default function Page() {
       }
     }, 0);
   };
-
-
 
   const todaya = new Date();
   const year = todaya.getFullYear();
@@ -547,46 +550,58 @@ export default function Page() {
             error={formError.medicalCondition}
           />
         </div>
-        <div className="mt-3">
-          <div className={`maiacare-input-field-container`}>
-            <InputFieldLabel label="Select Status" required={false} />
-            <Form.Select
-              name="status"
-              value={formData.status}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                handleChange(e);
-              }}
-              onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
-              className={`maiacare-input-field`}
-            //  onClick={onClick}
-            // required={required}
-            //  disabled={disabled}
-            //  {...rest}
 
-            >
-              <option value={""}>select</option>
-              {tempOptions.map(option => (
-                <option key={option.id} value={option.value}>{option.label}</option>
-
-              ))}
-            </Form.Select>
-            {formError.status && <InputFieldError error={formError.doctor} />}
-            {/* {helperText && <InputFieldHelperText helperText={helperText} />} */}
-
-          </div>
-        </div>
-
-        <div className="mt-3">
-          <div className={`maiacare-input-field-container`}>
+        {/* <div className="mt-3">
+          <div className={`maiacare-input-field-container custom-react-dropdown`}>
             <InputFieldLabel label="Select Status" required={false} />
             <MultiSelect
-              className="maiacare-input-field custom-react-dropdown"
+              // className="maiacare-input-field"
               options={tempOptions}
               value={selected}
               onChange={setSelected}
               labelledBy="Select Status"
+              disableSearch={true} // disables search bar
+              hasSelectAll={false} // removes "Select All" option
+
+              onMenuToggle={(state: boolean) => setIsOpen(state)} // detect open/close
+              overrideStrings={{
+                selectSomeItems: "Select Status", // placeholder text
+                allItemsAreSelected: "All selected",
+              }}
+              //  show placeholder while open or empty, show selection after close
+              valueRenderer={(selected) => {
+                if (isOpen || selected.length === 0) {
+                  return "Select Status"; // placeholder while open
+                }
+                return selected.map((s) => s.label).join(", "); // show selected when closed
+              }}
             />
           </div>
+        </div> */}
+
+        <div className="mt-3">
+          <MultiSelectWithCheckbox
+            label="Select Status"
+            name="status"
+            placeholder="Select Status111"
+            values={formData.status}
+            options={tempOptions}
+            required={true}
+
+            // onChange={setSelected}
+            onChange={(status: any) => {
+              handleChange({
+                target: { name: "status", value: status },
+              } as React.ChangeEvent<HTMLInputElement>);
+            }}
+
+            dropdownHandle={false}
+            disabled={false}
+            error={formError.status}
+            helperText="Select Status"
+
+          />
+
         </div>
 
         <div className="d-flex gap-2 mt-3">
@@ -600,9 +615,7 @@ export default function Page() {
 
       </ContentContainer>
 
-      <ContentContainer>
-        {/* Button Section Start */}
-
+      {/* <ContentContainer>
         <label className="form-label">Lifestyle</label>
 
         <div className="dropdown">
@@ -662,45 +675,6 @@ export default function Page() {
           </div>
         )}
 
-
-        {/* <div className="mt-3">
-          <h3>test select 2</h3>
-          <div className={`maiacare-input-field-container `}>
-
-            <Select
-              name="name"
-              className="react-dropdown-select-custom maiacare-input-field"
-              options={options}
-              multi={true}
-              values={selected}
-              placeholder="Search Medical Condition or Allergies"
-              onChange={(values) => setSelected(values)}
-              required={true}
-              addPlaceholder="Add Medical Condition or Allergies"
-            />
-
-            {selected.length > 0 && <span className="mt-3">{selected.length} selected</span>}
-
-            <div className="mt-3 d-flex gap-2 flex-wrap" >
-              {selected.map((item) => (
-                <div
-                  key={item.value}
-                  className="input-select-item-box"
-                >
-                  {item.label}
-                  <span className="ms-2"
-                    onClick={() => setSelected(selected.filter((s) => s.value !== item.value))}
-                  >
-                    ✕
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-
-        {/* Button Section End */}
-
         <div className="my-4 bg-warning">
           <div>{tempShowData.name}</div>
           <div>{tempShowData.description}</div>
@@ -708,7 +682,7 @@ export default function Page() {
           <div>{tempShowData.startTime}</div>
           <div>{tempShowData.endTime}</div>
         </div>
-      </ContentContainer>
+      </ContentContainer> */}
 
       <CustomTabs
         activeKey={activeTab}

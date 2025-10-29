@@ -343,19 +343,19 @@ input[type=number] {
 }
 
 .Quantity-box-show {
-    border: none !important;       
-    box-shadow: none !important;   
-    background: transparent;       
-    cursor: default;             
-  }
-  
-  /* Remove border/shadow on focus */
-  .Quantity-box-show:focus {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    cursor: default;
+}
+
+/* Remove border/shadow on focus */
+.Quantity-box-show:focus {
     border: none !important;
     box-shadow: none !important;
     outline: none !important;
-  }
-  
+}
+
 
 .Quantity-box {
     border: 1px solid var(--color-icon-border);
@@ -449,7 +449,7 @@ input[type=number] {
     display: none !important;
 }
 
-.custom-react-dropdown .react-dropdown-select-input{
+.custom-react-dropdown .react-dropdown-select-input {
     width: 100% !important;
 }
 
@@ -469,12 +469,50 @@ input[type=number] {
     transition: transform 0.3s ease;
 }
 
-/* Target the placeholder text inside the multiselect heading */
-/* .custom-react-dropdown .dropdown-heading .dropdown-heading-value {
-  white-space: nowrap !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-} */
+/* multiselect with check boxs css start*/
+.custom-react-dropdown .rmsc .dropdown-container {
+    border: none !important;
+}
+
+.custom-react-dropdown .rmsc .dropdown-heading {
+    height: fit-content !important;
+    border: 1px solid var(--color-brand) !important;
+    border-radius: 8px !important;
+    padding: 12px !important;
+
+}
+.custom-react-dropdown .rmsc .dropdown-container:focus-within{
+    box-shadow: none !important;
+}
+
+/* Checkbox appearance */
+.custom-react-dropdown .rmsc .item-renderer{
+    display: flex;
+    align-items: center;
+}
+
+.custom-react-dropdown .rmsc .item-renderer input[type="checkbox"] {
+  accent-color: var(--color-brand)!important; /* your custom color */
+  width: 16px;
+  height: 16px;
+  border-radius: 4px !important;
+  cursor: pointer;
+}
+
+/* Hide "✕" icon from selected items */
+.custom-react-dropdown .rmsc .clear-selected-button {
+    display: none !important;
+}
+
+.custom-react-dropdown:hover, .custom-react-dropdown .react-dropdown-select-input:hover {
+    background-color: transparent !important;
+}
+
+.custom-react-dropdown .selected {
+  background-color: transparent !important;
+}
+
+/* multiselect with check boxs css end*/
 
 .input-select-item-box {
     border: 1px solid;
@@ -519,7 +557,6 @@ input[type=number] {
     transform: translateY(-50%);
     background-color: var(--color-white);
     pointer-events: none;
-
 }
 
 
@@ -571,3 +608,6 @@ input[type=number] {
     padding: 10px 16px;
     background-color: var(--color-white);
 }
+
+
+

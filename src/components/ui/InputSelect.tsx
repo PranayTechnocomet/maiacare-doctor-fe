@@ -1,8 +1,9 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { InputFieldLabel, InputFieldError, InputFieldHelperText } from './InputField';
 import Select from 'react-dropdown-select';
+import { MultiSelect } from 'react-multi-select-component';
 
 type OptionType = { value: string; label: string };
 
@@ -16,6 +17,23 @@ interface InputSelectMultiSelectProps {
   name?: string;
   required?: boolean;
   dropdownHandle?: boolean;
+  disabled?: boolean;
+  error?: string;
+  helperText?: string;
+  className?: string;
+  selectedOptionColor?: string;
+  selectedOptionBorderColor?: string;
+  [key: string]: any;
+}
+
+interface MultiSelectWithCheckboxProps {
+  values: OptionType[];
+  onChange: (values: OptionType[]) => void; // expose as full objects for flexibility
+  options: { id: string, value: string, label: string }[];
+  placeholder?: string;
+  label?: string;
+  name?: string;
+  required?: boolean;
   disabled?: boolean;
   error?: string;
   helperText?: string;
@@ -170,3 +188,56 @@ export function InputSelectMultiSelect({
 
 }
 
+export function MultiSelectWithCheckbox({
+  values,
+  onChange,
+  options,
+  placeholder,
+  label,
+  name,
+  required,
+  disabled,
+  error,
+  helperText,
+  className = "",
+  selectedOptionColor = "var(--border-box)",
+  selectedOptionBorderColor = "var(--border-box)",
+  ...rest
+}: MultiSelectWithCheckboxProps) {
+
+  const [isOpen, setIsOpen] = useState(false); // track dropdown open/close
+  return (
+    <>
+
+      <div className={`maiacare-input-field-container custom-react-dropdown ${className}`}>
+        {label && <InputFieldLabel label={label} required={required} />}
+
+        <MultiSelect
+          // className="maiacare-input-field"
+          options={options}
+          value={values}
+          onChange={onChange}
+          
+          labelledBy="Select Status"
+          disableSearch={true} // disables search bar
+          hasSelectAll={false} // removes "Select All" option
+          onMenuToggle={(state: boolean) => setIsOpen(state)} // detect open/close
+          overrideStrings={{
+            selectSomeItems: "Select Status", // placeholder text
+            allItemsAreSelected: "All selected",
+          }}
+          //  show placeholder while open or empty, show selection after close
+          valueRenderer={(values) => {
+            if (isOpen || values.length === 0) {
+              return "Select Status"; // placeholder while open
+            }
+            return values.map((s) => s.label).join(", "); // show selected when closed
+          }}
+        />
+
+      </div>
+
+    </>
+  )
+
+}
