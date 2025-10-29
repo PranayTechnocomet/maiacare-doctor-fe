@@ -23,7 +23,12 @@
 
 .maiacare-input-field::placeholder {
     color: var(--color-radio) !important;
+}
 
+/*placeholder for multiselect with dropup down  color */
+.custom-react-dropdown .rmsc .gray {
+  color: var(--color-radio) !important;
+  /* color: red !important; */
 }
 
 .maiacare-input-field-label::placeholder {
@@ -1528,6 +1533,14 @@
     color: var(--color-heading);
 }
 
+.patient-calendar-modal-subtitle {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+
 .medication-prescription-accordion-subtitle {
     font-size: 14px;
     font-weight: 400;
@@ -1579,6 +1592,13 @@
     line-height: 16px;
     font-style: SemiBold;
     color: var(--color-completed);
+}
+
+.custom-react-dropdown .rmsc .item-renderer span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-radio-lable);
 }
 
 
