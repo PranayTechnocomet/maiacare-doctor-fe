@@ -170,6 +170,7 @@ export default function Page() {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [formError, setFormError] = useState<FormError>(initialFormError);
+
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
@@ -262,6 +263,7 @@ export default function Page() {
       setShowModal(true);
       setFormError(initialFormError);
     }
+
     setTempShowData(formData);
     setFormData(initialFormData);
     toast.success('Form Submitted Successfully', {
@@ -422,7 +424,7 @@ export default function Page() {
           readOnly={false}
           error={formError.name}
           helperText="Enter name"
-          className="position-relative "
+          className="position-relative"
         >
           <div className="position-absolute abc">
             <IoIosEye size={25} />
