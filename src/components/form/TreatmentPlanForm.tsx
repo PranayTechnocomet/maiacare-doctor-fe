@@ -212,7 +212,6 @@ export function MedicationPrescriptionForm({
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
-
         setFormData((prev) => ({
             ...prev,
             [name]: value,
@@ -274,7 +273,7 @@ export function MedicationPrescriptionForm({
                     ...formData,
                     id: generateRandomId(),
                 };
-
+                // console.log("newMedication", newMedication);
                 setMedicalPrescription?.((prev) => [...prev, newMedication]);
                 setFormData(initialFormData);
                 setFormError(initialFormError);
@@ -295,6 +294,7 @@ export function MedicationPrescriptionForm({
             setMedicalPrescriptionDataShowHide?.(true); // show extra form
         }
     };
+
 
     const handleSaveMedication = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -343,7 +343,7 @@ export function MedicationPrescriptionForm({
         }
     }
 
-    // console.log("test" , medicalPrescription);
+    // console.log("test" , formData);
 
     return (
         <>
@@ -385,7 +385,6 @@ export function MedicationPrescriptionForm({
                                     error={formError.type}
 
                                     options={[
-
                                         { id: "1", value: "Tablet", label: "Tablet" },
                                         { id: "2", value: "Capsule", label: "Capsule" },
                                         { id: "3", value: "Syrup", label: "Syrup" },

@@ -55,7 +55,7 @@ export function TestsForm({
 
     const validateForm = (data: MedicationTests): FormError => {
         const errors: FormError = {};
-        if (!data.tests) {
+        if (data.tests.length == 0) {
             errors.tests = "Tests is required";
         }
         return errors;

@@ -444,6 +444,17 @@ input[type=number] {
     transform: translate(-50%, -50%);
 }
 
+.input-Amount-box-error {
+    background-color: var(--color-bg);
+    border-right: 1px solid var(--color-radio);
+    border-radius: 8px 0px 0px 8px;
+    padding: 12px;
+    position: absolute;
+    top: 53%;
+    left: 24px;
+    transform: translate(-50%, -50%);
+}
+
 /* input select item box none hide */
 .custom-react-dropdown .react-dropdown-select-option {
     display: none !important;
@@ -598,11 +609,6 @@ input[type=number] {
         padding: 12px;
     }
 
-    .input-Amount-box {
-
-        padding: 10px;
-        left: 21px;
-    }
 
 }
 
