@@ -186,7 +186,7 @@ export interface TreatmentPlanEditType {
 }
 
 export interface TreatmentProgressStatusType {
-  stepName : string;
+  stepName: string;
   status: string;
   notes: string;
 }
@@ -207,7 +207,7 @@ export interface ProgressUpdatesType {
   patient: FertilityAssessmentFormType;
   partner: FertilityAssessmentHistory;
   medicalPrescription: MedicationPrescriptionType[];
-  StatusAndUpdates : TreatmentProgressStatusType;
+  StatusAndUpdates: TreatmentProgressStatusType;
 }
 
 export interface MedicationPrescriptionType {
@@ -280,4 +280,10 @@ export interface PatientJourneyItem {
   status: 'Success' | "In Progress" | 'Pending' | 'Failed';
 }
 
+export interface PatientCalenderFormType {
+  tests: OptionType[],
+  status: OptionType[],
+  symptoms: OptionType[],
+  additionalNote: string
+}
 

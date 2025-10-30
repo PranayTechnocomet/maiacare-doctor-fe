@@ -192,7 +192,7 @@ export function MultiSelectWithCheckbox({
   values,
   onChange,
   options,
-  placeholder,
+  placeholder = "Select",
   label,
   name,
   required,
@@ -223,19 +223,21 @@ export function MultiSelectWithCheckbox({
           hasSelectAll={false} // removes "Select All" option
           onMenuToggle={(state: boolean) => setIsOpen(state)} // detect open/close
           overrideStrings={{
-            selectSomeItems: "Select Status", // placeholder text
+            selectSomeItems: placeholder, // placeholder text
             allItemsAreSelected: "All selected",
           }}
           //  show placeholder while open or empty, show selection after close
           valueRenderer={(values) => {
             if (isOpen || values.length === 0) {
-              return "Select Status"; // placeholder while open
+              return placeholder; // placeholder while open
             }
             return values.map((s) => s.label).join(", "); // show selected when closed
           }}
         />
-
       </div>
+
+      {error && <InputFieldError error={error} />}
+      {helperText && <InputFieldHelperText helperText={helperText} />}
 
     </>
   )

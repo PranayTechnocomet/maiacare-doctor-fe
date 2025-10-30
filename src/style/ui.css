@@ -480,7 +480,16 @@ input[type=number] {
     border-radius: 8px !important;
     padding: 12px !important;
 
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
 }
+
+.custom-react-dropdown .rmsc .dropdown-heading-value {
+  white-space: normal !important;
+  display: block !important;
+}
+
 .custom-react-dropdown .rmsc .dropdown-container:focus-within{
     box-shadow: none !important;
 }
@@ -510,6 +519,19 @@ input[type=number] {
 
 .custom-react-dropdown .selected {
   background-color: transparent !important;
+}
+
+/* Target dropdown list scroll area */
+.custom-react-dropdown .rmsc .options {
+  max-height: 200px !important; /* limit visible items before scroll */
+  overflow-y: auto !important;
+  scrollbar-width: thin; /* for Firefox */
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-white); /* thumb + track colors for Firefox */
+}
+
+/* Chrome, Edge, Safari */
+.custom-react-dropdown .rmsc .options::-webkit-scrollbar {
+  width: 6px;
 }
 
 /* multiselect with check boxs css end*/
