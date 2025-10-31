@@ -27,8 +27,8 @@
 
 /*placeholder for multiselect with dropup down  color */
 .custom-react-dropdown .rmsc .gray {
-  color: var(--color-radio) !important;
-  /* color: red !important; */
+    color: var(--color-radio) !important;
+    /* color: red !important; */
 }
 
 .maiacare-input-field-label::placeholder {
@@ -1595,10 +1595,10 @@
 }
 
 .custom-react-dropdown .rmsc .item-renderer span {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  color: var(--color-radio-lable);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    color: var(--color-radio-lable);
 }
 
 
@@ -1981,3 +1981,649 @@
 }
 
 /* pankaj solanki end */
+
+
+/* Inhouse Font Start */
+
+
+.maiacare-input-field-label {
+    font-size: 14px;
+    font-weight: 600 !important;
+    /* color: var(--color-brand); */
+    color: var(--color-radio-lable);
+    font-style: semibold;
+}
+
+.maiacare-input-field-label::placeholder {
+    color: var(--color-radio) !important;
+}
+
+.maiacare-input-field {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-brand);
+}
+
+.maiacare-input-field::placeholder {
+    color: var(--color-radio);
+}
+
+.maiacare-input-field-helper-text {
+    color: var(--color-sidebar-icon);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.maiacare-input-field-error {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.maiacare-radio-wrapper {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-radio);
+}
+
+.maiacare-radio-label {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--color-radio-lable);
+}
+
+.basic-detail-text {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--color-radio-lable);
+}
+
+.maiacare-input-field-maxlength-indicator {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-sidebar-icon);
+}
+
+.maiacare-input-field:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    /* border: 1px solid #999 !important; grey focus border */
+}
+
+.maiacare-button-large {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.maiacare-button-medium {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.maiacare-button-small {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.default-layout {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+}
+
+.default-layout:hover {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+}
+
+.default-layout:focus-visible {
+    background-color: var(--color-brand);
+    color: var(--color-white);
+}
+
+.default-layout:active {
+    background-color: var(--color-brand) !important;
+    color: var(--color-white) !important;
+    transform: scale(0.98);
+    transition: all 0.2s ease-in-out;
+}
+
+.default-layout:disabled {
+    background-color: var(--color-brand) !important;
+    color: var(--color-white) !important;
+    cursor: not-allowed;
+}
+
+.outline-layout {
+    background-color: transparent;
+    color: var(--color-brand);
+    border: 1px solid var(--color-brand);
+}
+
+.outline-layout:hover {
+    background-color: transparent;
+    color: var(--color-brand);
+    border: 1px solid var(--color-brand);
+}
+
+.outline-layout:focus-visible {
+    background-color: transparent;
+    color: var(--color-brand);
+    border: 1px solid var(--color-brand);
+}
+
+.outline-layout:active {
+    background-color: transparent !important;
+    color: var(--color-brand) !important;
+    border: 1px solid var(--color-brand) !important;
+    transform: scale(0.98);
+    transition: all 0.2s ease-in-out;
+}
+
+.outline-layout:disabled {
+    background-color: var(--color-brand) !important;
+    color: var(--color-white) !important;
+    cursor: not-allowed;
+}
+
+.maiacare-phone-input {
+    font-size: 16px !important;
+    font-weight: 500;
+}
+
+.btn-border {
+    border-color: 1px solid var(--color-radio-lable) !important;
+    height: 40px !important;
+}
+
+/* ==================  Profile  / Edit Componet css  =============== */
+
+/* .profile-name {
+    color: var(--color-heading);
+    font-size: 20px;
+} */
+
+.profile-verified-badge {
+    font-size: 15px;
+    color: var(--color-subtitle-pink);
+    font-weight: 600;
+}
+
+.profile-sub-title {
+    color: var(--color-sidebar-icon);
+    line-height: 0;
+    font-size: 16px !important;
+    font-weight: 400;
+}
+
+.profile-member-since {
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.edit-profile-btn {
+    border: 1px solid var(--color-radio-lable);
+    color: var(--color-brand);
+    font-weight: 500;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 9px 15px;
+    border-radius: 8px;
+}
+
+.edit-profile-btn:hover,
+.edit-profile-btn:focus,
+.edit-profile-btn:active {
+    background-color: transparent !important;
+    color: var(--color-brand) !important;
+    border: 1px solid var(--color-radio-lable) !important;
+    /* box-shadow: none !important; */
+}
+
+/* Profile Tabes 2nd componet */
+.custom-tab .nav-link.active {
+    color: var(--color-brand);
+    border-bottom: 2px solid var(--color-brand);
+    font-weight: 600;
+}
+
+.custom-tab {
+    border-bottom: 1px solid var(--color-icon-border);
+    cursor: pointer;
+}
+
+.custom-tab .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #adb5bd;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.profile-card-main-titile {
+    color: var(--color-heading);
+    font-size: 24px;
+    font-weight: 600;
+    font-style: semi-bold;
+}
+
+.profile-card-boeder {
+    border-color: var(--color-icon-border) !important;
+}
+
+.my-custom-icon {
+    color: var(--color-icon-border) !important;
+    /* or other filter or styles */
+}
+
+.card-feild {
+    color: var(--color-radio-lable) !important;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.card-university-text {
+    color: var(--color-radio-lable) !important;
+    /* color: red !important; */
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.card-year {
+    color: var(--color-sidebar-icon);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.about-text {
+    color: var(--color-radio-lable) !important;
+    font-weight: 400;
+    font-size: 17px !important;
+}
+
+.check-box input[type="checkbox"] {
+    border: 1px solid var(--color-radio);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.kyc-details {
+    color: var(--color-sidebar-icon);
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.modal-bg {
+    background-color: #EDF5FF !important;
+}
+
+.kyc-modal-subheading {
+    color: var(--color-modal-subheading) !important;
+}
+
+.last-month {
+    border-color: var(--color-icon-border) !important;
+    background-color: white !important;
+    color: var(--color-brand) !important;
+}
+
+.modal-border-color {
+    border-color: var(--color-modal-border) !important;
+}
+
+.upload-report-data {
+    border: 2px dotted var(--color-modal-border) !important;
+}
+
+.custom-progress {
+    background-color: var(--color-brand) !important;
+    /* green color */
+}
+
+.file-name {
+    color: var(--color-radio-lable) !important;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.modal-border-dashed {
+    border: 2px dashed !important;
+    border-color: var(--color-icon-border) !important;
+    border-radius: 16px !important;
+}
+
+.uploding-complete-text {
+    color: var(--color-radio-lable) !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.report-name {
+    color: var(--color-radio-lable) !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.Profilephoto-save-take {
+    color: var(--color-radio-lable) !important;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+.modal-custom-header {
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: var(--color-modal-heading);
+}
+
+
+/* Media Query: Tablets (991px and below) */
+@media (max-width: 991px) {
+    .maiacare-input-field-label {
+        font-size: 13px;
+    }
+
+    .maiacare-input-field {
+        font-size: 15px;
+    }
+
+    .maiacare-input-field-helper-text,
+    .maiacare-input-field-error {
+        font-size: 13px;
+    }
+
+    .maiacare-radio-label {
+        font-size: 14px;
+    }
+
+    .basic-detail-text {
+        font-size: 14px !important;
+    }
+
+    .modal-custom-header {
+        font-size: 20px;
+    }
+
+    .maiacare-button-large {
+        font-size: 16px;
+    }
+
+    .maiacare-button-medium {
+        font-size: 14px;
+    }
+
+    .maiacare-button-small {
+        font-size: 12px;
+    }
+
+    .modal-heading {
+        font-size: 20px !important;
+    }
+
+    .brand-text {
+        font-size: 14px !important;
+    }
+
+    .forget-password {
+        font-size: 12px !important;
+    }
+
+    .verification-form {
+        margin: 20px;
+        padding: 40px !important;
+    }
+
+    .sub-heading-patient {
+        font-size: 14px !important;
+    }
+
+    .about-text {
+        font-size: 16px !important;
+    }
+
+    .profile-card-main-titile {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 525px) {
+    .Consultations-image {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .Consultations-book {
+        font-size: 16px !important;
+    }
+}
+
+/* Optional: Smaller devices like phones (e.g., 575px and below) */
+@media (max-width: 575px) {
+    .maiacare-input-field-label {
+        font-size: 12px;
+    }
+
+    .maiacare-input-field {
+        font-size: 14px;
+    }
+
+    .maiacare-input-field-helper-text,
+    .maiacare-input-field-error {
+        font-size: 12px;
+    }
+
+    /* .maiacare-radio-label {
+        font-size: 12px;
+    } */
+
+    .basic-detail-text {
+        font-size: 12px;
+    }
+
+    .modal-custom-header {
+        font-size: 18px;
+    }
+
+    .maiacare-button-large {
+        font-size: 14px;
+    }
+
+    .maiacare-button-medium {
+        font-size: 12px;
+    }
+
+    .maiacare-button-small {
+        font-size: 10px;
+    }
+
+    .about-text {
+        font-size: 15px !important;
+    }
+
+    .profile-card-main-titile {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .modal-heading {
+        font-size: 16px !important;
+    }
+
+    .brand-text {
+        font-size: 12px !important;
+    }
+
+    .login-form {
+        padding: 0px !important;
+    }
+
+    .verification-form {
+        margin: 15px;
+        padding: 20px !important;
+    }
+
+    .sub-heading-patient {
+        font-size: 12px !important;
+    }
+
+    .Patient-Details {
+        font-size: 18px !important;
+    }
+
+    .name-patient {
+        font-size: 20px !important;
+    }
+
+    .Patient-review {
+        font-size: 13px !important;
+    }
+
+    .sub-patient {
+        font-size: 12px !important;
+        padding: 4px 4px !important;
+    }
+
+    .about-text {
+        font-size: 14px !important;
+    }
+
+    .profile-card-main-titile {
+        font-size: 18px;
+    }
+
+    .Profilephoto-save-take {
+        font-size: 12px;
+    }
+}
+
+
+.modal-heading {
+    color: var(--color-modal-heading);
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.login-heading {
+    font-size: 20px;
+    color: var(--color-modal-heading);
+    font-weight: 600;
+}
+
+.brand-text {
+    color: var(--color-sidebar-icon);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.Button-login {
+    background-color: var(--color-brand);
+    /* e.g., #2b4360 */
+    color: var(--color-white);
+    /* e.g., #ffffff */
+    border: none;
+    outline: none;
+    box-shadow: none;
+    transition: none;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+
+.Button-login:hover,
+.Button-login:focus,
+.Button-login:active,
+.Button-login:active:focus,
+.Button-login.active,
+.Button-login.active:focus,
+.show>.Button-login.dropdown-toggle {
+    background-color: var(--color-brand) !important;
+    color: var(--color-white) !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.pass-list {
+    color: var(--color-brand);
+    font-size: 12px;
+}
+
+.pass-list-head {
+    color: var(--color-brand);
+    font-size: 14px;
+}
+
+
+.setting-head {
+    color: var(--color-heading);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+
+}
+
+.heading-patient {
+    color: #666B7A;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+
+.sub-heading-patient {
+    color: #131D2A;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.name-patient {
+    color: #131D2A;
+    font-size: 24px;
+}
+
+.Patient-Details {
+    color: #131D2A;
+    font-size: 20px;
+}
+
+.Patient-review {
+    color: #292929;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.sub-patient {
+    color: #E29578;
+    border: 1px solid #E29578;
+    font-weight: 400;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.Consultations-book {
+    font-weight: 600;
+    font-size: 18px;
+    color: #292929;
+}
+
+.profile-name-font {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-heading);
+    line-height: 21px;
+}
