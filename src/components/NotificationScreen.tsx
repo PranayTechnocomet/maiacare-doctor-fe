@@ -1,0 +1,154 @@
+"use client";
+import React, { useState, useMemo } from "react";
+import { InputGroup, Form } from "react-bootstrap";
+import { IoSearch } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import "../style/notificationscreen.css";
+import "../style/consultation.css";
+import emergencyImg from "@/assets/images/emergency.png";
+import leaveUpdateImg from "@/assets/images/leave-update.png";
+import doctorBackImg from "@/assets/images/Avatar.png";
+import ContentContainer from "@/components/ui/ContentContainer";
+
+interface NotificationItem {
+  title: string;
+  description: string;
+  time: string;
+  unread?: boolean;
+  image: string;
+}
+
+const notifications: NotificationItem[] = [
+  {
+    title: "Dolo 650 Low Stock",
+    description: "Important updates and system-wide notifications.",
+    time: "3 months ago",
+    image: emergencyImg.src,
+  },
+  {
+    title: "Stock Updated",
+    description: "Dolo 650 stocks updated",
+    time: "3 months ago",
+    image: doctorBackImg.src,
+    unread: true,
+  },
+  {
+    title: "Allegra Out of Stock ",
+    description: "Allegra Out of Stock.",
+    time: "3 months ago",
+    image: emergencyImg.src,
+  },
+  {
+    title: "System Alerts",
+    description: "Important updates and system-wide notifications.",
+    time: "3 months ago",
+    image: leaveUpdateImg.src,
+  },
+  {
+    title: "Allegra Out of Stock ",
+    description: "Allegra Out of Stock.",
+    time: "3 months ago",
+    image: emergencyImg.src,
+  },
+  {
+    title: "System Alerts",
+    description: "Important updates and system-wide notifications.",
+    time: "3 months ago",
+    image: leaveUpdateImg.src,
+    unread: true,
+  },
+];
+
+
+const NotificationScreen: React.FC = () => {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // filter notifications
+  const filteredNotifications = useMemo(() => {
+    if (!searchQuery.trim()) return notifications;
+    const q = searchQuery.toLowerCase();
+    return notifications.filter(
+      (n) =>
+        n.title.toLowerCase().includes(q) ||
+        n.description.toLowerCase().includes(q) ||
+        n.time.toLowerCase().includes(q)
+    );
+  }, [searchQuery]);
+
+  return (
+    <div className="notifications-page ">
+      {/* header */}
+      <div className="d-flex justify-content-between searchbar-content align-items-center flex-wrap mb-2">
+        {/* Search Input */}
+        <div className="custom-search-groups">
+         <InputGroup className="mb-2 custom-search-group">
+            <Form.Control
+              placeholder="Search History"
+              className="custom-search-input"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <InputGroup.Text className="custom-search-icon">
+              <IoSearch className="search-icon" />
+            </InputGroup.Text>
+          </InputGroup>
+        </div>
+
+        {/* Sort + Filter */}
+        <div className="d-flex align-items-center gap-2 ">
+          <span className="text-muted small short-by">Sort by:</span>
+          <Form.Select className="custom-filter-select">
+            <option>All Time</option>
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </Form.Select>
+          {/* <Button variant="light" className="border custom-filter-button">
+            <PiSlidersDuotone />
+          </Button> */}
+        </div>
+      </div>
+
+      {/* search */}
+      {/* <div className="mt-3">
+        <InputGroup>
+          <InputGroup.Text>
+            <FiSearch />
+          </InputGroup.Text>
+          <Form.Control placeholder="Search History" />
+        </InputGroup>
+      </div> */}
+
+      {/* list */}
+      <ContentContainer className="mt-3 notifications-list p-0">
+          {filteredNotifications.length > 0 ? (
+        filteredNotifications.map((n, idx) => (
+          <div
+            key={idx}
+            className={`notification-item d-flex justify-content-between align-items-start p-xxl-3 p-4  ${n.unread ? "unread" : ""}`}
+            role="button"
+          >
+            <div className="d-flex align-items-start">
+              <img
+                src={n.image}
+                alt={n.title}
+                className="me-3 notification-image"
+              />
+              <div>
+                <div className="notification-title">{n.title}</div>
+                <div className="notification-description">{n.description}</div>
+              </div>
+            </div>
+            <div className="notification-time ms-1 ">{n.time}</div>
+          </div>
+         ))
+        ) : (
+          <div className="p-3 text-muted">No notifications found</div>
+        )}
+      </ContentContainer>
+    </div>
+  );
+};
+
+export default NotificationScreen;

@@ -1,0 +1,135 @@
+.custom-search-group {
+    max-width: 300px;
+}
+
+.custom-search-input {
+    border-right: none;
+    color: #8A8D93;
+    box-shadow: none !important;
+    border-color: #DDE1E8 !important;
+    padding: 12px;
+}
+
+.custom-search-input::placeholder {
+    color: #8A8D93 !important;
+    opacity: 1;
+}
+
+.custom-search-icon {
+    background-color: white;
+    color: #8A8D93;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.custom-sort-select {
+    width: 130px;
+    color: #475569;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: none !important;
+    border-color: #DDE1E8 !important;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.custom-filter-button {
+    color: #2B4360;
+    background-color: white;
+    border-radius: 8px;
+    padding: 12px;
+
+}
+
+.short-by {
+    font-family: "Urbanist", sans-serif;
+    color: #3E4A57;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.status-completed {
+    background-color: #DEF7EC;
+    color: #057A55;
+}
+
+.status-pending {
+    background-color: #EBF5FF;
+    color: #3F83F8;
+}
+
+.status-cancelled {
+    background-color: #FDF2F2;
+    color: #F05252;
+}
+
+.status-scheduled {
+    background-color: #EDEBFE;
+    color: #7E3AF2;
+}
+
+.status-noresponse {
+    background-color: #FFF8F1;
+    color: #FF8A4C;
+}
+
+.status-rescheduled {
+    background-color: #EDFAFA;
+    color: #0694A2;
+}
+
+.table .btn-sm {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.trash {
+    color: #E85966;
+    height: 15px;
+    width: 15px;
+}
+
+.arrow-down {
+    color: #2B4360;
+    height: 15px;
+    width: 15px;
+}
+
+.custom-sort-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: none !important;
+    padding-right: 1rem;
+}
+
+@media (max-width: 525px) {
+
+    .custom-search-group {
+        max-width: 100% !important;
+    }
+
+    .custom-search-groups {
+        width: 100%;
+    }
+}
