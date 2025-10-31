@@ -295,7 +295,6 @@ export function MedicationPrescriptionForm({
         }
     };
 
-
     const handleSaveMedication = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const errors = validateForm(formData);

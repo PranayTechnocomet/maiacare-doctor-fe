@@ -42,8 +42,10 @@ export function LoginForms() {
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-
+         // const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.(com|in)$/;
+        
         if (formData.password.trim() === "") {
             errors.password = "Password is required";
             isValid = false;
@@ -187,7 +189,9 @@ export function ForgotPassword() {
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        // const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.(com|in)$/;
 
         if (data.email.trim() === "") {
             errors.email = "Email is required";
@@ -244,11 +248,7 @@ export function ForgotPassword() {
             </form>
         </div>
     )
-
 }
-
-
-
 
 export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
     setPasswordChangedSuccessModel: React.Dispatch<React.SetStateAction<boolean>>;
@@ -325,7 +325,6 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
             setFormError(defaultFormError);
             setPasswordChangedSuccessModel(true)
         }
-
     };
     return (
         <>
@@ -357,7 +356,7 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
 
                         </span>
                     </InputFieldGroup>
-                    
+
                 </div>
                 <div className='pt-3'>
                     <InputFieldGroup
@@ -416,11 +415,13 @@ export function VerifyOtp() {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
 
-        if (formData.number.length !== 6) {
+        if (!formData.number) {
+            errors.number = "Verification Code is required";
+            isValid = false;
+        }else if (formData.number.length !== 123456) {
             errors.number = "Please enter valid code";
             isValid = false;
         }
-
         setFormError(errors);
         return isValid;
     };
@@ -429,6 +430,7 @@ export function VerifyOtp() {
         e.preventDefault();
 
         if (validateForm()) {
+            
             if (formData.number !== "123456") {
                 alert("Please enter valid code");
                 return;

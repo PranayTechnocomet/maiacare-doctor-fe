@@ -16,7 +16,6 @@ function Page() {
     <div>
       {/* <h1>Appointments</h1></div> */}
       <DoctorListing />
-
     </div>
   )
 }
