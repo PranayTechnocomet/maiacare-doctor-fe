@@ -266,7 +266,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
 
                 />
             </Modal>
-
             {showContent && (
 
                 <Row className="mt-2 g-3">
@@ -597,7 +596,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                         <path d="M18.7744 9.5C18.7744 9.69891 18.6954 9.88968 18.5547 10.0303C18.4141 10.171 18.2233 10.25 18.0244 10.25H10.5244V17.75C10.5244 17.9489 10.4454 18.1397 10.3047 18.2803C10.1641 18.421 9.97333 18.5 9.77441 18.5C9.5755 18.5 9.38474 18.421 9.24408 18.2803C9.10343 18.1397 9.02441 17.9489 9.02441 17.75V10.25H1.52441C1.3255 10.25 1.13474 10.171 0.994084 10.0303C0.853432 9.88968 0.774414 9.69891 0.774414 9.5C0.774414 9.30109 0.853432 9.11032 0.994084 8.96967C1.13474 8.82902 1.3255 8.75 1.52441 8.75H9.02441V1.25C9.02441 1.05109 9.10343 0.860322 9.24408 0.71967C9.38474 0.579018 9.5755 0.5 9.77441 0.5C9.97333 0.5 10.1641 0.579018 10.3047 0.71967C10.4454 0.860322 10.5244 1.05109 10.5244 1.25V8.75H18.0244C18.2233 8.75 18.4141 8.82902 18.5547 8.96967C18.6954 9.11032 18.7744 9.30109 18.7744 9.5Z" fill="#2B4360" />
                                     </svg>
                                 </span>
-
                             </div>
                             <Accordion defaultActiveKey="0">
 
@@ -760,7 +758,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                     {item.semenAnalysis
                                                         === 'yes'
                                                         ? item.semenAnalysisContent
-                                                            ? `Yes, ${item.semenAnalysisContent}`
+                                                            ? `Yes | ${item.semenAnalysisContent}`
                                                             : 'Yes'
                                                         : 'No'}
                                                 </p>
@@ -774,7 +772,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                     {item.fertilityIssues
                                                         === 'yes'
                                                         ? item.fertilityIssuesContent
-                                                            ? `Yes, ${item.fertilityIssuesContent}`
+                                                            ? `Yes | ${item.fertilityIssuesContent}`
                                                             : 'Yes'
                                                         : 'No'}
                                                 </p>
@@ -789,7 +787,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                     {item.fertilityTreatment
                                                         === 'yes'
                                                         ? item.fertilityTreatmentContent
-                                                            ? `Yes, ${item.fertilityTreatmentContent}`
+                                                            ? `Yes | ${item.fertilityTreatmentContent}`
                                                             : 'Yes'
                                                         : 'No'}
                                                 </p>
@@ -804,7 +802,7 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                                                     {item.surgeries
                                                         === 'yes'
                                                         ? item.surgeriesContent
-                                                            ? `Yes, ${item.surgeriesContent}`
+                                                            ? `Yes | ${item.surgeriesContent}`
                                                             : 'Yes'
                                                         : 'No'}
                                                 </p>
@@ -816,7 +814,6 @@ export default function PartnerDetail({ setActiveTab }: { setActiveTab: (tab: st
                         </ContentContainer>
                     </Col>
                 </Row>
-
             )}
 
             <Modal

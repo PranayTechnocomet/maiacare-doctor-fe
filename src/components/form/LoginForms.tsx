@@ -321,7 +321,7 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
 
         if (validateForm()) {
             alert("Form Submitted");
-            router.push("/");
+            //  router.push("/"); // set route in success model
             setFormError(defaultFormError);
             setPasswordChangedSuccessModel(true)
         }

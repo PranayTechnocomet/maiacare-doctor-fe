@@ -1862,6 +1862,10 @@
     .support-accordion-content {
         font-size: 12px;
     }
+
+    .phisical-assessment-accordion-title-showData {
+        font-size: 18px;
+    }
 }
 
 @media screen and (max-width: 425px) {

@@ -223,6 +223,8 @@ body {
   background-color: transparent !important;
   color: inherit !important;
   box-shadow: none !important;
+  cursor: pointer !important;
+  
 }
 
 .payment-status {
@@ -237,6 +239,9 @@ body {
   left: 20px;
 }
 
+.cursor-pointer-custom {
+  cursor: pointer;
+}
 
 /* pankaj solanki end */
 

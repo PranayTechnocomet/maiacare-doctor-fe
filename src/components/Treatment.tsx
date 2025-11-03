@@ -1469,14 +1469,11 @@ function Treatment() {
                                                                             </div>
                                                                         </div>
 
-                                                                        <Button
+                                                                        {/* <Button
                                                                             className="mt-3"
                                                                             variant="outline"
                                                                             disabled={false}
                                                                             contentSize="small"
-                                                                            onClick={() => {
-                                                                                /*setEditForm(item); setEditFormShowModel(true); */
-                                                                            }}
                                                                         >
                                                                             <svg
                                                                                 width="16"
@@ -1492,7 +1489,8 @@ function Treatment() {
                                                                                 />
                                                                             </svg>
                                                                             Edit
-                                                                        </Button>
+                                                                        </Button> */}
+
                                                                     </Accordion.Body>
                                                                 </Accordion.Item>
                                                             </Col>
