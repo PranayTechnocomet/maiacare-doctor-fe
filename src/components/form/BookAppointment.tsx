@@ -453,10 +453,7 @@ export function BookAppointment({
                                     // </div>
 
                                     <div className="maiacare-input-field-container" ref={dropdownRef}>
-                                        <label className="d-block mb-1">
-                                            Name <span className="text-danger">*</span>
-                                        </label>
-
+                                        <InputFieldLabel label="Name" required={true} />
                                         <Form.Control
                                             type="text"
                                             name="patientName"
@@ -474,10 +471,7 @@ export function BookAppointment({
                                             onBlur={() => setTimeout(() => setOpen(false), 150)}
                                             onKeyDown={handleKeyDown}
                                         />
-
-                                        {formError.patientName && (
-                                            <small className="text-danger">{formError.patientName}</small>
-                                        )}
+                                        <InputFieldError error={formError.patientName} />
 
                                         <Dropdown className="custome-patient-dropdown" show={open}>
                                             <Dropdown.Menu className="w-100 mt-1 shadow">
@@ -486,7 +480,7 @@ export function BookAppointment({
                                                         <Dropdown.Item
                                                             key={item.id}
                                                             onClick={() => selectItem(item)}
-                                                            className={`d-flex align-items-center gap-2 ${index === highlightIndex ? "bg-primary text-white" : ""
+                                                            className={`d-flex align-items-center gap-2 ${index === highlightIndex ? "select-patient" : ""
                                                                 }`}
                                                         >
                                                             {item.ProfilePhoto?.src && (

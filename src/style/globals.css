@@ -220,11 +220,14 @@ body {
 .custome-patient-dropdown .dropdown-item:active,
 .custome-patient-dropdown .dropdown-item.active,
 .custome-patient-dropdown .dropdown-item:focus {
-  background-color: transparent !important;
+   background-color: var(--color-progressbar-secondary) !important;
   color: inherit !important;
   box-shadow: none !important;
   cursor: pointer !important;
   
+}
+.custome-patient-dropdown .dropdown-item.select-patient {
+  background-color: var(--color-progressbar-secondary) !important;
 }
 
 .payment-status {
