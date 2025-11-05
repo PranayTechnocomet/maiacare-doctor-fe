@@ -161,7 +161,14 @@ function MedicationAndTests({
                         header="Edit Medication Prescription"
                         closeButton={true}
                     >
-                        <MedicationPrescriptionForm editForm={editForm} setMedicalPrescription={setMedicalPrescription} setShowEditFormShowModel={setShowEditFormShowModel} medicalPrescription={medicalPrescription} medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide} setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide} />
+                        <MedicationPrescriptionForm
+                            editForm={editForm}
+                            setMedicalPrescription={setMedicalPrescription}
+                            setShowEditFormShowModel={setShowEditFormShowModel}
+                            medicalPrescription={medicalPrescription}
+                            medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                            setMedicalPrescriptionDataShowHide={setMedicalPrescriptionDataShowHide}
+                        />
                     </Modal>
 
                 </>

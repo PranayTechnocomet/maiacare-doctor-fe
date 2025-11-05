@@ -10,6 +10,7 @@ import patientImg1 from "../assets/images/patient-img-1.png"
 import patientImg2 from "../assets/images/patient-img-2.png"
 import patientImg3 from "../assets/images/patient-img-3.png"
 import patientImg4 from "../assets/images/patient-img-4.png"
+import { ColumnDef } from "@tanstack/react-table";
 
 export const tableResponse: Patient[] = [
   {
@@ -613,3 +614,104 @@ export const EditTreatmentStaticData = {
 
 }
 
+export const leaveData: LeaveEntry[] = [
+  {
+    id: '01',
+    type: 'Casual leave',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '1 Day',
+  },
+  {
+    id: '02',
+    type: 'Sick leave',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '3 Days',
+  },
+  {
+    id: '03',
+    type: 'Vacation',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '15 Days',
+  },
+  {
+    id: '04',
+    type: 'Family Thing',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '1 Day',
+  },
+  {
+    id: '05',
+    type: 'Sick leave',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '2 Days',
+  },
+  {
+    id: '06',
+    type: 'Casual leave',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '1 Day',
+  },
+  {
+    id: '07',
+    type: 'Family thing',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '2 Days',
+  },
+  {
+    id: '08',
+    type: 'Casual leave',
+    startDate: '12/08/25',
+    endDate: '12/08/25',
+    days: '1 Day',
+  },
+];
+export const leaveColumns: ColumnDef<LeaveEntry>[] = [
+  {
+    header: '#',
+    accessorKey: 'id',
+  },
+  {
+    header: 'Leave Type',
+    accessorKey: 'type',
+  },
+  {
+    header: 'Start Date',
+    accessorKey: 'startDate',
+  },
+  {
+    header: 'End Date',
+    accessorKey: 'endDate',
+  },
+  {
+    header: 'No. of days',
+    accessorKey: 'days',
+  },
+  // {
+  //   header: 'Action',
+  //   cell: () => (
+  //     <div className="d-flex gap-2">
+  //       <button className="btn btn-sm profile-card-boeder ">
+  //         <Image src={LightEditimg} alt="Specialization" width={18} height={20} />
+  //       </button>
+
+  //       <button className="btn btn-sm profile-card-boeder">
+  //         <Image src={Trash} alt="Specialization" width={18} height={20} />
+  //       </button>
+  //     </div>
+  //   ),
+  // },
+];
+export type LeaveEntry = {
+  id: string;
+  type: string;
+  startDate: string;
+  endDate: string;
+  days: string;
+};

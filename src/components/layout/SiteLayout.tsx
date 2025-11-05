@@ -59,9 +59,8 @@ const SiteLayout = ({ collapsed, setCollapsed, children }: Props) => {
     <div className="layout">
       {/* ====== DESKTOP SIDEBAR ====== */}
       <aside
-        className={`sidebar desktop-sidebar ${
-          collapsed ? "sidebar--collapsed" : "sidebar--expanded"
-        }`}
+        className={`sidebar desktop-sidebar ${collapsed ? "sidebar--collapsed" : "sidebar--expanded"
+          }`}
       >
         <button
           type="button"
@@ -113,12 +112,12 @@ const SiteLayout = ({ collapsed, setCollapsed, children }: Props) => {
       <aside className={`sidebar offcanvas-sidebar ${showOffcanvas ? "open" : ""}`}>
         <div className="offcanvas-header">
           <button
-          type="button"
-          className="sidebar__toggle"
-          onClick={() => setShowOffcanvas(false)}
-        >
-           <HiOutlineChevronDoubleLeft size={18} />
-        </button>
+            type="button"
+            className="sidebar__toggle"
+            onClick={() => setShowOffcanvas(false)}
+          >
+            <HiOutlineChevronDoubleLeft size={18} />
+          </button>
         </div>
         <div className="sidebar__top">
           <Link href="/" className="sidebar__logo-link" onClick={() => setShowOffcanvas(false)}>
@@ -140,7 +139,7 @@ const SiteLayout = ({ collapsed, setCollapsed, children }: Props) => {
                 </Link>
               );
             })}
-            
+
           </Nav>
         </div>
 
@@ -178,9 +177,9 @@ const SiteLayout = ({ collapsed, setCollapsed, children }: Props) => {
             <span className="header-icon-container">
               <RiChat3Line size={18} />
             </span>
-            <span className="header-icon-container">
+            <Link href="/notifications" className="header-icon-container sitelayout-header-icon" >
               <RiNotificationLine size={18} />
-            </span>
+            </Link>
           </div>
         </header>
         <div className="layout__body">{children}</div>

@@ -24,7 +24,6 @@ function PasswordSettings() {
 
     const initialFormError: FormError = {};
 
-    const [showModal, setShowModal] = useState(false);
     const [formError, setFormError] = useState<FormError>(initialFormError);
     const [formData, setFormData] = useState<FormData>({
         currentpassword: "",
@@ -115,7 +114,7 @@ function PasswordSettings() {
         setFormError(errors);
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
-            setShowModal(true);
+           
             setFormError(initialFormError);
         }
     };
@@ -260,15 +259,6 @@ function PasswordSettings() {
                         Save Password
                     </Button>
                 </div>
-
-                <Modal
-                    show={showModal}
-                    onHide={() => setShowModal(false)}
-                    header="Modal Header"
-                    closeButton={true}
-                >
-                    <h2 className="mb-0 text-center">Form Submitted Successfully</h2>
-                </Modal>
 
             </form>
         </>

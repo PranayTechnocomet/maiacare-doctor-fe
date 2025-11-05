@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Col, Container, Row } from 'react-bootstrap';
 import { IoIosArrowForward } from "react-icons/io";
 import { useRouter } from 'next/navigation';
-
 import Logo from "../assets/images/Maia Logo.png";
 import PregnecyWomanLogin from "../assets/images/Pregnecy_Woman_Login.png";
 import Individual from "../assets/images/Profile_Doctor.png";

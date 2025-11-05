@@ -191,64 +191,118 @@ export function QuantityNumber({
     );
 }
 
+// export function TimeSlotCheckBox({
+//     name,
+//     value,
+//     error,
+//     onChange }: {
+//         name?: string;
+//         value?: string[];
+//         error?: string;
+//         onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void
+//     }) {
+
+//     const [selectedSlots, setSelectedSlots] = useState<string[]>(value || ['morning']);
+
+//     const handleToggle = (value: string) => {
+//         if (selectedSlots.includes(value)) {
+//             setSelectedSlots(selectedSlots.filter((v) => v !== value));
+//         } else {
+//             setSelectedSlots([...selectedSlots, value]);
+//         }
+//         if (onChange) {
+//             const updatedSelectedSlots = [...selectedSlots];
+//             updatedSelectedSlots.includes(value)
+//                 ? updatedSelectedSlots.splice(updatedSelectedSlots.indexOf(value), 1)
+//                 : updatedSelectedSlots.push(value);
+//             onChange({ target: { name, value: updatedSelectedSlots } } as any);
+//         }
+//     };
+
+//     return (
+//         <>
+//             <Row className="g-3">
+//                 {timeSlots.map((slot, index) => (
+//                     <Col lg={3} sm={6} key={index}>
+//                         <label
+//                             key={slot.value}
+//                             className={`timeslot-card d-flex justify-content-between ${selectedSlots.includes(slot.value) ? "selected" : ""}`}
+//                         >
+//                             <div className="d-flex align-items-center gap-2">
+//                                 <div className="timeslot-icon">
+//                                     {slot.icon}
+//                                 </div>
+//                                 <span className="ms-2">{slot.label}</span>
+//                             </div>
+//                             <Form.Check
+//                                 type="checkbox"
+//                                 name={name}
+//                                 checked={selectedSlots.includes(slot.value)}
+//                                 onChange={() => { handleToggle(slot.value); }}
+//                                 className="m-0"
+//                             />
+//                         </label>
+//                     </Col>
+//                 ))}
+//             </Row>
+
+//             {error && <InputFieldError error={error} />}
+//         </>
+//     )
+// }
+
 export function TimeSlotCheckBox({
-    name,
-    value,
-    error,
-    onChange }: {
-        name?: string;
-        value?: string[];
-        error?: string;
-        onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void
-    }) {
+  name,
+  value = ["morning"],
+  error,
+  onChange,
+}: {
+  name?: string;
+  value?: string[];
+  error?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement | any>) => void;
+}) {
+  const handleToggle = (slotValue: string) => {
+    const updatedSelectedSlots = value.includes(slotValue)
+      ? value.filter((v) => v !== slotValue)
+      : [...value, slotValue];
 
-    const [selectedSlots, setSelectedSlots] = useState<string[]>(value || []);
+    onChange?.({
+      target: { name, value: updatedSelectedSlots },
+    } as any);
+  };
 
-    const handleToggle = (value: string) => {
-        if (selectedSlots.includes(value)) {
-            setSelectedSlots(selectedSlots.filter((v) => v !== value));
-        } else {
-            setSelectedSlots([...selectedSlots, value]);
-        }
-        if (onChange) {
-            const updatedSelectedSlots = [...selectedSlots];
-            updatedSelectedSlots.includes(value)
-                ? updatedSelectedSlots.splice(updatedSelectedSlots.indexOf(value), 1)
-                : updatedSelectedSlots.push(value);
-            onChange({ target: { name, value: updatedSelectedSlots } } as any);
-        }
-    };
+  return (
+    <>
+      <Row className="g-3">
+        {timeSlots.map((slot, index) => (
+          <Col lg={3} sm={6} key={index}>
+            <label
+              key={slot.value}
+              className={`timeslot-card d-flex justify-content-between ${
+                value.includes(slot.value) ? "selected" : ""
+              }`}
+            >
+              <div className="d-flex align-items-center gap-2">
+                <div className="timeslot-icon">{slot.icon}</div>
+                <span className="ms-2">{slot.label}</span>
+              </div>
+              <Form.Check
+                type="checkbox"
+                name={name}
+                checked={value.includes(slot.value)}
+                onChange={() => handleToggle(slot.value)}
+                className="m-0"
+              />
+            </label>
+          </Col>
+        ))}
+      </Row>
 
-    return (
-        <>
-            <Row className="g-3">
-                {timeSlots.map((slot, index) => (
-                    <Col lg={3} sm={6} key={index}>
-                        <label
-                            key={slot.value}
-                            className={`timeslot-card d-flex justify-content-between ${selectedSlots.includes(slot.value) ? "selected" : ""}`}
-                        >
-                            <div className="d-flex align-items-center gap-2">
-                                <div className="timeslot-icon">
-                                    {slot.icon}
-                                </div>
-                                <span className="ms-2">{slot.label}</span>
-                            </div>
-                            <Form.Check
-                                type="checkbox"
-                                name={name}
-                                checked={selectedSlots.includes(slot.value)}
-                                onChange={() => { handleToggle(slot.value); }}
-                                className="m-0"
-                            />
-                        </label>
-                    </Col>
-                ))}
-            </Row>
-
-            {error && <InputFieldError error={error} />}
-        </>
-    )
+      {error && <InputFieldError error={error} />}
+    </>
+  );
 }
+
 
 
