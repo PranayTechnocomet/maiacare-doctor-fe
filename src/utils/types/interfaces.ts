@@ -207,6 +207,7 @@ export interface ProgressUpdatesType {
   patient: FertilityAssessmentFormType;
   partner: FertilityAssessmentHistory;
   medicalPrescription: MedicationPrescriptionType[];
+  report : PatientReportType[]
   StatusAndUpdates: TreatmentProgressStatusType;
 }
 
@@ -287,3 +288,9 @@ export interface PatientCalenderFormType {
   additionalNote: string
 }
 
+export interface PatientReportType {
+  reportName: string;
+  name: string;
+  size: string;
+  uploadedAt: number;
+}

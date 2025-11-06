@@ -1,9 +1,6 @@
 "use client";
 
-import { AppDispatch } from "@/utils/redux/store";
-import { useDispatch } from "react-redux";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { setHeaderData } from "@/utils/redux/slices/headerSlice";
+
 import { Accordion, Col, Nav, Row, Tab } from "react-bootstrap";
 import ContentContainer from "@/components/ui/ContentContainer";
 import Image from "next/image";

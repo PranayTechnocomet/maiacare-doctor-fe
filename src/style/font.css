@@ -224,6 +224,7 @@
     line-height: 20px;
     color: var(--input-forgot-password);
     font-style: bold;
+    
 }
 
 .login-google-button {
@@ -454,6 +455,7 @@
     font-style: Regular;
     color: var(--color-radio-lable);
 }
+
 
 .contact-details-emergency {
     font-weight: 600;
@@ -1074,6 +1076,13 @@
     line-height: 20px;
     font-style: Regular;
     color: var(--color-sidebar-icon);
+
+    /* Ellipsis (truncation) setup */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block; /* or inline-block if inline context */
+    width: 100%; /* make sure container width is defined */
 }
 
 .patient-report-box-fileInfo {
@@ -1701,7 +1710,6 @@
 
     .settings-accordion-subtitle {
         font-size: 13px;
-
     }
 
     .support-faqs-title {

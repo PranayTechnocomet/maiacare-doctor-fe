@@ -80,6 +80,10 @@
     cursor: pointer;
 }
 
+.forgot-passwored-detail{
+    max-width: 860px;
+}
+
 /* apply this media 1524px > big screen */
 /* @media screen and (min-width: 1940px) {
     .forgot-password-screen {
@@ -173,10 +177,6 @@
         width: 35%;
     }
 }
-.forgot-passwored-detail{
-    max-width: 860px;
-}
-
 
 @media  screen and (min-width: 1100px) {
     .forgot-passwored-detail{

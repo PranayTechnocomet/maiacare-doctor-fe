@@ -42,10 +42,10 @@ export function LoginForms() {
     const validateForm = () => {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
-         // const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+        // const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
         // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.(com|in)$/;
-        
+
         if (formData.password.trim() === "") {
             errors.password = "Password is required";
             isValid = false;
@@ -123,9 +123,6 @@ export function LoginForms() {
                     </InputFieldGroup> */}
 
 
-
-
-
                     <InputFieldGroup
                         type={showPassword ? 'text' : 'password'}
                         label="Password"
@@ -147,7 +144,7 @@ export function LoginForms() {
                             className="position-absolute  end-0 translate-middle-y me-3 cursor-pointer passwored-btn-icon"
                             style={{ zIndex: 8 }}
                         >
-                            {showPassword ? <BiShow size={20} className='passwored-eye-icon eye-color' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
+                            {showPassword ? <BiShow size={20} className='passwored-eye-icon eye-color ' /> : <BiHide size={20} className='passwored-eye-icon eye-color' />}
 
                         </span>
                     </InputFieldGroup>
@@ -213,7 +210,6 @@ export function ForgotPassword() {
             alert("Form Submitted");
             router.push("/verificationcode");
             setFormError(defaultFormError);
-            console.log(data);
             localStorage.setItem('useremail', data.email);
 
         }
@@ -415,13 +411,20 @@ export function VerifyOtp() {
         const errors: typeof defaultFormError = { ...defaultFormError };
         let isValid = true;
 
-        if (!formData.number) {
-            errors.number = "Verification Code is required";
-            isValid = false;
-        }else if (formData.number.length !== 123456) {
+        // if (!formData.number) {
+        //     errors.number = "Verification Code is required";
+        //     isValid = false;
+        // }else if (formData.number.length !== 123456) {
+        //     errors.number = "Please enter valid code";
+        //     isValid = false;
+        // }
+
+        if (formData.number.length !== 6) {
             errors.number = "Please enter valid code";
             isValid = false;
         }
+
+
         setFormError(errors);
         return isValid;
     };
@@ -430,8 +433,8 @@ export function VerifyOtp() {
         e.preventDefault();
 
         if (validateForm()) {
-            
-            if (formData.number !== "123456") {
+
+            if (formData.number.length !== 6) {
                 alert("Please enter valid code");
                 return;
             }
