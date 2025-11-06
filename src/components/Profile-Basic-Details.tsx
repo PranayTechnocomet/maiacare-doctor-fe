@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
-import { Container, Row, Col,  Form, Table, Accordion } from 'react-bootstrap';
+import { Container, Row, Col, Form, Table, Accordion } from 'react-bootstrap';
 import Add from "../../assets/images/Add.png";
 import Delete from "../assets/images/Delete.png";
 import LightEditimg from "../assets/images/LightEditimg.png";
@@ -113,10 +113,6 @@ const ProfileBasicDetailsTabs = () => {
     { days: "Mon to Fri", time: "10 AM – 5 PM" },
     { days: "Sat & Sun", time: "10 AM – 2 PM" },
   ];
-
-
-
-
 
   //================  + add  Modal all data below ============= //
 
@@ -311,17 +307,6 @@ const ProfileBasicDetailsTabs = () => {
 
 
   const [editIndex, setEditIndex] = useState<number | null>(null); // track current editing row
-
-
-
-
-
-
-
-
-
-
-
 
   return (
     // <Container fluid className="mt-3">
@@ -535,7 +520,7 @@ const ProfileBasicDetailsTabs = () => {
                         qualifications.length > 0 &&
                         !isQualificationComplete(qualifications[qualifications.length - 1])
                       }
-                     >
+                    >
                       + Add Qualification
                     </Button>
 
@@ -721,43 +706,62 @@ const ProfileBasicDetailsTabs = () => {
             </ContentContainer>
           </div>
 
-          {/* Documents */}
-          <div>
-            <ContentContainer className="mt-4">
-              <div>
-                <h5 className="mb-4 profile-card-main-titile">Documents</h5>
+          <ContentContainer className="mt-4">
+            <h5 className="mb-4 profile-card-main-titile">Services Offered & Fee</h5>
 
-                {documents.map((doc, index) => (
-                  <div
-                    className="d-flex justify-content-between align-items-center border profile-card-boeder p-3 mb-3 document-main-border"
-                    key={index}
-                  >
-                    <div className="d-flex align-items-center">
-                      <Image
-                        src={Pdfimg}
-                        alt="pdf"
-                        width="40"
-                        className="me-3"
-                      />
-                      <div>
-                        <div className="card-feild">{doc.name}</div>
-                        <div className="card-year">{doc.date}</div>
-                      </div>
-                    </div>
-
-                    <button
-                      className="d-flex  bg-white justify-content-center align-items-center border profile-card-boeder rounded Download-border"
-                      onClick={() => handleDownload(`/files/${doc.name}.pdf`, doc.name)}
-                    >
-                      <Image src={Download} alt="experience" width={25} height={25} />
-                    </button>
-                  </div>
-                ))}
-
+            <span className="patient-treatment-box-subtitle">Services</span>
+            <div className='d-flex gap-2'>
+              <div className='box-border-orange'>
+                <span className='border-box-orange-font'>Fertility Support</span>
               </div>
+              <div className='box-border-orange'>
+                <span className='border-box-orange-font'>IUI</span>
+              </div>
+              <div className='box-border-orange'>
+                <span className='border-box-orange-font'>IVF</span>
+              </div>
+              <div className='box-border-orange'>
+                <span className='border-box-orange-font'>Egg Freezing</span>
+              </div>
+            </div>
 
-            </ContentContainer>
-          </div>
+          </ContentContainer>
+          {/* Documents */}
+
+          <ContentContainer className="mt-4">
+            <div>
+              <h5 className="mb-4 profile-card-main-titile">Documents</h5>
+
+              {documents.map((doc, index) => (
+                <div
+                  className="d-flex justify-content-between align-items-center border profile-card-boeder p-3 mb-3 document-main-border"
+                  key={index}
+                >
+                  <div className="d-flex align-items-center">
+                    <Image
+                      src={Pdfimg}
+                      alt="pdf"
+                      width="40"
+                      className="me-3"
+                    />
+                    <div>
+                      <div className="card-feild">{doc.name}</div>
+                      <div className="card-year">{doc.date}</div>
+                    </div>
+                  </div>
+
+                  <button
+                    className="d-flex  bg-white justify-content-center align-items-center border profile-card-boeder rounded Download-border"
+                    onClick={() => handleDownload(`/files/${doc.name}.pdf`, doc.name)}
+                  >
+                    <Image src={Download} alt="experience" width={25} height={25} />
+                  </button>
+                </div>
+              ))}
+
+            </div>
+
+          </ContentContainer>
 
         </Col>
       </Row>

@@ -3,10 +3,29 @@
 import { MedicationPrescriptionType, ProgressUpdatesType } from "@/utils/types/interfaces";
 import { Accordion, ProgressBar } from "react-bootstrap";
 import { TreatmentFertilityAssessmentPartner, TreatmentFertilityAssessmentPatient, TreatmentProgressStatus } from "./form/TreatmentAllForm";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CustomTabs from "./ui/CustomTabs";
 import Button from "./ui/Button";
 import { MedicationPrescriptionForm } from "./form/TreatmentPlanForm";
+import Image from "next/image";
+import Modal from "./ui/Modal";
+
+import Jpgimg from "@/assets/images/Jpgimg.png";
+import PDFAddhar from "@/assets/images/PDFAddhar.png";
+import pdfimg from "@/assets/images/Pdfimg.png";
+import uplodimg from "@/assets/images/Upload.png";
+import EditProfile from "@/assets/images/EditProfile.png";
+import GreenRight from "@/assets/images/GreenRight.png";
+import Trash from "@/assets/images/Trash.png";
+import Cross from "@/assets/images/Cross.png";
+import Delete from "@/assets/images/Delete.png";
+import Pluslight from "@/assets/images/Pluslight.png";
+import Add from "@/assets/images/Add.png";
+import Loading from "@/assets/images/Loading.png";
+import Completed from "@/assets/images/Completed.png";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRouter } from 'next/navigation';
+import { InputFieldGroup } from "./ui/InputField";
 
 export function ProgressUpdatesEditForm({
     setStep,
@@ -41,7 +60,6 @@ export function ProgressUpdatesEditForm({
 }) {
 
     const [activeTab, setActiveTab] = useState<string>("patient");
-
     const tabOptions = [
         {
             key: "patient",
@@ -74,6 +92,187 @@ export function ProgressUpdatesEditForm({
         }
     ];
 
+
+    interface FormError {
+        [key: string]: string;
+
+    }
+    const initialFormError: FormError = {};
+
+    const [showModal, setShowModal] = useState(false);
+    const [formError, setFormError] = useState<FormError>(initialFormError);
+    const [selectedFile, setSelectedFile] = useState<UploadedFile | null>(null);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [fileError, setFileError] = useState<string>("");
+
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const panFileRef = useRef<HTMLInputElement | null>(null)
+    const aadharFileRef = useRef<HTMLInputElement>(null);
+    const licenceFileRef = useRef<HTMLInputElement>(null);
+
+
+    interface UploadedFile {
+        name: string;
+        size: string;
+        progress?: number;
+        status: "uploading" | "completed";
+        reportName: string;
+        uploadedAt?: number; // timestamp (new Date().getTime())
+        // KYC ADHAR,PAN,LICEN CARD 
+        date?: string;       // For uploaded date
+        preview?: string;    // For preview URL or icon
+        actualSize?: string; // For original file size
+    }
+
+
+
+    // Add Button click in modal open //
+    const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([
+        {
+            name: "MD_Gynaecologist_Certificate.pdf",
+            size: "60 KB of 120 KB",
+            progress: 50,
+            status: "uploading",
+            reportName: "",
+        },
+        {
+            name: "MBBS_Certificate.pdf",
+            size: "60 KB",
+            status: "completed",
+            reportName: "MBBS Certificate",
+        },
+    ]);
+
+    const handleOpenModal = () => {
+        setUploadedFiles([]); // reset every time modal opens
+        setShowModal(true);
+    };
+
+    const handleButtonClick = () => {
+        fileInputRef.current?.click();
+    };
+
+
+    //file size , file name / select file 
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // Validation rules
+        const allowedTypes = ["image/svg+xml", "image/png", "image/jpeg", "application/pdf"];
+        const maxSize = 10 * 1024 * 1024; // 10 MB
+
+        if (!allowedTypes.includes(file.type)) {
+            setFileError(`Only SVG, PNG, JPG Allowed.`);
+            return;
+        }
+
+        if (file.size > maxSize) {
+            setFileError(`Exceeds 10MB limit.`);
+            return;
+        }
+
+        setFileError("");
+
+        // Check if file already uploaded
+
+        const exists = uploadedFiles.some((f) => f.name === file.name && f.size === `${Math.round(file.size / 1024)} KB`);
+        if (exists) {
+            setFileError("This file is already uploaded.");
+            return;
+        }
+
+        const sizeInKB = `${Math.round(file.size / 1024)} KB`;
+        const fileURL = URL.createObjectURL(file);
+
+        const newFile: UploadedFile = {
+            name: file.name,
+            size: sizeInKB,
+            progress: 0,
+            status: "uploading",
+            reportName: "",
+            preview: fileURL,
+            uploadedAt: Date.now(), // 👈 upload date store
+        };
+
+        setSelectedFile(newFile);
+        setUploadedFiles((prev) => [...prev, newFile]);
+        simulateUpload(file, sizeInKB);
+
+        e.target.value = "";
+    };
+
+
+    // MODAL DATA SHOW IN PERVIOUS PAGE  Qualificataion
+    const simulateUpload = (file: File, totalSize: string) => {
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 10;
+
+            setUploadedFiles((prev) =>
+                prev.map((f) =>
+                    f.name === file.name
+                        ? {
+                            ...f,
+                            progress: Math.min(progress, 100),
+                            size:
+                                progress < 100
+                                    ? `${Math.floor((progress / 100) * parseInt(totalSize))} KB of ${totalSize}`
+                                    : `${totalSize}`,
+                            status: progress >= 100 ? "completed" : "uploading",
+                        }
+                        : f
+                )
+            );
+
+            if (progress >= 100) clearInterval(interval);
+        }, 300);
+    };
+
+    const handleSave = () => {
+        let newErrors: { [key: number]: string } = {};
+
+        // ✅ Validation: Required + unique report names
+        const reportNames: string[] = [];
+        uploadedFiles.forEach((file, index) => {
+            if (!file.reportName.trim()) {
+                newErrors[index] = "Report Name is required";
+            } else if (reportNames.includes(file.reportName.trim())) {
+                newErrors[index] = "Report Name must be unique";
+            } else {
+                reportNames.push(file.reportName.trim());
+            }
+        });
+
+        setErrors(newErrors);
+
+        if (Object.keys(newErrors).length > 0) {
+            return; // stop saving
+        }
+
+        // ✅ Move completed files
+        const completed = uploadedFiles.filter((f) => f.status === "completed");
+
+        // setCompletedFiles((prev) => [...prev, ...completed]);
+        // setPatientReportData((prev: any) => [...prev, ...completed]);
+        // setPatientReport((prev: any) => [...prev, ...completed]);
+        // setProgressUpdatesData((prev: any) => ({ ...prev, report: [...prev.report, ...completed] }));
+        setModalFormFertilityData((prev: any) => ({ ...prev, report: [...prev.report, ...completed] }));
+
+        setUploadedFiles([]);
+        setShowModal(false);
+        setStep?.((prev: any) => prev + 1);
+        setStepper?.((prev: any) => prev + 1);
+    };
+    const handleClose = () => {
+        setShowModal(false);
+        setFileError("");       // file upload error reset (jo use karto hoy to)
+    };
+
+    // console.log("test", patientReport);
+
+
     return (
         <>
             <div className="d-flex align-items-center mb-4">
@@ -98,7 +297,7 @@ export function ProgressUpdatesEditForm({
 
             {step == 1 && (
                 <>
-                 <h6 className="dashboard-chart-heading pb-2">Fertility Assessment</h6>
+                    <h6 className="dashboard-chart-heading pb-2">Fertility Assessment</h6>
                     <CustomTabs
                         tabOptions={tabOptions}
                         className="mb-3"
@@ -199,29 +398,169 @@ export function ProgressUpdatesEditForm({
 
             {step == 3 && (
                 <>
-                    <h6>Upload Reports call modal</h6>
+                    <div className=" modal-border-color rounded-4 p-4 text-center mb-4 upload-report-data">
+                        <div className="mb-2">
+                            <Image src={uplodimg} alt="upload" width={35} height={35} className="modal-bg p-1 rounded-2" />
+                        </div>
+                        <div>Click here to upload your file or drag.</div>
+                        <small className="kyc-modal-subheading">Supported Format: SVG, JPG, PNG (10mb each)</small>
+                        <div className="mt-3">
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                accept=".jpg,.jpeg,.png,.pdf"
+                                onChange={handleFileChange}
+                                className="kyc-edit-aadhar-photo"
+                            />
+                            <Button variant="outline" onClick={handleButtonClick}>
+                                Browse File
+                            </Button>
+                        </div>
+                        {fileError && <div className="text-danger mt-2">{fileError}</div>}
 
-                    <div className="d-flex gap-3">
-                        <Button variant="outline" onClick={() => { setStep?.((prev: any) => prev - 1); setStepper?.((prev: any) => prev - 1); }} className="w-100">
-                            <div className="d-flex justify-content-center align-items-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
-                                    <path d="M19.1249 8.00001C19.1249 8.29838 19.0064 8.58452 18.7954 8.7955C18.5844 9.00648 18.2983 9.12501 17.9999 9.12501H4.21866L9.04866 13.9541C9.26 14.1654 9.37874 14.4521 9.37874 14.7509C9.37874 15.0498 9.26 15.3365 9.04866 15.5478C8.83732 15.7592 8.55067 15.8779 8.25179 15.8779C7.9529 15.8779 7.66625 15.7592 7.45491 15.5478L0.704911 8.79782C0.600031 8.6933 0.516814 8.56911 0.460033 8.43237C0.403252 8.29562 0.374023 8.14901 0.374023 8.00094C0.374023 7.85288 0.403252 7.70627 0.460033 7.56952C0.516814 7.43278 0.600031 7.30859 0.704911 7.20407L7.45491 0.454069C7.55956 0.349422 7.68379 0.266411 7.82052 0.209777C7.95725 0.153142 8.10379 0.123993 8.25179 0.123993C8.39978 0.123993 8.54632 0.153142 8.68305 0.209777C8.81978 0.266411 8.94401 0.349422 9.04866 0.454069C9.15331 0.558716 9.23632 0.68295 9.29295 0.819679C9.34959 0.956407 9.37874 1.10295 9.37874 1.25094C9.37874 1.39894 9.34959 1.54548 9.29295 1.68221C9.23632 1.81894 9.15331 1.94317 9.04866 2.04782L4.21866 6.87501H17.9999C18.2983 6.87501 18.5844 6.99353 18.7954 7.20451C19.0064 7.41549 19.1249 7.70164 19.1249 8.00001Z" fill="#2B4360" />
-                                </svg>
-                                Previous
+                    </div>
+
+                    {/* Uploaded files list (below browse) */}
+                    {uploadedFiles.map((file, index) => (
+                        <div
+                            key={index}
+                            className="p-3 mb-4 bg-white modal-border-color rounded-4 border"
+                        >
+                            <div className="modal-bg p-3 rounded-3 ">
+                                <div className="d-flex justify-content-between align-items-start">
+                                    {/* File Info */}
+                                    <div className="d-flex align-items-center gap-3">
+
+                                        {/* <Image
+                                                src={
+                                                    file.name.toLowerCase().endsWith(".pdf")
+                                                        ? PDFAddhar
+                                                        : [".jpg", ".jpeg", ".png", ".gif"].some((ext) =>
+                                                            file.name.toLowerCase().endsWith(ext)
+                                                        )
+                                                            ? Jpgimg
+                                                            : PDFAddhar // fallback = pdf icon
+                                                }
+                                                alt={file.name}
+                                                width={45}
+                                                height={50}
+                                            /> */}
+
+                                        <div>
+                                            <div className="fw-semibold file-name-ellipsis">
+                                                {file.name}
+                                            </div>
+                                            <div className="d-flex align-items-center gap-2">
+                                                <span className="profile-sub-title">{file.size}</span>
+                                                <span>•</span>
+                                                {file.status === "uploading" ? (
+                                                    <span className="d-flex align-items-center gap-1 upload-text">
+                                                        <Image src={Loading} alt="loading" width={20} height={20} />
+                                                        Uploading...
+                                                    </span>
+                                                ) : (
+                                                    <span className="d-flex align-items-center gap-1 text-success">
+                                                        <Image src={Completed} alt="completed" width={20} height={20} />
+                                                        Completed
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Close/Delete Icon */}
+                                    <button
+                                        className="btn border-0 bg-transparent"
+                                        onClick={() => {
+                                            setUploadedFiles((prev) =>
+                                                prev.filter((_, i) => i !== index)
+                                            );
+                                        }}
+                                    >
+                                        {file.status === "uploading" ? (
+                                            <Image src={Cross} alt="edit" width={22} height={22} />
+                                        ) : (
+                                            <Image src={Delete} alt="edit" width={22} height={22} />
+                                        )}
+                                    </button>
+                                </div>
+
+                                {/* Progress Bar */}
+                                {file.status === "uploading" && (
+                                    <div className="mt-3">
+                                        <div className="progress rounded-pill qualification-certificates-progress-bar">
+                                            <div
+                                                className="progress-bar rounded-pill custom-progress"
+                                                role="progressbar"
+                                                style={{ width: `${file.progress}%` }}
+                                            />
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-                        </Button>
 
-                        <Button variant="default" onClick={() => { setStep?.((prev: any) => prev + 1); setStepper?.((prev: any) => prev + 1); }} className="w-100">
-                            <div className="d-flex justify-content-center align-items-center gap-2">
+                            {/* Report Name Input */}
+                            <div className="mt-4 mb-3">
 
-                                Next
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 20 16" fill="none">
-                                    <path d="M19.2959 8.79592L12.5459 15.5459C12.3346 15.7573 12.0479 15.876 11.7491 15.876C11.4502 15.876 11.1635 15.7573 10.9522 15.5459C10.7408 15.3346 10.6221 15.0479 10.6221 14.749C10.6221 14.4502 10.7408 14.1635 10.9522 13.9522L15.7812 9.12498H2C1.70163 9.12498 1.41548 9.00645 1.2045 8.79548C0.993526 8.5845 0.875 8.29835 0.875 7.99998C0.875 7.70161 0.993526 7.41546 1.2045 7.20449C1.41548 6.99351 1.70163 6.87498 2 6.87498H15.7812L10.9541 2.04498C10.7427 1.83364 10.624 1.54699 10.624 1.24811C10.624 0.94922 10.7427 0.662575 10.9541 0.451231C11.1654 0.239887 11.4521 0.121155 11.7509 0.121155C12.0498 0.121155 12.3365 0.239887 12.5478 0.451231L19.2978 7.20123C19.4027 7.30589 19.4859 7.43024 19.5426 7.56714C19.5993 7.70403 19.6284 7.85079 19.6282 7.99896C19.6281 8.14714 19.5986 8.29383 19.5416 8.43059C19.4846 8.56736 19.4011 8.69151 19.2959 8.79592Z" fill="white" />
-                                </svg>
+                                <div className="d-flex align-items-center gap-2">
+                                    <InputFieldGroup
+                                        label="Report Name"
+                                        name="university"
+                                        className="w-100"
+                                        type="text"
+                                        value={file.reportName}
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            setUploadedFiles((prev) =>
+                                                prev.map((f, i) =>
+                                                    i === index ? { ...f, reportName: value } : f
+                                                )
+                                            );
+                                            setErrors((prev) => {
+                                                const updated = { ...prev };
+                                                delete updated[index];
+                                                return updated;
+                                            });
+                                        }}
+                                        onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+                                        placeholder="Enter Report Name"
+                                        required={true}
+                                        disabled={false}
+                                        readOnly={false}   // ✅ remove or set false
+                                        error={formError.university}
+                                    />
+                                    <div
+                                        className="d-flex align-items-center justify-content-center border rounded-3 p-2 bg-white qualification-certificates-edit-btn"
+
+                                    >
+                                        {file.status === "completed" ? (
+                                            // <Image src={EditProfile} alt="edit" width={20} height={20} />
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.2594 4.23184L11.768 0.741217C11.6519 0.625114 11.5141 0.533014 11.3624 0.470178C11.2107 0.407342 11.0482 0.375 10.884 0.375C10.7198 0.375 10.5572 0.407342 10.4056 0.470178C10.2539 0.533014 10.1161 0.625114 10 0.741217L0.366412 10.3748C0.249834 10.4905 0.157407 10.6281 0.0945056 10.7798C0.0316038 10.9315 -0.000518312 11.0942 6.32418e-06 11.2584V14.7498C6.32418e-06 15.0813 0.131702 15.3993 0.366123 15.6337C0.600543 15.8681 0.918486 15.9998 1.25001 15.9998H14.375C14.5408 15.9998 14.6997 15.934 14.8169 15.8168C14.9342 15.6995 15 15.5406 15 15.3748C15 15.2091 14.9342 15.0501 14.8169 14.9329C14.6997 14.8157 14.5408 14.7498 14.375 14.7498H6.50938L15.2594 5.99981C15.3755 5.88373 15.4676 5.74592 15.5304 5.59425C15.5933 5.44257 15.6256 5.28 15.6256 5.11583C15.6256 4.95165 15.5933 4.78908 15.5304 4.63741C15.4676 4.48573 15.3755 4.34792 15.2594 4.23184ZM4.74141 14.7498H1.25001V11.2584L8.12501 4.3834L11.6164 7.87481L4.74141 14.7498ZM12.5 6.99122L9.00938 3.49981L10.8844 1.62481L14.375 5.11622L12.5 6.99122Z" fill="#2B4360" />
+                                            </svg>
+
+                                        ) : (
+                                            <Image src={GreenRight} alt="editing" width={20} height={20} />
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Error Message */}
+                                {errors[index] && (
+                                    <div className="text-danger mt-1">{errors[index]}</div>
+                                )}
                             </div>
+                        </div>
+                    ))}
+                    {/* Action Buttons */}
 
+                    <div className="d-flex mt-3 gap-3">
+                        <Button variant="outline" className="w-100" onClick={handleClose}>
+                            Cancel
                         </Button>
-
+                        <Button className="w-100" variant="default" onClick={handleSave}>
+                            Save
+                        </Button>
                     </div>
 
                 </>

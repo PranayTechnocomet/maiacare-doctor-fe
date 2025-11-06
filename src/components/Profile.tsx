@@ -16,7 +16,6 @@ const ProfileTabes = () => {
             content: (
                 <>
                     <ProfileBasicDetailsTabs />
-                    
                 </>
             ),
         },

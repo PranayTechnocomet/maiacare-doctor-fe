@@ -722,3 +722,10 @@
     top: -4px;
     left: -4px;
 }
+
+.report-box{
+    border: 1px solid var(--color-icon-border);
+    padding: 16px;
+    border-radius: 12px;
+    
+}

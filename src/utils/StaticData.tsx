@@ -157,56 +157,111 @@ export const physicalAssessmentData: PhysicalAssessmentData[] = [
   },
 ];
 
-export const patientReportData = [
+// export const patientReport = [
+//   {
+//     img: dummyPdfImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyJpgImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Xray.jpg",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyJpgImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Xray.jpg",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyPdfImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyPdfImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyJpgImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyPdfImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+//   {
+//     img: dummyPdfImg,
+//     title: "Ultrasound Report",
+//     subtitle: "Ultrasound_Analysis",
+//     fileInfo: "60 KB • 11 Feb 2025"
+//   },
+// ]
+
+export const patientReport = [
   {
-    img: dummyPdfImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Ultrasound Report",
+    name: "Ultrasound_Ana.pdf",
+    size: "60 KB",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyJpgImg,
-    title: "Ultrasound Report",
-    subtitle: "Xray.jpg",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Ultrasound Report",
+    name: "Xray.jpg",
+    size: "60 KB",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyJpgImg,
-    title: "Ultrasound Report",
-    subtitle: "Xray.jpg",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Sonography",
+    name: "Sonography.jpg",
+    size: "60 KB",
+    progress: 100,
+    status: "completed",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyPdfImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Sonography Report",
+    name: "Sonography_Re.pdf",
+    size: "60 KB",
+    progress: 100,
+    status: "completed",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyPdfImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Xray",
+    name: "Xray.jpg",
+    size: "60 KB",
+    progress: 100,
+    status: "completed",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyJpgImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Xray Report",
+    name: "Xray_Ana.pdf",
+    size: "60 KB",
+    progress: 100,
+    status: "completed",
+    uploadedAt: 1739251200000,
   },
   {
-    img: dummyPdfImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
+    reportName: "Blood Test",
+    name: "Blood_T.pdf",
+    size: "60 KB",
+    progress: 100,
+    status: "completed",
+    uploadedAt: 1739251200000,
   },
-  {
-    img: dummyPdfImg,
-    title: "Ultrasound Report",
-    subtitle: "Ultrasound_Analysis",
-    fileInfo: "60 KB • 11 Feb 2025"
-  },
-]
+];
 
 export const patientTreatmentData = [
   {

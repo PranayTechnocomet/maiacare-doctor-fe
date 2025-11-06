@@ -47,9 +47,6 @@ export default function ForgotPasswordScreen() {
                         </div>
                     </Col>
 
-
-
-
                     <Col md={6} className=' p-0 d-none d-md-block '>
                         <div className="h-100 w-100 position-relative main-pregnancy-img">
                             <Image
