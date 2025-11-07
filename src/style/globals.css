@@ -44,6 +44,9 @@
   --modal-profile-color: #F5F7FA;
   --modal-follw-btn-color: #7E3AF2;
   --calender-day: #8e8e93;
+  --color-reviews: #383838;
+  --color-reviews-subtitle: #858B95;
+  --color-happy-box: #FEF3EA;
 
   --font-geist-sans1: var(--font-geist-sans);
   --font-geist-mono1: var(--font-geist-mono);
@@ -110,6 +113,10 @@ body {
   padding-right: 50px !important;
 }
 
+.profile-search .maiacare-input-field{
+   padding-left: 40px !important;
+}
+
 .patient-header-search-width {
   width: 25%;
 }
@@ -151,6 +158,13 @@ body {
   position: absolute;
   top: 50%;
   right: 5px;
+  transform: translate(-50%, -50%);
+}
+
+.profile-search-icon{
+  position: absolute;
+  top: 50%;
+  left: 20px;
   transform: translate(-50%, -50%);
 }
 
@@ -870,4 +884,37 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   padding: 30px !important;
 }
 
+
+.status-completed {
+    background-color: #DEF7EC;
+    color: #057A55;
+}
+
+.status-pending {
+    background-color: #EBF5FF;
+    color: #3F83F8;
+}
+
+.status-cancelled {
+    background-color: #FDF2F2;
+    color: #F05252;
+}
+
+.status-scheduled {
+    background-color: #EDEBFE;
+    color: #7E3AF2;
+}
+
+.status-noresponse {
+    background-color: #FFF8F1;
+    color: #FF8A4C;
+}
+
+.status-rescheduled {
+    background-color: #EDFAFA;
+    color: #0694A2;
+}
+
 /* Inhosue End */
+
+

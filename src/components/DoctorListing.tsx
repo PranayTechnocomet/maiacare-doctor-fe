@@ -25,6 +25,7 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Box from '@mui/material/Box';
 import AppointmentsWeek from './AppointmentsWeek';
 import { FaChevronDown } from 'react-icons/fa';
+import ListViews from '@/components/ListViews';
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -613,7 +614,15 @@ export function CalendarView() {
 
             </div>
           </div>
-          
+          <Button variant="default" onClick={() => { setBookAppointmentModal(true) }} >
+            <div className="d-flex justify-content-center align-items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                <path d="M19.8016 3.42969H17.9266V3.05469C17.9266 2.75632 17.8081 2.47017 17.5971 2.25919C17.3862 2.04821 17.1 1.92969 16.8016 1.92969C16.5033 1.92969 16.2171 2.04821 16.0061 2.25919C15.7952 2.47017 15.6766 2.75632 15.6766 3.05469V3.42969H8.92664V3.05469C8.92664 2.75632 8.80811 2.47017 8.59713 2.25919C8.38615 2.04821 8.1 1.92969 7.80164 1.92969C7.50327 1.92969 7.21712 2.04821 7.00614 2.25919C6.79516 2.47017 6.67664 2.75632 6.67664 3.05469V3.42969H4.80164C4.30435 3.42969 3.82744 3.62723 3.47581 3.97886C3.12418 4.33049 2.92664 4.80741 2.92664 5.30469V20.3047C2.92664 20.802 3.12418 21.2789 3.47581 21.6305C3.82744 21.9821 4.30435 22.1797 4.80164 22.1797H19.8016C20.2989 22.1797 20.7758 21.9821 21.1275 21.6305C21.4791 21.2789 21.6766 20.802 21.6766 20.3047V5.30469C21.6766 4.80741 21.4791 4.33049 21.1275 3.97886C20.7758 3.62723 20.2989 3.42969 19.8016 3.42969ZM6.67664 5.67969C6.67664 5.97806 6.79516 6.2642 7.00614 6.47518C7.21712 6.68616 7.50327 6.80469 7.80164 6.80469C8.1 6.80469 8.38615 6.68616 8.59713 6.47518C8.80811 6.2642 8.92664 5.97806 8.92664 5.67969H15.6766C15.6766 5.97806 15.7952 6.2642 16.0061 6.47518C16.2171 6.68616 16.5033 6.80469 16.8016 6.80469C17.1 6.80469 17.3862 6.68616 17.5971 6.47518C17.8081 6.2642 17.9266 5.97806 17.9266 5.67969H19.4266V7.92969H5.17664V5.67969H6.67664ZM5.17664 19.9297V10.1797H19.4266V19.9297H5.17664Z" fill="white" />
+              </svg>
+              Book Appointment
+            </div>
+          </Button>
+
         </div>
         <div className="d-flex flex-wrap align-items-center gap-3">
           <span className="sort-by-lable">Sort by:</span>
@@ -1313,7 +1322,7 @@ export function ListView() {
 
           {/* this show on table */}
 
-          <InputFieldGroup
+          {/* <InputFieldGroup
             name="search"
             type="text"
             // value={formData.name}
@@ -1333,9 +1342,9 @@ export function ListView() {
                 <path d="M18.5677 16.8364L14.8576 13.1246C15.97 11.675 16.4893 9.85652 16.3103 8.03804C16.1312 6.21956 15.2672 4.53728 13.8934 3.33245C12.5196 2.12762 10.7389 1.49047 8.91264 1.55024C7.08635 1.61001 5.35117 2.36223 4.05909 3.65431C2.76702 4.94638 2.0148 6.68156 1.95503 8.50785C1.89526 10.3341 2.53241 12.1148 3.73724 13.4886C4.94207 14.8624 6.62435 15.7264 8.44283 15.9055C10.2613 16.0846 12.0798 15.5652 13.5294 14.4528L17.2427 18.1668C17.3299 18.254 17.4335 18.3232 17.5474 18.3704C17.6613 18.4176 17.7835 18.4419 17.9068 18.4419C18.0301 18.4419 18.1522 18.4176 18.2662 18.3704C18.3801 18.3232 18.4836 18.254 18.5708 18.1668C18.658 18.0796 18.7272 17.9761 18.7744 17.8622C18.8216 17.7482 18.8459 17.6261 18.8459 17.5028C18.8459 17.3794 18.8216 17.2573 18.7744 17.1434C18.7272 17.0294 18.658 16.9259 18.5708 16.8387L18.5677 16.8364ZM3.84193 8.74965C3.84193 7.69894 4.15351 6.67182 4.73725 5.79818C5.321 4.92455 6.1507 4.24363 7.12143 3.84154C8.09216 3.43945 9.16033 3.33424 10.1909 3.53923C11.2214 3.74421 12.168 4.25018 12.9109 4.99314C13.6539 5.73611 14.1599 6.68271 14.3649 7.71323C14.5698 8.74376 14.4646 9.81192 14.0625 10.7827C13.6605 11.7534 12.9795 12.5831 12.1059 13.1668C11.2323 13.7506 10.2051 14.0621 9.15444 14.0621C7.74592 14.0607 6.3955 13.5005 5.39953 12.5046C4.40356 11.5086 3.84338 10.1582 3.84193 8.74965Z" fill="#B0B4C1" />
               </svg>
             </div>
-          </InputFieldGroup>
+          </InputFieldGroup> */}
 
-          <div className='appointments-total-box d-flex align-items-center gap-2'>
+          {/* <div className='appointments-total-box d-flex align-items-center gap-2'>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
               <g clipPath="url(#clip0_2202_83537)">
                 <path d="M20 40C31.0457 40 40 31.0457 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 31.0457 8.9543 40 20 40Z" fill="#FFEDCB" />
@@ -1364,10 +1373,10 @@ export function ListView() {
             </svg>
             <p className='appointments-total-box-item m-0'>98 Appointments</p>
 
-          </div>
+          </div> */}
         </div>
 
-        <div className="d-flex flex-sm-row align-items-center gap-sm-3 gap-2 flex-column flex-column-revserse mt-sm-0 mt-2">
+        {/* <div className="d-flex flex-sm-row align-items-center gap-sm-3 gap-2 flex-column flex-column-revserse mt-sm-0 mt-2">
           <div className="d-flex align-items-center gap-2">
 
             <span className="sort-by-lable">Sort by:</span>
@@ -1405,11 +1414,12 @@ export function ListView() {
               Book Appointment
             </div>
 
-          </Button>
-        </div>
+          </Button> 
+        
+        </div> */}
 
       </div>
-
+      <ListViews />
       <div className="d-sm-flex flex-column d-xl-none d-none gap-2 my-4">
         <div className='d-flex align-items-center justify-content-between'>
 
@@ -1444,6 +1454,7 @@ export function ListView() {
             </div>
 
           </Button>
+
         </div>
         <div className='d-flex gap-3 align-items-center'>
           <div className='appointments-total-box d-flex align-items-center gap-2'>

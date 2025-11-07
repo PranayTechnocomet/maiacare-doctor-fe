@@ -63,35 +63,7 @@
     text-align: center;
 }
 
-.status-completed {
-    background-color: #DEF7EC;
-    color: #057A55;
-}
 
-.status-pending {
-    background-color: #EBF5FF;
-    color: #3F83F8;
-}
-
-.status-cancelled {
-    background-color: #FDF2F2;
-    color: #F05252;
-}
-
-.status-scheduled {
-    background-color: #EDEBFE;
-    color: #7E3AF2;
-}
-
-.status-noresponse {
-    background-color: #FFF8F1;
-    color: #FF8A4C;
-}
-
-.status-rescheduled {
-    background-color: #EDFAFA;
-    color: #0694A2;
-}
 
 .table .btn-sm {
     width: 40px;
