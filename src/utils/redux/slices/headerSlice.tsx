@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface HeaderValue {
   title: string;
   subtitle?: string;
+  image?: string;
 }
 
 interface HeaderState {
@@ -13,6 +14,7 @@ const initialState: HeaderState = {
   value: {
     title: "",
     subtitle: "",
+    image: "",
   },
 };
 
