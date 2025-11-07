@@ -7,19 +7,20 @@ import Modal from "../ui/Modal"
 import Simpleeditpro from '../../assets/images/Simpleeditpro.png'
 import cameraicon from '../../assets/images/cameraicon.png'
 import LightEditimg from '../../assets/images/PencilSimpleLine.png'
-import { ChangeEvent, FormEvent, useRef, useState } from "react"
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react"
 import Camera from '../../assets/images/Camera.png'
 import Trash from '../../assets/images/Trash.png'
 import ImageSquare from '../../assets/images/ImageSquare.png'
 import Button from "../ui/Button"
 import { InputFieldGroup } from "../ui/InputField"
 import { RadioButtonGroup } from "../ui/RadioField"
+import LightTrush from "../../assets/images/LightTrush.png";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker"
-import {InputSelect} from "../ui/InputSelect"
+import { InputSelect } from "../ui/InputSelect"
 import { PhoneNumberInput } from "../ui/PhoneNumberInput"
 import { AddPatientFormData } from "@/utils/types/interfaces"
 import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'
-
+import "../../style/editprofile.css";
 
 type FormError = Partial<Record<keyof AddPatientFormData, string>>;
 
@@ -46,7 +47,6 @@ const initialFormError: FormError = {};
 
 function AddPatientForm() {
 
-    const [showModal, setShowModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [formData, setFormData] = useState<AddPatientFormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -66,6 +66,10 @@ function AddPatientForm() {
     const [previewImage, setPreviewImage] = useState<string | null>(null);  //previewImage 
     const [selectedImage, setSelectedImage] = useState<string | null>(null);//selectedImage 
 
+    const [showModal, setShowModal] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string>("");
+
+
     const handleOpenModal = () => {
         setPreviewImage(selectedImage || Simpleeditpro.src); // show image in modal
         setShowModal(true);
@@ -75,25 +79,109 @@ function AddPatientForm() {
         fileInputRef.current?.click();   //Edit btn click in file chhose
     };
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const selectedFile = event.target.files?.[0]; //previewImage chnages
-        if (selectedFile) {
-            const imageURL = URL.createObjectURL(selectedFile);
-            setPreviewImage(imageURL);
-        }
+    const cameraInputRef = useRef<HTMLInputElement>(null); // camera image select 
+    const openCamera = () => {
+        cameraInputRef.current?.click();
     };
+
+    // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //   const selectedFile = event.target.files?.[0]; //previewImage chnages
+    //   if (selectedFile) {
+    //     const imageURL = URL.createObjectURL(selectedFile);
+    //     setPreviewImage(imageURL);
+    //   }
+    // };
+
+
+    //  modal open and seletc image jpg/png image allow 
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const selectedFile = event.target.files?.[0];
+        if (!selectedFile) return;
+
+        // ✅ 1. Only allow JPG and PNG
+        const allowedTypes = ["image/jpeg", "image/png"];
+        if (!allowedTypes.includes(selectedFile.type)) {
+            setErrorMessage("Only JPG and PNG images are allowed.");
+            setPreviewImage(null); // remove previous preview
+            event.target.value = ""; // reset input
+            return;
+        }
+
+        // ✅ 2. Max size 5MB check
+        const maxSize = 5 * 1024 * 1024; // 5MB
+        if (selectedFile.size > maxSize) {
+            setErrorMessage("File size must be less than 5MB.");
+            setPreviewImage(null); // remove previous preview
+            event.target.value = ""; // reset input
+            return;
+        }
+
+        // ✅ 3. If valid → set preview & clear error
+        const imageURL = URL.createObjectURL(selectedFile);
+        setPreviewImage(imageURL);
+        setErrorMessage(""); // clear previous error
+    };
+
+
+    // camera image select 
+    const handleFileCamera = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+
+        if (!file) return;
+
+        // Allowed image types
+        const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+        // Max file size = 5MB
+        const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+
+        // Type validation
+        if (!allowedTypes.includes(file.type)) {
+            setErrorMessage("Only JPG and PNG images are allowed.");
+            setPreviewImage(null); // remove previous preview
+            event.target.value = ""; // Reset input
+            return;
+        }
+
+        // Size validation
+        if (file.size > maxSize) {
+            setErrorMessage("File size must be less than 5MB.");
+            setPreviewImage(null); // remove previous preview
+            event.target.value = ""; // Reset input
+            return;
+        }
+
+        // ✅ If valid image
+        setErrorMessage(""); // Clear error
+        const imageURL = URL.createObjectURL(file);
+        setPreviewImage(imageURL); // Show preview
+    };
+
+
+
+
 
     const handleSave = () => {
-        if (previewImage) {
-            setSelectedImage(previewImage); // ✅ set image in parent
-        }
-        setShowModal(false); // Close modal
+        setSelectedImage(previewImage); // save modal preview to actual profile
+        setShowModal(false);
+
     };
 
+
+
     const handleDelete = () => {
-        setSelectedImage(null); // remove selected image
-        setPreviewImage(Simpleeditpro.src); // reset to default image in modal
+        setPreviewImage(null); // delete only in modal
     };
+    //modal  image delete click in save btn click image set.
+    useEffect(() => {
+        if (showModal) {
+            setPreviewImage(selectedImage);
+        }
+    }, [showModal]);
+
+
+
+
 
     const validateForm = (data: AddPatientFormData): FormError => {
         const errors: FormError = {};
@@ -143,50 +231,58 @@ function AddPatientForm() {
     return (
         <>
             <form onSubmit={handleSubmit}>
+
+
                 <ContentContainer>
-
-                    <h3 className="add-patient-form-title">Personal Details</h3>
                     <Row className="mt-1 g-3">
-                        <Col md={12} sm={12}>
 
-                            <div className="d-flex align-items-center gap-4 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
-                                <div className="profile-wrapper position-relative">
+
+                        <Col>
+                            <h5 className="profile-card-main-titile">Personal Details</h5>
+                            <div className="d-flex align-items-center gap-4 mt-3 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
+                                <div className="profile-wrapper">
                                     {/* Profile image */}
                                     <Image
                                         src={selectedImage ? selectedImage : Simpleeditpro}
                                         alt="Profile"
-                                        className="patient-profile-image"
-                                        width={100}
-                                        height={100}
+                                        className="profile-image"
+                                        width={160}
+                                        height={160}
                                     />
                                     {/* Camera Icon */}
                                     <div
-                                        className="camera-icon position-absolute"
+                                        className="camera-icon"
+                                        // onClick={() => setShowModal(true)}  onClick={handleOpenModal} style={{ cursor: "pointer" }}
                                         onClick={handleOpenModal}
-                                        style={{ cursor: "pointer" }}
+
                                     >
                                         <Image
                                             src={cameraicon}
                                             alt="Upload"
-                                            width={48}
-                                            height={48}
+                                            width={44}
+                                            height={44}
                                         />
                                     </div>
                                 </div>
 
                                 {/* Edit Profile click in Modal */}
+
                                 <Modal
                                     show={showModal}
-                                    onHide={() => setShowModal(false)}
+                                    onHide={() => {
+                                        setShowModal(false);
+                                        setErrorMessage(""); //🔹Reset error msg on modal close
+                                    }}
+                                    size="md"
                                     header="Profile Photo"
                                     closeButton={true}
                                     className="text-pink"
                                     dialogClassName="custom-modal-width"
                                 >
-                                    <div className="d-flex flex-column align-items-center p-4">
+
+                                    <div className="d-flex flex-column align-items-center" >
                                         <div
-                                            className="rounded overflow-hidden mb-2 mx-auto position-relative"
-                                            style={{ width: 160, height: 160, borderRadius: "16px" }}>
+                                            className="rounded overflow-hidden mb-3 mx-auto position-relative edit-basic-details-modal">
 
                                             {/* Defult Profile Image */}
                                             <Image
@@ -194,26 +290,34 @@ function AddPatientForm() {
                                                 alt="Simpleeditpro"
                                                 width={160}
                                                 height={160}
-                                                style={{ objectFit: "cover" }}
+                                                className="edit-basic-details-image"
                                             />
                                         </div>
+                                        {errorMessage && (   // error msg only jpg/png image allow
+                                            <div className="text-danger mb-2 edit-basic-details-error-font">
+                                                {errorMessage}
+                                            </div>
+                                        )}
 
                                         <div className="w-100 border-top pt-3 d-flex justify-content-between align-items-center flex-wrap">
-                                            <div className="d-flex gap-4 align-items-center flex-wrap">
-                                                <div className="text-center" style={{ cursor: 'pointer' }} onClick={handleEditClick}>
-                                                    <Image src={LightEditimg} alt="Edit" width={28} height={28} />
-                                                    <div className="small">Edit</div>
-                                                    <input
-                                                        type="file"
-                                                        accept="image/*"
-                                                        ref={fileInputRef}
-                                                        onChange={handleFileChange}
-                                                        style={{ display: 'none' }}
-                                                    />
-                                                </div>
+                                            <div className="d-flex gap-3 align-items-center flex-wrap">
 
-                                                <div className="text-center" style={{ cursor: 'pointer' }} onClick={handleEditClick}>
-                                                    <Image src={ImageSquare} alt="Add Photo" width={28} height={28} />
+                                                {/* Edit button  */}
+
+                                                {/* <div className="text-center" style={{ cursor: 'pointer' }} onClick={handleEditClick}>
+                          <Image src={EditProfile} alt="Edit" width={18} height={18} />
+                          <div className="kyc-details">Edit</div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                          />
+                        </div> */}
+
+                                                <div className="text-center edit-basic-details-edit-button" onClick={handleEditClick}>
+                                                    <Image src={ImageSquare} alt="Add Photo" width={21} height={21} />
                                                     <div className="small">Add Photo</div>
 
                                                     <input
@@ -221,29 +325,40 @@ function AddPatientForm() {
                                                         accept="image/*"
                                                         ref={fileInputRef}
                                                         onChange={handleFileChange}
-                                                        style={{ display: 'none' }}
+                                                        className="edit-basic-details-edit-input"
                                                     />
                                                 </div>
 
-                                                <div className="text-center">
-                                                    <Image src={Camera} alt="Take Photo" width={28} height={28} />
+                                                <div className="text-center edit-basic-camera-icon" >
+                                                    {/* Camera button */}
+                                                    <Image src={Camera} alt="Take Photo" width={21} height={21} onClick={openCamera} />
                                                     <div className="small">Take Photo</div>
+
+                                                    {/* Hidden input for camera */}
+                                                    <input
+                                                        type="file"
+                                                        accept="image/*"
+                                                        capture="user" // front camera
+                                                        ref={cameraInputRef}
+                                                        className="edit-basic-details-edit-input"
+                                                        onChange={handleFileCamera}
+                                                    />
                                                 </div>
                                             </div>
 
                                             <div className="d-flex gap-3 mt-md-0 align-items-center">
-
                                                 <button className="btn p-0" onClick={handleDelete}>
-                                                    <Image src={Trash} alt="Trash" width={28} height={28} />
-                                                    <div className="small">Delete</div>
+                                                    <Image src={LightTrush} alt="Trash" width={21} height={21} />
+                                                    <div className="maiacare-input-field-helper-text">Delete</div>
                                                 </button>
 
-                                                <Button variant="default" disabled={false} contentSize="large" onClick={handleSave} >
-                                                Save
+                                                <Button variant="default" contentSize="small" onClick={handleSave}>
+                                                    Save
                                                 </Button>
-
                                             </div>
                                         </div>
+
+
                                     </div>
                                 </Modal>
 
@@ -254,12 +369,11 @@ function AddPatientForm() {
                                         Allowed Jpg, png of max size 5MB
                                     </div>
                                 </div>
-
-
-
                             </div>
-
                         </Col>
+
+
+
                         <Col md={12} sm={12}>
                             <InputFieldGroup
                                 label="Name"
@@ -455,10 +569,9 @@ function AddPatientForm() {
 
                             />
                         </Col>
-
                     </Row>
-
                 </ContentContainer>
+
 
                 <ContentContainer className="mt-3">
 
@@ -532,7 +645,6 @@ function AddPatientForm() {
                     </Button> */}
 
                     <Modal
-
                         show={showSuccessModal}
                         onHide={() => setShowSuccessModal(false)}
                         closeButton={true}
@@ -546,10 +658,10 @@ function AddPatientForm() {
                         </div>
 
                         <div className="d-flex justify-content-center gap-3">
-                            <Button variant="outline" disabled={false} className="w-100" >
+                            <Button variant="outline" disabled={false}  className="w-100" onClick={() => setShowSuccessModal(false)} >
                                 Okay
                             </Button>
-                            <Button variant="default" disabled={false} className="w-100" >
+                            <Button variant="default" disabled={false} className="w-100"  onClick={() => setShowSuccessModal(false)}>
                                 View Details
                             </Button>
                         </div>
