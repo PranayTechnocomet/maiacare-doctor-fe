@@ -770,3 +770,205 @@ export type LeaveEntry = {
   endDate: string;
   days: string;
 };
+
+
+import RaniImg from "@/assets/images/Img-1.png";
+import NinaImg from "@/assets/images/Img-2.png";
+import HimariImg from "@/assets/images/Img-3.png";
+import AnjaliImg from "@/assets/images/Img-4.png";
+import AasthaImg from "@/assets/images/Img-5.png";
+import { StaticImageData } from "next/image";
+// import Doctor1 from "@/assets/images/doctor1.png";
+// import Doctor2 from "@/assets/images/doctor2.png";
+// import Doctor3 from "@/assets/images/doctor3.png";
+// import Doctor4 from "@/assets/images/doctor4.png";
+
+
+export interface ConsultationEntry {
+  id: number; // <-- ADD ID
+  name: string;
+  mobile: string;
+  treatment: string;
+  pin: string;
+  status: string;
+   image: string | StaticImageData;
+  date?: string;  // ✅ optional date field
+}
+
+export interface InventoryEntry {
+  id: number; // <-- ADD ID
+  name: string;
+  mobile: string;
+  email: string;
+  pin: string;
+  status: string;
+   image: string | StaticImageData;
+  date?: string;  // ✅ optional date field
+}
+
+export type Doctor = {
+  id: string | number;
+  name: string;
+   image: string | StaticImageData;
+  slots: string[];
+};
+
+
+export const consultationData: ConsultationEntry[] = [
+  {
+    id: 1,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Completed",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 2,
+    name: "Nina Gupta",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "Pending",
+     image: RiyaSharma,
+    date: "2025-09-16"
+  },
+  {
+    id: 3,
+    name: "Himari Roy",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Scheduled",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 4,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "No Response",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 5,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Cancelled",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 6,
+    name: "Aastha Patil",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "Rescheduled",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 7,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "No Response",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 8,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Completed",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 9,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Cancelled",
+     image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 10,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Completed",
+     image: RiyaSharma,
+    date: "2025-10-15"
+  },
+];
+
+
+
+// export const inventoryData: InventoryEntry[] = [
+//   {
+//     id: 1,
+//     name: "Rani Desai",
+//     mobile: "9092038491",
+//     email: "ranidesai@protonmail.com",
+//     pin: "400077",
+//     status: "Completed",
+//     // image: RaniImg,
+//     date: "2025-09-16"
+//   },
+//   {
+//     id: 2,
+//     name: "Nina Gupta",
+//     mobile: "9092038491",
+//     email: "ninagupta@protonmail.com",
+//     pin: "400077",
+//     status: "Pending",
+//     // image: NinaImg,
+//     date: "2025-09-15"
+//   },
+//   {
+//     id: 3,
+//     name: "Himari Roy",
+//     mobile: "9092038491",
+//     email: "himariroy@protonmail.com",
+//     pin: "400077",
+//     status: "Scheduled",
+//     // image: HimariImg,
+//     date: "2025-09-15"
+//   },
+//   {
+//     id: 4,
+//     name: "Anjali Shinde",
+//     mobile: "9092038491",
+//     email: "anjalishinde@protonmail.com",
+//     pin: "400077",
+//     status: "No Response",
+//     // image: AnjaliImg,
+//     date: "2025-09-25"
+//   },
+//   {
+//     id: 5,
+//     name: "Anjali Shinde",
+//     mobile: "9092038491",
+//     email: "anjalishinde@protonmail.com",
+//     pin: "400077",
+//     status: "Cancelled",
+//     // image: AnjaliImg,
+//     date: "2025-10-15"
+//   },
+
+// ];

@@ -2639,3 +2639,8 @@
     color: var(--color-heading);
     line-height: 21px;
 }
+
+.dot-image{
+    height: 30px;
+    width: 30px;
+}

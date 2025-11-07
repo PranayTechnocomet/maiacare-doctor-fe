@@ -14,6 +14,7 @@ import { InputSelect } from "@/components/ui/InputSelect";
 import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
 import "@/style/patientProfile.css";
+import Consultation from "@/components/Consultation";
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();
@@ -23,7 +24,8 @@ function Page() {
 
   return (
     <>
-      <AddMedicalHistory />
+      {/* <AddMedicalHistory /> */}
+      <Consultation />
     </>
 
   );
