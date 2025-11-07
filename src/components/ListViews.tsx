@@ -153,7 +153,7 @@ export default function ListView() {
                 const id = info.row.original.id; // <-- Make sure you have an `id`
 
                 return (
-                    <Link href={`/patients/${id}`} className="text-decoration-none text-dark">
+                    // <Link href={`/patients/${id}`} className="text-decoration-none text-dark">
                         <div className="d-flex align-items-center gap-2">
                             {typeof imgSrc === "string" ? (
                                 <img
@@ -178,7 +178,7 @@ export default function ListView() {
                                 <path d="M8.12752 10.8711C8.04543 10.8713 7.96414 10.8551 7.88832 10.8237C7.81251 10.7922 7.74369 10.746 7.68585 10.6878L6.01918 9.0211C5.90878 8.90262 5.84868 8.74591 5.85154 8.58399C5.85439 8.42208 5.91999 8.26759 6.0345 8.15308C6.14901 8.03857 6.3035 7.97297 6.46542 7.97012C6.62733 7.96726 6.78404 8.02736 6.90252 8.13776L8.18585 9.4211L11.0859 7.2461C11.2185 7.14664 11.3851 7.10394 11.5492 7.12738C11.7133 7.15082 11.8614 7.23849 11.9609 7.3711C12.0603 7.5037 12.103 7.67039 12.0796 7.83448C12.0561 7.99858 11.9685 8.14664 11.8359 8.2461L8.50252 10.7461C8.3943 10.8272 8.26274 10.871 8.12752 10.8711Z" fill="white" />
                             </svg> */}
                         </div>
-                    </Link>
+                    // </Link>
                 );
             },
         },
@@ -224,7 +224,7 @@ export default function ListView() {
                         <span className={`status-pill ${statusClass}`}>{status}</span>
 
                         {/* 👇 Show 2 SVGs only for "Rani Desai" */}
-                        {row.name === "Rani Desai" && (
+                        {row.name === "Himari Roy" && (
                             <div className="text-center d-flex">
                                 {/* SVG 1 */}
 

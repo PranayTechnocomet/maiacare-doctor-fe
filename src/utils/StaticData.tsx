@@ -834,7 +834,7 @@ export const consultationData: ConsultationEntry[] = [
     pin: "400077",
     status: "Pending",
     image: RiyaSharma,
-    date: "2025-09-16"
+    date: "2025-11-07"
   },
   {
     id: 3,
@@ -864,7 +864,7 @@ export const consultationData: ConsultationEntry[] = [
     pin: "400077",
     status: "Cancelled",
     image: RiyaSharma,
-    date: "2025-09-15"
+    date: "2025-11-08"
   },
   {
     id: 6,
@@ -928,7 +928,7 @@ export const inventoryData: InventoryEntry[] = [
     treatment: "Fertility Support +2",
     Date: "7 Jan 2024",
     Time: "2:30 PM",
-    status: "",
+    status: "Completed",
     image: PriyaGupta,
     date: "2025-11-7"
   },
@@ -950,7 +950,7 @@ export const inventoryData: InventoryEntry[] = [
     treatment: "Egg Freezing +1",
     Date: "7 Jan 2024",
     Time: "2:30 PM",
-    status: "Scheduled",
+    status: "",
     image: NishaRao,
     date: "2025-09-15"
   },
@@ -963,7 +963,7 @@ export const inventoryData: InventoryEntry[] = [
     Time: "2:30 PM",
     status: "No Response",
     image: RiyaSharma,
-    date: "2025-09-25"
+    date: "2025-11-8"
   },
   {
     id: 5,
