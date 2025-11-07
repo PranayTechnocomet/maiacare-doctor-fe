@@ -1967,7 +1967,9 @@ function Treatment() {
                         </Col>
                     </Row>
                 </>
-            ) : (
+            )
+            
+            : (
                 <>
                     <div className="position-relative">
                         <CustomTabs
