@@ -1,19 +1,19 @@
-'use client'
-import { useState } from 'react';
-import CustomTabs from './ui/CustomTabs';
-import ContentContainer from './ui/ContentContainer';
-import DoctorProfile from './ui/custom/DoctorProfile';
-import ProfileBasicDetailsTabs from './Profile-Basic-Details';
-import { ManageLeave, Reviews } from './ManageLeave';
-import { useRouter } from 'next/navigation';
+"use client"
 
-const ProfileTabes = () => {
+import { useState } from "react";
+import { ClinicReviews, ManageLeave, Reviews } from "./ManageLeave";
+import DoctorProfile from "./ui/custom/DoctorProfile";
+import CustomTabs from "./ui/CustomTabs";
+import ProfileBasicDetailsTabs from "./Profile-Basic-Details";
+import { useRouter } from "next/navigation";
+
+export default function ProfileClinic() {
     const [activeTab, setActiveTab] = useState<string>("basic");
 
     const router = useRouter();
 
     const handleEditProfile = () => {
-        router.push('/edit-profile');
+        router.push('/edit-ProfileClinic');
     };
 
     const tabOptions = [
@@ -32,7 +32,6 @@ const ProfileTabes = () => {
             content: (
                 <>
                     <ManageLeave />
-
                 </>
             ),
         },
@@ -41,17 +40,16 @@ const ProfileTabes = () => {
             label: "Reviews",
             content: (
                 <>
-                    <Reviews />
+                    <ClinicReviews />
                 </>
             ),
         },
 
     ];
 
-
     return (
         <>
-            <DoctorProfile handleEditProfile={handleEditProfile} />
+            <DoctorProfile handleEditProfile={handleEditProfile}/>
             <div className='mt-4'>
 
                 <CustomTabs
@@ -60,30 +58,8 @@ const ProfileTabes = () => {
                     tabOptions={tabOptions}
                 />
 
-                {/* {activeTab === 'basic' && (
-          <div>
-
-          </div>
-        )}
-
-        {activeTab === 'leaves' && (
-          <div>
-            
-          </div>
-        )}
-
-        {activeTab === 'Reviews' && (
-          <div>Reviews Content</div>
-        )} */}
-
             </div>
         </>
 
-
-
-
-
     );
-};
-
-export default ProfileTabes;
+}
