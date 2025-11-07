@@ -875,33 +875,43 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 
 .status-completed {
-    background-color: #DEF7EC;
-    color: #057A55;
+    background-color: #DEF7EC !important;
+    color: #057A55 important;
+}
+
+.status-success {
+    background-color: #DEF7EC !important;
+    color: #057A55 !important;
 }
 
 .status-pending {
-    background-color: #EBF5FF;
-    color: #3F83F8;
+    background-color: #EBF5FF !important;
+    color: #3F83F8 !important;
+}
+
+.status-upcoming {
+    background-color: #EBF5FF !important;
+    color: #3F83F8 !important;
 }
 
 .status-cancelled {
-    background-color: #FDF2F2;
-    color: #F05252;
+    background-color: #FDF2F2 !important;
+    color: #F05252 !important;
 }
 
 .status-scheduled {
-    background-color: #EDEBFE;
-    color: #7E3AF2;
+    background-color: #EDEBFE !important;
+    color: #7E3AF2 !important;
 }
 
 .status-noresponse {
-    background-color: #FFF8F1;
-    color: #FF8A4C;
+    background-color: #FFF8F1 !important;
+    color: #FF8A4C !important;
 }
 
 .status-rescheduled {
-    background-color: #EDFAFA;
-    color: #0694A2;
+    background-color: #EDFAFA !important;
+    color: #0694A2 !important;
 }
 
 /* Inhosue End */
