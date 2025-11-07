@@ -209,7 +209,7 @@ function Treatment() {
         intake: "",
         description: "",
     });
-    const [showContent, setShowContent] = useState<boolean>(true); // for show content
+    const [showContent, setShowContent] = useState<boolean>(false); // for show content
 
     const [isAddingStep, setIsAddingStep] = useState(false);
     const [newStepName, setNewStepName] = useState("");
@@ -464,7 +464,7 @@ function Treatment() {
 
     return (
         <>
-            <Button
+            {/* <Button
                 variant="default"
                 className="mx-5 my-3"
                 contentSize="small"
@@ -473,7 +473,7 @@ function Treatment() {
                 }}
             >
                 calender patient
-            </Button>
+            </Button> */}
 
             <Modal
                 show={patientCalendarModel}

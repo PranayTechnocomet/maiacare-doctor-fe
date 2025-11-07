@@ -806,12 +806,30 @@ export interface InventoryEntry {
   date?: string;  // ✅ optional date field
 }
 
+export interface TreatmentPlanEntry {
+  id: number;
+  treatmentPlan: string;
+  step: string;
+  date: string;
+  patientName: string;
+  partnerName: string;
+  status: string;
+  image: string | StaticImageData;
+}
+
+
+
 export type Doctor = {
   id: string | number;
   name: string;
    image: string | StaticImageData;
   slots: string[];
 };
+
+
+
+
+
 
 
 export const consultationData: ConsultationEntry[] = [
@@ -917,6 +935,89 @@ export const consultationData: ConsultationEntry[] = [
   },
 ];
 
+
+export const treatmentPlanData: TreatmentPlanEntry[] = [
+  {
+    id: 1,
+    treatmentPlan: "IVF",
+    step: "Fertility Assessment",
+    date: "7 Jan 2024",
+    patientName: "Meera Joshi",
+    partnerName: "Ravi Sharma",
+    status: "Success",
+    image: RiyaSharma,
+  },
+  {
+    id: 2,
+    treatmentPlan: "Egg Freezing",
+    step: "Ovarian Stimulation",
+    date: "7 Jan 2024",
+    patientName: "Ravi Sharma",
+    partnerName: "Ravi Sharma",
+    status: "Pending",
+    image: AarushiPatel,
+  },
+  {
+    id: 3,
+    treatmentPlan: "IUI",
+    step: "Fertilisation",
+    date: "7 Jan 2024",
+    patientName: "Priya Singh",
+    partnerName: "Rohan Singh",
+    status: "Cancelled",
+    image: RiyaSharma,
+  },
+  {
+    id: 4,
+    treatmentPlan: "Fertility Support",
+    step: "IVF",
+    date: "7 Jan 2024",
+    patientName: "Lakshmi Patel",
+    partnerName: "Arjun Patel",
+    status: "Success",
+    image: RiyaSharma,
+  },
+  {
+    id: 5,
+    treatmentPlan: "IVF",
+    step: "Embryo Culture",
+    date: "7 Jan 2024",
+    patientName: "Arjun Patel",
+    partnerName: "Arjun Patel",
+    status: "Upcoming",
+    image: AarushiPatel,
+  },
+  {
+    id: 6,
+    treatmentPlan: "Egg Freezing",
+    step: "Embryo Transfer",
+    date: "7 Jan 2024",
+    patientName: "Suresh Gupta",
+    partnerName: "Suresh Gupta",
+    status: "Cancelled",
+    image: AarushiPatel,
+  },
+  {
+    id: 7,
+    treatmentPlan: "Fertility Support",
+    step: "Pregnancy Test",
+    date: "7 Jan 2024",
+    patientName: "Ananya Sharma",
+    partnerName: "Vikram Sharma",
+    status: "Pending",
+    image: AarushiPatel,
+  },
+  {
+    id: 8,
+    treatmentPlan: "Fertility Support",
+    step: "Fertility Assessment",
+    date: "7 Jan 2024",
+    patientName: "Ananya Sharma",
+    partnerName: "Vikram Sharma",
+    status: "Success",
+    image: AarushiPatel,
+  },
+];
 
 
 // export const inventoryData: InventoryEntry[] = [
