@@ -15,6 +15,7 @@ import "@/style/fertilityassessment.css";
 import "@/style/settingsPassword.css";
 import "@/style/patientProfile.css";
 import Consultation from "@/components/Consultation";
+import { Suspense } from "react";
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();
@@ -25,7 +26,9 @@ function Page() {
   return (
     <>
       {/* <AddMedicalHistory /> */}
-      <Consultation />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Consultation />
+      </Suspense>
     </>
 
   );

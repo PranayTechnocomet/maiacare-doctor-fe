@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import Dashboard from "@/components/Dashboard";
 import DoctorListing from "@/components/DoctorListing";
+import { Suspense } from "react";
 
 function Page() {
   const dispatch: AppDispatch = useDispatch();
@@ -15,7 +16,9 @@ function Page() {
   return (
     <div>
       {/* <h1>Appointments</h1></div> */}
-      <DoctorListing />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DoctorListing />
+      </Suspense>
     </div>
   )
 }
