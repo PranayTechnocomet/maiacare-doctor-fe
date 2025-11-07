@@ -1,13 +1,17 @@
 "use client"
 
-import { Col, Nav, Row, Tab } from "react-bootstrap";
+import { Col, Nav, Row, Tab, Pagination } from "react-bootstrap";
 import Button from "./ui/Button";
 import { InputFieldGroup } from "./ui/InputField";
 import { InputSelect } from "./ui/InputSelect";
 import ContentContainer from "./ui/ContentContainer";
 import '@/style/settingsPassword.css'
 import { useState } from "react";
-
+import CommonTable from "./ui/BaseTable";
+import { treatmentPlanData } from "@/utils/StaticData";
+import { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
+import Image from "next/image";
 const tempSideBar = [
     {
         id: "1",
@@ -50,6 +54,11 @@ const tempSideBar = [
         title: "Preganancy Test",
     }
 ]
+
+
+
+
+
 
 export function All() {
     return (
@@ -96,6 +105,7 @@ export function All() {
                 </div>
 
                 <div className="d-flex align-items-center justify-content-sm-between justify-content-center gap-sm-3 gap-2 mt-sm-0 mt-2">
+
                     <div className="d-flex align-items-center gap-2">
 
                         <span className="sort-by-lable">Sort by:</span>
@@ -121,6 +131,7 @@ export function All() {
                             </svg>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -130,13 +141,163 @@ export function All() {
     )
 }
 
-export function IVF() {
 
+
+
+
+export function IVF() {
+    const [filteredData, setFilteredData] = useState(treatmentPlanData);
     const [activeKey, setActiveKey] = useState<string>("fertilityAssessment");
+
+
+    const columns: ColumnDef<any>[] = [
+        {
+            header: "#",
+            cell: (info) => {
+                const index = info.row.index + 1; // row number start from 1
+                return index < 10 ? `0${index}` : index; // format 01,02,03
+            },
+        },
+
+        {
+            header: "Treatment Name",
+            cell: (info) => (
+                <span className="box-border-orange ">
+                    {info.row.original.treatmentPlan}
+                </span>
+            ),
+        },
+
+        {
+            header: "step",
+            cell: (info) => (
+                <span >
+                    {info.row.original.step}
+                </span>
+            ),
+        },
+
+        {
+            header: "date",
+            cell: (info) => (
+                <span >
+                    {info.row.original.date}
+                </span>
+            ),
+        },
+
+
+        {
+            header: "patientName",
+            cell: (info) => {
+                const imgSrc = info.row.original.image;
+                const name = info.row.original.patientName;
+                const id = info.row.original.id; // <-- Make sure you have an `id`
+
+                return (
+                    // <Link href={`/patients/${id}`} className="text-decoration-none text-dark">
+                    <div className="d-flex align-items-center gap-2">
+                        {typeof imgSrc === "string" ? (
+                            <img
+                                src={imgSrc}
+                                alt={name}
+                                className="rounded-circle object-fit-cover"
+                                width="40"
+                                height="40"
+                            />
+                        ) : (
+                            <Image
+                                src={imgSrc}
+                                alt={name}
+                                width={40}
+                                height={40}
+                                className="rounded-circle object-fit-cover"
+                            />
+                        )}
+                        {name}
+                    </div>
+                    // </Link>
+                );
+            },
+        },
+
+        {
+            header: "Patient Name",
+            cell: (info) => {
+                const imgSrc = info.row.original.image;
+                const name = info.row.original.patientName;
+                const id = info.row.original.id;
+
+                return (
+                    <div className="d-flex align-items-center gap-2">
+                        {typeof imgSrc === "string" ? (
+                            <img
+                                src={imgSrc}
+                                alt={name}
+                                className="rounded-circle   object-fit-cover"
+                                width="40"
+                                height="40"
+                            />
+                        ) : (
+                            <Image
+                                src={imgSrc}
+                                alt={name}
+                                width={40}
+                                height={40}
+                                className="rounded-circle object-fit-cover"
+                            />
+                        )}
+                        <span>{name}</span>
+                    </div>
+                );
+            },
+        },
+
+
+        {
+            header: "Status",
+            cell: (info) => {
+                const status = info.row.original.status;
+                const statusClass = `status-${status.toLowerCase().replace(/\s/g, "")}`;
+                return (
+                    <span className={`status-pill ${statusClass}`}>
+                        {status}
+                    </span>
+                );
+            },
+        },
+        {
+            header: "Actions",
+            cell: (info) => {
+                const id = info.row.original.id;
+                return (
+                    <div className="d-flex align-items-center gap-2">
+                        {/* First Icon */}
+                        <div className="d-flex justify-content-center align-items-center border rounded bg-white p-2" style={{ width: "32px", height: "32px" }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="17" viewBox="0 0 15 17" fill="none">
+                                <path d="M13.75 1.25H11.875V0.625C11.875 0.45924 11.8092 0.300268 11.6919 0.183058C11.5747 0.065848 11.4158 0 11.25 0C11.0842 0 10.9253 0.065848 10.8081 0.183058C10.6908 0.300268 10.625 0.45924 10.625 0.625V1.25H4.375V0.625C4.375 0.45924 4.30915 0.300268 4.19194 0.183058C4.07473 0.065848 3.91576 0 3.75 0C3.58424 0 3.42527 0.065848 3.30806 0.183058C3.19085 0.300268 3.125 0.45924 3.125 0.625V1.25H1.25C0.918479 1.25 0.600537 1.3817 0.366116 1.61612C0.131696 1.85054 0 2.16848 0 2.5V15C0 15.3315 0.131696 15.6495 0.366116 15.8839C0.600537 16.1183 0.918479 16.25 1.25 16.25H13.75C14.0815 16.25 14.3995 16.1183 14.6339 15.8839C14.8683 15.6495 15 15.3315 15 15V2.5C15 2.16848 14.8683 1.85054 14.6339 1.61612C14.3995 1.3817 14.0815 1.25 13.75 1.25ZM3.125 2.5V3.125C3.125 3.29076 3.19085 3.44973 3.30806 3.56694C3.42527 3.68415 3.58424 3.75 3.75 3.75C3.91576 3.75 4.07473 3.68415 4.19194 3.56694C4.30915 3.44973 4.375 3.29076 4.375 3.125V2.5H10.625V3.125C10.625 3.29076 10.6908 3.44973 10.8081 3.56694C10.9253 3.68415 11.0842 3.75 11.25 3.75C11.4158 3.75 11.5747 3.68415 11.6919 3.56694C11.8092 3.44973 11.875 3.29076 11.875 3.125V2.5H13.75V5H1.25V2.5H3.125ZM13.75 15H1.25V6.25H13.75V15Z" fill="#2B4360" />
+                            </svg>
+                        </div>
+
+                        {/* Second Icon */}
+                        <div className="d-flex justify-content-center align-items-center border rounded bg-white p-2" style={{ width: "32px", height: "32px" }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="19" height="13" viewBox="0 0 19 13" fill="none">
+                                <path d="M18.6961 5.99688C18.6687 5.93516 18.007 4.46719 16.5359 2.99609C14.5758 1.03594 12.1 0 9.37499 0C6.64999 0 4.17421 1.03594 2.21405 2.99609C0.742961 4.46719 0.0781175 5.9375 0.0538988 5.99688C0.0183622 6.07681 0 6.16331 0 6.25078C0 6.33826 0.0183622 6.42476 0.0538988 6.50469C0.0812425 6.56641 0.742961 8.03359 2.21405 9.50469C4.17421 11.4641 6.64999 12.5 9.37499 12.5C12.1 12.5 14.5758 11.4641 16.5359 9.50469C18.007 8.03359 18.6687 6.56641 18.6961 6.50469C18.7316 6.42476 18.75 6.33826 18.75 6.25078C18.75 6.16331 18.7316 6.07681 18.6961 5.99688ZM9.37499 11.25C6.9703 11.25 4.86952 10.3758 3.13046 8.65234C2.4169 7.94273 1.80983 7.13356 1.32812 6.25C1.8097 5.36636 2.41679 4.55717 3.13046 3.84766C4.86952 2.12422 6.9703 1.25 9.37499 1.25C11.7797 1.25 13.8805 2.12422 15.6195 3.84766C16.3345 4.557 16.9429 5.36619 17.4258 6.25C16.8625 7.30156 14.4086 11.25 9.37499 11.25ZM9.37499 2.5C8.63331 2.5 7.90829 2.71993 7.2916 3.13199C6.67492 3.54404 6.19427 4.12971 5.91044 4.81494C5.62662 5.50016 5.55235 6.25416 5.69705 6.98159C5.84174 7.70902 6.19889 8.3772 6.72334 8.90165C7.24779 9.4261 7.91597 9.78325 8.6434 9.92795C9.37083 10.0726 10.1248 9.99838 10.8101 9.71455C11.4953 9.43072 12.0809 8.95007 12.493 8.33339C12.9051 7.7167 13.125 6.99168 13.125 6.25C13.124 5.25576 12.7285 4.30253 12.0255 3.59949C11.3225 2.89645 10.3692 2.50103 9.37499 2.5ZM9.37499 8.75C8.88054 8.75 8.39719 8.60338 7.98607 8.32867C7.57494 8.05397 7.25451 7.66352 7.06529 7.20671C6.87607 6.74989 6.82657 6.24723 6.92303 5.76227C7.01949 5.27732 7.25759 4.83186 7.60722 4.48223C7.95686 4.1326 8.40231 3.8945 8.88727 3.79804C9.37222 3.70157 9.87488 3.75108 10.3317 3.9403C10.7885 4.12952 11.179 4.44995 11.4537 4.86107C11.7284 5.2722 11.875 5.75555 11.875 6.25C11.875 6.91304 11.6116 7.54893 11.1428 8.01777C10.6739 8.48661 10.038 8.75 9.37499 8.75Z" fill="#2B4360" />
+                            </svg>
+                        </div>
+                    </div>
+                );
+            },
+        }
+
+
+    ];
+
+
+
 
     return (
         <>
-
             <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k || "")}>
                 <Row className="g-3 mt-3">
                     <Col md={3}>
@@ -229,16 +390,36 @@ export function IVF() {
 
                         </div>
 
-                        <Tab.Content>   
-                            {tempSideBar.map((item) => (
-                                <Tab.Pane eventKey={item.eventKey} key={item.id}>
-                                    <h6 className="fw-semibold">{item.title}</h6>
-                                    <p className="text-muted mb-0">
-                                        Content for <strong>{item.title}</strong> goes here.
-                                    </p>
-                                </Tab.Pane>
-                            ))}
-                        </Tab.Content>
+
+
+
+                        {/* Table */}
+                        <div className="mt-3">
+
+                            <CommonTable data={filteredData} columns={columns} />
+
+                            {/* Pagination */}
+                            {/* <div className="d-flex justify-content-between align-items-center mt-3 flex-wrap pagination-container">
+                                <small className="text-muted">
+                                    Showing 100 of 1,000 results
+                                </small>
+
+                                <Pagination size="sm" className="custom-pagination mb-0">
+                                    <Pagination.Prev className="page-arrow" />
+                                    {[1, 2, 3, 4, 5].map((p) => (
+                                        <Pagination.Item key={p} active={p === 5}>
+                                            {p}
+                                        </Pagination.Item>
+                                    ))}
+                                    <Pagination.Ellipsis disabled />
+                                    <Pagination.Item>99</Pagination.Item>
+                                    <Pagination.Next className="page-arrow" />
+                                </Pagination>
+                            </div> */}
+
+                        </div>
+
+
 
                     </Col>
                 </Row>

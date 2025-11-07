@@ -44,6 +44,9 @@
   --modal-profile-color: #F5F7FA;
   --modal-follw-btn-color: #7E3AF2;
   --calender-day: #8e8e93;
+  --color-reviews: #383838;
+  --color-reviews-subtitle: #858B95;
+  --color-happy-box: #FEF3EA;
 
   --font-geist-sans1: var(--font-geist-sans);
   --font-geist-mono1: var(--font-geist-mono);
@@ -293,12 +296,30 @@ body {
   width: 81%;
 }
 
-.box-border-orange {
+/* .box-border-orange {
   border: 1px solid var(--border-box);
   padding: 4px 10px !important;
   color: var(--border-box);
   border-radius: 8px !important;
+} */
+
+
+.box-border-orange {
+  display: inline-block;
+   border: 1px solid var(--border-box);
+   color: var(--border-box);
+   border-radius: 8px !important;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap; /* keeps text in one line */
+  text-align: center;
+  overflow: visible; /* prevents text cutting */
+  box-sizing: border-box;
 }
+
+
 
 .box-border-blue {
   border: 1px solid var(--border-box-blue);
@@ -852,4 +873,37 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   padding: 30px !important;
 }
 
+
+.status-completed {
+    background-color: #DEF7EC;
+    color: #057A55;
+}
+
+.status-pending {
+    background-color: #EBF5FF;
+    color: #3F83F8;
+}
+
+.status-cancelled {
+    background-color: #FDF2F2;
+    color: #F05252;
+}
+
+.status-scheduled {
+    background-color: #EDEBFE;
+    color: #7E3AF2;
+}
+
+.status-noresponse {
+    background-color: #FFF8F1;
+    color: #FF8A4C;
+}
+
+.status-rescheduled {
+    background-color: #EDFAFA;
+    color: #0694A2;
+}
+
 /* Inhosue End */
+
+

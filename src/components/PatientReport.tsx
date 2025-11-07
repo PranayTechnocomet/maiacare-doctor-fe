@@ -31,6 +31,7 @@ import { PatientReportType } from "@/utils/types/interfaces"
 const PatientReport = () => {
 
     const [patientReportData, setPatientReportData] = useState<PatientReportType[]>(patientReport);
+    
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
     ) => {

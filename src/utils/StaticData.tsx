@@ -10,6 +10,7 @@ import patientImg1 from "../assets/images/patient-img-1.png"
 import patientImg2 from "../assets/images/patient-img-2.png"
 import patientImg3 from "../assets/images/patient-img-3.png"
 import patientImg4 from "../assets/images/patient-img-4.png"
+
 import { ColumnDef } from "@tanstack/react-table";
 
 export const tableResponse: Patient[] = [
@@ -33,6 +34,45 @@ export const tableResponse: Patient[] = [
   },
   // ...add more rows
 ];
+
+export const ClinicReviewsTable = [
+  {
+    id: "1",
+    image: patientImg1,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "2",
+    image: patientImg2,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "3",
+    image: patientImg3,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "4",
+    image: patientImg4,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+]
 
 export const AppointmentData = [
   {
@@ -770,3 +810,351 @@ export type LeaveEntry = {
   endDate: string;
   days: string;
 };
+
+
+import RaniImg from "@/assets/images/Img-1.png";
+import NinaImg from "@/assets/images/Img-2.png";
+import HimariImg from "@/assets/images/Img-3.png";
+import AnjaliImg from "@/assets/images/Img-4.png";
+import AasthaImg from "@/assets/images/Img-5.png";
+import { StaticImageData } from "next/image";
+// import Doctor1 from "@/assets/images/doctor1.png";
+// import Doctor2 from "@/assets/images/doctor2.png";
+// import Doctor3 from "@/assets/images/doctor3.png";
+// import Doctor4 from "@/assets/images/doctor4.png";
+
+
+export interface ConsultationEntry {
+  id: number; // <-- ADD ID
+  name: string;
+  mobile: string;
+  treatment: string;
+  pin: string;
+  status: string;
+  image: string | StaticImageData;
+  date?: string;  // ✅ optional date field
+}
+
+export interface InventoryEntry {
+  id: number; // <-- ADD ID
+  name: string;
+  mobile: string;
+  treatment: string;
+  Date: string;
+  Time: string;
+  status: string;
+  image: string | StaticImageData;
+  date?: string;  // ✅ optional date field
+}
+
+export interface TreatmentPlanEntry {
+  id: number;
+  treatmentPlan: string;
+  step: string;
+  date: string;
+  patientName: string;
+  partnerName: string;
+  status: string;
+  image: string | StaticImageData;
+}
+
+
+
+export type Doctor = {
+  id: string | number;
+  name: string;
+  image: string | StaticImageData;
+  slots: string[];
+};
+
+
+
+
+
+
+
+export const consultationData: ConsultationEntry[] = [
+  {
+    id: 1,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Completed",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 2,
+    name: "Nina Gupta",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "Pending",
+    image: RiyaSharma,
+    date: "2025-11-07"
+   
+  },
+  {
+    id: 3,
+    name: "Himari Roy",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Scheduled",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 4,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "No Response",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 5,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Cancelled",
+    image: RiyaSharma,
+    date: "2025-11-08"
+    
+  },
+  {
+    id: 6,
+    name: "Aastha Patil",
+    mobile: "9092038491",
+    treatment: "IVF",
+    pin: "400077",
+    status: "Rescheduled",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 7,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "No Response",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 8,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Completed",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 9,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    pin: "400077",
+    status: "Cancelled",
+    image: RiyaSharma,
+    date: "2025-09-15"
+  },
+  {
+    id: 10,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Egg Freezing",
+    pin: "400077",
+    status: "Completed",
+    image: RiyaSharma,
+    date: "2025-10-15"
+  },
+];
+
+
+export const treatmentPlanData: TreatmentPlanEntry[] = [
+  {
+    id: 1,
+    treatmentPlan: "IVF",
+    step: "Fertility Assessment",
+    date: "7 Jan 2024",
+    patientName: "Meera Joshi",
+    partnerName: "Ravi Sharma",
+    status: "Success",
+    image: RiyaSharma,
+  },
+  {
+    id: 2,
+    treatmentPlan: "Egg Freezing",
+    step: "Ovarian Stimulation",
+    date: "7 Jan 2024",
+    patientName: "Ravi Sharma",
+    partnerName: "Ravi Sharma",
+    status: "Pending",
+    image: AarushiPatel,
+  },
+  {
+    id: 3,
+    treatmentPlan: "IUI",
+    step: "Fertilisation",
+    date: "7 Jan 2024",
+    patientName: "Priya Singh",
+    partnerName: "Rohan Singh",
+    status: "Cancelled",
+    image: RiyaSharma,
+  },
+  {
+    id: 4,
+    treatmentPlan: "Fertility Support",
+    step: "IVF",
+    date: "7 Jan 2024",
+    patientName: "Lakshmi Patel",
+    partnerName: "Arjun Patel",
+    status: "Success",
+    image: RiyaSharma,
+  },
+  {
+    id: 5,
+    treatmentPlan: "IVF",
+    step: "Embryo Culture",
+    date: "7 Jan 2024",
+    patientName: "Arjun Patel",
+    partnerName: "Arjun Patel",
+    status: "Upcoming",
+    image: AarushiPatel,
+  },
+  {
+    id: 6,
+    treatmentPlan: "Egg Freezing",
+    step: "Embryo Transfer",
+    date: "7 Jan 2024",
+    patientName: "Suresh Gupta",
+    partnerName: "Suresh Gupta",
+    status: "Cancelled",
+    image: AarushiPatel,
+  },
+  {
+    id: 7,
+    treatmentPlan: "Fertility Support",
+    step: "Pregnancy Test",
+    date: "7 Jan 2024",
+    patientName: "Ananya Sharma",
+    partnerName: "Vikram Sharma",
+    status: "Pending",
+    image: AarushiPatel,
+  },
+  {
+    id: 8,
+    treatmentPlan: "Fertility Support",
+    step: "Fertility Assessment",
+    date: "7 Jan 2024",
+    patientName: "Ananya Sharma",
+    partnerName: "Vikram Sharma",
+    status: "Success",
+    image: AarushiPatel,
+  },
+];
+
+
+export const inventoryData: InventoryEntry[] = [
+  {
+    id: 1,
+    name: "Rani Desai",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "Completed",
+    image: PriyaGupta,
+    date: "2025-11-7"
+  },
+  {
+    id: 2,
+    name: "Nina Gupta",
+    mobile: "9092038491",
+    treatment: "Egg Freezing +1",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "Pending",
+    image: AarushiPatel,
+    date: "2025-09-15"
+  },
+  {
+    id: 3,
+    name: "Himari Roy",
+    mobile: "9092038491",
+    treatment: "Egg Freezing +1",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "",
+    image: NishaRao,
+    date: "2025-09-15"
+  },
+  {
+    id: 4,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "IVF",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "No Response",
+    image: RiyaSharma,
+    date: "2025-11-8"
+  },
+  {
+    id: 5,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "Cancelled",
+    image: AarushiPatel,
+    date: "2025-10-15"
+  },
+
+  {
+    id: 6,
+    name: "Aastha Patil",
+    mobile: "9092038491",
+    treatment: "Egg Freezing +1",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "Scheduled",
+    image: NishaRao,
+    date: "2025-09-15"
+  },
+  {
+    id: 7,
+    name: "Nina Gupta",
+    mobile: "9092038491",
+    treatment: "IVF",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "No Response",
+    image: RiyaSharma,
+    date: "2025-09-25"
+  },
+  {
+    id: 8,
+    name: "Anjali Shinde",
+    mobile: "9092038491",
+    treatment: "Fertility Support +2",
+    Date: "7 Jan 2024",
+    Time: "2:30 PM",
+    status: "Cancelled",
+    image: PriyaGupta,
+    date: "2025-10-15"
+  },
+
+];
+// ];
+
+
