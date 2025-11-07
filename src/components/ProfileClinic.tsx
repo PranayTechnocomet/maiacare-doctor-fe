@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { ClinicReviews, ManageLeave, Reviews } from "./ManageLeave";
+import { ClinicManageLeave, ClinicReviews, ManageLeave, Reviews } from "./ManageLeave";
 import DoctorProfile from "./ui/custom/DoctorProfile";
 import CustomTabs from "./ui/CustomTabs";
 import ProfileBasicDetailsTabs from "./Profile-Basic-Details";
@@ -31,7 +31,7 @@ export default function ProfileClinic() {
             label: "Manage Leaves",
             content: (
                 <>
-                    <ManageLeave />
+                    <ClinicManageLeave />
                 </>
             ),
         },
