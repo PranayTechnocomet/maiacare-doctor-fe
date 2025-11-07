@@ -132,8 +132,6 @@ export default function Consultation() {
         setFilteredData(data);
     }, [filter, searchQuery, timeFilter]);
 
-
-
     const columns: ColumnDef<any>[] = [
         {
             header: "#",

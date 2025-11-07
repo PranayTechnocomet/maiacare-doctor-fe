@@ -22,7 +22,8 @@ import { TimePickerFieldGroup } from "../ui/CustomTimePicker";
 import { useSearchParams } from "next/navigation";
 import { PhoneNumberInput } from "../ui/PhoneNumberInput";
 import Button from "../ui/Button";
-import { InputSelect } from "../ui/InputSelect";
+import { InputSelect, InputSelectMultiSelect } from "../ui/InputSelect";
+import { OptionType } from "@/utils/types/interfaces";
 
 
 export default function PersonalDetails({ onNext }: { onNext: () => void }) {
@@ -59,10 +60,12 @@ export default function PersonalDetails({ onNext }: { onNext: () => void }) {
     startYear: string;
     endYear: string;
 
-    MF: string;
-    SS: string;
-    Time: string;
-    Timer: string;
+    // MF: string;
+    // SS: string;
+    // Time: string;
+    // Timer: string;
+    services: OptionType[];
+    fees: string;
   };
 
   const initialFormData: FormData = {
@@ -81,10 +84,12 @@ export default function PersonalDetails({ onNext }: { onNext: () => void }) {
     startYear: "",
     endYear: "",
 
-    MF: "",
-    SS: "",
-    Time: "",
-    Timer: "",
+    // MF: "",
+    // SS: "",
+    // Time: "",
+    // Timer: "",
+    services: [],
+    fees: "",
   };
 
 
@@ -130,8 +135,8 @@ export default function PersonalDetails({ onNext }: { onNext: () => void }) {
 
 
     if (!data.About.trim()) errors.About = "About is required";
-
-
+    if (!data.services.length) errors.services = "services is required";
+    if (!data.fees.trim()) errors.fees = "fees is required";
     // if (!data.degree.trim()) errors.degree = "Degree is required";
     // if (!data.field.trim()) errors.field = "Field is required";
     // if (!data.university.trim()) errors.university = "University is required";
@@ -703,68 +708,58 @@ export default function PersonalDetails({ onNext }: { onNext: () => void }) {
         </div>
       </ContentContainer>
 
-
-
-
       <ContentContainer className="mt-4">
         <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center text-center text-md-start mb-3">
           <h5 className="profile-card-main-titile mb-2 mb-md-0">
-            Operational hours & Days
+            Services Offered & Fee
           </h5>
-          <Form.Check
-            type="checkbox"
-            label="Select custom Hours and Days?"
-            className="text-nowrap check-box input"
-          />
+
         </div>
 
-        <Row className="mb-3  ">
-          <Col md={6} className="edit-basic-detail-timepicker">
-            <TimePickerFieldGroup
-              label="Monday-Friday"
-              name="MF"
-              placeholder="Select Time"
-              value={formData.MF}
-              onChange={(e) => {
-                setFormData({ ...formData, MF: e.target.value });
-              }}
+        <Row className="mb-3 g-3 ">
+          <Col md={12}>
+            <InputSelectMultiSelect
+              label="Services"
+              name="services"
+              values={formData.services}
+              onChange={(values: any) => { setFormData((prev) => ({ ...prev, services: values })); setFormError((prev) => ({ ...prev, services: "" })) }}
+              options={[
+                { id: "1", value: "Fertility Support", label: "Fertility Support" },
+                { id: "2", value: "IUI", label: "IUI" },
+                { id: "3", value: "IVF", label: "IVF" },
+                { id: "4", value: "Egg Freezing", label: "Egg Freezing" },
+
+              ]}
+              placeholder="Search Medical Condition or Allergies"
+              addPlaceholder="Add Medical Condition or Allergies"
+              required={true}
+              dropdownHandle={true} // open close arrow icon show hide
+
+              selectedOptionColor="var(--border-box)"
+              selectedOptionBorderColor="var(--border-box)"
+              error={formError.services}
             />
           </Col>
-
-          <Col md={6} className="mt-2 edit-basic-detail-timepicker">
-            <TimePickerFieldGroup
-              name="Time"
-              placeholder="Select Time"
-              value={formData.Time}
-              onChange={(e) => {
-                setFormData({ ...formData, Time: e.target.value });
+          <Col md={12}>
+            <InputFieldGroup
+              label="Fees "
+              name="fees"
+              type="text"
+              value={formData.fees}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setFormData({ ...formData, fees: e.target.value });
+                if (formError.fees) {   // typing in hide error 
+                  setFormError({ ...formError, fees: "" });
+                }
               }}
-            />
-          </Col>
-        </Row>
-
-        <Row className="mb-3 edit-basic-detail-timepicker">
-          <Col md={6} className="edit-basic-detailsat-sun">
-            <TimePickerFieldGroup
-              label="Saturday-Sunday"
-              name="SS"
-              placeholder="Select Time"
-              value={formData.SS}
-              onChange={(e) => {
-                setFormData({ ...formData, SS: e.target.value });
-              }}
-            />
-          </Col>
-
-          <Col md={6} className="mt-2 edit-basic-detail-timepicker">
-            <TimePickerFieldGroup
-              name="Timer"
-              placeholder="Select Time"
-              value={formData.Timer}
-              onChange={(e) => {
-                setFormData({ ...formData, Timer: e.target.value });
-              }}
-            />
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
+              placeholder="fees"
+              required={true}
+              disabled={false}
+              readOnly={false}
+              error={formError.fees}
+            >
+            </InputFieldGroup>
           </Col>
         </Row>
       </ContentContainer>
@@ -943,3 +938,4 @@ export default function PersonalDetails({ onNext }: { onNext: () => void }) {
     </div>
   );
 }
+

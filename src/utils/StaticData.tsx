@@ -10,6 +10,7 @@ import patientImg1 from "../assets/images/patient-img-1.png"
 import patientImg2 from "../assets/images/patient-img-2.png"
 import patientImg3 from "../assets/images/patient-img-3.png"
 import patientImg4 from "../assets/images/patient-img-4.png"
+
 import { ColumnDef } from "@tanstack/react-table";
 
 export const tableResponse: Patient[] = [
@@ -33,6 +34,45 @@ export const tableResponse: Patient[] = [
   },
   // ...add more rows
 ];
+
+export const ClinicReviewsTable = [
+  {
+    id: "1",
+    image: patientImg1,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "2",
+    image: patientImg2,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "3",
+    image: patientImg3,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+  {
+    id: "4",
+    image: patientImg4,
+    name: "Meera Joshi",
+    rating: "4.5",
+    date: "7 Jan 2024",
+    time: "2:30 PM",
+    comment: "Dr. Kort practices the exact opposite of a one size fits all approach to medicine. He took my",
+  },
+]
 
 export const AppointmentData = [
   {
@@ -791,7 +831,7 @@ export interface ConsultationEntry {
   treatment: string;
   pin: string;
   status: string;
-   image: string | StaticImageData;
+  image: string | StaticImageData;
   date?: string;  // ✅ optional date field
 }
 
@@ -802,14 +842,14 @@ export interface InventoryEntry {
   email: string;
   pin: string;
   status: string;
-   image: string | StaticImageData;
+  image: string | StaticImageData;
   date?: string;  // ✅ optional date field
 }
 
 export type Doctor = {
   id: string | number;
   name: string;
-   image: string | StaticImageData;
+  image: string | StaticImageData;
   slots: string[];
 };
 
@@ -832,7 +872,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "IVF",
     pin: "400077",
     status: "Pending",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-16"
   },
   {
@@ -852,7 +892,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "IVF",
     pin: "400077",
     status: "No Response",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -862,7 +902,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "Fertility Support +2",
     pin: "400077",
     status: "Cancelled",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -872,7 +912,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "IVF",
     pin: "400077",
     status: "Rescheduled",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -882,7 +922,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "Fertility Support +2",
     pin: "400077",
     status: "No Response",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -892,7 +932,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "Egg Freezing",
     pin: "400077",
     status: "Completed",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -902,7 +942,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "Fertility Support +2",
     pin: "400077",
     status: "Cancelled",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-09-15"
   },
   {
@@ -912,7 +952,7 @@ export const consultationData: ConsultationEntry[] = [
     treatment: "Egg Freezing",
     pin: "400077",
     status: "Completed",
-     image: RiyaSharma,
+    image: RiyaSharma,
     date: "2025-10-15"
   },
 ];
@@ -972,3 +1012,5 @@ export const consultationData: ConsultationEntry[] = [
 //   },
 
 // ];
+
+

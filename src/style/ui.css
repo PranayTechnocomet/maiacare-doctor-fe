@@ -497,26 +497,27 @@ input[type=number] {
 }
 
 .custom-react-dropdown .rmsc .dropdown-heading-value {
-  white-space: normal !important;
-  display: block !important;
+    white-space: normal !important;
+    display: block !important;
 }
 
-.custom-react-dropdown .rmsc .dropdown-container:focus-within{
+.custom-react-dropdown .rmsc .dropdown-container:focus-within {
     box-shadow: none !important;
 }
 
 /* Checkbox appearance */
-.custom-react-dropdown .rmsc .item-renderer{
+.custom-react-dropdown .rmsc .item-renderer {
     display: flex;
     align-items: center;
 }
 
 .custom-react-dropdown .rmsc .item-renderer input[type="checkbox"] {
-  accent-color: var(--color-brand)!important; /* your custom color */
-  width: 16px;
-  height: 16px;
-  border-radius: 4px !important;
-  cursor: pointer;
+    accent-color: var(--color-brand) !important;
+    /* your custom color */
+    width: 16px;
+    height: 16px;
+    border-radius: 4px !important;
+    cursor: pointer;
 }
 
 /* Hide "✕" icon from selected items */
@@ -524,25 +525,29 @@ input[type=number] {
     display: none !important;
 }
 
-.custom-react-dropdown:hover, .custom-react-dropdown .react-dropdown-select-input:hover {
+.custom-react-dropdown:hover,
+.custom-react-dropdown .react-dropdown-select-input:hover {
     background-color: transparent !important;
 }
 
 .custom-react-dropdown .selected {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Target dropdown list scroll area */
 .custom-react-dropdown .rmsc .options {
-  max-height: 200px !important; /* limit visible items before scroll */
-  overflow-y: auto !important;
-  scrollbar-width: thin; /* for Firefox */
-  scrollbar-color: var(--color-scrollbar-thumb) var(--color-white); /* thumb + track colors for Firefox */
+    max-height: 200px !important;
+    /* limit visible items before scroll */
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    /* for Firefox */
+    scrollbar-color: var(--color-scrollbar-thumb) var(--color-white);
+    /* thumb + track colors for Firefox */
 }
 
 /* Chrome, Edge, Safari */
 .custom-react-dropdown .rmsc .options::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 /* multiselect with check boxs css end*/
@@ -592,6 +597,49 @@ input[type=number] {
     pointer-events: none;
 }
 
+.custome-switch .form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.custome-switch .form-check-input {
+    width: 42px;
+    height: 22px;
+    background-color: #d6d6d6;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+/* Remove Bootstrap’s default shadow */
+.custome-switch .form-check-input:focus {
+    box-shadow: none;
+}
+
+/* White circle (thumb) */
+.custome-switch .form-check-input::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* When checked: use brand color + move circle */
+.custome-switch .form-check-input:checked {
+    background-color: var(--color-brand);
+}
+
+.custome-switch .form-check-input:checked::before {
+    transform: translateX(20px);
+}
+
 
 /* pankaj solanki end */
 
@@ -636,6 +684,3 @@ input[type=number] {
     padding: 10px 16px;
     background-color: var(--color-white);
 }
-
-
-

@@ -17,13 +17,7 @@ import Button from '../Button';
 import '../../../style/doctorprofile.css';
 
 
-const DoctorProfile = () => {
-
-    const router = useRouter();
-
-    const handleEditProfile = () => {
-        router.push('/edit-profile'); // Route to your Edit Profile screen
-    };
+const DoctorProfile = ({ handleEditProfile }: { handleEditProfile?: () => void }) => {
 
     const doctorData = {
         name: "Dr. Riya Dharang",

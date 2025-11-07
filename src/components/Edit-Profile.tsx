@@ -6,14 +6,12 @@ import CustomTabs from './ui/CustomTabs';
 import ContentContainer from './ui/ContentContainer';
 import PersonalDetails from './form/Edit-Basic-Details';
 import KYCDetails from './form/Edit-Kyc-Details';
+import ClinicDetailsForm from './form/ClinicDetailsForm';
 // import ContentContainer from './ui/ContentContainer';
-
-
 
 
 const EditProfile = () => {
     const [activeTab, setActiveTab] = useState<string>("basic");
-
 
     const handleNextClick = () => {
         setActiveTab("KYC");
@@ -40,9 +38,7 @@ const EditProfile = () => {
             label: "Clinic Details",
             content: (
                 <>
-                    <ContentContainer className="mt-5">
-                        <h1>Clinic Details</h1>
-                    </ContentContainer>
+                   <ClinicDetailsForm />
                 </>
             ),
         },

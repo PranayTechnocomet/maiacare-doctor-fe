@@ -214,6 +214,17 @@
     color: #6c757d !important;
 }
 
+.clinic-details-box-background{
+    background-color: var(--modal-profile-color);
+}
+
+.reviews-Happy-box {
+    border: 1px solid var(--color-modal-heading);
+    border-radius: 4px;
+    padding: 4px 8px;
+    background-color: var(--color-happy-box);
+}
+
 @media screen and (max-width: 575px) {
     .patient-profile-dot {
         width: 45px;
