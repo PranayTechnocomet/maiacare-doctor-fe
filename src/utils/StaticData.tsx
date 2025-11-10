@@ -134,7 +134,7 @@ export const PaymentHistoryData = [
     actions: "View"
   },
   {
-    transactionId: "TXN1234567890",
+    transactionId: "TXN1234567891",
     serviceType: "Treatment",
     date: "11 Feb 2025",
     time: "3 PM",
@@ -144,7 +144,7 @@ export const PaymentHistoryData = [
     actions: "View"
   },
   {
-    transactionId: "TXN1234567890",
+    transactionId: "TXN1234567892",
     serviceType: "Lab Test",
     date: "11 Feb 2025",
     time: "3 PM",
@@ -154,7 +154,7 @@ export const PaymentHistoryData = [
     actions: "View"
   },
   {
-    transactionId: "TXN1234567890",
+    transactionId: "TXN1234567893",
     serviceType: "Consultation",
     date: "11 Feb 2025",
     time: "3 PM",

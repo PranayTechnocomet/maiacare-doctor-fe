@@ -79,7 +79,7 @@
     overflow-y: scroll;
     height: 78dvh;
   }
-  
+    
   .sidebar__nav::-webkit-scrollbar {
     display: none;
   }
