@@ -125,7 +125,7 @@ function Treatment() {
             surgeriesContent: "",
         },
         medicalPrescription: medicationPrescriptionData,
-        report : [],
+        report: [],
         StatusAndUpdates: StatusAndUpdatesData,
     };
 
@@ -152,7 +152,7 @@ function Treatment() {
             surgeriesContent: "",
         },
         medicalPrescription: [],
-        report : [],
+        report: [],
         StatusAndUpdates: {
             stepName: "",
             status: "",
@@ -1968,111 +1968,111 @@ function Treatment() {
                     </Row>
                 </>
             )
-            
-            : (
-                <>
-                    <div className="position-relative">
-                        <CustomTabs
-                            className="w-50"
-                            activeKey={activeTab}
-                            setActiveKey={setActiveTab}
-                            tabOptions={tabOptions}
-                        />
 
-                        <div className="position-absolute top-0 end-0">
-                            <Button
-                                variant="default"
-                                type="submit"
-                                onClick={() => {
-                                    setTreatmentModel(true);
-                                }}
-                            >
-                                <div className="d-flex justify-content-center align-items-center gap-2">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M17.8125 10C17.8125 10.2486 17.7137 10.4871 17.5379 10.6629C17.3621 10.8387 17.1236 10.9375 16.875 10.9375H10.9375V16.875C10.9375 17.1236 10.8387 17.3621 10.6629 17.5379C10.4871 17.7137 10.2486 17.8125 10 17.8125C9.75136 17.8125 9.5129 17.7137 9.33709 17.5379C9.16127 17.3621 9.0625 17.1236 9.0625 16.875V10.9375H3.125C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 10C2.1875 9.75136 2.28627 9.5129 2.46209 9.33709C2.6379 9.16127 2.87636 9.0625 3.125 9.0625H9.0625V3.125C9.0625 2.87636 9.16127 2.6379 9.33709 2.46209C9.5129 2.28627 9.75136 2.1875 10 2.1875C10.2486 2.1875 10.4871 2.28627 10.6629 2.46209C10.8387 2.6379 10.9375 2.87636 10.9375 3.125V9.0625H16.875C17.1236 9.0625 17.3621 9.16127 17.5379 9.33709C17.7137 9.5129 17.8125 9.75136 17.8125 10Z"
-                                            fill="#FFFFFF"
-                                        />
-                                    </svg>
-                                    Add Treatment
-                                </div>
-                            </Button>
+                : (
+                    <>
+                        <div className="position-relative">
+                            <CustomTabs
+                                className="w-50"
+                                activeKey={activeTab}
+                                setActiveKey={setActiveTab}
+                                tabOptions={tabOptions}
+                            />
+
+                            <div className="position-absolute top-0 end-0">
+                                <Button
+                                    variant="default"
+                                    type="submit"
+                                    onClick={() => {
+                                        setTreatmentModel(true);
+                                    }}
+                                >
+                                    <div className="d-flex justify-content-center align-items-center gap-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="20"
+                                            height="20"
+                                            viewBox="0 0 20 20"
+                                            fill="none"
+                                        >
+                                            <path
+                                                d="M17.8125 10C17.8125 10.2486 17.7137 10.4871 17.5379 10.6629C17.3621 10.8387 17.1236 10.9375 16.875 10.9375H10.9375V16.875C10.9375 17.1236 10.8387 17.3621 10.6629 17.5379C10.4871 17.7137 10.2486 17.8125 10 17.8125C9.75136 17.8125 9.5129 17.7137 9.33709 17.5379C9.16127 17.3621 9.0625 17.1236 9.0625 16.875V10.9375H3.125C2.87636 10.9375 2.6379 10.8387 2.46209 10.6629C2.28627 10.4871 2.1875 10.2486 2.1875 10C2.1875 9.75136 2.28627 9.5129 2.46209 9.33709C2.6379 9.16127 2.87636 9.0625 3.125 9.0625H9.0625V3.125C9.0625 2.87636 9.16127 2.6379 9.33709 2.46209C9.5129 2.28627 9.75136 2.1875 10 2.1875C10.2486 2.1875 10.4871 2.28627 10.6629 2.46209C10.8387 2.6379 10.9375 2.87636 10.9375 3.125V9.0625H16.875C17.1236 9.0625 17.3621 9.16127 17.5379 9.33709C17.7137 9.5129 17.8125 9.75136 17.8125 10Z"
+                                                fill="#FFFFFF"
+                                            />
+                                        </svg>
+                                        Add Treatment
+                                    </div>
+                                </Button>
+                            </div>
                         </div>
-                    </div>
 
-                    <Modal
-                        show={treatmentModel}
-                        onHide={() => {
-                            setTreatmentModel(false);
-                            setStep(1);
-                            setStepper(1);
-                            setMedicalPrescription([]);
-                        }}
-                        header="Treatment Plan"
-                        closeButton={true}
-                    >
-                        <TreatmentForm
+                        <Modal
+                            show={treatmentModel}
+                            onHide={() => {
+                                setTreatmentModel(false);
+                                setStep(1);
+                                setStepper(1);
+                                setMedicalPrescription([]);
+                            }}
+                            header="Treatment Plan"
+                            closeButton={true}
+                        >
+                            <TreatmentForm
+                                setStep={setStep}
+                                setStepper={setStepper}
+                                step={step}
+                                stepper={stepper}
+                                totalSteps={totalSteps}
+                                medicalPrescription={medicalPrescription}
+                                setMedicalPrescription={setMedicalPrescription}
+                                medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                                setMedicalPrescriptionDataShowHide={
+                                    setMedicalPrescriptionDataShowHide
+                                }
+                                showEditFormShowModel={showEditFormShowModel}
+                                setShowEditFormShowModel={setShowEditFormShowModel}
+                                setTreatmentPlanModel={setTreatmentModel}
+                                setEditForm={setEditForm}
+                                editForm={editForm}
+                                setSuccessModal={setSuccessModal}
+                            />
+                        </Modal>
+
+                        {/* edittime show model for Medication & Tests */}
+                        <Modal
+                            show={showEditFormShowModel}
+                            onHide={() => {
+                                setShowEditFormShowModel(false);
+                                setTreatmentModel(true);
+                                setMedicalPrescriptionDataShowHide(false);
+                            }}
+                            header="Edit Medication Prescription"
+                            closeButton={true}
+                        >
+                            <MedicationPrescriptionForm
+                                setShowEditFormShowModel={setShowEditFormShowModel}
+                                editForm={editForm}
+                                setTreatmentPlanModel={setTreatmentModel}
+                                setMedicalPrescription={setMedicalPrescription}
+                                medicalPrescription={medicalPrescription}
+                                setMedicalPrescriptionDataShowHide={
+                                    setMedicalPrescriptionDataShowHide
+                                }
+                                medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
+                            />
+                        </Modal>
+
+                        {/* success modal add treatment*/}
+                        <TreatmentSuccessModal
+                            successModal={successModal}
+                            setSuccessModal={setSuccessModal}
                             setStep={setStep}
                             setStepper={setStepper}
-                            step={step}
-                            stepper={stepper}
-                            totalSteps={totalSteps}
-                            medicalPrescription={medicalPrescription}
                             setMedicalPrescription={setMedicalPrescription}
-                            medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
-                            setMedicalPrescriptionDataShowHide={
-                                setMedicalPrescriptionDataShowHide
-                            }
-                            showEditFormShowModel={showEditFormShowModel}
-                            setShowEditFormShowModel={setShowEditFormShowModel}
-                            setTreatmentPlanModel={setTreatmentModel}
-                            setEditForm={setEditForm}
-                            editForm={editForm}
-                            setSuccessModal={setSuccessModal}
+                            setShowContent={setShowContent}
                         />
-                    </Modal>
-
-                    {/* edittime show model for Medication & Tests */}
-                    <Modal
-                        show={showEditFormShowModel}
-                        onHide={() => {
-                            setShowEditFormShowModel(false);
-                            setTreatmentModel(true);
-                            setMedicalPrescriptionDataShowHide(false);
-                        }}
-                        header="Edit Medication Prescription"
-                        closeButton={true}
-                    >
-                        <MedicationPrescriptionForm
-                            setShowEditFormShowModel={setShowEditFormShowModel}
-                            editForm={editForm}
-                            setTreatmentPlanModel={setTreatmentModel}
-                            setMedicalPrescription={setMedicalPrescription}
-                            medicalPrescription={medicalPrescription}
-                            setMedicalPrescriptionDataShowHide={
-                                setMedicalPrescriptionDataShowHide
-                            }
-                            medicalPrescriptionDataShowHide={medicalPrescriptionDataShowHide}
-                        />
-                    </Modal>
-
-                    {/* success modal add treatment*/}
-                    <TreatmentSuccessModal
-                        successModal={successModal}
-                        setSuccessModal={setSuccessModal}
-                        setStep={setStep}
-                        setStepper={setStepper}
-                        setMedicalPrescription={setMedicalPrescription}
-                        setShowContent={setShowContent}
-                    />
-                </>
-            )}
+                    </>
+                )}
         </>
     );
 }

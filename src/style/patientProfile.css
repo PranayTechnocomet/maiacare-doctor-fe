@@ -117,7 +117,7 @@
     transition: all 0.3s ease !important;
 
 
-    min-height: 220px;
+    /* min-height: 220px; */
     /* overflow: hidden; */
 }
 
@@ -128,7 +128,7 @@
     object-fit: contain;
 }
 
-.patient-report-box:hover {
+/* .patient-report-box:hover {
     border: 1px solid var(--color-modal-heading);
 }
 
@@ -139,13 +139,11 @@
 
 .patient-report-box .icons-wrapper {
     display: none !important;
-    /* hide by default */
 }
 
 .patient-report-box:hover .icons-wrapper {
     display: flex !important;
-    /* show when hovering on the card */
-}
+} */
 
 .patient-treatment-box {
     background-color: var(--color-white);

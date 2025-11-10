@@ -161,8 +161,6 @@ export function All() {
                 return index < 10 ? `0${index}` : index; // format 01,02,03
             },
         },
-
-
         {
             header: "patientName",
             cell: (info) => {
@@ -256,9 +254,6 @@ export function All() {
                 </span>
             ),
         },
-
-
-
         {
             header: "Status",
             cell: (info) => {

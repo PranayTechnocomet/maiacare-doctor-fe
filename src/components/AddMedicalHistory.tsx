@@ -14,6 +14,7 @@ import PatientTreatment from './PatientTreatment';
 import PatientPaymentHistory from './PatientPaymentHistory';
 import PartnerDetail from './PartnerDetail';
 import PatientAppointment from './PatientAppointment';
+import '@/style/patientProfile.css';
 
 
 const AddMedicalHistory = () => {

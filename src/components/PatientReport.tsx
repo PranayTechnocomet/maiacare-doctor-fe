@@ -666,7 +666,7 @@ const PatientReport = () => {
                                     : ""}
                             </p>
 
-                            <div className="icons-wrapper d-flex gap-2 align-items-center mt-2">
+                            {/* <div className="icons-wrapper d-flex gap-2 align-items-center mt-2">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="25"
@@ -708,7 +708,8 @@ const PatientReport = () => {
                                         fill="#2B4360"
                                     />
                                 </svg>
-                            </div>
+                            </div> */}
+
                         </div>
                     </Col>
                 ))}
