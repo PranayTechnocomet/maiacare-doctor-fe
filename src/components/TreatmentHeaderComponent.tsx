@@ -169,7 +169,7 @@ export function All() {
                 const id = info.row.original.id; // <-- Make sure you have an `id`
 
                 return (
-                    // <Link href={`/patients/${id}`} className="text-decoration-none text-dark">
+                     <Link href={`/treatment-plans/${id}`} className="text-decoration-none text-dark">
                     <div className="d-flex align-items-center gap-2">
                         {typeof imgSrc === "string" ? (
                             <img
@@ -190,7 +190,7 @@ export function All() {
                         )}
                         {name}
                     </div>
-                    // </Link>
+                     </Link>
                 );
             },
         },
