@@ -24,7 +24,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import Box from '@mui/material/Box';
 import AppointmentsWeek from './AppointmentsWeek';
-import { FaChevronDown } from 'react-icons/fa';
+import { SlArrowDown } from "react-icons/sl";
+
 import ListViews from '@/components/ListViews';
 
 // Multi-Select DatePicker Component
@@ -146,20 +147,14 @@ export default function DoctorListing() {
   )
 }
 
-
 export function CalendarView() {
   const [filters, setFilters] = useState<string[]>([]);
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
-  const calendarRef = useRef<HTMLDivElement>(null);
   const [selectedView, setSelectedView] = useState<string>("day");
   const [doctorListingModal, setDoctorListingModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState<tempAppointmentProfileData | any>();
   const [RescheduleModal, setRescheduleModal] = useState(false);
   const [CancelModal, setCancelModal] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [weekRange, setWeekRange] = useState<{ start: Date; end: Date } | null>(null);
   const [BookAppointmentModal, setBookAppointmentModal] = useState(false);
   const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
   const [blockCalendarModal, setBlockCalendarModal] = useState(false);
@@ -167,13 +162,7 @@ export function CalendarView() {
 
   const [events, setEvents] = useState<Event[] | any>([]);
   const [showTooltip, setShowTooltip] = useState(true);
-  interface Appointment {
-    id: string;
-    time: string;
-    title: string;
-    startTime: number; // in minutes from midnight
-    duration: number; // in minutes
-  }
+
   interface Event {
     id: number;
     top: number;
@@ -197,8 +186,6 @@ export function CalendarView() {
   const clearAll = () => {
     setFilters([]);
   };
-
-
 
   // Refs for the scrollable areas
   const scheduleRef = useRef<HTMLDivElement>(null);
@@ -305,168 +292,6 @@ export function CalendarView() {
   // Add 24px (half the slot height) to center it.
   const staticLineTop = ((12.5 - 9) * 2 * 48) + 24;
 
-
-
-
-
-  // --- Date Calculation Helpers ---
-  const getDaysInMonth = (year: number, month: number) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (year: number, month: number) => {
-    // Adjust to make Monday the first day of the week (0 = Monday)
-    return (new Date(year, month, 1).getDay() + 6) % 7;
-  };
-
-  const getWeekRange = (date: Date) => {
-    const dt = new Date(date);
-    const dayOfWeek = (dt.getDay() + 6) % 7; // Monday = 0, Sunday = 6
-
-    const weekStart = new Date(dt);
-    weekStart.setDate(dt.getDate() - dayOfWeek);
-    weekStart.setHours(0, 0, 0, 0);
-
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 6);
-    weekEnd.setHours(23, 59, 59, 999);
-
-    return { start: weekStart, end: weekEnd };
-  };
-
-  // --- Handlers ---
-  const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
-  };
-
-  const handleDateClick = (day: number) => {
-    const newSelectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-    setSelectedDate(newSelectedDate);
-    setWeekRange(getWeekRange(newSelectedDate));
-  };
-
-  // --- Effects ---
-  useEffect(() => {
-    // Initialize the week range when the component mounts
-    setWeekRange(getWeekRange(selectedDate));
-  }, []);
-
-
-  // --- Render Logic ---
-  const renderCalendar = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const daysInMonth = getDaysInMonth(year, month);
-    const firstDay = getFirstDayOfMonth(year, month);
-
-    const calendarDays = [];
-
-    // Add empty cells for days before the first day of the month
-    for (let i = 0; i < firstDay; i++) {
-      calendarDays.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
-    }
-
-    // Add the days of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      const dayDate = new Date(year, month, day);
-      const isSelected = selectedDate.getDate() === day && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
-
-      const isInRange = weekRange && dayDate >= weekRange.start && dayDate <= weekRange.end;
-      const dayOfWeek = (dayDate.getDay() + 6) % 7;
-      const isWeekStart = dayOfWeek === 0;
-      const isWeekEnd = dayOfWeek === 6;
-      const isFirstDayOfMonth = day === 1;
-      const isLastDayOfMonth = day === daysInMonth;
-
-      const classNames = [
-        'calendar-day',
-        isSelected ? 'selected' : '',
-        isInRange && !isSelected ? 'in-range' : '',
-        isInRange && (isWeekStart || isFirstDayOfMonth) ? 'range-start' : '',
-        isInRange && (isWeekEnd || isLastDayOfMonth) ? 'range-end' : ''
-      ].join(' ');
-
-      calendarDays.push(
-        <div
-          key={day}
-          className={classNames}
-          onClick={() => handleDateClick(day)}
-        >
-          {day}
-        </div>
-      );
-    }
-
-    return calendarDays;
-  };
-
-  const daysOfWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-
-  // week range formatter
-  const getSelectedDayRange = (date: Date) => {
-    const day = date.getDay();
-    const start = new Date(date);
-    start.setDate(date.getDate() - day + 1); // Monday
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6); // Sunday
-
-    const monthYear = date.toLocaleString("default", {
-      month: "long",
-      year: "numeric",
-    });
-
-    const startDayName = start
-      .toLocaleString("default", { weekday: "short" })
-      .replace(".", "");
-    const endDayName = end
-      .toLocaleString("default", { weekday: "short" })
-      .replace(".", "");
-
-    const startDate = start.getDate().toString().padStart(2, "0");
-    const endDate = end.getDate().toString().padStart(2, "0");
-
-    return `${monthYear}`;
-  };
-  const getSelectedWeekRange = (date: Date) => {
-    const day = date.getDay();
-    const start = new Date(date);
-    start.setDate(date.getDate() - day + 1); // Monday
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6); // Sunday
-
-    const monthYear = date.toLocaleString("default", {
-      month: "long",
-      year: "numeric",
-    });
-
-    const startDayName = start
-      .toLocaleString("default", { weekday: "short" })
-      .replace(".", "");
-    const endDayName = end
-      .toLocaleString("default", { weekday: "short" })
-      .replace(".", "");
-
-    const startDate = start.getDate().toString().padStart(2, "0");
-    const endDate = end.getDate().toString().padStart(2, "0");
-
-    return `${monthYear} (${startDayName} ${startDate} - ${endDayName} ${endDate})`;
-  };
-
-  // calendar renderer
-
-  // check if date belongs to selected week
-  const isDateInSelectedWeek = (date: Date, selected: Date) => {
-    const start = new Date(selected);
-    start.setDate(selected.getDate() - selected.getDay() + 1);
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6);
-    return date >= start && date <= end;
-  };
-
   const [selectedCard, setSelectedCard] = useState<"Upcoming" | "Waiting" | "Engaged" | "Done" | null>(null);
   const displayLimits: Record<"Upcoming" | "Waiting" | "Engaged" | "Done", number> = {
     Upcoming: 5,
@@ -474,7 +299,6 @@ export function CalendarView() {
     Engaged: 2,
     Done: 4,
   };
-
 
   const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   // console.log("Value",value);
@@ -495,13 +319,6 @@ export function CalendarView() {
     const endDay = endOfWeek.format('ddd DD');
     return `${monthYear} (${startDay} - ${endDay})`;
   })() : '';
-
-  console.log("Month Year Format:", monthYearFormat); // October 2025
-  console.log("Day  Format:", dayDateFormat);
-  console.log("Date Format:", dateDateFormat);
-  console.log("Month Year with Week Range:", monthYearWithWeekRange); // October 2025 (Mon 13 - Sun 19) 
-
-
 
   return (
     <>
@@ -657,207 +474,112 @@ export function CalendarView() {
 
       <Row className='mt-3'>
         <Col xl={3}>
-          <ContentContainer>
-            <>
-              <div>
-                <div className='d-flex align-item-center justify-content-center '>
-                  <Button variant="outline" disabled={false} onClick={() => { setBlockCalendarModal(true); }}>
-                    <div className='d-flex gap-2 align-items-center'>
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16.25 2.5H14.375V1.875C14.375 1.70924 14.3092 1.55027 14.1919 1.43306C14.0747 1.31585 13.9158 1.25 13.75 1.25C13.5842 1.25 13.4253 1.31585 13.3081 1.43306C13.1908 1.55027 13.125 1.70924 13.125 1.875V2.5H6.875V1.875C6.875 1.70924 6.80915 1.55027 6.69194 1.43306C6.57473 1.31585 6.41576 1.25 6.25 1.25C6.08424 1.25 5.92527 1.31585 5.80806 1.43306C5.69085 1.55027 5.625 1.70924 5.625 1.875V2.5H3.75C3.41848 2.5 3.10054 2.6317 2.86612 2.86612C2.6317 3.10054 2.5 3.41848 2.5 3.75V16.25C2.5 16.5815 2.6317 16.8995 2.86612 17.1339C3.10054 17.3683 3.41848 17.5 3.75 17.5H16.25C16.5815 17.5 16.8995 17.3683 17.1339 17.1339C17.3683 16.8995 17.5 16.5815 17.5 16.25V3.75C17.5 3.41848 17.3683 3.10054 17.1339 2.86612C16.8995 2.6317 16.5815 2.5 16.25 2.5ZM5.625 3.75V4.375C5.625 4.54076 5.69085 4.69973 5.80806 4.81694C5.92527 4.93415 6.08424 5 6.25 5C6.41576 5 6.57473 4.93415 6.69194 4.81694C6.80915 4.69973 6.875 4.54076 6.875 4.375V3.75H13.125V4.375C13.125 4.54076 13.1908 4.69973 13.3081 4.81694C13.4253 4.93415 13.5842 5 13.75 5C13.9158 5 14.0747 4.93415 14.1919 4.81694C14.3092 4.69973 14.375 4.54076 14.375 4.375V3.75H16.25V6.25H3.75V3.75H5.625ZM16.25 16.25H3.75V7.5H16.25V16.25ZM12.3172 10.4422L10.8836 11.875L12.3172 13.3078C12.3753 13.3659 12.4213 13.4348 12.4527 13.5107C12.4842 13.5866 12.5003 13.6679 12.5003 13.75C12.5003 13.8321 12.4842 13.9134 12.4527 13.9893C12.4213 14.0652 12.3753 14.1341 12.3172 14.1922C12.2591 14.2503 12.1902 14.2963 12.1143 14.3277C12.0384 14.3592 11.9571 14.3753 11.875 14.3753C11.7929 14.3753 11.7116 14.3592 11.6357 14.3277C11.5598 14.2963 11.4909 14.2503 11.4328 14.1922L10 12.7586L8.56719 14.1922C8.50912 14.2503 8.44018 14.2963 8.36431 14.3277C8.28844 14.3592 8.20712 14.3753 8.125 14.3753C8.04288 14.3753 7.96156 14.3592 7.88569 14.3277C7.80982 14.2963 7.74088 14.2503 7.68281 14.1922C7.62474 14.1341 7.57868 14.0652 7.54725 13.9893C7.51583 13.9134 7.49965 13.8321 7.49965 13.75C7.49965 13.6679 7.51583 13.5866 7.54725 13.5107C7.57868 13.4348 7.62474 13.3659 7.68281 13.3078L9.11641 11.875L7.68281 10.4422C7.56554 10.3249 7.49965 10.1659 7.49965 10C7.49965 9.83415 7.56554 9.67509 7.68281 9.55781C7.80009 9.44054 7.95915 9.37465 8.125 9.37465C8.29085 9.37465 8.44991 9.44054 8.56719 9.55781L10 10.9914L11.4328 9.55781C11.4909 9.49974 11.5598 9.45368 11.6357 9.42225C11.7116 9.39083 11.7929 9.37465 11.875 9.37465C11.9571 9.37465 12.0384 9.39083 12.1143 9.42225C12.1902 9.45368 12.2591 9.49974 12.3172 9.55781C12.3753 9.61588 12.4213 9.68482 12.4527 9.76069C12.4842 9.83656 12.5003 9.91788 12.5003 10C12.5003 10.0821 12.4842 10.1634 12.4527 10.2393C12.4213 10.3152 12.3753 10.3841 12.3172 10.4422Z" fill="#2B4360" />
-                      </svg>
-                      <span>
-                        Block Calendar
-                      </span>
+
+
+          <div className='custom-date-calendar calendar-box' >
+            <div className='d-flex align-item-center justify-content-center '>
+              <Button variant="outline" disabled={false} onClick={() => { setBlockCalendarModal(true); }}>
+                <div className='d-flex gap-2 align-items-center'>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.25 2.5H14.375V1.875C14.375 1.70924 14.3092 1.55027 14.1919 1.43306C14.0747 1.31585 13.9158 1.25 13.75 1.25C13.5842 1.25 13.4253 1.31585 13.3081 1.43306C13.1908 1.55027 13.125 1.70924 13.125 1.875V2.5H6.875V1.875C6.875 1.70924 6.80915 1.55027 6.69194 1.43306C6.57473 1.31585 6.41576 1.25 6.25 1.25C6.08424 1.25 5.92527 1.31585 5.80806 1.43306C5.69085 1.55027 5.625 1.70924 5.625 1.875V2.5H3.75C3.41848 2.5 3.10054 2.6317 2.86612 2.86612C2.6317 3.10054 2.5 3.41848 2.5 3.75V16.25C2.5 16.5815 2.6317 16.8995 2.86612 17.1339C3.10054 17.3683 3.41848 17.5 3.75 17.5H16.25C16.5815 17.5 16.8995 17.3683 17.1339 17.1339C17.3683 16.8995 17.5 16.5815 17.5 16.25V3.75C17.5 3.41848 17.3683 3.10054 17.1339 2.86612C16.8995 2.6317 16.5815 2.5 16.25 2.5ZM5.625 3.75V4.375C5.625 4.54076 5.69085 4.69973 5.80806 4.81694C5.92527 4.93415 6.08424 5 6.25 5C6.41576 5 6.57473 4.93415 6.69194 4.81694C6.80915 4.69973 6.875 4.54076 6.875 4.375V3.75H13.125V4.375C13.125 4.54076 13.1908 4.69973 13.3081 4.81694C13.4253 4.93415 13.5842 5 13.75 5C13.9158 5 14.0747 4.93415 14.1919 4.81694C14.3092 4.69973 14.375 4.54076 14.375 4.375V3.75H16.25V6.25H3.75V3.75H5.625ZM16.25 16.25H3.75V7.5H16.25V16.25ZM12.3172 10.4422L10.8836 11.875L12.3172 13.3078C12.3753 13.3659 12.4213 13.4348 12.4527 13.5107C12.4842 13.5866 12.5003 13.6679 12.5003 13.75C12.5003 13.8321 12.4842 13.9134 12.4527 13.9893C12.4213 14.0652 12.3753 14.1341 12.3172 14.1922C12.2591 14.2503 12.1902 14.2963 12.1143 14.3277C12.0384 14.3592 11.9571 14.3753 11.875 14.3753C11.7929 14.3753 11.7116 14.3592 11.6357 14.3277C11.5598 14.2963 11.4909 14.2503 11.4328 14.1922L10 12.7586L8.56719 14.1922C8.50912 14.2503 8.44018 14.2963 8.36431 14.3277C8.28844 14.3592 8.20712 14.3753 8.125 14.3753C8.04288 14.3753 7.96156 14.3592 7.88569 14.3277C7.80982 14.2963 7.74088 14.2503 7.68281 14.1922C7.62474 14.1341 7.57868 14.0652 7.54725 13.9893C7.51583 13.9134 7.49965 13.8321 7.49965 13.75C7.49965 13.6679 7.51583 13.5866 7.54725 13.5107C7.57868 13.4348 7.62474 13.3659 7.68281 13.3078L9.11641 11.875L7.68281 10.4422C7.56554 10.3249 7.49965 10.1659 7.49965 10C7.49965 9.83415 7.56554 9.67509 7.68281 9.55781C7.80009 9.44054 7.95915 9.37465 8.125 9.37465C8.29085 9.37465 8.44991 9.44054 8.56719 9.55781L10 10.9914L11.4328 9.55781C11.4909 9.49974 11.5598 9.45368 11.6357 9.42225C11.7116 9.39083 11.7929 9.37465 11.875 9.37465C11.9571 9.37465 12.0384 9.39083 12.1143 9.42225C12.1902 9.45368 12.2591 9.49974 12.3172 9.55781C12.3753 9.61588 12.4213 9.68482 12.4527 9.76069C12.4842 9.83656 12.5003 9.91788 12.5003 10C12.5003 10.0821 12.4842 10.1634 12.4527 10.2393C12.4213 10.3152 12.3753 10.3841 12.3172 10.4422Z" fill="#2B4360" />
+                  </svg>
+                  <span>
+                    Block Calendar
+                  </span>
+                </div>
+              </Button>
+            </div>
+
+            {/* Multi-Select DatePicker Component */}
+            <div className="mt-3">
+
+              <div className="d-flex align-items-center justify-content-center ">
+                <div className=" w-100 calender-card-main" >
+                  <Stack direction="horizontal" className="mb-0 p-3 ">
+                    <h2 className="calendar-header m-0">Calendar</h2>
+                    <div
+                      className={`ms-auto d-flex align-items-center dropdown-toggle-icon ${isOpen ? "open" : ""}`}
+                      role="button"
+                      onClick={() => setIsOpen(!isOpen)}
+                    >
+
+                      <SlArrowDown size={18} />
                     </div>
-                  </Button>
-                </div>
+                  </Stack>
 
-                {/* Multi-Select DatePicker Component */}
-                <div className="mt-3">
-                  {/* <MultiDateSelector /> */}
-
-
-
-                  {/* <div className="bg-light  d-flex align-items-center justify-content-center ">
-                    <Card className="shadow-sm calendar-card ">
-                      <Card.Body>
-                        <Stack direction="horizontal" className="mb-3">
-                          <h2 className="calendar-header mb-0">Calendar</h2>
-                          <div className="ms-auto">^</div>
-                        </Stack>
-
-                        <Stack direction="horizontal" className="align-items-center mb-3">
-                          <div className="month-header">
-                            {currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}
-                          </div>
-                          <Stack direction="horizontal" className="ms-auto">
-                            <Button variant="link" className="nav-btn p-0" onClick={handlePrevMonth}>&lt;</Button>
-                            <Button variant="link" className="nav-btn p-0" onClick={handleNextMonth}>&gt;</Button>
-                          </Stack>
-                        </Stack>
-
-                        <div className="calendar-grid">
-                          {daysOfWeek.map((day, index) => (
-                            <div key={index} className="day-of-week">{day}</div>
-                          ))}
-                          {renderCalendar()}
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </div> */}
-
-
-
-
-
-                  <div className="bg-light d-flex align-items-center justify-content-center ">
-                    {/* <Card className="shadow-sm calendar-card w-100" style={{ maxWidth: 400 }}>
-
-                      <Stack direction="horizontal" className="mb-3">
-                        <h2 className="calendar-header mb-0">Calendar</h2>
-                        <div className="ms-auto">^</div>
-                      </Stack>
-
-
-
-                      <Box
-                        sx={{
-                          overflow: "hidden",
-                          ".MuiDateCalendar-root": {
-                            overflow: "hidden",
-                          },
-                        }}
-                      >
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          <DateCalendar
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)}
-                            views={["year", "month", "day"]}
-                            disableFuture={false}
-                            disablePast={false}
-                            readOnly={false}
-                            showDaysOutsideCurrentMonth
-                            disableHighlightToday={true}
-                            sx={{
-                              "&::-webkit-scrollbar": { display: "none" },
-                              overflow: "hidden",
-                            }}
-
-                          />
-                        </LocalizationProvider>
-                      </Box>
-
-
-
-                    </Card> */}
-                    <Card className="shadow-sm calendar-card w-100 calender-card-main" >
-                      <Stack direction="horizontal" className="mb-0 p-3 ">
-                        <h2 className="calendar-header mb-0 fs-5">Calendar</h2>
-
-                        {/* <div
-                          className="ms-auto d-flex align-items-center"
-                          role="button"
-                          onClick={() => setIsOpen(!isOpen)}
-                          style={{
-                            transition: 'transform 0.3s ease',
-                            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                            cursor: 'pointer',
-                          }}
-                        > */}
-                        <div
-                          className={`ms-auto d-flex align-items-center dropdown-toggle-icon ${isOpen ? "open" : ""}`}
-                          role="button"
-                          onClick={() => setIsOpen(!isOpen)}
-                        >
-
-
-                          <FaChevronDown size={18} />
-                        </div>
-                      </Stack>
-
-                      {/* Collapsible Calendar Section */}
-                      {isOpen && (
-                        <Box
+                  {/* Collapsible Calendar Section */}
+                  {isOpen && (
+                    <Box
+                      sx={{
+                        overflow: 'hidden',
+                        transition: 'max-height 0.4s ease',
+                        '.MuiDateCalendar-root': {
+                          overflow: 'hidden',
+                        },
+                      }}
+                    >
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateCalendar
+                          value={value}
+                          onChange={(newValue) => setValue(newValue)}
+                          views={['year', 'month', 'day']}
+                          showDaysOutsideCurrentMonth
+                          disableHighlightToday
                           sx={{
+                            '&::-webkit-scrollbar': { display: 'none' },
                             overflow: 'hidden',
-                            transition: 'max-height 0.4s ease',
-                            '.MuiDateCalendar-root': {
-                              overflow: 'hidden',
-                            },
                           }}
-                        >
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateCalendar
-                              value={value}
-                              onChange={(newValue) => setValue(newValue)}
-                              views={['year', 'month', 'day']}
-                              showDaysOutsideCurrentMonth
-                              disableHighlightToday
-                              sx={{
-                                '&::-webkit-scrollbar': { display: 'none' },
-                                overflow: 'hidden',
-                              }}
-                            />
-                          </LocalizationProvider>
-                        </Box>
-                      )}
-                    </Card>
-                  </div>
 
-                </div>
-
-                <div className="p-3 " >
-                  <div className="d-flex justify-content-between align-items-center mb-2">
-                    <h6 className="mb-0 doctor-listing-calender-heading">Filter</h6>
-                    <p className="mb-0 doctor-listing-calender-filter " onClick={clearAll}>Clear all</p>
-
-                  </div>
-
-                  <Form>
-                    {options.map((option, idx) => (
-                      <div className='doctor-listing-filter' key={idx}>
-                        <Form.Check
-                          key={idx}
-                          type="checkbox"
-                          label={option}
-                          checked={filters.includes(option)}
-                          onChange={() => handleChange(option)}
-                          className="mb-2  settings-accordion-subtitle cursor-pointer"
                         />
-                      </div>
-                    ))}
-                  </Form>
+                      </LocalizationProvider>
+                    </Box>
+                  )}
                 </div>
 
               </div>
+            </div>
 
-            </>
-          </ContentContainer>
+            <div className='border-bottom p-0'></div>
+
+            <div className="p-3 " >
+              <div className="d-flex justify-content-between align-items-center mb-2">
+                <h6 className="mb-0 doctor-listing-calender-heading">Filter</h6>
+                <p className="mb-0 doctor-listing-calender-filter " onClick={clearAll}>Clear all</p>
+
+              </div>
+
+              <Form>
+                {options.map((option, idx) => (
+                  <div className='doctor-listing-filter' key={idx}>
+                    <Form.Check
+                      key={idx}
+                      type="checkbox"
+                      label={option}
+                      checked={filters.includes(option)}
+                      onChange={() => handleChange(option)}
+                      className="mb-2  settings-accordion-subtitle cursor-pointer"
+                    />
+                  </div>
+                ))}
+              </Form>
+            </div>
+
+          </div>
+
         </Col>
         <Col xl={9}>
           <Row>
             <div className="d-flex justify-content-between ">
-              {/* <div>
-                {selectedDate && (
-                  <p className="doctor-listing-date-heading m-0">
-                    {getSelectedWeekRange(selectedDate)}
-                  </p>
-                )}
-                <p className='doctor-listing-date-subtitle '>0 Appointments</p>
-              </div> */}
 
               <div className="mt-3">
                 {selectedView === "day" && (
                   <div>
+
                     <p className="doctor-listing-date-heading m-0">
-
-                      <p className="doctor-listing-date-heading m-0">
-                        {monthYearFormat}
-                      </p>
-
-                      <p className="doctor-listing-date-subtitle">10 Appointments</p>
+                      {monthYearFormat}
                     </p>
+
+                    <p className="doctor-listing-date-subtitle">10 Appointments</p>
                   </div>
                 )}
 
@@ -909,6 +631,7 @@ export function CalendarView() {
 
               </div>
             </div>
+
             <Modal
               show={doctorListingModal}
               onHide={() => setDoctorListingModal(false)}
@@ -1041,13 +764,20 @@ export function CalendarView() {
 
               </>
             </Modal>
-            <AppointmentRequestCancelModel setDoctorListingModal={setDoctorListingModal} RescheduleModal={RescheduleModal} setRescheduleModal={setRescheduleModal} setCancelModal={setCancelModal} CancelModal={CancelModal} />
+
+            <AppointmentRequestCancelModel
+              setDoctorListingModal={setDoctorListingModal}
+              RescheduleModal={RescheduleModal}
+              setRescheduleModal={setRescheduleModal}
+              setCancelModal={setCancelModal}
+              CancelModal={CancelModal}
+            />
             <Col md={8}>
               {selectedView === 'day'
                 &&
                 <>
 
-                  <div className=" min-vh-100 d-flex align-items-center justify-content-center">
+                  <div className="min-vh-100 d-flex align-items-center justify-content-center">
                     <div className="w-100 bg-white rounded shadow-lg d-flex day-calender-mian-card" >
                       {/* Time Column with Icon and Times */}
                       <div className={`border-end d-flex flex-column timeColumn-days-colum`}>
@@ -1081,15 +811,13 @@ export function CalendarView() {
                       <div className="flex-grow-1 d-flex flex-column">
                         {/* Header with Day and Date */}
                         <div className="d-flex align-items-center border-bottom p-3 day-date-header" >
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex flex-column ">
                             <p className="small fw-semibold mb-0 me-2 day-formate-text" >{dayDateFormat}</p>
-                            <div className="rounded-circle d-flex align-items-center justify-content-center fs-5 fw-bold dateCircle-days-colum ">
-                              {selectedDate && (
-                                <div className="text-center  fw-bold">
-                                  {dateDateFormat}
-                                </div>
-                              )}
-                            </div>
+                            {selectedDate && (
+                              <div className="dateCircle-days-colum">
+                                {dateDateFormat}
+                              </div>
+                            )}
                           </div>
                         </div>
 
@@ -1130,21 +858,15 @@ export function CalendarView() {
                             <div className="position-absolute bg-white p-4 rounded shadow-lg tooltipCustom" >
                               <div className="position-absolute bg-warning rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
                               <div className="position-absolute bg-warning rounded-circle tooltipDot" ></div>
-                              <p className="small text-secondary">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
-                              <button onClick={() => setShowTooltip(false)} className="btn btn-link p-0 mt-3 small fw-bold text-warning text-decoration-none">OK, GOT IT!</button>
+                              <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
+                              <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
                             </div>
                           )}
                         </div>
                       </div>
                     </div>
                   </div>
-
-
-
-
                 </>
-
-
               }
 
               {selectedView === 'week'
@@ -1161,18 +883,16 @@ export function CalendarView() {
 
               {/* <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} View</h1> */}
 
-
-
             </Col>
             <Col md={4}>
 
-              <div className='todays-schedule-main mt-3'>
+              <div className='todays-schedule-main mt-3 '>
                 <div className='today-schedule'>
                   <p className='doctor-listing-heading mb-0 '>Today’s Schedule</p>
                 </div>
 
 
-                <div className='today-schedule-box-section h-100'>
+                <div className='today-schedule-box-section h-100 '>
                   <div className='d-flex justify-content-between align-items-center gap-2 p-0'>
                     <div
                       className={`doctor-listing-today-schedule-box d-flex flex-column align-items-center ${selectedCard === 'Upcoming' ? 'today-schedule-box-color' : ''
@@ -1262,7 +982,6 @@ export function CalendarView() {
             </Col>
           </Row>
         </Col>
-
 
       </Row >
 
