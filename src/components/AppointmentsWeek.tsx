@@ -171,7 +171,7 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
                                   Get started by clicking anywhere on the calendar
                                   to add your first appointment
                                 </p>
-                                <span className="text-danger fw-semibold">OK. GOT IT!</span>
+                                <span className="text-danger fw-semibold ">OK. GOT IT!</span>
                               </div>
                             </Tooltip>
                           ) : (

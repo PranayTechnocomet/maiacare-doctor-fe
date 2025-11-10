@@ -1658,6 +1658,42 @@
     user-select: none;
 }
 
+.calendar-header {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+    font-style: Medium;
+    color: var(--color-heading);
+}
+
+.custom-date-calendar .css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 18px !important;
+    color: var(--color-sidebar-icon) !important;
+}
+
+.day-formate-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    font-style: medium;
+    color: var(--color-modal-heading);
+    
+}
+
+.dateCircle-days-colum{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.appointments-day-ok{
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--color-modal-heading);
+}
+
 @media screen and (max-width: 1391px) {
     .contact-detail {
         font-size: 13px;
@@ -2368,15 +2404,6 @@
     font-size: 14px;
 }
 
-
-
-
-
-
-
-
-
-
 .modal-custom-header {
     font-weight: 700;
     font-style: Bold;
@@ -2687,7 +2714,7 @@
     line-height: 21px;
 }
 
-.dot-image{
+.dot-image {
     height: 30px;
     width: 30px;
 }
