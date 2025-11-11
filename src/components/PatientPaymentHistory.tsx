@@ -10,61 +10,85 @@ import { PaymentHistoryData } from "@/utils/StaticData";
 import BaseTable from "@/components/ui/BaseTable";
 import { InputFieldGroup } from "./ui/InputField";
 import { InputSelect } from "./ui/InputSelect";
+import Link from "next/link";
+import { useParams} from "next/navigation";
 
-const columns: ColumnDef<any>[] = [
-    {
-        header: "Transaction ID",
-        accessorKey: "transactionId",
-    },
-    {
-        header: "Service Type",
-        accessorKey: "serviceType",
-    },
-    {
-        header: "Date",
-        accessorKey: "date",
-    },
-    {
-        header: "Time",
-        accessorKey: "time",
-    },
-    {
-        header: "Payment Mode",
-        accessorKey: "paymentMode",
-    },
-    {
-        header: "Amount",
-        accessorKey: "amount",
-    },
-    {
-        header: "Status",
-        accessorKey: "status",
-        cell: (info) => {
-            const status = info.getValue() as string;
-            return (
-                <span
-                    className={` ${status == "Refunded" ? "patient-journey-badge-InProgress" : status === "Pending"
-                        ? "patient-journey-badge-pending"
-                        : status === "Paid"
-                        && "patient-journey-badge-success"
 
-                        }`}
-                >
-                    {status}
-                </span>
-            );
-        },
-    },
-    {
-        header: "Actions",
-        accessorKey: "actions",
-    },
-];
 
 const PatientPaymentHistory = () => {
 
     const dispatch: AppDispatch = useDispatch();
     const [tableData, setTableData] = useState<any>([]);
+    const parms = useParams()
+  
+    const columns: ColumnDef<any>[] = [
+        {
+            header: "Transaction ID",
+            accessorKey: "transactionId",
+        },
+        {
+            header: "Service Type",
+            accessorKey: "serviceType",
+        },
+        {
+            header: "Date",
+            accessorKey: "date",
+        },
+        {
+            header: "Time",
+            accessorKey: "time",
+        },
+        {
+            header: "Payment Mode",
+            accessorKey: "paymentMode",
+        },
+        {
+            header: "Amount",
+            accessorKey: "amount",
+        },
+        {
+            header: "Status",
+            accessorKey: "status",
+            cell: (info) => {
+                const status = info.getValue() as string;
+                return (
+                    <span
+                        className={` ${status == "Refunded" ? "patient-journey-badge-InProgress" : status === "Pending"
+                            ? "patient-journey-badge-pending"
+                            : status === "Paid"
+                            && "patient-journey-badge-success"
+
+                            }`}
+                    >
+                        {status}
+                    </span>
+                );
+            },
+        },
+        {
+            header: "Actions",
+            cell: ( info ) => {
+                const transactionId = info.row.original.transactionId; // example: your data id
+                return (
+                    <div className="d-flex align-items-center gap-2">
+                        <div className="patient-treatment-box-dot-btn" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 25 24" fill="none">
+                                <path d="M21.875 13.5V19.5C21.875 19.7984 21.7565 20.0845 21.5455 20.2955C21.3345 20.5065 21.0484 20.625 20.75 20.625H4.25C3.95163 20.625 3.66548 20.5065 3.4545 20.2955C3.24353 20.0845 3.125 19.7984 3.125 19.5V13.5C3.125 13.2016 3.24353 12.9155 3.4545 12.7045C3.66548 12.4935 3.95163 12.375 4.25 12.375C4.54837 12.375 4.83452 12.4935 5.0455 12.7045C5.25647 12.9155 5.375 13.2016 5.375 13.5V18.375H19.625V13.5C19.625 13.2016 19.7435 12.9155 19.9545 12.7045C20.1655 12.4935 20.4516 12.375 20.75 12.375C21.0484 12.375 21.3345 12.4935 21.5455 12.7045C21.7565 12.9155 21.875 13.2016 21.875 13.5ZM11.7041 14.2959C11.8086 14.4008 11.9328 14.484 12.0695 14.5408C12.2063 14.5976 12.3529 14.6268 12.5009 14.6268C12.649 14.6268 12.7956 14.5976 12.9324 14.5408C13.0691 14.484 13.1933 14.4008 13.2978 14.2959L17.0478 10.5459C17.2592 10.3346 17.3779 10.0479 17.3779 9.74906C17.3779 9.45018 17.2592 9.16353 17.0478 8.95219C16.8365 8.74084 16.5498 8.62211 16.2509 8.62211C15.9521 8.62211 15.6654 8.74084 15.4541 8.95219L13.625 10.7812V3C13.625 2.70163 13.5065 2.41548 13.2955 2.2045C13.0845 1.99353 12.7984 1.875 12.5 1.875C12.2016 1.875 11.9155 1.99353 11.7045 2.2045C11.4935 2.41548 11.375 2.70163 11.375 3V10.7812L9.54594 8.95406C9.44129 8.84942 9.31706 8.7664 9.18033 8.70977C9.0436 8.65314 8.89706 8.62399 8.74906 8.62399C8.45018 8.62399 8.16353 8.74272 7.95219 8.95406C7.84754 9.05871 7.76453 9.18294 7.7079 9.31967C7.65126 9.4564 7.62211 9.60294 7.62211 9.75094C7.62211 10.0498 7.74084 10.3365 7.95219 10.5478L11.7041 14.2959Z" fill="#2B4360" />
+                            </svg>
+                        </div>
+                             <Link href={`/patients/${parms.id}/invoice/${transactionId}`} className="patient-treatment-box-dot-btn">
+                            <div className="patient-treatment-box-dot-btn" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 19 13" fill="none">
+                                    <path d="M18.6961 5.99688C18.6687 5.93516 18.007 4.46719 16.5359 2.99609C14.5758 1.03594 12.1 0 9.37499 0C6.64999 0 4.17421 1.03594 2.21405 2.99609C0.742961 4.46719 0.0781175 5.9375 0.0538988 5.99688C0.0183622 6.07681 0 6.16331 0 6.25078C0 6.33826 0.0183622 6.42476 0.0538988 6.50469C0.0812425 6.56641 0.742961 8.03359 2.21405 9.50469C4.17421 11.4641 6.64999 12.5 9.37499 12.5C12.1 12.5 14.5758 11.4641 16.5359 9.50469C18.007 8.03359 18.6687 6.56641 18.6961 6.50469C18.7316 6.42476 18.75 6.33826 18.75 6.25078C18.75 6.16331 18.7316 6.07681 18.6961 5.99688ZM9.37499 11.25C6.9703 11.25 4.86952 10.3758 3.13046 8.65234C2.4169 7.94273 1.80983 7.13356 1.32812 6.25C1.8097 5.36636 2.41679 4.55717 3.13046 3.84766C4.86952 2.12422 6.9703 1.25 9.37499 1.25C11.7797 1.25 13.8805 2.12422 15.6195 3.84766C16.3345 4.557 16.9429 5.36619 17.4258 6.25C16.8625 7.30156 14.4086 11.25 9.37499 11.25ZM9.37499 2.5C8.63331 2.5 7.90829 2.71993 7.2916 3.13199C6.67492 3.54404 6.19427 4.12971 5.91044 4.81494C5.62662 5.50016 5.55235 6.25416 5.69705 6.98159C5.84174 7.70902 6.19889 8.3772 6.72334 8.90165C7.24779 9.4261 7.91597 9.78325 8.6434 9.92795C9.37083 10.0726 10.1248 9.99838 10.8101 9.71455C11.4953 9.43072 12.0809 8.95007 12.493 8.33339C12.9051 7.7167 13.125 6.99168 13.125 6.25C13.124 5.25576 12.7285 4.30253 12.0255 3.59949C11.3225 2.89645 10.3692 2.50103 9.37499 2.5ZM9.37499 8.75C8.88054 8.75 8.39719 8.60338 7.98607 8.32867C7.57494 8.05397 7.25451 7.66352 7.06529 7.20671C6.87607 6.74989 6.82657 6.24723 6.92303 5.76227C7.01949 5.27732 7.25759 4.83186 7.60722 4.48223C7.95686 4.1326 8.40231 3.8945 8.88727 3.79804C9.37222 3.70157 9.87488 3.75108 10.3317 3.9403C10.7885 4.12952 11.179 4.44995 11.4537 4.86107C11.7284 5.2722 11.875 5.75555 11.875 6.25C11.875 6.91304 11.6116 7.54893 11.1428 8.01777C10.6739 8.48661 10.038 8.75 9.37499 8.75Z" fill="#2B4360" />
+                                </svg>
+                            </div>
+                        </Link>
+                    </div>
+                );
+            },
+        },
+    ];
+
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
@@ -212,6 +236,7 @@ const PatientPaymentHistory = () => {
                 <BaseTable data={tableData} columns={columns} />
 
                 {/* <PatientPaymentInvoice /> */}
+
 
             </div>
 

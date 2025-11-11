@@ -631,9 +631,7 @@
     font-size: 14px !important;
 }
 
-.calender-card-main {
-    max-width: 400px !important;
-}
+
 
 .day-calender-mian-card {
     max-width: 64rem !important;
@@ -650,7 +648,7 @@
 }
 
 .time-slot-day {
-    height: 48px !important;
+    height: 96px !important;
 }
 
 .day-date-header {
@@ -658,12 +656,10 @@
     flex-shrink: 0 !important;
 }
 
-.day-formate-text {
-    color: #f57c00 !important;
-}
+
 
 .grid-line-calendar {
-    height: 48px !important;
+    height: 96px !important;
 }
 
 .selected-calender-data {
@@ -689,16 +685,21 @@
 }
 
 .timeColumn-days-colum {
-    width: 120px;
-    background-color: #fafafa;
+    width: 70px;
+    background-color: var(--color-white);
     flex-shrink: 0;
 }
 
 .dateCircle-days-colum {
-    width: 40px;
-    height: 40px;
-    background-color: #fce5d8;
-    color: #f57c00;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-modal-heading);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 .eventLine-days-colum {
     left: 5px;
@@ -729,3 +730,38 @@
     border-radius: 12px;
     
 }
+
+/* pankaj solanki start */
+
+.calendar-box{
+    border: 1px solid var(--color-icon-border);
+    border-radius: 16px;
+    padding: 16px;
+    background-color: var(--color-white);
+}
+
+
+.custom-date-calendar .css-vk2zi7-MuiDateCalendar-root{
+    width: auto !important;
+}
+
+.custom-date-calendar .css-su1ucx-MuiYearCalendar-root{
+    width: auto !important;
+}
+.custom-date-calendar .css-1vp3ug1-MuiMonthCalendar-root{
+      width: auto !important;
+}
+
+.custom-date-calendar .css-1nxbkmn-MuiPickersCalendarHeader-root{
+ padding: 0 !important;   
+}
+
+.custom-date-calendar .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+  background-color: var(--color-modal-heading) !important;
+}
+
+.custom-date-calendar .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root .Mui-selected {
+  background-color: var(--color-modal-heading) !important;
+}
+
+/* pankaj solanki end */
