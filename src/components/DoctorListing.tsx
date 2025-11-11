@@ -11,7 +11,7 @@ import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
 import '../style/appointments.css';
 import { BsClock } from 'react-icons/bs';
-import { doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
+import { Appointments, doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
 import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
@@ -159,6 +159,7 @@ export function CalendarView() {
   const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
   const [blockCalendarModal, setBlockCalendarModal] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
+  const [CalnderAppointments, setCalnderAppointments] = useState(Appointments);
 
   const [events, setEvents] = useState<Event[] | any>([]);
   const [showTooltip, setShowTooltip] = useState(true);
@@ -191,18 +192,55 @@ export function CalendarView() {
   const scheduleRef = useRef<HTMLDivElement>(null);
   const timeColumnRef = useRef<HTMLDivElement>(null);
 
-  // Helper function to generate time slots
+  // // Helper function to generate time slots
+  // const generateTimeSlots = () => {
+  //   const slots = [];
+  //   // Extended hours to better fill the view
+  //   for (let i = 9; i < 19; i++) {
+  //     slots.push(`${i}:00`);
+  //     slots.push(`${i}:30`);
+  //   }
+  //   return slots;
+  // };
+
+  // const timeSlots = generateTimeSlots();
+
   const generateTimeSlots = () => {
     const slots = [];
-    // Extended hours to better fill the view
     for (let i = 9; i < 19; i++) {
-      slots.push(`${i}:00`);
-      slots.push(`${i}:30`);
+      const hour12 = i > 12 ? i - 12 : i;
+      const ampm = i < 12 ? "AM" : "PM";
+      slots.push({ time: `${hour12}:00 ${ampm}` });
+      slots.push({ time: `${hour12}:30 ${ampm}` });
     }
     return slots;
   };
 
   const timeSlots = generateTimeSlots();
+
+  // Helper: convert 12-hour string (e.g., "1:30 PM") to minutes since midnight
+  const toMinutes = (timeStr: string) => {
+    const [time, modifier] = timeStr.split(" ");
+    const [hourStr, minuteStr] = time.split(":");
+    let hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr || "0", 10);
+
+    if (modifier === "PM" && hour !== 12) hour += 12;
+    if (modifier === "AM" && hour === 12) hour = 0;
+
+    return hour * 60 + minute;
+  };
+
+  // Helper: convert JSON 12-hour-like time (e.g. "12:30", "1:00") to minutes
+  const toMinutesFromJson = (timeStr: string) => {
+    const [hourStr, minuteStr] = timeStr.split(":");
+    let hour = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr || "0", 10);
+
+    // heuristic: assume JSON "12:xx" is noon or later
+    if (hour < 9) hour += 12; // treat times after 12 as PM (1–6)
+    return hour * 60 + minute;
+  };
 
   const formatTime = (hour: number, minutes: number) => {
     const ampm = hour >= 12 ? 'PM' : 'AM';
@@ -311,14 +349,36 @@ export function CalendarView() {
   const dateDateFormat = value ? value.format('DD') : '';
 
   // Format: "October 2025 (Mon 13 - Sun 19)"
-  const monthYearWithWeekRange = value ? (() => {
-    const startOfWeek = value.startOf('week');
-    const endOfWeek = value.endOf('week');
-    const monthYear = value.format('MMMM YYYY');
-    const startDay = startOfWeek.format('ddd DD');
-    const endDay = endOfWeek.format('ddd DD');
-    return `${monthYear} (${startDay} - ${endDay})`;
-  })() : '';
+  // const monthYearWithWeekRange = value ? (() => {
+  //   const startOfWeek = value.startOf('week');
+  //   const endOfWeek = value.endOf('week');
+  //   const monthYear = value.format('MMMM YYYY');
+  //   const startDay = startOfWeek.format('ddd DD');
+  //   const endDay = endOfWeek.format('ddd DD');
+  //   return `${monthYear} (${startDay} - ${endDay})`;
+  // })() : '';
+
+  const monthYearWithWeekRange = value
+    ? (() => {
+      // Ensure week starts on Monday
+      const startOfWeek = value.startOf('week').add(1, 'day');
+      const endOfWeek = startOfWeek.add(6, 'day');
+      const monthYear = value.format('MMMM YYYY');
+      const startDay = startOfWeek.format('ddd DD');
+      const endDay = endOfWeek.format('ddd DD');
+      return `${monthYear} (${startDay} - ${endDay})`;
+    })()
+    : '';
+
+  // console.log(timeSlots);
+
+  const appoimentDayFilter = (data: any) => {
+    console.log("data : ", data);
+    // if(data.time == timeSlots.time){
+    //   console.log("data.time : ", data.time);
+    // }
+
+  }
 
   return (
     <>
@@ -474,8 +534,6 @@ export function CalendarView() {
 
       <Row className='mt-3'>
         <Col xl={3}>
-
-
           <div className='custom-date-calendar calendar-box' >
             <div className='d-flex align-item-center justify-content-center '>
               <Button variant="outline" disabled={false} onClick={() => { setBlockCalendarModal(true); }}>
@@ -502,7 +560,6 @@ export function CalendarView() {
                       role="button"
                       onClick={() => setIsOpen(!isOpen)}
                     >
-
                       <SlArrowDown size={18} />
                     </div>
                   </Stack>
@@ -574,11 +631,9 @@ export function CalendarView() {
               <div className="mt-3">
                 {selectedView === "day" && (
                   <div>
-
                     <p className="doctor-listing-date-heading m-0">
                       {monthYearFormat}
                     </p>
-
                     <p className="doctor-listing-date-subtitle">10 Appointments</p>
                   </div>
                 )}
@@ -651,16 +706,8 @@ export function CalendarView() {
               closeButton={true}
               size="lg"
             >
-
-
-              {/* <div>
-                      <p># Appointment Id <span>1234</span></p>
-                      <p>Maia Care Patient</p>
-                    </div> */}
               <>
-
                 <div>
-
                   <div className='doctor-listing-modal-profile'>
                     <div className='d-flex justify-content-between'>
                       <div className='d-flex gap-2' >
@@ -777,8 +824,8 @@ export function CalendarView() {
                 &&
                 <>
 
-                  <div className="min-vh-100 d-flex align-items-center justify-content-center">
-                    <div className="w-100 bg-white rounded shadow-lg d-flex day-calender-mian-card" >
+                  <div className="min-vh-100 d-flex align-items-center justify-content-center day-formate-wrapper">
+                    <div className="w-100 bg-white shadow-lg d-flex day-calender-mian-card" >
                       {/* Time Column with Icon and Times */}
                       <div className={`border-end d-flex flex-column timeColumn-days-colum`}>
                         {/* Header with Icon */}
@@ -791,19 +838,42 @@ export function CalendarView() {
                           className="text-center flex-grow-1 overflow-auto time-scroll"
                           ref={timeColumnRef}
                         >
-                          {timeSlots.map((time, index) => {
+                          {/* {timeSlots.map((time, index) => {
                             const [hour, minute] = time.split(':');
+                            // console.log('hour-minute',hour,"---",minute)
                             const displayTime = parseInt(hour, 10);
                             const ampm = displayTime < 12 ? 'AM' : 'PM';
                             const formattedHour = displayTime > 12 ? displayTime - 12 : (displayTime === 0 ? 12 : displayTime);
+                            // console.log('formattedHour', formattedHour)
                             return (
                               <div key={index} className="d-flex align-items-center justify-content-center border-top time-slot-day">
                                 <span className="small text-secondary">
-                                  {`${formattedHour}:${minute} ${ampm}`}
+                                  {`${formattedHour}${minute == "00" ? '' : `:${minute}`} ${ampm}`}
                                 </span>
                               </div>
                             )
+                          })} */}
+
+                          {timeSlots.map((slot, index) => {
+                            const [hour, minute] = slot.time.split(':');
+                            const displayTime = parseInt(hour, 10);
+                            const ampm = displayTime < 12 ? 'AM' : 'PM';
+                            const formattedHour =
+                              displayTime > 12 ? displayTime - 12 : displayTime === 0 ? 12 : displayTime;
+
+                            return (
+                              <div
+                                key={index}
+                                className="d-flex align-items-center justify-content-center border-top time-slot-day"
+                              >
+                                <span className="small text-secondary">
+                                  {/* {`${formattedHour}${minute === '00' ? '' : `:${minute}`} ${ampm}`} */}
+                                   {`${formattedHour}${minute === '00' ? '' : `:${minute}`}`}
+                                </span>
+                              </div>
+                            );
                           })}
+
                         </div>
                       </div>
 
@@ -812,7 +882,7 @@ export function CalendarView() {
                         {/* Header with Day and Date */}
                         <div className="d-flex align-items-center border-bottom p-3 day-date-header" >
                           <div className="d-flex flex-column ">
-                            <p className="small fw-semibold mb-0 me-2 day-formate-text" >{dayDateFormat}</p>
+                            <p className=" mb-0 me-2 day-formate-text" >{dayDateFormat}</p>
                             {selectedDate && (
                               <div className="dateCircle-days-colum">
                                 {dateDateFormat}
@@ -829,39 +899,82 @@ export function CalendarView() {
                         >
                           {/* Grid Lines Container */}
                           <div className="position-relative" style={{ height: `${timeSlots.length * 48}px` }}>
-                            {timeSlots.map((_, index) => (
-                              <div key={index} className="border-top grid-line-calendar" ></div>
-                            ))}
+                            {/* {timeSlots.map((_, index) => (
+                                  <div key={index} className="border-top grid-line-calendar" >
+                                    
+                                    data
+                                  </div>
+                                ))} */}
+
+
+                            {timeSlots.map((slot, slotIndex) => {
+                              const slotAppointments = CalnderAppointments.filter((appt: any) => {
+                                const currentSlotMinutes = toMinutes(slot.time);
+
+                                const nextSlot = timeSlots[slotIndex + 1];
+                                const nextSlotMinutes = nextSlot ? toMinutes(nextSlot.time) : currentSlotMinutes + 30;
+
+                                const apptMinutes = toMinutesFromJson(appt.time);
+
+                                return apptMinutes >= currentSlotMinutes && apptMinutes < nextSlotMinutes;
+                              });
+
+                              return (
+                                <div
+                                  key={slotIndex}
+                                  className="border-top grid-line-calendar position-relative"
+                                  style={{ height: "48px" }}
+                                >
+                                  {/* Render all appointments in this slot */}
+                                  {slotAppointments.map((appt: any, i: number) => (
+                                    <div
+                                      key={i}
+                                      className="appointment-box bg-light d-flex align-items-center rounded p-2 mt-1"
+                                    >
+                                      <Image
+                                        src={appt.patient.profileImage}
+                                        alt={appt.patient.name}
+                                        width={24}
+                                        height={24}
+                                        className="rounded-circle me-2"
+                                      />
+                                      <span className="fw-semibold small">{appt.patient.name}</span>
+                                      <span className="fw-semibold small ms-1">{appt.time}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              );
+                            })}
 
                             {/* Static 12:30 PM Line */}
-                            <div
-                              className="position-absolute bg-warning"
-                              style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
-                            >
-                              <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
-                            </div>
+                            {/* <div
+                                  className="position-absolute bg-warning"
+                                  style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
+                                >
+                                  <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
+                                </div> */}
 
                             {/* Dynamic Event Lines */}
-                            {events.map((event: any) => (
-                              <div
-                                key={event.id}
-                                className="position-absolute bg-warning"
-                                style={{ ...datasforcss.eventLine, top: `${event.top}px` }}
-                              >
-                                <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
-                              </div>
-                            ))}
+                            {/* {events.map((event: any) => (
+                                  <div
+                                    key={event.id}
+                                    className="position-absolute bg-warning"
+                                    style={{ ...datasforcss.eventLine, top: `${event.top}px` }}
+                                  >
+                                    <div className="bg-warning rounded-circle position-absolute eventDot-days-colum"></div>
+                                  </div>
+                                ))} */}
                           </div>
 
                           {/* Initial Tooltip */}
-                          {showTooltip && (
-                            <div className="position-absolute bg-white p-4 rounded shadow-lg tooltipCustom" >
-                              <div className="position-absolute bg-warning rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
-                              <div className="position-absolute bg-warning rounded-circle tooltipDot" ></div>
-                              <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
-                              <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
-                            </div>
-                          )}
+                          {/* {showTooltip && (
+                                <div className="position-absolute bg-white p-4 rounded shadow-lg tooltipCustom" >
+                                  <div className="position-absolute bg-warning rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
+                                  <div className="position-absolute bg-warning rounded-circle tooltipDot" ></div>
+                                  <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
+                                  <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
+                                </div>
+                              )} */}
                         </div>
                       </div>
                     </div>
@@ -886,13 +999,13 @@ export function CalendarView() {
             </Col>
             <Col md={4}>
 
-              <div className='todays-schedule-main mt-3 '>
+              <div className='todays-schedule-main mt-3  '>
                 <div className='today-schedule'>
                   <p className='doctor-listing-heading mb-0 '>Today’s Schedule</p>
                 </div>
 
 
-                <div className='today-schedule-box-section h-100 '>
+                <div className='today-schedule-box-section '>
                   <div className='d-flex justify-content-between align-items-center gap-2 p-0'>
                     <div
                       className={`doctor-listing-today-schedule-box d-flex flex-column align-items-center ${selectedCard === 'Upcoming' ? 'today-schedule-box-color' : ''

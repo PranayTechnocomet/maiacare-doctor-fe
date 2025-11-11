@@ -916,7 +916,7 @@ function AppointmentDetails() {
                         <Modal
                             show={showModal}
                             onHide={handleClose}
-                            header="Upload Documents"
+                            header="Upload Report"
                             closeButton
                             dialogClassName="custom-modal-width"
                         >

@@ -893,7 +893,7 @@ export const consultationData: ConsultationEntry[] = [
     status: "Pending",
     image: RiyaSharma,
     date: "2025-11-07"
-   
+
   },
   {
     id: 3,
@@ -924,7 +924,7 @@ export const consultationData: ConsultationEntry[] = [
     status: "Cancelled",
     image: RiyaSharma,
     date: "2025-11-08"
-    
+
   },
   {
     id: 6,
@@ -1156,5 +1156,140 @@ export const inventoryData: InventoryEntry[] = [
 
 ];
 // ];
+
+export const Appointments = [
+  {
+    id: "1",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "10:00",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "9:01"
+  },
+  {
+    id: "2",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg2,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "10:15",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "9:02"
+  },
+  {
+    id: "3",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg3,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "10:20",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "10:07"
+  },
+  {
+    id: "4",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg4,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "10:30",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "11:30"
+  },
+  {
+    id: "5",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "11:15",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "6:15"
+  },
+  {
+    id: "6",
+    status: 1,
+    doctor: {
+      _id: "68b5723f5e662f13011c00ff",
+      name: "Dr. Priya Sharma"
+    },
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "smriti shah",
+      profileImage: patientImg2,
+      contactNumber: "9898765432"
+    },
+    appointmentDate: "11 Nov 2025",
+    appointmentTime: "11:30",
+    reason: [
+      "reason  to appointment"
+    ],
+    title: "smriti shah - reason  to appointment",
+    date: "11 Nov 2025",
+    time: "1:30"
+  }
+];
 
 

@@ -542,9 +542,6 @@ function Treatment() {
             </Modal>
 
            
-              
-           
-             
                     <>
                         <div className="position-relative">
                             <CustomTabs
