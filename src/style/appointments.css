@@ -656,8 +656,6 @@
     flex-shrink: 0 !important;
 }
 
-
-
 .grid-line-calendar {
     height: 96px !important;
 }
@@ -758,10 +756,29 @@
 
 .custom-date-calendar .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
   background-color: var(--color-modal-heading) !important;
+  height: 26px !important;
+  width: 26px !important;
 }
 
 .custom-date-calendar .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root .Mui-selected {
   background-color: var(--color-modal-heading) !important;
+}
+
+.custom-date-calendar .css-1pv2de5-MuiDayCalendar-weekContainer{
+    align-items: center !important;
+}
+
+.day-formate-wrapper{
+    /* border:1px solid red; */
+    border-radius: 8px;
+    
+}
+
+.appointment-box {
+  background-color: #e9f7f6;
+  border: 1px solid #cde8e6;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 /* pankaj solanki end */

@@ -294,3 +294,13 @@ export interface PatientReportType {
   size: string;
   uploadedAt: number;
 }
+
+// export interface Appointment {
+//   id: number;
+//   patientName: string;
+//   time: string; // e.g., "10:00"
+//   duration: number; // minutes
+//   patientImg: string | any;
+//   participants?: string[];
+// }
+
