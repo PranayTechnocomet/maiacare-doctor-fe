@@ -5,12 +5,18 @@ import { BiHide, BiLockAlt, BiShow } from 'react-icons/bi';
 import Button from '../ui/Button';
 import "../../style/login.css"
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { login } from '@/utils/apis/apiHelper';
+import { setTokenInCookie } from '@/utils/Helper';
+import { setUserAuthData } from '@/utils/redux/slices/userAuthSlice';
+import { setToken } from '@/Hook/Redux/Slice/tokenSlice';
+import { useDispatch } from 'react-redux';
 
 export function LoginForms() {
 
     const [showPassword, setShowPassword] = useState(false);
     const [maskedValue, setMaskedValue] = useState("");
-
+    const dispatch = useDispatch();
     const togglePasswordVisibility = () => {
         setShowPassword(prev => !prev);
     };
@@ -68,9 +74,25 @@ export function LoginForms() {
         e.preventDefault();
 
         if (validateForm()) {
-            alert("Form Submitted");
-            router.push("/selectprofile");
-            setFormError(defaultFormError);
+             login(formData)
+        .then((response) => {
+          if (response.status) {
+            toast.success(response?.data?.message || "Login successful!");
+            console.log("response", response);
+            
+            // Save token
+            const token = response?.data?.token;
+            localStorage.setItem("token", token);
+            setTokenInCookie(token);
+            dispatch(setToken(token));
+            dispatch(setUserAuthData(response?.data?.data.doctor));
+            router.push("/profile");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setFormError(defaultFormError);
         }
     };
 
