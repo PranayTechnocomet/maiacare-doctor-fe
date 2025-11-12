@@ -639,7 +639,7 @@
 }
 
 .header-icon-day {
-    height: 96px !important;
+    height: 110px !important;
     flex-shrink: 0 !important;
 }
 
@@ -648,16 +648,16 @@
 }
 
 .time-slot-day {
-    height: 96px !important;
+    height: 110px !important;
 }
 
 .day-date-header {
-    height: 96px !important;
+    height: 110px !important;
     flex-shrink: 0 !important;
 }
 
 .grid-line-calendar {
-    height: 96px !important;
+    height: 110px !important;
 }
 
 .selected-calender-data {
@@ -775,10 +775,24 @@
 }
 
 .appointment-box {
-  background-color: #e9f7f6;
-  border: 1px solid #cde8e6;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
+  background-color: var(--color-progressbar-secondary);
+  border-radius: 6px;
+  padding: 4px 6px;
+
+}
+
+.appointment-reason-vist-box{
+    border:1px solid var(--color-modal-heading);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.multi-patient-show-box{
+    border: 1px solid var(--color-icon-border);
+    padding: 4px;
+    border-radius: 8px;
+    background-color: var(--color-white);
+    z-index: 100 !important;
 }
 
 /* pankaj solanki end */

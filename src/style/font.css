@@ -1641,6 +1641,13 @@
     color: var(--color-modal-heading);
 }
 
+.appointment-reason-vist-box-content {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: var(--color-modal-heading);
+}
+
 .reviews-show-all {
     font-size: 14px;
     font-weight: 600;
@@ -1679,15 +1686,15 @@
     line-height: 20px;
     font-style: medium;
     color: var(--color-modal-heading);
-    
+
 }
 
-.dateCircle-days-colum{
+.dateCircle-days-colum {
     font-size: 16px;
     font-weight: 600;
 }
 
-.appointments-day-ok{
+.appointments-day-ok {
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
