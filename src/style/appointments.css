@@ -189,8 +189,6 @@
     font-weight: 600;
 } */
 
-
-
 .aw-time-col {
     background: #F8FAFC;
 }
@@ -699,11 +697,13 @@
     justify-content: center;
 
 }
+
 .eventLine-days-colum {
     left: 5px;
     right: 0;
     height: 1px;
 }
+
 .eventDot-days-colum {
     width: 10px;
     height: 10px;
@@ -711,27 +711,33 @@
     top: -4.5px;
     z-index: 1;
 }
-.tooltipCustom{
+
+.tooltipCustom {
     top: 25%;
     left: 30%;
 }
-.tooltipDot{
+.tooltipCustom-week{
+    top: 11%;
+    left: 25%;
+}
+
+.tooltipDot {
     width: 12px;
     height: 12px;
     top: -4px;
     left: -4px;
 }
 
-.report-box{
+.report-box {
     border: 1px solid var(--color-icon-border);
     padding: 16px;
     border-radius: 12px;
-    
+
 }
 
 /* pankaj solanki start */
 
-.calendar-box{
+.calendar-box {
     border: 1px solid var(--color-icon-border);
     border-radius: 16px;
     padding: 16px;
@@ -739,60 +745,123 @@
 }
 
 
-.custom-date-calendar .css-vk2zi7-MuiDateCalendar-root{
+.custom-date-calendar .css-vk2zi7-MuiDateCalendar-root {
     width: auto !important;
 }
 
-.custom-date-calendar .css-su1ucx-MuiYearCalendar-root{
+.custom-date-calendar .css-su1ucx-MuiYearCalendar-root {
     width: auto !important;
 }
-.custom-date-calendar .css-1vp3ug1-MuiMonthCalendar-root{
-      width: auto !important;
+
+.custom-date-calendar .css-1vp3ug1-MuiMonthCalendar-root {
+    width: auto !important;
 }
 
-.custom-date-calendar .css-1nxbkmn-MuiPickersCalendarHeader-root{
- padding: 0 !important;   
+.custom-date-calendar .css-1nxbkmn-MuiPickersCalendarHeader-root {
+    padding: 0 !important;
 }
 
 .custom-date-calendar .css-4k4mmf-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-  background-color: var(--color-modal-heading) !important;
-  height: 26px !important;
-  width: 26px !important;
+    background-color: var(--color-modal-heading) !important;
+    height: 26px !important;
+    width: 26px !important;
 }
 
 .custom-date-calendar .css-qct7wd-MuiButtonBase-root-MuiPickersDay-root .Mui-selected {
-  background-color: var(--color-modal-heading) !important;
+    background-color: var(--color-modal-heading) !important;
 }
 
-.custom-date-calendar .css-1pv2de5-MuiDayCalendar-weekContainer{
+.custom-date-calendar .css-1pv2de5-MuiDayCalendar-weekContainer {
     align-items: center !important;
 }
 
-.day-formate-wrapper{
+.day-formate-wrapper {
     /* border:1px solid red; */
     border-radius: 8px;
-    
+
 }
 
 .appointment-box {
-  background-color: var(--color-progressbar-secondary);
-  border-radius: 6px;
-  padding: 4px 6px;
+    background-color: var(--color-progressbar-secondary);
+    border-radius: 6px;
+    padding: 4px 6px;
 
 }
 
-.appointment-reason-vist-box{
-    border:1px solid var(--color-modal-heading);
+.appointment-reason-vist-box {
+    border: 1px solid var(--color-modal-heading);
     padding: 4px;
     border-radius: 4px;
 }
 
-.multi-patient-show-box{
-    border: 1px solid var(--color-icon-border);
-    padding: 4px;
-    border-radius: 8px;
+.multi-patient-show-box {
     background-color: var(--color-white);
-    z-index: 100 !important;
+    border: 1px solid var(--color-icon-border);
+    padding: 8px;
+    border-radius: 8px;
+    /* width: auto !important; */
+    top: 35px !important;
+    right: -140px;
+    z-index: 999 !important;
+    /* THIS FIXES EVERYTHING */
+    min-width: 370px;
+
+}
+
+.multi-patient-show-box::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 135px;
+    width: 18px;
+    height: 18px;
+    background: var(--color-white);
+
+    border: 1px solid var(--color-icon-border);
+    border-bottom: none;
+    border-right: none;
+
+    transform: rotate(45deg);
+    border-radius: 4px;
+
+    z-index: 5;
+    /* arrow must stay above the box */
+}
+
+.get-started-dot-bg-color {
+    background-color: var(--color-modal-heading) !important;
+}
+
+.get-started-box {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-icon-border);
+    padding: 8px;
+    border-radius: 4px;
+
+    top: 25px;
+    left: -60px;
+    min-width: 285px;
+}
+
+.get-started-box::before {
+    content: "";
+    position: absolute;
+    top: -9px;         /* arrow above box */
+    left: 53px;        /* adjust position as needed */
+
+    width: 18px;
+    height: 18px;
+
+    background: var(--color-white);
+
+    border: 1px solid var(--color-icon-border);
+    border-bottom: none;
+    border-right: none;
+
+    transform: rotate(45deg);
+    border-radius: 3px;
+
+    z-index: 100;
 }
 
 /* pankaj solanki end */

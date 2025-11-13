@@ -1,13 +1,18 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, MouseEvent } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import '../style/appointments.css'
 
 interface AppointmentsWeekProps {
   selectedDate?: string | null;
+  setBookAppointmentModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps) {
+export default function AppointmentsWeek(
+  {
+    selectedDate,
+    setBookAppointmentModal
+  }: AppointmentsWeekProps) {
   const days = [
     "Monday",
     "Tuesday",
@@ -25,11 +30,24 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
     return `${h12}${m} ${period}`;
   };
 
-  const times = Array.from({ length: 24 * 2 }, (_, idx) => {
-    const hour = Math.floor(idx / 2);
+  // const times = Array.from({ length: 24 * 2 }, (_, idx) => {
+  //   const hour = Math.floor(idx / 2);
+  //   const minutes = idx % 2 === 0 ? 0 : 30;
+  //   return formatTime(hour, minutes);
+  // });
+
+
+
+  const times = Array.from({ length: (19 - 9) * 2 }, (_, idx) => {
+    const hour = 9 + Math.floor(idx / 2);
     const minutes = idx % 2 === 0 ? 0 : 30;
-    return formatTime(hour, minutes);
+
+    const hour12 = hour > 12 ? hour - 12 : hour;
+    const ampm = hour < 12 ? "AM" : "PM";
+
+    return `${hour12}:${minutes === 0 ? "00" : "30"} ${ampm}`;
   });
+
 
   const [selectedSlot, setSelectedSlot] = useState<{ day: string; time: string } | null>(null);
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
@@ -38,15 +56,21 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
   const [currentMonthYear, setCurrentMonthYear] = useState<string>('');
   const [weekDateRange, setWeekDateRange] = useState<string>('');
 
+  const [showTooltip, setShowTooltip] = useState(true);
+  const [staticLineTop, setStaticLineTop] = useState(0);
+
+  // console.log("selectedDate", selectedDate);
+
+
   // Calculate week dates based on selected date
   useEffect(() => {
     const calculateWeekDates = (date: Date) => {
       const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
       const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Calculate offset to get Monday
-      
+
       const monday = new Date(date);
       monday.setDate(date.getDate() + mondayOffset);
-      
+
       const weekDates = [];
       for (let i = 0; i < 7; i++) {
         const day = new Date(monday);
@@ -60,26 +84,26 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
       const date = new Date(selectedDate);
       const dates = calculateWeekDates(date);
       setWeekDates(dates);
-      
+
       // Set month and year based on selected date
       const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
       setCurrentMonthYear(`${monthNames[date.getMonth()]} ${date.getFullYear()}`);
-      
+
       // Set week date range
       if (dates.length > 0) {
         const startDate = dates[0];
         const endDate = dates[6];
         const startMonth = monthNames[startDate.getMonth()];
         const endMonth = monthNames[endDate.getMonth()];
-        
+
         if (startDate.getMonth() === endDate.getMonth()) {
           setWeekDateRange(`${startDate.getDate()} - ${endDate.getDate()} ${startMonth}`);
         } else {
           setWeekDateRange(`${startDate.getDate()} ${startMonth} - ${endDate.getDate()} ${endMonth}`);
         }
       }
-      
+
       // Find which day of the week the selected date is
       const selectedDayOfWeek = date.getDay();
       const dayIndex = selectedDayOfWeek === 0 ? 6 : selectedDayOfWeek - 1; // Convert to Monday-first index
@@ -89,40 +113,56 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
       const today = new Date();
       const dates = calculateWeekDates(today);
       setWeekDates(dates);
-      
+
       // Set current month and year
       const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'];
       setCurrentMonthYear(`${monthNames[today.getMonth()]} ${today.getFullYear()}`);
-      
+
       // Set week date range
       if (dates.length > 0) {
         const startDate = dates[0];
         const endDate = dates[6];
         const startMonth = monthNames[startDate.getMonth()];
         const endMonth = monthNames[endDate.getMonth()];
-        
+
         if (startDate.getMonth() === endDate.getMonth()) {
           setWeekDateRange(`${startDate.getDate()} - ${endDate.getDate()} ${startMonth}`);
         } else {
           setWeekDateRange(`${startDate.getDate()} ${startMonth} - ${endDate.getDate()} ${endMonth}`);
         }
       }
-      
+
       setHighlightedDay(null);
     }
   }, [selectedDate]);
 
+  // CSS datasforcss that will be applied inline
+  const datasforcss = {
+    eventLine: { left: '5px', right: '0', height: '1px' },
+    tooltipDot: { width: '12px', height: '12px', top: '-4px', left: '-4px' },
+    pingAnimation: { animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' }
+  };
+
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    console.log("click");
+    setBookAppointmentModal?.(true)
+
+  };
+
+  // console.log("times" , times);
+
+
   return (
     <div className="container mt-3">
       <div className="border rounded shadow-sm bg-white aw-card">
-       
-        
+
+
         <div className="aw-scroll">
           {/* Header (sticky) */}
           <div className="row border-bottom text-center fw-semibold text-muted small aw-header">
-            <div className="col-2 border-end py-1 d-flex align-items-center justify-content-center aw-time-header aw-sticky-col">
-              <i className="bi bi-clock me-2"></i> Time
+            <div className="col-2 border-end d-flex align-items-center justify-content-center aw-time-header aw-sticky-col">
+              <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24" xmlns="http://www.w3.org/2000/svg" className="header-icon-day-color"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
             <div className="col p-0">
               <div className="row g-0 flex-nowrap aw-days-row text-center">
@@ -130,13 +170,13 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
                   const isHighlighted = highlightedDay === day;
                   const currentDate = weekDates[i];
                   const dateNumber = currentDate ? currentDate.getDate() : i + 1;
-                  
+
                   return (
                     <div className="aw-day-col py-3 border-end" key={day}>
                       <div className={isHighlighted ? "day-text-color " : ""}>{day}</div>
                       <div className={`mt-1 mx-auto rounded-circle d-flex align-items-center justify-content-center aw-date-circle ${isHighlighted ? 'aw-date-circle-active' : 'text-secondary'}`}>
                         {dateNumber < 10 ? `0${dateNumber}` : dateNumber}
-                        
+
                       </div>
                     </div>
                   );
@@ -148,7 +188,7 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
           {/* Body (scrolls vertically & horizontally together) */}
           <div className="row aw-body">
             {/* Time Column (sticky left) */}
-            <div className="col-2 border-end bg-light text-center small text-muted p-0 aw-time-col aw-sticky-col">
+            <div className="col-2 border-end text-center small text-muted p-0 aw-time-col aw-sticky-col">
               {times.map((time) => (
                 <div key={time} className="border-bottom appointments-week-time time-cell">{time}</div>
               ))}
@@ -156,44 +196,72 @@ export default function AppointmentsWeek({ selectedDate }: AppointmentsWeekProps
 
             {/* Calendar Grid */}
             <div className="col p-0">
-              <div className="row g-0 flex-nowrap">
+              <div className="row g-0 flex-nowrap position-relative overflow-auto">
                 {days.map((day) => (
-                  <div className="aw-day-col border-end p-0" key={day}>
+                  <div className="aw-day-col border-end p-0" key={day} >
                     {times.map((time) => (
-                      <OverlayTrigger
-                        key={time}
-                        placement="top"
-                        overlay={
-                          selectedSlot?.day === day && selectedSlot?.time === time ? (
-                            <Tooltip id={`tooltip-${day}-${time}`} className="appointments-week-tooltip">
-                              <div className="text-dark small">
-                                <p className="mb-1">
-                                  Get started by clicking anywhere on the calendar
-                                  to add your first appointment
-                                </p>
-                                <span className="text-danger fw-semibold ">OK. GOT IT!</span>
-                              </div>
-                            </Tooltip>
-                          ) : (
-                            <></>
-                          )
-                        }
+                      // <OverlayTrigger
+                      //   key={time}
+                      //   placement="top"
+                      //   overlay={
+                      //     selectedSlot?.day === day && selectedSlot?.time === time ? (
+                      //       <Tooltip id={`tooltip-${day}-${time}`} className="appointments-week-tooltip">
+                      //         <div className="text-dark small">
+                      //           <p className="mb-1">
+                      //             Get started by clicking anywhere on the calendar
+                      //             to add your first appointment
+                      //           </p>
+                      //           <span className="text-danger fw-semibold ">OK. GOT IT!</span>
+                      //         </div>
+                      //       </Tooltip>
+                      //     ) : (
+                      //       <></>
+                      //     )
+                      //   }
+                      // >
+                      <div
+                        className="border-bottom aw-slot"
+                        onClick={() => {
+                          console.log("time : ", time);
+
+                          handleClick
+
+                          // const key = `${day}|${time}`;
+                          // setSelectedSlot({ day, time });
+                          // setBookedSlots((prev) => (prev.includes(key) ? prev : [...prev, key]));
+
+                        }}
                       >
-                        <div
-                          className="border-bottom aw-slot"
-                          onClick={() => {
-                            const key = `${day}|${time}`;
-                            setSelectedSlot({ day, time });
-                            setBookedSlots((prev) => (prev.includes(key) ? prev : [...prev, key]));
-                          }}
-                        >
-                          {bookedSlots.includes(`${day}|${time}`) && <div className="aw-booked-line"></div>}
-                          {selectedSlot?.day === day && selectedSlot?.time === time && <div className="aw-selected-dot"></div>}
-                        </div>
-                      </OverlayTrigger>
+                        {/* <span>data</span> */}
+
+                        {/* {bookedSlots.includes(`${day}|${time}`) && <div className="aw-booked-line"></div>}
+                        {selectedSlot?.day === day && selectedSlot?.time === time && <div className="aw-selected-dot">data</div>} */}
+
+                      </div>
+                      // </OverlayTrigger>
                     ))}
                   </div>
                 ))}
+                {showTooltip && (
+                  <div className="position-absolute tooltipCustom-week" >
+                    <div className="position-absolute get-started-dot-bg-color rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
+                    <div className="position-absolute get-started-dot-bg-color rounded-circle tooltipDot" ></div>
+                    <div className=' get-started-box position-absolute'>
+                      <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
+                      <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
+                    </div>
+                  </div>
+                )}
+                {/* {showTooltip && (
+                  <div
+                    className="position-absolute get-started-dot-bg-color"
+                    style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
+                  >
+                    <div className="get-started-dot-bg-color rounded-circle position-absolute eventDot-days-colum"></div>
+                  </div>
+
+                )} */}
+
               </div>
             </div>
           </div>

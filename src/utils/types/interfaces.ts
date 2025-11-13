@@ -304,3 +304,7 @@ export interface PatientReportType {
 //   participants?: string[];
 // }
 
+export interface ClickDateTimeType {
+  date: string;
+  time: string;
+}
