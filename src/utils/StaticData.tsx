@@ -1174,7 +1174,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
     reason: [
-      "reason  to appointment"
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment1",
     date: "11 Nov 2025",
@@ -1196,7 +1196,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
     reason: [
-      "reason  to appointment"
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1217,8 +1217,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1239,8 +1239,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1261,8 +1261,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1283,8 +1283,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1299,20 +1299,20 @@ export const Appointments = [
     },
     patient: {
       _id: "69005c207162eaf97429433c",
-      name: "smriti shah",
+      name: "smriti shah 1",
       profileImage: patientImg1,
       contactNumber: "9898765432"
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
     reason: [
-      "reason  to appointment"
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
     time: "9:30"
   },
-  
+
   {
     id: "5",
     status: 1,
@@ -1322,14 +1322,14 @@ export const Appointments = [
     },
     patient: {
       _id: "69005c207162eaf97429433c",
-      name: "smriti shah",
+      name: "smriti shah 2",
       profileImage: patientImg2,
       contactNumber: "9898765432"
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1394,8 +1394,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "11:15",
-    reason: [
-      "reason  to appointment"
+   reason: [
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1417,7 +1417,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "1:30",
     reason: [
-      "reason  to appointment"
+      "Fertility Support" , "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",

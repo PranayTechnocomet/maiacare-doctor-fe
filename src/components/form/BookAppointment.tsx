@@ -21,35 +21,39 @@ import temppatientImg1 from "@/assets/images/patient-img-1.png"
 interface BookAppointmentProps {
     setBookAppointmentModal: React.Dispatch<React.SetStateAction<boolean>>;
     setShowSuccessModalBook: React.Dispatch<React.SetStateAction<boolean>>;
+    appointmentTime?: string;
+    appointmentDate?: string;
 }
 
 type FormError = Partial<Record<keyof BookAppointmentForm, string>>;
 
-const initialFormData: BookAppointmentForm = {
-    //Appointment Details
-    appointmentId: "",
-    type: "",
-    reasonForVisit: [],
-    appointmentDate: "",
-    appointmentTime: "",
-    forTime: "",
-    additionalNote: "",
-
-    //Patient Details
-    patientName: [],
-    phone: "",
-    email: "",
-    patientAge: "25-35",
-    gender: "male",
-};
-
-const initialFormError: FormError = {};
-
 export function BookAppointment({
     setBookAppointmentModal,
     setShowSuccessModalBook,
+    appointmentTime,
+    appointmentDate,
 
 }: BookAppointmentProps) {
+
+    const initialFormData: BookAppointmentForm = {
+        //Appointment Details
+        appointmentId: "",
+        type: "",
+        reasonForVisit: [],
+        appointmentDate: appointmentDate || "",
+        appointmentTime: appointmentTime || "",
+        forTime: "",
+        additionalNote: "",
+
+        //Patient Details
+        patientName: [],
+        phone: "",
+        email: "",
+        patientAge: "25-35",
+        gender: "male",
+    };
+
+    const initialFormError: FormError = {};
 
     const [formData, setFormData] = useState<BookAppointmentForm>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
@@ -131,7 +135,7 @@ export function BookAppointment({
         setFormError(errors);
         if (Object.keys(errors).length === 0) {
             setStep(2);
-            console.log("first form submit go to next");
+            console.log("first form submit go to next", formData);
             setStepper((prev) => Math.max(1, prev + 1));
         }
     };
@@ -226,7 +230,7 @@ export function BookAppointment({
                                 label="Appointment ID"
                                 name="appointmentId"
                                 type="text"
-                                value={formData.appointmentId || "#1234"}
+                                value={formData.appointmentId || "1234"}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     handleChange(e);
                                 }}
@@ -292,7 +296,6 @@ export function BookAppointment({
                                 error={formError.appointmentDate}
                                 iconColor="var(--color-radio)"
                                 min={new Date().toISOString().split("T")[0]}
-
                             />
                         </Col>
                         <Col md={4}>

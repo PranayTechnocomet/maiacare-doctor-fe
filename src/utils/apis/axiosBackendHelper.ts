@@ -19,7 +19,7 @@ apiServer.interceptors.request.use(async (config: InternalAxiosRequestConfig) =>
   // Get headers once for reuse
   const headerList = await headers();
 
-  // 2️⃣ If token isn't in cookies, try to get it from the request headers (client → server)
+  //  If token isn't in cookies, try to get it from the request headers (client → server)
   if (!token) {
     let clientToken = headerList.get("authorization")?.replace("Bearer ", "");
     if (clientToken) {
