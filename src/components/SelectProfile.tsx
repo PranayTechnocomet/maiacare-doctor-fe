@@ -12,14 +12,17 @@ import "../style/login.css";
 
 export default function SelectProfile() {
   // ✅ JSON-style data defined inside the same file
+
+  
   const profileData = [
     {
       id: 1,
       image: Individual,
       title: "Individual",
       subtitle: "Individual doctor login",
-      route: "/"
+      route: "/profile"
     },
+
     {
       id: 2,
       image: Clinic,

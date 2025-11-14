@@ -6,7 +6,7 @@ import Button from '../ui/Button';
 import "../../style/login.css"
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { login } from '@/utils/apis/apiHelper';
+import { forgotPassword, forgotPasswordVerify, login, newPassword } from '@/utils/apis/apiHelper';
 import { setTokenInCookie } from '@/utils/Helper';
 import { setUserAuthData } from '@/utils/redux/slices/userAuthSlice';
 import { setToken } from '@/Hook/Redux/Slice/tokenSlice';
@@ -74,25 +74,31 @@ export function LoginForms() {
         e.preventDefault();
 
         if (validateForm()) {
-             login(formData)
-        .then((response) => {
-          if (response.status) {
-            toast.success(response?.data?.message || "Login successful!");
-            console.log("response", response);
-            
-            // Save token
-            const token = response?.data?.token;
-            localStorage.setItem("token", token);
-            setTokenInCookie(token);
-            dispatch(setToken(token));
-            dispatch(setUserAuthData(response?.data?.data.doctor));
-            router.push("/profile");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      setFormError(defaultFormError);
+            login(formData)
+                .then((response) => {
+                    if (response.status) {
+                        toast.success(response?.data?.message || "Login successful!");
+                        console.log("response", response);
+
+                        // Save token
+                        const token = response?.data?.token;
+                        localStorage.setItem("token", token);
+                        localStorage.setItem("doctordetails", response?.data?.doctor)
+                        // localStorage.setItem("doctorclinic", JSON.stringify(response?.data?.clinics));
+                        const clinics = response?.data?.clinics || [];
+                        localStorage.setItem("doctorclinic", JSON.stringify(clinics));
+
+                        setTokenInCookie(token);
+                        dispatch(setToken(token));
+                        // dispatch(setUserAuthData(response?.data?.data.doctor));
+                        // dispatch(setUserAuthData(response.data.clinics));
+                        router.push("/selectprofile");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            setFormError(defaultFormError);
         }
     };
 
@@ -225,17 +231,56 @@ export function ForgotPassword() {
     };
 
     const router = useRouter();
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+
+    // const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+
+    //     if (validateForm()) {
+    //         alert("Form Submitted");
+    //         router.push("/verificationcode");
+    //         setFormError(defaultFormError);
+    //         localStorage.setItem('useremail', data.email);
+
+    //     }
+    // };
+
+
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (validateForm()) {
-            alert("Form Submitted");
-            router.push("/verificationcode");
+            //   alert("Form Submitted");
+            //   router.push("/verification");
+            //   setFormError(defaultFormError);
+            //   localStorage.setItem("useremail", data.email);
+            forgotPassword(data)
+                .then((response) => {
+
+                    console.log("response", response.data);
+                    if (response.status == 200) {
+                        router.push("/verificationcode");
+                        setFormError(defaultFormError);
+                        localStorage.setItem("useremail", data.email);
+                        localStorage.setItem("token", response.data.data.token);
+                    } else {
+                        console.log("Error");
+                    }
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             setFormError(defaultFormError);
-            localStorage.setItem('useremail', data.email);
+            // router.push("/selectprofile");
+            // router.push("/"); // set route in success model
 
         }
     };
+
+
+
+
     return (
 
         <div>
@@ -334,16 +379,52 @@ export function ResetPasswordScreen({ setPasswordChangedSuccessModel }: {
         return isValid;
     };
     const router = useRouter();
+    // const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+
+    //     if (validateForm()) {
+    //         alert("Form Submitted");
+    //         //  router.push("/"); // set route in success model
+    //         setFormError(defaultFormError);
+    //         setPasswordChangedSuccessModel(true)
+    //     }
+    // };
+
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (validateForm()) {
-            alert("Form Submitted");
-            //  router.push("/"); // set route in success model
+            // alert("Form Submitted");
+            // router.push("/"); // set route in success model
+            // setFormError(defaultFormError);
+            // setPasswordChangedSuccessModel(true);
+            const passData: { password: string, token: string | null } = {
+                password: formData.confirmpassword,
+                token: localStorage.getItem("token")
+            }
+            newPassword(passData)
+                .then((response) => {
+
+                    console.log("response", response.data);
+                    if (response.status == 200) {
+                        router.push("/");
+                        setFormError(defaultFormError);
+                        setPasswordChangedSuccessModel(true);
+                    } else {
+                        console.log("Error");
+                    }
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             setFormError(defaultFormError);
-            setPasswordChangedSuccessModel(true)
         }
     };
+
+
+
     return (
         <>
             <form onSubmit={handleFormSubmit}>
@@ -451,21 +532,62 @@ export function VerifyOtp() {
         return isValid;
     };
     const router = useRouter();
+
+
+    // const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+
+    //     if (validateForm()) {
+
+    //         if (formData.number.length !== 6) {
+    //             alert("Please enter valid code");
+    //             return;
+    //         }
+    //         alert("Form Submitted");
+    //         router.push("/resetpassword");
+    //         setFormError(defaultFormError);
+    //     }
+    // };
+
+
+
+
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (validateForm()) {
-
             if (formData.number.length !== 6) {
-                alert("Please enter valid code");
+                alert("Please enter Verification code");
                 return;
             }
-            alert("Form Submitted");
-            router.push("/resetpassword");
+            // alert("Form Submitted");
+            // router.push("/resetpassword");
+            // setFormError(defaultFormError);
+            let passData = {
+                token: localStorage.getItem("token"),
+                otp: formData.number,
+            }
+            forgotPasswordVerify(passData)
+                .then((response) => {
+
+                    console.log("response", response.status);
+                    if (response.status == 200) {
+                        router.push("/resetpassword");
+                        setFormError(defaultFormError);
+                        localStorage.setItem("token", response.data.data.token);
+                    } else {
+                        console.log("Error");
+                    }
+
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
             setFormError(defaultFormError);
+
         }
     };
-
     return (
 
         <div>
@@ -495,8 +617,6 @@ export function VerifyOtp() {
                         }
                     }}
                 />
-
-
 
                 <Button className='w-100 input-forgot-password-btn mt-4' type='submit'> Verify</Button>
             </form>
