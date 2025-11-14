@@ -168,6 +168,7 @@
     flex: 0 0 20%;
     max-width: 20%;
     text-align: center;
+
 }
 
 .aw-date-circle {
@@ -203,7 +204,7 @@
 
 .appointments-week-time,
 .time-cell {
-    height: 94px;
+    height: 130px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -591,7 +592,7 @@
 }
 
 .aw-slot {
-    height: 94px;
+    height: 130px;
     cursor: pointer;
     position: relative;
 }
@@ -716,7 +717,8 @@
     top: 25%;
     left: 30%;
 }
-.tooltipCustom-week{
+
+.tooltipCustom-week {
     top: 11%;
     left: 25%;
 }
@@ -846,8 +848,10 @@
 .get-started-box::before {
     content: "";
     position: absolute;
-    top: -9px;         /* arrow above box */
-    left: 53px;        /* adjust position as needed */
+    top: -9px;
+    /* arrow above box */
+    left: 53px;
+    /* adjust position as needed */
 
     width: 18px;
     height: 18px;
@@ -863,5 +867,22 @@
 
     z-index: 100;
 }
+
+.appoiment-patient-wprap {
+    display: block;
+    max-width: 53px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.appointment-reason-vist-box-wrap {
+    display: block;
+    max-width: 52px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 
 /* pankaj solanki end */

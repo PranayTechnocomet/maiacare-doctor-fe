@@ -78,11 +78,11 @@
 }
 
 .custom-month-datepicker .fc-day-today .fc-daygrid-day-number {
-    background-color: #f6b49c !important;
+    background-color: var(--color-modal-heading) !important;
     color: white !important;
     border-radius: 50%;
-    width: 28px;
-    height: 28px;
+    width: 23px;
+    height: 23px;
     display: flex;
     align-items: center;
     justify-content: center;
