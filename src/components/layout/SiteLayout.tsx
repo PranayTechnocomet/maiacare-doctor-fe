@@ -28,7 +28,8 @@ interface Props {
 const SiteLayout = ({ collapsed, setCollapsed, children }: Props) => {
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement | null>(null);
-  const { title, subtitle } = useSelector((state: RootState) => state.header.value);
+  const { title, subtitle } = useSelector((state: RootState) => state.header?.value);
+// const { title = "", subtitle = "" } = useSelector((state: RootState) => state.header?.value || {});
 
   // 🔥 Offcanvas state
   const [showOffcanvas, setShowOffcanvas] = useState(false);

@@ -14,23 +14,24 @@ export const selectclinic = () => {
   return apiClient.post("/auth/select-clinic");
 } 
 
-export const forgotPassword = () => {
-  return apiClient.post("/auth/forgot-password");
+export const forgotPassword = (data: { email: string }) => {
+  return apiClient.post("/auth/forgot-password", data);
 }
 
-export const forgotPasswordVerify = () => {
-  return apiClient.post("/auth/forgot-password-verify");
+export const forgotPasswordVerify = (data: { token: string | null, otp: number | string }) => {
+  return apiClient.post("/auth/forgot-password-verify", data);
 }
-export const newPassword = () => {
-  return apiClient.post("/auth/new-password");
+
+export const newPassword = (data: { token: string | null, password: string }) => {
+  return apiClient.post("/auth/new-password", data);
 }
 
 export const update = () => {
   return apiClient.put("/auth/update");
 }
 
-export const changePassword = () => {
-  return apiClient.post("/profile/change-password");
+export const changePassword = (data: { oldPassword: string, newPassword: string }) => {
+  return apiClient.post("/profile/change-password", data);
 }
 
 export const logout = () => {
@@ -201,7 +202,6 @@ export const fertilityassessmentdel= () => {
 
 
 
-
 //...... PATIENT - PARTNER BASIC DETAILS ......//
 
 export const basicDetailspost= () => {
@@ -247,7 +247,7 @@ export const partnerphysicalAssessmentput= () => {
 
 
 
-//...... PATIENT - PARTNER FERTILITY  ASSESSMENT ......//
+// ...... PATIENT - PARTNER FERTILITY  ASSESSMENT ...... //
 
 export const partnerfertilityAssessmentpost= () => {
   return apiClient.post("/patient/partner/fertilityAssessment");
@@ -261,6 +261,20 @@ export const partnerfertilityAssessmentput= () => {
 } 
 
 
+
+
+// ...... NOTIFICATATION ...... //
+
+export const partnernotificationspost= () => {
+  return apiClient.post("/notifications");
+}
+export const partnernotificationsget= () => {
+  return apiClient.get("/notifications");
+}
+
+export const partnernotificationsput= () => {
+  return apiClient.put("/notifications");
+} 
 
 
 
