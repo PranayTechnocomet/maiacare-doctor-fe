@@ -94,27 +94,37 @@ function AppointmentsMonth({ appointmentsData, selectedDate: externalSelectedDat
             const isSelected = selectedDate === cellDate;
 
 
-            if (day === 1) {
-              return {
-                html: `
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                  <div style="font-size: 0.85rem; color: #6c757d;">
-                    ${monthAbbr} ${day}
-                  </div>
-                  ${isSelected ? '<div class="dot "></div>' : ""}
-                </div>
-              `,
-              };
-            }
+            // if (day === 1) {
+            //   return {
+            //     html: `
+            //     <div style="display: flex; flex-direction: column; align-items: center;">
+            //       <div style="font-size: 0.85rem; color: #6c757d;">
+            //         ${monthAbbr} ${day}
+            //       </div>
+            //       ${isSelected ? '<div class="dot "></div>' : ""}
+            //     </div>
+            //   `,
+            //   };
+            // }
 
-            return {
+            // return {
+            //   html: `
+            //   <div style="display: flex; flex-direction: column; align-items: center;">
+            //     <div style="font-size: 0.85rem; color: #6c757d;">${day}</div>
+            //     ${isSelected ? '<div class="dot"></div>' : ""}
+            //   </div>
+            // `,
+            // };
+
+             return {
               html: `
               <div style="display: flex; flex-direction: column; align-items: center;">
                 <div style="font-size: 0.85rem; color: #6c757d;">${day}</div>
-                ${isSelected ? '<div class="dot"></div>' : ""}
+              
               </div>
             `,
             };
+            
           }}
         />
       </div>

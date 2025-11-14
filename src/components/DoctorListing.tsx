@@ -11,7 +11,7 @@ import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
 import '../style/appointments.css';
 import { BsClock } from 'react-icons/bs';
-import { Appointments, doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
+import { Appointments, AppointmentsWeekData, doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
 import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
@@ -160,7 +160,10 @@ export function CalendarView() {
   const [blockCalendarModal, setBlockCalendarModal] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   // const [CalnderAppointments, setCalnderAppointments] = useState(Appointments);
+  // const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>(AppointmentsWeekData);
   const [CalnderAppointments, setCalnderAppointments] = useState<any[]>([]);
+  const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>([]);
+
 
   const [events, setEvents] = useState<Event[] | any>([]);
   const [clickTime, setClickTime] = useState<string>("");
@@ -287,6 +290,34 @@ export function CalendarView() {
       .padStart(2, "0")}`;
   };
 
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+
+    if (scheduleRef.current && CalnderAppointments.length == 0) {
+      setShowTooltip(false);
+      const rect = scheduleRef.current.getBoundingClientRect();
+      const scrollTop = scheduleRef.current.scrollTop;
+      const clickY = e.clientY - rect.top + scrollTop;
+
+      const totalHours = (18 - 9);
+      const totalMinutes =
+        (clickY / scheduleRef.current.scrollHeight) * totalHours * 60;
+
+      const hour = Math.floor(totalMinutes / 60) + 9;
+      const minutes = Math.floor(totalMinutes % 60);
+      const roundedMinutes = Math.round(minutes / 15) * 15;
+
+      const date = new Date();
+      date.setHours(hour, roundedMinutes, 0, 0);
+
+      setClickTime(formatTime24(date.getHours(), date.getMinutes()));
+      setClickDate(value ? value?.format('YYYY-MM-DD') : '');
+
+      setBookAppointmentModal(true);
+    }
+  };
+
+  // Effect to synchronize scrolling between the two columns
+
   // const handleClick = (e: MouseEvent<HTMLDivElement>) => {
 
   //   if (scheduleRef.current && CalnderAppointments.length == 0) {
@@ -295,7 +326,7 @@ export function CalendarView() {
   //     const scrollTop = scheduleRef.current.scrollTop;
   //     const clickY = e.clientY - rect.top + scrollTop;
 
-  //     const totalHours = (18 - 9);
+  //     const totalHours = 18 - 9;
   //     const totalMinutes =
   //       (clickY / scheduleRef.current.scrollHeight) * totalHours * 60;
 
@@ -303,61 +334,32 @@ export function CalendarView() {
   //     const minutes = Math.floor(totalMinutes % 60);
   //     const roundedMinutes = Math.round(minutes / 15) * 15;
 
-  //     const date = new Date();
-  //     date.setHours(hour, roundedMinutes, 0, 0);
+  //     let baseDate: Date;
 
-  //     setClickTime(formatTime24(date.getHours(), date.getMinutes()));
-      
+  //     if (selectedDate) {
+
+  //       if (typeof selectedDate === "string") {
+  //         baseDate = new Date(selectedDate + "T00:00:00");
+  //       } else {
+
+  //         baseDate = new Date(selectedDate);
+  //       }
+  //     } else {
+
+  //       baseDate = new Date();
+  //     }
+
+  //     baseDate.setHours(hour, roundedMinutes, 0, 0);
+
+  //     const formattedDate = baseDate.toISOString().split("T")[0];
+  //     const formattedTime = formatTime24(baseDate.getHours(), baseDate.getMinutes());
+
+  //     setClickTime(formattedTime);
+  //     setClickDate(formattedDate);
+
   //     setBookAppointmentModal(true);
   //   }
   // };
-
-  // Effect to synchronize scrolling between the two columns
-
-  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
-
-
-    if (scheduleRef.current && CalnderAppointments.length == 0) {
-      setShowTooltip(false);
-      const rect = scheduleRef.current.getBoundingClientRect();
-      const scrollTop = scheduleRef.current.scrollTop;
-      const clickY = e.clientY - rect.top + scrollTop;
-
-      const totalHours = 18 - 9;
-      const totalMinutes =
-        (clickY / scheduleRef.current.scrollHeight) * totalHours * 60;
-
-      const hour = Math.floor(totalMinutes / 60) + 9;
-      const minutes = Math.floor(totalMinutes % 60);
-      const roundedMinutes = Math.round(minutes / 15) * 15;
-
-
-      let baseDate: Date;
-
-      if (selectedDate) {
-
-        if (typeof selectedDate === "string") {
-          baseDate = new Date(selectedDate + "T00:00:00");
-        } else {
-
-          baseDate = new Date(selectedDate);
-        }
-      } else {
-
-        baseDate = new Date();
-      }
-
-      baseDate.setHours(hour, roundedMinutes, 0, 0);
-
-      const formattedDate = baseDate.toISOString().split("T")[0];
-      const formattedTime = formatTime24(baseDate.getHours(), baseDate.getMinutes());
-
-      setClickTime(formattedTime);
-      setClickDate(formattedDate);
-
-      setBookAppointmentModal(true);
-    }
-  };
 
   useEffect(() => {
     const timeEl = timeColumnRef.current;
@@ -1045,8 +1047,7 @@ export function CalendarView() {
                                                   height={20}
                                                   className="rounded-circle position-absolute start-50"
                                                 />
-                                              </div>
-                                              {multiPatientShow && (
+                                                {multiPatientShow && (
                                                 <div ref={boxRef} className='position-absolute multi-patient-show-box'>
                                                   <div className='d-flex flex-wrap'>
                                                     {extradata.map((appt: any, i: any) => {
@@ -1100,6 +1101,8 @@ export function CalendarView() {
                                                 </div>
 
                                               )}
+                                              </div>
+                                              
                                             </div>
 
                                             <span className="patient-calendar-modal-subtitle">
@@ -1142,7 +1145,7 @@ export function CalendarView() {
                                             </div>
 
                                             {slotAppointments.length == 1 && (
-                                              <div className="d-flex align-items-center gap-1 mt-3">
+                                              <div className="d-flex align-items-center gap-1 mt-1">
                                                 {appt.reason.slice(0, 4).map((item: string, index: number) => (
                                                   <span
                                                     key={index}
@@ -1220,9 +1223,11 @@ export function CalendarView() {
                 &&
                 <>
                   <AppointmentsWeek
+                    CalnderAppointmentsWeek={CalnderAppointmentsWeek}
                     setBookAppointmentModal={setBookAppointmentModal}
                     selectedDate={value ? value.format('YYYY-MM-DD') : null}
-
+                    setClickDate={setClickDate}
+                    setClickTime={setClickTime}
                   />
                 </>
               }
@@ -1250,7 +1255,6 @@ export function CalendarView() {
                         }`}
                       onClick={() => setSelectedCard('Upcoming')}
                     >
-
                       <p className='doctor-listing-today-schedule-boxs text-center'>Upcoming</p>
                       <div
                         className={`upcoming-box doctor-listing-all-box ${selectedCard === 'Upcoming' ? 'today-shedule-color' : ''}`}
@@ -1338,13 +1342,13 @@ export function CalendarView() {
       <>
         <Modal
           show={BookAppointmentModal}
-          onHide={() => { setBookAppointmentModal(false); setShowTooltip(true) }}
+          onHide={() => { setBookAppointmentModal(false); setShowTooltip(true); setClickTime(''); setClickDate(''); }}
           header="Book Appointment"
           closeButton={true}
         >
           <BookAppointment
             appointmentTime={clickTime}
-            appointmentDate={clickDate || value ? value?.format('YYYY-MM-DD') : ''}
+            appointmentDate={clickDate}
             setBookAppointmentModal={setBookAppointmentModal}
             setShowSuccessModalBook={setShowSuccessModalBook}
           />
