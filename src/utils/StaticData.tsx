@@ -1174,7 +1174,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
     reason: [
-      "Fertility Support" , "other"
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment1",
     date: "11 Nov 2025",
@@ -1196,7 +1196,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
     reason: [
-      "Fertility Support" , "other"
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1217,8 +1217,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1239,8 +1239,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1261,8 +1261,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1283,8 +1283,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1306,7 +1306,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
     reason: [
-      "Fertility Support" , "other"
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1328,8 +1328,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:15",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1394,8 +1394,8 @@ export const Appointments = [
     },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "11:15",
-   reason: [
-      "Fertility Support" , "other"
+    reason: [
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1417,7 +1417,7 @@ export const Appointments = [
     appointmentDate: "11 Nov 2025",
     appointmentTime: "1:30",
     reason: [
-      "Fertility Support" , "other"
+      "Fertility Support", "other"
     ],
     title: "smriti shah - reason  to appointment",
     date: "11 Nov 2025",
@@ -1426,90 +1426,91 @@ export const Appointments = [
 ];
 
 export const AppointmentsWeekData = [
-   {
+  {
     id: "1",
     status: 1,
     doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
     patient: { _id: "69005c207162eaf97429433c", name: "1 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
     appointmentDate: "11 Nov 2025",
     appointmentTime: "10:00",
-    reason: ["Fertility Support", "icu","other"],
+    reason: ["Fertility Support", "icu", "other"],
     title: "smriti shah - reason to appointment1",
-    date: "10 Nov 2025",
+    date: "18 Nov 2025",
     time: "09:00"
   },
-  {
-    id: "1",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "1 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:00",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment1",
-    date: "11 Nov 2025",
-    time: "09:01"
-  },
-  {
-    id: "2",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "2 smriti shah", profileImage: patientImg2, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:15",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
-    time: "09:02"
-  },
-  {
-    id: "3",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "3 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:00",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
-    time: "09:10"
-  },
- {
-    id: "1",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "1 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:00",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment1",
-    date: "11 Nov 2025",
-    time: "09:01"
-  },
-  {
-    id: "2",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "2 smriti shah", profileImage: patientImg2, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:15",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
-    time: "09:02"
-  },
-  {
-    id: "3",
-    status: 1,
-    doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
-    patient: { _id: "69005c207162eaf97429433c", name: "3 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
-    appointmentDate: "11 Nov 2025",
-    appointmentTime: "10:00",
-    reason: ["Fertility Support", "other"],
-    title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
-    time: "09:10"
-  },
+
+  // {
+  //   id: "1",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "1 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:00",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment1",
+  //   date: "19 Nov 2025",
+  //   time: "09:01"
+  // },
+  // {
+  //   id: "2",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "2 smriti shah", profileImage: patientImg2, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:15",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment",
+  //   date: "19 Nov 2025",
+  //   time: "09:02"
+  // },
+  // {
+  //   id: "3",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "3 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:00",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment",
+  //   date: "19 Nov 2025",
+  //   time: "09:10"
+  // },
+  // {
+  //   id: "1",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "1 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:00",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment1",
+  //   date: "19 Nov 2025",
+  //   time: "09:01"
+  // },
+  // {
+  //   id: "2",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "2 smriti shah", profileImage: patientImg2, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:15",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment",
+  //   date: "19 Nov 2025",
+  //   time: "09:02"
+  // },
+  // {
+  //   id: "3",
+  //   status: 1,
+  //   doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
+  //   patient: { _id: "69005c207162eaf97429433c", name: "3 smriti shah", profileImage: patientImg1, contactNumber: "9898765432" },
+  //   appointmentDate: "11 Nov 2025",
+  //   appointmentTime: "10:00",
+  //   reason: ["Fertility Support", "other"],
+  //   title: "smriti shah - reason to appointment",
+  //   date: "19 Nov 2025",
+  //   time: "09:10"
+  // },
 
 
   {
@@ -1521,7 +1522,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment1",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:01"
   },
   {
@@ -1533,7 +1534,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:15",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:02"
   },
   {
@@ -1545,10 +1546,10 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:10"
   },
- {
+  {
     id: "1",
     status: 1,
     doctor: { _id: "68b5723f5e662f13011c00ff", name: "Dr. Priya Sharma" },
@@ -1557,7 +1558,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment1",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:01"
   },
   {
@@ -1569,7 +1570,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:15",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:02"
   },
   {
@@ -1581,7 +1582,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "13 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:10"
   },
 
@@ -1594,7 +1595,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "20 Nov 2025",
     time: "09:17"
   },
   {
@@ -1606,7 +1607,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "09:17"
   },
   {
@@ -1618,7 +1619,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:15",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "09:17"
   },
   {
@@ -1630,7 +1631,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:00",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "05:30"
   },
 
@@ -1643,7 +1644,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:15",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "05:40"
   },
   {
@@ -1655,7 +1656,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:20",
     reason: ["Fertility Support", "Egg Freezing", "IVF", "IUI", "Fertility Support 2", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "10:07"
   },
   {
@@ -1667,7 +1668,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "10:30",
     reason: ["Fertility Support", "Egg Freezing", "IVF", "IUI", "Fertility Support 2", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "11:30"
   },
   {
@@ -1679,7 +1680,7 @@ export const AppointmentsWeekData = [
     appointmentTime: "11:15",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "18:15"
   },
   {
@@ -1691,9 +1692,151 @@ export const AppointmentsWeekData = [
     appointmentTime: "13:30",
     reason: ["Fertility Support", "other"],
     title: "smriti shah - reason to appointment",
-    date: "11 Nov 2025",
+    date: "21 Nov 2025",
     time: "13:30"
   }
 ];
 
+export const AppointmentsMonthData = [
+  {
+    id: "1",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "1 Nov 2025",
+  },
+  {
+    id: "1",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "2 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "1 Nov 2025",
+  },
+  {
+    id: "1",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "3 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "1 Nov 2025",
+  },
+  {
+    id: "1",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "4 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "1 Nov 2025",
+  },
+  {
+    id: "1",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "5 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "1 Nov 2025",
+  },
+  {
+    id: "3",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "3 Nov 2025",
+  },
+  {
+    id: "5",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "5 Nov 2025",
+  },
+   {
+    id: "5",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "2 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "5 Nov 2025",
+  },
+   {
+    id: "5",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "3 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "5 Nov 2025",
+  },
+   {
+    id: "5",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "4 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "5 Nov 2025",
+  },
+  {
+    id: "2",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "12 Nov 2025",
+  },
+  {
+    id: "4",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "14 Nov 2025",
+  },
+  {
+    id: "6",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "16 Nov 2025",
+  },
+  {
+    id: "7",
+    patient: {
+      _id: "69005c207162eaf97429433c",
+      name: "1 smriti shah",
+      profileImage: patientImg1,
+      contactNumber: "9898765432"
+    },
+    date: "7 Nov 2025",
+  }
+]
 

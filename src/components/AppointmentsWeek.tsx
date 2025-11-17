@@ -48,6 +48,13 @@ export default function AppointmentsWeek(
       .padStart(2, "0")}`;
   };
 
+  // CSS datasforcss that will be applied inline
+  const datasforcss = {
+    eventLine: { left: '5px', right: '0', height: '1px' },
+    tooltipDot: { width: '12px', height: '12px', top: '-4px', left: '-4px' },
+    pingAnimation: { animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' }
+  };
+
   const [selectedSlot, setSelectedSlot] = useState<{ day: string; time: string } | null>(null);
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [weekDates, setWeekDates] = useState<Date[]>([]);
@@ -58,7 +65,33 @@ export default function AppointmentsWeek(
   const [showTooltip, setShowTooltip] = useState(true);
   const [staticLineTop, setStaticLineTop] = useState(0);
 
-  // console.log("selectedDate", selectedDate);
+  useEffect(() => {
+    if (!scheduleRef.current) return;
+
+    const updateCurrentTimePosition = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+
+      const startHour = 9;       // Start time of calendar
+      const slotHeight = 125;    // Your actual slot height
+      const pxPerHour = slotHeight * 2; // 220px per hour
+
+      const timeInHours = hour + minute / 60;
+      const diff = timeInHours - startHour;
+
+      // Center inside current slot
+      const yPos = diff * pxPerHour + slotHeight / 2;
+
+      setStaticLineTop(yPos);
+    };
+
+    updateCurrentTimePosition();         // Initial run
+    const interval = setInterval(updateCurrentTimePosition, 60000); // Update every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
 
 
   // Calculate week dates based on selected date
@@ -136,13 +169,6 @@ export default function AppointmentsWeek(
     }
   }, [selectedDate]);
 
-  // CSS datasforcss that will be applied inline
-  const datasforcss = {
-    eventLine: { left: '5px', right: '0', height: '1px' },
-    tooltipDot: { width: '12px', height: '12px', top: '-4px', left: '-4px' },
-    pingAnimation: { animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite' }
-  };
-
   const scheduleRef = useRef<HTMLDivElement>(null);
   const timeColumnRef = useRef<HTMLDivElement>(null);
 
@@ -157,29 +183,32 @@ export default function AppointmentsWeek(
   // };
 
   const to24Hour = (time12h: string) => {
-  const [time, modifier] = time12h.split(" ");
+    const [time, modifier] = time12h.split(" ");
 
-  let [hours, minutes] = time.split(":");
-  let h = parseInt(hours, 10);
+    let [hours, minutes] = time.split(":");
+    let h = parseInt(hours, 10);
 
-  if (modifier === "PM" && h !== 12) h += 12;
-  if (modifier === "AM" && h === 12) h = 0;
+    if (modifier === "PM" && h !== 12) h += 12;
+    if (modifier === "AM" && h === 12) h = 0;
 
-  return `${String(h).padStart(2, "0")}:${minutes}`;
-};
+    return `${String(h).padStart(2, "0")}:${minutes}`;
+  };
 
   const handleClick = (time: string) => {
-    console.log("click", time);
+    // console.log("click", time);
 
-     const time24 = to24Hour(time);  // convert before setting
+    const time24 = to24Hour(time);  // convert before setting
 
-  console.log("click", time, "=>", time24);
+    // console.log("click", time, "=>", time24);
 
-  setClickTime(time24);
+    setClickTime(time24);
 
     setClickTime(time24);
     setClickDate(selectedDate || "");
-    setBookAppointmentModal?.(true);
+    if (CalnderAppointmentsWeek?.length == 0) {
+
+      setBookAppointmentModal?.(true);
+    }
   };
 
 
@@ -288,6 +317,10 @@ export default function AppointmentsWeek(
       year: "numeric"
     }).replace(/ /g, " ");
 
+  const today = new Date().toDateString();
+  const todayIndex = weekDates.findIndex(
+    (d) => d.toDateString() === today
+  );
 
   return (
     <div className="container mt-3">
@@ -330,244 +363,244 @@ export default function AppointmentsWeek(
 
             {/* Calendar Grid */}
             <div className="col p-0">
-              <div className="row g-0 flex-nowrap position-relative overflow-auto">
-                {days.map((day) => (
-                  <div className="aw-day-col border-end p-0" key={day}>
-                    {timeSlots.map((item) => (
+              <div ref={scheduleRef} className="position-relative">
+                <div className="row g-0 flex-nowrap overflow-auto">
+                  {days.map((day, index) => (
+                    <div className="aw-day-col border-end p-0 position-relative" key={day}>
+                      {timeSlots.map((item, i) => (
 
-                      // <div
-                      //   className="border-bottom aw-slot"
-                      //   onClick={() => {
+                        <div className="border-bottom aw-slot position-relative d-flex flex-wrap" key={i} onClick={() => handleClick(item.time)}>
 
-                      //   }}
-                      // >
-                      //   <span>data</span>
+                          {(() => {
+                            const dayIndex = days.indexOf(day);
+                            const currentDate = weekDates[dayIndex];
+                            if (!currentDate) return null;
 
-                      // </div>
+                            const dateString = formatDate(currentDate); // "11 Nov 2025"
 
-                      <div className="border-bottom aw-slot position-relative d-flex flex-wrap" onClick={() => handleClick(item.time)}>
+                            // 24hr slot for grouping
+                            const time24 = getTimeSlot(item.time.replace(" AM", "").replace(" PM", ""));
 
-                        {(() => {
-                          const dayIndex = days.indexOf(day);
-                          const currentDate = weekDates[dayIndex];
-                          if (!currentDate) return null;
+                            // appointments of this day + this exact time slot
+                            const slotAppointments =
+                              groupedAppointments[dateString]?.[time24] || []; // method for replace data
 
-                          const dateString = formatDate(currentDate); // "11 Nov 2025"
+                            if (slotAppointments.length === 0) return null;
 
-                          // 24hr slot for grouping
-                          const time24 = getTimeSlot(item.time.replace(" AM", "").replace(" PM", ""));
+                            // show only first 2 appointments
+                            const visible = slotAppointments.slice(0, 3);
 
-                          // appointments of this day + this exact time slot
-                          const slotAppointments =
-                            groupedAppointments[dateString]?.[time24] || []; // method for replace data
+                            return (
+                              <>
+                                {visible.map((appt, i) => {
+                                  if (slotAppointments.length > 3 && i >= 2) {
+                                    const extradata = slotAppointments.slice(3)
+                                    console.log("true");
 
-                          if (slotAppointments.length === 0) return null;
+                                    return (
+                                      <div className="p-1 w-100" key={`extra-${i}`}>
+                                        <div className="appointment-box d-flex align-items-center gap-3 " >
+                                          <div className='position-relative'    >
+                                            <div className='d-flex position-relative cursor-pointer-custom' onClick={() => { setMultiPatientShow(true) }} >
+                                              <Image
+                                                src={extradata[0].patient.profileImage}
+                                                alt={extradata[0].patient.name}
+                                                width={20}
+                                                height={20}
+                                                className="rounded-circle"
+                                              />
+                                              <Image
+                                                src={extradata[1]?.patient.profileImage}
+                                                alt={extradata[1]?.patient.name}
+                                                width={20}
+                                                height={20}
+                                                className="rounded-circle position-absolute start-50"
+                                              />
 
-                          // show only first 2 appointments
-                          const visible = slotAppointments.slice(0, 3);
+                                              {multiPatientShow && (
+                                                <div ref={boxRef} className='position-absolute multi-patient-show-box'>
+                                                  <div className='d-flex flex-wrap'>
+                                                    {extradata.map((appt: any, i: any) => {
+                                                      const isLastOdd =
+                                                        extradata.length % 2 !== 0 && i === extradata.length - 1;
+                                                      return (
 
-                          return (
-                            <>
-                              {visible.map((appt, i) => {
-                                if (slotAppointments.length > 3 && i >= 2) {
-                                  const extradata = slotAppointments.slice(3)
-                                  console.log("true");
-
-                                  return (
-                                    <div className="p-1 w-100" key={`extra-${i}`}>
-                                      <div className="appointment-box d-flex align-items-center gap-3 " >
-                                        <div className='position-relative'    >
-                                          <div className='d-flex position-relative cursor-pointer-custom' onClick={() => { setMultiPatientShow(true) }} >
-                                            <Image
-                                              src={extradata[0].patient.profileImage}
-                                              alt={extradata[0].patient.name}
-                                              width={20}
-                                              height={20}
-                                              className="rounded-circle"
-                                            />
-                                            <Image
-                                              src={extradata[1]?.patient.profileImage}
-                                              alt={extradata[1]?.patient.name}
-                                              width={20}
-                                              height={20}
-                                              className="rounded-circle position-absolute start-50"
-                                            />
-
-                                            {multiPatientShow && (
-                                              <div ref={boxRef} className='position-absolute multi-patient-show-box'>
-                                                <div className='d-flex flex-wrap'>
-                                                  {extradata.map((appt: any, i: any) => {
-                                                    const isLastOdd =
-                                                      extradata.length % 2 !== 0 && i === extradata.length - 1;
-                                                    return (
-
-                                                      <div className={`${isLastOdd ? "col-12" : "col-6"} p-1`} key={i}>
-                                                        <div className="appointment-box ">
-                                                          <div className="d-flex align-items-center text-nowrap">
-                                                            <Image
-                                                              src={appt.patient.profileImage}
-                                                              alt={appt.patient.name}
-                                                              width={20}
-                                                              height={20}
-                                                              className="rounded-1 me-2"
-                                                            />
-                                                            <div className='d-flex flex-column'>
-                                                              <span className="patient-calendar-modal-subtitle">{appt.patient.name}</span>
-                                                              <div className='d-flex align-items-center gap-1'>
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                                                                  <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
-                                                                </svg>
-                                                                <span className="appointment-reschedule-profile-schedule-detail">
-                                                                  {appt.time}
-                                                                </span>
-                                                                {/* <span className="appointment-reschedule-profile-schedule-detail">
+                                                        <div className={`${isLastOdd ? "col-12" : "col-6"} p-1`} key={i}>
+                                                          <div className="appointment-box ">
+                                                            <div className="d-flex align-items-center text-nowrap">
+                                                              <Image
+                                                                src={appt.patient.profileImage}
+                                                                alt={appt.patient.name}
+                                                                width={20}
+                                                                height={20}
+                                                                className="rounded-1 me-2"
+                                                              />
+                                                              <div className='d-flex flex-column'>
+                                                                <span className="patient-calendar-modal-subtitle">{appt.patient.name}</span>
+                                                                <div className='d-flex align-items-center gap-1'>
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                                                    <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
+                                                                  </svg>
+                                                                  <span className="appointment-reschedule-profile-schedule-detail">
+                                                                    {appt.time}
+                                                                  </span>
+                                                                  {/* <span className="appointment-reschedule-profile-schedule-detail">
                                                             {`${slot.time} - ${timeSlots[slotIndex + 1] ? timeSlots[slotIndex + 1].time : toNextTime(slot.time)}`}
                                                           </span> */}
+                                                                </div>
                                                               </div>
                                                             </div>
-                                                          </div>
-                                                          <div className="d-flex align-items-center gap-1 mt-3">
-                                                            {appt.reason.slice(0, 1).map((item: string, index: number) => (
-                                                              <span
-                                                                key={index}
-                                                                className="appointment-reason-vist-box appointment-reason-vist-box-content"
-                                                              >
-                                                                {item}
-                                                              </span>
-                                                            ))}
-                                                            {appt.reason.length > 1 && (
-                                                              <span className="patient-calendar-modal-subtitle">
-                                                                +{appt.reason.length - 1}
-                                                              </span>
-                                                            )}
+                                                            <div className="d-flex align-items-center gap-1 mt-3">
+                                                              {appt.reason.slice(0, 1).map((item: string, index: number) => (
+                                                                <span
+                                                                  key={index}
+                                                                  className="appointment-reason-vist-box appointment-reason-vist-box-content"
+                                                                >
+                                                                  {item}
+                                                                </span>
+                                                              ))}
+                                                              {appt.reason.length > 1 && (
+                                                                <span className="patient-calendar-modal-subtitle">
+                                                                  +{appt.reason.length - 1}
+                                                                </span>
+                                                              )}
+                                                            </div>
                                                           </div>
                                                         </div>
-                                                      </div>
-                                                    )
-                                                  })}
+                                                      )
+                                                    })}
+                                                  </div>
                                                 </div>
+
+                                              )}
+                                            </div>
+                                          </div>
+
+                                          <span className="patient-calendar-modal-subtitle">
+                                            +{extradata.length}
+                                          </span>
+                                        </div>
+
+                                      </div>
+                                    );
+                                  }
+                                  else {
+                                    return (
+                                      <div className={`p-1 w-100`}
+
+                                        key={i}>
+                                        <div className="appointment-box">
+                                          <div className="d-flex align-items-center">
+                                            <Image
+                                              src={appt.patient.profileImage}
+                                              alt={appt.patient.name}
+                                              width={20}
+                                              height={20}
+                                              className="rounded-1 me-2"
+                                            />
+                                            <div className='d-flex flex-column'>
+                                              <div className="appoiment-patient-wprap">
+                                                <span className="patient-calendar-modal-subtitle  ">{appt.patient.name}</span>
                                               </div>
 
-                                            )}
-                                          </div>
-                                        </div>
-
-                                        <span className="patient-calendar-modal-subtitle">
-                                          +{extradata.length}
-                                        </span>
-                                      </div>
-
-                                    </div>
-                                  );
-                                }
-                                else {
-                                  return (
-                                    <div className={`p-1 w-100`}
-
-                                      key={i}>
-                                      <div className="appointment-box">
-                                        <div className="d-flex align-items-center">
-                                          <Image
-                                            src={appt.patient.profileImage}
-                                            alt={appt.patient.name}
-                                            width={20}
-                                            height={20}
-                                            className="rounded-1 me-2"
-                                          />
-                                          <div className='d-flex flex-column'>
-                                            <div className="appoiment-patient-wprap">
-                                              <span className="patient-calendar-modal-subtitle  ">{appt.patient.name}</span>
                                             </div>
-
                                           </div>
-                                        </div>
-                                        {visible.length == 1 && (
-                                          <div className='d-flex align-items-center gap-1 mt-1'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                                              <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
-                                            </svg>
+                                          {visible.length == 1 && (
+                                            <div className='d-flex align-items-center gap-1 mt-1'>
+                                              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                                <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
+                                              </svg>
 
-                                            <span className="appointment-reschedule-profile-schedule-detail">
-                                              {appt.time}
-                                            </span>
-
-
-                                          </div>
-                                        )}
-
-                                        {visible.length == 1 && (
-                                          <div className="d-flex flex-wrap align-items-center gap-1 mt-1">
-
-                                            {appt.reason.slice(0, 2).map((item: string, index: number) => (
-                                              <>
-                                                <div
-                                                  key={index}
-                                                  className="appointment-reason-vist-box appointment-reason-vist-box-content "
-                                                >
-                                                  <span className="appointment-reason-vist-box-wrap">
-                                                    {item}
-                                                  </span>
-                                                </div>
-
-                                              </>
-                                            ))}
-
-                                            {appt.reason.length > 2 && (
-                                              <span className="patient-calendar-modal-subtitle">
-                                                +{appt.reason.length - 2}
+                                              <span className="appointment-reschedule-profile-schedule-detail">
+                                                {appt.time}
                                               </span>
-                                            )}
-                                          </div>
-                                        )}
+
+
+                                            </div>
+                                          )}
+
+                                          {visible.length == 1 && (
+                                            <div className="d-flex flex-wrap align-items-center gap-1 mt-1">
+
+                                              {appt.reason.slice(0, 2).map((item: string, index: number) => (
+                                                <>
+                                                  <div
+                                                    key={index}
+                                                    className="appointment-reason-vist-box appointment-reason-vist-box-content "
+                                                  >
+                                                    <span className="appointment-reason-vist-box-wrap">
+                                                      {item}
+                                                    </span>
+                                                  </div>
+
+                                                </>
+                                              ))}
+
+                                              {appt.reason.length > 2 && (
+                                                <span className="patient-calendar-modal-subtitle">
+                                                  +{appt.reason.length - 2}
+                                                </span>
+                                              )}
+                                            </div>
+                                          )}
+                                        </div>
                                       </div>
-                                    </div>
-                                  )
+                                    )
+                                  }
+
                                 }
+                                )}
 
-                              }
-                              )}
+                              </>
+                            );
 
-                              {/* {extra > 0 && (
-                                <div className="small fw-semibold text-primary">
-                                  +{extra}
-                                </div>
-                              )} */}
+                          })()}
 
-                            </>
-                          );
+                        </div>
+                      ))}
 
-                        })()}
+                      {index === todayIndex &&
+                        showTooltip &&
+                        CalnderAppointmentsWeek?.length === 0 && (
 
-                      </div>
+                          <div
+                            className="position-absolute get-started-dot-bg-color"
+                            style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
+                          >
+                            <div className="get-started-dot-bg-color rounded-circle position-absolute eventDot-days-colum"></div>
+                          </div>
 
+                        )}
 
-
-                    ))}
-                  </div>
-                ))}
-
-
-                {(showTooltip && CalnderAppointmentsWeek?.length) == 0 && (
-                  <div className="position-absolute tooltipCustom-week" >
-                    <div className="position-absolute get-started-dot-bg-color rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
-                    <div className="position-absolute get-started-dot-bg-color rounded-circle tooltipDot" ></div>
-                    <div className=' get-started-box position-absolute'>
-                      <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
-                      <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
                     </div>
-                  </div>
-                )}
-                {/* {showTooltip && (
-                  <div
-                    className="position-absolute get-started-dot-bg-color"
-                    style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
-                  >
-                    <div className="get-started-dot-bg-color rounded-circle position-absolute eventDot-days-colum"></div>
-                  </div>
+                  ))}
 
-                )} */}
 
+                  {(showTooltip && CalnderAppointmentsWeek?.length) == 0 && (
+                    <div className="position-absolute tooltipCustom-week" >
+                      <div className="position-absolute get-started-dot-bg-color rounded-circle" style={{ ...datasforcss.tooltipDot, ...datasforcss.pingAnimation }}></div>
+                      <div className="position-absolute get-started-dot-bg-color rounded-circle tooltipDot" ></div>
+                      <div className=' get-started-box position-absolute'>
+                        <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
+                        <span onClick={() => setShowTooltip(false)} className="appointments-day-ok cursor-pointer-custom">OK, GOT IT!</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* {(showTooltip && CalnderAppointmentsWeek?.length == 0) && (
+                    <div
+                      className="position-absolute get-started-dot-bg-color"
+                      style={{ ...datasforcss.eventLine, top: `${staticLineTop}px` }}
+                    >
+                      <div className="get-started-dot-bg-color rounded-circle position-absolute eventDot-days-colum"></div>
+                    </div>
+
+                  )} */}
+
+
+                </div>
               </div>
+
             </div>
           </div>
         </div>
