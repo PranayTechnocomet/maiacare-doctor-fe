@@ -11,14 +11,14 @@ import PriyaGupta from '../assets/images/Priya Gupta.png';
 import { AppointmentRequestCancelModel } from './TempAppoRequstCancelModel';
 import '../style/appointments.css';
 import { BsClock } from 'react-icons/bs';
-import { Appointments, AppointmentsWeekData, doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
+import { Appointments, AppointmentsMonthData, AppointmentsWeekData, doctorlistingModalData, tempAppointmentProfileData } from '@/utils/StaticData';
 import { InputFieldGroup } from './ui/InputField';
 import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
 import ScheduleTimeOff from './ScheduleTimeOff';
 import AppointmentsMonth from './AppointmentsMonth';
-import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
+import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
@@ -27,6 +27,20 @@ import AppointmentsWeek from './AppointmentsWeek';
 import { SlArrowDown } from "react-icons/sl";
 
 import ListViews from '@/components/ListViews';
+
+import localeData from "dayjs/plugin/localeData";
+import updateLocale from "dayjs/plugin/updateLocale";
+dayjs.extend(localeData);
+dayjs.extend(updateLocale);
+
+// Monday = 1, Sunday = 0
+dayjs.updateLocale("en", { weekStart: 1 });
+
+import isoWeek from "dayjs/plugin/isoWeek";
+dayjs.extend(isoWeek);
+import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
+
+type DayProps = React.ComponentProps<typeof PickersDay>;
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -71,6 +85,99 @@ const MultiSelectDatePicker: React.FC = () => {
     </div>
   );
 };
+
+
+export function WeekHighlightDay(props: DayProps) {
+  const { day, ...other } = props as DayProps & { day: dayjs.Dayjs };
+
+  const today = dayjs();
+
+  const isToday = day.isSame(today, "day");
+
+  const endOfWeek = today.endOf("week");
+
+  // highlight: today → end of week
+  const isInWeek =
+    day.isSame(today, "day") ||
+    (day.isAfter(today, "day") && day.isBefore(endOfWeek, "day")) ||
+    day.isSame(endOfWeek, "day");
+
+  const isStart = day.isSame(today, "day");
+  const isEnd = day.isSame(endOfWeek, "day");
+
+  return (
+    <PickersDay
+      {...other}
+      day={day}
+      sx={{
+        mx: 0,
+        px: 0.5,
+        borderRadius: 0,
+
+        /** WEEK STRIP — applies behind today also */
+        ...(isInWeek && {
+          backgroundColor: "#f5b58a",
+          color: "#d35400",
+        }),
+
+        /** LEFT ROUND (today) */
+        ...(isStart && {
+          borderTopLeftRadius: "16px",
+          borderBottomLeftRadius: "16px",
+        }),
+
+        /** RIGHT ROUND (end of week) */
+        ...(isEnd && {
+          borderTopRightRadius: "16px",
+          borderBottomRightRadius: "16px",
+        }),
+
+        /** TODAY ON TOP OF THE STRIP */
+        // ...(isToday && {
+        //   backgroundColor: "#e67c5d !important",
+        //   color: "white !important",
+        //   // borderRadius: "50% !important",
+        //   // position: "relative",
+        //   // // brings circle above strip
+        // }),
+
+        ...(isToday && {
+          color: "white !important",
+          position: "relative",
+          zIndex: 2,
+          backgroundColor: "#f5b58a !important",
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "100%",   // adjust circle size
+            height: "100%",
+            backgroundColor: "#e67c5d",
+            borderRadius: "50%",
+            zIndex: -1,      // behind the number but above strip
+          },
+        }),
+
+        /** DISABLE HOVER */
+        "&:hover": {
+          backgroundColor: isToday
+            ? "#e67c5d !important"
+            : isInWeek
+              ? "#f5b58a !important"
+              : "transparent !important",
+        },
+
+        "&.Mui-selected:hover": { background: "transparent" },
+        "&.MuiPickersDay-today": { border: "none" },
+      }}
+    />
+  );
+}
+
+
 
 export default function DoctorListing() {
   const [activeTab, setActiveTab] = useState<string>("calander");
@@ -159,11 +266,14 @@ export function CalendarView() {
   const [showSuccessModalBook, setShowSuccessModalBook] = useState(false);
   const [blockCalendarModal, setBlockCalendarModal] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  // const [CalnderAppointments, setCalnderAppointments] = useState(Appointments);
-  // const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>(AppointmentsWeekData);
-  const [CalnderAppointments, setCalnderAppointments] = useState<any[]>([]);
-  const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>([]);
 
+  const [CalnderAppointments, setCalnderAppointments] = useState(Appointments);
+  const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>(AppointmentsWeekData);
+  const [AppointmentsMonthShow, setAppointmentsMonthShow] = useState<any[]>(AppointmentsMonthData)
+
+  // const [CalnderAppointments, setCalnderAppointments] = useState<any[]>([]);
+  // const [CalnderAppointmentsWeek, setCalnderAppointmentsWeek] = useState<any[]>([]);
+  // const [AppointmentsMonthShow, setAppointmentsMonthShow] = useState<any[]>([])
 
   const [events, setEvents] = useState<Event[] | any>([]);
   const [clickTime, setClickTime] = useState<string>("");
@@ -691,7 +801,16 @@ export function CalendarView() {
                           sx={{
                             '&::-webkit-scrollbar': { display: 'none' },
                             overflow: 'hidden',
+
                           }}
+
+                          slots={{ day: WeekHighlightDay }}
+
+                          // {
+                          // ...(selectedView === "week" && {
+                          //   slots: { day: WeekHighlightDay }
+                          // })
+                          // }
 
                         />
                       </LocalizationProvider>
@@ -740,7 +859,7 @@ export function CalendarView() {
                     <p className="doctor-listing-date-heading m-0">
                       {monthYearFormat}
                     </p>
-                    <p className="doctor-listing-date-subtitle">10 Appointments</p>
+                    <p className="doctor-listing-date-subtitle">{CalnderAppointments.length} Appointments</p>
                   </div>
                 )}
 
@@ -751,21 +870,18 @@ export function CalendarView() {
                         {monthYearWithWeekRange}
                       </p>
                     )}
-                    <p className="doctor-listing-date-subtitle">0 Appointments</p>
+                    <p className="doctor-listing-date-subtitle">{CalnderAppointmentsWeek.length} Appointments</p>
                   </div>
                 )}
 
                 {selectedView === "month" && (
                   <div>
-                    <p className="doctor-listing-date-heading m-0">
-
-                      {selectedDate && (
-                        <p className="doctor-listing-date-heading m-0">
-                          {monthYearFormat}
-                        </p>
-                      )}
-                      <p className="doctor-listing-date-subtitle">20 Appointments</p>
-                    </p>
+                    {selectedDate && (
+                      <p className="doctor-listing-date-heading m-0">
+                        {monthYearFormat}
+                      </p>
+                    )}
+                    <p className="doctor-listing-date-subtitle">{AppointmentsMonthShow.length} Appointments</p>
                   </div>
                 )}
               </div>
@@ -1048,61 +1164,61 @@ export function CalendarView() {
                                                   className="rounded-circle position-absolute start-50"
                                                 />
                                                 {multiPatientShow && (
-                                                <div ref={boxRef} className='position-absolute multi-patient-show-box'>
-                                                  <div className='d-flex flex-wrap'>
-                                                    {extradata.map((appt: any, i: any) => {
-                                                      const isLastOdd =
-                                                        extradata.length % 2 !== 0 && i === extradata.length - 1;
-                                                      return (
+                                                  <div ref={boxRef} className='position-absolute multi-patient-show-box'>
+                                                    <div className='d-flex flex-wrap'>
+                                                      {extradata.map((appt: any, i: any) => {
+                                                        const isLastOdd =
+                                                          extradata.length % 2 !== 0 && i === extradata.length - 1;
+                                                        return (
 
-                                                        <div className={`${isLastOdd ? "col-12" : "col-6"} p-1`} key={i}>
-                                                          <div className="appointment-box ">
-                                                            <div className="d-flex align-items-center text-nowrap">
-                                                              <Image
-                                                                src={appt.patient.profileImage}
-                                                                alt={appt.patient.name}
-                                                                width={20}
-                                                                height={20}
-                                                                className="rounded-1 me-2"
-                                                              />
-                                                              <div className='d-flex flex-column'>
-                                                                <span className="patient-calendar-modal-subtitle">{appt.patient.name}</span>
-                                                                <div className='d-flex align-items-center gap-1'>
-                                                                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
-                                                                    <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
-                                                                  </svg>
+                                                          <div className={`${isLastOdd ? "col-12" : "col-6"} p-1`} key={i}>
+                                                            <div className="appointment-box ">
+                                                              <div className="d-flex align-items-center text-nowrap">
+                                                                <Image
+                                                                  src={appt.patient.profileImage}
+                                                                  alt={appt.patient.name}
+                                                                  width={20}
+                                                                  height={20}
+                                                                  className="rounded-1 me-2"
+                                                                />
+                                                                <div className='d-flex flex-column'>
+                                                                  <span className="patient-calendar-modal-subtitle">{appt.patient.name}</span>
+                                                                  <div className='d-flex align-items-center gap-1'>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                                                                      <path d="M8.875 1.5C7.58942 1.5 6.33272 1.88122 5.2638 2.59545C4.19488 3.30968 3.36176 4.32484 2.86979 5.51256C2.37782 6.70028 2.24909 8.00721 2.4999 9.26809C2.7507 10.529 3.36977 11.6872 4.27881 12.5962C5.18785 13.5052 6.34604 14.1243 7.60692 14.3751C8.86779 14.6259 10.1747 14.4972 11.3624 14.0052C12.5502 13.5132 13.5653 12.6801 14.2796 11.6112C14.9938 10.5423 15.375 9.28558 15.375 8C15.3732 6.27665 14.6878 4.62441 13.4692 3.40582C12.2506 2.18722 10.5984 1.50182 8.875 1.5ZM8.875 13.5C7.78721 13.5 6.72384 13.1774 5.81937 12.5731C4.9149 11.9687 4.20995 11.1098 3.79367 10.1048C3.37738 9.09977 3.26847 7.9939 3.48068 6.927C3.6929 5.86011 4.21673 4.8801 4.98592 4.11091C5.7551 3.34172 6.73511 2.8179 7.80201 2.60568C8.8689 2.39346 9.97477 2.50238 10.9798 2.91866C11.9848 3.33494 12.8437 4.03989 13.4481 4.94436C14.0524 5.84883 14.375 6.9122 14.375 8C14.3733 9.45818 13.7934 10.8562 12.7623 11.8873C11.7312 12.9184 10.3332 13.4983 8.875 13.5ZM12.875 8C12.875 8.13261 12.8223 8.25979 12.7286 8.35355C12.6348 8.44732 12.5076 8.5 12.375 8.5H8.875C8.74239 8.5 8.61522 8.44732 8.52145 8.35355C8.42768 8.25979 8.375 8.13261 8.375 8V4.5C8.375 4.36739 8.42768 4.24021 8.52145 4.14645C8.61522 4.05268 8.74239 4 8.875 4C9.00761 4 9.13479 4.05268 9.22856 4.14645C9.32232 4.24021 9.375 4.36739 9.375 4.5V7.5H12.375C12.5076 7.5 12.6348 7.55268 12.7286 7.64645C12.8223 7.74021 12.875 7.86739 12.875 8Z" fill="#8A8D93" />
+                                                                    </svg>
 
-                                                                  <span className="appointment-reschedule-profile-schedule-detail">
-                                                                    {`${slot.time} - ${timeSlots[slotIndex + 1] ? timeSlots[slotIndex + 1].time : toNextTime(slot.time)}`}
-                                                                  </span>
+                                                                    <span className="appointment-reschedule-profile-schedule-detail">
+                                                                      {`${slot.time} - ${timeSlots[slotIndex + 1] ? timeSlots[slotIndex + 1].time : toNextTime(slot.time)}`}
+                                                                    </span>
+                                                                  </div>
                                                                 </div>
                                                               </div>
-                                                            </div>
-                                                            <div className="d-flex align-items-center gap-1 mt-3">
-                                                              {appt.reason.slice(0, 1).map((item: string, index: number) => (
-                                                                <span
-                                                                  key={index}
-                                                                  className="appointment-reason-vist-box appointment-reason-vist-box-content"
-                                                                >
-                                                                  {item}
-                                                                </span>
-                                                              ))}
-                                                              {appt.reason.length > 1 && (
-                                                                <span className="patient-calendar-modal-subtitle">
-                                                                  +{appt.reason.length - 1}
-                                                                </span>
-                                                              )}
+                                                              <div className="d-flex align-items-center gap-1 mt-3">
+                                                                {appt.reason.slice(0, 1).map((item: string, index: number) => (
+                                                                  <span
+                                                                    key={index}
+                                                                    className="appointment-reason-vist-box appointment-reason-vist-box-content"
+                                                                  >
+                                                                    {item}
+                                                                  </span>
+                                                                ))}
+                                                                {appt.reason.length > 1 && (
+                                                                  <span className="patient-calendar-modal-subtitle">
+                                                                    +{appt.reason.length - 1}
+                                                                  </span>
+                                                                )}
+                                                              </div>
                                                             </div>
                                                           </div>
-                                                        </div>
-                                                      )
-                                                    })}
+                                                        )
+                                                      })}
+                                                    </div>
                                                   </div>
-                                                </div>
 
-                                              )}
+                                                )}
                                               </div>
-                                              
+
                                             </div>
 
                                             <span className="patient-calendar-modal-subtitle">
@@ -1208,7 +1324,7 @@ export function CalendarView() {
                               <div className="position-absolute get-started-dot-bg-color rounded-circle tooltipDot" ></div>
                               <div className=' get-started-box position-absolute'>
                                 <p className="appointments-total-box-item">Get started by clicking anywhere<br />on the calendar to add your first<br />appointment</p>
-                                <span onClick={() => setShowTooltip(false)} className="appointments-day-ok">OK, GOT IT!</span>
+                                <span onClick={() => setShowTooltip(false)} className="appointments-day-ok cursor-pointer-custom">OK, GOT IT!</span>
                               </div>
                             </div>
                           )}
@@ -1234,7 +1350,13 @@ export function CalendarView() {
 
               {selectedView === 'month'
                 &&
-                <AppointmentsMonth selectedDate={value ? value.format('YYYY-MM-DD') : null} />
+                <AppointmentsMonth
+                  selectedDate={value ? value.format('YYYY-MM-DD') : null}
+                  AppointmentsMonthShow={AppointmentsMonthShow}
+                  setBookAppointmentModal={setBookAppointmentModal}
+                  setClickDate={setClickDate}
+
+                />
               }
 
               {/* <h1>{selectedView.charAt(0).toUpperCase() + selectedView.slice(1)} View</h1> */}

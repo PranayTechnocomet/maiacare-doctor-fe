@@ -714,11 +714,13 @@
 }
 
 .tooltipCustom {
+    z-index: 10 !important;
     top: 25%;
     left: 30%;
 }
 
 .tooltipCustom-week {
+    /* z-index: 11 !important; */
     top: 11%;
     left: 25%;
 }
@@ -775,6 +777,22 @@
 
 .custom-date-calendar .css-1pv2de5-MuiDayCalendar-weekContainer {
     align-items: center !important;
+}
+
+.custom-date-calendar .MuiPickersDay-root:not(.Mui-selected):hover {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* .custom-date-calendar .MuiPickersDay-root.Mui-selected:hover {
+  background-color: var(--color-modal-heading) !important;
+  color: #fff !important;
+} */
+/* .custom-date-calendar .MuiPickersDay-root:not(.Mui-selected):hover{
+    background-color: transparent !important;
+} */
+.css-rvpaeb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+
 }
 
 .day-formate-wrapper {
@@ -868,12 +886,25 @@
     z-index: 100;
 }
 
+.css-1620dzp-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    color: #fff;
+    background-color: var(--color-modal-heading) !important;
+    border-radius: 50%;
+    font-weight: 500;
+}
+
 .appoiment-patient-wprap {
     display: block;
     max-width: 53px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    /* width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
 }
 
 .appointment-reason-vist-box-wrap {
@@ -882,7 +913,76 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    /* width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; */
 }
 
+.custom-month-datepicker .fc-daygrid-day-bottom .appt-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.custom-month-datepicker .appt-item {
+    display: block;
+    background: #e6f3f2;
+    padding: 4px 8px;
+    border-radius: 48px;
+    font-size: 12px;
+    color: #292929;
+    width: 85%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.custom-month-datepicker .more-count {
+    font-size: 12px;
+    color: #555;
+    cursor: pointer;
+}
+
+.fc-popover {
+  display: none !important;
+}
+
+.fc-event-title.fc-sticky {
+  display: none !important;
+}
+
+/* scrollabar month start */
+.calendar-wrapper {
+  height: 100vh !important;           /* the visible area */
+  overflow-y: auto;
+}
+
+.fc .fc-scroller {
+  overflow-y: auto !important;
+  max-height: none !important;  /* allow free scroll */
+}
+
+.fc-daygrid-body {
+  height: auto !important;  /* ensure grid expands */
+}
+
+/* scrollabar month end */
+
+@media (min-width: 1440px) {
+  .custom-month-datepicker .appt-item {
+    width: 90%;
+  }
+}
+
+@media (min-width: 1540px) {
+  .custom-month-datepicker .appt-item {
+    width: 100%;
+  }
+}
 
 /* pankaj solanki end */

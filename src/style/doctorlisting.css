@@ -127,7 +127,7 @@
 
 .custom-month-datepicker .fc-daygrid-day-frame {
     width: 102px !important;
-    height: 150px !important;
+    height: 165px !important;
     border-bottom: none !important;
     justify-content: start;
     align-items: start;
@@ -150,7 +150,8 @@
    Appointment name pills
    ==================== */
 .fc-daygrid-day-events {
-    padding: 6px 8px 10px 8px; /* spacing inside the day cell for events */
+    /* padding: 6px 8px 10px 8px; */
+    padding : 0
 }
 
 /* Remove default FC event look */
