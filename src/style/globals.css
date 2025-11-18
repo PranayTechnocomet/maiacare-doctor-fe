@@ -25,6 +25,11 @@
   --color-age-select-item: #111928;
   --border-check-box: #CBD5E1;
   --border-accordion-arrow: #F4F4F4;
+  --badge-background-color-primary: #EBF5FF;
+  --badge-background-color-wip: #DEF7EC;
+  --badge-background-color-pending: #DEF7EC;
+  --badge-background-color-starting: #FFFAC9;
+  --badge-color-starting: #C27803;
 
   --color-scrollbar-thumb: #F1F1F2;
   --background-color-staus-success: #F2F2FF;
@@ -113,8 +118,8 @@ body {
   padding-right: 50px !important;
 }
 
-.profile-search .maiacare-input-field{
-   padding-left: 40px !important;
+.profile-search .maiacare-input-field {
+  padding-left: 40px !important;
 }
 
 .patient-header-search-width {
@@ -161,7 +166,7 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.profile-search-icon{
+.profile-search-icon {
   position: absolute;
   top: 50%;
   left: 20px;
@@ -234,12 +239,13 @@ body {
 .custome-patient-dropdown .dropdown-item:active,
 .custome-patient-dropdown .dropdown-item.active,
 .custome-patient-dropdown .dropdown-item:focus {
-   background-color: var(--color-progressbar-secondary) !important;
+  background-color: var(--color-progressbar-secondary) !important;
   color: inherit !important;
   box-shadow: none !important;
   cursor: pointer !important;
-  
+
 }
+
 .custome-patient-dropdown .dropdown-item.select-patient {
   background-color: var(--color-progressbar-secondary) !important;
 }
@@ -317,16 +323,18 @@ body {
 
 .box-border-orange {
   display: inline-block;
-   border: 1px solid var(--border-box);
-   color: var(--border-box);
-   border-radius: 8px !important;
+  border: 1px solid var(--border-box);
+  color: var(--border-box);
+  border-radius: 8px !important;
   padding: 6px 14px;
   font-weight: 600;
   font-size: 14px;
   line-height: 1.3;
-  white-space: nowrap; /* keeps text in one line */
+  white-space: nowrap;
+  /* keeps text in one line */
   text-align: center;
-  overflow: visible; /* prevents text cutting */
+  overflow: visible;
+  /* prevents text cutting */
   box-sizing: border-box;
 }
 
@@ -879,45 +887,43 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 
 .status-completed {
-    background-color: #DEF7EC !important;
-    color: #057A55 important;
+  background-color: #DEF7EC !important;
+  color: #057A55 important;
 }
 
 .status-success {
-    background-color: #DEF7EC !important;
-    color: #057A55 !important;
+  background-color: #DEF7EC !important;
+  color: #057A55 !important;
 }
 
 .status-pending {
-    background-color: #EBF5FF !important;
-    color: #3F83F8 !important;
+  background-color: #EBF5FF !important;
+  color: #3F83F8 !important;
 }
 
 .status-upcoming {
-    background-color: #EBF5FF !important;
-    color: #3F83F8 !important;
+  background-color: #EBF5FF !important;
+  color: #3F83F8 !important;
 }
 
 .status-cancelled {
-    background-color: #FDF2F2 !important;
-    color: #F05252 !important;
+  background-color: #FDF2F2 !important;
+  color: #F05252 !important;
 }
 
 .status-scheduled {
-    background-color: #EDEBFE !important;
-    color: #7E3AF2 !important;
+  background-color: #EDEBFE !important;
+  color: #7E3AF2 !important;
 }
 
 .status-noresponse {
-    background-color: #FFF8F1 !important;
-    color: #FF8A4C !important;
+  background-color: #FFF8F1 !important;
+  color: #FF8A4C !important;
 }
 
 .status-rescheduled {
-    background-color: #EDFAFA !important;
-    color: #0694A2 !important;
+  background-color: #EDFAFA !important;
+  color: #0694A2 !important;
 }
 
 /* Inhosue End */
-
-

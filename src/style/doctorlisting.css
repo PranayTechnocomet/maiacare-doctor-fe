@@ -126,11 +126,13 @@
 }
 
 .custom-month-datepicker .fc-daygrid-day-frame {
-    width: 102px !important;
+    /* width: 102px !important; */
+    width: 100% !important;
     height: 165px !important;
     border-bottom: none !important;
     justify-content: start;
     align-items: start;
+    
 }
 
 .fc-col-header-cell {
@@ -160,6 +162,7 @@
     border: none !important;
     padding: 0 !important;
 }
+
 
 /* Our custom pill renderer from eventContent */
 .pill {

@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from "@fullcalendar/interaction";
-import { AppointmentsMonthData } from '@/utils/StaticData';
+import { AppointmentsMonthData, TreatmentPlanMonthData } from '@/utils/StaticData';
+import dayjs from 'dayjs';
+
 type AppointmentDay = {
   date: string; // e.g. "2025-10-10"
   names: string[]; // list of names for that date
@@ -16,7 +18,8 @@ type AppointmentsMonthProps = {
   setClickDate?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function AppointmentsMonth({ appointmentsData,
+export function AppointmentsMonth({
+  appointmentsData,
   selectedDate: externalSelectedDate,
   AppointmentsMonthShow,
   setBookAppointmentModal,
@@ -69,9 +72,10 @@ function AppointmentsMonth({ appointmentsData,
     // console.log("click date is : ", fullDate);
 
     setClickDate?.(fullDate)
-    setBookAppointmentModal?.(true)
     setShowTooltip(false);
-
+    if(AppointmentsMonthShow.length == 0){
+      setBookAppointmentModal?.(true)
+    }
   }
 
   return (
@@ -79,7 +83,7 @@ function AppointmentsMonth({ appointmentsData,
 
       <div className="custom-month-datepicker ">
         <div className="calendar-wrapper position-relative">
-          {showTooltip && AppointmentsMonthShow.length === 0 && (
+          {showTooltip && AppointmentsMonthShow?.length === 0 && (
             <div className="position-absolute tooltipCustom">
               <div
                 className="position-absolute get-started-dot-bg-color rounded-circle"
@@ -205,7 +209,7 @@ function AppointmentsMonth({ appointmentsData,
               const d = String(cellDate.getDate()).padStart(2, "0");
               const fullDate = `${y}-${m}-${d}`;
 
-              const todaysEvents = AppointmentsMonthShow.filter((item) => {
+              const todaysEvents = AppointmentsMonthShow?.filter((item) => {
                 const pd = new Date(item.date);
                 const py = pd.getFullYear();
                 const pm = String(pd.getMonth() + 1).padStart(2, "0");
@@ -240,12 +244,12 @@ function AppointmentsMonth({ appointmentsData,
               //   if (bottom) bottom.appendChild(container);
               // }
 
-              if (todaysEvents.length > 0) {
+              if (todaysEvents?.length > 0) {
                 const container = document.createElement("div");
                 container.className = "appt-container";
 
                 // CASE 1: 1–4 items → show all normally
-                if (todaysEvents.length <= 4) {
+                if (todaysEvents?.length <= 4) {
                   todaysEvents.forEach((ev) => {
                     const item = document.createElement("div");
                     item.className = "appt-item"; // normal box
@@ -314,4 +318,207 @@ function AppointmentsMonth({ appointmentsData,
   )
 }
 
-export default AppointmentsMonth
+export function TreatmentMonthView() {
+
+  const [TreatmentPlanMonthShow, setTreatmentPlanMonthShow] = useState(TreatmentPlanMonthData)
+
+  // const [TreatmentPlanMonthShow, setTreatmentPlanMonthShow] = useState([{
+  //   id: "",
+  //   date: "",
+  //   events: [],
+  // bgColor: "", 
+  // }])
+
+
+  // const events = TreatmentPlanMonthShow.flatMap((item) => {
+  //   const parsed = dayjs(item.date, "D MMM YYYY");
+
+  //   return item.events.map((ev, index) => ({
+  //     id: `${item.id}-${index}`,
+  //     title: ev,
+  //     date: parsed.format("YYYY-MM-DD"),
+  //   }));
+  // });
+
+  const events = TreatmentPlanMonthShow?.map((item: any) => {
+    const parsed = dayjs(item.date, "D MMM YYYY");
+
+    return item.events.map((ev: any, index: number) => ({
+      id: `${item.id}-${index}`,
+      title: ev,
+      date: parsed.format("YYYY-MM-DD"),
+      bgColor: item.bgColor,
+    }));
+  }).flat(); // flatten the nested arrays
+
+  let statusClass = "";
+
+  return (
+    <>
+      <div className="custom-month-datepicker">
+        <div className="calendar-wrapper position-relative">
+
+
+          {/* <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            firstDay={1} // Monday
+            height="auto"
+            contentHeight="auto"
+            events={events}
+            displayEventTime={false}
+            eventDisplay="block"
+
+            dayCellDidMount={(arg) => {
+              const cellDate = arg.date.toISOString().split("T")[0];
+
+              // Filter events for this date
+              const todaysEvents = events.filter((ev) => ev.date === cellDate);
+
+              if (todaysEvents.length === 0) return;
+
+              // Create event container
+              const wrapper = document.createElement("div");
+
+              todaysEvents.forEach((ev) => {
+                const div = document.createElement("div");
+                div.className = "custom-event-box";
+                div.innerText = ev.title;
+                wrapper.appendChild(div);
+              });
+
+              // Append into FullCalendar cell
+              const frame = arg.el.querySelector(".fc-daygrid-day-frame");
+              frame?.appendChild(wrapper);
+            }}
+
+            // Custom date format for 1st of month
+            dayCellContent={(arg) => {
+              const date = arg.date;
+              const day = date.getDate();
+              const monthAbbr = date
+                .toLocaleString("default", { month: "short" })
+                .replace(".", "");
+
+              if (day === 1) {
+                return {
+                  html: `
+                    <div className="d-flex flex-column align-items-center">
+                    <div className="appointment-details-invoice-title">
+                      ${monthAbbr} ${day}
+                    </div>
+                  </div>
+                `,
+                };
+              }
+
+              return {
+                html: `
+                <div className="d-flex flex-column align-items-center">
+                  <div className="appointment-details-invoice-title" >${day}</div>
+                </div>
+              `,
+              };
+            }}
+          /> */}
+
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            firstDay={1}
+            height="auto"
+            contentHeight="auto"
+            events={events}
+            displayEventTime={false}
+            eventDisplay="none"      // IMPORTANT: disable built-in rendering
+
+            /* Custom event display */
+            dayCellDidMount={(arg) => {
+              const cellDate = dayjs(arg.date).format("YYYY-MM-DD");
+
+              // Find events for this day
+              const todaysEvents = events.filter((ev) => ev.date === cellDate);
+
+              // Hide empty FC event area only for this calendar
+              const fcEventContainer = arg.el.querySelector(".fc-daygrid-day-events");
+              if (fcEventContainer) {
+                if (todaysEvents.length === 0) {
+                  fcEventContainer.className = "d-none";
+                } else {
+                  fcEventContainer.className = "d-none";
+                }
+              }
+
+
+              if (todaysEvents.length === 0) return;
+
+              // Build custom pills container
+              const wrapper = document.createElement("div");
+              wrapper.style.marginTop = "4px";
+              wrapper.style.display = "flex";
+              wrapper.style.flexDirection = "column";
+              wrapper.style.gap = "3px";
+
+              todaysEvents.forEach((ev) => {
+
+                switch (ev.bgColor) {
+                  case "starting":
+                    statusClass = "custom-event-box-starting";
+                    break;
+
+                  case "success":
+                    statusClass = "custom-event-box-success";
+                    break;
+
+                  case "pending":
+                    statusClass = "custom-event-box-pending";
+                    break;
+
+                  case "inprogress":
+                    statusClass = "custom-event-box-wip";
+                    break;
+
+                  default:
+                    statusClass = "custom-event-box-success";
+                }
+
+                const div = document.createElement("div");
+                div.className = `custom-event-box ${statusClass}`;
+                div.innerText = ev.title;
+                wrapper.appendChild(div);
+              });
+
+              // Append inside the cell
+              const frame = arg.el.querySelector(".fc-daygrid-day-frame");
+              frame?.appendChild(wrapper);
+            }}
+
+            /* Custom date format (1st day = “Nov 1”) */
+            dayCellContent={(arg) => {
+              const date = arg.date;
+              const day = date.getDate();
+              const monthAbbr = date
+                .toLocaleString("default", { month: "short" })
+                .replace(".", "");
+
+              if (day === 1) {
+                return {
+                  html: `
+                    <div class="date-label">${monthAbbr} ${day}</div>
+                  `,
+                };
+              }
+
+              return {
+                html: `
+                  <div class="date-label">${day}</div>
+                `,
+              };
+            }}
+          />
+
+        </div>
+      </div>
+    </>
+  )
+}

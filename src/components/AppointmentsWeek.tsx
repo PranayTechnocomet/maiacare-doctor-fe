@@ -395,7 +395,6 @@ export default function AppointmentsWeek(
                                 {visible.map((appt, i) => {
                                   if (slotAppointments.length > 3 && i >= 2) {
                                     const extradata = slotAppointments.slice(3)
-                                    console.log("true");
 
                                     return (
                                       <div className="p-1 w-100" key={`extra-${i}`}>
@@ -444,9 +443,6 @@ export default function AppointmentsWeek(
                                                                   <span className="appointment-reschedule-profile-schedule-detail">
                                                                     {appt.time}
                                                                   </span>
-                                                                  {/* <span className="appointment-reschedule-profile-schedule-detail">
-                                                            {`${slot.time} - ${timeSlots[slotIndex + 1] ? timeSlots[slotIndex + 1].time : toNextTime(slot.time)}`}
-                                                          </span> */}
                                                                 </div>
                                                               </div>
                                                             </div>

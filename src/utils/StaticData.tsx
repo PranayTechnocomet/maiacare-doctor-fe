@@ -1768,7 +1768,7 @@ export const AppointmentsMonthData = [
     },
     date: "5 Nov 2025",
   },
-   {
+  {
     id: "5",
     patient: {
       _id: "69005c207162eaf97429433c",
@@ -1778,7 +1778,7 @@ export const AppointmentsMonthData = [
     },
     date: "5 Nov 2025",
   },
-   {
+  {
     id: "5",
     patient: {
       _id: "69005c207162eaf97429433c",
@@ -1788,7 +1788,7 @@ export const AppointmentsMonthData = [
     },
     date: "5 Nov 2025",
   },
-   {
+  {
     id: "5",
     patient: {
       _id: "69005c207162eaf97429433c",
@@ -1837,6 +1837,87 @@ export const AppointmentsMonthData = [
       contactNumber: "9898765432"
     },
     date: "7 Nov 2025",
+  }
+]
+
+export const TreatmentPlanMonthData = [
+  {
+     id: "1",
+    date: "28 Oct 2025",
+    events: ["Semen analysis (Partner)"],
+    bgColor: "starting",
+  },
+   {
+     id: "1",
+    date: "30 Oct 2025",
+    events: ["Transvaginal Ultrasound"],
+    bgColor: "starting",
+  },
+  {
+    id: "1",
+    date: "1 Nov 2025",
+    events: ["Period start date (tentative)"],
+    bgColor: "success",
+  },
+  {
+    id: "2",
+    date: "2 Nov 2025",
+    events: ["Medication start"],
+    bgColor: "inprogress",
+  },
+  {
+    id: "3",
+    date: "3 Nov 2025",
+    events: ["Medication start"],
+    bgColor: "success",
+  },
+  {
+    id: "4",
+    date: "7 Nov 2025",
+    events: ["HCG injection plan"],
+    bgColor: "pending",
+  },
+  {
+    id: "5",
+    date: "8 Nov 2025",
+    events: ["Possible egg retrieval", "HCG injection plan"],
+    bgColor: "success",
+  },
+  {
+    id: "6",
+    date: "10 Nov 2025",
+    events: ["Possible egg retrieval", "HCG injection plan"],
+    bgColor: "success",
+  },
+  {
+    id: "7",
+    date: "12 Nov 2025",
+    events: ["Possible egg retrieval"],
+    bgColor: "success",
+  },
+  {
+    id: "8",
+    date: "13 Nov 2025",
+    events: ["Egg retrieval"],
+    bgColor: "success",
+  },
+  {
+    id: "9",
+    date: "15 Nov 2025",
+    events: ["Sperm Collection", "Fertilisation"],
+    bgColor: "success",
+  },
+  {
+    id: "10",
+    date: "17 Nov 2025",
+    events: ["Embryo biopsy (5–7 days)"],
+    bgColor: "success",
+  },
+  {
+    id: "11",
+    date: "19 Nov 2025",
+    events: ["Embryo Transfer"],
+    bgColor: "success",
   }
 ]
 
