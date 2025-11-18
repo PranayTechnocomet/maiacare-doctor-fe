@@ -6,8 +6,10 @@ import { useDispatch } from "react-redux";
 import { useEffect, useMemo } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { consultationData, treatmentPlanData } from "@/utils/StaticData";
-import AddMedicalHistory from "@/components/AddMedicalHistory";
-import AppointmentsMonth from "@/components/AppointmentsMonth";
+import { TreatmentMonthView } from "@/components/AppointmentsMonth";
+import '@/style/temp.css';
+import '@/style/doctorlisting.css';
+import '@/style/appointments.css';
 
 export default function PatientDetailPage() {
     const params = useParams();
@@ -31,7 +33,10 @@ export default function PatientDetailPage() {
     return (
         <div>
             {/* Pass the data to the component */}
-            <AppointmentsMonth />
+            {/* <AppointmentsMonth /> */}
+
+            <TreatmentMonthView />
+
         </div>
     );
 }

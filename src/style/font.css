@@ -1701,6 +1701,13 @@
     color: var(--color-modal-heading);
 }
 
+.custom-event-box {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    /* color: var(--border-box-blue); */
+}
+
 @media screen and (max-width: 1391px) {
     .contact-detail {
         font-size: 13px;

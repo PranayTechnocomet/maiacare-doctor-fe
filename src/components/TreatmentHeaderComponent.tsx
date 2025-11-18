@@ -522,7 +522,7 @@ export function IVF() {
             header: "Actions",
             cell: (info) => {
                 const id = info.row.original.id;
-                console.log("info",info)
+                // console.log("info",info)
                 return (
                     // <Link href={`/patients/${id}`} className="text-decoration-none text-dark">
                     <div className="d-flex align-items-center gap-2">

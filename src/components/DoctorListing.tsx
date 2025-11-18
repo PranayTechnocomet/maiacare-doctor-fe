@@ -16,7 +16,7 @@ import { InputFieldGroup } from './ui/InputField';
 import { InputSelect } from './ui/InputSelect';
 import { BookAppointment, SuccessModalBookAppointment } from './form/BookAppointment';
 import ScheduleTimeOff from './ScheduleTimeOff';
-import AppointmentsMonth from './AppointmentsMonth';
+import { AppointmentsMonth } from './AppointmentsMonth';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -105,6 +105,10 @@ export function WeekHighlightDay(props: DayProps) {
   const isStart = day.isSame(today, "day");
   const isEnd = day.isSame(endOfWeek, "day");
 
+  // console.log("isToday : " , isToday);
+  // console.log("isStart : " , isStart);
+  // console.log("isInWeek : " , isInWeek);
+
   return (
     <PickersDay
       {...other}
@@ -112,9 +116,9 @@ export function WeekHighlightDay(props: DayProps) {
       sx={{
         mx: 0,
         px: 0.5,
+        // height : 25,
+        // margin : "5px 0",
         borderRadius: 0,
-
-        /** WEEK STRIP — applies behind today also */
         ...(isInWeek && {
           backgroundColor: "#f5b58a",
           color: "#d35400",
@@ -132,15 +136,6 @@ export function WeekHighlightDay(props: DayProps) {
           borderBottomRightRadius: "16px",
         }),
 
-        /** TODAY ON TOP OF THE STRIP */
-        // ...(isToday && {
-        //   backgroundColor: "#e67c5d !important",
-        //   color: "white !important",
-        //   // borderRadius: "50% !important",
-        //   // position: "relative",
-        //   // // brings circle above strip
-        // }),
-
         ...(isToday && {
           color: "white !important",
           position: "relative",
@@ -155,7 +150,7 @@ export function WeekHighlightDay(props: DayProps) {
             transform: "translate(-50%, -50%)",
             width: "100%",   // adjust circle size
             height: "100%",
-            backgroundColor: "#e67c5d",
+            backgroundColor: "var(--color-modal-heading)",
             borderRadius: "50%",
             zIndex: -1,      // behind the number but above strip
           },
@@ -164,7 +159,7 @@ export function WeekHighlightDay(props: DayProps) {
         /** DISABLE HOVER */
         "&:hover": {
           backgroundColor: isToday
-            ? "#e67c5d !important"
+            ? "#f5b58a !important"
             : isInWeek
               ? "#f5b58a !important"
               : "transparent !important",
@@ -804,13 +799,13 @@ export function CalendarView() {
 
                           }}
 
-                          slots={{ day: WeekHighlightDay }}
+                          // slots={{ day: WeekHighlightDay }}
 
-                          // {
-                          // ...(selectedView === "week" && {
-                          //   slots: { day: WeekHighlightDay }
-                          // })
-                          // }
+                        {
+                        ...(selectedView === "week" && {
+                          slots: { day: WeekHighlightDay }
+                        })
+                        }
 
                         />
                       </LocalizationProvider>
@@ -1148,7 +1143,9 @@ export function CalendarView() {
                                         <div className="p-1 w-50" key={`extra-${i}`}>
                                           <div className="appointment-box d-flex align-items-center gap-3" >
                                             <div className='position-relative'    >
-                                              <div className='d-flex position-relative cursor-pointer-custom' onClick={() => { setMultiPatientShow(true) }} >
+                                              <div className='d-flex position-relative cursor-pointer-custom'
+                                                onClick={() => setMultiPatientShow(true)}
+                                              >
                                                 <Image
                                                   src={extradata[0].patient.profileImage}
                                                   alt={extradata[0].patient.name}

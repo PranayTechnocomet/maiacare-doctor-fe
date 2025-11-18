@@ -779,21 +779,22 @@
     align-items: center !important;
 }
 
-.custom-date-calendar .MuiPickersDay-root:not(.Mui-selected):hover {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
+/* .custom-date-calendar .MuiPickersDay-root:not(.Mui-selected):hover {
+    background-color: transparent !important;
+    box-shadow: none !important;
+} */
 
 /* .custom-date-calendar .MuiPickersDay-root.Mui-selected:hover {
   background-color: var(--color-modal-heading) !important;
   color: #fff !important;
 } */
+
 /* .custom-date-calendar .MuiPickersDay-root:not(.Mui-selected):hover{
     background-color: transparent !important;
 } */
-.css-rvpaeb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+/* .css-rvpaeb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
 
-}
+} */
 
 .day-formate-wrapper {
     /* border:1px solid red; */
@@ -935,7 +936,7 @@
     border-radius: 48px;
     font-size: 12px;
     color: #292929;
-    width: 85%;
+    width: 100%;
     max-width: 100%;
     overflow: hidden;
     white-space: nowrap;
@@ -949,40 +950,71 @@
 }
 
 .fc-popover {
-  display: none !important;
+    display: none !important;
 }
 
 .fc-event-title.fc-sticky {
-  display: none !important;
+    display: none !important;
 }
 
 /* scrollabar month start */
 .calendar-wrapper {
-  height: 100vh !important;           /* the visible area */
-  overflow-y: auto;
+    height: 100vh !important;
+    /* the visible area */
+    overflow-y: auto;
 }
 
 .fc .fc-scroller {
-  overflow-y: auto !important;
-  max-height: none !important;  /* allow free scroll */
+    overflow-y: auto !important;
+    max-height: none !important;
+    /* allow free scroll */
 }
 
 .fc-daygrid-body {
-  height: auto !important;  /* ensure grid expands */
+    height: auto !important;
+    /* ensure grid expands */
+}
+
+.custom-event-box {
+    border-radius: 6px;
+    padding: 2px 6px;
+    margin: 2px 10px;
+    width: auto;
+    text-align: center;
+}
+
+.custom-event-box-success {
+    background-color: var(--badge-background-color-primary);
+    color: var(--border-box-blue);
+}
+
+.custom-event-box-pending{
+ background-color: var(--badge-background-color-pending);
+    color: var(--border-box);
+}
+
+.custom-event-box-wip{
+ background-color: var(--badge-background-color-wip);
+    color: var(--dashboard-chart-patients);
+}
+
+.custom-event-box-starting{
+    background-color: var(--badge-background-color-starting);
+    color: var(--badge-color-starting);
 }
 
 /* scrollabar month end */
 
-@media (min-width: 1440px) {
-  .custom-month-datepicker .appt-item {
-    width: 90%;
-  }
+/* @media (min-width: 1440px) {
+    .custom-month-datepicker .appt-item {
+        width: 90%;
+    }
 }
 
 @media (min-width: 1540px) {
-  .custom-month-datepicker .appt-item {
-    width: 100%;
-  }
-}
+    .custom-month-datepicker .appt-item {
+        width: 100%;
+    }
+} */
 
 /* pankaj solanki end */
