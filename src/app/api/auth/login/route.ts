@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await parseRequestBody(req);
-
+    
     const response = await apiServer.post(API_BASE_URL, body);
 
     return new NextResponse(JSON.stringify(response.data), {

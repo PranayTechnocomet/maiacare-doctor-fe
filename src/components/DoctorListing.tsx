@@ -40,7 +40,12 @@ import isoWeek from "dayjs/plugin/isoWeek";
 dayjs.extend(isoWeek);
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 
+
 type DayProps = React.ComponentProps<typeof PickersDay>;
+interface CustomDayProps extends PickersDayProps {
+  selectedDay?: dayjs.Dayjs | null;
+}
+
 
 // Multi-Select DatePicker Component
 const MultiSelectDatePicker: React.FC = () => {
@@ -87,27 +92,24 @@ const MultiSelectDatePicker: React.FC = () => {
 };
 
 
-export function WeekHighlightDay(props: DayProps) {
-  const { day, ...other } = props as DayProps & { day: dayjs.Dayjs };
+export function WeekHighlightDay(props: CustomDayProps) {
+  const { day, selectedDay, ...other } = props;
 
-  const today = dayjs();
+  const base = selectedDay ? dayjs(selectedDay) : null;
 
-  const isToday = day.isSame(today, "day");
+  const start = base ? base.startOf("week") : null;
+  const end = base ? base.endOf("week") : null;
 
-  const endOfWeek = today.endOf("week");
-
-  // highlight: today → end of week
   const isInWeek =
-    day.isSame(today, "day") ||
-    (day.isAfter(today, "day") && day.isBefore(endOfWeek, "day")) ||
-    day.isSame(endOfWeek, "day");
+    !!base &&
+    (day.isSame(start, "day") ||
+      (day.isAfter(start, "day") && day.isBefore(end, "day")) ||
+      day.isSame(end, "day"));
 
-  const isStart = day.isSame(today, "day");
-  const isEnd = day.isSame(endOfWeek, "day");
+  const isStart = base && day.isSame(start, "day");
+  const isEnd = base && day.isSame(end, "day");
 
-  // console.log("isToday : " , isToday);
-  // console.log("isStart : " , isStart);
-  // console.log("isInWeek : " , isInWeek);
+  const isSelected = base && day.isSame(base, "day");
 
   return (
     <PickersDay
@@ -116,31 +118,31 @@ export function WeekHighlightDay(props: DayProps) {
       sx={{
         mx: 0,
         px: 0.5,
-        // height : 25,
-        // margin : "5px 0",
+        height: 30,
+        margin: "2px 0",
         borderRadius: 0,
+
         ...(isInWeek && {
-          backgroundColor: "#f5b58a",
-          color: "#d35400",
+          backgroundColor: "var(--badge-background-color-rejected)",
+          color: "var(--color-heading)",
         }),
 
-        /** LEFT ROUND (today) */
         ...(isStart && {
           borderTopLeftRadius: "16px",
           borderBottomLeftRadius: "16px",
         }),
 
-        /** RIGHT ROUND (end of week) */
         ...(isEnd && {
           borderTopRightRadius: "16px",
           borderBottomRightRadius: "16px",
         }),
 
-        ...(isToday && {
+        ...(isSelected && {
+
           color: "white !important",
           position: "relative",
           zIndex: 2,
-          backgroundColor: "#f5b58a !important",
+          backgroundColor: "var(--badge-background-color-rejected) !important",
 
           "&::after": {
             content: '""',
@@ -148,20 +150,24 @@ export function WeekHighlightDay(props: DayProps) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: "100%",   // adjust circle size
-            height: "100%",
+            width: "25px",
+            height: "25px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             backgroundColor: "var(--color-modal-heading)",
             borderRadius: "50%",
+            fontSize: "12px",
             zIndex: -1,      // behind the number but above strip
           },
         }),
 
         /** DISABLE HOVER */
         "&:hover": {
-          backgroundColor: isToday
-            ? "#f5b58a !important"
+          backgroundColor: isSelected
+            ? "var(--badge-background-color-rejected) !important"
             : isInWeek
-              ? "#f5b58a !important"
+              ? "var(--badge-background-color-rejected) !important"
               : "transparent !important",
         },
 
@@ -569,15 +575,6 @@ export function CalendarView() {
   const dayDateFormat = value ? value.format('dddd ') : '';
   const dateDateFormat = value ? value.format('DD') : '';
 
-  // Format: "October 2025 (Mon 13 - Sun 19)"
-  // const monthYearWithWeekRange = value ? (() => {
-  //   const startOfWeek = value.startOf('week');
-  //   const endOfWeek = value.endOf('week');
-  //   const monthYear = value.format('MMMM YYYY');
-  //   const startDay = startOfWeek.format('ddd DD');
-  //   const endDay = endOfWeek.format('ddd DD');
-  //   return `${monthYear} (${startDay} - ${endDay})`;
-  // })() : '';
 
   const monthYearWithWeekRange = value
     ? (() => {
@@ -800,12 +797,27 @@ export function CalendarView() {
                           }}
 
                           // slots={{ day: WeekHighlightDay }}
+                          // slotProps={{
+                          //   day: (ownerState) => ({
+                          //     ...ownerState,
+                          //     selectedDay: value,   // <-- now allowed
+                          //   })
+                          // }}
 
-                        {
-                        ...(selectedView === "week" && {
-                          slots: { day: WeekHighlightDay }
-                        })
-                        }
+                          {...(selectedView === "week" && {
+                            slots: { day: WeekHighlightDay }
+                          })}
+
+                          slotProps={
+                            selectedView === "week"
+                              ? {
+                                day: (ownerState) => ({
+                                  ...ownerState,
+                                  selectedDay: value,
+                                }),
+                              }
+                              : undefined
+                          }
 
                         />
                       </LocalizationProvider>
@@ -1036,6 +1048,7 @@ export function CalendarView() {
               setCancelModal={setCancelModal}
               CancelModal={CancelModal}
             />
+           
             <Col md={8}>
               {selectedView === 'day'
                 &&
@@ -1365,8 +1378,6 @@ export function CalendarView() {
                 <div className='today-schedule'>
                   <p className='doctor-listing-heading mb-0 '>Today’s Schedule</p>
                 </div>
-
-
                 <div className='today-schedule-box-section '>
                   <div className='d-flex justify-content-between align-items-center gap-2 p-0'>
                     <div
@@ -1454,6 +1465,7 @@ export function CalendarView() {
               </div>
 
             </Col>
+            
           </Row>
         </Col>
       </Row >
