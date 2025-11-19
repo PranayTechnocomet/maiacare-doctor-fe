@@ -7,7 +7,7 @@ import { useEffect, useMemo } from "react";
 import { setHeaderData } from "@/utils/redux/slices/headerSlice";
 import { consultationData, treatmentPlanData } from "@/utils/StaticData";
 import AddMedicalHistory from "@/components/AddMedicalHistory";
-import AppointmentsMonth from "@/components/AppointmentsMonth";
+// import AppointmentsMonth from "@/components/AppointmentsMonth";
 import TreatmentEditForm from "@/components/TreatmentEditForm";
 import TreatmentTable from "@/components/TreatmentPatient"
 import TreatmentPatient from "@/components/TreatmentPatient";
