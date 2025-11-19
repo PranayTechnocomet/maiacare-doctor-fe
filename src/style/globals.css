@@ -30,6 +30,7 @@
   --badge-background-color-pending: #DEF7EC;
   --badge-background-color-starting: #FFFAC9;
   --badge-color-starting: #C27803;
+  --badge-background-color-rejected: #FDF2F2;
 
   --color-scrollbar-thumb: #F1F1F2;
   --background-color-staus-success: #F2F2FF;
