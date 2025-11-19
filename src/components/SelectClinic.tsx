@@ -101,7 +101,7 @@ export default function SelectClinic() {
                   <div className='d-flex gap-3 align-items-center'>
                     <div className='select-profile-img-wrapeer'>
                       <img
-                        src={clinic.clinicLogo}
+                        src={clinic.clinicLogo} 
                         alt={clinic.clinicName}
                         width={70}
                         height={70}

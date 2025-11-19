@@ -305,3 +305,13 @@ export const deleteleave= () => {
   return apiClient.get("/profile/delete-leave");
 }
 
+
+
+
+
+//...... UPDATE IMAGES ......//
+export const updateImages = (formData: FormData) => {
+  return apiClient.post("/update-images", formData, {
+    headers: { "Content-Type": "multipart/form-data"},
+  });
+};
