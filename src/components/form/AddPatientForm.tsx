@@ -21,16 +21,16 @@ import { PhoneNumberInput } from "../ui/PhoneNumberInput"
 import { AddPatientFormData } from "@/utils/types/interfaces"
 import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'
 import "../../style/editprofile.css";
+import { add } from "@/utils/apis/apiHelper"
 
 type FormError = Partial<Record<keyof AddPatientFormData, string>>;
 
 const initialFormData: AddPatientFormData = {
-
     name: "",
-    patientId: "",
-    gender: "male", // default to male if you want
+    // patientId: "",
+    gender: "male",
     date: "",
-    age: "",
+    // age: "",
     phone: "",
     email: "",
     address: "",
@@ -42,6 +42,7 @@ const initialFormData: AddPatientFormData = {
     emergencyContactPhone: "",
     emergencyContactRelation: "",
 };
+
 
 const initialFormError: FormError = {};
 
@@ -117,6 +118,8 @@ function AddPatientForm() {
             return;
         }
 
+        // console.log(selectedFile);
+
         // ✅ 3. If valid → set preview & clear error
         const imageURL = URL.createObjectURL(selectedFile);
         setPreviewImage(imageURL);
@@ -157,17 +160,12 @@ function AddPatientForm() {
         setPreviewImage(imageURL); // Show preview
     };
 
-
-
-
-
     const handleSave = () => {
+        
         setSelectedImage(previewImage); // save modal preview to actual profile
         setShowModal(false);
 
     };
-
-
 
     const handleDelete = () => {
         setPreviewImage(null); // delete only in modal
@@ -191,7 +189,7 @@ function AddPatientForm() {
         // }
 
         if (!data.name.trim()) errors.name = "Name is required";
-        if (!data.patientId.trim()) errors.patientId = "Patient ID is required";
+        // if (!data.patientId.trim()) errors.patientId = "Patient ID is required";
         if (!data.date) errors.date = "Date of birth is required";
 
         if (!data.phone.trim()) {
@@ -222,8 +220,38 @@ function AddPatientForm() {
         setFormError(errors);
         console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
-            setShowSuccessModal(true)
-            console.log("patient add sucessfully ... ", formData);
+
+            const data = {
+                personalDetails: {
+                    profileImage: selectedImage,
+                    name: formData.name,
+                    email: formData.email,
+                    gender: formData.gender,
+                    dob: formData.date,
+                    contactNumber: formData.phone,
+                    address: formData.address,
+                    pincode: formData.pincode,
+                    city: formData.city,
+                    state: formData.state
+                },
+                emergencyContact: {
+                    name: formData.emergencyContactName,
+                    contactNumber: formData.emergencyContactPhone,
+                    relation: formData.emergencyContactRelation
+                },
+                type: "doctor"
+            }
+
+            // add(data).then((response) => {
+            //     console.log("response : ", response);
+
+            // })
+            //     .catch((err) => {
+            //         console.log("error", err);
+            //     });
+
+            // setShowSuccessModal(true)    
+            console.log("patient add sucessfully ... ", data);
             setFormError(initialFormError);
         }
     };
@@ -235,8 +263,6 @@ function AddPatientForm() {
 
                 <ContentContainer>
                     <Row className="mt-1 g-3">
-
-
                         <Col>
                             <h5 className="profile-card-main-titile">Personal Details</h5>
                             <div className="d-flex align-items-center gap-4 mt-3 flex-wrap justify-content-center justify-content-sm-start text-center text-md-start">
@@ -302,20 +328,6 @@ function AddPatientForm() {
                                         <div className="w-100 border-top pt-3 d-flex justify-content-between align-items-center flex-wrap">
                                             <div className="d-flex gap-3 align-items-center flex-wrap">
 
-                                                {/* Edit button  */}
-
-                                                {/* <div className="text-center" style={{ cursor: 'pointer' }} onClick={handleEditClick}>
-                          <Image src={EditProfile} alt="Edit" width={18} height={18} />
-                          <div className="kyc-details">Edit</div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            ref={fileInputRef}
-                            onChange={handleFileChange}
-                            style={{ display: 'none' }}
-                          />
-                        </div> */}
-
                                                 <div className="text-center edit-basic-details-edit-button" onClick={handleEditClick}>
                                                     <Image src={ImageSquare} alt="Add Photo" width={21} height={21} />
                                                     <div className="small">Add Photo</div>
@@ -357,12 +369,8 @@ function AddPatientForm() {
                                                 </Button>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </Modal>
-
-
                                 <div>
                                     <div className="fw-semibold">Add Profile Picture</div>
                                     <div className="text-muted small">
@@ -371,9 +379,6 @@ function AddPatientForm() {
                                 </div>
                             </div>
                         </Col>
-
-
-
                         <Col md={12} sm={12}>
                             <InputFieldGroup
                                 label="Name"
@@ -397,16 +402,16 @@ function AddPatientForm() {
                                 label="Patient ID"
                                 name="patientId"
                                 type="text"
-                                value={formData.patientId}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    handleChange(e);
-                                }}
+                                // value={formData.patientId}
+                                // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                //     handleChange(e);
+                                // }}
                                 onBlur={(e: React.FocusEvent<HTMLInputElement>) => { }}
                                 placeholder="Enter patientId"
                                 required={true}
                                 disabled={false}
                                 readOnly={false}
-                                error={formError.patientId}
+                            // error={formError.patientId}
 
                             />
                         </Col>
@@ -445,14 +450,14 @@ function AddPatientForm() {
                             <InputSelect
                                 label="Age"
                                 name="age"
-                                value={formData.age}
-                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                                    handleChange(e);
-                                }}
+                                // value={formData.age}
+                                // onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                //     handleChange(e);
+                                // }}
                                 onBlur={(e: React.FocusEvent<HTMLSelectElement>) => { }}
                                 required={true}
                                 disabled={false}
-                                error={formError.age}
+                                // error={formError.age}
                                 placeholder="Select Age"
                                 options={[
                                     { id: "1", value: "1", label: "1" },
@@ -658,10 +663,10 @@ function AddPatientForm() {
                         </div>
 
                         <div className="d-flex justify-content-center gap-3">
-                            <Button variant="outline" disabled={false}  className="w-100" onClick={() => setShowSuccessModal(false)} >
+                            <Button variant="outline" disabled={false} className="w-100" onClick={() => setShowSuccessModal(false)} >
                                 Okay
                             </Button>
-                            <Button variant="default" disabled={false} className="w-100"  onClick={() => setShowSuccessModal(false)}>
+                            <Button variant="default" disabled={false} className="w-100" onClick={() => setShowSuccessModal(false)}>
                                 View Details
                             </Button>
                         </div>

@@ -1,4 +1,4 @@
-    "use client"
+"use client"
 
 import AddPatientForm from "@/components/form/AddPatientForm"
 import '../../style/patientProfile.css'
@@ -6,9 +6,7 @@ import '../../style/patientProfile.css'
 function Page() {
     return (
         <>
-
-            <AddPatientForm/>
-
+            <AddPatientForm />
         </>
     )
 }

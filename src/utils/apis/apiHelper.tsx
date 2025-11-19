@@ -4,14 +4,14 @@ import apiClient from "./axiosInstance";
 
 export const login = (data: LoginRequest) => {
   return apiClient.post("/auth/login", data);
-} 
+}
 
 export const getLoginUser = () => {
   return apiClient.get("/profile/get/login-user");
 }
 
 
-export const selectClinic = (clinicId: string ) => {
+export const selectClinic = (clinicId: string) => {
   return apiClient.post("/auth/select-clinic", { clinicId });
 };
 
@@ -84,7 +84,7 @@ export const addQualification = (data: QualificationType[]) => {
   });
 }
 
-export const editQualification = (data: QualificationType, id:string) => {
+export const editQualification = (data: QualificationType, id: string) => {
   const token = localStorage.getItem("token");
   return apiClient.put(`/profile/qualifications/edit/${id}`, data, {
     headers: {
@@ -96,8 +96,8 @@ export const editQualification = (data: QualificationType, id:string) => {
 
 export const deleteQualification = () => {
   const token = localStorage.getItem("token");
-  return apiClient.delete("/profile/qualifications/edit",  {
-    headers : {
+  return apiClient.delete("/profile/qualifications/edit", {
+    headers: {
       Authorization: `Bearer ${token}`,
     }
   });
@@ -138,34 +138,34 @@ export const patientdelete = () => {
   return apiClient.delete("/patient/delete");
 }
 
-export const patientupdate= () => {
+export const patientupdate = () => {
   return apiClient.put("/patient/update");
 }
 
-export const getAll= () => {
+export const getAll = () => {
   return apiClient.get("/patient/getAll");
 }
-export const add= () => {
-  return apiClient.post("/patient/add");
+export const add = (data: object) => {
+  return apiClient.post("/patient/add", data);
 }
 
 
 // ...... PATIENT - PHYSICAL ASSESSMENT ...... //
 
 
-export const physicalassessmentpost= () => {
+export const physicalassessmentpost = () => {
   return apiClient.post("/patient/physical-assessment");
 }
 
-export const physicalassessmentget= () => {
+export const physicalassessmentget = () => {
   return apiClient.get("/patient/physical-assessment");
 }
 
-export const physicalassessmentput= () => {
+export const physicalassessmentput = () => {
   return apiClient.put("/patient/physical-assessment");
 }
 
-export const physicalassessmentdelete= () => {
+export const physicalassessmentdelete = () => {
   return apiClient.delete("/patient/physical-assessment");
 }
 
@@ -173,19 +173,19 @@ export const physicalassessmentdelete= () => {
 
 // ...... PATIENT MEDICAL HISTOTY ......//
 
-export const patientmedicalhistorypost= () => {
+export const patientmedicalhistorypost = () => {
   return apiClient.post("/patient/medical-history");
 }
 
-export const patientmedicalhistorydelete= () => {
+export const patientmedicalhistorydelete = () => {
   return apiClient.delete("/patient/medical-history");
 }
 
-export const patientmedicalhistoryget= () => {
+export const patientmedicalhistoryget = () => {
   return apiClient.get("/patient/medical-history");
 }
 
-export const patientmedicalhistoryput= () => {
+export const patientmedicalhistoryput = () => {
   return apiClient.put("/patient/medical-history");
 }
 
@@ -194,19 +194,19 @@ export const patientmedicalhistoryput= () => {
 
 //...... PATIENT - FERTILITY ASSESSMENT ......//
 
-export const fertilityassessmentpost= () => {
+export const fertilityassessmentpost = () => {
   return apiClient.post("/patient/fertility-assessment");
 }
 
-export const fertilityassessmentget= () => {
+export const fertilityassessmentget = () => {
   return apiClient.get("/patient/fertility-assessment");
 }
 
-export const fertilityassessmentput= () => {
+export const fertilityassessmentput = () => {
   return apiClient.put("/patient/fertility-assessment");
 }
 
-export const fertilityassessmentdel= () => {
+export const fertilityassessmentdel = () => {
   return apiClient.delete("/patient/fertility-assessment");
 }
 
@@ -214,94 +214,99 @@ export const fertilityassessmentdel= () => {
 
 //...... PATIENT - PARTNER BASIC DETAILS ......//
 
-export const basicDetailspost= () => {
+export const basicDetailspost = () => {
   return apiClient.post("/patient/partner/basicDetails");
 }
 
-export const basicDetailsput= () => {
+export const basicDetailsput = () => {
   return apiClient.get("/patient/partner/basicDetails");
 }
 
-export const basicDetailsget= () => {
+export const basicDetailsget = () => {
   return apiClient.put("/patient/partner/basicDetails");
-} 
+}
 
 
 //...... PATIENT - PARTNER MEDICAL HISTORY ......//
 
-export const partnermedicalHistorypost= () => {
+export const partnermedicalHistorypost = () => {
   return apiClient.post("/patient/partner/medicalHistory");
 }
 
-export const partnermedicalHistoryget= () => {
+export const partnermedicalHistoryget = () => {
   return apiClient.get("/patient/partner/medicalHistory");
 }
 
-export const partnermedicalHistoryput= () => {
+export const partnermedicalHistoryput = () => {
   return apiClient.put("/patient/partner/medicalHistory");
-} 
+}
 
 
 //...... PATIENT - PARTNER PHYSICAL  ASSESSMENT ......//
-export const partnerphysicalAssessmentpost= () => {
+export const partnerphysicalAssessmentpost = () => {
   return apiClient.post("/patient/partner/physicalAssessment");
 }
-export const partnerphysicalAssessmentget= () => {
+export const partnerphysicalAssessmentget = () => {
   return apiClient.get("/patient/partner/physicalAssessment");
 }
 
-export const partnerphysicalAssessmentput= () => {
+export const partnerphysicalAssessmentput = () => {
   return apiClient.put("/patient/partner/physicalAssessment");
-} 
+}
 
 
 
 
 // ...... PATIENT - PARTNER FERTILITY  ASSESSMENT ...... //
 
-export const partnerfertilityAssessmentpost= () => {
+export const partnerfertilityAssessmentpost = () => {
   return apiClient.post("/patient/partner/fertilityAssessment");
 }
-export const partnerfertilityAssessmentget= () => {
+export const partnerfertilityAssessmentget = () => {
   return apiClient.get("/patient/partner/fertilityAssessment");
 }
 
-export const partnerfertilityAssessmentput= () => {
+export const partnerfertilityAssessmentput = () => {
   return apiClient.put("/patient/partner/fertilityAssessment");
-} 
+}
 
 
 
 
 // ...... NOTIFICATATION ...... //
 
-export const partnernotificationspost= () => {
+export const partnernotificationspost = () => {
   return apiClient.post("/notifications");
 }
-export const partnernotificationsget= () => {
+export const partnernotificationsget = () => {
   return apiClient.get("/notifications");
 }
 
-export const partnernotificationsput= () => {
+export const partnernotificationsput = () => {
   return apiClient.put("/notifications");
-} 
+}
 
 
 
 //...... LEAVES ...... //
-export const createleave= () => {
+export const createleave = () => {
   return apiClient.post("/profile/create-leave");
 }
 
-export const getleaves= () => {
+export const getleaves = () => {
   return apiClient.get("/profile/get-leaves");
 }
 
-export const getleupdateleaveaves= () => {
+export const getleupdateleaveaves = () => {
   return apiClient.get("/profile/update-leave");
 }
 
-export const deleteleave= () => {
+export const deleteleave = () => {
   return apiClient.get("/profile/delete-leave");
 }
 
+
+
+export const updateimages = () => {
+  return apiClient.get("/update-images");
+} 

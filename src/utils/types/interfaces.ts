@@ -65,10 +65,10 @@ export interface AddPatientFormData {
   // Personal details
 
   name: string;
-  patientId: string;
+  // patientId: string;
   gender: string;
   date: string;
-  age: string;
+  // age: string; 
   phone: string;
   email: string;
   address: string;
