@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Table, Accordion } from 'react-bootstrap';
 import Add from "../../assets/images/Add.png";
 import Delete from "../assets/images/Delete.png";
@@ -20,6 +20,7 @@ import { InputSelect } from './ui/InputSelect';
 import ClinicImg from '@/assets/images/GoodHealth Clinic.png';
 import ClinicImg2 from '@/assets/images/Fertility Clinic.png';
 import MaiaVerified from '@/assets/images/Maia Verified.png';
+import { addQualification, getLoggedInUser } from '@/utils/apis/apiHelper';
 
 
 const ProfileBasicDetailsTabs = () => {
@@ -59,7 +60,7 @@ const ProfileBasicDetailsTabs = () => {
     Timer: string;
 
     degree: string;
-    field: string;
+    fieldOfStudy: string;
     university: string;
     startYear: string;
     endYear: string;
@@ -74,7 +75,7 @@ const ProfileBasicDetailsTabs = () => {
 
 
     degree: "",
-    field: "",
+    fieldOfStudy: "",
     university: "",
     startYear: "",
     endYear: ""
@@ -86,11 +87,11 @@ const ProfileBasicDetailsTabs = () => {
     { ...initialFormData },
   ]);
   const [formErrors, setFormErrors] = useState([
-    { degree: "", field: "", university: "", startYear: "", endYear: "" }
+    { degree: "", fieldOfStudy: "", university: "", startYear: "", endYear: "" }
   ]);
 
 
-
+ const [, setDocuments] = useState<{ name: string; date: string }[]>([]);
   const documents = [
     { name: 'Certificate.pdf', date: 'October 20, 2024' },
     { name: 'Aadhar Card.pdf', date: 'October 20, 2024' },
@@ -163,7 +164,7 @@ const ProfileBasicDetailsTabs = () => {
     const errors = quals.map((q) => ({
 
       degree: !q.degree ? "Degree is required" : "",
-      field: !q.field ? "Field is required" : "",
+      fieldOfStudy: !q.fieldOfStudy ? "Field is required" : "",
       university: !q.university ? "University is required" : "",
       startYear: !q.startYear ? "Start Year is required" : "",
       endYear: !q.endYear ? "End Year is required" : "",
@@ -177,7 +178,7 @@ const ProfileBasicDetailsTabs = () => {
     // ADDD Qualifications validtation msg 
     setFormErrors([
       ...formErrors,
-      { degree: "", field: "", university: "", startYear: "", endYear: "" }
+      { degree: "", fieldOfStudy: "", university: "", startYear: "", endYear: "" }
     ]);
   };
 
@@ -204,14 +205,14 @@ const ProfileBasicDetailsTabs = () => {
       const newItems = qualifications
         .filter(
           (q) =>
-            q.degree && q.field && q.university && q.startYear && q.endYear
+            q.degree && q.fieldOfStudy && q.university && q.startYear && q.endYear
         )
         .map((q) => ({
-          title: `${q.degree} - ${q.field}`,
+          title: `${q.degree} - ${q.fieldOfStudy}`,
           university: q.university,
           years: `${q.startYear} - ${q.endYear}`,
           degree: q.degree,
-          field: q.field,
+          fieldOfStudy: q.fieldOfStudy,
           startYear: q.startYear,
           endYear: q.endYear
         }));
@@ -227,18 +228,46 @@ const ProfileBasicDetailsTabs = () => {
       console.log("Form submitted ✅", { formData, qualifications });
 
       // 🔹 Success → close modal + reset data
-      setShowModal(false);
-      setFormData(initialFormData);
-      setFormError(initialFormError);
-      setFormErrors([]);
-      setQualifications([{ ...initialFormData }]); // reset one row
-      toast.success("Data saved successfully!", {
-        position: "top-right",
-        // autoClose: 3000,
-      });
+
+
+
+      const passData = qualifications.map((q) => ({
+        degree: q.degree,
+        fieldOfStudy: q.fieldOfStudy,
+        university: q.university,
+        startYear: Number(q.startYear),
+        endYear: Number(q.endYear),
+      }));
+
+      console.log("Send data:", passData);
+
+
+      addQualification(passData)
+        .then((response) => {
+
+          if (response.status == 200) {
+            console.log("Qualification Added: ", response.data);
+            setShowModal(false);
+            setFormData(initialFormData);
+            setFormError(initialFormError);
+            setFormErrors([]);
+            setQualifications([{ ...initialFormData }]);
+            toast.success("Data saved successfully!", {
+              position: "top-right",
+              // autoClose: 3000,
+            });
+          } else {
+            console.log("Error");
+          }
+
+        })
+        .catch((err) => {
+          console.log("Qualification adding error", err);
+        });
+
     }
     else {
-      console.log("Form has errors ⚠️", { errors, qualErrors });
+      console.log("Form has errors : ", { errors, qualErrors });
     }
 
 
@@ -247,7 +276,7 @@ const ProfileBasicDetailsTabs = () => {
 
   // + add Qualification button diable data show after unable
   const isQualificationComplete = (q: any) => {
-    return q.degree && q.field && q.university && q.startYear && q.endYear;
+    return q.degree && q.fieldOfStudy && q.university && q.startYear && q.endYear;
   };
 
 
@@ -273,7 +302,7 @@ const ProfileBasicDetailsTabs = () => {
     const errors: FormError = {};
 
     if (!data.degree.trim()) errors.degree = "Degree is required";
-    if (!data.field.trim()) errors.field = "Field is required";
+    if (!data.fieldOfStudy.trim()) errors.field = "Field is required";
     if (!data.university.trim()) errors.university = "University is required";
     if (!data.startYear.trim()) errors.startYear = "Start year is required";
     if (!data.endYear.trim()) errors.endYear = "End year is required";
@@ -291,11 +320,11 @@ const ProfileBasicDetailsTabs = () => {
     if (editIndex !== null) {
       const updated = [...defaultQualifications];
       updated[editIndex] = {
-        title: `${formData.degree} - ${formData.field}`,
+        title: `${formData.degree} - ${formData.fieldOfStudy}`,
         university: formData.university,
         years: `${formData.startYear} - ${formData.endYear}`,
         degree: formData.degree,
-        field: formData.field,
+        field: formData.fieldOfStudy,
         startYear: formData.startYear,
         endYear: formData.endYear
       };
@@ -310,6 +339,98 @@ const ProfileBasicDetailsTabs = () => {
 
 
   const [editIndex, setEditIndex] = useState<number | null>(null); // track current editing row
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  interface OperationalHour {
+    day: string;
+    openTime: string;
+    closeTime: string;
+    _id: string;
+  }
+
+  interface Qualification {
+    degree: string;
+    fieldOfStudy: string;
+    university: string;
+    startYear: number;
+    endYear: number;
+    _id: string;
+  }
+
+  interface DoctorDataType {
+    _id: string;
+    name: string;
+    profilePicture: string;
+    specialty: string;
+    yearsOfExperience: number;
+    dob: string;
+    gender: string;
+    contactNumber: string;
+    email: string;
+    about: string;
+    servicesOffered: string[];
+    operationalHours: OperationalHour[];
+    qualifications: Qualification[];
+    fees: number;
+    clinicIds: string[];
+    doctorType: string;
+    doctor_id_other: string;
+    other_type_flag: string;
+    memberSince: string;
+    documents: any[];
+  }
+
+
+  const [user, setUser] = useState<DoctorDataType | null>(null)
+  const getUser = () => {
+    getLoggedInUser()
+      .then((response) => {
+
+        if (response.status == 200) {
+          setUser(response.data.data)
+          setDocuments(response.data.data.documents)
+          setDefaultQualifications(response.data.data.qualifications)
+        } else {
+          console.log("Error");
+        }
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     // <Container fluid className="mt-3">
@@ -510,7 +631,7 @@ const ProfileBasicDetailsTabs = () => {
                                       name="degree"
                                       type="text"
                                       value={q.degree}
-                                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                      onChange={(e) => {
                                         const updated = [...qualifications];
                                         updated[index].degree = e.target.value;
                                         setQualifications(updated);
@@ -532,21 +653,21 @@ const ProfileBasicDetailsTabs = () => {
                                       label="Field of study"
                                       name="field"
                                       type="text"
-                                      value={q.field}
-                                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                      value={q.fieldOfStudy}
+                                      onChange={(e) => {
                                         const updated = [...qualifications];
-                                        updated[index].field = e.target.value;
+                                        updated[index].fieldOfStudy = e.target.value;
                                         setQualifications(updated);
 
                                         const updatedErrors = [...formErrors];
                                         if (updatedErrors[index]) {
-                                          updatedErrors[index].field = "";
+                                          updatedErrors[index].fieldOfStudy = "";
                                         }
                                         setFormErrors(updatedErrors);
                                       }}
                                       placeholder="Select Field"
                                       required={true}
-                                      error={formErrors[index]?.field}
+                                      error={formErrors[index]?.fieldOfStudy}
                                     />
                                   </Col>
 
@@ -556,7 +677,7 @@ const ProfileBasicDetailsTabs = () => {
                                       name="university"
                                       type="text"
                                       value={q.university}
-                                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                      onChange={(e) => {
                                         const updated = [...qualifications];
                                         updated[index].university = e.target.value;
                                         setQualifications(updated);
@@ -578,7 +699,7 @@ const ProfileBasicDetailsTabs = () => {
                                       label="Start Year"
                                       name="startYear"
                                       value={q.startYear}
-                                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                      onChange={(e) => {
                                         const updated = [...qualifications];
                                         updated[index].startYear = e.target.value;
                                         setQualifications(updated);
@@ -600,7 +721,7 @@ const ProfileBasicDetailsTabs = () => {
                                       label="End Year"
                                       name="endYear"
                                       value={q.endYear}
-                                      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                                      onChange={(e) => {
                                         const updated = [...qualifications];
                                         updated[index].endYear = e.target.value;
                                         setQualifications(updated);
@@ -713,7 +834,7 @@ const ProfileBasicDetailsTabs = () => {
                                 label="Field of study"
                                 name="field"
                                 type="text"
-                                value={formData.field}
+                                value={formData.fieldOfStudy}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                   handleChange(e);
                                 }}

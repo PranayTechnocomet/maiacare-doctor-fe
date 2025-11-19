@@ -10,9 +10,11 @@ export const getLoginUser = () => {
   return apiClient.get("/profile/get/login-user");
 }
 
-export const selectclinic = () => {
-  return apiClient.post("/auth/select-clinic");
-} 
+
+export const selectClinic = (clinicId: string ) => {
+  return apiClient.post("/auth/select-clinic", { clinicId });
+};
+
 
 export const forgotPassword = (data: { email: string }) => {
   return apiClient.post("/auth/forgot-password", data);
@@ -53,36 +55,44 @@ export const uploadkycdetails = () => {
   return apiClient.put("/profile/upload-kyc-details");
 }
 
+export const getLoggedInUser = () => {
+  const token = localStorage.getItem("token");
+  return apiClient.get("/profile/get", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+}
 
 
-// type QualificationType = {
-//   degree: string;
-//   fieldOfStudy: string;
-//   university: string;
-//   startYear: number;
-//   endYear: number;
-// };
-
+type QualificationType = {
+  degree: string;
+  fieldOfStudy: string;
+  university: string;
+  startYear: number | string;
+  endYear: number | string;
+};
 
 // ...... QUALIFICATION ...... //
 
-export const addQualification = () => {
+export const addQualification = (data: QualificationType[]) => {
   const token = localStorage.getItem("token");
-  return apiClient.post("/profile/qualifications/add", {
-    headers : {
+  return apiClient.post("/profile/qualifications/add", data, {
+    headers: {
       Authorization: `Bearer ${token}`,
     }
   });
 }
 
-export const editQualification = () => {
+export const editQualification = (data: QualificationType, id:string) => {
   const token = localStorage.getItem("token");
-  return apiClient.put("/profile/qualifications/edit",  {
-    headers : {
+  return apiClient.put(`/profile/qualifications/edit/${id}`, data, {
+    headers: {
       Authorization: `Bearer ${token}`,
     }
   });
 }
+
 
 export const deleteQualification = () => {
   const token = localStorage.getItem("token");

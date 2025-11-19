@@ -81,17 +81,19 @@ export function LoginForms() {
                         console.log("response", response);
 
                         // Save token
-                        const token = response?.data?.token;
+                       const token = response?.data?.token;
                         localStorage.setItem("token", token);
-                        localStorage.setItem("doctordetails", response?.data?.doctor)
+                         const doctor = response?.data?.doctor;
+                          localStorage.setItem("doctordetails", JSON.stringify(doctor));
+                      console.log("DOCTOR DETAILS:", doctor); 
+                    
                         // localStorage.setItem("doctorclinic", JSON.stringify(response?.data?.clinics));
-                        const clinics = response?.data?.clinics || [];
+                    const clinics = response?.data?.data?.clinics || [];
+                        console.log("CLINICS LIST:", clinics); 
                         localStorage.setItem("doctorclinic", JSON.stringify(clinics));
 
                         setTokenInCookie(token);
                         dispatch(setToken(token));
-                        // dispatch(setUserAuthData(response?.data?.data.doctor));
-                        // dispatch(setUserAuthData(response.data.clinics));
                         router.push("/selectprofile");
                     }
                 })

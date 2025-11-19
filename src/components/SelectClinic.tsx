@@ -10,24 +10,57 @@ import FertilityClinic from "../assets/images/Fertility Clinic.png";
 import GoodHealthClinic from "../assets/images/GoodHealth Clinic.png";
 import RightArrow from "../assets/icons/RightArrow.svg";
 import "../style/login.css";
+import { useEffect, useState } from 'react';
+
+import toast from 'react-hot-toast';
+import { selectClinic } from '@/utils/apis/apiHelper';
 
 export default function SelectClinic() {
   // ✅ JSON-style data defined inside the same file
-  const profileData = [
-    {
-      id: 1,
-      image: GoodHealthClinic,
-      title: "GoodHealth Clinic",
-      route: "/"
-    },
-    {
-      id: 2,
-      image: FertilityClinic,
-      title: "Fertility Clinic",
-      route: "/"
-    },
+  const [clinicList, setClinicList] = useState<any[]>([]);
 
-  ];
+
+  useEffect(() => {
+    const savedClinics = localStorage.getItem("doctorclinic");
+
+    if (savedClinics) {
+      const parsed = JSON.parse(savedClinics);
+
+      console.log("Parsed Clinics:", parsed);
+
+      // Combine both arrays → maiaOrOther + self
+      const combinedList = [
+        ...(parsed.maiaOrOther || []),
+        ...(parsed.self || [])
+      ];
+
+      setClinicList(combinedList);
+    }
+  }, []);
+
+
+// SELECTCLINIC API  //
+  const handleSelectClinic = async (clinicId: string) => {
+    try {
+  
+      const response = await selectClinic(clinicId);
+      if (response?.data?.token) {
+        localStorage.setItem("token", response.data.token);
+        console.log("New token saved:", response.data.token);
+      }
+      toast.success("Clinic selected!");
+         router.push('/profile-clinic')
+    } catch (error: any) {
+      console.error("Select clinic error:", error?.response?.data || error);
+      toast.error(error?.response?.data?.message || "Failed to select clinic");
+    }
+  };
+
+
+  useEffect(() => {
+    console.log("UPDATED clinicList:", clinicList);
+  }, [clinicList]);
+
 
   const router = useRouter();
 
@@ -60,22 +93,23 @@ export default function SelectClinic() {
               Select clinic you want to sign in
             </p>
 
-            <div className='d-flex flex-column align-items-center select-profile-main'>
-              {profileData.map((profile) => (
-                <div key={profile.id} className='profile-card shadow d-flex justify-content-between align-items-center my-2 w-100' onClick={() => router.push(profile.route)}>
+            <div className='d-flex flex-column align-items-center select-profile-main' >
+              {clinicList.map((clinic) => (
+                <div key={clinic.id} className='profile-card shadow d-flex justify-content-between align-items-center my-2 w-100' 
+                onClick={() => handleSelectClinic(clinic._id)}>
                   {/* Left side: image + title + subtitle */}
                   <div className='d-flex gap-3 align-items-center'>
                     <div className='select-profile-img-wrapeer'>
-                      <Image
-                        src={profile.image}
-                        alt={`${profile.title} Logo`}
+                      <img
+                        src={clinic.clinicLogo}
+                        alt={clinic.clinicName}
                         width={70}
                         height={70}
                         className="select-clinic-image"
                       />
                     </div>
                     <div>
-                      <h2 className='select-profile-title m-0'>{profile.title}</h2>
+                      <h2 className='select-profile-title m-0'>{clinic.clinicName}</h2>
                     </div>
                   </div>
 
@@ -113,3 +147,119 @@ export default function SelectClinic() {
     </Container>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client';
+// import Image from 'next/image';
+// import { Col, Container, Row } from 'react-bootstrap';
+// import { IoIosArrowForward } from "react-icons/io";
+// import { useRouter } from 'next/navigation';
+// import { useEffect, useState } from 'react';
+
+// import Logo from "../assets/images/Maia Logo.png";
+// import PregnecyWomanLogin from "../assets/images/Pregnecy_Woman_Login.png";
+// import "../style/login.css";
+
+// export default function SelectClinic() {
+
+
+//   const router = useRouter();
+//   const [clinicList, setClinicList] = useState<any[]>([]);
+
+// useEffect(() => {
+//   const savedClinics = localStorage.getItem("doctorclinic");
+
+//   if (savedClinics) {
+//     const parsed = JSON.parse(savedClinics);
+
+//     console.log("Parsed Clinics:", parsed);
+
+//     // Combine both arrays → maiaOrOther + self
+//     const combinedList = [
+//       ...(parsed.maiaOrOther || []),
+//       ...(parsed.self || [])
+//     ];
+
+//     setClinicList(combinedList);
+//   }
+// }, []);
+
+
+
+//   useEffect(() => {
+//     console.log("UPDATED clinicList:", clinicList);
+//   }, [clinicList]);
+
+//   return (
+//     <Container fluid>
+//       <Row className='min-vh-100'>
+
+//         <Col md={6} className="d-flex align-items-center justify-content-center">
+//           <div>
+//             <div className='d-flex justify-content-center align-item-center'>
+//               <Image src={Logo} width={145} height={45} alt="logo" />
+//             </div>
+
+//             <Image
+//               src={PregnecyWomanLogin}
+//               width={450}
+//               height={450}
+//               alt="Login Woman"
+//             />
+//           </div>
+//         </Col>
+
+//         <Col md={6} className="clinic-list-right">
+//           <h2 className="select-heading">Select Clinic</h2>
+// {clinicList.map((item, index) => (
+//   <div key={index} className="clinic-box">
+//     <img
+//       src={item.clinicLogo}
+//       width={60}
+//       height={60}
+//       className="rounded-circle"
+//       alt={item.clinicName}
+//     />
+//     <h4>{item.clinicName}</h4>
+//   </div>
+// ))}
+
+
+//         </Col>
+
+//       </Row>
+//     </Container>
+//   );
+// }
