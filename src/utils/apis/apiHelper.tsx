@@ -94,15 +94,14 @@ export const editQualification = (data: QualificationType, id: string) => {
 }
 
 
-export const deleteQualification = () => {
+export const deleteQualification = (id:string) => {
   const token = localStorage.getItem("token");
-  return apiClient.delete("/profile/qualifications/edit", {
+  return apiClient.delete(`/profile/qualifications/delete/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
-    }
+    },
   });
-}
-
+};
 
 
 // ...... APPOINTMENT ...... //
@@ -304,9 +303,6 @@ export const getleupdateleaveaves = () => {
 export const deleteleave = () => {
   return apiClient.get("/profile/delete-leave");
 }
-
-
-
 
 
 //...... UPDATE IMAGES ......//

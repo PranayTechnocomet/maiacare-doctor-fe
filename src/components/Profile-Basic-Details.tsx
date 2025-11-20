@@ -20,7 +20,7 @@ import { InputSelect } from './ui/InputSelect';
 import ClinicImg from '@/assets/images/GoodHealth Clinic.png';
 import ClinicImg2 from '@/assets/images/Fertility Clinic.png';
 import MaiaVerified from '@/assets/images/Maia Verified.png';
-import { addQualification, getLoggedInUser } from '@/utils/apis/apiHelper';
+import { addQualification, deleteQualification, editQualification, getLoggedInUser } from '@/utils/apis/apiHelper';
 
 
 const ProfileBasicDetailsTabs = () => {
@@ -99,11 +99,31 @@ const ProfileBasicDetailsTabs = () => {
   //   { name: 'Certificate.pdf', date: 'October 20, 2024' },
   // ];
 
-  const handleDelete = (index: number) => {
-    const updated = defaultQualifications.filter((_, i) => i !== index);
-    setDefaultQualifications(updated);
+  const handleDelete = (id: string) => {
+    // const updated = defaultQualifications.filter((_, i) => i !== index);
+    // setDefaultQualifications(updated);
+  console.log("ID: ", id);
+    deleteQualification(id)
+      .then((response) => {
+
+        if (response.status == 200) {
+          console.log("qualifications deleted");
+          getUser()
+        } else {
+          console.log("Error");
+        }
+
+      })
+      .catch((err) => {
+        console.log("Qualification deleting error", err);
+      });
+
+
   };
 
+
+
+  
   const handleDownload = (url: string, name: string) => {
     const link = document.createElement("a");
     link.href = url;
@@ -252,6 +272,7 @@ const ProfileBasicDetailsTabs = () => {
             setFormError(initialFormError);
             setFormErrors([]);
             setQualifications([{ ...initialFormData }]);
+            getUser()
             toast.success("Data saved successfully!", {
               position: "top-right",
               // autoClose: 3000,
@@ -302,7 +323,7 @@ const ProfileBasicDetailsTabs = () => {
     const errors: FormError = {};
 
     if (!data.degree.trim()) errors.degree = "Degree is required";
-    if (!data.fieldOfStudy.trim()) errors.field = "Field is required";
+    if (!data.fieldOfStudy.trim()) errors.field = "FieldOfStudy is required";
     if (!data.university.trim()) errors.university = "University is required";
     if (!data.startYear.trim()) errors.startYear = "Start year is required";
     if (!data.endYear.trim()) errors.endYear = "End year is required";
@@ -311,25 +332,40 @@ const ProfileBasicDetailsTabs = () => {
   };
 
 
-  const handleEditSave = () => {
+  const handleEditSave = (id:string) => {
     const errors = EditValidtation(formData);
     setFormError(errors);
 
     if (Object.keys(errors).length > 0) return; // ❌ don't save if errors
 
-    if (editIndex !== null) {
-      const updated = [...defaultQualifications];
-      updated[editIndex] = {
-        title: `${formData.degree} - ${formData.fieldOfStudy}`,
-        university: formData.university,
-        years: `${formData.startYear} - ${formData.endYear}`,
-        degree: formData.degree,
-        field: formData.fieldOfStudy,
-        startYear: formData.startYear,
-        endYear: formData.endYear
-      };
-      setDefaultQualifications(updated);
-    }
+    // if (editIndex !== null) {
+    //   const updated = [...defaultQualifications];
+    //   updated[editIndex] = {
+    //     title: `${formData.degree} - ${formData.fieldOfStudy}`,
+    //     university: formData.university,
+    //     years: `${formData.startYear} - ${formData.endYear}`,
+    //     degree: formData.degree,
+    //     field: formData.fieldOfStudy,
+    //     startYear: formData.startYear,
+    //     endYear: formData.endYear
+    //   };
+    //   setDefaultQualifications(updated);
+    // }
+
+    editQualification(formData, id)
+      .then((response) => {
+
+        if (response.status == 200) {
+          console.log("Qualification Edited : ", response.data);
+          getUser()
+        } else {
+          console.log("Error");
+        }
+
+      })
+      .catch((err) => {
+        console.log("Qualification adding error", err);
+      });
 
     console.log("Form updated:", formData);
 
@@ -339,8 +375,6 @@ const ProfileBasicDetailsTabs = () => {
 
 
   const [editIndex, setEditIndex] = useState<number | null>(null); // track current editing row
-
-
 
 
 
@@ -412,7 +446,7 @@ const ProfileBasicDetailsTabs = () => {
     // __v: number;
     // is_24_7?: boolean;
     // beds?: number;
-    // servicesOffered?: string[];
+    // servicesOffered?: string[];http://localhost:3002
   }
 
 
@@ -911,7 +945,7 @@ const ProfileBasicDetailsTabs = () => {
 
 
                       <Button className="border p-2 rounded-2 edit-del-btn  bg-transparent"
-                        onClick={() => handleDelete(idx)} variant='outline' //click par delete
+                        onClick={() => handleDelete(item._id)} variant='outline' //click par delete
                       >
                         <Image src={Delete} alt="Specialization" width={18} height={18} />
                       </Button>
