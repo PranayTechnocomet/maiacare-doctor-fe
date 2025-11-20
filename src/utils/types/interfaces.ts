@@ -64,6 +64,7 @@ export interface FertilityAssessmentHistory {
 export interface AddPatientFormData {
   // Personal details
 
+  profileImage: string;
   name: string;
   // patientId: string;
   gender: string;
@@ -80,6 +81,31 @@ export interface AddPatientFormData {
   emergencyContactName: string;
   emergencyContactPhone: string;
   emergencyContactRelation: string;
+}
+
+export interface personalDetails {
+  profileImage: string;
+  name: string;
+  email: string;
+  gender: string;
+  dob: string;
+  contactNumber: string;
+  address: string;
+  pincode: string;
+  city: string;
+  state: string;
+}
+
+export interface emergencyContact {
+  name: string;
+  contactNumber: string;
+  relation: string;
+}
+
+export interface AddPatientFormObjType {
+  personalDetails: personalDetails;
+  emergencyContact: emergencyContact;
+  type: string;
 }
 
 export interface RescheduleAppointmentForm {
@@ -207,7 +233,7 @@ export interface ProgressUpdatesType {
   patient: FertilityAssessmentFormType;
   partner: FertilityAssessmentHistory;
   medicalPrescription: MedicationPrescriptionType[];
-  report : PatientReportType[]
+  report: PatientReportType[]
   StatusAndUpdates: TreatmentProgressStatusType;
 }
 
@@ -307,4 +333,26 @@ export interface PatientReportType {
 export interface ClickDateTimeType {
   date: string;
   time: string;
+}
+
+
+export interface imageUpload {
+  type: string;
+  files: File;
+}
+
+ export interface GetAllPatient {
+  _id: string;
+  verified: boolean;
+  profileImage: string;
+  name: string;
+  gender: string;
+  dob: string;            // ISO date string
+  contactNumber: string;
+  email: string;
+  address: string;
+  pincode: string;
+  city: string;
+  state: string;
+  age: number;
 }

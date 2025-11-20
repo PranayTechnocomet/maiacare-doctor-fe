@@ -868,11 +868,6 @@ export type Doctor = {
 };
 
 
-
-
-
-
-
 export const consultationData: ConsultationEntry[] = [
   {
     id: 1,

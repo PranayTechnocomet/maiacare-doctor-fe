@@ -81,8 +81,8 @@ export function InputSelect({
       {label && <InputFieldLabel label={label} required={required} />}
       <Form.Select
         name={name}
-        // value={value || defaultValue}
-        value={value ?? ""} 
+        value={value || defaultValue}
+        // value={value ?? ""} 
         onChange={onChange}
         onBlur={onBlur}
         onClick={onClick}
