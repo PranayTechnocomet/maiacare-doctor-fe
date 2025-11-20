@@ -1,6 +1,7 @@
 import { PhysicalAssessment } from "@/components/form/AddPartnerDetailsForm";
 import { LoginRequest } from "../types/requestInterface";
 import apiClient from "./axiosInstance";
+import { AddPatientFormObjType, imageUpload } from "../types/interfaces";
 
 export const login = (data: LoginRequest) => {
   return apiClient.post("/auth/login", data);
@@ -145,10 +146,16 @@ export const patientupdate = () => {
 export const getAll = () => {
   return apiClient.get("/patient/getAll");
 }
-export const add = (data: object) => {
+
+
+
+export const add = (data: AddPatientFormObjType) => {
   return apiClient.post("/patient/add", data);
 }
 
+export const getpatientById = (id : string) => {
+  return apiClient.get(`/patient/${id}`);
+}
 
 // ...... PATIENT - PHYSICAL ASSESSMENT ...... //
 
@@ -307,15 +314,11 @@ export const deleteleave = () => {
 
 
 
-
-
 //...... UPDATE IMAGES ......//
-export const updateImages = (formData: FormData) => {
+export const updateImages = (formData: imageUpload) => {
   return apiClient.post("/update-images", formData, {
     headers: { "Content-Type": "multipart/form-data"},
   });
 };
 
-export const updateimages = () => {
-  return apiClient.get("/update-images");
-} 
+
