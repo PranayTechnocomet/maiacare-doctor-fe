@@ -102,7 +102,7 @@ const ProfileBasicDetailsTabs = () => {
   const handleDelete = (id: string) => {
     // const updated = defaultQualifications.filter((_, i) => i !== index);
     // setDefaultQualifications(updated);
-  console.log("ID: ", id);
+    console.log("ID: ", id);
     deleteQualification(id)
       .then((response) => {
 
@@ -118,12 +118,11 @@ const ProfileBasicDetailsTabs = () => {
         console.log("Qualification deleting error", err);
       });
 
-
   };
 
 
 
-  
+
   const handleDownload = (url: string, name: string) => {
     const link = document.createElement("a");
     link.href = url;
@@ -184,7 +183,7 @@ const ProfileBasicDetailsTabs = () => {
     const errors = quals.map((q) => ({
 
       degree: !q.degree ? "Degree is required" : "",
-      fieldOfStudy: !q.fieldOfStudy ? "Field is required" : "",
+      fieldOfStudy: !q.fieldOfStudy ? "fieldOfStudy is required" : "",
       university: !q.university ? "University is required" : "",
       startYear: !q.startYear ? "Start Year is required" : "",
       endYear: !q.endYear ? "End Year is required" : "",
@@ -323,7 +322,7 @@ const ProfileBasicDetailsTabs = () => {
     const errors: FormError = {};
 
     if (!data.degree.trim()) errors.degree = "Degree is required";
-    if (!data.fieldOfStudy.trim()) errors.field = "FieldOfStudy is required";
+    if (!data.fieldOfStudy.trim()) errors.fieldOfStudy = "FieldOfStudy is required";
     if (!data.university.trim()) errors.university = "University is required";
     if (!data.startYear.trim()) errors.startYear = "Start year is required";
     if (!data.endYear.trim()) errors.endYear = "End year is required";
@@ -332,7 +331,7 @@ const ProfileBasicDetailsTabs = () => {
   };
 
 
-  const handleEditSave = (id:string) => {
+  const handleEditSave = (id: string) => {
     const errors = EditValidtation(formData);
     setFormError(errors);
 
@@ -385,11 +384,6 @@ const ProfileBasicDetailsTabs = () => {
 
 
 
-
-
-
-
-
   interface OperationalHour {
     day: string;
     openTime: string;
@@ -420,7 +414,7 @@ const ProfileBasicDetailsTabs = () => {
     servicesOffered: string[];
     operationalHours: OperationalHour[];
     qualifications: Qualification[];
-    fees: number;
+    // fees: number;
     clinicIds: string[];
     doctorType: string;
     doctor_id_other: string;
@@ -518,12 +512,12 @@ const ProfileBasicDetailsTabs = () => {
 
                       {/* CLINIC LOGO */}
                       <img
-                        src={clinic.clinicLogo }
+                        src={clinic.clinicLogo}
                         alt={clinic.clinicName}
                         width={58}
                         height={58}
                         className='rounded-circle'
-                      />  
+                      />
 
                       <div className='d-flex flex-column'>
 
@@ -622,7 +616,6 @@ const ProfileBasicDetailsTabs = () => {
 
                 </Button>
 
-
                 <Modal
                   show={showModal}
                   onHide={handleClose}
@@ -644,7 +637,7 @@ const ProfileBasicDetailsTabs = () => {
                             <Accordion.Body>
                               <div className="position-relative pt-3 p-3 modal-border-dashed">
 
-                                {/* ❌ Remove button - show only if NOT first item */}
+                                {/* Remove button - show only if NOT first item */}
                                 {index !== 0 && (
                                   <button
                                     type="button"
@@ -802,7 +795,6 @@ const ProfileBasicDetailsTabs = () => {
                 </Modal>
 
 
-
               </div>
 
               {defaultQualifications.length === 0 ? (
@@ -817,9 +809,9 @@ const ProfileBasicDetailsTabs = () => {
                     className="d-flex justify-content-between align-items-start p-3 mb-3 bg-white border rounded-4 profile-card-boeder"
                   >
                     <div>
-                      <div className="card-feild">{item.title}</div>
+                      <div className="card-feild">{item.degree}</div>
                       <div className="card-university-text">{item.university}</div>
-                      <div className="card-year">{item.years}</div>
+                      <div className="card-year">{`${item.startYear} - ${item.endYear}`}</div>
                     </div>
 
 
@@ -862,7 +854,7 @@ const ProfileBasicDetailsTabs = () => {
                             <Col md={6} className="mt-3">
                               <InputFieldGroup
                                 label="Field of study"
-                                name="field"
+                                name="fieldOfStudy"
                                 type="text"
                                 value={formData.fieldOfStudy}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -873,7 +865,7 @@ const ProfileBasicDetailsTabs = () => {
                                 required={true}
                                 disabled={false}
                                 readOnly={false}   // ✅ remove or set false
-                                error={formError.field}
+                                error={formError.fieldOfStudy}
                               />
                             </Col>
 
@@ -931,7 +923,7 @@ const ProfileBasicDetailsTabs = () => {
 
 
                           {/* Save Button */}
-                          <Button onClick={handleEditSave} className="maiacare-button mt-4">
+                          <Button onClick={() => handleEditSave(item._id)} className="maiacare-button mt-4">
                             Save
                           </Button>
 

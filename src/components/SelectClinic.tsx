@@ -39,17 +39,17 @@ export default function SelectClinic() {
   }, []);
 
 
-// SELECTCLINIC API  //
+  // SELECTCLINIC API  //
   const handleSelectClinic = async (clinicId: string) => {
     try {
-  
+
       const response = await selectClinic(clinicId);
       if (response?.data?.token) {
         localStorage.setItem("token", response.data.token);
         console.log("New token saved:", response.data.token);
       }
       toast.success("Clinic selected!");
-         router.push('/profile-clinic')
+      router.push('/profile-clinic')
     } catch (error: any) {
       console.error("Select clinic error:", error?.response?.data || error);
       toast.error(error?.response?.data?.message || "Failed to select clinic");
@@ -95,18 +95,24 @@ export default function SelectClinic() {
 
             <div className='d-flex flex-column align-items-center select-profile-main' >
               {clinicList.map((clinic) => (
-                <div key={clinic.id} className='profile-card shadow d-flex justify-content-between align-items-center my-2 w-100' 
-                onClick={() => handleSelectClinic(clinic._id)}>
+                <div key={clinic.id} className='profile-card shadow d-flex justify-content-between align-items-center my-2 w-100'
+                  onClick={() => handleSelectClinic(clinic._id)}>
                   {/* Left side: image + title + subtitle */}
                   <div className='d-flex gap-3 align-items-center'>
                     <div className='select-profile-img-wrapeer'>
                       <img
-                        src={clinic.clinicLogo} 
+                        src={
+                          clinic?.clinicLogo
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/${clinic.clinicLogo}`
+                            : "/no-image.png"
+                        }
                         alt={clinic.clinicName}
                         width={70}
                         height={70}
                         className="select-clinic-image"
                       />
+
+
                     </div>
                     <div>
                       <h2 className='select-profile-title m-0'>{clinic.clinicName}</h2>
