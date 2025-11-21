@@ -2,6 +2,7 @@ import { PhysicalAssessment } from "@/components/form/AddPartnerDetailsForm";
 import { LoginRequest } from "../types/requestInterface";
 import apiClient from "./axiosInstance";
 import { AddPatientFormObjType, imageUpload } from "../types/interfaces";
+import api from "./axiosInstance";
 
 export const login = (data: LoginRequest) => {
   return apiClient.post("/auth/login", data);
@@ -85,7 +86,7 @@ export const addQualification = (data: QualificationType[]) => {
   });
 }
 
-export const editQualification = (data: QualificationType, id: string) => {
+export const editQualification = (data: QualificationType, id:string|null) => {
   const token = localStorage.getItem("token");
   return apiClient.put(`/profile/qualifications/edit/${id}`, data, {
     headers: {
@@ -142,11 +143,20 @@ export const patientupdate = () => {
   return apiClient.put("/patient/update");
 }
 
+
 export const getAll = () => {
-  return apiClient.get("/patient/getAll");
-}
+  const token = localStorage.getItem("token");
+  return apiClient.get("/patient/getAll", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 
+export const getOne = async (id: string | number) => {
+    return await api.get(`/patient/${id}`);   // FIXED ✔
+};
 
 export const add = (data: AddPatientFormObjType) => {
   return apiClient.post("/patient/add", data);

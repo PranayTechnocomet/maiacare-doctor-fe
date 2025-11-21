@@ -239,6 +239,7 @@ const DoctorProfile = ({ handleEditProfile }: { handleEditProfile?: () => void }
 
 
     }, [])
+    
     const DoctorProfileCard: React.FC<{ doctor: typeof doctorData }> = ({ doctor }) => {
         return (
 

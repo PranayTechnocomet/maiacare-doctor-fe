@@ -52,7 +52,7 @@ const ProfileBasicDetailsTabs = () => {
 
   const [defaultQualifications, setDefaultQualifications] = useState<any[]>([]);
   const [showQualificationModal, setShowQualificationModal] = useState(false);
-
+ const [selectedQualificationId, setSelectedQualificationId] = useState<string | null>(null);
   type FormData = {
     MF: string;
     SS: string;
@@ -302,10 +302,12 @@ const ProfileBasicDetailsTabs = () => {
 
 
   // ===== Edit button click in modal open ================
-  const openQualificationModal = (index: number) => {
-    setEditIndex(index);
+  const openQualificationModal = (index: number, id:string) => {
+      setEditIndex(index);
+     setEditIndex(defaultQualifications[index].id); // ADD THIS
     setFormData(defaultQualifications[index]); // je data show thayu e prefill karo
     setShowQualificationModal(true); // modal open
+      setSelectedQualificationId(id)
   };
 
   const closeQualificationModal = () => setShowQualificationModal(false);
@@ -322,20 +324,19 @@ const ProfileBasicDetailsTabs = () => {
     const errors: FormError = {};
 
     if (!data.degree.trim()) errors.degree = "Degree is required";
-    if (!data.fieldOfStudy.trim()) errors.fieldOfStudy = "FieldOfStudy is required";
+    if (!data.fieldOfStudy.trim()) errors.fieldOfStudy = "fieldOfStudy is required";
     if (!data.university.trim()) errors.university = "University is required";
-    if (!data.startYear.trim()) errors.startYear = "Start year is required";
-    if (!data.endYear.trim()) errors.endYear = "End year is required";
+    if (!data.startYear) errors.startYear = "Start year is required";
+    if (!data.endYear) errors.endYear = "End year is required";
 
     return errors;
   };
 
-
-  const handleEditSave = (id: string) => {
+  const handleEditSave = (id:string) => {
     const errors = EditValidtation(formData);
     setFormError(errors);
 
-    if (Object.keys(errors).length > 0) return; // ❌ don't save if errors
+    if (Object.keys(errors).length > 0) return; // don't save if errors
 
     // if (editIndex !== null) {
     //   const updated = [...defaultQualifications];
@@ -344,14 +345,15 @@ const ProfileBasicDetailsTabs = () => {
     //     university: formData.university,
     //     years: `${formData.startYear} - ${formData.endYear}`,
     //     degree: formData.degree,
-    //     field: formData.fieldOfStudy,
+    //     fieldOfStudy: formData.fieldOfStudy,
     //     startYear: formData.startYear,
     //     endYear: formData.endYear
     //   };
     //   setDefaultQualifications(updated);
     // }
-
-    editQualification(formData, id)
+    console.log("formData", formData);
+    
+    editQualification(formData, selectedQualificationId)
       .then((response) => {
 
         if (response.status == 200) {
@@ -372,16 +374,8 @@ const ProfileBasicDetailsTabs = () => {
     setEditIndex(null);
   };
 
-
-  const [editIndex, setEditIndex] = useState<number | null>(null); // track current editing row
-
-
-
-
-
-
-
-
+  
+ const [editIndex, setEditIndex] = useState<number | null>(null); // track current editing row
 
 
   interface OperationalHour {
@@ -477,16 +471,6 @@ const ProfileBasicDetailsTabs = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
   return (
     // <Container fluid className="mt-3">
     <div>
@@ -513,7 +497,7 @@ const ProfileBasicDetailsTabs = () => {
                       {/* CLINIC LOGO */}
                       <img
                         src={clinic.clinicLogo}
-                        alt={clinic.clinicName}
+                        alt={clinic.clinicLogo}
                         width={58}
                         height={58}
                         className='rounded-circle'
@@ -817,7 +801,7 @@ const ProfileBasicDetailsTabs = () => {
 
                     <div className="d-flex gap-2">
 
-                      <Button onClick={() => openQualificationModal(idx)} className="border p-2 rounded-3 edit-del-btn  bg-transparent" variant='outline'>
+                      <Button onClick={() => openQualificationModal(idx, item._id)} className="border p-2 rounded-3 edit-del-btn  bg-transparent" variant='outline'>
                         <Image src={LightEditimg} alt="Specialization" width={18} height={18} />
                       </Button>
 

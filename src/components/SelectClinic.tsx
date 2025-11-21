@@ -101,11 +101,7 @@ export default function SelectClinic() {
                   <div className='d-flex gap-3 align-items-center'>
                     <div className='select-profile-img-wrapeer'>
                       <img
-                        src={
-                          clinic?.clinicLogo
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/${clinic.clinicLogo}`
-                            : "/no-image.png"
-                        }
+                        src={clinic.clinicLogo}
                         alt={clinic.clinicName}
                         width={70}
                         height={70}
