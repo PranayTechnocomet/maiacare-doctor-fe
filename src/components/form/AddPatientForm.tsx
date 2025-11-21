@@ -18,17 +18,21 @@ import LightTrush from "../../assets/images/LightTrush.png";
 import { DatePickerFieldGroup } from "../ui/CustomDatePicker"
 import { InputSelect } from "../ui/InputSelect"
 import { PhoneNumberInput } from "../ui/PhoneNumberInput"
-import { AddPatientFormData } from "@/utils/types/interfaces"
+import { AddPatientFormData, AddPatientFormObjType, imageUpload } from "@/utils/types/interfaces"
 import dummyPatientImg from '../../assets/images/dummy-patient-sucess.png'
 import "../../style/editprofile.css";
-import { add } from "@/utils/apis/apiHelper"
+import { add, updateImages } from "@/utils/apis/apiHelper"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
+import { BsInfoCircle } from "react-icons/bs"
 
 type FormError = Partial<Record<keyof AddPatientFormData, string>>;
 
 const initialFormData: AddPatientFormData = {
+    profileImage: "",
     name: "",
     // patientId: "",
-    gender: "male",
+    gender: "Male",
     date: "",
     // age: "",
     phone: "",
@@ -51,6 +55,7 @@ function AddPatientForm() {
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [formData, setFormData] = useState<AddPatientFormData>(initialFormData);
     const [formError, setFormError] = useState<FormError>(initialFormError);
+    const router = useRouter();
 
     // Handle form field change
     const handleChange = (
@@ -66,6 +71,7 @@ function AddPatientForm() {
 
     const [previewImage, setPreviewImage] = useState<string | null>(null);  //previewImage 
     const [selectedImage, setSelectedImage] = useState<string | null>(null);//selectedImage 
+    const [selectedImageFile, setselectedImageFile] = useState<File | null>(null)
 
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -84,6 +90,7 @@ function AddPatientForm() {
     const openCamera = () => {
         cameraInputRef.current?.click();
     };
+
 
     // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //   const selectedFile = event.target.files?.[0]; //previewImage chnages
@@ -119,6 +126,7 @@ function AddPatientForm() {
         }
 
         // console.log(selectedFile);
+        setselectedImageFile(selectedFile); // set selected image file
 
         // ✅ 3. If valid → set preview & clear error
         const imageURL = URL.createObjectURL(selectedFile);
@@ -161,10 +169,35 @@ function AddPatientForm() {
     };
 
     const handleSave = () => {
-        
-        setSelectedImage(previewImage); // save modal preview to actual profile
-        setShowModal(false);
 
+        if (selectedImageFile !== null) {
+
+            // console.log(selectedImageFile);
+            const data: imageUpload = {
+                type: "doctor",
+                files: selectedImageFile
+            }
+
+            // console.log(data);
+            updateImages(data)
+                .then((response) => {
+                    console.log(response);
+
+                    if (response.status == 200) {
+                        const uploadedImage = response.data.files[0];
+
+                        // console.log("uploadedImage" , uploadedImage);
+                        setSelectedImage(uploadedImage); // save modal preview to actual profile
+                        setFormData({ ...formData, profileImage: uploadedImage });
+                        setShowModal(false);
+                    } else {
+                        console.log("Error");
+                    }
+
+                }).catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
     const handleDelete = () => {
@@ -178,11 +211,10 @@ function AddPatientForm() {
     }, [showModal]);
 
 
-
-
-
     const validateForm = (data: AddPatientFormData): FormError => {
         const errors: FormError = {};
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.(com|in)$/;
 
         // if(!previewImage){
         //     errors.previewImage = "Profile image is required";
@@ -196,8 +228,11 @@ function AddPatientForm() {
             errors.phone = "Phone number is required";
         }
 
-        if (!data.email.trim())
+        if (data.email.trim() === "") {
             errors.email = "Email is required";
+        } else if (!emailRegex.test(data.email)) {
+            errors.email = "Invalid email format";
+        }
 
         if (!data.address.trim())
             errors.address = "Address is required";
@@ -218,12 +253,12 @@ function AddPatientForm() {
 
         const errors = validateForm(formData);
         setFormError(errors);
-        console.log("errors", errors);
+        // console.log("errors", errors);
         if (Object.keys(errors).length === 0) {
 
-            const data = {
+            const data: AddPatientFormObjType = {
                 personalDetails: {
-                    profileImage: selectedImage,
+                    profileImage: formData.profileImage,
                     name: formData.name,
                     email: formData.email,
                     gender: formData.gender,
@@ -241,26 +276,29 @@ function AddPatientForm() {
                 },
                 type: "doctor"
             }
+            console.log("patient add data ", data);
 
-            // add(data).then((response) => {
-            //     console.log("response : ", response);
+            add(data).then((response) => {
+                console.log("response : ", response);
 
-            // })
-            //     .catch((err) => {
-            //         console.log("error", err);
-            //     });
+                if (response.status == 200) {
+                    setShowSuccessModal(true)
+                    setFormError(initialFormError);
+                } else {
+                    console.log("Error");
 
-            // setShowSuccessModal(true)    
-            console.log("patient add sucessfully ... ", data);
-            setFormError(initialFormError);
+                }
+            })
+                .catch((err) => {
+                    console.log("error", err.response);
+                    toast.error(err.response.data.message);
+                });
         }
     };
 
     return (
         <>
             <form onSubmit={handleSubmit}>
-
-
                 <ContentContainer>
                     <Row className="mt-1 g-3">
                         <Col>
@@ -419,13 +457,13 @@ function AddPatientForm() {
                             <RadioButtonGroup
                                 label="Gender"
                                 name="gender"
-                                value={formData.gender || ""}
-                                defaultValue="Male"
+                                value={formData.gender}
+                                // defaultValue="Male"
                                 onChange={(e) => handleChange(e)}
                                 required
                                 options={[
-                                    { label: "Male", value: "male" },
-                                    { label: "Female", value: "female" },
+                                    { label: "Male", value: "Male" },
+                                    { label: "Female", value: "Female" },
                                 ]}
                             />
                         </Col>
@@ -630,9 +668,9 @@ function AddPatientForm() {
                                 error={formError.emergencyContactRelation}
                                 placeholder="Select Relation"
                                 options={[
-                                    { id: "1", value: "1", label: "Father" },
-                                    { id: "2", value: "2", label: "Mother" },
-                                    { id: "3", value: "3", label: "Brother" },
+                                    { id: "1", value: "Father", label: "Father" },
+                                    { id: "2", value: "Mother", label: "Mother" },
+                                    { id: "3", value: "Brother", label: "Brother" },
                                 ]}
                             />
                         </Col>
@@ -663,10 +701,10 @@ function AddPatientForm() {
                         </div>
 
                         <div className="d-flex justify-content-center gap-3">
-                            <Button variant="outline" disabled={false} className="w-100" onClick={() => setShowSuccessModal(false)} >
+                            <Button variant="outline" disabled={false} className="w-100" onClick={() => { setShowSuccessModal(false); router.push("/patients"); }} >
                                 Okay
                             </Button>
-                            <Button variant="default" disabled={false} className="w-100" onClick={() => setShowSuccessModal(false)}>
+                            <Button variant="default" disabled={false} className="w-100" onClick={() => { setShowSuccessModal(false); router.push("/patients"); }}>
                                 View Details
                             </Button>
                         </div>
